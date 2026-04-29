@@ -4,6 +4,8 @@ runs/
 work/
 .tmp/
 references/firmware/extracted/helper-codeexec-candidates/
+ghidra_export.c
+ghidra_export.h
 __pycache__/
 *.pyc
 *.pyo
