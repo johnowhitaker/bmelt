@@ -55,6 +55,13 @@ def parse_u16(value: str) -> int:
     return parsed
 
 
+def parse_length(value: str) -> int:
+    parsed = int(value, 0)
+    if not 1 <= parsed <= 0x100:
+        raise argparse.ArgumentTypeError("length must be 1..0x100")
+    return parsed
+
+
 def parse_u8(value: str) -> int:
     parsed = int(value, 0)
     if not 0 <= parsed <= 0xFF:
@@ -66,6 +73,15 @@ def parse_bit(value: str) -> int:
     parsed = int(value, 0)
     if not 0 <= parsed <= 7:
         raise argparse.ArgumentTypeError("bit must be 0..7")
+    return parsed
+
+
+def parse_syndrome_bit(value: str) -> int | None:
+    if value.lower() in {"all", "total", "none"}:
+        return None
+    parsed = int(value, 0)
+    if not 0 <= parsed <= 15:
+        raise argparse.ArgumentTypeError("syndrome bit must be 0..15, or total")
     return parsed
 
 
@@ -82,6 +98,48 @@ def hex_patch(offset: int, data_hex: str) -> str:
 
 def ljmp(addr: int) -> str:
     return f"02{addr:04x}"
+
+
+class Asm8051:
+    """Tiny label resolver for the small 8051 payloads we generate here."""
+
+    def __init__(self) -> None:
+        self.data = bytearray()
+        self.labels: dict[str, int] = {}
+        self.fixups: list[tuple[int, str]] = []
+
+    def label(self, name: str) -> None:
+        self.labels[name] = len(self.data)
+
+    def emit(self, *values: int) -> None:
+        self.data.extend(values)
+
+    def rel_fixup(self, label: str) -> None:
+        self.fixups.append((len(self.data), label))
+        self.data.append(0)
+
+    def jnb(self, bit_addr: int, label: str) -> None:
+        self.emit(0x30, bit_addr)
+        self.rel_fixup(label)
+
+    def jz(self, label: str) -> None:
+        self.emit(0x60)
+        self.rel_fixup(label)
+
+    def djnz_r(self, reg: int, label: str) -> None:
+        self.emit(0xD8 + reg)
+        self.rel_fixup(label)
+
+    def finish(self) -> str:
+        for pos, label in self.fixups:
+            if label not in self.labels:
+                raise ValueError(f"undefined label {label!r}")
+            target = self.labels[label]
+            rel = target - (pos + 1)
+            if not -128 <= rel <= 127:
+                raise ValueError(f"relative jump to {label!r} is out of range: {rel}")
+            self.data[pos] = rel & 0xFF
+        return self.data.hex()
 
 
 def helper_code_addr(plain_offset: int) -> int:
@@ -214,6 +272,67 @@ def hold_direct_bit_payload(bit_addr: int, op: str, hold_count: int) -> str:
     return f"7f{hold_count:02x}7eff7dff{opcode}{bit_addr:02x}ddfcdef8dff4" + ljmp(0x32C4)
 
 
+def xdata_parity_range_payload(
+    addr: int,
+    length: int,
+    syndrome_bit: int | None,
+    *,
+    success_on_one: bool,
+) -> str:
+    """Return a payload that reports one parity predicate over an XDATA byte range.
+
+    Candidate bits are indexed as ``byte_offset * 8 + bit``.  ``syndrome_bit``
+    selects only candidate indices where that index bit is 1.  ``None`` means
+    total parity across the range.  For a single bit that changes between two
+    runs, the XOR of all syndrome predicate results reconstructs its index.
+    """
+
+    if not 1 <= length <= 0x100:
+        raise ValueError("length must be 1..0x100")
+    byte_count = 0 if length == 0x100 else length
+    bit_mask = 0xFF
+    byte_select_mask: int | None = None
+    if syndrome_bit is not None:
+        if syndrome_bit < 3:
+            bit_mask = sum(1 << bit for bit in range(8) if ((bit >> syndrome_bit) & 1))
+        else:
+            byte_select_mask = 1 << (syndrome_bit - 3)
+
+    asm = Asm8051()
+    asm.emit(0x90, (addr >> 8) & 0xFF, addr & 0xFF)  # MOV DPTR,#addr
+    asm.emit(0x7F, byte_count)  # MOV R7,#count; 0 means 256 iterations with DJNZ.
+    asm.emit(0x7E, 0x00)  # MOV R6,#byte_offset
+    asm.emit(0x75, 0x30, 0x00)  # MOV 0x30,#0 parity accumulator
+    asm.label("loop")
+    if byte_select_mask is not None:
+        asm.emit(0xEE)  # MOV A,R6
+        asm.emit(0x54, byte_select_mask & 0xFF)  # ANL A,#byte_select_mask
+        asm.jz("skip_parity")
+    if bit_mask:
+        asm.emit(0xE0)  # MOVX A,@DPTR
+        if bit_mask != 0xFF:
+            asm.emit(0x54, bit_mask)  # ANL A,#bit_mask
+        asm.jnb(0xD0, "skip_xor")  # JNB PSW.P,skip_xor
+        asm.emit(0x63, 0x30, 0x01)  # XRL 0x30,#1
+        asm.label("skip_xor")
+    asm.label("skip_parity")
+    asm.emit(0xA3)  # INC DPTR
+    asm.emit(0x0E)  # INC R6
+    asm.djnz_r(7, "loop")
+    asm.emit(0xE5, 0x30)  # MOV A,0x30
+    if success_on_one:
+        first = 0x32C4
+        second = 0x32B2
+    else:
+        first = 0x32B2
+        second = 0x32C4
+    asm.jnb(acc_bit_addr(0), "zero")
+    asm.emit(0x02, (first >> 8) & 0xFF, first & 0xFF)  # LJMP first
+    asm.label("zero")
+    asm.emit(0x02, (second >> 8) & 0xFF, second & 0xFF)  # LJMP second
+    return asm.finish()
+
+
 def render_command(args: argparse.Namespace, patches: list[str]) -> tuple[list[str], dict[str, Path]]:
     out_dir = args.out_root / args.name
     outputs = {
@@ -258,6 +377,7 @@ def build_report(args: argparse.Namespace, patches: list[str], outputs: dict[str
         "delayed-direct-bit-op",
         "hold-movx-byte",
         "hold-direct-bit",
+        "xdata-parity-range",
     }
     payload_plain_offset = getattr(args, "payload_offset", PAYLOAD_PLAIN_OFFSET) if has_payload else None
     payload_code_addr = helper_code_addr(payload_plain_offset) if payload_plain_offset is not None else None
@@ -274,6 +394,8 @@ def build_report(args: argparse.Namespace, patches: list[str], outputs: dict[str
         "payload_offset",
         "delay_count",
         "hold_count",
+        "length",
+        "syndrome_bit",
     ):
         if hasattr(args, key):
             mode_args[key] = getattr(args, key)
@@ -385,6 +507,21 @@ def parse_args() -> argparse.Namespace:
     hold_bit.add_argument("--op", choices=("clear", "set"), required=True)
     hold_bit.add_argument("--payload-offset", type=parse_u16, default=0x0600)
     hold_bit.add_argument("--hold-count", type=parse_byte, default=0x40)
+
+    parity = sub.add_parser(
+        "xdata-parity-range",
+        help="report one parity/syndrome predicate over a contiguous XDATA range",
+    )
+    parity.add_argument("--addr", type=parse_u16, required=True)
+    parity.add_argument("--length", type=parse_length, required=True)
+    parity.add_argument(
+        "--syndrome-bit",
+        type=parse_syndrome_bit,
+        default=None,
+        help="candidate-index bit to predicate on, or 'total' for total parity",
+    )
+    parity.add_argument("--payload-offset", type=parse_u16, default=0x0600)
+    parity.add_argument("--success-on-zero", action="store_true")
     return parser.parse_args()
 
 
@@ -495,6 +632,19 @@ def main() -> int:
         patches = [
             hex_patch(HOOK_PLAIN_OFFSET, ljmp(helper_code_addr(args.payload_offset))),
             hex_patch(args.payload_offset, hold_direct_bit_payload(args.bit_addr, args.op, args.hold_count)),
+        ]
+    elif args.mode == "xdata-parity-range":
+        patches = [
+            hex_patch(HOOK_PLAIN_OFFSET, ljmp(helper_code_addr(args.payload_offset))),
+            hex_patch(
+                args.payload_offset,
+                xdata_parity_range_payload(
+                    args.addr,
+                    args.length,
+                    args.syndrome_bit,
+                    success_on_one=not args.success_on_zero,
+                ),
+            ),
         ]
     else:  # pragma: no cover - argparse prevents this.
         raise AssertionError(args.mode)

@@ -48,6 +48,13 @@ GP26/yellow did not move during a burst of normal INQUIRY traffic; it stayed in
 the same low-ish analog range. That is not surprising if normal SCSI polling
 does not blink the front LED.
 
+Important safety note: holding GP27 low is not an inert input-only test. During
+the first button-syndrome scan, pulling GP27 low through the full setup sequence
+physically moved the sled and made the drive report tray-open/not-ready before
+the helper event was reached. Treat GP27 as the real eject actuator path. Any
+future GP27-low probe should be explicit, brief, and scoped as late as possible
+in the sequence.
+
 During helper/currentboot and recovery runs, GP26 does move and the physical LED
 blinks. A Pico sampler around the Linux event-68 helper run sees GP26 swing
 from near `0 mV` to about `2.0 V`, then settle high before recovery starts.
@@ -79,4 +86,5 @@ Negative LED-control probes so far:
 Current interpretation: GP26 is definitely usable as an observed front-panel
 LED line, but the tested helper-visible registers are not its latch. GP27 can
 still be used as an input line if we want to map the button path and use that to
-find the surrounding GPIO block.
+find the surrounding GPIO block, but only with a late/event-scoped low pulse or
+with a physical/mechanical setup that makes sled motion acceptable.

@@ -233,3 +233,16 @@ The more promising next step is probably to use GP27 as an input signal and map
 which internal bit changes when the eject button line is pulled low. That should
 narrow the front-panel GPIO block more efficiently than brute-forcing output
 registers.
+
+The first attempt at making that efficient was a parity/syndrome scanner: ask
+the helper for parity over whole XDATA ranges, once with the button line
+released and once with it low. In the ideal single-bit-change case, a handful of
+predicate bits decodes the changing address directly.
+
+That idea is still good, but the first live shakeout taught us not to hold GP27
+low through the whole sequence. It physically moved the sled and made the drive
+report tray-open/not-ready before reaching the helper. The tool now refuses
+button-low runs unless explicitly allowed, and the intended mode is to run setup
+with GP27 released, then pull GP27 low only for event 68. Whether even that
+short pulse is acceptable is a hardware/mechanism decision, not just a software
+one.

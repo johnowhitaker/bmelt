@@ -294,6 +294,12 @@ python3 scripts/probe_liteon_pico_led_payload.py \
 The probe writes phase summaries for `pre`, `event68`, `post_event68`, and
 `recovery` under `runs/pico-led-probes/`.
 
+Do not hold `GP27` low through a full sequence as a casual input test. It is the
+real eject button line: holding it low moved the sled and caused tray-open /
+not-ready sense before the helper event. The syndrome scanner therefore refuses
+button-low runs unless `--allow-button-low` is passed, and its default low scope
+is only event `68` after setup.
+
 Timing-safe LED probes should use the event-68 helper hook, not a post-command
 snapshot. The codeexec builder now has held-window modes:
 
@@ -313,12 +319,30 @@ Validated windows:
 Negative LED-control candidates so far: `P1.6`, XDATA `0x4023`, `0x4844`,
 `0x90fc`, and the earlier `0x59xx/0x5axx` helper-init shortlist.
 
+For input mapping, the efficient path is a parity/syndrome scan rather than
+one-bit-at-a-time reads:
+
+```sh
+python3 scripts/scan_liteon_pico_button_syndrome.py \
+  --device /dev/sg1 \
+  --addr 0x4700 \
+  --length 0x100 \
+  --sync-remote \
+  --allow-button-low \
+  --low-scope event68
+```
+
+This generates helper predicates over a whole XDATA page. Comparing released
+versus low button states gives the index of a single changed bit in about
+`1 + ceil(log2(length * 8))` predicates. Because GP27 actuates the sled, run
+this only when late low-pulse behavior is acceptable.
+
 ## Next Work
 
 Immediate useful directions:
 
-1. Use GP27 as a controllable input and map which internal bit changes when the
-   eject button line is pulled low.
+1. If we keep using GP27, map it with event-scoped low pulses only; otherwise
+   use a different external input that does not actuate the mechanism.
 2. Use the XDATA bit channel to map a small set of high-value helper/controller
    registers around `0x48a0`, `0x47d2`, `0x8221`, and likely GPIO/status
    candidates.
