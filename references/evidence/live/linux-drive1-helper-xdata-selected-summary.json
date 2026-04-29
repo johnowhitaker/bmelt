@@ -1,0 +1,41 @@
+{
+  "captured_at_utc": "2026-04-29T22:01:52+00:00",
+  "device": "/dev/sg1",
+  "host": "jonathan-thinkpad-t480s",
+  "notes": [
+    "Values were read at the late event-68 helper hook with the MOVX GOOD/DID_ERROR bit channel.",
+    "event68 returncode 0 means the tested bit was 1; returncode 99 with DID_ERROR means the tested bit was 0.",
+    "Each bit run auto-recovered the drive to LD5M."
+  ],
+  "reads": [
+    {
+      "addr": 18386,
+      "addr_hex": "0x47d2",
+      "bits_lsb_first": [1, 1, 1, 1, 1, 1, 1, 1],
+      "value": 255,
+      "value_hex": "0xff"
+    },
+    {
+      "addr": 18592,
+      "addr_hex": "0x48a0",
+      "bits_lsb_first": [0, 0, 0, 0, 0, 1, 0, 1],
+      "value": 160,
+      "value_hex": "0xa0"
+    },
+    {
+      "addr": 18597,
+      "addr_hex": "0x48a5",
+      "bits_lsb_first": [1, 1, 1, 1, 1, 1, 1, 1],
+      "value": 255,
+      "value_hex": "0xff"
+    },
+    {
+      "addr": 33313,
+      "addr_hex": "0x8221",
+      "bits_lsb_first": [1, 1, 1, 1, 1, 1, 1, 1],
+      "value": 255,
+      "value_hex": "0xff"
+    }
+  ],
+  "status": "selected_xdata_bit_channel_summary"
+}

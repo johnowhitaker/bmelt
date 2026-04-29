@@ -135,11 +135,20 @@ LJMP 0x32b2  -> event 68 DID_ERROR, then auto-recovery restores LD5M
 xdata[0x48a0] at event 68 = 0xa0
 ```
 
+Follow-up selected reads:
+
+```text
+xdata[0x47d2] = 0xff
+xdata[0x48a5] = 0xff
+xdata[0x8221] = 0xff
+```
+
 Evidence:
 
 ```text
 references/evidence/live/linux-drive1-helper-bit-channel.md
 references/evidence/live/linux-drive1-helper-xdata-48a0-summary.json
+references/evidence/live/linux-drive1-helper-xdata-selected-summary.json
 ```
 
 Read another byte:

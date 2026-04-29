@@ -62,6 +62,7 @@ Code-execution evidence:
 references/evidence/live/linux-drive1-codeexec-timing-poc.md
 references/evidence/live/linux-drive1-helper-bit-channel.md
 references/evidence/live/linux-drive1-helper-xdata-48a0-summary.json
+references/evidence/live/linux-drive1-helper-xdata-selected-summary.json
 ```
 
 ## Firmware Layout
@@ -258,6 +259,15 @@ Live byte read:
 ```text
 xdata[0x48a0] at the late event-68 hook = 0xa0
 ```
+
+Selected follow-up reads at the same hook:
+
+| address | value |
+|---:|---:|
+| `0x47d2` | `0xff` |
+| `0x48a0` | `0xa0` |
+| `0x48a5` | `0xff` |
+| `0x8221` | `0xff` |
 
 This is too slow for bulk dumping, but useful for mapping selected XDATA
 registers and validating GPIO/status candidates before using external wiring.

@@ -54,12 +54,17 @@ def parse_bits(value: str) -> list[int]:
     return bits
 
 
-def run_command(cmd: list[str], *, check: bool = False) -> subprocess.CompletedProcess[str]:
+def run_command(
+    cmd: list[str],
+    *,
+    check: bool = False,
+    quiet: bool = False,
+) -> subprocess.CompletedProcess[str]:
     print("+ " + " ".join(cmd), flush=True)
     proc = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-    if proc.stdout:
+    if proc.stdout and not quiet:
         print(proc.stdout, end="")
-    if proc.stderr:
+    if proc.stderr and not quiet:
         print(proc.stderr, end="", file=sys.stderr)
     if check and proc.returncode != 0:
         raise subprocess.CalledProcessError(proc.returncode, cmd, proc.stdout, proc.stderr)
@@ -138,7 +143,7 @@ def run_bit_once(
         "--out-dir",
         str(attempt_out_dir),
     ]
-    proc = run_command(cmd, check=False)
+    proc = run_command(cmd, check=False, quiet=args.quiet_runner)
     result_path = latest_result(attempt_out_dir)
     result = json.loads(result_path.read_text(encoding="utf-8"))
     try:
@@ -229,6 +234,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--rebuild", action="store_true")
     parser.add_argument("--retry-attempts", type=int, default=2)
     parser.add_argument("--between-delay", type=float, default=3.0)
+    parser.add_argument(
+        "--quiet-runner",
+        action="store_true",
+        help="suppress verbose per-event runner output; raw logs are still written under --out-dir",
+    )
     return parser.parse_args()
 
 
@@ -240,7 +250,13 @@ def main() -> int:
     bits: list[dict[str, Any]] = []
     for index, bit in enumerate(args.bits):
         candidate = build_candidate(args, args.addr, bit)
-        bits.append(run_bit(args, args.addr, bit, candidate, run_root))
+        item = run_bit(args, args.addr, bit, candidate, run_root)
+        bits.append(item)
+        print(
+            f"bit {bit}: value={item['value']} event68_rc={item['event68_returncode']} "
+            f"attempts={item['attempt_count']}",
+            flush=True,
+        )
         if index != len(args.bits) - 1 and args.between_delay:
             print(f"sleeping {args.between_delay:.1f}s before next bit", flush=True)
             time.sleep(args.between_delay)

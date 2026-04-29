@@ -135,6 +135,22 @@ xdata[0x48a0] = 0xa0
 That matches the helper success path setting `0x48a0 |= 0xa0` before the final
 cleanup sequence.
 
+Additional selected XDATA reads at the same hook point:
+
+| address | value | note |
+|---:|---:|---|
+| `0x47d2` | `0xff` | controller/finalizer state byte candidate |
+| `0x48a0` | `0xa0` | handoff byte; success path has set bits 7 and 5 |
+| `0x48a5` | `0xff` | nearby helper cleanup/status byte candidate |
+| `0x8221` | `0xff` | finalizer handoff byte candidate |
+
+Compact machine-readable summaries:
+
+```text
+references/evidence/live/linux-drive1-helper-xdata-48a0-summary.json
+references/evidence/live/linux-drive1-helper-xdata-selected-summary.json
+```
+
 ## Tools
 
 Reusable builders:
