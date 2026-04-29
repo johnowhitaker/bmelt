@@ -272,15 +272,58 @@ Selected follow-up reads at the same hook:
 This is too slow for bulk dumping, but useful for mapping selected XDATA
 registers and validating GPIO/status candidates before using external wiring.
 
+## Pico Front-Panel Probe
+
+The gutted-drive front board is wired to a Pico:
+
+| Pico | line |
+|---|---|
+| `GP26` | yellow, LED-plus line, sampled high-Z |
+| `GP27` | green, eject button line, normally high and pull-low active |
+| `GND` | blue, front-panel ground |
+
+Use the Mac-side Pico sampler while running a Linux helper event:
+
+```sh
+python3 scripts/probe_liteon_pico_led_payload.py \
+  --candidate references/firmware/extracted/helper-codeexec-candidates/<name>/liteon-full-currentboot-ld5m-helper-codeexec-<name>-candidate.json \
+  --device /dev/sg1 \
+  --label <name>
+```
+
+The probe writes phase summaries for `pre`, `event68`, `post_event68`, and
+`recovery` under `runs/pico-led-probes/`.
+
+Timing-safe LED probes should use the event-68 helper hook, not a post-command
+snapshot. The codeexec builder now has held-window modes:
+
+```sh
+python3 scripts/build_liteon_helper_codeexec_candidate.py \
+  --name held-loop3-movx-4023-write00-count20 \
+  hold-movx-byte --addr 0x4023 --value 0x00 --payload-offset 0x0600 --hold-count 0x20
+```
+
+Validated windows:
+
+| mode | observed event-68 behavior |
+|---|---|
+| delay at plain `0x0600` | stretches event 68 to roughly `2.7s` |
+| looped XDATA hold at plain `0x0600` | stretches event 68 to roughly `3.1s` |
+
+Negative LED-control candidates so far: `P1.6`, XDATA `0x4023`, `0x4844`,
+`0x90fc`, and the earlier `0x59xx/0x5axx` helper-init shortlist.
+
 ## Next Work
 
 Immediate useful directions:
 
-1. Use the XDATA bit channel to map a small set of high-value helper/controller
+1. Use GP27 as a controllable input and map which internal bit changes when the
+   eject button line is pulled low.
+2. Use the XDATA bit channel to map a small set of high-value helper/controller
    registers around `0x48a0`, `0x47d2`, `0x8221`, and likely GPIO/status
    candidates.
-2. If the software bit channel is too slow or cannot reach the needed state,
-   use the Pico front-panel wiring and map the LED/button GPIO path.
-3. Keep live tests short through event `68` while iterating on helper code.
-4. Avoid boot-critical persistent F0 hooks until the live normal-mode handler
+3. If the LED/button GPIO block is found, switch from timing/error-status output
+   to a faster Pico-visible channel.
+4. Keep live tests short through event `68` while iterating on helper code.
+5. Avoid boot-critical persistent F0 hooks until the live normal-mode handler
    path is mapped.

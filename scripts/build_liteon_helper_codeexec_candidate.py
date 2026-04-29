@@ -30,6 +30,7 @@ DEFAULT_OUT_ROOT = EXTRACTED / "helper-codeexec-candidates"
 HOOK_PLAIN_OFFSET = 0x02B5
 PAYLOAD_PLAIN_OFFSET = 0x0620
 PAYLOAD_CODE_ADDR = 0x361A
+HELPER_CODE_BASE_FROM_PLAIN = 0x2FFA
 SUCCESS_STATUS_CALL_ADDR = 0x32CB
 
 
@@ -54,6 +55,13 @@ def parse_u16(value: str) -> int:
     return parsed
 
 
+def parse_u8(value: str) -> int:
+    parsed = int(value, 0)
+    if not 0 <= parsed <= 0xFF:
+        raise argparse.ArgumentTypeError("value must be 0..0xff")
+    return parsed
+
+
 def parse_bit(value: str) -> int:
     parsed = int(value, 0)
     if not 0 <= parsed <= 7:
@@ -74,6 +82,16 @@ def hex_patch(offset: int, data_hex: str) -> str:
 
 def ljmp(addr: int) -> str:
     return f"02{addr:04x}"
+
+
+def helper_code_addr(plain_offset: int) -> int:
+    return HELPER_CODE_BASE_FROM_PLAIN + plain_offset
+
+
+def delay_payload(count: int) -> str:
+    if count <= 0:
+        return ""
+    return f"7f{count:02x}7eff7dffddfedefadff6"
 
 
 def status_payload(status_byte: int) -> str:
@@ -134,6 +152,68 @@ def movx_bit_payload(addr: int, bit: int, *, success_on_one: bool) -> str:
     return branch_on_acc_bit_payload(prefix, bit, success_on_one=success_on_one)
 
 
+def direct_bit_payload(addr: int, bit: int, *, success_on_one: bool) -> str:
+    prefix = f"e5{addr:02x}"  # MOV A,direct
+    return branch_on_acc_bit_payload(prefix, bit, success_on_one=success_on_one)
+
+
+def movx_byte_op_payload(addr: int, op: str, value: int) -> str:
+    if op == "write":
+        body = f"90{addr:04x}74{value:02x}f0"  # MOV DPTR,#addr; MOV A,#value; MOVX @DPTR,A
+    else:
+        opcode = {"xor": "64", "or": "44", "and": "54"}[op]
+        body = f"90{addr:04x}e0{opcode}{value:02x}f0"  # MOVX A,@DPTR; op A,#value; MOVX @DPTR,A
+    return body + ljmp(0x32C4)
+
+
+def direct_byte_op_payload(addr: int, op: str, value: int) -> str:
+    if op == "write":
+        body = f"75{addr:02x}{value:02x}"  # MOV direct,#value
+    else:
+        opcode = {"xor": "64", "or": "44", "and": "54"}[op]
+        body = f"e5{addr:02x}{opcode}{value:02x}f5{addr:02x}"  # MOV A,direct; op A,#value; MOV direct,A
+    return body + ljmp(0x32C4)
+
+
+def direct_bit_op_payload(bit_addr: int, op: str) -> str:
+    opcode = {"clear": "c2", "set": "d2", "toggle": "b2"}[op]
+    return f"{opcode}{bit_addr:02x}" + ljmp(0x32C4)
+
+
+def delayed_movx_byte_op_payload(addr: int, op: str, value: int, delay_count: int) -> str:
+    if op == "write":
+        body = f"90{addr:04x}74{value:02x}f0"  # MOV DPTR,#addr; MOV A,#value; MOVX @DPTR,A
+    else:
+        opcode = {"xor": "64", "or": "44", "and": "54"}[op]
+        body = f"90{addr:04x}e0{opcode}{value:02x}f0"  # MOVX A,@DPTR; op A,#value; MOVX @DPTR,A
+    return body + delay_payload(delay_count) + ljmp(0x32C4)
+
+
+def delayed_direct_bit_op_payload(bit_addr: int, op: str, delay_count: int) -> str:
+    opcode = {"clear": "c2", "set": "d2", "toggle": "b2"}[op]
+    return f"{opcode}{bit_addr:02x}" + delay_payload(delay_count) + ljmp(0x32C4)
+
+
+def hold_movx_byte_payload(addr: int, value: int, hold_count: int) -> str:
+    return (
+        f"90{addr:04x}"  # MOV DPTR,#addr
+        f"7f{hold_count:02x}"  # MOV R7,#outer
+        "7eff"  # outer: MOV R6,#0xff
+        "7dff"  # middle: MOV R5,#0xff
+        f"74{value:02x}"  # inner: MOV A,#value
+        "f0"  # MOVX @DPTR,A
+        "ddfb"  # DJNZ R5,inner
+        "def7"  # DJNZ R6,middle
+        "dff3"  # DJNZ R7,outer
+        + ljmp(0x32C4)
+    )
+
+
+def hold_direct_bit_payload(bit_addr: int, op: str, hold_count: int) -> str:
+    opcode = {"clear": "c2", "set": "d2"}[op]
+    return f"7f{hold_count:02x}7eff7dff{opcode}{bit_addr:02x}ddfcdef8dff4" + ljmp(0x32C4)
+
+
 def render_command(args: argparse.Namespace, patches: list[str]) -> tuple[list[str], dict[str, Path]]:
     out_dir = args.out_root / args.name
     outputs = {
@@ -163,9 +243,38 @@ def render_command(args: argparse.Namespace, patches: list[str]) -> tuple[list[s
 
 
 def build_report(args: argparse.Namespace, patches: list[str], outputs: dict[str, Path]) -> dict[str, Any]:
-    has_payload = args.mode in {"status-byte", "payload-hex", "immediate-bit", "movc-bit", "movx-bit"}
+    has_payload = args.mode in {
+        "status-byte",
+        "payload-hex",
+        "immediate-bit",
+        "movc-bit",
+        "movx-bit",
+        "direct-bit",
+        "movx-byte-op",
+        "direct-byte-op",
+        "direct-bit-op",
+        "delay-only",
+        "delayed-movx-byte-op",
+        "delayed-direct-bit-op",
+        "hold-movx-byte",
+        "hold-direct-bit",
+    }
+    payload_plain_offset = getattr(args, "payload_offset", PAYLOAD_PLAIN_OFFSET) if has_payload else None
+    payload_code_addr = helper_code_addr(payload_plain_offset) if payload_plain_offset is not None else None
     mode_args: dict[str, Any] = {}
-    for key in ("status_byte", "payload_hex", "value", "addr", "bit", "success_on_zero"):
+    for key in (
+        "status_byte",
+        "payload_hex",
+        "value",
+        "addr",
+        "bit",
+        "bit_addr",
+        "op",
+        "success_on_zero",
+        "payload_offset",
+        "delay_count",
+        "hold_count",
+    ):
         if hasattr(args, key):
             mode_args[key] = getattr(args, key)
     return {
@@ -175,8 +284,8 @@ def build_report(args: argparse.Namespace, patches: list[str], outputs: dict[str
         "mode_args": mode_args,
         "base_candidate": str(args.base_candidate),
         "hook_plain_offset": HOOK_PLAIN_OFFSET,
-        "payload_plain_offset": PAYLOAD_PLAIN_OFFSET if has_payload else None,
-        "payload_code_addr": PAYLOAD_CODE_ADDR if has_payload else None,
+        "payload_plain_offset": payload_plain_offset,
+        "payload_code_addr": payload_code_addr,
         "patches": patches,
         "outputs": {key: str(value) for key, value in outputs.items()},
         "notes": [
@@ -216,6 +325,66 @@ def parse_args() -> argparse.Namespace:
     movx.add_argument("--addr", type=parse_u16, required=True)
     movx.add_argument("--bit", type=parse_bit, required=True)
     movx.add_argument("--success-on-zero", action="store_true")
+
+    direct = sub.add_parser("direct-bit", help="branch based on an 8051 direct/SFR byte bit")
+    direct.add_argument("--addr", type=parse_u8, required=True)
+    direct.add_argument("--bit", type=parse_bit, required=True)
+    direct.add_argument("--success-on-zero", action="store_true")
+
+    movx_op = sub.add_parser("movx-byte-op", help="write or read/modify/write one XDATA byte, then report success")
+    movx_op.add_argument("--addr", type=parse_u16, required=True)
+    movx_op.add_argument("--op", choices=("write", "xor", "or", "and"), required=True)
+    movx_op.add_argument("--value", type=parse_byte, required=True)
+
+    direct_op = sub.add_parser("direct-byte-op", help="write or read/modify/write one direct/SFR byte, then report success")
+    direct_op.add_argument("--addr", type=parse_u8, required=True)
+    direct_op.add_argument("--op", choices=("write", "xor", "or", "and"), required=True)
+    direct_op.add_argument("--value", type=parse_byte, required=True)
+
+    bit_op = sub.add_parser("direct-bit-op", help="set, clear, or toggle one bit-addressable direct/SFR bit")
+    bit_op.add_argument("--bit-addr", type=parse_u8, required=True)
+    bit_op.add_argument("--op", choices=("clear", "set", "toggle"), required=True)
+
+    delay = sub.add_parser("delay-only", help="hold the known helper hook for a visible timing window, then report success")
+    delay.add_argument("--payload-offset", type=parse_u16, default=0x0600)
+    delay.add_argument("--delay-count", type=parse_byte, default=0x40)
+
+    delayed_movx = sub.add_parser(
+        "delayed-movx-byte-op",
+        help="write or read/modify/write one XDATA byte, delay, then report success",
+    )
+    delayed_movx.add_argument("--addr", type=parse_u16, required=True)
+    delayed_movx.add_argument("--op", choices=("write", "xor", "or", "and"), required=True)
+    delayed_movx.add_argument("--value", type=parse_byte, required=True)
+    delayed_movx.add_argument("--payload-offset", type=parse_u16, default=0x0600)
+    delayed_movx.add_argument("--delay-count", type=parse_byte, default=0x40)
+
+    delayed_bit = sub.add_parser(
+        "delayed-direct-bit-op",
+        help="set, clear, or toggle one bit-addressable direct/SFR bit, delay, then report success",
+    )
+    delayed_bit.add_argument("--bit-addr", type=parse_u8, required=True)
+    delayed_bit.add_argument("--op", choices=("clear", "set", "toggle"), required=True)
+    delayed_bit.add_argument("--payload-offset", type=parse_u16, default=0x0600)
+    delayed_bit.add_argument("--delay-count", type=parse_byte, default=0x40)
+
+    hold_movx = sub.add_parser(
+        "hold-movx-byte",
+        help="repeatedly write one XDATA byte for a Pico-visible hold window, then report success",
+    )
+    hold_movx.add_argument("--addr", type=parse_u16, required=True)
+    hold_movx.add_argument("--value", type=parse_byte, required=True)
+    hold_movx.add_argument("--payload-offset", type=parse_u16, default=0x0600)
+    hold_movx.add_argument("--hold-count", type=parse_byte, default=0x40)
+
+    hold_bit = sub.add_parser(
+        "hold-direct-bit",
+        help="repeatedly set or clear one bit-addressable direct/SFR bit, then report success",
+    )
+    hold_bit.add_argument("--bit-addr", type=parse_u8, required=True)
+    hold_bit.add_argument("--op", choices=("clear", "set"), required=True)
+    hold_bit.add_argument("--payload-offset", type=parse_u16, default=0x0600)
+    hold_bit.add_argument("--hold-count", type=parse_byte, default=0x40)
     return parser.parse_args()
 
 
@@ -268,6 +437,64 @@ def main() -> int:
                     success_on_one=not args.success_on_zero,
                 ),
             ),
+        ]
+    elif args.mode == "direct-bit":
+        patches = [
+            hex_patch(HOOK_PLAIN_OFFSET, ljmp(PAYLOAD_CODE_ADDR)),
+            hex_patch(
+                PAYLOAD_PLAIN_OFFSET,
+                direct_bit_payload(
+                    args.addr,
+                    args.bit,
+                    success_on_one=not args.success_on_zero,
+                ),
+            ),
+        ]
+    elif args.mode == "movx-byte-op":
+        patches = [
+            hex_patch(HOOK_PLAIN_OFFSET, ljmp(PAYLOAD_CODE_ADDR)),
+            hex_patch(PAYLOAD_PLAIN_OFFSET, movx_byte_op_payload(args.addr, args.op, args.value)),
+        ]
+    elif args.mode == "direct-byte-op":
+        patches = [
+            hex_patch(HOOK_PLAIN_OFFSET, ljmp(PAYLOAD_CODE_ADDR)),
+            hex_patch(PAYLOAD_PLAIN_OFFSET, direct_byte_op_payload(args.addr, args.op, args.value)),
+        ]
+    elif args.mode == "direct-bit-op":
+        patches = [
+            hex_patch(HOOK_PLAIN_OFFSET, ljmp(PAYLOAD_CODE_ADDR)),
+            hex_patch(PAYLOAD_PLAIN_OFFSET, direct_bit_op_payload(args.bit_addr, args.op)),
+        ]
+    elif args.mode == "delay-only":
+        patches = [
+            hex_patch(HOOK_PLAIN_OFFSET, ljmp(helper_code_addr(args.payload_offset))),
+            hex_patch(args.payload_offset, delay_payload(args.delay_count) + ljmp(0x32C4)),
+        ]
+    elif args.mode == "delayed-movx-byte-op":
+        patches = [
+            hex_patch(HOOK_PLAIN_OFFSET, ljmp(helper_code_addr(args.payload_offset))),
+            hex_patch(
+                args.payload_offset,
+                delayed_movx_byte_op_payload(args.addr, args.op, args.value, args.delay_count),
+            ),
+        ]
+    elif args.mode == "delayed-direct-bit-op":
+        patches = [
+            hex_patch(HOOK_PLAIN_OFFSET, ljmp(helper_code_addr(args.payload_offset))),
+            hex_patch(
+                args.payload_offset,
+                delayed_direct_bit_op_payload(args.bit_addr, args.op, args.delay_count),
+            ),
+        ]
+    elif args.mode == "hold-movx-byte":
+        patches = [
+            hex_patch(HOOK_PLAIN_OFFSET, ljmp(helper_code_addr(args.payload_offset))),
+            hex_patch(args.payload_offset, hold_movx_byte_payload(args.addr, args.value, args.hold_count)),
+        ]
+    elif args.mode == "hold-direct-bit":
+        patches = [
+            hex_patch(HOOK_PLAIN_OFFSET, ljmp(helper_code_addr(args.payload_offset))),
+            hex_patch(args.payload_offset, hold_direct_bit_payload(args.bit_addr, args.op, args.hold_count)),
         ]
     else:  # pragma: no cover - argparse prevents this.
         raise AssertionError(args.mode)

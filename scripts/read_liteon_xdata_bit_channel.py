@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Read XDATA bytes through the late-helper success/error bit channel.
+"""Read XDATA or direct/SFR bytes through the helper success/error bit channel.
 
 This runs on the Linux host with the drive attached.  For each requested bit it:
 
 1. builds a currentboot profile-tail helper candidate whose payload reads one
-   XDATA bit with MOVX;
+   XDATA bit with MOVX, or an 8051 direct/SFR bit with MOV direct;
 2. replays only through event 68;
 3. interprets event-68 GOOD as bit=1 and the known DID_ERROR helper error-exit
    as bit=0;
@@ -32,7 +32,7 @@ DEFAULT_CANDIDATE_ROOT = ROOT / "references/firmware/extracted/helper-codeexec-c
 DEFAULT_OUT_DIR = ROOT / "runs/helper-xdata-bit-channel"
 
 
-def parse_u16(value: str) -> int:
+def parse_addr(value: str) -> int:
     parsed = int(value, 0)
     if not 0 <= parsed <= 0xFFFF:
         raise argparse.ArgumentTypeError("address must be 0..0xffff")
@@ -96,7 +96,10 @@ def interpret_bit(event68: dict[str, Any]) -> int | None:
 
 
 def build_candidate(args: argparse.Namespace, addr: int, bit: int) -> Path:
-    name = f"xdata-{addr:04x}-bit{bit}"
+    if args.source == "direct" and addr > 0xFF:
+        raise ValueError("direct/SFR source addresses must be 0..0xff")
+    name_addr = f"{addr:02x}" if args.source == "direct" else f"{addr:04x}"
+    name = f"{args.source}-{name_addr}-bit{bit}"
     candidate = (
         args.candidate_root
         / name
@@ -111,9 +114,9 @@ def build_candidate(args: argparse.Namespace, addr: int, bit: int) -> Path:
         name,
         "--out-root",
         str(args.candidate_root),
-        "movx-bit",
+        "direct-bit" if args.source == "direct" else "movx-bit",
         "--addr",
-        f"0x{addr:04x}",
+        f"0x{name_addr}",
         "--bit",
         str(bit),
     ]
@@ -202,6 +205,7 @@ def render_markdown(summary: dict[str, Any]) -> str:
         "",
         f"- captured at UTC: `{summary['captured_at_utc']}`",
         f"- device: `{summary['device']}`",
+        f"- source: `{summary['source']}`",
         f"- address: `{summary['addr']:#06x}`",
         f"- value: `{summary['value_text']}`",
         "",
@@ -227,7 +231,8 @@ def render_markdown(summary: dict[str, Any]) -> str:
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--device", required=True)
-    parser.add_argument("--addr", type=parse_u16, required=True)
+    parser.add_argument("--source", choices=("xdata", "direct"), default="xdata")
+    parser.add_argument("--addr", type=parse_addr, required=True)
     parser.add_argument("--bits", type=parse_bits, default=parse_bits("0,1,2,3,4,5,6,7"))
     parser.add_argument("--candidate-root", type=Path, default=DEFAULT_CANDIDATE_ROOT)
     parser.add_argument("--out-dir", type=Path, default=DEFAULT_OUT_DIR)
@@ -244,7 +249,9 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> int:
     args = parse_args()
-    run_id = datetime.now(timezone.utc).strftime(f"xdata-{args.addr:04x}-%Y%m%dT%H%M%SZ")
+    run_id = datetime.now(timezone.utc).strftime(
+        f"{args.source}-{args.addr:04x}-%Y%m%dT%H%M%SZ"
+    )
     run_root = args.out_dir / run_id
     run_root.mkdir(parents=True, exist_ok=True)
     bits: list[dict[str, Any]] = []
@@ -271,6 +278,7 @@ def main() -> int:
         "status": "xdata_bit_channel_read",
         "captured_at_utc": datetime.now(timezone.utc).isoformat(),
         "device": args.device,
+        "source": args.source,
         "addr": args.addr,
         "bits": bits,
         "value": value,

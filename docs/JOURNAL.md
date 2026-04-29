@@ -200,3 +200,36 @@ The active repo now keeps only the compact operating set:
 The next phase is to use that slow bit channel for targeted internal mapping,
 then decide whether a Pico front-panel link is worth adding for faster,
 friendlier communication.
+
+## Front-Panel Probing
+
+The Pico side quest is now real enough to be useful. The gutted drive's front
+board is wired with blue as ground, green as the normally-high eject button
+line on `GP27`, and yellow as the LED-plus line on `GP26`. Pulling GP27 low from
+the Pico safely simulates a button press electrically, and GP26 clearly follows
+the visible LED during helper/recovery activity.
+
+This immediately exposed a timing problem in the naive LED-register probes:
+checking GP26 only after a SCSI command returns can only see latched state. A
+candidate register could pulse during helper execution and be restored before
+the host sees command completion.
+
+The current probe method fixes that. The helper hook at plain `0x02b5` jumps to
+payload space at plain `0x0600`, where the payload either delays or repeatedly
+asserts a candidate register value while the Pico samples GP26. This is a
+known-good execution window:
+
+```text
+plain 0x0600 delay payload: event 68 stretches to about 2.7s
+plain 0x0600 looped XDATA hold: event 68 stretches to about 3.1s
+```
+
+So far, this stronger method has ruled out the first small LED-control
+shortlist: `P1.6`, XDATA `0x4023`, `0x4844`, and `0x90fc`. The earlier
+final-tail probes also ruled out the obvious `0x59xx/0x5axx` initialization
+registers. The LED is observable, but we have not found the latch yet.
+
+The more promising next step is probably to use GP27 as an input signal and map
+which internal bit changes when the eject button line is pulled low. That should
+narrow the front-panel GPIO block more efficiently than brute-forcing output
+registers.
