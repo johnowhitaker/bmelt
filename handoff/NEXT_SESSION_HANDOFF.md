@@ -12,10 +12,13 @@ from the active tree. The compact operating set is now in this repo.
 2. `docs/JOURNAL.md`
 3. `docs/helper-bypass-write-method.md`
 4. `references/evidence/live/linux-drive1-codeexec-timing-poc.md`
-5. `scripts/run_liteon_linux_persistence_experiment.py`
-6. `scripts/build_liteon_helper_bypass_candidate.py`
-7. `scripts/recover_liteon_currentboot_linux.py`
-8. `scripts/dump_liteon_linux_f0_window.py`
+5. `references/evidence/live/linux-drive1-helper-bit-channel.md`
+6. `scripts/run_liteon_linux_persistence_experiment.py`
+7. `scripts/build_liteon_helper_bypass_candidate.py`
+8. `scripts/build_liteon_helper_codeexec_candidate.py`
+9. `scripts/read_liteon_xdata_bit_channel.py`
+10. `scripts/recover_liteon_currentboot_linux.py`
+11. `scripts/dump_liteon_linux_f0_window.py`
 
 ## Hardware State
 
@@ -45,12 +48,13 @@ Live-proven:
 - dump/decrypt F0 through Linux `READ BUFFER id=F0`;
 - recover known `0D5C` currentboot back to `LD5M`;
 - persist selected F0 bytes with the helper-status bypass;
-- execute patched helper-overlay code and observe host-visible timing.
+- execute patched helper-overlay code and observe host-visible timing;
+- read selected XDATA bits through event-68 GOOD vs DID_ERROR.
 
 Still unsolved:
 
 - the real `0xe7fe0` container seal/auth algorithm;
-- a general host data-return channel from helper code;
+- a fast/general host data-return channel from helper code;
 - stable normal-mode persistent F0 resident hooks.
 
 ## Practical Write Method
@@ -116,16 +120,56 @@ Evidence:
 references/evidence/live/linux-drive1-codeexec-timing-poc.md
 ```
 
+## XDATA Bit Channel
+
+The same late hook can now return one bit without timing. Payload code chooses:
+
+```text
+LJMP 0x32c4  -> event 68 GOOD
+LJMP 0x32b2  -> event 68 DID_ERROR, then auto-recovery restores LD5M
+```
+
+`MOVX A,@DPTR` can feed that decision. The first byte read was:
+
+```text
+xdata[0x48a0] at event 68 = 0xa0
+```
+
+Evidence:
+
+```text
+references/evidence/live/linux-drive1-helper-bit-channel.md
+references/evidence/live/linux-drive1-helper-xdata-48a0-summary.json
+```
+
+Read another byte:
+
+```sh
+python3 scripts/read_liteon_xdata_bit_channel.py \
+  --device /dev/sg1 \
+  --addr 0x48a0 \
+  --out-dir runs/helper-xdata-bit-channel \
+  --retry-attempts 2 \
+  --between-delay 4
+```
+
+This is intentionally slow. It is suitable for selected registers, not bulk
+memory dumps.
+
 ## Good Next Step
 
-Turn timing-only helper code execution into a real data channel.
+Use the XDATA bit channel to map a short list of high-value registers before
+adding hardware:
 
-Best first attempt: keep the same late `0x32af -> payload -> 0x32c4` hook and
-try to reuse a helper/status routine that is already safe late in the pMac
-boundary. Avoid helper-entry trampolines; those wedged at event `68`.
+- nearby handoff/status bytes around `0x48a0`;
+- controller/finalizer state bytes already seen statically, such as `0x47d2`
+  and `0x8221`;
+- candidate GPIO/front-panel registers before wiring the Pico into an active
+  feedback loop.
 
-If host-visible status stays opaque, use the Pico front-panel wiring to map a
-simple LED/button channel.
+If this becomes too slow or cannot see the needed state, use the Pico
+front-panel wiring for a faster LED/button channel. Avoid helper-entry
+trampolines; those wedged at event `68`.
 
 ## Check
 

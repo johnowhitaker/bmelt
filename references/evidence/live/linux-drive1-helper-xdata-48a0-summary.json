@@ -1,0 +1,53 @@
+{
+  "addr": 18592,
+  "addr_hex": "0x48a0",
+  "bits": [
+    {
+      "bit": 0,
+      "event68_returncode": 99,
+      "value": 0
+    },
+    {
+      "bit": 1,
+      "event68_returncode": 99,
+      "value": 0
+    },
+    {
+      "bit": 2,
+      "event68_returncode": 99,
+      "value": 0
+    },
+    {
+      "bit": 3,
+      "event68_returncode": 99,
+      "value": 0
+    },
+    {
+      "bit": 4,
+      "event68_returncode": 99,
+      "value": 0
+    },
+    {
+      "bit": 5,
+      "event68_returncode": 0,
+      "value": 1
+    },
+    {
+      "bit": 6,
+      "event68_returncode": 99,
+      "value": 0
+    },
+    {
+      "bit": 7,
+      "event68_returncode": 0,
+      "value": 1
+    }
+  ],
+  "captured_at_utc": "2026-04-29T21:51:57.742010+00:00",
+  "device": "/dev/sg1",
+  "host": "jonathan-thinkpad-t480s",
+  "interpretation": "Late helper event-68 hook read xdata[0x48a0] through the GOOD/DID_ERROR bit channel.",
+  "status": "xdata_bit_channel_summary",
+  "value": 160,
+  "value_hex": "0xa0"
+}

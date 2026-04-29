@@ -3,6 +3,7 @@ logs/
 runs/
 work/
 .tmp/
+references/firmware/extracted/helper-codeexec-candidates/
 __pycache__/
 *.pyc
 *.pyo

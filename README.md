@@ -16,10 +16,12 @@ We can:
 - dump and decrypt `READ BUFFER id=F0`;
 - recover the known `0D5C` currentboot state back to `LD5M`;
 - build helper-bypass candidates that persist selected F0 byte changes;
-- execute patched 8051 helper-overlay code and observe a host timing signal.
+- execute patched 8051 helper-overlay code;
+- read small XDATA values back through a slow success/error bit channel.
 
 The current code-exec foothold is documented in
-`references/evidence/live/linux-drive1-codeexec-timing-poc.md`.
+`references/evidence/live/linux-drive1-codeexec-timing-poc.md` and
+`references/evidence/live/linux-drive1-helper-bit-channel.md`.
 
 ## Read First
 

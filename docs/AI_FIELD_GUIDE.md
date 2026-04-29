@@ -60,6 +60,8 @@ Code-execution evidence:
 
 ```text
 references/evidence/live/linux-drive1-codeexec-timing-poc.md
+references/evidence/live/linux-drive1-helper-bit-channel.md
+references/evidence/live/linux-drive1-helper-xdata-48a0-summary.json
 ```
 
 ## Firmware Layout
@@ -176,7 +178,7 @@ python3 scripts/run_liteon_linux_persistence_experiment.py \
 
 ## Helper Code-Execution Foothold
 
-The first clean host-visible code execution proof is timing-based.
+The first clean host-visible code execution proof was timing-based.
 
 Hook:
 
@@ -221,14 +223,54 @@ Negative result: `MOVX` self-write to `0x361a` did not alter public
 `READ BUFFER 01:018620`; that window appears to expose the staged helper copy,
 not live helper XDATA/code memory.
 
+## Helper Bit Channel
+
+The timing foothold has been widened into a slow no-hardware XDATA read
+channel. The same late hook jumps to payload at `0x361a`, and the payload
+chooses either:
+
+```text
+LJMP 0x32c4  -> event 68 returns GOOD
+LJMP 0x32b2  -> event 68 returns DID_ERROR, then recovery restores LD5M
+```
+
+Confirmed payload-controlled cases:
+
+| probe | event 68 |
+|---|---:|
+| constant `0x01.bit0` | `GOOD` |
+| constant `0x00.bit0` | `DID_ERROR` |
+| `MOVX xdata[0x48a0].6`, success-on-zero | `GOOD` |
+| `MOVX xdata[0x48a0].6`, success-on-one | `DID_ERROR` |
+
+`MOVC` at helper code address `0x32af` did not distinguish bit `0` from bit
+`1`, so code-memory reads probably do not see the mutable helper overlay.
+
+Reusable tools:
+
+```sh
+python3 scripts/build_liteon_helper_codeexec_candidate.py --help
+python3 scripts/read_liteon_xdata_bit_channel.py --device /dev/sg1 --addr 0x48a0
+```
+
+Live byte read:
+
+```text
+xdata[0x48a0] at the late event-68 hook = 0xa0
+```
+
+This is too slow for bulk dumping, but useful for mapping selected XDATA
+registers and validating GPIO/status candidates before using external wiring.
+
 ## Next Work
 
 Immediate useful directions:
 
-1. Turn the timing foothold into a byte/packet channel by reusing a late helper
-   status routine.
-2. If host-visible status remains opaque, use the Pico front-panel wiring and
-   map the LED/button GPIO path.
+1. Use the XDATA bit channel to map a small set of high-value helper/controller
+   registers around `0x48a0`, `0x47d2`, `0x8221`, and likely GPIO/status
+   candidates.
+2. If the software bit channel is too slow or cannot reach the needed state,
+   use the Pico front-panel wiring and map the LED/button GPIO path.
 3. Keep live tests short through event `68` while iterating on helper code.
 4. Avoid boot-critical persistent F0 hooks until the live normal-mode handler
    path is mapped.

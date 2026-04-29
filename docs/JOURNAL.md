@@ -166,6 +166,25 @@ The adjacent event timings stayed flat, and each partial run recovered back to
 communicate back to the host, even if only through a crude timing channel for
 now.
 
+The next small breakthrough was turning that crude timing channel into a real
+bit. Instead of delaying, the payload chooses between the helper's normal
+success path and its original error path. Success makes event `68` return
+GOOD; the error path makes it return the known recoverable `DID_ERROR`.
+
+That was enough to read XDATA one bit at a time. A tiny payload reads a byte
+with `MOVX`, tests one bit, then chooses success or error. The first full byte
+read was the helper/controller handoff byte at `0x48a0`:
+
+```text
+xdata[0x48a0] = 0xa0
+```
+
+This is not fast enough to dump memory wholesale, but it changes the shape of
+the next phase. We can now ask the drive small internal questions without
+soldering anything: what does this status register contain at the hook point,
+does this GPIO bit move when a button changes, does this controller handoff
+flag mean what we think it means?
+
 ## Where The Clean Repo Starts
 
 The active repo now keeps only the compact operating set:
@@ -175,7 +194,9 @@ The active repo now keeps only the compact operating set:
 - currentboot/recovery candidates;
 - the minimal Linux dumping/recovery/bypass scripts;
 - the current 8051 binary and Ghidra decompile;
-- the timing code-execution proof.
+- the timing code-execution proof;
+- the helper success/error bit-channel proof.
 
-The next phase is to widen the timing proof into a useful communication
-channel, then use that to map more of the drive from the inside.
+The next phase is to use that slow bit channel for targeted internal mapping,
+then decide whether a Pico front-panel link is worth adding for faster,
+friendlier communication.
