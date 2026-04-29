@@ -187,3 +187,11 @@ This is slow, but it is a real no-hardware internal data channel:
 It is not yet a practical bulk dump channel. It is good enough to map a small
 number of important XDATA registers and to validate candidate GPIO/status
 registers before moving to Pico wiring.
+
+## Timing-Nibble Side Probe
+
+A follow-up attempt tried to convert one XDATA nibble into a delay count so a
+byte could be read in two successful event-68 runs. Constant delay calibration
+still behaved as expected, but nibble-derived delays from the `0x48a0` hook did
+not decode consistently. That mode was not kept as supported tooling. Use the
+GOOD/DID_ERROR bit channel until there is a cleaner multi-bit channel.
