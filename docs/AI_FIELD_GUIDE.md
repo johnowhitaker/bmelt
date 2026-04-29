@@ -1,0 +1,234 @@
+# AI Field Guide
+
+This is the compact technical handoff for the current clean repo. It is meant
+to let a future agent start from a plugged-in LiteOn/PLDS `DS-8ABSH` drive and
+reach the current helper-code execution foothold without reading the old 10GB
+evidence tree.
+
+## Hardware And Host
+
+- Linux host: `jonathan-thinkpad-t480s`
+- Remote repo path: `/home/jonathan/boastermelt`
+- SSH as `root` works.
+- The optical drive may appear as `/dev/sg0` or `/dev/sg1`; rediscover before
+  every live run.
+- Known normal identity: `PLDS DVD+-RW DS-8ABSH LD5M`.
+- Known recoverable failure identity: `PLDS DVD+-RW DS-8ABSH 0D5C`.
+
+Rediscover:
+
+```sh
+ssh root@jonathan-thinkpad-t480s 'cd /home/jonathan/boastermelt && python3 scripts/liteon_linux_status.py'
+```
+
+## Minimal Artifacts
+
+Base image and keys:
+
+```text
+references/firmware/extracted/ld5m-f0-window-0x00000-0x100000.bin
+references/evidence/ld5m-extrainq-reference.log
+references/evidence/live/currentboot-extrainq-after-profile-tail.hex
+```
+
+Profile-tail helper:
+
+```text
+references/firmware/extracted/liteon-official-profile-tail-ef130045-plain.bin
+references/firmware/extracted/liteon-profile-tail-ef130045-ld5m-official-currentboot.bin
+references/firmware/extracted/liteon-profile-tail-ef130045-ld5m-official-currentboot.json
+references/firmware/extracted/liteon-profile-tail-ef130045-ld5m-official-pretail.json
+```
+
+Currentboot/recovery candidates:
+
+```text
+references/firmware/extracted/liteon-full-currentboot-ld5m-base-candidate.json
+references/firmware/extracted/liteon-same-family-boundary-probe-candidate.json
+references/firmware/extracted/liteon-same-family-currentboot-continuation-candidate.json
+```
+
+8051 material:
+
+```text
+analysis/8051/ldm58051.bin
+analysis/8051/ldm58051_c.c
+analysis/8051/ldm58051_c.h
+```
+
+Code-execution evidence:
+
+```text
+references/evidence/live/linux-drive1-codeexec-timing-poc.md
+```
+
+## Firmware Layout
+
+For the 1 MiB LD5M F0 image:
+
+| Range | Meaning | Notes |
+|---:|---|---|
+| `0x00000..0x06fef` | resident 8051/prefix/tables | low prefix is protected or skipped by helper programming |
+| `0x06ff0..0x06ff3` | pre-family word | image/profile-adjacent auth-ish word |
+| `0x06ff8..0x06fff` | family marker | LD5M marker area |
+| `0x07000..0x0702b` | outer descriptor | describes CDD stream boundaries |
+| `0x0702c..0xcec18` | CDD stream 1 | early directory/table area is dangerous |
+| `0xcec18..0xd8fcf` | erased gap 1 | canonical `ff` |
+| `0xd8fd0..0xd8fff` | identity/profile area | writable; not necessarily live INQUIRY source |
+| `0xd9000..0xe6401` | CDD stream 2 | likely controller-consumed payload |
+| `0xe6401..0xe7fdf` | erased gap 2 | canonical `ff` |
+| `0xe7fe0..0xe7fed` | trailer auth14 | visible container seal material |
+| `0xe7ff5..0xe7fff` | `DU8A6S` / `LITE` markers | keep intact |
+| `0xe8000..0xfffff` | final erased tail | outside programmed/validated object in live tests |
+
+Important boundaries:
+
+- Helper normal program range starts at `0x7000`.
+- Helper main object range ends at `0xe8000`.
+- Low prefix changes at `0x4f81` and `0x6f80` staged but did not persist
+  without helper range extension.
+- CDD directory-adjacent `0x704f` caused a hard failure; avoid that area.
+
+## Read/Dump Path
+
+The useful read-only surface is SCSI `READ BUFFER mode=1`.
+
+- `id=F0` returns encrypted F0 bytes.
+- F0 decrypts with AES-CBC using EXTRAINQ-derived IV/key.
+- The crypto reset interval is `0x80`.
+- Linux reads are stable with `--chunk 0x80`.
+
+Dump:
+
+```sh
+python3 scripts/dump_liteon_linux_f0_window.py \
+  --device /dev/sg1 \
+  --extrainq references/evidence/ld5m-extrainq-reference.log \
+  --start 0 \
+  --size 0x100000 \
+  --chunk 0x80 \
+  --out runs/f0/f0-decrypted.bin \
+  --raw-out runs/f0/f0-raw.bin
+```
+
+## Recovery Path
+
+Known `0D5C` currentboot recovery is live-proven. It replays the LD5M
+currentboot-key sequence and returns the drive to `LD5M`.
+
+```sh
+python3 scripts/recover_liteon_currentboot_linux.py --device /dev/sg1
+```
+
+If the bridge is still visible, software recovery usually works. For the older
+helper-entry wedge class, rebooting the Linux host was enough to re-enumerate
+the optical LUN, then recovery worked.
+
+## Helper-Bypass Write Method
+
+The controller rejects arbitrary modified sealed F0 containers at finalization.
+The practical bypass is to keep the currentboot flow but mutate the mutable
+profile-tail helper body.
+
+The essential helper final-status patch:
+
+```text
+helper plaintext 0x02b5 / code 0x32af:
+30 e6 12 -> 02 32 c4
+```
+
+This forces the helper's final status path to report success. It has persisted
+selected F0 bytes, including:
+
+- `0xd8ff4: 32 -> 33` and restore;
+- `0xd8fd8: 50 -> 40` and restore;
+- `0x27d4f: 3f -> 3e` in later CDD stream 1 body;
+- lower-prefix restores when helper erase/program range patches are included.
+
+Build:
+
+```sh
+python3 scripts/build_liteon_helper_bypass_candidate.py \
+  --name example \
+  --patch 0xd8ff4:33 \
+  --include-pre-tail
+```
+
+For lower-prefix sectors below `0x7000`, add:
+
+```sh
+--auto-helper-range
+```
+
+Run:
+
+```sh
+python3 scripts/run_liteon_linux_persistence_experiment.py \
+  --candidate references/firmware/extracted/helper-bypass-candidates/example/liteon-full-currentboot-ld5m-helper-bypass-example-candidate.json \
+  --device /dev/sg1 \
+  --skip-pre-f0 \
+  --end-index 544 \
+  --f0-size 0xe0000 \
+  --capture-finalizer-status-after-event 1 \
+  --capture-finalizer-status \
+  --recover-on-currentboot
+```
+
+## Helper Code-Execution Foothold
+
+The first clean host-visible code execution proof is timing-based.
+
+Hook:
+
+```text
+helper plaintext 0x02b5 / code 0x32af:
+30 e6 12 -> 02 36 1a
+```
+
+Payload location:
+
+```text
+helper plaintext 0x0620 / code 0x361a
+```
+
+Payload shape:
+
+```text
+mov r7,#N
+outer:
+  mov r6,#0xff
+middle:
+  mov r5,#0xff
+inner:
+  djnz r5,inner
+  djnz r6,middle
+  djnz r7,outer
+ljmp 0x32c4
+```
+
+Observed event-68 timing:
+
+| Run | Event 68 |
+|---|---:|
+| baseline | `0.255830s` |
+| delay `0x20` | `0.849545s` |
+| delay `0x80` | `2.638886s` |
+
+Event `34` and event `35` stayed flat, so this is payload-controlled helper
+execution, not ordinary bank variance.
+
+Negative result: `MOVX` self-write to `0x361a` did not alter public
+`READ BUFFER 01:018620`; that window appears to expose the staged helper copy,
+not live helper XDATA/code memory.
+
+## Next Work
+
+Immediate useful directions:
+
+1. Turn the timing foothold into a byte/packet channel by reusing a late helper
+   status routine.
+2. If host-visible status remains opaque, use the Pico front-panel wiring and
+   map the LED/button GPIO path.
+3. Keep live tests short through event `68` while iterating on helper code.
+4. Avoid boot-critical persistent F0 hooks until the live normal-mode handler
+   path is mapped.

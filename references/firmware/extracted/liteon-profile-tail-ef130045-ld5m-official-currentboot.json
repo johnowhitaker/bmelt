@@ -1,0 +1,25 @@
+{
+  "cdb": "3B 05 01 00 00 00 00 0B D0 7F 00 00",
+  "ciphertext_first16": "7a1c97ba4a7e3a6c547fbd0041771c28",
+  "ciphertext_len": 3008,
+  "ciphertext_sha256": "5e0969630aca73bb1f0f97185ed16331a975978ecbb8a5886affdeab7c8ca36c",
+  "cmac": "1db9f50cd18d13e653615a0362e7bfdc",
+  "entry_hex": "ef1300450bba",
+  "extrainq": "references/evidence/live/currentboot-extrainq-after-profile-tail.hex",
+  "notes": [
+    "Payload is AES-CBC(profile row/body plaintext) plus AES-CMAC(ciphertext).",
+    "The profile-tail helper uses the static updater layout: byte 9 arg/control=0x7f, byte 10 zero, byte 11 zero.",
+    "Use --plain-tail with the official trace-decrypted plaintext to reproduce the Windows updater payloads."
+  ],
+  "payload_first16": "7a1c97ba4a7e3a6c547fbd0041771c28",
+  "payload_len": 3024,
+  "payload_path": "references/firmware/extracted/liteon-profile-tail-ef130045-ld5m-official-currentboot.bin",
+  "payload_sha256": "df8d8d8460d1491829e74aad34dfbde4d21e024bebc4a3fd63c743a43cef711a",
+  "plain_len": 3008,
+  "plain_sha256": "fa7ac6f9c41557becc0c62864c30c972773d1db7b66a764d61fdcbf419af00e5",
+  "plain_source": "plain_tail_file",
+  "plain_tail": "references/firmware/extracted/liteon-official-profile-tail-ef130045-plain.bin",
+  "profile": null,
+  "status": "offline_profile_tail_payload_model",
+  "updater": "/Users/johno/projects/boastermelt/references/firmware/DS-8ABSH_AD12/DS-8ABSH_AD12 FW utility/DS-8ABSH_AD12 FW utility/DOS/DS-8ABSH_AD12_DOS.EXe"
+}

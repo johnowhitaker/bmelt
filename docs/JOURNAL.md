@@ -1,0 +1,181 @@
+# Project Journal
+
+This is the cleaned-up story of the boastermelt LiteOn/PLDS `DS-8ABSH` work so
+far. It is deliberately human-readable: enough technical detail to preserve the
+thread, but not a dump of every failed probe.
+
+## Starting Point
+
+The project began with an ordinary-looking slimline optical drive and the
+question that makes these devices interesting: if the vendor updater can
+rewrite the drive firmware over normal storage commands, can we understand the
+protocol well enough to read, modify, and eventually run our own code?
+
+The first foothold was SCSI. Besides normal INQUIRY and storage commands, the
+drive accepted vendor-flavored `READ BUFFER` and `WRITE BUFFER` traffic. That
+was enough to start treating the drive as a black box with a firmware-update
+surface rather than as a completely sealed appliance.
+
+## Reading The Drive
+
+The early read work found the useful public windows:
+
+- standard INQUIRY reported `PLDS DVD+-RW DS-8ABSH`;
+- EXTRAINQ exposed LiteOn-specific metadata and key material;
+- `READ BUFFER mode=1 id=F0` exposed a 1 MiB firmware window.
+
+The F0 bytes were encrypted, but the pattern was tractable. EXTRAINQ gave the
+pieces needed to derive the AES key and IV, and F0 decrypted cleanly when read
+in `0x80`-byte reset windows. That gave us the baseline LD5M image.
+
+Once the image was visible, its structure stood out:
+
+- a low resident/prefix region;
+- a family marker around `0x6ff8`;
+- a descriptor and two large `CDD` streams;
+- identity/profile bytes around `0xd8fd0`;
+- trailer material around `0xe7fe0`;
+- a final erased tail from `0xe8000` onward.
+
+## Learning From The Updaters
+
+The next step was to stop guessing the write sequence and watch the official
+updaters. That led to the Wine shim work: fake enough of the Windows SPTI/ASPI
+environment that the updater would run offline while logging every command it
+wanted to send.
+
+That was one of the big unlocks. The updater traces gave us:
+
+- the banked chunking model;
+- the profile-tail helper payloads;
+- the use of AES-CBC plus CMAC on transport payloads;
+- the split between normal/pre-tail keys and currentboot keys;
+- the official-style 544-event currentboot write sequence.
+
+Extracting firmware from installers became its own subproblem. AD12, AHS9,
+CHS9, and related sibling images each needed slightly different handling:
+some were pulled from updater traces, some from FileDecrypt-style paths, and
+some required the `F2K8` postprocess mask. Comparing valid images made the
+container layout much clearer, especially the suspicious pre-family word and
+the 14-byte trailer seal.
+
+## The First Wrong Theories
+
+A lot of effort went into testing simple explanations:
+
+- maybe the USB bridge was blocking writes;
+- maybe direct SATA would behave differently;
+- maybe a final commit CDB was missing;
+- maybe the last 16-byte pMac/control payload was a checksum;
+- maybe the trailer was a CRC, sum, Adler, visible-key CMAC, or HMAC;
+- maybe the Coastermelt-style bypass was a visible count byte in the CDD header.
+
+Most of these were useful negatives. Modified images staged and read back
+correctly, but final persistence failed. Same-image controls passed. Flipping
+the final event payload still passed. Skipping the final event failed later.
+The evidence kept pointing away from transport mechanics and toward a
+controller-side admission check over the staged container.
+
+## The 0D5C Detour
+
+At one point the project crossed a boundary without knowing the return path.
+Both affected drives ended up reporting `0D5C`, a currentboot/recovery-like
+personality with CD-only behavior. That looked bad for a while.
+
+Linux changed the situation. With direct `sg_raw` access on
+`jonathan-thinkpad-t480s`, we could speak the same SCSI dialect more reliably
+than macOS/USB allowed. The LD5M currentboot-key continuation sequence recovered
+the drives back to normal `LD5M`. That turned `0D5C` from a dead end into a
+known, recoverable state.
+
+That recovery path changed the tone of the project. We could afford sharper
+experiments because the common failure mode had a mapped exit.
+
+## The Container Barrier
+
+The cleanest model became:
+
+1. Host chunks and pMac/control commands can stage bytes.
+2. The staged bytes can read back correctly.
+3. Final event 544 hands off to controller/helper logic.
+4. The controller admits only containers it considers valid.
+
+The visible 8051 code showed the final path entering a controller handoff
+rather than locally validating a simple host checksum. The helper/status path
+around `0x4da4`, `0x48a0`, and `01:8006` looked like a controller-mediated
+finalization step.
+
+The trailer at `0xe7fe0..0xe7fed` remains suspicious. It is almost certainly
+container-auth material, but not a simple checksum we have reproduced. The
+project could still return to that clean route later, but it was not the
+fastest way to get code running.
+
+## The Helper Bypass
+
+The breakthrough came from treating the `ef130045` profile-tail payload as a
+mutable 8051 helper overlay. It is loaded separately from the F0 image and is
+visible at `READ BUFFER 01:018000` in normal mode. Static analysis mapped it as
+a flash-profile helper linked at code base `0x3000`.
+
+The crucial patch was tiny:
+
+```text
+helper plain 0x02b5: 30 e6 12 -> 02 32 c4
+```
+
+That forces the helper's final status branch to jump to its local success path.
+With that helper patch in place, selected F0 changes persisted even when the
+ordinary modified image would have failed admission.
+
+Live-proven cases included:
+
+- identity/profile byte `0xd8ff4`;
+- identity/profile vendor-copy byte `0xd8fd8`;
+- a later CDD stream 1 byte at `0x27d4f`;
+- low-prefix restores when the helper erase/program start range was patched.
+
+This did not make every byte safe. The low prefix below `0x7000` is special,
+CDD directories are risky, canonical erased gaps should stay erased, and
+`0xe8000..0xfffff` is outside the programmed object. But it changed the core
+question from "can we edit this?" to "what shall we build?"
+
+## Code Execution
+
+The first attempts at host-visible code execution taught two things:
+
+- persistent F0 hooks are not automatically live just because the bytes are in
+  flash;
+- patching the helper entry is too early and can wedge the drive at the next
+  pMac/control boundary.
+
+The successful proof used a later, already-understood helper branch instead.
+We hooked the final status branch at code `0x32af`, jumped to payload space at
+`0x361a`, ran a finite delay loop, and returned to the normal success path at
+`0x32c4`.
+
+The host-visible signal was timing:
+
+```text
+baseline event 68: 0.255830s
+delay 0x20 event 68: 0.849545s
+delay 0x80 event 68: 2.638886s
+```
+
+The adjacent event timings stayed flat, and each partial run recovered back to
+`LD5M`. That is the first clean proof that our patched helper code runs and can
+communicate back to the host, even if only through a crude timing channel for
+now.
+
+## Where The Clean Repo Starts
+
+The active repo now keeps only the compact operating set:
+
+- the LD5M base image and EXTRAINQ reference;
+- the profile-tail helper artifacts;
+- currentboot/recovery candidates;
+- the minimal Linux dumping/recovery/bypass scripts;
+- the current 8051 binary and Ghidra decompile;
+- the timing code-execution proof.
+
+The next phase is to widen the timing proof into a useful communication
+channel, then use that to map more of the drive from the inside.

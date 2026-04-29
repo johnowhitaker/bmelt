@@ -1,0 +1,10 @@
+old/
+logs/
+runs/
+work/
+.tmp/
+__pycache__/
+*.pyc
+*.pyo
+*.zip
+.DS_Store

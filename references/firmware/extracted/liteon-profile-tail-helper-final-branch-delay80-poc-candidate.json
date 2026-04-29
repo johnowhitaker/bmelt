@@ -1,0 +1,166 @@
+{
+  "base_candidate": "references/firmware/extracted/liteon-full-currentboot-ld5m-base-candidate.json",
+  "expected_live_signals": [
+    "If first mutated event 35 fails immediately, the profile-tail payload/plaintext is checked before finalizer admission.",
+    "If the mutated tail events succeed but event 544 rejects, the finalizer admission covers or depends on the helper overlay bytes.",
+    "If event 544 passes and READ BUFFER id=01 around host offset 0x0182b5 shows the changed byte, the helper overlay is mutable independently of the F0 container.",
+    "If event 544 passes but the helper window is canonical, the controller re-exposes its own helper copy rather than the staged mutated payload."
+  ],
+  "mutation": {
+    "cmac_after": "64954de0a671ef6965a893c15bd2bbfd",
+    "expected_visible_helper_host_offset": 98997,
+    "kind": "same_f0_profile_tail_plaintext_mutation",
+    "mutation": {
+      "body_offset": 687,
+      "host_id01_offset_from_018000": 98997,
+      "host_id01_offset_from_018006_body": 98997,
+      "kind": "patch_bytes",
+      "patches": [
+        {
+          "after_hex": "02361a",
+          "before_hex": "30e612",
+          "body_offset": 687,
+          "host_id01_offset_from_018000": 98997,
+          "host_id01_offset_from_018006_body": 98997,
+          "length": 3,
+          "plain_offset": 693
+        },
+        {
+          "after_hex": "7f807eff7dffddfedefadff60232c4",
+          "before_hex": "466c6173682054797065204572726f",
+          "body_offset": 1562,
+          "host_id01_offset_from_018000": 99872,
+          "host_id01_offset_from_018006_body": 99872,
+          "length": 15,
+          "plain_offset": 1568
+        }
+      ],
+      "plain_offset": 693
+    },
+    "payload_mutated": "references/firmware/extracted/profile-tail-mutation-candidates/helper-final-branch-delay80-poc/ef130045-mutated-string-currentboot-payload.bin",
+    "payload_sha256_after": "ac4857890ad7a0301e36079a831b517ed5d72877fc381a6b8d1834d9457569aa",
+    "plain_sha256_after": "4c48dff5ec4daba347d623540d84f36d57abc9d3bc65c818e7f6a2156a47eb15",
+    "plain_sha256_before": "fa7ac6f9c41557becc0c62864c30c972773d1db7b66a764d61fdcbf419af00e5",
+    "plain_tail_base": "/Users/johno/projects/boastermelt/references/firmware/extracted/liteon-official-profile-tail-ef130045-plain.bin",
+    "plain_tail_mutated": "references/firmware/extracted/profile-tail-mutation-candidates/helper-final-branch-delay80-poc/ef130045-mutated-string-plain.bin",
+    "target_event_index": 35,
+    "target_event_indexes": [
+      35,
+      69,
+      103,
+      137,
+      171,
+      205,
+      239,
+      273,
+      307,
+      341,
+      375,
+      409,
+      443,
+      477,
+      511
+    ],
+    "target_scope": "all_currentboot_tails"
+  },
+  "out_candidate": "references/firmware/extracted/liteon-full-currentboot-ld5m-base-mutated-all-helper-final-branch-delay80-poc-candidate.json",
+  "outputs": {
+    "candidate": "references/firmware/extracted/liteon-full-currentboot-ld5m-base-mutated-all-helper-final-branch-delay80-poc-candidate.json",
+    "mutated_payload": "references/firmware/extracted/profile-tail-mutation-candidates/helper-final-branch-delay80-poc/ef130045-mutated-string-currentboot-payload.bin",
+    "mutated_plain_tail": "references/firmware/extracted/profile-tail-mutation-candidates/helper-final-branch-delay80-poc/ef130045-mutated-string-plain.bin"
+  },
+  "status": "offline_profile_tail_helper_mutation_candidate",
+  "target_events": [
+    {
+      "cdb": "3B 05 01 00 00 00 00 0B D0 7F 00 00",
+      "event_index": 35,
+      "phase": "profile_tail_arg7f",
+      "role": "currentboot-key LD5M profile tail before bank 1"
+    },
+    {
+      "cdb": "3B 05 01 00 00 00 00 0B D0 7F 00 00",
+      "event_index": 69,
+      "phase": "profile_tail_arg7f",
+      "role": "currentboot-key LD5M profile tail before bank 2"
+    },
+    {
+      "cdb": "3B 05 01 00 00 00 00 0B D0 7F 00 00",
+      "event_index": 103,
+      "phase": "profile_tail_arg7f",
+      "role": "currentboot-key LD5M profile tail before bank 3"
+    },
+    {
+      "cdb": "3B 05 01 00 00 00 00 0B D0 7F 00 00",
+      "event_index": 137,
+      "phase": "profile_tail_arg7f",
+      "role": "currentboot-key LD5M profile tail before bank 4"
+    },
+    {
+      "cdb": "3B 05 01 00 00 00 00 0B D0 7F 00 00",
+      "event_index": 171,
+      "phase": "profile_tail_arg7f",
+      "role": "currentboot-key LD5M profile tail before bank 5"
+    },
+    {
+      "cdb": "3B 05 01 00 00 00 00 0B D0 7F 00 00",
+      "event_index": 205,
+      "phase": "profile_tail_arg7f",
+      "role": "currentboot-key LD5M profile tail before bank 6"
+    },
+    {
+      "cdb": "3B 05 01 00 00 00 00 0B D0 7F 00 00",
+      "event_index": 239,
+      "phase": "profile_tail_arg7f",
+      "role": "currentboot-key LD5M profile tail before bank 7"
+    },
+    {
+      "cdb": "3B 05 01 00 00 00 00 0B D0 7F 00 00",
+      "event_index": 273,
+      "phase": "profile_tail_arg7f",
+      "role": "currentboot-key LD5M profile tail before bank 8"
+    },
+    {
+      "cdb": "3B 05 01 00 00 00 00 0B D0 7F 00 00",
+      "event_index": 307,
+      "phase": "profile_tail_arg7f",
+      "role": "currentboot-key LD5M profile tail before bank 9"
+    },
+    {
+      "cdb": "3B 05 01 00 00 00 00 0B D0 7F 00 00",
+      "event_index": 341,
+      "phase": "profile_tail_arg7f",
+      "role": "currentboot-key LD5M profile tail before bank 10"
+    },
+    {
+      "cdb": "3B 05 01 00 00 00 00 0B D0 7F 00 00",
+      "event_index": 375,
+      "phase": "profile_tail_arg7f",
+      "role": "currentboot-key LD5M profile tail before bank 11"
+    },
+    {
+      "cdb": "3B 05 01 00 00 00 00 0B D0 7F 00 00",
+      "event_index": 409,
+      "phase": "profile_tail_arg7f",
+      "role": "currentboot-key LD5M profile tail before bank 12"
+    },
+    {
+      "cdb": "3B 05 01 00 00 00 00 0B D0 7F 00 00",
+      "event_index": 443,
+      "phase": "profile_tail_arg7f",
+      "role": "currentboot-key LD5M profile tail before bank 13"
+    },
+    {
+      "cdb": "3B 05 01 00 00 00 00 0B D0 7F 00 00",
+      "event_index": 477,
+      "phase": "profile_tail_arg7f",
+      "role": "currentboot-key LD5M profile tail before bank 14"
+    },
+    {
+      "cdb": "3B 05 01 00 00 00 00 0B D0 7F 00 00",
+      "event_index": 511,
+      "phase": "profile_tail_arg7f",
+      "role": "currentboot-key LD5M profile tail before bank 15"
+    }
+  ],
+  "target_scope": "all_currentboot_tails"
+}
