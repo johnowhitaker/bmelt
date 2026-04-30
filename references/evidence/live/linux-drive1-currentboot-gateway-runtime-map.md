@@ -34,6 +34,24 @@ current clean workspace. It contains live per-drive/profile strings and large
 areas that disassemble plausibly as 8051 code, including direct references to
 the same controller and hardware registers we have been probing.
 
+Follow-up offline analysis refined that: this is a mixed currentboot
+controller/work window, not a complete decoded CDD payload. The tail of the dump
+contains exact sealed LD5M CDD bytes:
+
+```text
+gateway+0xf000 == F0 0x704c..0x7deb   CDD1 post-header directory/table prefix
+gateway+0xfc20 == F0 0xd9020..0xd919f CDD2 duplicate prefix
+gateway+0xff00 and +0xff80            repeated CDD headers
+```
+
+The generated report is:
+
+```text
+analysis/8051/currentboot-gateway-070000-analysis.md
+analysis/8051/currentboot-gateway-070000-analysis.json
+analysis/8051/servo-mechanics-static-notes.md
+```
+
 ## Run Details
 
 The drive was entered into currentboot with event 1, then sampled with
@@ -208,16 +226,23 @@ side effects rather than read by a simple direct-DPTR path here.
 
 ## Practical Consequence
 
-The decoded CDD descriptor target `0x184000` is not the only useful gateway
-address. In the currentboot phase, `0x070000`/`0x170000` is the better live
-oracle. It may be a decoded controller/runtime/profile image, and it gives us a
-new static target for:
+The decoded CDD descriptor target `0x184000` is not the useful currentboot
+gateway address we hoped for. In the currentboot phase, `0x070000`/`0x170000`
+is the better live oracle, but it is mixed runtime/work memory: profile strings,
+known 8051 fragments, controller register code, and copied encoded CDD work
+buffers. It gives us a new static target for:
 
 - mapping controller-side register use without single-bit helper probes;
 - understanding why LED/front-panel writes were not simple GPIO latches;
 - looking for safer normal-runtime hook sites or command handlers;
 - comparing currentboot and later-runtime controller memory if we get a hook
   that survives normal LD5M boot.
+
+For the sled/focus/laser side quest, the best current clue is the `0x59xx` and
+`0x5axx` cluster. The LD5M routine around F0 `0x59f3` appears at gateway offset
+`0x6059`, and routines around `0x642c`, `0x6fe0`, and `0x8278` manipulate the
+same cluster. Treat that area as a mechanics/servo command cluster to reverse,
+not as a safe LED latch to poke blindly.
 
 The drive was recovered after this run with
 `scripts/recover_liteon_currentboot_linux.py --force`; final standard INQUIRY

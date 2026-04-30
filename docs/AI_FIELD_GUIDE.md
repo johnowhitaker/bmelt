@@ -684,13 +684,41 @@ references/evidence/live/linux-drive1-currentboot-gateway-070000-10000.bin
 sha256 5f517adeab1647dbedf7b93f8be097b1641164fd49e87776364b9e134b9cbc0b
 ```
 
+Offline analysis:
+
+```text
+analysis/8051/currentboot-gateway-070000-analysis.md
+analysis/8051/currentboot-gateway-070000-analysis.json
+analysis/8051/servo-mechanics-static-notes.md
+```
+
 This 64 KiB region contains live profile/calibration strings such as
 `PLDS CORPORATION`, `KEYPARA`, media-profile names, and per-drive-looking serial
 material. It also disassembles plausibly as 8051 in several regions and
 references the same `0x4098`, `0x47xx`, `0x48xx`, and `0x59xx` register
-clusters we have been probing. Treat it as the best current currentboot-phase
-controller/runtime oracle. It is not an exact byte-for-byte static firmware
-slice found in the clean workspace.
+clusters we have been probing.
+
+Important correction: this is not a decoded CDD payload. The tail of the
+`0x070000` window contains exact sealed LD5M CDD bytes:
+
+```text
+gateway+0xf000 == F0 0x704c..0x7deb   CDD1 post-header directory/table prefix
+gateway+0xfc20 == F0 0xd9020..0xd919f CDD2 duplicate prefix
+gateway+0xff00 and +0xff80            repeated CDD headers
+```
+
+The same dump has exact overlaps against the resident 8051 and the
+profile-tail helper, but many apparent calls target the zero
+`0x02ea..0x3fff` region. Treat it as a mixed currentboot controller/work
+window, not as a complete standalone code image at base zero.
+
+For mechanics work, the useful static clue is the `0x59xx`/`0x5axx` cluster.
+The LD5M routine at F0 `0x59f3` appears at gateway offset `0x6059` and touches
+`0x5904`, `0x5905`, `0x5906`, `0x592a`, `0x59f0`, `0x5a00`, `0x5a24`,
+`0x5a31`, and nearby `0x4860..0x486a` state. Other gateway routines around
+`0x642c`, `0x6fe0`, and `0x8278` manipulate the same cluster. This fits the
+live sled movement from earlier probes: this is a servo/mechanics command area,
+not a safe LED latch.
 
 XDATA read example:
 
@@ -1034,3 +1062,5 @@ Immediate useful directions:
    Persistent hooks at `0x4ec6` and `0x5c72` were visible in F0 but did not
    affect `INQUIRY` or `REQUEST SENSE` timing. The `0x4ec6` negative now holds
    even across a true servo-driven `+5V` power cycle.
+8. For sled/focus/laser goals, statically reverse the `0x59xx` routines from
+   the gateway report before any more live mechanics pokes.

@@ -831,8 +831,28 @@ simple output latch. The code that touches `0x5904`, `0x5905`, `0x5906`, and
 neighbors is real controller/runtime code, and it sits among broader
 hardware-initialization routines. Random writes there are exactly the kind of
 thing that would move mechanics instead of blinking a nice debug LED. The next
-LED/front-panel work should therefore be guided by this decoded runtime image,
+LED/front-panel work should therefore be guided by this gateway/runtime map,
 not by brute-force bit pokes.
 
 I recovered the drive immediately after the map run with the standard
 currentboot recovery script; standard INQUIRY was back to `LD5M`.
+
+The deeper offline pass sharpened that story. The `0x070000` dump is not the
+decoded CDD image we were hoping for. Its tail is a copied CDD work area:
+gateway offset `0xf000` exactly matches F0 `0x704c..0x7deb`, the first CDD1
+post-header directory/table bytes; `0xfc20` exactly matches the duplicated CDD2
+prefix from F0 `0xd9020`; and `0xff00`/`0xff80` repeat the CDD header. That is
+still useful, just in a different way. We now know this gateway can show the
+controller's currentboot work buffers, but the decoded `0x184000..0x1b3fff`
+runtime payload is not present in this phase.
+
+I added a repeatable analyzer for this artifact:
+`scripts/analyze_liteon_gateway_runtime.py`, plus a short
+`analysis/8051/servo-mechanics-static-notes.md` side note. The report also
+found exact overlaps with the resident 8051 and profile-tail helper, including
+the hardware setup routine at F0 `0x59f3` reappearing at gateway offset
+`0x6059`. That makes the sled side quest much more concrete. The cluster around
+`0x5904`, `0x5905`, `0x5906`, `0x592a`, `0x59f0`, `0x5a00`, `0x5a24`, and
+`0x5a31` is now the main static target for movement/focus/laser control. The
+next move there should be reverse-engineering the state machine around those
+routines, not poking them live one bit at a time.

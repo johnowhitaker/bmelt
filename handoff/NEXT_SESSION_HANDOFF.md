@@ -296,11 +296,26 @@ references/evidence/live/linux-drive1-currentboot-gateway-070000-10000.bin
 sha256 5f517adeab1647dbedf7b93f8be097b1641164fd49e87776364b9e134b9cbc0b
 ```
 
-It contains profile/calibration strings and disassembles plausibly as 8051 in
-several areas. It references the `0x4098` FIFO, `0x47xx` event/status
-registers, and the `0x59xx` hardware cluster that made the sled move during LED
-experiments. Use this decoded/runtime image to guide front-panel and hook work;
-do not brute-force `0x59xx` writes casually.
+Offline analysis is in:
+
+```text
+analysis/8051/currentboot-gateway-070000-analysis.md
+analysis/8051/currentboot-gateway-070000-analysis.json
+analysis/8051/servo-mechanics-static-notes.md
+```
+
+Important nuance: the `0x070000` dump is mixed currentboot controller/work
+memory, not the decoded CDD image. Its tail contains exact sealed CDD bytes:
+gateway `+0xf000` mirrors F0 `0x704c..0x7deb`, gateway `+0xfc20` mirrors the
+known CDD2 duplicate prefix at F0 `0xd9020`, and `+0xff00/+0xff80` repeat the
+CDD header. It also contains profile/calibration strings and 8051-like code
+fragments, including exact overlaps with the resident/helper code.
+
+For the sled/focus/laser side quest, focus statically on the `0x59xx`/`0x5axx`
+cluster before any live mechanics poke. The LD5M routine at F0 `0x59f3` appears
+at gateway offset `0x6059`; related gateway routines around `0x642c`, `0x6fe0`,
+and `0x8278` manipulate the same cluster. This is likely a servo/mechanics
+command area, not an LED latch.
 
 Then use the bulk currentboot response hook and timing XDATA channel to map a
 short list of high-value registers before adding hardware. Use the older
