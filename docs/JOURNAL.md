@@ -745,3 +745,56 @@ runtime hook where natural LED transitions can be correlated against live
 state, or use a different hardware channel entirely. The new cross-reference
 report gives us a ranked map instead of a list of superstition-driven poke
 targets.
+
+## A New Blank-Currentboot Failure Class
+
+The next LED probe found a useful hazard boundary. A delay-only helper payload
+at the event-68 hook did exactly what it was supposed to do from the host's
+point of view: event `68` returned GOOD, and the Pico saw the LED/front-panel
+line rise during the helper window. But the drive did not settle into ordinary
+`0D5C` currentboot afterward. Its identity kept the PLDS model string while the
+revision and EXTRAINQ tail went mostly zero.
+
+That matters because this is not the old, solved `0D5C` state. The known
+recovery script starts by sending the currentboot profile tail before bank 0;
+blank-currentboot rejects that tail with `Parameter value invalid`. It also
+rejects the normal event-1 pre-tail. On the other hand, it still accepts
+ordinary `arg=00` chunk staging and readback. We staged bank-2 chunks
+successfully, but the matching bank pMac rejected, so the control/finalize side
+is out of sync even though the data staging side is alive.
+
+The new Pico servo command helped rule out easy explanations. A Linux host
+reboot, an 8-second servo cold boot, and finally an explicit Pico `ALLZ` plus a
+30-second servo power cut all came back to the same blank revision. A non-write
+exit pass through TEST UNIT READY, REQUEST SENSE, START STOP variants,
+`PLDSVUC` lock/unlock, `DF 0D/11`, and `sg_reset` also left it blank.
+
+So the practical lesson is simple: event-68 helper probes can leave a state
+that is neither normal LD5M nor the known recoverable `0D5C`. A full manual
+unplug of both the Pico and the drive did not clear it either, which made it
+feel uncomfortably persistent for a while.
+
+The recovery turned out not to be a reset at all; it was a third protocol
+dialect. The blank EXTRAINQ response had lost the normal `EXTRAINQ` marker, but
+it still carried a usable slot-5 AES key at bytes `0x9c..0xab`, with the
+familiar `"LD50"` tail. A profile-tail payload rebuilt under that key returned
+GOOD. After that, bank 0 staged and crossed its pMac boundary. The next tail
+failed, which exposed the pattern: the key bytes change after bank boundaries,
+so the tail has to be rebuilt from the current malformed EXTRAINQ before each
+bank.
+
+Bank 2 was the decisive test because it is the AES-selected bank. Rebuilding
+bank-2 chunks and the pMac under the active slot-5 key worked; after that, the
+remaining banks could use plain LD5M chunks while carrying the bank-2 pMac
+through every boundary. I wrapped that into
+`recover_liteon_blank_currentboot_linux.py`, resumed from bank 3, and the drive
+completed through bank 15 and final `PLDSVUC`. A Pico servo cold boot came back
+as normal `LD5M`.
+
+The recovered F0 image is not byte-identical to the original stock LD5M
+baseline, but it is not random damage. It matches the deliberate
+`currentboot-response-hook-gateway-cdb-bulk` candidate: a jump at `0x4fc9` into
+the `0x6ee3` code cave, where the currentboot response hook lives. So the state
+of the project after this recovery is better than before the wedge: we have the
+blank-currentboot exit path, and the useful currentboot bulk-read hook is still
+installed.

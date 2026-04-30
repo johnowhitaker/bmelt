@@ -913,22 +913,102 @@ references/evidence/live/linux-drive1-pico-servo-power-cycle.md
 references/evidence/live/linux-drive1-servo-coldboot-persistence-map.md
 ```
 
+## Blank-Currentboot Recovery
+
+The `led-baseline-delay-count50-r4` Pico probe completed event `68` but left
+Linux drive #1 in a new blank-currentboot identity:
+
+```text
+standard INQUIRY: PLDS DVD+-RW DS-8ABSH, blank/garbage revision
+EXTRAINQ: 176 bytes, no EXTRAINQ marker, trailing "        LD50 01 00 00 00"
+```
+
+This is not the known `0D5C` state. The known recovery tail before bank 0
+rejects with `Parameter value invalid`; normal event-1 profile-tail also
+rejects. `arg=00` chunks still stage and read back, but pMac/control rejects, so
+the data path and control path are out of phase.
+
+Recovery/status attempts that did not exit blank mode:
+
+- 8-second servo cold boot;
+- Linux host reboot plus 8-second servo cold boot;
+- Pico `ALLZ` plus 30-second servo cold boot;
+- TEST UNIT READY, REQUEST SENSE, START STOP variants, `PLDSVUC`
+  lock/unlock, `DF 0D/11`, and `sg_reset`.
+
+The exit is now live-proven. Treat blank-currentboot as a third currentboot
+dialect. Its malformed EXTRAINQ still exposes an active slot-5 transport key at
+`0x9c..0xab`. That key changes after bank boundaries, so the profile-tail
+payload must be rebuilt dynamically. Bank 2 is the AES-selected bank; its chunks
+and pMac must be regenerated under the slot-5 key visible immediately before
+bank 2. Later banks use plain LD5M chunks and carry the bank-2 pMac.
+
+Recovery command:
+
+```sh
+python3 scripts/recover_liteon_blank_currentboot_linux.py --device /dev/sg0
+```
+
+The first live recovery was hand-proven through bank 2, then resumed:
+
+```sh
+python3 scripts/recover_liteon_blank_currentboot_linux.py \
+  --device /dev/sg0 \
+  --start-bank 3 \
+  --end-bank 15 \
+  --initial-pmac 1b98d87590797f125e5f2ea3d704c531
+```
+
+It completed through final `PLDSVUC`, and a Pico servo cold boot re-enumerated
+as `LD5M`.
+
+Current live-drive note: F0 readback is not byte-stock LD5M. It matches the
+known `currentboot-response-hook-gateway-cdb-bulk` candidate:
+
+```text
+sha256 11df18bd19d269b959aa7c2270db96a636c27384669194ed0732c9b05e176771
+diffs  0x4fc9..0x4fcb -> LJMP 0x6ee3
+       0x6ee3..0x6f49 -> currentboot gateway bulk hook payload
+```
+
+Restore with the `currentboot-response-hook-restore-4fc9-cave` candidate before
+any test that needs stock bytes in `0x4fc9` or the `0x6ee3` cave.
+
+Evidence:
+
+```text
+references/evidence/live/linux-drive1-blank-currentboot-after-led-probe.md
+```
+
+Operational advice: do not keep issuing LED/XDATA write probes from this state.
+Recover to `LD5M` first. If testing recovery commands where identity reads may
+be hooked/stateful, use:
+
+```sh
+python3 scripts/run_liteon_events_no_preflight.py --help
+```
+
+This sends selected candidate events without the usual preflight INQUIRY.
+
 ## Next Work
 
 Immediate useful directions:
 
-1. Prefer a different external input that does not actuate the mechanism. GP27
+1. Keep `recover_liteon_blank_currentboot_linux.py` as the first response to
+   blank/garbage-revision currentboot. It is now faster and more reliable than
+   reset-only attempts.
+2. Prefer a different external input that does not actuate the mechanism. GP27
    should be considered an eject actuator, not a debug input.
-2. Treat XDATA `0x4748` and `0x4780` as controller-path clues, not LED latches.
+3. Treat XDATA `0x4748` and `0x4780` as controller-path clues, not LED latches.
    Any further tests there should be bit-level, restored, and followed by an
    immediate state check.
-3. Use the XDATA bit channel to map a small set of high-value helper/controller
+4. Use the XDATA bit channel to map a small set of high-value helper/controller
    registers around `0x48a0`, `0x47d2`, `0x8221`, and likely GPIO/status
    candidates.
-4. If the LED/button GPIO block is found, switch from timing/error-status output
+5. If the LED/button GPIO block is found, switch from timing/error-status output
    to a faster Pico-visible channel.
-5. Keep live tests short through event `68` while iterating on helper code.
-6. Do not assume visible F0-prefix functions are live normal-mode handlers.
+6. Keep live tests short through event `68` while iterating on helper code.
+7. Do not assume visible F0-prefix functions are live normal-mode handlers.
    Persistent hooks at `0x4ec6` and `0x5c72` were visible in F0 but did not
    affect `INQUIRY` or `REQUEST SENSE` timing. The `0x4ec6` negative now holds
    even across a true servo-driven `+5V` power cycle.

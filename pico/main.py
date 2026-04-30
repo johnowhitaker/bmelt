@@ -116,9 +116,9 @@ def servo_response():
     )
 
 
-def toggle_servo():
+def toggle_servo(hold_ms=1000):
     servo_set("RIGHT")
-    time.sleep_ms(1000)
+    time.sleep_ms(hold_ms)
     servo_set("LEFT")
     write_line(servo_response())
 
@@ -152,15 +152,26 @@ def handle_command(line):
         write_line('{"ok":true,"reply":"pong"}')
         return
 
-    if cmd == "TOGGLE" and len(parts) == 2 and parts[1].upper() == "SERVO":
-        toggle_servo()
+    if cmd == "TOGGLE" and len(parts) >= 2 and parts[1].upper() == "SERVO":
+        hold_ms = 1000
+        if len(parts) == 3:
+            hold_ms = int(parts[2])
+        elif len(parts) != 2:
+            raise ValueError("usage: TOGGLE SERVO [hold_ms]")
+        if hold_ms < 100 or hold_ms > 30000:
+            raise ValueError("hold_ms must be between 100 and 30000")
+        toggle_servo(hold_ms)
         return
 
     if cmd == "SERVO":
         if len(parts) == 2 and parts[1].upper() == "STATE":
             write_line(servo_response())
             return
-        raise ValueError("usage: TOGGLE SERVO or SERVO STATE")
+        if len(parts) == 2 and parts[1].upper() in ("LEFT", "RIGHT"):
+            servo_set(parts[1])
+            write_line(servo_response())
+            return
+        raise ValueError("usage: TOGGLE SERVO [hold_ms], SERVO STATE, SERVO LEFT, or SERVO RIGHT")
 
     if cmd in ("READ", "ADC", "DIG", "DIGITAL"):
         target = None

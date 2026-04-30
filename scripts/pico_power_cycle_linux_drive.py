@@ -31,8 +31,8 @@ def run(cmd: list[str], *, cwd: Path | None = None, timeout: float | None = None
     )
 
 
-def pico_toggle(port: str, timeout: float) -> dict[str, object]:
-    cmd = [sys.executable, "pico/client.py", "--port", port, "TOGGLE SERVO"]
+def pico_toggle(port: str, timeout: float, hold_ms: int) -> dict[str, object]:
+    cmd = [sys.executable, "pico/client.py", "--port", port, "TOGGLE SERVO", str(hold_ms)]
     result = run(cmd, cwd=ROOT, timeout=timeout)
     if result.returncode != 0:
         raise RuntimeError(f"Pico servo command failed rc={result.returncode}: {result.stderr.strip()}")
@@ -83,6 +83,7 @@ def main() -> int:
     parser.add_argument("--wait-timeout", type=float, default=30.0)
     parser.add_argument("--interval", type=float, default=1.0)
     parser.add_argument("--pico-timeout", type=float, default=5.0)
+    parser.add_argument("--hold-ms", type=int, default=1000, help="servo switch hold time in milliseconds")
     parser.add_argument("--ssh-timeout", type=float, default=8.0)
     parser.add_argument("--status-only", action="store_true", help="do not toggle the servo; only report status")
     args = parser.parse_args()
@@ -90,7 +91,8 @@ def main() -> int:
         args.expect_rev = None
 
     if not args.status_only:
-        response = pico_toggle(args.pico_port, args.pico_timeout)
+        pico_timeout = max(args.pico_timeout, args.hold_ms / 1000 + 3)
+        response = pico_toggle(args.pico_port, pico_timeout, args.hold_ms)
         print(json.dumps({"servo": response}, sort_keys=True))
 
     status, dev, rev = wait_for_optical(args)

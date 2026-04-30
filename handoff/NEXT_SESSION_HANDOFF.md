@@ -1,6 +1,6 @@
 # Boastermelt Next Session Handoff
 
-Date: 2026-04-29.
+Date: 2026-04-30.
 
 This is the clean-slate handoff after the repo spring cleaning. The old
 generated logs, Wine prefixes, packaged bundles, and git history were removed
@@ -20,7 +20,8 @@ from the active tree. The compact operating set is now in this repo.
 10. `scripts/read_liteon_xdata_bit_channel.py`
 11. `scripts/read_liteon_xdata_timing_channel.py`
 12. `scripts/recover_liteon_currentboot_linux.py`
-13. `scripts/dump_liteon_linux_f0_window.py`
+13. `scripts/recover_liteon_blank_currentboot_linux.py`
+14. `scripts/dump_liteon_linux_f0_window.py`
 
 ## Hardware State
 
@@ -31,11 +32,24 @@ from the active tree. The compact operating set is now in this repo.
   `/dev/sg0` and `/dev/sg1`.
 - After cleanup, sysfs still showed `/dev/sg1` rev `0D5C`, but `sg_inq`
   reported `LD5M`; trust the active SCSI INQUIRY over stale sysfs text.
-- At cleanup time, Linux drive #1 reported:
+- Current live state after the blank-currentboot recovery: Linux drive #1 is
+  visible as the optical PLDS LUN and cold-boots as `LD5M`.
 
 ```text
 PLDS / DVD+-RW DS-8ABSH / LD5M
 ```
+
+Important caveat: F0 is not byte-stock LD5M. It matches the deliberate
+`currentboot-response-hook-gateway-cdb-bulk` candidate:
+
+```text
+sha256 11df18bd19d269b959aa7c2270db96a636c27384669194ed0732c9b05e176771
+0x4fc9..0x4fcb -> LJMP 0x6ee3
+0x6ee3..0x6f49 -> currentboot gateway bulk hook payload
+```
+
+Restore with the `currentboot-response-hook-restore-4fc9-cave` candidate before
+any test that requires stock bytes at `0x4fc9` or in the `0x6ee3` cave.
 
 Rediscover:
 
@@ -50,12 +64,19 @@ LUN:
 python3 scripts/pico_power_cycle_linux_drive.py
 ```
 
+For a longer raw servo cut without waiting for `LD5M`:
+
+```sh
+python3 pico/client.py --port /dev/cu.usbmodem2101 --timeout 35 "TOGGLE SERVO 30000"
+```
+
 ## Current Capabilities
 
 Live-proven:
 
 - dump/decrypt F0 through Linux `READ BUFFER id=F0`;
 - recover known `0D5C` currentboot back to `LD5M`;
+- recover the newer blank-currentboot dialect back to `LD5M`;
 - persist selected F0 bytes with the helper-status bypass;
 - execute patched helper-overlay code and observe host-visible timing;
 - read selected XDATA bits through event-68 GOOD vs DID_ERROR;
@@ -66,6 +87,28 @@ Still unsolved:
 - the real `0xe7fe0` container seal/auth algorithm;
 - a fast/general host data-return channel from helper code;
 - stable normal-mode persistent F0 resident hooks.
+
+Blank-currentboot details:
+
+- standard INQUIRY and EXTRAINQ keep PLDS/model but return blank/garbage
+  revision and no normal `EXTRAINQ` marker;
+- known `0D5C` recovery profile tail rejects with `Parameter value invalid`;
+- normal event-1 pre-tail also rejects;
+- `arg=00` chunks still stage and read back;
+- the profile-tail key is still recoverable from malformed EXTRAINQ bytes
+  `0x9c..0xab`, and must be regenerated dynamically at bank boundaries.
+
+Recovery:
+
+```sh
+python3 scripts/recover_liteon_blank_currentboot_linux.py --device /dev/sg0
+```
+
+Evidence:
+
+```text
+references/evidence/live/linux-drive1-blank-currentboot-after-led-probe.md
+```
 
 Important 2026-04-30 update: true servo-driven `+5V` power loss did not make
 the persisted F0 `INQUIRY` hook at `0x4ec6` live. Direct F0 readback showed the
@@ -237,9 +280,15 @@ references/evidence/live/linux-drive1-helper-xdata-timing-channel.md
 
 ## Good Next Step
 
-Use the timing XDATA channel to map a short list of high-value registers before
-adding hardware. Use the older GOOD/DID_ERROR channel only when the value is
-already known not to drive a messy recovery path.
+The live drive is back in a known state: `LD5M`, with the currentboot gateway
+bulk response hook still installed. Decide deliberately whether to keep that
+hook for currentboot reads or restore stock bytes with the
+`currentboot-response-hook-restore-4fc9-cave` candidate before more LED probes.
+
+Then use the bulk currentboot response hook and timing XDATA channel to map a
+short list of high-value registers before adding hardware. Use the older
+GOOD/DID_ERROR channel only when the value is already known not to drive a messy
+recovery path.
 
 - nearby handoff/status bytes around `0x48a0`;
 - controller/finalizer state bytes already seen statically, such as `0x47d2`

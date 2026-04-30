@@ -18,6 +18,15 @@ We can:
 - build helper-bypass candidates that persist selected F0 byte changes;
 - execute patched 8051 helper-overlay code;
 - read small XDATA values back through a slow success/error bit channel.
+- recover the newer blank-currentboot failure class with a dynamic slot-5
+  profile-tail replay.
+
+Current live-drive caveat: Linux drive #1 has been recovered from the
+blank-currentboot identity and cold-boots as `LD5M`, but its F0 is not byte-stock.
+It currently contains the deliberate `currentboot-response-hook-gateway-cdb-bulk`
+resident hook at `0x4fc9 -> 0x6ee3`. Read
+`references/evidence/live/linux-drive1-blank-currentboot-after-led-probe.md`
+and the handoff before issuing more live write/control probes.
 
 The current code-exec foothold is documented in
 `references/evidence/live/linux-drive1-codeexec-timing-poc.md` and
@@ -53,6 +62,12 @@ python3 pico/client.py --port /dev/cu.usbmodem2101 "TOGGLE SERVO"
 This cuts the spliced USB `+5V` line for about one second. It has been verified
 to make the optical LUN disappear and reappear as `LD5M`.
 
+For a longer raw cut:
+
+```sh
+python3 pico/client.py --port /dev/cu.usbmodem2101 --timeout 35 "TOGGLE SERVO 30000"
+```
+
 Or use the wrapper that toggles the servo and waits for the Linux optical LUN:
 
 ```sh
@@ -69,6 +84,12 @@ Recover from known `0D5C` currentboot:
 
 ```sh
 ssh root@jonathan-thinkpad-t480s 'cd /home/jonathan/boastermelt && python3 scripts/recover_liteon_currentboot_linux.py --device /dev/sg1'
+```
+
+Recover from the blank-revision currentboot dialect:
+
+```sh
+ssh root@jonathan-thinkpad-t480s 'cd /home/jonathan/boastermelt && python3 scripts/recover_liteon_blank_currentboot_linux.py --device /dev/sg0'
 ```
 
 Read one XDATA byte through the safer GOOD/GOOD timing channel:

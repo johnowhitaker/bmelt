@@ -84,7 +84,9 @@ SERVO STATE
 
 Use `Z`, `RELEASE`, or `ALLZ` to return pins to high impedance. The Pico starts in `Z` for all three pins after every boot.
 
-`TOGGLE SERVO` moves GP10 from left to right for one second, then returns it to left.
+`TOGGLE SERVO` moves GP10 from left to right for one second, then returns it to
+left. `TOGGLE SERVO 5000` holds the switch for five seconds. `SERVO RIGHT` and
+`SERVO LEFT` manually hold/release the power-cut switch for recovery testing.
 
 ## Host Example
 
