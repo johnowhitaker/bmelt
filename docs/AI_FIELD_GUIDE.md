@@ -147,7 +147,9 @@ Key CDD facts:
   entry 388 starts at `0xd91a0`, immediately after CDD2's copied directory and
   before its `0x400` aux window.
 - Repeated templates `0d6840031a` and `0c60000318` point at short
-  `0x34`/`0x30` byte spans, matching the visible motif islands.
+  `0x34`/`0x30` byte spans, matching the visible motif islands. In these
+  records, byte 0 behaves like `N`, byte 1 is `8*N`, byte 4 is `2*N`, and the
+  source span is `4*N`.
 - Cheap decode probes did not find a global XOR/add/sub mask or standard zlib
   payload. Treat CDD as a structured controller-specific packed format, not as
   a single generic encrypted blob.

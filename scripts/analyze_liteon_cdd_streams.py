@@ -515,7 +515,7 @@ def write_report(images: list[CddImage]) -> str:
             f"`{template.hex()}` | {count} | {common_len_text} |"
         )
     lines.append("")
-    lines.append("This is the strongest static CDD grammar clue so far. The small repeated-source templates such as `0d6840031a` and `0c60000318` point at short `0x34`/`0x30` byte spans, matching the visible motif islands. That makes the 8-byte records look like a real packed-stream directory rather than encrypted noise.")
+    lines.append("This is the strongest static CDD grammar clue so far. The small repeated-source templates such as `0d6840031a` and `0c60000318` point at short `0x34`/`0x30` byte spans, matching the visible motif islands. For these templates, byte 0 behaves like `N`, byte 1 is `8*N`, byte 4 is `2*N`, and the source span is `4*N`. That looks like an opcode/length tuple for a repeated packed-stream construct. The broader record format is still unresolved, but the records are no longer plausibly encrypted noise.")
     lines.append("")
     ld5m = next((image for image in images if image.name == "LD5M"), None)
     if ld5m is not None:

@@ -136,7 +136,7 @@ The resulting addresses are monotonic and land in the CDD payload/aux regions. E
 | CHS7 | `0x081c4` | `0xd91a0` | `0xe6136` | `0x1fe` | True | `0d6840031a` | 18 | `0x34` x18 |
 | CHS9 | `0x081d0` | `0xd91a0` | `0xe6133` | `0x1fe` | True | `0d6840031a` | 18 | `0x34` x18 |
 
-This is the strongest static CDD grammar clue so far. The small repeated-source templates such as `0d6840031a` and `0c60000318` point at short `0x34`/`0x30` byte spans, matching the visible motif islands. That makes the 8-byte records look like a real packed-stream directory rather than encrypted noise.
+This is the strongest static CDD grammar clue so far. The small repeated-source templates such as `0d6840031a` and `0c60000318` point at short `0x34`/`0x30` byte spans, matching the visible motif islands. For these templates, byte 0 behaves like `N`, byte 1 is `8*N`, byte 4 is `2*N`, and the source span is `4*N`. That looks like an opcode/length tuple for a repeated packed-stream construct. The broader record format is still unresolved, but the records are no longer plausibly encrypted noise.
 
 LD5M source-segment mapping for useful probe offsets:
 

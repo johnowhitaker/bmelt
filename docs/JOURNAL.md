@@ -389,6 +389,12 @@ before CDD2's `0x400` aux window. The common short templates `0d6840031a` and
 motif islands. This is the first strong sign that the 8-byte records are a
 packed-stream directory with source spans, not just opaque metadata.
 
+Those short templates even have an internal length pattern: for `0d6840031a`,
+`0x0d` acts like `N`, `0x68` is `8*N`, `0x1a` is `2*N`, and the source span is
+`4*N = 0x34`. The `0c60000318` template follows the same rule with `N=0x0c`.
+That looks much more like an opcode/length tuple than random high-entropy
+material.
+
 That is not what a plain encrypted blob looks like. Cheap decode probes agree:
 no global XOR/add/sub transform exposed text, no standard zlib payload decoded,
 and the repeated motif runs do not look like AES-ECB blocks. The best static
