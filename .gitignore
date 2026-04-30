@@ -7,6 +7,7 @@ references/firmware/extracted/helper-codeexec-candidates/
 references/firmware/extracted/helper-bypass-candidates/
 references/firmware/extracted/resident-hook-candidates/
 references/firmware/extracted/profile-tail-mutation-candidates/
+references/firmware/extracted/currentboot-response-hook-candidates/
 ghidra_export.c
 ghidra_export.h
 __pycache__/

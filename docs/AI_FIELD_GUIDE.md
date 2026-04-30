@@ -552,6 +552,119 @@ Evidence:
 references/evidence/live/linux-drive1-controller-gateway-cdd-second-pass.md
 ```
 
+## Currentboot Response-Hook Readout
+
+The slow helper timing/error channels are now mostly superseded for currentboot
+mapping. The visible currentboot identity handler at code `0x4ec6` executes
+after a hardware cold boot plus event-1/profile-tail entry into currentboot.
+Hook its final response-copy call:
+
+```text
+0x4fc9: 12 62 06 -> 02 6e e3
+```
+
+Payloads at `0x6ee3` write one byte into response offset `0x20`, call the
+original `0x6206` response copy, and jump back to `0x4fcc`.
+
+Builder:
+
+```sh
+python3 scripts/build_liteon_currentboot_response_hook_candidate.py --help
+```
+
+Important candidate modes:
+
+```sh
+# constant response byte, used for the XD5C proof
+python3 scripts/build_liteon_currentboot_response_hook_candidate.py \
+  --name revision-x-constant \
+  --constant 0x58
+
+# controller gateway read: CDB[7:9] + (CDB[5] & 0x3f)
+python3 scripts/build_liteon_currentboot_response_hook_candidate.py \
+  --name gateway-cdb-byte-v3 \
+  --gateway-cdb-address
+
+# XDATA read: CDB[7:8] + (CDB[5] & 0x3f)
+python3 scripts/build_liteon_currentboot_response_hook_candidate.py \
+  --name xdata-cdb-byte \
+  --xdata-cdb-address
+```
+
+Install a response hook using the normal helper-bypass full-currentboot runner,
+then power-cycle the drive with the Pico servo and enter currentboot with event
+1:
+
+```sh
+python3 scripts/pico_power_cycle_linux_drive.py
+
+ssh root@jonathan-thinkpad-t480s \
+  'cd /home/jonathan/boastermelt && python3 scripts/run_liteon_linux_persistence_experiment.py \
+    --candidate references/firmware/extracted/liteon-full-currentboot-ld5m-base-candidate.json \
+    --device /dev/sg0 \
+    --skip-pre-f0 --skip-post-f0 \
+    --end-index 1 \
+    --capture-finalizer-status-after-event 1 \
+    --out-dir runs/currentboot-response-hook/event1-no-recover'
+```
+
+Controller-gateway read example:
+
+```sh
+ssh root@jonathan-thinkpad-t480s \
+  'cd /home/jonathan/boastermelt && python3 scripts/read_liteon_currentboot_gateway.py \
+    --device /dev/sg0 \
+    --address 0x018620 \
+    --length 32'
+```
+
+Known output:
+
+```text
+Flash Type Error
+```
+
+The controller-gateway hook must do a throwaway `0x4098` read before the real
+read. Without that, reads returned stale `0x05` bytes.
+
+XDATA read example:
+
+```sh
+ssh root@jonathan-thinkpad-t480s \
+  'cd /home/jonathan/boastermelt && python3 scripts/read_liteon_currentboot_xdata.py \
+    --device /dev/sg0 \
+    --address 0x4704 \
+    --length 16'
+```
+
+Known output starts:
+
+```text
+00 50 00 04 90 00 64 06 78 ...
+```
+
+Button differential with the Pico:
+
+```text
+GP27 released: xdata[0x4814] = d9
+GP27 low:      xdata[0x4814] = c9
+```
+
+So `xdata[0x4814].4` is the cleanest current front eject button-sense
+candidate. `xdata[0x48f7].7` also tracks the button. The LED output latch is
+still unknown.
+
+Current limitation: these hooks observe the currentboot/helper phase. The
+decoded CDD range around controller `0x184000` remains all zero here, so a
+decoded CDD dump still needs either a later controller phase or a normal-runtime
+hook.
+
+Evidence:
+
+```text
+references/evidence/live/linux-drive1-currentboot-response-hook.md
+```
+
 ## Pico Front-Panel Probe
 
 The gutted-drive front board is wired to a Pico:

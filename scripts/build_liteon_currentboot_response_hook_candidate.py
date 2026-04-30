@@ -1,0 +1,339 @@
+#!/usr/bin/env python3
+"""Build currentboot INQUIRY/EXTRAINQ response hook candidates.
+
+The currentboot identity path reaches the visible 8051 handler at 0x4ec6.
+This builder hooks the final response-copy call at 0x4fc9, writes one byte into
+the response staging buffer, then executes the original 0x6206 copy.
+
+No drive commands are sent by this script.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import re
+import subprocess
+import sys
+from pathlib import Path
+from typing import Any
+
+
+ROOT = Path(__file__).resolve().parents[1]
+EXTRACTED = ROOT / "references/firmware/extracted"
+DEFAULT_BASE_IMAGE = EXTRACTED / "ld5m-f0-window-0x00000-0x100000.bin"
+DEFAULT_OUT_DIR = EXTRACTED / "currentboot-response-hook-candidates"
+DEFAULT_HOOK_ADDR = 0x4FC9
+DEFAULT_CAVE_ADDR = 0x6EE3
+RESPONSE_STORAGE_BASE = 0x0220
+
+
+def slugify(value: str) -> str:
+    slug = re.sub(r"[^A-Za-z0-9_.-]+", "-", value.strip()).strip("-").lower()
+    if not slug:
+        raise argparse.ArgumentTypeError("name must contain at least one safe character")
+    return slug
+
+
+def parse_addr(value: str) -> int:
+    parsed = int(value, 0)
+    if not 0 <= parsed <= 0xFFFF:
+        raise argparse.ArgumentTypeError("address must be 0..0xffff")
+    return parsed
+
+
+def parse_byte(value: str) -> int:
+    parsed = int(value, 0)
+    if not 0 <= parsed <= 0xFF:
+        raise argparse.ArgumentTypeError("value must be 0..0xff")
+    return parsed
+
+
+def patch_arg(offset: int, data: bytes) -> str:
+    return f"0x{offset:x}:{data.hex()}"
+
+
+def ljmp(addr: int) -> bytes:
+    return bytes([0x02, (addr >> 8) & 0xFF, addr & 0xFF])
+
+
+def lcall(addr: int) -> bytes:
+    return bytes([0x12, (addr >> 8) & 0xFF, addr & 0xFF])
+
+
+def mov_dptr(addr: int) -> bytes:
+    return bytes([0x90, (addr >> 8) & 0xFF, addr & 0xFF])
+
+
+def mov_rn_imm(register: int, value: int) -> bytes:
+    if not 0 <= register <= 7:
+        raise ValueError("register must be R0..R7")
+    return bytes([0x78 + register, value & 0xFF])
+
+
+def source_constant(value: int) -> bytes:
+    return mov_rn_imm(5, value)
+
+
+def source_xdata_direct(addr: int) -> bytes:
+    return mov_dptr(addr) + bytes([0xE0, 0xFD])
+
+
+def source_xdata_window(base: int, selector_mask: int) -> bytes:
+    low = base & 0xFF
+    high = (base >> 8) & 0xFF
+    return b"".join(
+        [
+            mov_dptr(0x818F),  # CDB byte 5; stock accepts 0x40..0x7f.
+            bytes([0xE0]),  # MOVX A,@DPTR
+            bytes([0x54, selector_mask & 0xFF]),  # ANL A,#mask
+            bytes([0x24, low]),  # ADD A,#base_low
+            bytes([0xF5, 0x82]),  # MOV DPL,A
+            bytes([0x74, high]),  # MOV A,#base_high
+            bytes([0x34, 0x00]),  # ADDC A,#0
+            bytes([0xF5, 0x83]),  # MOV DPH,A
+            bytes([0xE0, 0xFD]),  # MOVX A,@DPTR ; MOV R5,A
+        ]
+    )
+
+
+def source_xdata_cdb_address(selector_mask: int) -> bytes:
+    return b"".join(
+        [
+            mov_dptr(0x818F),  # CDB byte 5: selector in low bits.
+            bytes([0xE0, 0x54, selector_mask & 0xFF, 0xFC]),  # MOVX; ANL; MOV R4,A
+            mov_dptr(0x8192),  # CDB byte 8: low base-address byte.
+            bytes([0xE0, 0x2C, 0xFF]),  # MOVX; ADD A,R4; MOV R7,A
+            mov_dptr(0x8191),  # CDB byte 7: high base-address byte.
+            bytes([0xE0, 0x34, 0x00, 0xF5, 0x83]),  # MOVX; ADDC A,#0; MOV DPH,A
+            bytes([0x8F, 0x82]),  # MOV DPL,R7
+            bytes([0xE0, 0xFD]),  # MOVX A,@DPTR ; MOV R5,A
+        ]
+    )
+
+
+def source_gateway_cdb_address(selector_mask: int) -> bytes:
+    wait_ready = bytes.fromhex("904000e020e7f9")
+    return b"".join(
+        [
+            mov_dptr(0x818F),  # CDB byte 5: selector in low bits.
+            bytes([0xE0, 0x54, selector_mask & 0xFF, 0xFC]),  # MOVX; ANL; MOV R4,A
+            mov_dptr(0x8193),  # CDB byte 9: low address byte.
+            bytes([0xE0, 0x2C, 0xFF]),  # MOVX; ADD A,R4; MOV R7,A
+            mov_dptr(0x8192),  # CDB byte 8: middle address byte.
+            bytes([0xE0, 0x34, 0x00, 0xFE]),  # MOVX; ADDC A,#0; MOV R6,A
+            mov_dptr(0x8191),  # CDB byte 7: high address byte.
+            bytes([0xE0, 0x34, 0x00, 0xFD]),  # MOVX; ADDC A,#0; MOV R5,A
+            wait_ready,
+            mov_dptr(0x4091),
+            bytes([0xED, 0xF0, 0xA3, 0xEE, 0xF0, 0xA3, 0xEF, 0xF0]),
+            mov_dptr(0x4098),
+            bytes([0xE0]),  # Stock 0x6239 does this throwaway read before waiting for data.
+            wait_ready,
+            mov_dptr(0x4098),
+            bytes([0xE0, 0xFD]),  # MOVX A,@DPTR ; MOV R5,A
+        ]
+    )
+
+
+def build_source(args: argparse.Namespace) -> tuple[str, bytes, dict[str, Any]]:
+    modes = [
+        args.constant is not None,
+        args.xdata_direct is not None,
+        args.xdata_window is not None,
+        args.xdata_cdb_address,
+        args.gateway_cdb_address,
+    ]
+    if sum(modes) != 1:
+        raise ValueError(
+            "choose exactly one of --constant, --xdata-direct, --xdata-window, "
+            "--xdata-cdb-address, or --gateway-cdb-address"
+        )
+    if args.constant is not None:
+        return "constant", source_constant(args.constant), {"constant": args.constant}
+    if args.xdata_direct is not None:
+        return "xdata_direct", source_xdata_direct(args.xdata_direct), {"xdata_direct": args.xdata_direct}
+    if args.gateway_cdb_address:
+        return (
+            "gateway_cdb_address",
+            source_gateway_cdb_address(args.selector_mask),
+            {"address_source": "cdb_bytes_7_8_9_plus_control_low_bits", "selector_mask": args.selector_mask},
+        )
+    if args.xdata_cdb_address:
+        return (
+            "xdata_cdb_address",
+            source_xdata_cdb_address(args.selector_mask),
+            {"address_source": "cdb_bytes_7_8_plus_control_low_bits", "selector_mask": args.selector_mask},
+        )
+    return (
+        "xdata_window",
+        source_xdata_window(args.xdata_window, args.selector_mask),
+        {"xdata_window": args.xdata_window, "selector_mask": args.selector_mask},
+    )
+
+
+def build_payload(base: bytes, args: argparse.Namespace) -> dict[str, Any]:
+    original_hook = base[args.hook_addr : args.hook_addr + 3]
+    if len(original_hook) != 3:
+        raise ValueError("hook bytes are outside base image")
+    if args.restore:
+        cave_payload = b"\xFF" * args.cave_len
+        return {
+            "mode": "restore",
+            "hook_patch": patch_arg(args.hook_addr, original_hook),
+            "cave_patch": patch_arg(args.cave_addr, cave_payload),
+            "original_hook_bytes": original_hook.hex(),
+            "payload": cave_payload.hex(),
+            "payload_len": len(cave_payload),
+            "source": {},
+        }
+
+    cave_original = base[args.cave_addr : args.cave_addr + args.cave_len]
+    if cave_original != b"\xFF" * args.cave_len:
+        raise ValueError(
+            f"cave 0x{args.cave_addr:04x}..0x{args.cave_addr + args.cave_len:04x} is not all FF"
+        )
+
+    source_mode, source_code, source_meta = build_source(args)
+    storage_offset = RESPONSE_STORAGE_BASE + args.response_offset
+    if not 0 <= storage_offset <= 0xFFFF:
+        raise ValueError("response offset is outside 16-bit response storage window")
+    payload = b"".join(
+        [
+            source_code,
+            mov_rn_imm(7, storage_offset & 0xFF),
+            mov_rn_imm(6, (storage_offset >> 8) & 0xFF),
+            lcall(0x6012),
+            mov_rn_imm(7, 0x20),
+            mov_rn_imm(6, 0x02),
+            lcall(0x6206),
+            ljmp(args.resume_addr),
+        ]
+    )
+    if len(payload) > args.cave_len:
+        raise ValueError(f"payload is {len(payload)} bytes, cave limit is {args.cave_len}")
+    return {
+        "mode": source_mode,
+        "hook_patch": patch_arg(args.hook_addr, ljmp(args.cave_addr)),
+        "cave_patch": patch_arg(args.cave_addr, payload),
+        "original_hook_bytes": original_hook.hex(),
+        "response_offset": args.response_offset,
+        "response_storage_offset": storage_offset,
+        "payload": payload.hex(),
+        "payload_len": len(payload),
+        "source": source_meta,
+    }
+
+
+def render_command(args: argparse.Namespace, hook: dict[str, Any]) -> tuple[list[str], Path]:
+    name = f"currentboot-response-hook-{args.name}"
+    out_dir = args.out_dir / name
+    cmd = [
+        sys.executable,
+        str(ROOT / "scripts/build_liteon_helper_bypass_candidate.py"),
+        "--name",
+        name,
+        "--out-dir",
+        str(out_dir),
+        "--patch",
+        hook["hook_patch"],
+        "--patch",
+        hook["cave_patch"],
+        "--auto-helper-range",
+        "--include-pre-tail",
+    ]
+    return cmd, out_dir
+
+
+def write_report(args: argparse.Namespace, hook: dict[str, Any], out_dir: Path, cmd: list[str]) -> None:
+    report = {
+        "status": "currentboot_response_hook_candidate",
+        "name": args.name,
+        "base_image": str(args.base_image),
+        "hook_addr": args.hook_addr,
+        "resume_addr": args.resume_addr,
+        "cave_addr": args.cave_addr,
+        "cave_len": args.cave_len,
+        **hook,
+        "build_command": cmd,
+    }
+    out_dir.mkdir(parents=True, exist_ok=True)
+    (out_dir / f"{args.name}.json").write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
+    lines = [
+        f"# Currentboot Response Hook Candidate: {args.name}",
+        "",
+        f"- mode: `{hook['mode']}`",
+        f"- hook address: `0x{args.hook_addr:04x}`",
+        f"- resume address: `0x{args.resume_addr:04x}`",
+        f"- cave address: `0x{args.cave_addr:04x}`",
+        f"- original hook bytes: `{hook['original_hook_bytes']}`",
+        f"- response offset: `0x{hook.get('response_offset', 0):02x}`",
+        f"- hook patch: `{hook['hook_patch']}`",
+        f"- cave patch: `{hook['cave_patch']}`",
+        "",
+        "Build command:",
+        "",
+        "```sh",
+        " ".join(cmd),
+        "```",
+    ]
+    (out_dir / f"{args.name}.md").write_text("\n".join(lines) + "\n")
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--name", required=True, type=slugify)
+    parser.add_argument("--base-image", type=Path, default=DEFAULT_BASE_IMAGE)
+    parser.add_argument("--out-dir", type=Path, default=DEFAULT_OUT_DIR)
+    parser.add_argument("--hook-addr", type=parse_addr, default=DEFAULT_HOOK_ADDR)
+    parser.add_argument("--resume-addr", type=parse_addr, default=0x4FCC)
+    parser.add_argument("--cave-addr", type=parse_addr, default=DEFAULT_CAVE_ADDR)
+    parser.add_argument("--cave-len", type=int, default=0x80)
+    parser.add_argument("--response-offset", type=parse_byte, default=0x20)
+    parser.add_argument("--constant", type=parse_byte)
+    parser.add_argument("--xdata-direct", type=parse_addr)
+    parser.add_argument("--xdata-window", type=parse_addr)
+    parser.add_argument(
+        "--gateway-cdb-address",
+        action="store_true",
+        help="read controller gateway address CDB[7:9] + (CDB[5] & --selector-mask)",
+    )
+    parser.add_argument(
+        "--xdata-cdb-address",
+        action="store_true",
+        help="read XDATA address CDB[7:8] + (CDB[5] & --selector-mask)",
+    )
+    parser.add_argument("--selector-mask", type=parse_byte, default=0x3F)
+    parser.add_argument("--restore", action="store_true")
+    parser.add_argument("--dry-run", action="store_true")
+    return parser.parse_args()
+
+
+def main() -> int:
+    args = parse_args()
+    if args.restore and (
+        any(value is not None for value in (args.constant, args.xdata_direct, args.xdata_window))
+        or args.gateway_cdb_address
+        or args.xdata_cdb_address
+    ):
+        raise ValueError("--restore cannot be combined with a source mode")
+    base = args.base_image.read_bytes()
+    hook = build_payload(base, args)
+    cmd, out_dir = render_command(args, hook)
+    write_report(args, hook, out_dir, cmd)
+    if args.dry_run:
+        print(json.dumps(hook, indent=2, sort_keys=True))
+        print(f"wrote {out_dir}")
+        return 0
+    print("+ " + " ".join(cmd), flush=True)
+    subprocess.run(cmd, check=True, text=True)
+    print(f"wrote {out_dir}")
+    return 0
+
+
+if __name__ == "__main__":
+    try:
+        raise SystemExit(main())
+    except (OSError, RuntimeError, ValueError, subprocess.SubprocessError) as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        raise SystemExit(1)

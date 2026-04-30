@@ -259,6 +259,81 @@ which internal bit changes when the eject button line is pulled low. That should
 narrow the front-panel GPIO block more efficiently than brute-forcing output
 registers.
 
+## The Response Hook Opens Up
+
+The front-panel work also made the old readout pain impossible to ignore. The
+first helper code-execution proof was clever but expensive: event `68` took
+about a quarter second normally, about `0.85s` with a small delay, and multiple
+seconds with larger delay loops. Turning that into a bit channel worked, but it
+was still a one-bit-at-a-time conversation where a zero could mean deliberately
+walking into the helper error path and then recovering the drive. It proved the
+point, but it was not a pleasant way to map memory.
+
+The next blocker was that normal `LD5M` runtime did not seem to use the visible
+handler bytes we were patching. A persistent F0 hook could be written and
+verified in flash, but EXTRAINQ still looked stock. The crack came from
+currentboot instead. After installing a resident hook and doing a real hardware
+cold boot with the Pico servo power switch, the drive would enter the visible
+currentboot INQUIRY/EXTRAINQ handler after the event-1 profile-tail command.
+Software resets and host rescans were not the same thing here; the full
+power-cycle made the newly written resident bytes take effect.
+
+The useful hook point is tiny: in the currentboot identity handler, patch the
+final `LCALL 0x6206` response-copy call at code `0x4fc9`. The payload writes one
+byte into the response staging area, calls the original copy routine, and
+returns. The first proof wrote a literal `X` into response byte `0x20`, so the
+drive identified itself as `XD5C` instead of `0D5C`. That was the moment the
+readout changed from "watch how long a command takes" to "put a byte in the
+SCSI response."
+
+That byte channel quickly grew into two useful readers:
+
+- a controller-gateway reader, where CDB bytes choose a 24-bit controller
+  address and INQUIRY returns the selected byte;
+- an XDATA reader, where CDB bytes choose a 16-bit 8051 XDATA address and
+  INQUIRY returns the selected byte.
+
+The controller-gateway reader needed one subtle fix. The first versions always
+returned a stale `0x05`. The resident code hinted at the missing ritual: after
+setting `0x4091..0x4093`, do a throwaway `0x4098` read, wait for `0x4000.7` to
+clear, then read `0x4098` again. With that in place, reading controller address
+`0x018620` returned the expected string:
+
+```text
+Flash Type Error
+```
+
+That is the same region we had only seen through READ BUFFER status windows
+before, now available through a parameterized currentboot INQUIRY request.
+
+The decoded CDD mystery did not immediately fall over. Reading the advertised
+descriptor range around controller `0x184000` still returns zeros in this
+currentboot-helper phase. So the descriptor's `0x184000..0x1b4000` range may be
+real but unpopulated here, or it may require a different controller mode or
+normal runtime context. Either way, the new reader made that negative result
+cheap and firm instead of an all-evening timing-channel ordeal.
+
+The XDATA reader paid off immediately. It confirmed Claude's hazardous
+`xdata[0x4704].0 = 0` observation without using the `DID_ERROR` path at all,
+then turned the Pico button line into a simple differential scan. With GP27
+released versus pulled low, `xdata[0x4814]` consistently changed:
+
+```text
+released: d9
+low:      c9
+change:   bit 4 cleared
+```
+
+`xdata[0x48f7].7` also follows the button, but `0x4814.4` is the cleanest front
+eject button-sense candidate so far.
+
+This is a major practical shift. We still do not have a normal-runtime debugger,
+and we still have not found the LED output latch or a decoded CDD dump. But we
+can now ask the currentboot firmware byte-sized questions directly through SCSI
+instead of staging a whole firmware image and timing a branch for every bit.
+That should make the next round of mapping much faster, and it gives us a much
+better bridge between static guesses and live hardware behavior.
+
 The first attempt at making that efficient was a parity/syndrome scanner: ask
 the helper for parity over whole XDATA ranges, once with the button line
 released and once with it low. In the ideal single-bit-change case, a handful of
