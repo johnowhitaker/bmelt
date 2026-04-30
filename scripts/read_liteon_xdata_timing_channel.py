@@ -87,7 +87,18 @@ def event_by_index(result: dict[str, Any], index: int) -> dict[str, Any]:
     raise KeyError(f"event {index} not present in result")
 
 
+def scoped_name(args: argparse.Namespace, name: str) -> str:
+    if args.tail_scope == "currentboot":
+        return name
+    return f"{args.tail_scope}-{name}"
+
+
+def target_event_index(args: argparse.Namespace) -> int:
+    return 1 if args.tail_scope == "pretail" else 68
+
+
 def candidate_path(args: argparse.Namespace, name: str) -> Path:
+    name = scoped_name(args, name)
     return args.candidate_root / name / f"liteon-full-currentboot-ld5m-helper-codeexec-{name}-candidate.json"
 
 
@@ -99,9 +110,11 @@ def build_immediate_candidate(args: argparse.Namespace, name: str, value: int, b
         sys.executable,
         str(ROOT / "scripts/build_liteon_helper_codeexec_candidate.py"),
         "--name",
-        name,
+        scoped_name(args, name),
         "--out-root",
         str(args.candidate_root),
+        "--tail-scope",
+        args.tail_scope,
         "immediate-bit-delay",
         "--value",
         f"0x{value:02x}",
@@ -129,9 +142,11 @@ def build_xdata_candidate(args: argparse.Namespace, addr: int, bit: int) -> Path
         sys.executable,
         str(ROOT / "scripts/build_liteon_helper_codeexec_candidate.py"),
         "--name",
-        name,
+        scoped_name(args, name),
         "--out-root",
         str(args.candidate_root),
+        "--tail-scope",
+        args.tail_scope,
         "movx-bit-delay",
         "--addr",
         f"0x{addr:04x}",
@@ -158,9 +173,11 @@ def build_controller_candidate(args: argparse.Namespace, addr: int, bit: int) ->
         sys.executable,
         str(ROOT / "scripts/build_liteon_helper_codeexec_candidate.py"),
         "--name",
-        name,
+        scoped_name(args, name),
         "--out-root",
         str(args.candidate_root),
+        "--tail-scope",
+        args.tail_scope,
         "controller-byte-bit-delay",
         "--addr",
         f"0x{addr:06x}",
@@ -186,6 +203,7 @@ def build_data_candidate(args: argparse.Namespace, addr: int, bit: int) -> Path:
 
 
 def run_candidate_once(args: argparse.Namespace, candidate: Path, out_dir: Path) -> dict[str, Any]:
+    event_index = target_event_index(args)
     cmd = [
         sys.executable,
         str(ROOT / "scripts/run_liteon_linux_persistence_experiment.py"),
@@ -196,7 +214,7 @@ def run_candidate_once(args: argparse.Namespace, candidate: Path, out_dir: Path)
         "--skip-pre-f0",
         "--skip-post-f0",
         "--end-index",
-        "68",
+        str(event_index),
         "--recover-on-currentboot",
         "--out-dir",
         str(out_dir),
@@ -205,18 +223,22 @@ def run_candidate_once(args: argparse.Namespace, candidate: Path, out_dir: Path)
     result_path = latest_result(out_dir)
     result = json.loads(result_path.read_text(encoding="utf-8"))
     try:
-        event68 = event_by_index(result, 68)
+        target_event = event_by_index(result, event_index)
     except KeyError:
-        event68 = {}
+        target_event = {}
     recovery = result.get("auto_recovery") or {}
     identity_after_recovery = result.get("identity_after_auto_recovery") or {}
     return {
         "candidate": str(candidate),
+        "target_event_index": event_index,
         "runner_returncode": proc.returncode,
         "result": str(result_path),
-        "event68_returncode": event68.get("returncode"),
-        "event68_elapsed_seconds": event68.get("elapsed_seconds"),
-        "event68_stderr": event68.get("stderr"),
+        "event_returncode": target_event.get("returncode"),
+        "event_elapsed_seconds": target_event.get("elapsed_seconds"),
+        "event_stderr": target_event.get("stderr"),
+        "event68_returncode": target_event.get("returncode"),
+        "event68_elapsed_seconds": target_event.get("elapsed_seconds"),
+        "event68_stderr": target_event.get("stderr"),
         "final_revision_after_sequence": result.get("final_revision_after_sequence"),
         "auto_recovery_returncode": recovery.get("returncode"),
         "revision_after_auto_recovery": (identity_after_recovery.get("standard") or {}).get("revision"),
@@ -236,7 +258,7 @@ def run_candidate(args: argparse.Namespace, candidate: Path, out_dir: Path) -> d
     for attempt in range(1, args.retry_attempts + 1):
         item = run_candidate_once(args, candidate, out_dir / f"attempt{attempt}")
         attempts.append(item)
-        if item.get("event68_elapsed_seconds") is not None:
+        if item.get("event68_returncode") == 0 and item.get("event68_elapsed_seconds") is not None:
             break
         if attempt < args.retry_attempts and is_retryable_unit_attention(item):
             time.sleep(args.between_delay)
@@ -288,7 +310,10 @@ def render_markdown(summary: dict[str, Any]) -> str:
         f"- threshold seconds: `{summary['threshold_seconds']:.6f}`",
         f"- value: `{summary['value_text']}`",
         "",
-        "| bit | value | event68 seconds | recovery | result |",
+        f"- tail scope: `{summary['tail_scope']}`",
+        f"- target event: `{summary['target_event_index']}`",
+        "",
+        "| bit | value | event seconds | recovery | result |",
         "|---:|---:|---:|---|---|",
     ]
     for item in summary["bits"]:
@@ -321,6 +346,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--bits", type=parse_bits, default=parse_bits("0,1,2,3,4,5,6,7"))
     parser.add_argument("--candidate-root", type=Path, default=DEFAULT_CANDIDATE_ROOT)
     parser.add_argument("--out-dir", type=Path)
+    parser.add_argument(
+        "--tail-scope",
+        choices=("currentboot", "pretail"),
+        default="currentboot",
+        help="run the payload from all currentboot tails/event 68, or from the normal/pre-tail event 1 helper",
+    )
     parser.add_argument(
         "--controller-skip",
         type=parse_skip,
@@ -392,6 +423,8 @@ def main() -> int:
         "device": args.device,
         "space": args.space,
         "space_label": "Controller-Gateway" if args.space == "controller" else "XDATA",
+        "tail_scope": args.tail_scope,
+        "target_event_index": target_event_index(args),
         "addr": args.addr,
         "addr_hex": f"0x{args.addr:0{addr_width}x}",
         "addr_text": f"0x{args.addr:0{addr_width}x}",

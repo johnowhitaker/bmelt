@@ -478,6 +478,31 @@ Evidence:
 references/evidence/live/linux-drive1-controller-gateway-timing-cdd-attempt.md
 ```
 
+The timing reader also has a pre-tail/event-1 mode:
+
+```sh
+python3 scripts/read_liteon_xdata_timing_channel.py \
+  --device /dev/sg1 \
+  --tail-scope pretail \
+  --space controller \
+  --addr 0x000000 \
+  --controller-skip 1 \
+  --bits 0 \
+  --calibrate \
+  --payload-offset 0x04f6
+```
+
+That was a negative for the known helper hook. Constant timing payloads did not
+split at event `1`, and a force-error payload still returned GOOD. Event `1`
+accepts mutated pre-tail helper bytes, but it does not execute the late helper
+branch at helper plaintext `0x02b5` / code `0x32af`.
+
+Evidence:
+
+```text
+references/evidence/live/linux-drive1-pretail-codeexec-event1-negative.md
+```
+
 Second pass, after the directory source-address model, also returned zeros:
 
 | target | value |

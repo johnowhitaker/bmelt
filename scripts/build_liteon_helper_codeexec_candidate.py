@@ -25,6 +25,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 EXTRACTED = ROOT / "references/firmware/extracted"
 DEFAULT_BASE_CANDIDATE = EXTRACTED / "liteon-full-currentboot-ld5m-base-candidate.json"
+DEFAULT_PRETAIL_TAIL = EXTRACTED / "liteon-profile-tail-ef130045-ld5m-official-pretail.json"
 DEFAULT_OUT_ROOT = EXTRACTED / "helper-codeexec-candidates"
 
 HOOK_PLAIN_OFFSET = 0x02B5
@@ -487,7 +488,6 @@ def render_command(args: argparse.Namespace, patches: list[str]) -> tuple[list[s
         str(ROOT / "scripts/render_liteon_profile_tail_mutation_candidate.py"),
         "--base-candidate",
         str(args.base_candidate),
-        "--all-currentboot-tails",
         "--out-dir",
         str(out_dir),
         "--out-candidate",
@@ -497,6 +497,20 @@ def render_command(args: argparse.Namespace, patches: list[str]) -> tuple[list[s
         "--out-md",
         str(outputs["md"]),
     ]
+    if args.tail_scope == "currentboot":
+        cmd.append("--all-currentboot-tails")
+    elif args.tail_scope == "pretail":
+        cmd.extend(
+            [
+                "--currentboot-tail",
+                str(args.pretail_tail),
+                "--event-index",
+                "1",
+                "--allow-pre-tail",
+            ]
+        )
+    else:
+        raise ValueError(f"unsupported tail scope: {args.tail_scope}")
     for patch in patches:
         cmd.extend(["--patch", patch])
     return cmd, outputs
@@ -550,15 +564,25 @@ def build_report(args: argparse.Namespace, patches: list[str], outputs: dict[str
         "mode": args.mode,
         "mode_args": mode_args,
         "base_candidate": str(args.base_candidate),
+        "tail_scope": args.tail_scope,
+        "pretail_tail": str(args.pretail_tail) if args.tail_scope == "pretail" else None,
         "hook_plain_offset": HOOK_PLAIN_OFFSET,
         "payload_plain_offset": payload_plain_offset,
         "payload_code_addr": payload_code_addr,
         "patches": patches,
         "outputs": {key: str(value) for key, value in outputs.items()},
         "notes": [
-            "Mutates every currentboot-key profile-tail helper payload.",
+            (
+                "Mutates every currentboot-key profile-tail helper payload."
+                if args.tail_scope == "currentboot"
+                else "Mutates only the normal/pre-tail event-1 profile-tail helper payload."
+            ),
             "The staged F0 image remains byte-identical to the LD5M base candidate.",
-            "Use short runs through event 68 while iterating on payload behavior.",
+            (
+                "Use short runs through event 68 while iterating on currentboot payload behavior."
+                if args.tail_scope == "currentboot"
+                else "Use short runs through event 1 while iterating on pre-tail payload behavior."
+            ),
         ],
     }
 
@@ -568,6 +592,18 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--name", required=True, type=slugify)
     parser.add_argument("--base-candidate", type=Path, default=DEFAULT_BASE_CANDIDATE)
     parser.add_argument("--out-root", type=Path, default=DEFAULT_OUT_ROOT)
+    parser.add_argument(
+        "--tail-scope",
+        choices=("currentboot", "pretail"),
+        default="currentboot",
+        help="mutate all currentboot-key helper tails, or only normal/pre-tail event 1",
+    )
+    parser.add_argument(
+        "--pretail-tail",
+        type=Path,
+        default=DEFAULT_PRETAIL_TAIL,
+        help="profile-tail report/key source used with --tail-scope pretail",
+    )
     sub = parser.add_subparsers(dest="mode", required=True)
 
     status = sub.add_parser("status-byte", help="call the normal success status path with a substituted R5 byte")

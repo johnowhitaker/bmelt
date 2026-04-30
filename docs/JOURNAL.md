@@ -515,3 +515,23 @@ source spans, operation keys describe how much decoded material is produced,
 and the table window likely carries decoded-space addresses or control
 targets. We still do not have a decoder, but the problem has narrowed from
 "what cipher is this?" to "what is this record grammar?"
+
+## Pre-Tail Shortcut Attempt
+
+The decoded CDD question pushed us back toward runtime visibility. The current
+helper hook can read the controller gateway, but those decoded-address probes
+returned zero at event `68`, which is still inside currentboot. The obvious
+shortcut was to move the same hook earlier: mutate only the normal/pre-tail
+event-1 helper payload and see whether it runs before the drive enters
+currentboot.
+
+That was a clean negative. Event `1` accepts mutated pre-tail payload bytes and
+still transitions the drive into `0D5C`, but constant timing payloads at the
+known late-helper hook did not split, and a force-error payload still returned
+GOOD. In plain terms: the bytes are accepted there, but the branch we know how
+to hijack is not executed there.
+
+That closes the easy version of the pre-tail route. The next route is a real
+resident LD5M command hook: patch a live normal-mode SCSI handler, trigger it
+from the host after recovery, and use that as the vantage point for decoded CDD
+or controller memory.
