@@ -831,6 +831,32 @@ Follow-up narrowed this:
   with GP26 stuck high. The known recovery sequence brings it back to `LD5M`.
   Treat `0x4780` as another hazardous controller-path lead.
 
+The 2026-04-30 static cross-reference pass backs up that interpretation.
+`0x4748` sits in a controller transaction path: stock code writes command bytes
+to `0x474d/0x474e`, clears/sets `0x4748.7`, and waits through `FUN_CODE_60c4`.
+That makes it a controller kick/ack register, not a clean LED latch. `0x4780`
+is only touched inside a broad initialization/config sequence.
+
+Higher-value static clues now are:
+
+- `0x4814` is a packed front-panel/status byte. Live Pico reads show bit 4
+  tracks the eject button, while `FUN_CODE_63cb` waits on bit 7 after writing
+  `0x4821/0x4822`.
+- `0x482b/0x482c/0x482d` look like a small controller query/status port: helper
+  functions write a command to `0x482b` and read a 16-bit result from
+  `0x482c/0x482d`.
+- `0x483f` is a sparse visible 0/1 latch and is worth keeping on a future
+  Pico-sampled shortlist, but it is not yet evidence of LED control.
+
+Static reports:
+
+```text
+analysis/8051/controller-command-static-notes.md
+analysis/8051/xdata-front-panel-static-notes.md
+analysis/8051/xdata-register-crossref.md
+analysis/8051/xdata-register-crossref.json
+```
+
 For input mapping, the efficient path is a parity/syndrome scan rather than
 one-bit-at-a-time reads:
 

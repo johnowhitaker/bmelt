@@ -716,3 +716,32 @@ They also confirm the awkward negative result at useful scale:
 `controller[0x184000..0x184fff]` is still all zero in currentboot. So the
 gateway-bulk tool is real, but the decoded CDD likely needs a later runtime
 phase, not just a faster read of the same early phase.
+
+## The LED Is Probably Not A Simple Latch
+
+With the bulk reader working, the obvious next dream was a fast hardware-visible
+channel: make the drive blink the front LED under our control and let the Pico
+read bytes quickly. The front board wiring is simple enough from the outside:
+one line sees the LED, one line can pull the eject button low, and the Pico can
+sample both.
+
+The button side mapped cleanly. Pulling the eject line low changes
+`xdata[0x4814]` from `d9` to `c9`, so bit 4 is a real front-panel button sense.
+The LED side was not so kind. Direct 8051 GPIO-style probes were negative, and
+some XDATA probes near `0x4748` and `0x4780` affected recovery state without
+behaving like a controllable output.
+
+The static pass made that result less disappointing. `0x4748` sits inside a
+controller transaction path with command bytes at `0x474d/0x474e`; stock code
+clears and sets bit 7 as part of asking the controller to do work. `0x4780`
+belongs to the same broad hardware-initialization fabric. So those registers
+are clues to the controller interface, not LED latches.
+
+The better interpretation is that the visible 8051 sees a front-panel/status
+byte and can talk to the controller, but the raw LED behavior is probably owned
+by the controller/CDD side. That leaves three plausible routes: map the
+controller command vocabulary around `0x474d/0x474e` and `0x482b`, find a later
+runtime hook where natural LED transitions can be correlated against live
+state, or use a different hardware channel entirely. The new cross-reference
+report gives us a ranked map instead of a list of superstition-driven poke
+targets.
