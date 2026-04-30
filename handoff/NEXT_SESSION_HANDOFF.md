@@ -79,10 +79,8 @@ references/evidence/live/linux-drive1-servo-coldboot-persistence-map.md
 
 Follow-up: patching the lower `0D5C2011` identity record at `0x4476` to `3011`
 did affect currentboot EXTRAINQ after power loss and event 1. The restore write
-completed, but the Linux host became unreachable over Tailscale before the final
-restore-verification JSON could be re-read from the Mac. When reachable, check
-`runs/servo-currentboot-date/read-currentboot-extrainq-after-restore/` and
-confirm currentboot EXTRAINQ is back to `2011/04/28`.
+and restore-verification run both completed: currentboot EXTRAINQ returned to
+`2011/04/28`, then auto-recovery returned to `LD5M`.
 
 ## Practical Write Method
 

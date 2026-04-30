@@ -160,10 +160,14 @@ post_decrypted_sha256: 2ef34753cc59e4aca7cae78f56a0baea063c2d7e99831e38bae792620
 post_matches_expected_target: true
 ```
 
-A final event-1 restore-verification run completed, but the Linux laptop became
-unreachable over Tailscale before the JSON could be re-read from this Mac. Check
-`runs/servo-currentboot-date/read-currentboot-extrainq-after-restore/` on the
-Linux host when it is reachable again.
+A final event-1 restore-verification run confirmed the currentboot identity was
+back to stock:
+
+```text
+identity_before:          LD5M  2016/10/18 14:18
+identity_after_sequence:  0D5C  2011/04/28 09:20
+identity_after_recovery:  LD5M  2016/10/18 14:18
+```
 
 ## Operational Note
 
