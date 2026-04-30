@@ -253,6 +253,47 @@ def directory_entries(stream: CddStream) -> list[bytes]:
     ]
 
 
+def directory_source_addresses(stream: CddStream) -> list[int]:
+    # The final little-endian word is a 16-byte paragraph address. The high
+    # nibble of byte 5 supplies the low address nibble. This maps directory
+    # entries directly into the CDD object.
+    return [((entry[6] | (entry[7] << 8)) << 4) | (entry[5] >> 4) for entry in directory_entries(stream)]
+
+
+def common_source_template(entries: list[bytes]) -> tuple[bytes, int]:
+    if not entries:
+        return b"", 0
+    counts = Counter(entry[:5] for entry in entries)
+    return counts.most_common(1)[0]
+
+
+def source_segments(image: CddImage) -> list[tuple[int, int, int, bytes]]:
+    if len(image.streams) < 2:
+        return []
+    entries = directory_entries(image.streams[0])
+    starts = directory_source_addresses(image.streams[0])
+    segments: list[tuple[int, int, int, bytes]] = []
+    for index, start in enumerate(starts):
+        if index < 387:
+            end = starts[index + 1]
+        elif index == 387:
+            end = image.streams[0].end
+        elif index < len(starts) - 1:
+            end = starts[index + 1]
+        else:
+            end = image.streams[1].end
+        segments.append((index, start, end, entries[index]))
+    return segments
+
+
+def segment_for_offset(image: CddImage, offset: int) -> tuple[int, int, int, bytes] | None:
+    for segment in source_segments(image):
+        _, start, end, _ = segment
+        if start <= offset < end:
+            return segment
+    return None
+
+
 def exact_matches(a: bytes, b: bytes, seed: int = 16, limit: int = 10) -> list[tuple[int, int, int, int]]:
     table: defaultdict[bytes, list[int]] = defaultdict(list)
     for offset in range(0, len(a) - seed + 1):
@@ -439,6 +480,59 @@ def write_report(images: list[CddImage]) -> str:
             + " |"
         )
     lines.append("")
+
+    lines.append("## Directory Source Address Field")
+    lines.append("")
+    lines.append("The directory pointer column now has a direct file-address interpretation:")
+    lines.append("")
+    lines.append("```text")
+    lines.append("source_start = (u16le(entry[6:8]) << 4) | (entry[5] >> 4)")
+    lines.append("```")
+    lines.append("")
+    lines.append("The resulting addresses are monotonic and land in the CDD payload/aux regions. Entry 388 starts at `0xd91a0`, exactly after CDD2's copied directory prefix and before its inferred `0x400` aux window.")
+    lines.append("")
+    lines.append("| image | first source | entry 388 source | last source | final gap to CDD2 end | monotonic | common entry prefix | count | common short segment |")
+    lines.append("|---|---:|---:|---:|---:|---:|---|---:|---:|")
+    for image in images:
+        if len(image.streams) < 2 or image.name == "XD13":
+            continue
+        entries = directory_entries(image.streams[0])
+        sources = directory_source_addresses(image.streams[0])
+        lengths = [right - left for left, right in zip(sources, sources[1:])]
+        template, count = common_source_template(entries)
+        template_lengths = [
+            lengths[index]
+            for index, entry in enumerate(entries[:-1])
+            if entry[:5] == template and lengths[index] <= 0x80
+        ]
+        common_len = Counter(template_lengths).most_common(1)
+        common_len_text = f"`0x{common_len[0][0]:x}` x{common_len[0][1]}" if common_len else ""
+        monotonic = all(left < right for left, right in zip(sources, sources[1:]))
+        final_gap = image.streams[1].end - sources[-1]
+        lines.append(
+            f"| {image.name} | `0x{sources[0]:05x}` | `0x{sources[388]:05x}` | "
+            f"`0x{sources[-1]:05x}` | `0x{final_gap:x}` | {monotonic} | "
+            f"`{template.hex()}` | {count} | {common_len_text} |"
+        )
+    lines.append("")
+    lines.append("This is the strongest static CDD grammar clue so far. The small repeated-source templates such as `0d6840031a` and `0c60000318` point at short `0x34`/`0x30` byte spans, matching the visible motif islands. That makes the 8-byte records look like a real packed-stream directory rather than encrypted noise.")
+    lines.append("")
+    ld5m = next((image for image in images if image.name == "LD5M"), None)
+    if ld5m is not None:
+        lines.append("LD5M source-segment mapping for useful probe offsets:")
+        lines.append("")
+        lines.append("| offset | source entry | source range | entry bytes |")
+        lines.append("|---:|---:|---:|---|")
+        for offset in (0x704F, 0x81EC, 0x27D4F, 0xD91A0, 0xD95A0, 0xE7FE0):
+            segment = segment_for_offset(ld5m, offset)
+            if segment is None:
+                lines.append(f"| `0x{offset:05x}` | none | outside source spans | |")
+            else:
+                index, start, end, entry = segment
+                lines.append(
+                    f"| `0x{offset:05x}` | {index} | `0x{start:05x}..0x{end:05x}` | `{entry.hex()}` |"
+                )
+        lines.append("")
 
     lines.append("## CDD2 Directory Duplicate")
     lines.append("")

@@ -375,6 +375,20 @@ monotonic little-endian pointer-like column. CDD2 reuses the tail of that
 directory: its bytes `0x20..0x1a0` exactly duplicate CDD1 entries 388..435, and
 its inferred body starts at `0x5a0`.
 
+Then that pointer-like column turned into a real address field. For each
+directory entry:
+
+```text
+source_start = (u16le(entry[6:8]) << 4) | (entry[5] >> 4)
+```
+
+Those source starts are monotonic and land directly inside the CDD object. CDD1
+entry 388 starts at `0xd91a0`, exactly after CDD2's copied directory prefix and
+before CDD2's `0x400` aux window. The common short templates `0d6840031a` and
+`0c60000318` point at `0x34`/`0x30` byte spans, matching the visible repeated
+motif islands. This is the first strong sign that the 8-byte records are a
+packed-stream directory with source spans, not just opaque metadata.
+
 That is not what a plain encrypted blob looks like. Cheap decode probes agree:
 no global XOR/add/sub transform exposed text, no standard zlib payload decoded,
 and the repeated motif runs do not look like AES-ECB blocks. The best static
@@ -385,3 +399,16 @@ The hybrid path remains attractive too. Once we can hook normal runtime, a few
 bytes from `0x184000`, `0x18481c`, and `0x19191a` would tell us whether that
 logical range contains raw CDD body material, decoded controller code/data, or
 some third representation.
+
+We tried those reads through the existing currentboot helper timing channel.
+They all came back `0x00`, with clean recovery after each bit:
+
+```text
+controller[0x184000] = 0x00
+controller[0x18481c] = 0x00
+controller[0x19191a] = 0x00
+```
+
+That mostly tells us the currentboot helper hook is the wrong vantage point for
+decoded CDD memory. The descriptor can still be right; the decoded/controller
+range may simply not be populated or exposed until normal LD5M runtime.

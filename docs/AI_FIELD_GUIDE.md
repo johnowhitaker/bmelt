@@ -142,6 +142,12 @@ Key CDD facts:
   window, then body bytes at stream-relative `0x11c0`.
 - CDD2 bytes `0x20..0x1a0` duplicate CDD1 entries 388..435, and CDD2's inferred
   body starts at stream-relative `0x5a0`.
+- The directory source address is now modeled as
+  `(u16le(entry[6:8]) << 4) | (entry[5] >> 4)`. These addresses are monotonic;
+  entry 388 starts at `0xd91a0`, immediately after CDD2's copied directory and
+  before its `0x400` aux window.
+- Repeated templates `0d6840031a` and `0c60000318` point at short
+  `0x34`/`0x30` byte spans, matching the visible motif islands.
 - Cheap decode probes did not find a global XOR/add/sub mask or standard zlib
   payload. Treat CDD as a structured controller-specific packed format, not as
   a single generic encrypted blob.
@@ -417,6 +423,20 @@ Evidence:
 
 ```text
 references/evidence/live/linux-drive1-controller-gateway-timing-cdd-attempt.md
+```
+
+Second pass, after the directory source-address model, also returned zeros:
+
+| target | value |
+|---:|---:|
+| controller `0x184000` | `0x00` |
+| controller `0x18481c` | `0x00` |
+| controller `0x19191a` | `0x00` |
+
+Evidence:
+
+```text
+references/evidence/live/linux-drive1-controller-gateway-cdd-second-pass.md
 ```
 
 ## Pico Front-Panel Probe

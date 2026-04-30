@@ -117,6 +117,38 @@ The final two bytes of each 8-byte CDD1 directory entry form a little-endian mon
 | CHS7 | `0x081c` | `0xd91a` | `0xe613` | True | `0x92` x17, `0x3` x12, `0x9c` x11, `0x99` x11, `0x93` x11 |
 | CHS9 | `0x081d` | `0xd91a` | `0xe613` | True | `0x92` x15, `0x3` x13, `0x88` x11, `0x93` x11, `0x9d` x10 |
 
+## Directory Source Address Field
+
+The directory pointer column now has a direct file-address interpretation:
+
+```text
+source_start = (u16le(entry[6:8]) << 4) | (entry[5] >> 4)
+```
+
+The resulting addresses are monotonic and land in the CDD payload/aux regions. Entry 388 starts at `0xd91a0`, exactly after CDD2's copied directory prefix and before its inferred `0x400` aux window.
+
+| image | first source | entry 388 source | last source | final gap to CDD2 end | monotonic | common entry prefix | count | common short segment |
+|---|---:|---:|---:|---:|---:|---|---:|---:|
+| LD5M | `0x081c0` | `0xd91a0` | `0xe6204` | `0x1fd` | True | `0d6840031a` | 16 | `0x34` x16 |
+| AD12 | `0x081d0` | `0xd91a0` | `0xe60f2` | `0x1fd` | True | `0c60000318` | 18 | `0x30` x18 |
+| AHS9 | `0x081c0` | `0xd91a0` | `0xe616d` | `0x1fd` | True | `0c60000318` | 16 | `0x30` x16 |
+| CD12 | `0x081c8` | `0xd91a0` | `0xe6114` | `0x1fe` | True | `0d6840031a` | 18 | `0x34` x18 |
+| CHS7 | `0x081c4` | `0xd91a0` | `0xe6136` | `0x1fe` | True | `0d6840031a` | 18 | `0x34` x18 |
+| CHS9 | `0x081d0` | `0xd91a0` | `0xe6133` | `0x1fe` | True | `0d6840031a` | 18 | `0x34` x18 |
+
+This is the strongest static CDD grammar clue so far. The small repeated-source templates such as `0d6840031a` and `0c60000318` point at short `0x34`/`0x30` byte spans, matching the visible motif islands. That makes the 8-byte records look like a real packed-stream directory rather than encrypted noise.
+
+LD5M source-segment mapping for useful probe offsets:
+
+| offset | source entry | source range | entry bytes |
+|---:|---:|---:|---|
+| `0x0704f` | none | outside source spans | |
+| `0x081ec` | 0 | `0x081c0..0x08d32` | `ef7a96b5bc051c08` |
+| `0x27d4f` | 58 | `0x27825..0x28119` | `66228ca200558227` |
+| `0xd91a0` | 388 | `0xd91a0..0xd9adb` | `0dabd47774031ad9` |
+| `0xd95a0` | 388 | `0xd91a0..0xd9adb` | `0dabd47774031ad9` |
+| `0xe7fe0` | none | outside source spans | |
+
 ## CDD2 Directory Duplicate
 
 For DS-8ABSH-style images, stream2 bytes `0x20..0x1a0` duplicate stream1 bytes `0xc40..0xdc0`, i.e. CDD1 entries 388..435.
