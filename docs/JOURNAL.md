@@ -395,6 +395,12 @@ Those short templates even have an internal length pattern: for `0d6840031a`,
 That looks much more like an opcode/length tuple than random high-entropy
 material.
 
+Comparing same-index source spans across close siblings backs that up. CHS7
+and CHS9 have directory entries that are usually only one or two bytes apart,
+and some same-index source spans share long prefixes, up to 56 bytes in the
+current report. The record index is probably a stable semantic unit across
+minor firmware revisions.
+
 That is not what a plain encrypted blob looks like. Cheap decode probes agree:
 no global XOR/add/sub transform exposed text, no standard zlib payload decoded,
 and the repeated motif runs do not look like AES-ECB blocks. The best static

@@ -185,6 +185,21 @@ For DS-8ABSH-style images, stream2 bytes `0x20..0x1a0` duplicate stream1 bytes `
 | length | left body rel | right body rel | shift | sample |
 |---:|---:|---:|---:|---|
 
+## Same-Index Source Segment Matches: CHS7 vs CHS9
+
+CHS7 and CHS9 are close siblings. Their directory entries are mostly one or two bytes apart, and the source-address model lets us compare the same directory index as a semantic unit rather than searching the whole body blindly.
+
+| entry | common prefix | left source | right source | lengths | entry byte diff | entries |
+|---:|---:|---:|---:|---:|---:|---|
+| 406 | 56 | `0xddb65` | `0xddb64` | `0x507`/`0x507` | 1 | `6d11cb4d0252b6dd` / `6d11cb4d0242b6dd` |
+| 232 | 32 | `0x80214` | `0x80252` | `0x8af`/`0x8af` | 2 | `b012517dd0432180` / `b012517dd0232580` |
+| 408 | 25 | `0xde681` | `0xde680` | `0x534`/`0x534` | 1 | `0b414657081468de` / `0b414657080468de` |
+| 52 | 22 | `0x23a52` | `0x23a44` | `0x890`/`0x890` | 2 | `5f5a108edc23a523` / `5f5a108edc43a423` |
+| 366 | 22 | `0xc3880` | `0xc38be` | `0x829`/`0x829` | 2 | `0c1294758a0388c3` / `0c1294758ae38bc3` |
+| 124 | 21 | `0x49265` | `0x492a2` | `0x47d`/`0x47e` | 3 | `a6694453fa512649` / `a6698453fa212a49` |
+| 199 | 17 | `0x6ea5d` | `0x6ea9c` | `0x74c`/`0x74c` | 2 | `5b420c63bad3a56e` / `5b420c63bac3a96e` |
+| 316 | 15 | `0xac567` | `0xac5a2` | `0xa1e`/`0xa1e` | 2 | `dab2d2990e7556ac` / `dab2d2990e255aac` |
+
 ## Simple Decode/Compression Probes
 
 These are sanity probes, not proof that no transform exists. They rule out the cheap cases: a global one-byte XOR/add/sub mask, obvious text-bearing transform, and standard compression headers at useful rates.

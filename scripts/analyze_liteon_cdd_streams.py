@@ -312,6 +312,40 @@ def exact_matches(a: bytes, b: bytes, seed: int = 16, limit: int = 10) -> list[t
     return sorted(runs, reverse=True)[:limit]
 
 
+def common_prefix_len(left: bytes, right: bytes) -> int:
+    count = 0
+    for a, b in zip(left, right):
+        if a != b:
+            break
+        count += 1
+    return count
+
+
+def same_index_segment_matches(left: CddImage, right: CddImage, limit: int = 8) -> list[dict[str, int | str]]:
+    rows: list[dict[str, int | str]] = []
+    left_segments = source_segments(left)
+    right_segments = source_segments(right)
+    for (index, left_start, left_end, left_entry), (_, right_start, right_end, right_entry) in zip(
+        left_segments, right_segments
+    ):
+        left_data = left.data[left_start:left_end]
+        right_data = right.data[right_start:right_end]
+        rows.append(
+            {
+                "index": index,
+                "prefix": common_prefix_len(left_data, right_data),
+                "left_start": left_start,
+                "right_start": right_start,
+                "left_len": left_end - left_start,
+                "right_len": right_end - right_start,
+                "entry_diff": sum(a != b for a, b in zip(left_entry, right_entry)),
+                "left_entry": left_entry.hex(),
+                "right_entry": right_entry.hex(),
+            }
+        )
+    return sorted(rows, key=lambda row: (int(row["prefix"]), -int(row["entry_diff"])), reverse=True)[:limit]
+
+
 def transformed_printable_score(data: bytes, transform: str, key: int) -> float:
     if transform == "xor":
         transformed = ((byte ^ key) for byte in data)
@@ -581,6 +615,23 @@ def write_report(images: list[CddImage]) -> str:
             lines.append(
                 f"| {length} | `0x{left_offset:x}` | `0x{right_offset:x}` | "
                 f"`{shift:+#x}` | `{sample}` |"
+            )
+        lines.append("")
+
+    left = next((image for image in images if image.name == "CHS7"), None)
+    right = next((image for image in images if image.name == "CHS9"), None)
+    if left is not None and right is not None:
+        lines.append("## Same-Index Source Segment Matches: CHS7 vs CHS9")
+        lines.append("")
+        lines.append("CHS7 and CHS9 are close siblings. Their directory entries are mostly one or two bytes apart, and the source-address model lets us compare the same directory index as a semantic unit rather than searching the whole body blindly.")
+        lines.append("")
+        lines.append("| entry | common prefix | left source | right source | lengths | entry byte diff | entries |")
+        lines.append("|---:|---:|---:|---:|---:|---:|---|")
+        for row in same_index_segment_matches(left, right):
+            lines.append(
+                f"| {row['index']} | {row['prefix']} | `0x{int(row['left_start']):05x}` | "
+                f"`0x{int(row['right_start']):05x}` | `0x{int(row['left_len']):x}`/`0x{int(row['right_len']):x}` | "
+                f"{row['entry_diff']} | `{row['left_entry']}` / `{row['right_entry']}` |"
             )
         lines.append("")
 

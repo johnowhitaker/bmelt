@@ -150,6 +150,8 @@ Key CDD facts:
   `0x34`/`0x30` byte spans, matching the visible motif islands. In these
   records, byte 0 behaves like `N`, byte 1 is `8*N`, byte 4 is `2*N`, and the
   source span is `4*N`.
+- CHS7 vs CHS9 same-index source-span comparison has common prefixes up to
+  56 bytes, so record indices appear stable across close sibling revisions.
 - Cheap decode probes did not find a global XOR/add/sub mask or standard zlib
   payload. Treat CDD as a structured controller-specific packed format, not as
   a single generic encrypted blob.
