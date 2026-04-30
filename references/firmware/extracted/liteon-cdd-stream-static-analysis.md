@@ -164,6 +164,17 @@ Interpreting the CDD1 table/control window as little-endian 16-bit words gives a
 | CHS7 | 492 | `0x00060..0x1f080` | low 356, mid 40, high 96 | `0x0d01` x16, `0x14e0` x4, `0x1503` x4, `0x1490` x4, `0x1502` x4 |
 | CHS9 | 498 | `0x00060..0x1f0e0` | low 365, mid 37, high 96 | `0x0d01` x16, `0x14e0` x4, `0x1503` x4, `0x1490` x4, `0x1502` x4 |
 
+Splitting that table at word index 128 exposes two different-looking regions. The front `0x100` bytes carry the high/mid paragraph targets and the repeated `0x0d01`/`0x14e0`/`0x1503`/`0x1490`/`0x1502` runs. The remaining words are mostly low decoded offsets with no adjacent repeats. That makes the front look more like a vector/entrypoint/control table, while the tail looks more like a secondary offset list.
+
+| image | front 128 words | remaining words | long repeated runs in front table |
+|---|---|---|---|
+| LD5M | low 0, mid 28, high 100 | low 355, mid 7, high 0 | `0x0d01` x16 @16 -> rec 118+`0xf0`, `0x1503` x4 @52 -> rec 189+`0x90`, `0x1490` x4 @72 -> rec 186+`0x240`, `0x1502` x4 @124 -> rec 189+`0x80` |
+| AD12 | low 0, mid 32, high 96 | low 365, mid 5, high 0 | `0x0d01` x16 @16 -> rec 102+`0xe0`, `0x14e0` x4 @4 -> rec 176+`0x50`, `0x1503` x4 @40 -> rec 178+`0x20`, `0x1490` x4 @80 -> rec 172+`0x10`, `0x1502` x4 @112 -> rec 178+`0x10` |
+| AHS9 | low 0, mid 32, high 96 | low 353, mid 9, high 0 | `0x0d01` x16 @16 -> rec 102+`0x2c0`, `0x14e0` x4 @8 -> rec 180+`0x240`, `0x1503` x4 @40 -> rec 181+`0xc0`, `0x1490` x4 @80 -> rec 177+`0x60`, `0x1502` x4 @112 -> rec 181+`0xb0` |
+| CD12 | low 0, mid 32, high 96 | low 359, mid 7, high 0 | `0x0d01` x16 @16 -> rec 112+`0x90`, `0x14e0` x4 @4 -> rec 181+`0x220`, `0x1503` x4 @40 -> rec 183+`0x0`, `0x1490` x4 @80 -> rec 180+`0xd0`, `0x1502` x4 @112 -> rec 182+`0x170` |
+| CHS7 | low 0, mid 32, high 96 | low 356, mid 8, high 0 | `0x0d01` x16 @16 -> rec 106+`0x240`, `0x14e0` x4 @4 -> rec 182+`0x10`, `0x1503` x4 @40 -> rec 183+`0xb0`, `0x1490` x4 @80 -> rec 180+`0x190`, `0x1502` x4 @112 -> rec 183+`0xa0` |
+| CHS9 | low 0, mid 32, high 96 | low 365, mid 5, high 0 | `0x0d01` x16 @16 -> rec 105+`0x130`, `0x14e0` x4 @4 -> rec 181+`0x2c0`, `0x1503` x4 @40 -> rec 183+`0x90`, `0x1490` x4 @80 -> rec 180+`0x170`, `0x1502` x4 @112 -> rec 183+`0x80` |
+
 Close sibling tables also line up by position. CHS7 and CHS9 have 189 identical same-index table words, including long equal runs, so this table is versioned data with stable structure.
 
 | pair | table words | same-position equal | most common word deltas |

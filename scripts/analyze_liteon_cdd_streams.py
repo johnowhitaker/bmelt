@@ -216,6 +216,19 @@ def cdd1_table_window(image: CddImage) -> bytes:
     return image.streams[0].data[info["directory_end_rel"] : source_start_rel]
 
 
+def cdd1_table_words(image: CddImage) -> list[int]:
+    table = cdd1_table_window(image)
+    return [int.from_bytes(table[offset : offset + 2], "little") for offset in range(0, len(table) - 1, 2)]
+
+
+def table_word_band(word: int) -> str:
+    if word < 0x0800:
+        return "low"
+    if word < 0x1800:
+        return "mid"
+    return "high"
+
+
 def ratio_rows(image: CddImage) -> list[tuple[str, int, float]]:
     descriptor = parse_outer_descriptor(image)
     if descriptor is None:
@@ -556,14 +569,37 @@ def cdd1_table_interval_summary(image: CddImage) -> dict[str, object]:
     }
 
 
+def cdd1_table_repeated_runs(image: CddImage, min_len: int = 2) -> list[dict[str, int | None]]:
+    targets = cdd1_table_targets(image)
+    runs: list[dict[str, int | None]] = []
+    index = 0
+    while index < len(targets):
+        end = index + 1
+        while end < len(targets) and targets[end]["word"] == targets[index]["word"]:
+            end += 1
+        if end - index >= min_len:
+            first = targets[index]
+            runs.append(
+                {
+                    "length": end - index,
+                    "start": index,
+                    "end": end,
+                    "word": first["word"],
+                    "decoded_offset": first["decoded_offset"],
+                    "record_index": first["record_index"],
+                    "record_rel": first["record_rel"],
+                }
+            )
+        index = end
+    return sorted(runs, key=lambda run: (int(run["length"]), -int(run["start"])), reverse=True)
+
+
 def cdd1_table_targets(image: CddImage) -> list[dict[str, int | None]]:
     starts = decoded_candidate_starts(image)
     segments = source_segments(image)
     ends = [start + decoded_span_candidate(entry) for start, (_, _, _, entry) in zip(starts, segments)]
-    table = cdd1_table_window(image)
-    words = [int.from_bytes(table[offset : offset + 2], "little") for offset in range(0, len(table) - 1, 2)]
     targets: list[dict[str, int | None]] = []
-    for table_index, word in enumerate(words):
+    for table_index, word in enumerate(cdd1_table_words(image)):
         offset = word << 4
         index = bisect_right(starts, offset) - 1
         if index >= 0 and index < len(ends) and offset < ends[index]:
@@ -936,7 +972,7 @@ def write_report(images: list[CddImage]) -> str:
         cdd2_source_rel = cdd2_source_start_rel(image)
         duplicate_end = 0x20 + cdd2_duplicate_len(stream1, stream2)
         table = cdd1_table_window(image)
-        words = [int.from_bytes(table[offset : offset + 2], "little") for offset in range(0, len(table) - 1, 2)]
+        words = cdd1_table_words(image)
         common_words = ", ".join(f"`0x{value:04x}` x{count}" for value, count in Counter(words).most_common(3))
         nominal_overlap = info["nominal_body_start"] - cdd1_source_rel if cdd1_source_rel is not None else 0
         lines.append(
@@ -955,16 +991,33 @@ def write_report(images: list[CddImage]) -> str:
     for image in images:
         if len(image.streams) < 2 or image.name == "XD13":
             continue
-        table = cdd1_table_window(image)
-        words = [int.from_bytes(table[offset : offset + 2], "little") for offset in range(0, len(table) - 1, 2)]
-        bands = Counter(
-            "low" if word < 0x0800 else "mid" if word < 0x1800 else "high"
-            for word in words
-        )
+        words = cdd1_table_words(image)
+        bands = Counter(table_word_band(word) for word in words)
         common = ", ".join(f"`0x{word:04x}` x{count}" for word, count in Counter(words).most_common(5))
         lines.append(
             f"| {image.name} | {len(words)} | `0x{min(words) << 4:05x}..0x{max(words) << 4:05x}` | "
             f"low {bands['low']}, mid {bands['mid']}, high {bands['high']} | {common} |"
+        )
+    lines.append("")
+    lines.append("Splitting that table at word index 128 exposes two different-looking regions. The front `0x100` bytes carry the high/mid paragraph targets and the repeated `0x0d01`/`0x14e0`/`0x1503`/`0x1490`/`0x1502` runs. The remaining words are mostly low decoded offsets with no adjacent repeats. That makes the front look more like a vector/entrypoint/control table, while the tail looks more like a secondary offset list.")
+    lines.append("")
+    lines.append("| image | front 128 words | remaining words | long repeated runs in front table |")
+    lines.append("|---|---|---|---|")
+    for image in images:
+        if len(image.streams) < 2 or image.name == "XD13":
+            continue
+        words = cdd1_table_words(image)
+        front = words[:128]
+        tail = words[128:]
+        front_bands = Counter(table_word_band(word) for word in front)
+        tail_bands = Counter(table_word_band(word) for word in tail)
+        run_text = ", ".join(
+            f"`0x{int(run['word']):04x}` x{int(run['length'])} @{int(run['start'])} -> rec {run['record_index']}+`0x{int(run['record_rel'] or 0):x}`"
+            for run in cdd1_table_repeated_runs(image, min_len=4)
+        )
+        lines.append(
+            f"| {image.name} | low {front_bands['low']}, mid {front_bands['mid']}, high {front_bands['high']} | "
+            f"low {tail_bands['low']}, mid {tail_bands['mid']}, high {tail_bands['high']} | {run_text} |"
         )
     lines.append("")
     lines.append("Close sibling tables also line up by position. CHS7 and CHS9 have 189 identical same-index table words, including long equal runs, so this table is versioned data with stable structure.")
@@ -976,14 +1029,8 @@ def write_report(images: list[CddImage]) -> str:
         right = next((image for image in images if image.name == pair[1]), None)
         if not left or not right:
             continue
-        left_words = [
-            int.from_bytes(cdd1_table_window(left)[offset : offset + 2], "little")
-            for offset in range(0, len(cdd1_table_window(left)) - 1, 2)
-        ]
-        right_words = [
-            int.from_bytes(cdd1_table_window(right)[offset : offset + 2], "little")
-            for offset in range(0, len(cdd1_table_window(right)) - 1, 2)
-        ]
+        left_words = cdd1_table_words(left)
+        right_words = cdd1_table_words(right)
         count = min(len(left_words), len(right_words))
         same = sum(left_words[index] == right_words[index] for index in range(count))
         deltas = Counter(right_words[index] - left_words[index] for index in range(count)).most_common(6)
