@@ -329,6 +329,42 @@ Evidence:
 references/evidence/live/linux-drive1-helper-xdata-timing-channel.md
 ```
 
+The same timing reader can now sample the 8051/controller gateway:
+
+```sh
+python3 scripts/read_liteon_xdata_timing_channel.py \
+  --device /dev/sg1 \
+  --space controller \
+  --addr 0x184000 \
+  --payload-offset 0x04f6
+```
+
+This sets `0x4091..0x4093`, reads one byte from the `0x4098` FIFO, and reports
+bits through the GOOD/GOOD timing split. `--controller-skip N` can discard a
+few FIFO bytes after setting the gateway address.
+
+First CDD-related live follow-up:
+
+| target | value |
+|---:|---:|
+| controller `0x184000` | `0x00` |
+| controller `0x18481c` | `0x00` |
+| controller `0x000000`, skip 1 | `0xce` |
+| xdata `0x803c` | `0x00` |
+| xdata `0x803d` | `0x00` |
+
+Interpretation: the controller FIFO timing primitive works, but the guessed
+decoded CDD address `0x184000` is not exposed as useful decoded memory at the
+currentboot helper event-68 hook. The next decoded-CDD attempt likely needs a
+resident/runtime hook after normal LD5M boot, or a more exact model of the
+controller stream selector.
+
+Evidence:
+
+```text
+references/evidence/live/linux-drive1-controller-gateway-timing-cdd-attempt.md
+```
+
 ## Pico Front-Panel Probe
 
 The gutted-drive front board is wired to a Pico:

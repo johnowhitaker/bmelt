@@ -128,3 +128,31 @@ controller address space is probably controller-side.
 4. If the Pico/LED channel becomes reliable, prioritize reading decoded CDD
    memory over continuing blind XDATA register sweeps. The static CDD format
    now gives much better target addresses for those reads.
+
+## Live Follow-Up: Currentboot Helper Hook
+
+An initial controller-gateway timing read was attempted from the event-68
+currentboot helper hook. The read primitive itself works: setting `00:0000`,
+discarding one FIFO byte, then timing the next byte returned `0xce`.
+
+The guessed decoded CDD addresses were not useful in that context:
+
+| target | value |
+|---:|---:|
+| controller `0x184000` | `0x00` |
+| controller `0x18481c` | `0x00` |
+| controller `0x184000`, FIFO skip 1 | `0x00` |
+| xdata `0x803c` | `0x00` |
+| xdata `0x803d` | `0x00` |
+
+That suggests the normal decoded CDD/controller base state is not populated at
+the currentboot helper hook, or `0x184000` is not exposed there as a simple
+controller stream. The decoded-memory idea is still plausible, but the next
+attempt should use either a resident/runtime hook after normal boot or a better
+static model of the controller stream selector.
+
+Evidence:
+
+```text
+references/evidence/live/linux-drive1-controller-gateway-timing-cdd-attempt.md
+```

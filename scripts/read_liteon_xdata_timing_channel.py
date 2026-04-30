@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Read XDATA bits through a GOOD/GOOD helper timing channel.
+"""Read XDATA or controller-gateway bits through a GOOD/GOOD helper timing channel.
 
 The older bit channel used GOOD for 1 and the helper's DID_ERROR path for 0.
 That is easy to interpret but rough on the drive. This tool always returns
@@ -22,12 +22,13 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_CANDIDATE_ROOT = ROOT / "references/firmware/extracted/helper-codeexec-candidates"
 DEFAULT_OUT_DIR = ROOT / "runs/helper-xdata-timing-channel"
+DEFAULT_CONTROLLER_OUT_DIR = ROOT / "runs/helper-controller-timing-channel"
 
 
 def parse_addr(value: str) -> int:
     parsed = int(value, 0)
-    if not 0 <= parsed <= 0xFFFF:
-        raise argparse.ArgumentTypeError("address must be 0..0xffff")
+    if not 0 <= parsed <= 0xFFFFFF:
+        raise argparse.ArgumentTypeError("address must be 0..0xffffff")
     return parsed
 
 
@@ -35,6 +36,13 @@ def parse_byte(value: str) -> int:
     parsed = int(value, 0)
     if not 0 <= parsed <= 0xFF:
         raise argparse.ArgumentTypeError("value must be 0..0xff")
+    return parsed
+
+
+def parse_skip(value: str) -> int:
+    parsed = int(value, 0)
+    if not 0 <= parsed <= 0x20:
+        raise argparse.ArgumentTypeError("skip must be 0..0x20")
     return parsed
 
 
@@ -111,6 +119,8 @@ def build_immediate_candidate(args: argparse.Namespace, name: str, value: int, b
 
 
 def build_xdata_candidate(args: argparse.Namespace, addr: int, bit: int) -> Path:
+    if not 0 <= addr <= 0xFFFF:
+        raise ValueError("XDATA address must be 0..0xffff")
     name = f"xdata-timing-{addr:04x}-bit{bit}"
     candidate = candidate_path(args, name)
     if candidate.exists() and not args.rebuild:
@@ -136,6 +146,43 @@ def build_xdata_candidate(args: argparse.Namespace, addr: int, bit: int) -> Path
         cmd.append("--delay-on-zero")
     run_command(cmd, check=True, quiet=args.quiet_builder)
     return candidate
+
+
+def build_controller_candidate(args: argparse.Namespace, addr: int, bit: int) -> Path:
+    skip_part = "" if args.controller_skip == 0 else f"-skip{args.controller_skip:02x}"
+    name = f"controller-timing-{addr:06x}{skip_part}-bit{bit}"
+    candidate = candidate_path(args, name)
+    if candidate.exists() and not args.rebuild:
+        return candidate
+    cmd = [
+        sys.executable,
+        str(ROOT / "scripts/build_liteon_helper_codeexec_candidate.py"),
+        "--name",
+        name,
+        "--out-root",
+        str(args.candidate_root),
+        "controller-byte-bit-delay",
+        "--addr",
+        f"0x{addr:06x}",
+        "--bit",
+        str(bit),
+        "--payload-offset",
+        f"0x{args.payload_offset:04x}",
+        "--delay-count",
+        f"0x{args.delay_count:02x}",
+    ]
+    if args.controller_skip:
+        cmd.extend(["--skip", f"0x{args.controller_skip:02x}"])
+    if args.delay_on_zero:
+        cmd.append("--delay-on-zero")
+    run_command(cmd, check=True, quiet=args.quiet_builder)
+    return candidate
+
+
+def build_data_candidate(args: argparse.Namespace, addr: int, bit: int) -> Path:
+    if args.space == "controller":
+        return build_controller_candidate(args, addr, bit)
+    return build_xdata_candidate(args, addr, bit)
 
 
 def run_candidate_once(args: argparse.Namespace, candidate: Path, out_dir: Path) -> dict[str, Any]:
@@ -229,11 +276,13 @@ def calibrate(args: argparse.Namespace, run_root: Path) -> dict[str, Any]:
 
 def render_markdown(summary: dict[str, Any]) -> str:
     lines = [
-        "# LiteOn XDATA Timing-Channel Read",
+        f"# LiteOn {summary['space_label']} Timing-Channel Read",
         "",
         f"- captured at UTC: `{summary['captured_at_utc']}`",
         f"- device: `{summary['device']}`",
-        f"- address: `{summary['addr']:#06x}`",
+        f"- space: `{summary['space']}`",
+        f"- address: `{summary['addr_text']}`",
+        f"- controller FIFO skip: `{summary['controller_skip']:#04x}`",
         f"- delay count: `{summary['delay_count']:#04x}`",
         f"- payload offset: `{summary['payload_offset']:#06x}`",
         f"- threshold seconds: `{summary['threshold_seconds']:.6f}`",
@@ -262,10 +311,22 @@ def render_markdown(summary: dict[str, Any]) -> str:
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--device", required=True)
+    parser.add_argument(
+        "--space",
+        choices=("xdata", "controller"),
+        default="xdata",
+        help="read XDATA directly or read controller address space through 0x4091..0x4098",
+    )
     parser.add_argument("--addr", type=parse_addr, required=True)
     parser.add_argument("--bits", type=parse_bits, default=parse_bits("0,1,2,3,4,5,6,7"))
     parser.add_argument("--candidate-root", type=Path, default=DEFAULT_CANDIDATE_ROOT)
-    parser.add_argument("--out-dir", type=Path, default=DEFAULT_OUT_DIR)
+    parser.add_argument("--out-dir", type=Path)
+    parser.add_argument(
+        "--controller-skip",
+        type=parse_skip,
+        default=0,
+        help="for --space controller, discard this many FIFO bytes after setting the gateway address",
+    )
     parser.add_argument(
         "--payload-offset",
         type=parse_addr,
@@ -286,7 +347,16 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> int:
     args = parse_args()
-    run_id = datetime.now(timezone.utc).strftime(f"xdata-timing-{args.addr:04x}-%Y%m%dT%H%M%SZ")
+    if args.space == "xdata" and args.addr > 0xFFFF:
+        raise SystemExit("XDATA address must be <= 0xffff")
+    if args.space != "controller" and args.controller_skip:
+        raise SystemExit("--controller-skip only applies to --space controller")
+    if args.out_dir is None:
+        args.out_dir = DEFAULT_CONTROLLER_OUT_DIR if args.space == "controller" else DEFAULT_OUT_DIR
+    addr_width = 6 if args.space == "controller" else 4
+    run_id = datetime.now(timezone.utc).strftime(
+        f"{args.space}-timing-{args.addr:0{addr_width}x}-%Y%m%dT%H%M%SZ"
+    )
     run_root = args.out_dir / run_id
     run_root.mkdir(parents=True, exist_ok=True)
 
@@ -303,7 +373,7 @@ def main() -> int:
     value = 0
     complete = True
     for bit in args.bits:
-        candidate = build_xdata_candidate(args, args.addr, bit)
+        candidate = build_data_candidate(args, args.addr, bit)
         item = run_candidate(args, candidate, run_root / f"bit{bit}")
         elapsed = item.get("event68_elapsed_seconds")
         if item.get("event68_returncode") != 0 or elapsed is None:
@@ -317,11 +387,15 @@ def main() -> int:
         time.sleep(args.between_delay)
 
     summary: dict[str, Any] = {
-        "status": "xdata_timing_channel_read",
+        "status": f"{args.space}_timing_channel_read",
         "captured_at_utc": datetime.now(timezone.utc).isoformat(),
         "device": args.device,
+        "space": args.space,
+        "space_label": "Controller-Gateway" if args.space == "controller" else "XDATA",
         "addr": args.addr,
-        "addr_hex": f"0x{args.addr:04x}",
+        "addr_hex": f"0x{args.addr:0{addr_width}x}",
+        "addr_text": f"0x{args.addr:0{addr_width}x}",
+        "controller_skip": args.controller_skip,
         "bits_requested": args.bits,
         "delay_count": args.delay_count,
         "payload_offset": args.payload_offset,
@@ -332,8 +406,8 @@ def main() -> int:
         "value": value if complete else None,
         "value_text": f"0x{value:02x}" if complete else "unknown",
     }
-    json_path = run_root / "xdata-timing-channel-summary.json"
-    md_path = run_root / "xdata-timing-channel-summary.md"
+    json_path = run_root / f"{args.space}-timing-channel-summary.json"
+    md_path = run_root / f"{args.space}-timing-channel-summary.md"
     json_path.write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     md_path.write_text(render_markdown(summary), encoding="utf-8")
     print(f"wrote {json_path}")

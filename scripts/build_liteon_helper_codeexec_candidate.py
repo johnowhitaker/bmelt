@@ -55,10 +55,24 @@ def parse_u16(value: str) -> int:
     return parsed
 
 
+def parse_u24(value: str) -> int:
+    parsed = int(value, 0)
+    if not 0 <= parsed <= 0xFFFFFF:
+        raise argparse.ArgumentTypeError("address must be 0..0xffffff")
+    return parsed
+
+
 def parse_length(value: str) -> int:
     parsed = int(value, 0)
     if not 1 <= parsed <= 0x100:
         raise argparse.ArgumentTypeError("length must be 1..0x100")
+    return parsed
+
+
+def parse_skip(value: str) -> int:
+    parsed = int(value, 0)
+    if not 0 <= parsed <= 0x20:
+        raise argparse.ArgumentTypeError("skip must be 0..0x20")
     return parsed
 
 
@@ -120,6 +134,10 @@ class Asm8051:
 
     def jnb(self, bit_addr: int, label: str) -> None:
         self.emit(0x30, bit_addr)
+        self.rel_fixup(label)
+
+    def jb(self, bit_addr: int, label: str) -> None:
+        self.emit(0x20, bit_addr)
         self.rel_fixup(label)
 
     def jz(self, label: str) -> None:
@@ -242,6 +260,63 @@ def movx_bit_payload(addr: int, bit: int, *, success_on_one: bool) -> str:
 def movx_bit_timing_payload(addr: int, bit: int, delay_count: int, *, delay_on_one: bool) -> str:
     prefix = f"90{addr:04x}e0"  # MOV DPTR,#addr; MOVX A,@DPTR
     return timing_on_acc_bit_payload(prefix, bit, delay_count, delay_on_one=delay_on_one)
+
+
+def emit_controller_gateway_wait(asm: Asm8051, label: str) -> None:
+    asm.label(label)
+    asm.emit(0x90, 0x40, 0x00)  # MOV DPTR,#0x4000
+    asm.emit(0xE0)  # MOVX A,@DPTR
+    asm.jb(acc_bit_addr(7), label)  # while busy bit is set
+
+
+def emit_controller_gateway_fifo_read(asm: Asm8051) -> None:
+    emit_controller_gateway_wait(asm, f"wait_before_read_{len(asm.labels)}")
+    asm.emit(0x90, 0x40, 0x98)  # MOV DPTR,#0x4098
+    asm.emit(0xE0)  # MOVX A,@DPTR
+
+
+def controller_gateway_read_prefix(addr: int, skip: int = 0) -> str:
+    """Return 8051 code that reads one controller-address-space byte into ACC.
+
+    The resident uses the same 0x4000/0x4091..0x4093/0x4098 gateway for
+    controller reads.  This is intentionally a one-byte read: wait for the
+    gateway to be idle, set a 24-bit big-endian address, then consume bytes
+    from the auto-incrementing data port.  ``skip`` is small by design; it is
+    for validating FIFO-style streams such as 00:0000 -> ? "LITE".
+    """
+
+    if not 0 <= addr <= 0xFFFFFF:
+        raise ValueError("controller gateway address must be 0..0xffffff")
+    if not 0 <= skip <= 0x20:
+        raise ValueError("controller gateway skip must be 0..0x20")
+    high = (addr >> 16) & 0xFF
+    mid = (addr >> 8) & 0xFF
+    low = addr & 0xFF
+    asm = Asm8051()
+    emit_controller_gateway_wait(asm, "wait_before_addr")
+    asm.emit(0x90, 0x40, 0x91)  # MOV DPTR,#0x4091
+    asm.emit(0x74, high, 0xF0)  # MOV A,#high; MOVX @DPTR,A
+    asm.emit(0xA3, 0x74, mid, 0xF0)  # INC DPTR; MOV A,#mid; MOVX @DPTR,A
+    asm.emit(0xA3, 0x74, low, 0xF0)  # INC DPTR; MOV A,#low; MOVX @DPTR,A
+    for _ in range(skip + 1):
+        emit_controller_gateway_fifo_read(asm)
+    return asm.finish()
+
+
+def controller_gateway_bit_timing_payload(
+    addr: int,
+    bit: int,
+    delay_count: int,
+    *,
+    skip: int = 0,
+    delay_on_one: bool,
+) -> str:
+    return timing_on_acc_bit_payload(
+        controller_gateway_read_prefix(addr, skip=skip),
+        bit,
+        delay_count,
+        delay_on_one=delay_on_one,
+    )
 
 
 def direct_bit_payload(addr: int, bit: int, *, success_on_one: bool) -> str:
@@ -445,6 +520,7 @@ def build_report(args: argparse.Namespace, patches: list[str], outputs: dict[str
         "hold-movx-byte-op",
         "hold-direct-bit",
         "xdata-parity-range",
+        "controller-byte-bit-delay",
     }
     payload_plain_offset = getattr(args, "payload_offset", PAYLOAD_PLAIN_OFFSET) if has_payload else None
     payload_code_addr = helper_code_addr(payload_plain_offset) if payload_plain_offset is not None else None
@@ -464,6 +540,7 @@ def build_report(args: argparse.Namespace, patches: list[str], outputs: dict[str
         "length",
         "syndrome_bit",
         "restore_original",
+        "skip",
     ):
         if hasattr(args, key):
             mode_args[key] = getattr(args, key)
@@ -535,6 +612,17 @@ def parse_args() -> argparse.Namespace:
     movx_delay.add_argument("--payload-offset", type=parse_u16, default=PAYLOAD_PLAIN_OFFSET)
     movx_delay.add_argument("--delay-count", type=parse_byte, default=0x20)
     movx_delay.add_argument("--delay-on-zero", action="store_true")
+
+    controller_delay = sub.add_parser(
+        "controller-byte-bit-delay",
+        help="return GOOD either way, adding a delay when a controller-gateway byte bit has the selected value",
+    )
+    controller_delay.add_argument("--addr", type=parse_u24, required=True)
+    controller_delay.add_argument("--bit", type=parse_bit, required=True)
+    controller_delay.add_argument("--payload-offset", type=parse_u16, default=PAYLOAD_PLAIN_OFFSET)
+    controller_delay.add_argument("--delay-count", type=parse_byte, default=0x20)
+    controller_delay.add_argument("--skip", type=parse_skip, default=0)
+    controller_delay.add_argument("--delay-on-zero", action="store_true")
 
     direct = sub.add_parser("direct-bit", help="branch based on an 8051 direct/SFR byte bit")
     direct.add_argument("--addr", type=parse_u8, required=True)
@@ -700,6 +788,20 @@ def main() -> int:
                     args.addr,
                     args.bit,
                     args.delay_count,
+                    delay_on_one=not args.delay_on_zero,
+                ),
+            ),
+        ]
+    elif args.mode == "controller-byte-bit-delay":
+        patches = [
+            hex_patch(HOOK_PLAIN_OFFSET, ljmp(helper_code_addr(args.payload_offset))),
+            hex_patch(
+                args.payload_offset,
+                controller_gateway_bit_timing_payload(
+                    args.addr,
+                    args.bit,
+                    args.delay_count,
+                    skip=args.skip,
                     delay_on_one=not args.delay_on_zero,
                 ),
             ),
