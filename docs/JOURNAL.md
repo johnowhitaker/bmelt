@@ -707,3 +707,12 @@ instrument for mapping the 8051's live state, finding hardware latches, checking
 which status bytes move, and designing the next hook from evidence rather than
 single-bit guesses. It is the first point where poking around inside the drive
 starts to feel like debugging instead of divination.
+
+We added the same idea for the controller gateway too. That path has a small
+pipeline quirk: the first returned byte is stale, so the host-side reader asks
+for one byte before the desired range and drops it. With that compensated, bulk
+gateway reads recover known helper text like `Flash Type Error` at `0x018620`.
+They also confirm the awkward negative result at useful scale:
+`controller[0x184000..0x184fff]` is still all zero in currentboot. So the
+gateway-bulk tool is real, but the decoded CDD likely needs a later runtime
+phase, not just a faster read of the same early phase.

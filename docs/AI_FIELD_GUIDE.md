@@ -585,6 +585,11 @@ python3 scripts/build_liteon_currentboot_response_hook_candidate.py \
   --name gateway-cdb-byte-v3 \
   --gateway-cdb-address
 
+# controller gateway bulk read: copy 128 bytes into response[0x20..0x9f]
+python3 scripts/build_liteon_currentboot_response_hook_candidate.py \
+  --name gateway-cdb-bulk \
+  --gateway-cdb-bulk
+
 # XDATA read: CDB[7:8] + (CDB[5] & 0x3f)
 python3 scripts/build_liteon_currentboot_response_hook_candidate.py \
   --name xdata-cdb-byte \
@@ -636,6 +641,34 @@ Flash Type Error
 
 The controller-gateway hook must do a throwaway `0x4098` read before the real
 read. Without that, reads returned stale `0x05` bytes.
+
+The bulk gateway reader has a related one-byte pipeline quirk: the first byte
+of each 128-byte response is stale. `scripts/read_liteon_currentboot_gateway_bulk.py`
+compensates by requesting `address - 1` and dropping the stale first byte, so
+use the script rather than hand-parsing raw INQUIRY output.
+
+Gateway bulk read example:
+
+```sh
+ssh root@jonathan-thinkpad-t480s \
+  'cd /home/jonathan/boastermelt && python3 scripts/read_liteon_currentboot_gateway_bulk.py \
+    --device /dev/sg0 \
+    --address 0x018620 \
+    --length 64'
+```
+
+Known settled output:
+
+```text
+Flash Type Error
+```
+
+The currentboot-phase decoded CDD candidate range is still blank when sampled
+in bulk:
+
+```text
+controller[0x184000..0x184fff] = all 00
+```
 
 XDATA read example:
 

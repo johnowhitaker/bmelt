@@ -204,6 +204,53 @@ def source_gateway_cdb_address(selector_mask: int) -> bytes:
     )
 
 
+def source_gateway_cdb_bulk(selector_mask: int, storage_offset: int, bulk_len: int) -> bytes:
+    if not 1 <= bulk_len <= 0xFF:
+        raise ValueError("--bulk-len must be 1..255")
+    if not 0 <= storage_offset <= 0xFFFF:
+        raise ValueError("response storage offset is outside 16-bit range")
+    wait_ready = bytes.fromhex("904000e020e7f9")
+    compute = b"".join(
+        [
+            mov_dptr(0x818F),  # CDB byte 5: selector in low bits.
+            bytes([0xE0, 0x54, selector_mask & 0xFF, 0xFC]),  # MOVX; ANL; MOV R4,A
+            mov_dptr(0x8193),  # CDB byte 9: low address byte.
+            bytes([0xE0, 0x2C, 0xFB]),  # MOVX; ADD A,R4; MOV R3,A
+            mov_dptr(0x8192),  # CDB byte 8: middle address byte.
+            bytes([0xE0, 0x34, 0x00, 0xFA]),  # MOVX; ADDC A,#0; MOV R2,A
+            mov_dptr(0x8191),  # CDB byte 7: high address byte.
+            bytes([0xE0, 0x34, 0x00, 0xF8]),  # MOVX; ADDC A,#0; MOV R0,A
+        ]
+    )
+    init = b"".join(
+        [
+            mov_rn_imm(6, (storage_offset >> 8) & 0xFF),  # R6:R7 = response-buffer offset.
+            mov_rn_imm(7, storage_offset & 0xFF),
+            mov_rn_imm(1, bulk_len),  # R1 = byte count.
+        ]
+    )
+    setup_gateway_addr = b"".join(
+        [
+            wait_ready,
+            mov_dptr(0x4091),
+            bytes([0xE8, 0xF0, 0xA3, 0xEA, 0xF0, 0xA3, 0xEB, 0xF0]),
+            mov_dptr(0x4098),
+            bytes([0xE0]),  # throwaway read, matching the stock gateway read quirk.
+            wait_ready,
+            mov_dptr(0x4098),
+            bytes([0xE0, 0xFD]),  # MOVX A,@DPTR ; MOV R5,A
+            lcall(0x6012),
+        ]
+    )
+    increment_gateway_addr = bytes.fromhex("0beb70050aea700108")
+    increment_response_offset = bytes.fromhex("0fef70010e")
+    loop_start = len(compute) + len(init)
+    loop_body = setup_gateway_addr + increment_gateway_addr + increment_response_offset
+    djnz_pos = loop_start + len(loop_body)
+    djnz = bytes([0xD9, rel8(djnz_pos + 2, loop_start)])  # DJNZ R1,loop_start
+    return compute + init + loop_body + djnz
+
+
 def build_source(args: argparse.Namespace) -> tuple[str, bytes, dict[str, Any]]:
     modes = [
         args.constant is not None,
@@ -213,12 +260,13 @@ def build_source(args: argparse.Namespace) -> tuple[str, bytes, dict[str, Any]]:
         args.xdata_cdb_bulk,
         args.xdata_cdb_rw,
         args.gateway_cdb_address,
+        args.gateway_cdb_bulk,
     ]
     if sum(modes) != 1:
         raise ValueError(
             "choose exactly one of --constant, --xdata-direct, --xdata-window, "
             "--xdata-cdb-address, --xdata-cdb-bulk, --xdata-cdb-rw, "
-            "or --gateway-cdb-address"
+            "--gateway-cdb-address, or --gateway-cdb-bulk"
         )
     if args.constant is not None:
         return "constant", source_constant(args.constant), {"constant": args.constant}
@@ -229,6 +277,20 @@ def build_source(args: argparse.Namespace) -> tuple[str, bytes, dict[str, Any]]:
             "gateway_cdb_address",
             source_gateway_cdb_address(args.selector_mask),
             {"address_source": "cdb_bytes_7_8_9_plus_control_low_bits", "selector_mask": args.selector_mask},
+        )
+    if args.gateway_cdb_bulk:
+        return (
+            "gateway_cdb_bulk",
+            source_gateway_cdb_bulk(
+                args.selector_mask,
+                RESPONSE_STORAGE_BASE + args.response_offset,
+                args.bulk_len,
+            ),
+            {
+                "address_source": "cdb_bytes_7_8_9_plus_control_low_bits",
+                "selector_mask": args.selector_mask,
+                "bulk_len": args.bulk_len,
+            },
         )
     if args.xdata_cdb_address:
         return (
@@ -395,6 +457,11 @@ def parse_args() -> argparse.Namespace:
         help="read controller gateway address CDB[7:9] + (CDB[5] & --selector-mask)",
     )
     parser.add_argument(
+        "--gateway-cdb-bulk",
+        action="store_true",
+        help="copy --bulk-len bytes from controller gateway address CDB[7:9] + selector into the INQUIRY response",
+    )
+    parser.add_argument(
         "--xdata-cdb-address",
         action="store_true",
         help="read XDATA address CDB[7:8] + (CDB[5] & --selector-mask)",
@@ -421,6 +488,7 @@ def main() -> int:
     if args.restore and (
         any(value is not None for value in (args.constant, args.xdata_direct, args.xdata_window))
         or args.gateway_cdb_address
+        or args.gateway_cdb_bulk
         or args.xdata_cdb_address
         or args.xdata_cdb_bulk
         or args.xdata_cdb_rw

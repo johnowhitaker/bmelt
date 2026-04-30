@@ -52,6 +52,7 @@ Readers:
 
 ```text
 scripts/read_liteon_currentboot_gateway.py
+scripts/read_liteon_currentboot_gateway_bulk.py
 scripts/read_liteon_currentboot_xdata.py
 scripts/read_liteon_currentboot_xdata_bulk.py
 scripts/write_liteon_currentboot_xdata.py
@@ -140,6 +141,35 @@ controller[0x184000..0x1841ff] = all 00
 That agrees with the older timing-channel attempts. It does not disprove the
 descriptor's `0x184000..0x1b4000` logical range; it says this currentboot phase
 does not expose populated decoded CDD bytes there.
+
+## Controller-Gateway Bulk Read
+
+Candidate:
+
+```text
+references/firmware/extracted/currentboot-response-hook-candidates/currentboot-response-hook-gateway-cdb-bulk/currentboot-response-hook-gateway-cdb-bulk/liteon-full-currentboot-ld5m-helper-bypass-currentboot-response-hook-gateway-cdb-bulk-candidate.json
+```
+
+Version 1 is live-proven with one pipeline caveat. The first byte returned by
+each gateway-bulk command is stale. The reader compensates by requesting
+`address - 1`, reading one extra byte, and dropping that first byte. With that
+settling step:
+
+```text
+controller[0x018620..0x01865f]:
+466c6173682054797065204572726f7200905904e4f0a3f09059c0e054fe4404f0905906e0541cf090592ae054f7f09059f0e4f0a3e0543ff0905a00e054f8f0
+
+ascii:
+Flash Type Error..Y......Y..T.D...Y..T...Y*.T...Y.....T?..Z..T..
+```
+
+The decoded CDD candidate range remains blank in this currentboot phase even
+with faster bulk sampling:
+
+```text
+controller[0x184000..0x184fff] = all 00
+sha256 ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7
+```
 
 ## XDATA CDB Address
 
