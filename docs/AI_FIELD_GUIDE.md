@@ -294,11 +294,12 @@ python3 scripts/probe_liteon_pico_led_payload.py \
 The probe writes phase summaries for `pre`, `event68`, `post_event68`, and
 `recovery` under `runs/pico-led-probes/`.
 
-Do not hold `GP27` low through a full sequence as a casual input test. It is the
-real eject button line: holding it low moved the sled and caused tray-open /
-not-ready sense before the helper event. The syndrome scanner therefore refuses
-button-low runs unless `--allow-button-low` is passed, and its default low scope
-is only event `68` after setup.
+Do not use `GP27` low as a casual input test. It is the real eject button line:
+holding it low moved the sled and caused tray-open / not-ready sense before the
+helper event, and a later event-scoped pulse still tried to eject. The syndrome
+scanner therefore refuses button-low runs unless `--allow-button-low` is passed,
+but the practical default should be to avoid GP27-low probing while the
+mechanism is connected.
 
 Timing-safe LED probes should use the event-68 helper hook, not a post-command
 snapshot. The codeexec builder now has held-window modes:
@@ -334,15 +335,16 @@ python3 scripts/scan_liteon_pico_button_syndrome.py \
 
 This generates helper predicates over a whole XDATA page. Comparing released
 versus low button states gives the index of a single changed bit in about
-`1 + ceil(log2(length * 8))` predicates. Because GP27 actuates the sled, run
-this only when late low-pulse behavior is acceptable.
+`1 + ceil(log2(length * 8))` predicates. Because GP27 actuates the sled, treat
+this command as disabled unless the mechanism has been made safe and the drive
+can still reach the helper hook.
 
 ## Next Work
 
 Immediate useful directions:
 
-1. If we keep using GP27, map it with event-scoped low pulses only; otherwise
-   use a different external input that does not actuate the mechanism.
+1. Prefer a different external input that does not actuate the mechanism. GP27
+   should be considered an eject actuator, not a debug input.
 2. Use the XDATA bit channel to map a small set of high-value helper/controller
    registers around `0x48a0`, `0x47d2`, `0x8221`, and likely GPIO/status
    candidates.

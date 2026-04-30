@@ -246,3 +246,10 @@ button-low runs unless explicitly allowed, and the intended mode is to run setup
 with GP27 released, then pull GP27 low only for event 68. Whether even that
 short pulse is acceptable is a hardware/mechanism decision, not just a software
 one.
+
+The first event-scoped try still attempted to eject, so GP27 is now classified
+as a mechanism actuator rather than a useful debug input in the current wiring.
+Removing the tray/insert sense band might reduce mechanical risk, but it also
+risks preventing the updater sequence from reaching the helper at all. The
+better next hardware input is a separate line that does not already mean
+"eject" to the drive.

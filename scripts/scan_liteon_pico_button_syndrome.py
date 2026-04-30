@@ -56,6 +56,24 @@ def parse_length(value: str) -> int:
     return parsed
 
 
+def parse_predicates(value: str) -> list[int | None]:
+    predicates: list[int | None] = []
+    for item in value.split(","):
+        item = item.strip().lower()
+        if not item:
+            continue
+        if item in {"total", "all", "none"}:
+            predicates.append(None)
+            continue
+        parsed = int(item, 0)
+        if not 0 <= parsed <= 15:
+            raise argparse.ArgumentTypeError("predicate index bits must be 0..15")
+        predicates.append(parsed)
+    if not predicates:
+        raise argparse.ArgumentTypeError("at least one predicate is required")
+    return predicates
+
+
 def find_port() -> str:
     candidates = []
     for port in list_ports.comports():
@@ -297,6 +315,15 @@ def recover(args: argparse.Namespace, remote_out: str) -> dict[str, Any]:
     }
 
 
+def setup_ready(summary: dict[str, Any]) -> bool:
+    return (
+        summary.get("runner_returncode") == 0
+        and summary.get("target_event_present") is True
+        and summary.get("target_event_returncode") == 0
+        and summary.get("final_revision_after_sequence") == "0D5C"
+    )
+
+
 def run_state(
     args: argparse.Namespace,
     ser: serial.Serial,
@@ -321,6 +348,24 @@ def run_state(
             end_index=67,
             force=False,
         )
+        if not setup_ready(setup):
+            released = send_pico(ser, f"SET {args.button_pin} Z")
+            read_after = send_pico(ser, f"READ {args.button_pin}")
+            return {
+                "state": state,
+                "pico_set": before,
+                "pico_read_before_event": read_before,
+                "pico_release": released,
+                "pico_read_after_release": read_after,
+                "setup": setup,
+                "event68": {
+                    "status": "skipped",
+                    "reason": "setup did not reach event-68 boundary",
+                    "value": None,
+                },
+                "recovery": recover(args, f"{remote_base}/recovery-after-setup-failure"),
+                "value": None,
+            }
         if state == "low":
             before = send_pico(ser, f"SET {args.button_pin} LOW")
             read_before = send_pico(ser, f"READ {args.button_pin}")
@@ -432,6 +477,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--quiet-build", action="store_true")
     parser.add_argument("--sync-remote", action="store_true")
     parser.add_argument(
+        "--predicates",
+        type=parse_predicates,
+        default=None,
+        help="comma-separated predicate list such as 'total' or 'total,0,1'; default is full syndrome",
+    )
+    parser.add_argument(
         "--allow-button-low",
         action="store_true",
         help="actually pull the Pico button line low; without this the scanner refuses low-state runs",
@@ -457,7 +508,7 @@ def main() -> int:
     out_dir.mkdir(parents=True, exist_ok=True)
     candidate_bit_count = args.length * 8
     syndrome_bits = math.ceil(math.log2(candidate_bit_count))
-    predicates = [None] + list(range(syndrome_bits))
+    predicates = args.predicates or [None] + list(range(syndrome_bits))
     candidates = {predicate: build_candidate(args, predicate) for predicate in predicates}
     if args.sync_remote:
         sync_remote(args)
@@ -485,13 +536,20 @@ def main() -> int:
         finally:
             send_pico(ser, "ALLZ")
 
-    total_delta = results[0]["delta"]
+    total_result = next((item for item in results if item["predicate"] is None), None)
+    total_delta = None if total_result is None else total_result["delta"]
     decoded_index: int | None = None
     decoded_candidate: dict[str, Any] | None = None
     decoded_candidate_text = "unknown"
-    if total_delta == 1 and all(item["delta"] is not None for item in results[1:]):
+    syndrome_results = [item for item in results if item["predicate"] is not None]
+    if (
+        total_delta == 1
+        and len(syndrome_results) == syndrome_bits
+        and all(item["delta"] is not None for item in syndrome_results)
+    ):
         decoded_index = 0
-        for bit, item in enumerate(results[1:]):
+        for item in syndrome_results:
+            bit = int(item["predicate"])
             decoded_index |= int(item["delta"]) << bit
         if decoded_index < candidate_bit_count:
             decoded_candidate = {
@@ -504,6 +562,8 @@ def main() -> int:
             decoded_candidate_text = f"out-of-range index {decoded_index}"
     elif total_delta == 0:
         decoded_candidate_text = "no odd number of bit changes detected"
+    elif total_delta == 1:
+        decoded_candidate_text = "change detected; run full syndrome predicates to decode"
 
     report = {
         "status": "pico_button_syndrome_scan",
