@@ -369,11 +369,13 @@ encoded-vs-decoded CDD size. It may be a smaller work buffer or substream, but
 the visible CDD descriptor is saying something much chunkier.
 
 The structure is getting less mysterious, though. CDD1 begins with 436
-eight-byte directory records, then a `0x400` aux/table window, then the body at
-stream-relative `0x11c0`. The last two bytes of each directory entry form a
-monotonic little-endian pointer-like column. CDD2 reuses the tail of that
-directory: its bytes `0x20..0x1a0` exactly duplicate CDD1 entries 388..435, and
-its inferred body starts at `0x5a0`.
+eight-byte directory records, then a low-entropy table/control window. The
+header byte that looked like a clean `0x400` table length turned out to be only
+a nominal boundary: the first source bytes begin a little earlier, around
+stream-relative `0x1194..0x11a4` depending on the image. CDD2 reuses the tail
+of the directory: its bytes `0x20..0x1a0` exactly duplicate CDD1 entries
+388..435, and its source payload starts immediately at `0x1a0`. The old
+`0x5a0` CDD2 body guess was too symmetrical.
 
 Then that pointer-like column turned into a real address field. For each
 directory entry:
@@ -383,11 +385,18 @@ source_start = (u16le(entry[6:8]) << 4) | (entry[5] >> 4)
 ```
 
 Those source starts are monotonic and land directly inside the CDD object. CDD1
-entry 388 starts at `0xd91a0`, exactly after CDD2's copied directory prefix and
-before CDD2's `0x400` aux window. The common short templates `0d6840031a` and
-`0c60000318` point at `0x34`/`0x30` byte spans, matching the visible repeated
-motif islands. This is the first strong sign that the 8-byte records are a
-packed-stream directory with source spans, not just opaque metadata.
+entry 388 starts at `0xd91a0`, exactly after CDD2's copied directory prefix.
+Byte 5 is split: its high nibble is the low nibble of the source address, while
+its low nibble groups with bytes 0..4 as a non-source operation key. In the
+CHS7/CHS9 pair, 380 of 436 same-index records keep that operation key and all
+380 keep the same source-span length; 377 of them differ only in source-address
+bits. That is the best evidence so far that the records are real packed-stream
+instructions, not opaque metadata.
+
+The common short templates `0d6840031a` and `0c60000318` point at
+`0x34`/`0x30` byte spans, matching the visible repeated motif islands. This is
+another strong sign that the 8-byte records are a packed-stream directory with
+source spans.
 
 Those short templates even have an internal length pattern: for `0d6840031a`,
 `0x0d` acts like `N`, `0x68` is `8*N`, `0x1a` is `2*N`, and the source span is

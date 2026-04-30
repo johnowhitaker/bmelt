@@ -138,14 +138,20 @@ Key CDD facts:
 - The encoded descriptor object `0x7000..0xe8000` is about 4.69x that decoded
   range; the CDD streams/bodies are about 4.4x. A remembered ~1.4x ratio does
   not appear at the descriptor level.
-- CDD1 starts with 436 8-byte directory records, then a `0x400` aux/table
-  window, then body bytes at stream-relative `0x11c0`.
-- CDD2 bytes `0x20..0x1a0` duplicate CDD1 entries 388..435, and CDD2's inferred
-  body starts at stream-relative `0x5a0`.
+- CDD1 starts with 436 8-byte directory records, then a low-entropy
+  table/control window. The copied header suggests a nominal `0x400` table, but
+  the source-address field places the first payload bytes slightly earlier
+  (`0x1194..0x11a4` depending on image).
+- CDD2 bytes `0x20..0x1a0` duplicate CDD1 entries 388..435. CDD2 source payload
+  starts immediately at stream-relative `0x1a0`; there is no separate `0x400`
+  CDD2 table-like window despite the copied header byte.
 - The directory source address is now modeled as
   `(u16le(entry[6:8]) << 4) | (entry[5] >> 4)`. These addresses are monotonic;
-  entry 388 starts at `0xd91a0`, immediately after CDD2's copied directory and
-  before its `0x400` aux window.
+  entry 388 starts at `0xd91a0`, immediately after CDD2's copied directory.
+- Byte 5 is split: the high nibble feeds the source-address formula, while the
+  low nibble groups with bytes 0..4 as a non-source operation key. In CHS7 vs
+  CHS9, 380/436 same-index records keep that operation key and all 380 keep the
+  same source-span length; 377 differ only in source-address bits.
 - Repeated templates `0d6840031a` and `0c60000318` point at short
   `0x34`/`0x30` byte spans, matching the visible motif islands. In these
   records, byte 0 behaves like `N`, byte 1 is `8*N`, byte 4 is `2*N`, and the

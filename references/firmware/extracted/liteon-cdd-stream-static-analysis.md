@@ -16,14 +16,14 @@ Offline only. No drive commands were sent.
 
 ## CDD1 Grammar
 
-| image | stream | dir end | entries | aux len | body start | body len | body len mod 12 | top sliding 12-byte motif | motif count | longest 13-stride run |
+| image | stream | dir end | entries | nominal 12-byte body | first source | nominal body len | nominal body len mod 12 | top sliding 12-byte motif | motif count | longest 13-stride run |
 |---|---:|---:|---:|---:|---:|---:|---:|---|---:|---:|
-| LD5M | `0x0702c..0xcec18` | `0x07dec` | 436 | `0x400` | `0x11c0` | `0xc6a2c` | 0 | `b8b820171417141a77b83760` | 73 | 15 |
-| AD12 | `0x0702c..0xcfb67` | `0x07dec` | 436 | `0x400` | `0x11c0` | `0xc797b` | 7 | `e8e89fdfdb689fc0b2713f92` | 18 | 0 |
-| AHS9 | `0x0702c..0xcfe20` | `0x07dec` | 436 | `0x400` | `0x11c0` | `0xc7c34` | 8 | `f92111f3fb0711f03e4623e2` | 17 | 0 |
-| CD12 | `0x0702c..0xced1c` | `0x07dec` | 436 | `0x400` | `0x11c0` | `0xc6b30` | 8 | `c6582018c818c810d1706780` | 83 | 16 |
-| CHS7 | `0x0702c..0xcedb4` | `0x07dec` | 436 | `0x400` | `0x11c0` | `0xc6bc8` | 4 | `c07820180c180c0d15706740` | 84 | 15 |
-| CHS9 | `0x0702c..0xcee2a` | `0x07dec` | 436 | `0x400` | `0x11c0` | `0xc6c3e` | 2 | `bef82017dc17dc0c3d706740` | 84 | 15 |
+| LD5M | `0x0702c..0xcec18` | `0x07dec` | 436 | `0x11c0` | `0x1194` | `0xc6a2c` | 0 | `b8b820171417141a77b83760` | 73 | 15 |
+| AD12 | `0x0702c..0xcfb67` | `0x07dec` | 436 | `0x11c0` | `0x11a4` | `0xc797b` | 7 | `e8e89fdfdb689fc0b2713f92` | 18 | 0 |
+| AHS9 | `0x0702c..0xcfe20` | `0x07dec` | 436 | `0x11c0` | `0x1194` | `0xc7c34` | 8 | `f92111f3fb0711f03e4623e2` | 17 | 0 |
+| CD12 | `0x0702c..0xced1c` | `0x07dec` | 436 | `0x11c0` | `0x119c` | `0xc6b30` | 8 | `c6582018c818c810d1706780` | 83 | 16 |
+| CHS7 | `0x0702c..0xcedb4` | `0x07dec` | 436 | `0x11c0` | `0x1198` | `0xc6bc8` | 4 | `c07820180c180c0d15706740` | 84 | 15 |
+| CHS9 | `0x0702c..0xcee2a` | `0x07dec` | 436 | `0x11c0` | `0x11a4` | `0xc6c3e` | 2 | `bef82017dc17dc0c3d706740` | 84 | 15 |
 
 ## Descriptor Logical Range And Size Ratios
 
@@ -44,58 +44,58 @@ Relative to that explicit `0x30000` decoded range, the obvious encoded sizes are
 |---|---|---:|---:|
 | LD5M | descriptor object | `0xe1000` | 4.6875 |
 | LD5M | CDD streams | `0xd4fed` | 4.4374 |
-| LD5M | CDD bodies | `0xd388d` | 4.4070 |
-| LD5M | CDD1 body | `0xc6a2c` | 4.1382 |
-| LD5M | CDD2 inferred body | `0xce61` | 0.2687 |
+| LD5M | CDD bodies | `0xd3cb9` | 4.4124 |
+| LD5M | CDD1 source body | `0xc6a58` | 4.1385 |
+| LD5M | CDD2 source body | `0xd261` | 0.2739 |
 | LD5M | directory pointer span | `0xde04` | 0.2891 |
 | LD5M | directory final pointer | `0xe620` | 0.2996 |
 | LD5M | directory entry388 pointer | `0xd91a` | 0.2827 |
 | AD12 | descriptor object | `0xe1000` | 4.6875 |
 | AD12 | CDD streams | `0xd5e2a` | 4.4559 |
-| AD12 | CDD bodies | `0xd46ca` | 4.4255 |
-| AD12 | CDD1 body | `0xc797b` | 4.1582 |
-| AD12 | CDD2 inferred body | `0xcd4f` | 0.2673 |
+| AD12 | CDD bodies | `0xd4ae6` | 4.4309 |
+| AD12 | CDD1 source body | `0xc7997` | 4.1583 |
+| AD12 | CDD2 source body | `0xd14f` | 0.2725 |
 | AD12 | directory pointer span | `0xddf2` | 0.2890 |
 | AD12 | directory final pointer | `0xe60f` | 0.2996 |
 | AD12 | directory entry388 pointer | `0xd91a` | 0.2827 |
 | AHS9 | descriptor object | `0xe1000` | 4.6875 |
 | AHS9 | CDD streams | `0xd615e` | 4.4601 |
-| AHS9 | CDD bodies | `0xd49fe` | 4.4297 |
-| AHS9 | CDD1 body | `0xc7c34` | 4.1617 |
-| AHS9 | CDD2 inferred body | `0xcdca` | 0.2680 |
+| AHS9 | CDD bodies | `0xd4e2a` | 4.4351 |
+| AHS9 | CDD1 source body | `0xc7c60` | 4.1619 |
+| AHS9 | CDD2 source body | `0xd1ca` | 0.2732 |
 | AHS9 | directory pointer span | `0xddfa` | 0.2890 |
 | AHS9 | directory final pointer | `0xe616` | 0.2996 |
 | AHS9 | directory entry388 pointer | `0xd91a` | 0.2827 |
 | CD12 | descriptor object | `0xe1000` | 4.6875 |
 | CD12 | CDD streams | `0xd5002` | 4.4375 |
-| CD12 | CDD bodies | `0xd38a2` | 4.4071 |
-| CD12 | CDD1 body | `0xc6b30` | 4.1396 |
-| CD12 | CDD2 inferred body | `0xcd72` | 0.2675 |
+| CD12 | CDD bodies | `0xd3cc6` | 4.4125 |
+| CD12 | CDD1 source body | `0xc6b54` | 4.1398 |
+| CD12 | CDD2 source body | `0xd172` | 0.2727 |
 | CD12 | directory pointer span | `0xddf5` | 0.2890 |
 | CD12 | directory final pointer | `0xe611` | 0.2996 |
 | CD12 | directory entry388 pointer | `0xd91a` | 0.2827 |
 | CHS7 | descriptor object | `0xe1000` | 4.6875 |
 | CHS7 | CDD streams | `0xd50bc` | 4.4385 |
-| CHS7 | CDD bodies | `0xd395c` | 4.4080 |
-| CHS7 | CDD1 body | `0xc6bc8` | 4.1403 |
-| CHS7 | CDD2 inferred body | `0xcd94` | 0.2677 |
+| CHS7 | CDD bodies | `0xd3d84` | 4.4134 |
+| CHS7 | CDD1 source body | `0xc6bf0` | 4.1405 |
+| CHS7 | CDD2 source body | `0xd194` | 0.2729 |
 | CHS7 | directory pointer span | `0xddf7` | 0.2890 |
 | CHS7 | directory final pointer | `0xe613` | 0.2996 |
 | CHS7 | directory entry388 pointer | `0xd91a` | 0.2827 |
 | CHS9 | descriptor object | `0xe1000` | 4.6875 |
 | CHS9 | CDD streams | `0xd512f` | 4.4390 |
-| CHS9 | CDD bodies | `0xd39cf` | 4.4086 |
-| CHS9 | CDD1 body | `0xc6c3e` | 4.1409 |
-| CHS9 | CDD2 inferred body | `0xcd91` | 0.2677 |
+| CHS9 | CDD bodies | `0xd3deb` | 4.4140 |
+| CHS9 | CDD1 source body | `0xc6c5a` | 4.1411 |
+| CHS9 | CDD2 source body | `0xd191` | 0.2729 |
 | CHS9 | directory pointer span | `0xddf6` | 0.2890 |
 | CHS9 | directory final pointer | `0xe613` | 0.2996 |
 | CHS9 | directory entry388 pointer | `0xd91a` | 0.2827 |
 
 ## Header Fields
 
-The CDD stream header is mostly 24-bit big-endian fields. The repeated `0x1b3fff` value is inclusive, while the descriptor stores end+1 as `0x1b4000`.
+The CDD stream header is mostly 24-bit big-endian fields. The repeated `0x1b3fff` value is inclusive, while the descriptor stores end+1 as `0x1b4000`. The `nominal table guess` column is the old interpretation of header byte `+0x10`; the directory source field below shows the real payload boundary is slightly earlier in CDD1 and much earlier in CDD2.
 
-| image | stream2 start | directory end | control quad | aux len | final boundary | descriptor | decoded start | decoded inclusive end |
+| image | stream2 start | directory end | control quad | nominal table guess | final boundary | descriptor | decoded start | decoded inclusive end |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
 | LD5M | `0xd9000` | `0x07dec` | `0x03081087` | `0x400` | `0xe8000` | `0x07000` | `0x184000` | `0x1b3fff` |
 | AD12 | `0xd9000` | `0x07dec` | `0x03101087` | `0x400` | `0xe8000` | `0x07000` | `0x184000` | `0x1b3fff` |
@@ -125,7 +125,7 @@ The directory pointer column now has a direct file-address interpretation:
 source_start = (u16le(entry[6:8]) << 4) | (entry[5] >> 4)
 ```
 
-The resulting addresses are monotonic and land in the CDD payload/aux regions. Entry 388 starts at `0xd91a0`, exactly after CDD2's copied directory prefix and before its inferred `0x400` aux window.
+The resulting addresses are monotonic and land in the CDD payload regions. Entry 388 starts at `0xd91a0`, exactly after CDD2's copied directory prefix. This corrects the earlier CDD2 symmetry guess: despite the copied header byte that looks like a `0x400` table length, CDD2 appears to start source payload immediately after the copied entries.
 
 | image | first source | entry 388 source | last source | final gap to CDD2 end | monotonic | common entry prefix | count | common short segment |
 |---|---:|---:|---:|---:|---:|---|---:|---:|
@@ -137,6 +137,19 @@ The resulting addresses are monotonic and land in the CDD payload/aux regions. E
 | CHS9 | `0x081d0` | `0xd91a0` | `0xe6133` | `0x1fe` | True | `0d6840031a` | 18 | `0x34` x18 |
 
 This is the strongest static CDD grammar clue so far. The small repeated-source templates such as `0d6840031a` and `0c60000318` point at short `0x34`/`0x30` byte spans, matching the visible motif islands. For these templates, byte 0 behaves like `N`, byte 1 is `8*N`, byte 4 is `2*N`, and the source span is `4*N`. That looks like an opcode/length tuple for a repeated packed-stream construct. The broader record format is still unresolved, but the records are no longer plausibly encrypted noise.
+
+## Directory/Table Boundary
+
+The source-address field gives a more precise payload boundary than the copied header bytes. CDD1 has a low-entropy table/control window after the directory, but its first source segment begins before the old nominal `directory + 0x400` boundary. CDD2 is different: after the copied header and copied entries, source payload begins immediately with no separate `0x400` table-like window.
+
+| image | CDD1 directory end rel | CDD1 first source rel | CDD1 table/control len | nominal overlap | CDD1 table entropy | CDD1 table common u16 | CDD2 copied entries end | CDD2 first source rel |
+|---|---:|---:|---:|---:|---:|---|---:|---:|
+| LD5M | `0xdc0` | `0x1194` | `0x3d4` | `0x2c` | 6.038 | `0x0d01` x16, `0x1503` x4, `0x1490` x4 | `0x1a0` | `0x1a0` |
+| AD12 | `0xdc0` | `0x11a4` | `0x3e4` | `0x1c` | 6.052 | `0x0d01` x16, `0x14e0` x4, `0x1503` x4 | `0x1a0` | `0x1a0` |
+| AHS9 | `0xdc0` | `0x1194` | `0x3d4` | `0x2c` | 6.051 | `0x0d01` x16, `0x14e0` x4, `0x1503` x4 | `0x1a0` | `0x1a0` |
+| CD12 | `0xdc0` | `0x119c` | `0x3dc` | `0x24` | 6.051 | `0x0d01` x16, `0x14e0` x4, `0x1503` x4 | `0x1a0` | `0x1a0` |
+| CHS7 | `0xdc0` | `0x1198` | `0x3d8` | `0x28` | 6.059 | `0x0d01` x16, `0x14e0` x4, `0x1503` x4 | `0x1a0` | `0x1a0` |
+| CHS9 | `0xdc0` | `0x11a4` | `0x3e4` | `0x1c` | 6.053 | `0x0d01` x16, `0x14e0` x4, `0x1503` x4 | `0x1a0` | `0x1a0` |
 
 LD5M source-segment mapping for useful probe offsets:
 
@@ -151,29 +164,29 @@ LD5M source-segment mapping for useful probe offsets:
 
 ## CDD2 Directory Duplicate
 
-For DS-8ABSH-style images, stream2 bytes `0x20..0x1a0` duplicate stream1 bytes `0xc40..0xdc0`, i.e. CDD1 entries 388..435.
+For DS-8ABSH-style images, stream2 bytes `0x20..0x1a0` duplicate stream1 bytes `0xc40..0xdc0`, i.e. CDD1 entries 388..435. Stream2 source payload starts at `0x1a0`, immediately after those copied entries.
 
-| image | duplicate length | stream2 inferred body start | stream2 body len |
+| image | duplicate length | stream2 source body start | stream2 source body len |
 |---|---:|---:|---:|
-| LD5M | `0x180` | `0x5a0` | `0xce61` |
-| AD12 | `0x180` | `0x5a0` | `0xcd4f` |
-| AHS9 | `0x180` | `0x5a0` | `0xcdca` |
-| CD12 | `0x180` | `0x5a0` | `0xcd72` |
-| CHS7 | `0x180` | `0x5a0` | `0xcd94` |
-| CHS9 | `0x180` | `0x5a0` | `0xcd91` |
+| LD5M | `0x180` | `0x1a0` | `0xd261` |
+| AD12 | `0x180` | `0x1a0` | `0xd14f` |
+| AHS9 | `0x180` | `0x1a0` | `0xd1ca` |
+| CD12 | `0x180` | `0x1a0` | `0xd172` |
+| CHS7 | `0x180` | `0x1a0` | `0xd194` |
+| CHS9 | `0x180` | `0x1a0` | `0xd191` |
 
 ## Exact Shifted Body Matches: CHS7 vs CHS9
 
 | length | left body rel | right body rel | shift | sample |
 |---:|---:|---:|---:|---|
-| 53 | `0x13cec` | `0x13cdc` | `-0x10` | `17dae71ce0b4d63409790b0bc8d5c6ae3b70bdcb1cc4722f` |
-| 53 | `0xc1be` | `0xc1ae` | `-0x10` | `9831c65b013108503e84cbbc9738e31c648fa1b3ca39c5a1` |
-| 52 | `0x25da4` | `0x25d96` | `-0xe` | `0e15719718ee58927eaaab1b9453394a3b951995572616c0` |
-| 51 | `0xb70f` | `0xb6ff` | `-0x10` | `ea41ed651fe2ba06e4620cad713908c726f5c7c16eecf80d` |
-| 50 | `0x146bc` | `0x146ac` | `-0x10` | `0f127a07a85054fbbe102eac23858bbd60e8d34e3d720fce` |
-| 47 | `0x58310` | `0x58350` | `+0x40` | `a8357d41f6310656b637fd3768308d4494c27c348ce10fc9` |
-| 46 | `0x5c92e` | `0x5c96e` | `+0x40` | `371cd9bb177b1b072ba4aae601dbf1f434de3eccd67164a8` |
-| 46 | `0x2a370` | `0x2a362` | `-0xe` | `8c894741912bf55aa392280fc20d4b352e9c997922ec3808` |
+| 53 | `0x13d14` | `0x13cf8` | `-0x1c` | `17dae71ce0b4d63409790b0bc8d5c6ae3b70bdcb1cc4722f` |
+| 53 | `0xc1e6` | `0xc1ca` | `-0x1c` | `9831c65b013108503e84cbbc9738e31c648fa1b3ca39c5a1` |
+| 52 | `0x25dcc` | `0x25db2` | `-0x1a` | `0e15719718ee58927eaaab1b9453394a3b951995572616c0` |
+| 51 | `0xb737` | `0xb71b` | `-0x1c` | `ea41ed651fe2ba06e4620cad713908c726f5c7c16eecf80d` |
+| 50 | `0x146e4` | `0x146c8` | `-0x1c` | `0f127a07a85054fbbe102eac23858bbd60e8d34e3d720fce` |
+| 47 | `0x58338` | `0x5836c` | `+0x34` | `a8357d41f6310656b637fd3768308d4494c27c348ce10fc9` |
+| 46 | `0x5c956` | `0x5c98a` | `+0x34` | `371cd9bb177b1b072ba4aae601dbf1f434de3eccd67164a8` |
+| 46 | `0x2a398` | `0x2a37e` | `-0x1a` | `8c894741912bf55aa392280fc20d4b352e9c997922ec3808` |
 
 ## Exact Shifted Body Matches: AD12 vs CD12
 
@@ -199,6 +212,29 @@ CHS7 and CHS9 are close siblings. Their directory entries are mostly one or two 
 | 124 | 21 | `0x49265` | `0x492a2` | `0x47d`/`0x47e` | 3 | `a6694453fa512649` / `a6698453fa212a49` |
 | 199 | 17 | `0x6ea5d` | `0x6ea9c` | `0x74c`/`0x74c` | 2 | `5b420c63bad3a56e` / `5b420c63bac3a96e` |
 | 316 | 15 | `0xac567` | `0xac5a2` | `0xa1e`/`0xa1e` | 2 | `dab2d2990e7556ac` / `dab2d2990e255aac` |
+
+## Operation Fields Versus Source Fields
+
+The source-address formula splits byte 5: the high nibble is the source low nibble, while the low nibble stays with the non-source record fields. Treating `entry[0:5] + (entry[5] & 0x0f)` as an operation key makes the close-sibling comparison much cleaner.
+
+| pair | exact same entry | same operation key | same-op equal source length | source-only changes | common source deltas |
+|---|---:|---:|---:|---:|---|
+| CHS7 vs CHS9 | 3 | 380 | 380 | 377 | `-0x3b` x74, `-0x3e` x56, `-0x40` x52, `+0xe` x39, `-0x3f` x33, `+0x10` x30 |
+| AD12 vs CD12 | 0 | 7 | 7 | 7 | `-0x13` x2, `-0x19` x2, `-0x21` x2, `+0xf48` x1 |
+| AHS9 vs CHS9 | 0 | 2 | 2 | 2 | `+0xc` x1, `+0x3a` x1 |
+
+For CHS7 vs CHS9, 380 of 436 records keep the same operation key; all 380 also keep the same source-segment length, and 377 differ only in the source-address bits. That is strong evidence that the directory entry is not opaque: `entry[0:5]` plus byte5 low nibble likely describes the packed operation/output contract, while byte5 high nibble and bytes 6-7 are the source-address field.
+
+Example CHS7/CHS9 source-only differences:
+
+| entry | source delta | lengths | entries |
+|---:|---:|---:|---|
+| 14 | `+0xe` | `0x94d`/`0x94d` | `753a11b3ca03f610` / `753a11b3ca23f510` |
+| 15 | `+0xe` | `0x34`/`0x34` | `0d6840031ad08a11` / `0d6840031af08911` |
+| 16 | `+0xe` | `0x726`/`0x726` | `26b20c698c138e11` / `26b20c698c338d11` |
+| 17 | `+0xe` | `0x530`/`0x530` | `e279c73ae8720012` / `e279c73ae892ff11` |
+| 18 | `+0xe` | `0x6a0`/`0x6a0` | `5e810d5f2c745312` / `5e810d5f2c945212` |
+| 20 | `+0x10` | `0x734`/`0x734` | `cb01d083b4e25c13` / `cb01d083b4e25b13` |
 
 ## Simple Decode/Compression Probes
 

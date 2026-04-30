@@ -118,14 +118,14 @@ def cdd1_directory_info(stream: CddStream) -> dict[str, int]:
     directory_end_rel = directory_end_abs - stream.start
     entry_count = (directory_end_rel - 0x20) // 8
     aux_len = (header[0x10] & 0xF0) * 8
-    body_start = directory_end_rel + aux_len
+    nominal_body_start = directory_end_rel + aux_len
     return {
         "directory_end_abs": directory_end_abs,
         "directory_end_rel": directory_end_rel,
         "entry_count": entry_count,
         "aux_len": aux_len,
-        "body_start": body_start,
-        "body_len": len(stream.data) - body_start,
+        "nominal_body_start": nominal_body_start,
+        "nominal_body_len": len(stream.data) - nominal_body_start,
     }
 
 
@@ -172,6 +172,10 @@ def inferred_cdd2_body_start(image: CddImage) -> int | None:
     if len(image.streams) < 2:
         return None
     stream1, stream2 = image.streams[:2]
+    return 0x20 + cdd2_duplicate_len(stream1, stream2)
+
+
+def cdd2_duplicate_len(stream1: CddStream, stream2: CddStream) -> int:
     duplicate_len = 0
     while (
         0x20 + duplicate_len < len(stream2.data)
@@ -179,7 +183,35 @@ def inferred_cdd2_body_start(image: CddImage) -> int | None:
         and stream2.data[0x20 + duplicate_len] == stream1.data[0xC40 + duplicate_len]
     ):
         duplicate_len += 1
-    return 0x20 + duplicate_len + cdd1_directory_info(stream1)["aux_len"]
+    return duplicate_len
+
+
+def cdd1_source_start_rel(image: CddImage) -> int | None:
+    if not image.streams:
+        return None
+    sources = directory_source_addresses(image.streams[0])
+    if not sources:
+        return None
+    return sources[0] - image.streams[0].start
+
+
+def cdd2_source_start_rel(image: CddImage) -> int | None:
+    if len(image.streams) < 2:
+        return None
+    sources = directory_source_addresses(image.streams[0])
+    if len(sources) <= 388:
+        return None
+    return sources[388] - image.streams[1].start
+
+
+def cdd1_table_window(image: CddImage) -> bytes:
+    if not image.streams:
+        return b""
+    info = cdd1_directory_info(image.streams[0])
+    source_start_rel = cdd1_source_start_rel(image)
+    if source_start_rel is None or source_start_rel <= info["directory_end_rel"]:
+        return b""
+    return image.streams[0].data[info["directory_end_rel"] : source_start_rel]
 
 
 def ratio_rows(image: CddImage) -> list[tuple[str, int, float]]:
@@ -193,17 +225,18 @@ def ratio_rows(image: CddImage) -> list[tuple[str, int, float]]:
     info1 = cdd1_directory_info(stream1)
     stream2_body_start = inferred_cdd2_body_start(image)
     cdd_total = sum(len(stream.data) for stream in image.streams)
-    cdd_body_total = len(stream1.data) - info1["body_start"]
+    source_start_rel = cdd1_source_start_rel(image)
+    cdd_body_total = len(stream1.data) - source_start_rel if source_start_rel is not None else 0
     if stream2_body_start is not None and len(image.streams) >= 2:
         cdd_body_total += len(image.streams[1].data) - stream2_body_start
     rows = [
         ("descriptor object", descriptor["final_boundary"] - descriptor["start"]),
         ("CDD streams", cdd_total),
         ("CDD bodies", cdd_body_total),
-        ("CDD1 body", len(stream1.data) - info1["body_start"]),
+        ("CDD1 source body", len(stream1.data) - source_start_rel if source_start_rel is not None else 0),
     ]
     if stream2_body_start is not None and len(image.streams) >= 2:
-        rows.append(("CDD2 inferred body", len(image.streams[1].data) - stream2_body_start))
+        rows.append(("CDD2 source body", len(image.streams[1].data) - stream2_body_start))
     entries = directory_entries(stream1)
     if entries:
         pointers = [entry[6] | (entry[7] << 8) for entry in entries]
@@ -286,6 +319,12 @@ def source_segments(image: CddImage) -> list[tuple[int, int, int, bytes]]:
     return segments
 
 
+def operation_key(entry: bytes) -> bytes:
+    # Byte 5 is split: the high nibble is the low source-address nibble,
+    # while the low nibble stays stable with the non-source record fields.
+    return entry[:5] + bytes([entry[5] & 0x0F])
+
+
 def segment_for_offset(image: CddImage, offset: int) -> tuple[int, int, int, bytes] | None:
     for segment in source_segments(image):
         _, start, end, _ = segment
@@ -344,6 +383,44 @@ def same_index_segment_matches(left: CddImage, right: CddImage, limit: int = 8) 
             }
         )
     return sorted(rows, key=lambda row: (int(row["prefix"]), -int(row["entry_diff"])), reverse=True)[:limit]
+
+
+def same_index_operation_summary(left: CddImage, right: CddImage) -> dict[str, object]:
+    rows = []
+    full_match = 0
+    op_match = 0
+    source_only_change = 0
+    op_same_len = 0
+    for (index, left_start, left_end, left_entry), (_, right_start, right_end, right_entry) in zip(
+        source_segments(left), source_segments(right)
+    ):
+        left_op = operation_key(left_entry)
+        right_op = operation_key(right_entry)
+        full = left_entry == right_entry
+        same_op = left_op == right_op
+        full_match += int(full)
+        op_match += int(same_op)
+        source_only_change += int(same_op and not full)
+        if same_op:
+            op_same_len += int((left_end - left_start) == (right_end - right_start))
+            rows.append(
+                {
+                    "index": index,
+                    "source_delta": left_start - right_start,
+                    "left_len": left_end - left_start,
+                    "right_len": right_end - right_start,
+                    "left_entry": left_entry.hex(),
+                    "right_entry": right_entry.hex(),
+                }
+            )
+    return {
+        "full_match": full_match,
+        "op_match": op_match,
+        "op_same_len": op_same_len,
+        "source_only_change": source_only_change,
+        "deltas": Counter(int(row["source_delta"]) for row in rows).most_common(6),
+        "examples": [row for row in rows if int(row["source_delta"]) != 0][:6],
+    }
 
 
 def transformed_printable_score(data: bytes, transform: str, key: int) -> float:
@@ -425,22 +502,23 @@ def write_report(images: list[CddImage]) -> str:
 
     lines.append("## CDD1 Grammar")
     lines.append("")
-    lines.append("| image | stream | dir end | entries | aux len | body start | body len | body len mod 12 | top sliding 12-byte motif | motif count | longest 13-stride run |")
+    lines.append("| image | stream | dir end | entries | nominal 12-byte body | first source | nominal body len | nominal body len mod 12 | top sliding 12-byte motif | motif count | longest 13-stride run |")
     lines.append("|---|---:|---:|---:|---:|---:|---:|---:|---|---:|---:|")
     for image in images:
         if len(image.streams) < 1 or image.name == "XD13":
             continue
         stream = image.streams[0]
         info = cdd1_directory_info(stream)
-        body = stream.data[info["body_start"] :]
+        source_start_rel = cdd1_source_start_rel(image) or info["nominal_body_start"]
+        body = stream.data[info["nominal_body_start"] :]
         motif, count = top_sliding_motif(body)
         runs = motif_runs_13(body, motif)
         longest = runs[0][1] if runs else 0
         lines.append(
             f"| {image.name} | `0x{stream.start:05x}..0x{stream.end:05x}` | "
             f"`0x{info['directory_end_abs']:05x}` | {info['entry_count']} | "
-            f"`0x{info['aux_len']:x}` | `0x{info['body_start']:x}` | "
-            f"`0x{info['body_len']:x}` | {info['body_len'] % 12} | "
+            f"`0x{info['nominal_body_start']:x}` | `0x{source_start_rel:x}` | "
+            f"`0x{len(body):x}` | {len(body) % 12} | "
             f"`{motif.hex()}` | {count} | {longest} |"
         )
     lines.append("")
@@ -478,9 +556,9 @@ def write_report(images: list[CddImage]) -> str:
 
     lines.append("## Header Fields")
     lines.append("")
-    lines.append("The CDD stream header is mostly 24-bit big-endian fields. The repeated `0x1b3fff` value is inclusive, while the descriptor stores end+1 as `0x1b4000`.")
+    lines.append("The CDD stream header is mostly 24-bit big-endian fields. The repeated `0x1b3fff` value is inclusive, while the descriptor stores end+1 as `0x1b4000`. The `nominal table guess` column is the old interpretation of header byte `+0x10`; the directory source field below shows the real payload boundary is slightly earlier in CDD1 and much earlier in CDD2.")
     lines.append("")
-    lines.append("| image | stream2 start | directory end | control quad | aux len | final boundary | descriptor | decoded start | decoded inclusive end |")
+    lines.append("| image | stream2 start | directory end | control quad | nominal table guess | final boundary | descriptor | decoded start | decoded inclusive end |")
     lines.append("|---|---:|---:|---:|---:|---:|---:|---:|---:|")
     for image in images:
         if not image.streams or image.name == "XD13":
@@ -523,7 +601,7 @@ def write_report(images: list[CddImage]) -> str:
     lines.append("source_start = (u16le(entry[6:8]) << 4) | (entry[5] >> 4)")
     lines.append("```")
     lines.append("")
-    lines.append("The resulting addresses are monotonic and land in the CDD payload/aux regions. Entry 388 starts at `0xd91a0`, exactly after CDD2's copied directory prefix and before its inferred `0x400` aux window.")
+    lines.append("The resulting addresses are monotonic and land in the CDD payload regions. Entry 388 starts at `0xd91a0`, exactly after CDD2's copied directory prefix. This corrects the earlier CDD2 symmetry guess: despite the copied header byte that looks like a `0x400` table length, CDD2 appears to start source payload immediately after the copied entries.")
     lines.append("")
     lines.append("| image | first source | entry 388 source | last source | final gap to CDD2 end | monotonic | common entry prefix | count | common short segment |")
     lines.append("|---|---:|---:|---:|---:|---:|---|---:|---:|")
@@ -551,6 +629,31 @@ def write_report(images: list[CddImage]) -> str:
     lines.append("")
     lines.append("This is the strongest static CDD grammar clue so far. The small repeated-source templates such as `0d6840031a` and `0c60000318` point at short `0x34`/`0x30` byte spans, matching the visible motif islands. For these templates, byte 0 behaves like `N`, byte 1 is `8*N`, byte 4 is `2*N`, and the source span is `4*N`. That looks like an opcode/length tuple for a repeated packed-stream construct. The broader record format is still unresolved, but the records are no longer plausibly encrypted noise.")
     lines.append("")
+
+    lines.append("## Directory/Table Boundary")
+    lines.append("")
+    lines.append("The source-address field gives a more precise payload boundary than the copied header bytes. CDD1 has a low-entropy table/control window after the directory, but its first source segment begins before the old nominal `directory + 0x400` boundary. CDD2 is different: after the copied header and copied entries, source payload begins immediately with no separate `0x400` table-like window.")
+    lines.append("")
+    lines.append("| image | CDD1 directory end rel | CDD1 first source rel | CDD1 table/control len | nominal overlap | CDD1 table entropy | CDD1 table common u16 | CDD2 copied entries end | CDD2 first source rel |")
+    lines.append("|---|---:|---:|---:|---:|---:|---|---:|---:|")
+    for image in images:
+        if len(image.streams) < 2 or image.name == "XD13":
+            continue
+        stream1, stream2 = image.streams[:2]
+        info = cdd1_directory_info(stream1)
+        cdd1_source_rel = cdd1_source_start_rel(image)
+        cdd2_source_rel = cdd2_source_start_rel(image)
+        duplicate_end = 0x20 + cdd2_duplicate_len(stream1, stream2)
+        table = cdd1_table_window(image)
+        words = [int.from_bytes(table[offset : offset + 2], "little") for offset in range(0, len(table) - 1, 2)]
+        common_words = ", ".join(f"`0x{value:04x}` x{count}" for value, count in Counter(words).most_common(3))
+        nominal_overlap = info["nominal_body_start"] - cdd1_source_rel if cdd1_source_rel is not None else 0
+        lines.append(
+            f"| {image.name} | `0x{info['directory_end_rel']:x}` | `0x{(cdd1_source_rel or 0):x}` | "
+            f"`0x{len(table):x}` | `0x{nominal_overlap:x}` | {entropy(table):.3f} | "
+            f"{common_words} | `0x{duplicate_end:x}` | `0x{(cdd2_source_rel or 0):x}` |"
+        )
+    lines.append("")
     ld5m = next((image for image in images if image.name == "LD5M"), None)
     if ld5m is not None:
         lines.append("LD5M source-segment mapping for useful probe offsets:")
@@ -570,9 +673,9 @@ def write_report(images: list[CddImage]) -> str:
 
     lines.append("## CDD2 Directory Duplicate")
     lines.append("")
-    lines.append("For DS-8ABSH-style images, stream2 bytes `0x20..0x1a0` duplicate stream1 bytes `0xc40..0xdc0`, i.e. CDD1 entries 388..435.")
+    lines.append("For DS-8ABSH-style images, stream2 bytes `0x20..0x1a0` duplicate stream1 bytes `0xc40..0xdc0`, i.e. CDD1 entries 388..435. Stream2 source payload starts at `0x1a0`, immediately after those copied entries.")
     lines.append("")
-    lines.append("| image | duplicate length | stream2 inferred body start | stream2 body len |")
+    lines.append("| image | duplicate length | stream2 source body start | stream2 source body len |")
     lines.append("|---|---:|---:|---:|")
     for image in images:
         if len(image.streams) < 2 or image.name == "XD13":
@@ -585,7 +688,7 @@ def write_report(images: list[CddImage]) -> str:
             and stream2.data[0x20 + duplicate_len] == stream1.data[0xC40 + duplicate_len]
         ):
             duplicate_len += 1
-        body_start = 0x20 + duplicate_len + cdd1_directory_info(stream1)["aux_len"]
+        body_start = inferred_cdd2_body_start(image) or 0x20 + duplicate_len
         lines.append(
             f"| {image.name} | `0x{duplicate_len:x}` | `0x{body_start:x}` | "
             f"`0x{len(stream2.data) - body_start:x}` |"
@@ -599,17 +702,14 @@ def write_report(images: list[CddImage]) -> str:
             continue
         left_info = cdd1_directory_info(left.streams[0])
         right_info = cdd1_directory_info(right.streams[0])
-        matches = exact_matches(
-            left.streams[0].data[left_info["body_start"] :],
-            right.streams[0].data[right_info["body_start"] :],
-            seed=16,
-            limit=8,
-        )
+        left_start = cdd1_source_start_rel(left) or left_info["nominal_body_start"]
+        right_start = cdd1_source_start_rel(right) or right_info["nominal_body_start"]
+        matches = exact_matches(left.streams[0].data[left_start:], right.streams[0].data[right_start:], seed=16, limit=8)
         lines.append(f"## Exact Shifted Body Matches: {pair[0]} vs {pair[1]}")
         lines.append("")
         lines.append("| length | left body rel | right body rel | shift | sample |")
         lines.append("|---:|---:|---:|---:|---|")
-        left_body = left.streams[0].data[left_info["body_start"] :]
+        left_body = left.streams[0].data[left_start:]
         for length, left_offset, right_offset, shift in matches:
             sample = left_body[left_offset : left_offset + min(length, 24)].hex()
             lines.append(
@@ -635,6 +735,41 @@ def write_report(images: list[CddImage]) -> str:
             )
         lines.append("")
 
+    lines.append("## Operation Fields Versus Source Fields")
+    lines.append("")
+    lines.append("The source-address formula splits byte 5: the high nibble is the source low nibble, while the low nibble stays with the non-source record fields. Treating `entry[0:5] + (entry[5] & 0x0f)` as an operation key makes the close-sibling comparison much cleaner.")
+    lines.append("")
+    lines.append("| pair | exact same entry | same operation key | same-op equal source length | source-only changes | common source deltas |")
+    lines.append("|---|---:|---:|---:|---:|---|")
+    for pair in (("CHS7", "CHS9"), ("AD12", "CD12"), ("AHS9", "CHS9")):
+        left = next((image for image in images if image.name == pair[0]), None)
+        right = next((image for image in images if image.name == pair[1]), None)
+        if not left or not right:
+            continue
+        summary = same_index_operation_summary(left, right)
+        deltas = ", ".join(f"`{delta:+#x}` x{count}" for delta, count in summary["deltas"])
+        lines.append(
+            f"| {pair[0]} vs {pair[1]} | {summary['full_match']} | {summary['op_match']} | {summary['op_same_len']} | "
+            f"{summary['source_only_change']} | {deltas} |"
+        )
+    lines.append("")
+    lines.append("For CHS7 vs CHS9, 380 of 436 records keep the same operation key; all 380 also keep the same source-segment length, and 377 differ only in the source-address bits. That is strong evidence that the directory entry is not opaque: `entry[0:5]` plus byte5 low nibble likely describes the packed operation/output contract, while byte5 high nibble and bytes 6-7 are the source-address field.")
+    lines.append("")
+    lines.append("Example CHS7/CHS9 source-only differences:")
+    lines.append("")
+    lines.append("| entry | source delta | lengths | entries |")
+    lines.append("|---:|---:|---:|---|")
+    example_left = next((image for image in images if image.name == "CHS7"), None)
+    example_right = next((image for image in images if image.name == "CHS9"), None)
+    if example_left is not None and example_right is not None:
+        for row in same_index_operation_summary(example_left, example_right)["examples"]:
+            lines.append(
+                f"| {row['index']} | `{int(row['source_delta']):+#x}` | "
+                f"`0x{int(row['left_len']):x}`/`0x{int(row['right_len']):x}` | "
+                f"`{row['left_entry']}` / `{row['right_entry']}` |"
+            )
+    lines.append("")
+
     lines.append("## Simple Decode/Compression Probes")
     lines.append("")
     lines.append("These are sanity probes, not proof that no transform exists. They rule out the cheap cases: a global one-byte XOR/add/sub mask, obvious text-bearing transform, and standard compression headers at useful rates.")
@@ -642,7 +777,8 @@ def write_report(images: list[CddImage]) -> str:
     ld5m = next((image for image in images if image.name == "LD5M"), None)
     if ld5m and ld5m.streams:
         info = cdd1_directory_info(ld5m.streams[0])
-        body = ld5m.streams[0].data[info["body_start"] :]
+        source_start_rel = cdd1_source_start_rel(ld5m) or info["nominal_body_start"]
+        body = ld5m.streams[0].data[source_start_rel:]
         lines.append("Best printable score over the first `0x20000` bytes of LD5M CDD1 body:")
         lines.append("")
         lines.append("| transform | best key | printable fraction |")
