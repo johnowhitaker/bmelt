@@ -354,3 +354,34 @@ That is useful cleanup and future tooling, but it does not expose decoded servo
 runtime memory. The Windows updater materializes the sealed F0 container. The
 CDD body still looks like something the drive's controller consumes and
 expands internally.
+
+## The CDD Shape Gets Clearer
+
+The next static pass pushed on that CDD question without touching the live
+drive. The important result is that the obvious decoded allocation is not the
+remembered 1.4x relationship. Both the outer descriptor and the CDD stream
+headers name controller/logical space `0x184000..0x1b4000`, exactly `0x30000`
+bytes. The encoded object from `0x7000..0xe8000` is about 4.69 times that, and
+the actual CDD streams/bodies are about 4.4 times that.
+
+So if there is a 1.4x relation hiding somewhere, it is not the top-level
+encoded-vs-decoded CDD size. It may be a smaller work buffer or substream, but
+the visible CDD descriptor is saying something much chunkier.
+
+The structure is getting less mysterious, though. CDD1 begins with 436
+eight-byte directory records, then a `0x400` aux/table window, then the body at
+stream-relative `0x11c0`. The last two bytes of each directory entry form a
+monotonic little-endian pointer-like column. CDD2 reuses the tail of that
+directory: its bytes `0x20..0x1a0` exactly duplicate CDD1 entries 388..435, and
+its inferred body starts at `0x5a0`.
+
+That is not what a plain encrypted blob looks like. Cheap decode probes agree:
+no global XOR/add/sub transform exposed text, no standard zlib payload decoded,
+and the repeated motif runs do not look like AES-ECB blocks. The best static
+path is now to reverse the directory record grammar and use sibling shifted
+matches as anchors, not to brute-force an unknown cipher.
+
+The hybrid path remains attractive too. Once we can hook normal runtime, a few
+bytes from `0x184000`, `0x18481c`, and `0x19191a` would tell us whether that
+logical range contains raw CDD body material, decoded controller code/data, or
+some third representation.

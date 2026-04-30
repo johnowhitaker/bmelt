@@ -124,6 +124,28 @@ not appear to decode the CDD body into controller runtime memory; it
 materializes the sealed F0 container that the drive later hands to the
 controller.
 
+The current CDD static report is:
+
+```sh
+python3 scripts/analyze_liteon_cdd_streams.py \
+  --out references/firmware/extracted/liteon-cdd-stream-static-analysis.md
+```
+
+Key CDD facts:
+
+- DS-8ABSH descriptor and CDD headers both name logical/controller range
+  `0x184000..0x1b4000`, length `0x30000`.
+- The encoded descriptor object `0x7000..0xe8000` is about 4.69x that decoded
+  range; the CDD streams/bodies are about 4.4x. A remembered ~1.4x ratio does
+  not appear at the descriptor level.
+- CDD1 starts with 436 8-byte directory records, then a `0x400` aux/table
+  window, then body bytes at stream-relative `0x11c0`.
+- CDD2 bytes `0x20..0x1a0` duplicate CDD1 entries 388..435, and CDD2's inferred
+  body starts at stream-relative `0x5a0`.
+- Cheap decode probes did not find a global XOR/add/sub mask or standard zlib
+  payload. Treat CDD as a structured controller-specific packed format, not as
+  a single generic encrypted blob.
+
 ## Read/Dump Path
 
 The useful read-only surface is SCSI `READ BUFFER mode=1`.

@@ -1,202 +1,193 @@
 # LiteOn CDD Stream Static Analysis
 
-Offline-only checkpoint. No drive commands were sent.
+Offline only. No drive commands were sent.
 
-## Inputs
+## Images
 
-The sibling comparison set is local in ignored scratch space at
-`work/cdd-siblings/`:
+| image | sha256 | CDD starts | family | trailer auth14 |
+|---|---:|---:|---|---|
+| LD5M | `488f49c7f5d8` | `0x0702c`, `0xd9000` | `U8A60D5C` | `4979c08a77386c1658483bf233fe` |
+| AD12 | `17c8b50717b1` | `0x0702c`, `0xd9000` | `S8AB0D16` | `fe3ed5cbc2002a6eb5ae0dfb5d4a` |
+| AHS9 | `e556dbed1132` | `0x0702c`, `0xd9000` | `S8AB0HS6` | `5084d8596db47bd5da64d01ad053` |
+| CD12 | `c1848cb515c8` | `0x0702c`, `0xd9000` | `S8AB0D16` | `445c5e968b5f1fb80016fa3fdfc5` |
+| CHS7 | `017b0f9c769e` | `0x0702c`, `0xd9000` | `S8AB0HS6` | `f817e214ed8b13729811dfb4c2f6` |
+| CHS9 | `6f2552a0a4b9` | `0x0702c`, `0xd9000` | `S8AB0HS6` | `8061c6bb6c5f698b66425bb17dd7` |
+| XD13 | `ebfb4902d401` | `0x08000` | `\xa8\x00"\x00\x00\x00\x00\x00` | `ffffffffffffffffffffffffffff` |
 
-- `AD12-1.bin`
-- `AHS9-postprocess-plain.bin`
-- `CD12-postprocess-plain.bin`
-- `CHS7-postprocess-plain.bin`
-- `CHS9-postprocess-plain.bin`
-- `XD13-postprocess-plain.bin`
+## CDD1 Grammar
 
-The reusable analyzer is `scripts/analyze_liteon_cdd_streams.py`.
+| image | stream | dir end | entries | aux len | body start | body len | body len mod 12 | top sliding 12-byte motif | motif count | longest 13-stride run |
+|---|---:|---:|---:|---:|---:|---:|---:|---|---:|---:|
+| LD5M | `0x0702c..0xcec18` | `0x07dec` | 436 | `0x400` | `0x11c0` | `0xc6a2c` | 0 | `b8b820171417141a77b83760` | 73 | 15 |
+| AD12 | `0x0702c..0xcfb67` | `0x07dec` | 436 | `0x400` | `0x11c0` | `0xc797b` | 7 | `e8e89fdfdb689fc0b2713f92` | 18 | 0 |
+| AHS9 | `0x0702c..0xcfe20` | `0x07dec` | 436 | `0x400` | `0x11c0` | `0xc7c34` | 8 | `f92111f3fb0711f03e4623e2` | 17 | 0 |
+| CD12 | `0x0702c..0xced1c` | `0x07dec` | 436 | `0x400` | `0x11c0` | `0xc6b30` | 8 | `c6582018c818c810d1706780` | 83 | 16 |
+| CHS7 | `0x0702c..0xcedb4` | `0x07dec` | 436 | `0x400` | `0x11c0` | `0xc6bc8` | 4 | `c07820180c180c0d15706740` | 84 | 15 |
+| CHS9 | `0x0702c..0xcee2a` | `0x07dec` | 436 | `0x400` | `0x11c0` | `0xc6c3e` | 2 | `bef82017dc17dc0c3d706740` | 84 | 15 |
 
-## Main Findings
+## Descriptor Logical Range And Size Ratios
 
-The LD5M `0x11c0` CDD1 body start now has a concrete explanation. For all
-DS-8ABSH-style images, CDD1 is:
+The DS-8ABSH descriptor and CDD headers both point at controller/logical range `0x184000..0x1b4000`, length `0x30000`. That is the only decoded/runtime allocation that is currently explicit in the F0 image.
 
-| region | stream-relative range | notes |
-|---|---:|---|
-| CDD header | `0x0000..0x001f` | starts with `43 44 44 09 10 16`; contains absolute directory end `0x7dec` |
-| directory | `0x0020..0x0dbf` | 436 records, 8 bytes each |
-| aux/table window | `0x0dc0..0x11bf` | 0x400 bytes; low entropy, mostly 16-bit-looking values |
-| CDD1 body | `0x11c0..stream_end` | high entropy body with recurring motifs |
+| image | descriptor | decoded range | CDD1 end | CDD2 end | final boundary |
+|---|---:|---:|---:|---:|---:|
+| LD5M | `0x07000..0x0702c` | `0x184000..0x1b4000` | `0xcec18` | `0xe6401` | `0xe8000` |
+| AD12 | `0x07000..0x0702c` | `0x184000..0x1b4000` | `0xcfb67` | `0xe62ef` | `0xe8000` |
+| AHS9 | `0x07000..0x0702c` | `0x184000..0x1b4000` | `0xcfe20` | `0xe636a` | `0xe8000` |
+| CD12 | `0x07000..0x0702c` | `0x184000..0x1b4000` | `0xced1c` | `0xe6312` | `0xe8000` |
+| CHS7 | `0x07000..0x0702c` | `0x184000..0x1b4000` | `0xcedb4` | `0xe6334` | `0xe8000` |
+| CHS9 | `0x07000..0x0702c` | `0x184000..0x1b4000` | `0xcee2a` | `0xe6331` | `0xe8000` |
 
-CDD2 reuses the tail of CDD1's directory:
+Relative to that explicit `0x30000` decoded range, the obvious encoded sizes are much larger than 1.4x. If the remembered ~1.4 factor is real, it is probably a smaller internal work allocation rather than the descriptor-level decoded CDD range.
 
-- CDD2 bytes `0x20..0x1a0` match CDD1 bytes `0xc40..0xdc0`.
-- That is CDD1 entries 388..435, 48 entries total.
-- With the same 0x400 aux/table window rule, CDD2's inferred body starts at
-  stream-relative `0x5a0`.
+| image | encoded measure | size | ratio to `0x30000` decoded range |
+|---|---|---:|---:|
+| LD5M | descriptor object | `0xe1000` | 4.6875 |
+| LD5M | CDD streams | `0xd4fed` | 4.4374 |
+| LD5M | CDD bodies | `0xd388d` | 4.4070 |
+| LD5M | CDD1 body | `0xc6a2c` | 4.1382 |
+| LD5M | CDD2 inferred body | `0xce61` | 0.2687 |
+| LD5M | directory pointer span | `0xde04` | 0.2891 |
+| LD5M | directory final pointer | `0xe620` | 0.2996 |
+| LD5M | directory entry388 pointer | `0xd91a` | 0.2827 |
+| AD12 | descriptor object | `0xe1000` | 4.6875 |
+| AD12 | CDD streams | `0xd5e2a` | 4.4559 |
+| AD12 | CDD bodies | `0xd46ca` | 4.4255 |
+| AD12 | CDD1 body | `0xc797b` | 4.1582 |
+| AD12 | CDD2 inferred body | `0xcd4f` | 0.2673 |
+| AD12 | directory pointer span | `0xddf2` | 0.2890 |
+| AD12 | directory final pointer | `0xe60f` | 0.2996 |
+| AD12 | directory entry388 pointer | `0xd91a` | 0.2827 |
+| AHS9 | descriptor object | `0xe1000` | 4.6875 |
+| AHS9 | CDD streams | `0xd615e` | 4.4601 |
+| AHS9 | CDD bodies | `0xd49fe` | 4.4297 |
+| AHS9 | CDD1 body | `0xc7c34` | 4.1617 |
+| AHS9 | CDD2 inferred body | `0xcdca` | 0.2680 |
+| AHS9 | directory pointer span | `0xddfa` | 0.2890 |
+| AHS9 | directory final pointer | `0xe616` | 0.2996 |
+| AHS9 | directory entry388 pointer | `0xd91a` | 0.2827 |
+| CD12 | descriptor object | `0xe1000` | 4.6875 |
+| CD12 | CDD streams | `0xd5002` | 4.4375 |
+| CD12 | CDD bodies | `0xd38a2` | 4.4071 |
+| CD12 | CDD1 body | `0xc6b30` | 4.1396 |
+| CD12 | CDD2 inferred body | `0xcd72` | 0.2675 |
+| CD12 | directory pointer span | `0xddf5` | 0.2890 |
+| CD12 | directory final pointer | `0xe611` | 0.2996 |
+| CD12 | directory entry388 pointer | `0xd91a` | 0.2827 |
+| CHS7 | descriptor object | `0xe1000` | 4.6875 |
+| CHS7 | CDD streams | `0xd50bc` | 4.4385 |
+| CHS7 | CDD bodies | `0xd395c` | 4.4080 |
+| CHS7 | CDD1 body | `0xc6bc8` | 4.1403 |
+| CHS7 | CDD2 inferred body | `0xcd94` | 0.2677 |
+| CHS7 | directory pointer span | `0xddf7` | 0.2890 |
+| CHS7 | directory final pointer | `0xe613` | 0.2996 |
+| CHS7 | directory entry388 pointer | `0xd91a` | 0.2827 |
+| CHS9 | descriptor object | `0xe1000` | 4.6875 |
+| CHS9 | CDD streams | `0xd512f` | 4.4390 |
+| CHS9 | CDD bodies | `0xd39cf` | 4.4086 |
+| CHS9 | CDD1 body | `0xc6c3e` | 4.1409 |
+| CHS9 | CDD2 inferred body | `0xcd91` | 0.2677 |
+| CHS9 | directory pointer span | `0xddf6` | 0.2890 |
+| CHS9 | directory final pointer | `0xe613` | 0.2996 |
+| CHS9 | directory entry388 pointer | `0xd91a` | 0.2827 |
 
-The final two bytes of every 8-byte CDD1 directory entry form a
-little-endian, monotonically increasing value. For LD5M:
+## Header Fields
 
-- entry 0: `0x081c`
-- entry 388: `0xd91a`
-- entry 435: `0xe620`
+The CDD stream header is mostly 24-bit big-endian fields. The repeated `0x1b3fff` value is inclusive, while the descriptor stores end+1 as `0x1b4000`.
 
-The same entry 388 value appears across all DS-8ABSH samples. This looks much
-more like a real offset/index column than random encrypted record material.
+| image | stream2 start | directory end | control quad | aux len | final boundary | descriptor | decoded start | decoded inclusive end |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| LD5M | `0xd9000` | `0x07dec` | `0x03081087` | `0x400` | `0xe8000` | `0x07000` | `0x184000` | `0x1b3fff` |
+| AD12 | `0xd9000` | `0x07dec` | `0x03101087` | `0x400` | `0xe8000` | `0x07000` | `0x184000` | `0x1b3fff` |
+| AHS9 | `0xd9000` | `0x07dec` | `0x03080f87` | `0x400` | `0xe8000` | `0x07000` | `0x184000` | `0x1b3fff` |
+| CD12 | `0xd9000` | `0x07dec` | `0x030c0f87` | `0x400` | `0xe8000` | `0x07000` | `0x184000` | `0x1b3fff` |
+| CHS7 | `0xd9000` | `0x07dec` | `0x030a0f87` | `0x400` | `0xe8000` | `0x07000` | `0x184000` | `0x1b3fff` |
+| CHS9 | `0xd9000` | `0x07dec` | `0x03100f87` | `0x400` | `0xe8000` | `0x07000` | `0x184000` | `0x1b3fff` |
 
-CHS7 and CHS9 make the directory structure especially visible. They have only
-three byte-identical full entries, but column-wise they are overwhelmingly
-similar:
+## Directory Pointer Column
 
-| column | identical entries, CHS7 vs CHS9 |
-|---:|---:|
-| 0 | 402 / 436 |
-| 1 | 406 / 436 |
-| 2 | 401 / 436 |
-| 3 | 416 / 436 |
-| 4 | 403 / 436 |
-| 5 | 92 / 436 |
-| 6 | 63 / 436 |
-| 7 | 434 / 436 |
+The final two bytes of each 8-byte CDD1 directory entry form a little-endian monotonically increasing value.
 
-That is another strike against "the directory is encrypted." It is structured
-metadata, with columns 5 and 6 carrying the most version-specific movement.
+| image | first | entry 388 | last | monotonic | common diffs |
+|---|---:|---:|---:|---:|---|
+| LD5M | `0x081c` | `0xd91a` | `0xe620` | True | `0x93` x15, `0x96` x13, `0x8b` x10, `0x86` x10, `0x90` x10 |
+| AD12 | `0x081d` | `0xd91a` | `0xe60f` | True | `0x3` x18, `0x93` x13, `0x9d` x12, `0x9b` x12, `0x88` x11 |
+| AHS9 | `0x081c` | `0xd91a` | `0xe616` | True | `0x3` x16, `0x92` x14, `0x90` x12, `0x93` x11, `0x9b` x10 |
+| CD12 | `0x081c` | `0xd91a` | `0xe611` | True | `0x3` x13, `0x9c` x11, `0x9f` x10, `0x8c` x10, `0x96` x10 |
+| CHS7 | `0x081c` | `0xd91a` | `0xe613` | True | `0x92` x17, `0x3` x12, `0x9c` x11, `0x99` x11, `0x93` x11 |
+| CHS9 | `0x081d` | `0xd91a` | `0xe613` | True | `0x92` x15, `0x3` x13, `0x88` x11, `0x93` x11, `0x9d` x10 |
 
-## Motifs
+## CDD2 Directory Duplicate
 
-The repeated LD5M motif remains real:
+For DS-8ABSH-style images, stream2 bytes `0x20..0x1a0` duplicate stream1 bytes `0xc40..0xdc0`, i.e. CDD1 entries 388..435.
 
-`b8 b8 20 17 14 17 14 1a 77 b8 37 60`
+| image | duplicate length | stream2 inferred body start | stream2 body len |
+|---|---:|---:|---:|
+| LD5M | `0x180` | `0x5a0` | `0xce61` |
+| AD12 | `0x180` | `0x5a0` | `0xcd4f` |
+| AHS9 | `0x180` | `0x5a0` | `0xcdca` |
+| CD12 | `0x180` | `0x5a0` | `0xcd72` |
+| CHS7 | `0x180` | `0x5a0` | `0xcd94` |
+| CHS9 | `0x180` | `0x5a0` | `0xcd91` |
 
-It occurs 73 times in CDD1 and 26 times in CDD2. Other siblings have
-image-specific motifs with the same general "template plus one changing byte"
-behavior. Examples:
+## Exact Shifted Body Matches: CHS7 vs CHS9
 
-| image | top CDD1 sliding 12-byte motif | count |
-|---|---|---:|
-| LD5M | `b8b820171417141a77b83760` | 73 |
-| CD12 | `c6582018c818c810d1706780` | 83 |
-| CHS7 | `c07820180c180c0d15706740` | 84 |
-| CHS9 | `bef82017dc17dc0c3d706740` | 84 |
+| length | left body rel | right body rel | shift | sample |
+|---:|---:|---:|---:|---|
+| 53 | `0x13cec` | `0x13cdc` | `-0x10` | `17dae71ce0b4d63409790b0bc8d5c6ae3b70bdcb1cc4722f` |
+| 53 | `0xc1be` | `0xc1ae` | `-0x10` | `9831c65b013108503e84cbbc9738e31c648fa1b3ca39c5a1` |
+| 52 | `0x25da4` | `0x25d96` | `-0xe` | `0e15719718ee58927eaaab1b9453394a3b951995572616c0` |
+| 51 | `0xb70f` | `0xb6ff` | `-0x10` | `ea41ed651fe2ba06e4620cad713908c726f5c7c16eecf80d` |
+| 50 | `0x146bc` | `0x146ac` | `-0x10` | `0f127a07a85054fbbe102eac23858bbd60e8d34e3d720fce` |
+| 47 | `0x58310` | `0x58350` | `+0x40` | `a8357d41f6310656b637fd3768308d4494c27c348ce10fc9` |
+| 46 | `0x5c92e` | `0x5c96e` | `+0x40` | `371cd9bb177b1b072ba4aae601dbf1f434de3eccd67164a8` |
+| 46 | `0x2a370` | `0x2a362` | `-0xe` | `8c894741912bf55aa392280fc20d4b352e9c997922ec3808` |
 
-The "13th byte" in the long runs is probably not a parity byte over the
-preceding 12-byte motif. The strongest counterexample is that matched sibling
-runs often have the same varying byte sequence while the repeated 12-byte
-motif differs by image. That is more consistent with an instruction/data
-template where one field varies than with a checksum over the motif bytes.
+## Exact Shifted Body Matches: AD12 vs CD12
 
-The original "CDD1 body is exactly 67801 * 12 bytes" observation is true for
-LD5M, but it is not universal. The sibling CDD1 body lengths after `0x11c0`
-are not all divisible by 12, so 12-byte units are not a global stream grammar.
-The motifs are sliding byte patterns, not reliably aligned 12-byte records.
+| length | left body rel | right body rel | shift | sample |
+|---:|---:|---:|---:|---|
 
-## What This Says About "Decrypting" CDD
+## Exact Shifted Body Matches: AHS9 vs CHS9
 
-This does not look like one uniformly encrypted blob:
+| length | left body rel | right body rel | shift | sample |
+|---:|---:|---:|---:|---|
 
-- the CDD header is plain and directly parsed by the 8051;
-- the directory has at least one clear monotonic offset/index column;
-- the 0x400 window has low entropy and 16-bit-table structure;
-- the body has repeated sliding templates and long 13-stride runs.
+## Simple Decode/Compression Probes
 
-It also does not look like plain ARM/8051 code. The body entropy is very high,
-there are no useful strings, and the 8051 loader appears to configure the
-controller-side CDD machinery rather than decode the body locally.
+These are sanity probes, not proof that no transform exists. They rule out the cheap cases: a global one-byte XOR/add/sub mask, obvious text-bearing transform, and standard compression headers at useful rates.
 
-Working model: CDD is a controller-specific packed/program/data format. The
-8051 validates the header, prepares XDATA `0x4a00`/`0x4a10`/`0x4a20` state, and
-hands ranges to the controller. The actual transformation into the runtime
-controller address space is probably controller-side.
+Best printable score over the first `0x20000` bytes of LD5M CDD1 body:
 
-## Updater-Side Materialization
+| transform | best key | printable fraction |
+|---|---:|---:|
+| xor | `0x80` | 0.4039 |
+| add | `0x80` | 0.4039 |
+| sub | `0x80` | 0.4039 |
 
-The unpacked AHS9 Windows updater does materialize a CDD-bearing firmware
-container, but not a separately decoded CDD runtime image. The reproducible
-path is now:
+Common compression magic counts across the full LD5M CDD1 body:
 
-1. find the `COPYF2K8_SIZE=0000000000` metadata/table area;
-2. derive the FileDecrypt AES-ECB key as
-   `key[i] = table[(selector + i * 0x11) & 0xff]`, with selector byte
-   `table[0x58]`;
-3. AES-ECB decrypt the 1 MiB source object at metadata end + `0x1000`;
-4. apply the COPYF2K8 per-1KiB mask.
+| magic | count |
+|---|---:|
+| zlib 78 01 | 5 |
+| zlib 78 5e | 5 |
+| zlib 78 9c | 10 |
+| zlib 78 da | 120 |
+| gzip | 21 |
+| bzip2 | 0 |
+| xz | 0 |
 
-For the AHS9 module this yields:
+Zlib decompression successes from those LD5M CDD1 body magic-looking offsets: `0`.
 
-- encrypted source offset: `0x195dc0`;
-- key table offset: `0x819f2a`;
-- selector offset: `0x819f82`, selector `0x07`;
-- AES-ECB key: `7ee34f39b34d5c9248473a39ec976508`;
-- COPYF2K8 mask offset: `0x194dc0`;
-- postprocessed SHA-256:
-  `e556dbed1132638b58600100fcd2c45d731430edc0cad388455cdbf624322af0`.
+The body also contains sliding/13-stride motif runs and cross-sibling exact matches that are not aligned like AES-ECB blocks. That makes generic block-cipher brute force a poor fit: the useful attack surface is probably the CDD record grammar, not a blind key search.
 
-The COPYF2K8 rule patches one byte per `0x400` block:
+## Interpretation
 
-```text
-table_byte = mask[block_index]
-relative_offset = table_byte & 0x3f
-xor_delta = sum(NEW_FW1[0:4]) & 0xff if block_index % 7 in {0, 2} else table_byte
-image[block_index * 0x400 + relative_offset] ^= xor_delta
-```
+This still does not give us a decoded controller firmware image. It does narrow the static picture:
 
-For AHS9, `sum("AHS9") & 0xff = 0x15`. This reproduces the existing
-`AHS9-postprocess-plain.bin` sample byte-for-byte. The updater module has no
-raw `CDD\t` before this decrypt/postprocess path, and no evidence so far that
-the Windows updater decodes the CDD body into controller runtime form.
+- The updater materializes a sealed F0 container, not decoded CDD runtime bytes.
+- The visible descriptor/header decoded range is `0x30000`, but the encoded CDD object is roughly 4.4x larger; the remembered ~1.4 factor is not present at this level.
+- The directory and aux table are plainly structured, so treating CDD as one encrypted blob is probably the wrong mental model.
+- A blind brute-force decrypt is not realistic without a known algorithm/key/plaintext target. The more promising static route is to reverse the 8-byte directory records, then use sibling shifted matches as anchors.
 
-Detailed report and extractor:
-
-```text
-references/firmware/extracted/liteon-updater-f0-materialization-analysis.md
-scripts/extract_liteon_updater_f0_image.py
-```
-
-## Immediate Next Static Leads
-
-1. Continue parsing the 8-byte directory format. The final little-endian word
-   is the first firm field; the first six bytes likely contain flags, lengths,
-   or encoded source/destination metadata.
-
-2. Use CHS7 vs CHS9 shifted exact runs as alignment anchors. They share exact
-   body runs up to 53 bytes with shifts like `-0x10` and `+0x40`, which is
-   useful for distinguishing code/data movement from per-image encoding.
-
-3. When live work resumes, take a tiny decoded-memory sample through the
-   controller gateway at the descriptor address `0x184000`, plus offsets
-   implied by the directory column such as `0x18481c` and `0x19191a`. A few
-   dozen decoded bytes would tell us whether the runtime image resembles the
-   aux table, body bytes, or a third representation.
-
-4. If the Pico/LED channel becomes reliable, prioritize reading decoded CDD
-   memory over continuing blind XDATA register sweeps. The static CDD format
-   now gives much better target addresses for those reads.
-
-## Live Follow-Up: Currentboot Helper Hook
-
-An initial controller-gateway timing read was attempted from the event-68
-currentboot helper hook. The read primitive itself works: setting `00:0000`,
-discarding one FIFO byte, then timing the next byte returned `0xce`.
-
-The guessed decoded CDD addresses were not useful in that context:
-
-| target | value |
-|---:|---:|
-| controller `0x184000` | `0x00` |
-| controller `0x18481c` | `0x00` |
-| controller `0x184000`, FIFO skip 1 | `0x00` |
-| xdata `0x803c` | `0x00` |
-| xdata `0x803d` | `0x00` |
-
-That suggests the normal decoded CDD/controller base state is not populated at
-the currentboot helper hook, or `0x184000` is not exposed there as a simple
-controller stream. The decoded-memory idea is still plausible, but the next
-attempt should use either a resident/runtime hook after normal boot or a better
-static model of the controller stream selector.
-
-Evidence:
-
-```text
-references/evidence/live/linux-drive1-controller-gateway-timing-cdd-attempt.md
-```
+Best next hybrid test, once live work resumes: sample a few normal-boot decoded/controller bytes around `0x184000`, `0x18481c`, and `0x19191a`. If those bytes resemble CDD directory/body material we get a mapping; if they are a third representation, static decode probably needs that runtime oracle.
