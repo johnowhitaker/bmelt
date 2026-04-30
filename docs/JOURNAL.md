@@ -404,6 +404,25 @@ Those short templates even have an internal length pattern: for `0d6840031a`,
 That looks much more like an opcode/length tuple than random high-entropy
 material.
 
+The operation key also seems to determine the source span. Across the six
+DS-8ABSH samples in the repo, 2,135 unique operation keys appear and none maps
+to more than one source length. One obvious partial length field is:
+
+```text
+length_base = u16le(operation_key[2:4]) >> 4
+```
+
+That is exact for 106 records and close for many more, so bytes 2 and 3 are
+probably part of the length coding even if they are not the whole formula.
+
+The short records expose a more tangible source-unit shape. For the `0x0d`
+operation, the source is four 13-byte units. For the `0x0c` operation, it is
+four 12-byte units. The first byte of each unit behaves like payload: for many
+shared record indices the same four first bytes appear in all six images. The
+rest of the unit is a constant image/profile-specific tail. That makes these
+look less like compressed ordinary code and more like a controller-specific
+codeword or packed-record representation.
+
 Comparing same-index source spans across close siblings backs that up. CHS7
 and CHS9 have directory entries that are usually only one or two bytes apart,
 and some same-index source spans share long prefixes, up to 56 bytes in the

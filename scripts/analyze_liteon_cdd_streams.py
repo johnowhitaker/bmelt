@@ -423,6 +423,88 @@ def same_index_operation_summary(left: CddImage, right: CddImage) -> dict[str, o
     }
 
 
+def operation_length_rows(images: list[CddImage]) -> list[dict[str, object]]:
+    by_key: defaultdict[bytes, list[tuple[str, int, int, int, bytes]]] = defaultdict(list)
+    for image in images:
+        if len(image.streams) < 2 or image.name == "XD13":
+            continue
+        for index, start, end, entry in source_segments(image):
+            by_key[operation_key(entry)].append((image.name, index, end - start, start, entry))
+
+    rows: list[dict[str, object]] = []
+    for key, items in by_key.items():
+        lengths = Counter(item[2] for item in items)
+        rows.append(
+            {
+                "key": key,
+                "count": len(items),
+                "lengths": lengths,
+                "indices": sorted({item[1] for item in items}),
+                "images": sorted({item[0] for item in items}),
+                "examples": items[:4],
+            }
+        )
+    return sorted(rows, key=lambda row: (int(row["count"]), next(iter(row["lengths"]))), reverse=True)
+
+
+def operation_length_base_rows(images: list[CddImage]) -> list[tuple[str, int, int, str, int]]:
+    rows: list[tuple[str, int, int, str, int]] = []
+    for image in images:
+        if len(image.streams) < 2 or image.name == "XD13":
+            continue
+        for index, start, end, entry in source_segments(image):
+            key = operation_key(entry)
+            base = int.from_bytes(key[2:4], "little") >> 4
+            rows.append((image.name, index, end - start, key.hex(), (end - start) - base))
+    return rows
+
+
+def operation_unit_summary(images: list[CddImage], key: bytes) -> dict[str, object]:
+    rows = []
+    units = []
+    units_by_image: defaultdict[str, list[bytes]] = defaultdict(list)
+    for image in images:
+        if len(image.streams) < 2 or image.name == "XD13":
+            continue
+        for index, start, end, entry in source_segments(image):
+            if operation_key(entry) != key:
+                continue
+            data = image.data[start:end]
+            rows.append((image.name, index, start, end, entry, data))
+            unit_len = key[0]
+            if unit_len and len(data) % unit_len == 0:
+                for offset in range(0, len(data), unit_len):
+                    unit = data[offset : offset + unit_len]
+                    units.append(unit)
+                    units_by_image[image.name].append(unit)
+
+    constant_tail = b""
+    if units:
+        tail = units[0][1:]
+        if all(unit[1:] == tail for unit in units):
+            constant_tail = tail
+    image_rows = []
+    for image_name, image_units in units_by_image.items():
+        tail = image_units[0][1:] if image_units else b""
+        image_rows.append(
+            {
+                "image": image_name,
+                "unit_count": len(image_units),
+                "constant_tail": tail if image_units and all(unit[1:] == tail for unit in image_units) else b"",
+                "first_bytes": Counter(unit[0] for unit in image_units).most_common(8),
+            }
+        )
+    return {
+        "key": key,
+        "rows": rows,
+        "unit_count": len(units),
+        "unit_len": key[0],
+        "constant_tail": constant_tail,
+        "image_rows": sorted(image_rows, key=lambda row: str(row["image"])),
+        "first_bytes": Counter(unit[0] for unit in units).most_common(8) if units else [],
+    }
+
+
 def transformed_printable_score(data: bytes, transform: str, key: int) -> float:
     if transform == "xor":
         transformed = ((byte ^ key) for byte in data)
@@ -768,6 +850,100 @@ def write_report(images: list[CddImage]) -> str:
                 f"`0x{int(row['left_len']):x}`/`0x{int(row['right_len']):x}` | "
                 f"`{row['left_entry']}` / `{row['right_entry']}` |"
             )
+    lines.append("")
+
+    lines.append("## Operation Key Source-Length Invariant")
+    lines.append("")
+    operation_rows = operation_length_rows(images)
+    inconsistent = [
+        row for row in operation_rows if len(row["lengths"]) > 1  # type: ignore[arg-type]
+    ]
+    lines.append(
+        f"Across these DS-8ABSH samples, `{len(operation_rows)}` unique operation keys appear. "
+        f"None map to more than one source-span length (`{len(inconsistent)}` inconsistent keys). "
+        "That makes the operation key a deterministic source-length descriptor, even though the full field grammar is not solved."
+    )
+    lines.append("")
+    lines.append("| operation key | count | source length | indices | images |")
+    lines.append("|---|---:|---:|---|---|")
+    for row in operation_rows[:12]:
+        lengths = row["lengths"]  # type: ignore[assignment]
+        length_text = ", ".join(f"`0x{length:x}` x{count}" for length, count in lengths.most_common())  # type: ignore[attr-defined]
+        indices = row["indices"]  # type: ignore[assignment]
+        index_text = ", ".join(str(index) for index in indices[:10])  # type: ignore[index]
+        if len(indices) > 10:  # type: ignore[arg-type]
+            index_text += ", ..."
+        lines.append(
+            f"| `{row['key'].hex()}` | {row['count']} | {length_text} | "
+            f"{index_text} | {', '.join(row['images'])} |"  # type: ignore[arg-type]
+        )
+    lines.append("")
+
+    base_rows = operation_length_base_rows(images)
+    residuals = Counter(residual for _, _, _, _, residual in base_rows)
+    exact_count = residuals[0]
+    lines.append("A partial length field also falls out of the operation key:")
+    lines.append("")
+    lines.append("```text")
+    lines.append("length_base = u16le(operation_key[2:4]) >> 4")
+    lines.append("```")
+    lines.append("")
+    lines.append(
+        f"This equals the source-span length for `{exact_count}` records. "
+        "For the rest it is a length-ish base with a structured residual, so bytes 2..3 are probably part of the length coding rather than the complete source-length field."
+    )
+    lines.append("")
+    lines.append("| residual (`source_len - length_base`) | count |")
+    lines.append("|---:|---:|")
+    for residual, count in residuals.most_common(12):
+        lines.append(f"| `{residual:+#x}` | {count} |")
+    lines.append("")
+
+    lines.append("## Short Operation Source Units")
+    lines.append("")
+    lines.append("The two high-frequency short operations expose a small regular source format. In both cases byte 0 of the operation key is the source unit length, byte 1 is `8 * unit_len`, byte 4 is `2 * unit_len`, and each record source span is `4 * unit_len`.")
+    lines.append("")
+    lines.append("| operation key | image | records | unit len | units | constant unit tail | first-byte samples |")
+    lines.append("|---|---|---:|---:|---:|---|---|")
+    for key in (bytes.fromhex("0d6840031a00"), bytes.fromhex("0c6000031800")):
+        summary = operation_unit_summary(images, key)
+        rows = summary["rows"]  # type: ignore[assignment]
+        record_count_by_image = Counter(row[0] for row in rows)  # type: ignore[index]
+        for image_row in summary["image_rows"]:  # type: ignore[index]
+            image_name = str(image_row["image"])
+            first_bytes = ", ".join(f"`0x{value:02x}` x{count}" for value, count in image_row["first_bytes"])  # type: ignore[index]
+            tail = image_row["constant_tail"]  # type: ignore[assignment]
+            tail_text = f"`{tail.hex()}`" if tail else ""
+            lines.append(
+                f"| `{key.hex()}` | {image_name} | {record_count_by_image[image_name]} | "
+                f"`0x{int(summary['unit_len']):x}` | {image_row['unit_count']} | {tail_text} | {first_bytes} |"
+            )
+    lines.append("")
+    lines.append("At shared record indices, the first byte of each short source unit is often identical across images even when the operation key and constant tail differ. That makes the unit shape look like one payload byte plus an image/profile-specific codeword tail.")
+    lines.append("")
+    lines.append("| entry | first-byte sequence | images |")
+    lines.append("|---:|---|---|")
+    short_sequences: defaultdict[int, defaultdict[tuple[int, ...], list[str]]] = defaultdict(lambda: defaultdict(list))
+    for image in images:
+        if len(image.streams) < 2 or image.name == "XD13":
+            continue
+        for index, start, end, entry in source_segments(image):
+            key = operation_key(entry)
+            if key not in (bytes.fromhex("0d6840031a00"), bytes.fromhex("0c6000031800")):
+                continue
+            unit_len = key[0]
+            data = image.data[start:end]
+            if unit_len and len(data) % unit_len == 0:
+                first_sequence = tuple(data[offset] for offset in range(0, len(data), unit_len))
+                short_sequences[index][first_sequence].append(image.name)
+    sequence_rows = []
+    for index, groups in short_sequences.items():
+        for sequence, image_names in groups.items():
+            if len(image_names) >= 4:
+                sequence_rows.append((len(image_names), index, sequence, sorted(image_names)))
+    for _, index, sequence, image_names in sorted(sequence_rows, reverse=True)[:10]:
+        sequence_text = " ".join(f"{byte:02x}" for byte in sequence)
+        lines.append(f"| {index} | `{sequence_text}` | {', '.join(image_names)} |")
     lines.append("")
 
     lines.append("## Simple Decode/Compression Probes")

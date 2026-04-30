@@ -152,10 +152,18 @@ Key CDD facts:
   low nibble groups with bytes 0..4 as a non-source operation key. In CHS7 vs
   CHS9, 380/436 same-index records keep that operation key and all 380 keep the
   same source-span length; 377 differ only in source-address bits.
+- Across the current six DS-8ABSH samples, 2,135 unique operation keys appear
+  and none maps to more than one source-span length. A partial length field is
+  `u16le(operation_key[2:4]) >> 4`, exact for 106 records and close for many
+  more.
 - Repeated templates `0d6840031a` and `0c60000318` point at short
   `0x34`/`0x30` byte spans, matching the visible motif islands. In these
   records, byte 0 behaves like `N`, byte 1 is `8*N`, byte 4 is `2*N`, and the
   source span is `4*N`.
+- Those short operations have a source-unit format: one payload-looking first
+  byte followed by an image/profile-specific constant tail. Shared indices
+  often keep the same four first bytes across all six images even when the unit
+  tail and operation key differ.
 - CHS7 vs CHS9 same-index source-span comparison has common prefixes up to
   56 bytes, so record indices appear stable across close sibling revisions.
 - Cheap decode probes did not find a global XOR/add/sub mask or standard zlib

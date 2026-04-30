@@ -236,6 +236,76 @@ Example CHS7/CHS9 source-only differences:
 | 18 | `+0xe` | `0x6a0`/`0x6a0` | `5e810d5f2c745312` / `5e810d5f2c945212` |
 | 20 | `+0x10` | `0x734`/`0x734` | `cb01d083b4e25c13` / `cb01d083b4e25b13` |
 
+## Operation Key Source-Length Invariant
+
+Across these DS-8ABSH samples, `2135` unique operation keys appear. None map to more than one source-span length (`0` inconsistent keys). That makes the operation key a deterministic source-length descriptor, even though the full field grammar is not solved.
+
+| operation key | count | source length | indices | images |
+|---|---:|---:|---|---|
+| `0d6840031a00` | 70 | `0x34` x70 | 15, 51, 109, 110, 111, 206, 207, 279, 312, 313, ... | CD12, CHS7, CHS9, LD5M |
+| `0c6000031800` | 34 | `0x30` x34 | 109, 110, 111, 279, 312, 313, 314, 315, 327, 337, ... | AD12, AHS9 |
+| `5f884219a000` | 4 | `0x165` x4 | 401 | AD12, AHS9, CHS7, CHS9 |
+| `72014b6a0204` | 3 | `0x67c` x3 | 357 | CD12, CHS7, CHS9 |
+| `6629cb56de02` | 3 | `0x595` x3 | 434 | AHS9, CHS7, CHS9 |
+| `86784e616203` | 3 | `0x58b` x3 | 137 | CD12, CHS7, CHS9 |
+| `fc4188493802` | 3 | `0x546` x3 | 404 | CD12, CHS7, CHS9 |
+| `50b14d3de001` | 3 | `0x4eb` x3 | 392 | CD12, CHS7, CHS9 |
+| `559841137c00` | 3 | `0x113` x3 | 425 | AD12, AHS9, CD12 |
+| `e002dbb69e05` | 2 | `0xbea` x2 | 76 | CHS7, CHS9 |
+| `cf6a57b5b205` | 2 | `0xb6a` x2 | 294 | CHS7, CHS9 |
+| `232317c51404` | 2 | `0xb25` x2 | 3 | CHS7, CHS9 |
+
+A partial length field also falls out of the operation key:
+
+```text
+length_base = u16le(operation_key[2:4]) >> 4
+```
+
+This equals the source-span length for `106` records. For the rest it is a length-ish base with a structured residual, so bytes 2..3 are probably part of the length coding rather than the complete source-length field.
+
+| residual (`source_len - length_base`) | count |
+|---:|---:|
+| `+0x0` | 106 |
+| `+0x6` | 13 |
+| `+0xad` | 12 |
+| `+0x15` | 10 |
+| `-0xc9` | 10 |
+| `+0x1a` | 9 |
+| `-0x67` | 9 |
+| `-0x5a` | 9 |
+| `-0x71` | 9 |
+| `-0x89` | 9 |
+| `+0x1d` | 8 |
+| `-0x4` | 8 |
+
+## Short Operation Source Units
+
+The two high-frequency short operations expose a small regular source format. In both cases byte 0 of the operation key is the source unit length, byte 1 is `8 * unit_len`, byte 4 is `2 * unit_len`, and each record source span is `4 * unit_len`.
+
+| operation key | image | records | unit len | units | constant unit tail | first-byte samples |
+|---|---|---:|---:|---:|---|---|
+| `0d6840031a00` | CD12 | 18 | `0xd` | 72 | `c6582018c818c810d1706780` | `0x7e` x2, `0x67` x2, `0x4c` x2, `0x55` x2, `0x80` x1, `0x99` x1, `0xb2` x1, `0xab` x1 |
+| `0d6840031a00` | CHS7 | 18 | `0xd` | 72 | `c07820180c180c0d15706740` | `0x7e` x2, `0x67` x2, `0x4c` x2, `0x55` x2, `0xb7` x1, `0xae` x1, `0x85` x1, `0x9c` x1 |
+| `0d6840031a00` | CHS9 | 18 | `0xd` | 72 | `bef82017dc17dc0c3d706740` | `0x7e` x2, `0x67` x2, `0x4c` x2, `0x55` x2, `0xb7` x1, `0xae` x1, `0x85` x1, `0x9c` x1 |
+| `0d6840031a00` | LD5M | 16 | `0xd` | 64 | `b8b820171417141a77b83760` | `0x94` x2, `0x8d` x2, `0xa6` x2, `0xbf` x2, `0x80` x1, `0x99` x1, `0xb2` x1, `0xab` x1 |
+| `0c6000031800` | AD12 | 18 | `0xc` | 72 | `cf6b016b016b00c8d60680` | `0x94` x2, `0x8d` x2, `0xa6` x2, `0xbf` x2, `0x80` x1, `0x99` x1, `0xb2` x1, `0xab` x1 |
+| `0c6000031800` | AHS9 | 16 | `0xc` | 64 | `d33ac13ac13ac0c9560668` | `0x80` x1, `0x99` x1, `0xb2` x1, `0xab` x1, `0x2c` x1, `0x35` x1, `0x1e` x1, `0x07` x1 |
+
+At shared record indices, the first byte of each short source unit is often identical across images even when the operation key and constant tail differ. That makes the unit shape look like one payload byte plus an image/profile-specific codeword tail.
+
+| entry | first-byte sequence | images |
+|---:|---|---|
+| 423 | `28 31 1a 03` | AD12, AHS9, CD12, CHS7, CHS9, LD5M |
+| 422 | `4c 55 7e 67` | AD12, AHS9, CD12, CHS7, CHS9, LD5M |
+| 421 | `e0 f9 d2 cb` | AD12, AHS9, CD12, CHS7, CHS9, LD5M |
+| 399 | `a6 bf 94 8d` | AD12, AHS9, CD12, CHS7, CHS9, LD5M |
+| 398 | `c2 db f0 e9` | AD12, AHS9, CD12, CHS7, CHS9, LD5M |
+| 397 | `6e 77 5c 45` | AD12, AHS9, CD12, CHS7, CHS9, LD5M |
+| 327 | `b9 a0 8b 92` | AD12, AHS9, CD12, CHS7, CHS9, LD5M |
+| 315 | `bb a2 89 90` | AD12, AHS9, CD12, CHS7, CHS9, LD5M |
+| 314 | `df c6 ed f4` | AD12, AHS9, CD12, CHS7, CHS9, LD5M |
+| 313 | `73 6a 41 58` | AD12, AHS9, CD12, CHS7, CHS9, LD5M |
+
 ## Simple Decode/Compression Probes
 
 These are sanity probes, not proof that no transform exists. They rule out the cheap cases: a global one-byte XOR/add/sub mask, obvious text-bearing transform, and standard compression headers at useful rates.
