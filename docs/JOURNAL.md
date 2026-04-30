@@ -324,6 +324,13 @@ the stock `2016/10/18` timestamp while direct F0 readback showed our temporary
 some normal host-visible state is coming from a different runtime/controller
 source rather than these obvious F0 copies.
 
+Then we tried the matching low-prefix currentboot identity record. This one did
+matter. Changing the lower `0D5C2011/04/28` string to `0D5C3011/04/28`, cutting
+power, and entering currentboot made EXTRAINQ report the patched `3011` date.
+That gives us a sharper mental model: normal LD5M identity is not coming from
+the high profile copy, but the currentboot personality really does consume the
+lower prefix record.
+
 ## Back To The Updaters
 
 After the slow bit-channel work, we took a static detour back into the Windows

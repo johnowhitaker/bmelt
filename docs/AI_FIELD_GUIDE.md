@@ -532,6 +532,12 @@ patched byte persisted, but live EXTRAINQ still reported canonical
 `2016/10/18 14:18`. So `0xd8fd0..0xd8fff` is writable persistent data, but not
 the normal runtime EXTRAINQ source.
 
+The lower-prefix `0D5C` identity copy is different. Patching `0x4476` from
+`2011` to `3011` with `--auto-helper-range`, cold-booting, and then running only
+event 1 made currentboot EXTRAINQ report `0D5C3011/04/28 09:20`. Auto-recovery
+returned to `LD5M`. This is a useful currentboot-visible lower-prefix data
+hook, even though the normal LD5M identity stayed canonical.
+
 Second pass, after the directory source-address model, also returned zeros:
 
 | target | value |

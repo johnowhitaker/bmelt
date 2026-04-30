@@ -77,6 +77,13 @@ F0 across cold boot while live EXTRAINQ stayed canonical. See:
 references/evidence/live/linux-drive1-servo-coldboot-persistence-map.md
 ```
 
+Follow-up: patching the lower `0D5C2011` identity record at `0x4476` to `3011`
+did affect currentboot EXTRAINQ after power loss and event 1. The restore write
+completed, but the Linux host became unreachable over Tailscale before the final
+restore-verification JSON could be re-read from the Mac. When reachable, check
+`runs/servo-currentboot-date/read-currentboot-extrainq-after-restore/` and
+confirm currentboot EXTRAINQ is back to `2011/04/28`.
+
 ## Practical Write Method
 
 The helper-bypass write method patches the mutable `ef130045` profile-tail

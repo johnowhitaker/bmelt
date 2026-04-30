@@ -104,6 +104,67 @@ The restore candidate returned the byte to stock:
 F0 text: LD5M2016/10/18
 ```
 
+## Test 3: Lower 0D5C Identity Copy Is Live In Currentboot
+
+The F0 image also contains a lower-prefix identity record:
+
+```text
+0x4452: ... PLDS    DVD+-RW DS-8ABSH0D5C2011/04/28 09:20 ...
+0x4476: 0x32
+```
+
+Candidate:
+
+```text
+references/firmware/extracted/helper-bypass-candidates/
+  currentboot-date-3011-servo/
+    liteon-full-currentboot-ld5m-helper-bypass-currentboot-date-3011-servo-candidate.json
+```
+
+Patch:
+
+```text
+0x4476: 32 -> 33
+text: 0D5C2011/04/28 -> 0D5C3011/04/28
+```
+
+Because this is below `0x7000`, the helper-bypass builder used
+`--auto-helper-range`, setting the helper erase/program start to sector/page
+`0x04` / `0x40`. The write persisted:
+
+```text
+post_decrypted_sha256: b64f47cef9adaef96ef4fb84a6c964138103be0fb301b3de4cc1b0022fa865d4
+post_matches_expected_target: true
+```
+
+After a servo cold power cycle, a deliberately short event-1 run entered
+currentboot and captured identity before auto-recovery. Currentboot EXTRAINQ
+reported the patched timestamp:
+
+```text
+identity_before:          LD5M  2016/10/18 14:18
+identity_after_sequence:  0D5C  3011/04/28 09:20
+identity_after_recovery:  LD5M  2016/10/18 14:18
+```
+
+Interpretation: unlike the high identity/profile copy at `0xd8fd0`, the lower
+prefix identity record at `0x4452..` is a live source for the currentboot
+personality. This is the first host-visible proof that a helper-bypass lower
+prefix edit can change currentboot behavior after true power loss.
+
+The stock restore candidate then completed and its post-F0 hash matched stock
+for the tested `0xe0000` window:
+
+```text
+post_decrypted_sha256: 2ef34753cc59e4aca7cae78f56a0baea063c2d7e99831e38bae7926201eb8592
+post_matches_expected_target: true
+```
+
+A final event-1 restore-verification run completed, but the Linux laptop became
+unreachable over Tailscale before the JSON could be re-read from this Mac. Check
+`runs/servo-currentboot-date/read-currentboot-extrainq-after-restore/` on the
+Linux host when it is reachable again.
+
 ## Operational Note
 
 For verification dumps in this phase, a fresh binary EXTRAINQ capture was more
@@ -116,4 +177,3 @@ sg_raw -b --request=176 /dev/sg0 12 00 00 00 F0 40 00 00 00 00 00 00 > live-extr
 ```
 
 Then use `--extrainq live-extrainq.bin` for the relevant dump.
-
