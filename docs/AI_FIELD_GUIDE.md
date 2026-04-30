@@ -592,6 +592,29 @@ The next normal-runtime foothold experiment should be a state-carryover test
 or a better handler-source localization pass, not another blind patch to the
 visible F0 prefix handlers.
 
+Follow-up live timing hooks made that warning stronger. Two broad hooks were
+installed and cold-booted:
+
+```text
+0x6206 response-copy helper: 90 80 3e -> LJMP delay cave
+0x542b packet-intake helper: 90 81 79 -> LJMP delay cave
+```
+
+Both patches persisted in F0 and both were negative for normal LD5M timing
+across `INQUIRY`, `EXTRAINQ`, `MODE SENSE(10)`, `GET CONFIGURATION`,
+`GET EVENT STATUS`, and `MECHANISM STATUS`. The `0x6206` hook did, however,
+slow the next currentboot update run, proving the hook was live in currentboot
+but not in ordinary normal-mode response handling.
+
+The stock restore then rewrote `0x1ea0`, `0x542b`, `0x6206`, and the `0x6ee3`
+cave, and a live-key F0 dump of `0x1000..0x6fff` matched stock with zero diffs.
+
+Evidence:
+
+```text
+references/evidence/live/normal-mode-hook-tests/normal-mode-hook-tests-summary.md
+```
+
 Second pass, after the directory source-address model, also returned zeros:
 
 | target | value |

@@ -126,6 +126,25 @@ live edits to the visible F0 identity/profile copy persisted across a true
 cold boot but did not alter normal EXTRAINQ. This is a source-localization clue,
 not a solved resident hook.
 
+Follow-up timing hooks tested the broad visible command path directly:
+
+```text
+0x6206 response-copy helper -> persisted, no normal-mode timing effect
+0x542b packet-intake helper -> persisted, no normal-mode timing effect
+```
+
+The `0x6206` hook did slow the next currentboot update run, proving the hook was
+real and live in currentboot. The negative is specific to normal LD5M command
+handling. After the tests, stock restore rewrote `0x1ea0`, `0x542b`, `0x6206`,
+and `0x6ee3..`, and a live-key F0 dump of `0x1000..0x6fff` had zero diffs
+against stock.
+
+Evidence:
+
+```text
+references/evidence/live/normal-mode-hook-tests/normal-mode-hook-tests-summary.md
+```
+
 Blank-currentboot details:
 
 - standard INQUIRY and EXTRAINQ keep PLDS/model but return blank/garbage
@@ -324,7 +343,9 @@ hook for currentboot reads or restore stock bytes with the
 `currentboot-response-hook-restore-4fc9-cave` candidate before more LED probes.
 
 For the normal-runtime foothold, do not spend the next live run on another
-blind visible-F0 prefix hook. Better next tests:
+blind visible-F0 prefix hook. That class now includes the command-specific
+`0x4ec6`/`0x5c72` hooks and the broader `0x6206`/`0x542b` hooks. Better next
+tests:
 
 1. a currentboot-to-LD5M state-carryover marker test, if the right XDATA/write
    response hook is installed or can be safely reinstalled;

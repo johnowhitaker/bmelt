@@ -286,6 +286,21 @@ flash offsets directly. This narrows the next problem: find where normal LD5M
 materializes those templates, or find a state path that survives from
 currentboot into normal runtime.
 
+The next live test made that split sharper. Instead of patching individual
+command handlers again, we patched two broad visible helpers: the response-copy
+routine at `0x6206` and the packet-intake routine at `0x542b`. If the normal
+commands were quietly using the visible currentboot command path, one of those
+hooks should have made several commands slow down.
+
+Both hooks persisted. Neither changed normal LD5M timing. But the `0x6206`
+hook did slow the next currentboot write run, which is exactly the kind of
+negative result that tells a clean story: the visible path is real and live in
+currentboot, while ordinary normal-mode responses are coming from somewhere
+else.
+
+Afterward we restored the low-prefix hooks and cave to stock and verified
+`0x1000..0x6fff` byte-for-byte. The drive is back in normal `LD5M`.
+
 ## The Response Hook Opens Up
 
 The front-panel work also made the old readout pain impossible to ignore. The
