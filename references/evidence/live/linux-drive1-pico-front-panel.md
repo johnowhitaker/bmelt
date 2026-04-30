@@ -93,7 +93,10 @@ Hazard notes:
   GP26 stayed high through the subsequent recovery attempt (`5379/5379`
   recovery samples high, average about `1.98 V`) and the USB/optical LUN dropped
   with descriptor timeouts. The paired `0x4748=0x00` probe completed and
-  recovered normally.
+  recovered normally. Static refs show stock writes of `0x88`/`0x98` and
+  bit-7 kick/wait behavior around command bytes `0x474d/0x474e`, so future
+  tests should isolate non-stock bits and restore the original byte before
+  returning.
 
 Current interpretation: GP26 is definitely usable as an observed front-panel
 LED line. XDATA `0x4748` is now the best lead for the latch or a nearby

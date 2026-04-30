@@ -267,9 +267,18 @@ def hold_movx_byte_payload(addr: int, value: int, hold_count: int) -> str:
     )
 
 
-def hold_movx_byte_op_payload(addr: int, op: str, value: int, hold_count: int) -> str:
+def hold_movx_byte_op_payload(
+    addr: int,
+    op: str,
+    value: int,
+    hold_count: int,
+    *,
+    restore_original: bool,
+) -> str:
     asm = Asm8051()
     asm.emit(0x90, (addr >> 8) & 0xFF, addr & 0xFF)  # MOV DPTR,#addr
+    if restore_original:
+        asm.emit(0xE0, 0xFC)  # MOVX A,@DPTR; MOV R4,A
     asm.emit(0x7F, hold_count)  # MOV R7,#outer
     asm.label("outer")
     asm.emit(0x7E, 0xFF)  # MOV R6,#0xff
@@ -284,6 +293,8 @@ def hold_movx_byte_op_payload(addr: int, op: str, value: int, hold_count: int) -
     asm.djnz_r(5, "inner")
     asm.djnz_r(6, "middle")
     asm.djnz_r(7, "outer")
+    if restore_original:
+        asm.emit(0xEC, 0xF0)  # MOV A,R4; MOVX @DPTR,A
     asm.emit(0x02, 0x32, 0xC4)  # LJMP success path.
     return asm.finish()
 
@@ -418,6 +429,7 @@ def build_report(args: argparse.Namespace, patches: list[str], outputs: dict[str
         "hold_count",
         "length",
         "syndrome_bit",
+        "restore_original",
     ):
         if hasattr(args, key):
             mode_args[key] = getattr(args, key)
@@ -530,6 +542,11 @@ def parse_args() -> argparse.Namespace:
     hold_movx_op.add_argument("--value", type=parse_byte, required=True)
     hold_movx_op.add_argument("--payload-offset", type=parse_u16, default=0x0600)
     hold_movx_op.add_argument("--hold-count", type=parse_byte, default=0x40)
+    hold_movx_op.add_argument(
+        "--restore-original",
+        action="store_true",
+        help="save the original XDATA byte before the loop and restore it before returning",
+    )
 
     hold_bit = sub.add_parser(
         "hold-direct-bit",
@@ -665,7 +682,13 @@ def main() -> int:
             hex_patch(HOOK_PLAIN_OFFSET, ljmp(helper_code_addr(args.payload_offset))),
             hex_patch(
                 args.payload_offset,
-                hold_movx_byte_op_payload(args.addr, args.op, args.value, args.hold_count),
+                hold_movx_byte_op_payload(
+                    args.addr,
+                    args.op,
+                    args.value,
+                    args.hold_count,
+                    restore_original=args.restore_original,
+                ),
             ),
         ]
     elif args.mode == "hold-direct-bit":

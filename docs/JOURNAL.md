@@ -268,6 +268,8 @@ return, but then GP26 stayed high for the whole attempted recovery and the USB
 side timed out until a physical replug. That is the first strong front-panel LED
 path lead: not yet a communication channel, because whole-byte `0xff` is too
 destructive, but very likely either the LED latch itself or a nearby
-front-panel/control register. The next version of this experiment should be
+front-panel/control register. Static refs point toward the latter: stock code
+writes `0x88`/`0x98` to `0x4748` and treats bit 7 as a kick/wait bit beside
+command bytes at `0x474d/0x474e`. The next version of this experiment should be
 bit-level and should preserve/restore the original `0x4748` value instead of
 hammering all bits high.

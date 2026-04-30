@@ -316,7 +316,8 @@ changed in the held window:
 ```sh
 python3 scripts/build_liteon_helper_codeexec_candidate.py \
   --name led-4748-or01-count04 \
-  hold-movx-byte-op --addr 0x4748 --op or --value 0x01 --payload-offset 0x0600 --hold-count 0x04
+  hold-movx-byte-op --addr 0x4748 --op or --value 0x01 \
+  --payload-offset 0x0600 --hold-count 0x04 --restore-original
 ```
 
 Validated windows:
@@ -336,14 +337,17 @@ host reboot; it needed a physical drive/bridge power cycle followed by the
 normal currentboot recovery sequence. This matches the standard 8051 `WR`
 strobe role and should be treated as a bus/control pin.
 
-The first strong LED-path candidate is XDATA `0x4748`. A held-window
+The first strong LED-path candidate is XDATA `0x4748`. Static references make
+it look like a small controller command/control register rather than a plain
+GPIO latch: stock code writes `0x88`/`0x98`, clears bit 7, and later sets bit 7
+while related command bytes live at `0x474d/0x474e`. A held-window
 `0x4748=0x00` probe completed and recovered normally. The paired
 `0x4748=0xff` probe completed event 68, but GP26 stayed high through the
 following recovery attempt (`5379/5379` recovery samples high, about `1.98 V`)
 and the USB/optical LUN then disappeared with descriptor timeouts. This is a
-real clue, not a safe output primitive yet: next tests should isolate bits of
-`0x4748`, restore the original value instead of writing whole-byte `0xff`, and
-stop on any optical-LUN loss.
+real clue, not a safe output primitive yet: next tests should isolate non-stock
+bits of `0x4748` with `--restore-original` instead of writing whole-byte
+`0xff`, and stop on any optical-LUN loss.
 
 For input mapping, the efficient path is a parity/syndrome scan rather than
 one-bit-at-a-time reads:
