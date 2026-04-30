@@ -481,9 +481,10 @@ One more split made the table more useful. Its first 128 words behave
 differently from the rest: they carry all of the high/mid decoded paragraph
 targets and stable repeated runs like `0x0d01` repeated 16 times at table
 indices 16..31. The tail after that is mostly low decoded offsets and has no
-adjacent repeats. I do not want to over-name it yet, but the front now looks
-vector/entrypoint/control-table-like, while the tail looks like a different
-offset list.
+adjacent repeats. The front points into later candidate decoded records, while
+the tail points into the early decoded records. I do not want to over-name it
+yet, but the front now looks vector/entrypoint/control-table-like, while the
+tail looks like a different offset list.
 
 I turned that into a JSON record map alongside the markdown report. It is not a
 decoded firmware image, but it is a practical skeleton: each record now has a

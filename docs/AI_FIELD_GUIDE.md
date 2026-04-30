@@ -167,10 +167,11 @@ Key CDD facts:
 - That CDD1 table has two visible regions. The first 128 words (`0x100` bytes)
   hold all high decoded paragraph targets plus stable repeated runs such as
   `0x0d01` x16 at table indices 16..31 and `0x1503`/`0x1490`/`0x1502` x4 runs.
-  The remaining words are almost entirely low decoded offsets and have no
-  adjacent repeats. Treat the front as vector/entrypoint/control-table-like,
-  and the tail as a different offset-list-like structure until proven
-  otherwise.
+  These front words target later candidate decoded records. The remaining words
+  are almost entirely low decoded offsets, have no adjacent repeats, and target
+  early candidate decoded records. Treat the front as
+  vector/entrypoint/control-table-like, and the tail as a different
+  offset-list-like structure until proven otherwise.
 - Across the current six DS-8ABSH samples, 2,135 unique operation keys appear
   and none maps to more than one source-span length. A partial length field is
   `u16le(operation_key[2:4]) >> 4`, exact for 106 records and close for many

@@ -229,6 +229,13 @@ def table_word_band(word: int) -> str:
     return "high"
 
 
+def table_target_record_range(targets: list[dict[str, int | None]]) -> str:
+    records = [int(target["record_index"]) for target in targets if target["record_index"] is not None]
+    if not records:
+        return ""
+    return f"{min(records)}..{max(records)}"
+
+
 def ratio_rows(image: CddImage) -> list[tuple[str, int, float]]:
     descriptor = parse_outer_descriptor(image)
     if descriptor is None:
@@ -999,16 +1006,17 @@ def write_report(images: list[CddImage]) -> str:
             f"low {bands['low']}, mid {bands['mid']}, high {bands['high']} | {common} |"
         )
     lines.append("")
-    lines.append("Splitting that table at word index 128 exposes two different-looking regions. The front `0x100` bytes carry the high/mid paragraph targets and the repeated `0x0d01`/`0x14e0`/`0x1503`/`0x1490`/`0x1502` runs. The remaining words are mostly low decoded offsets with no adjacent repeats. That makes the front look more like a vector/entrypoint/control table, while the tail looks more like a secondary offset list.")
+    lines.append("Splitting that table at word index 128 exposes two different-looking regions. The front `0x100` bytes carry the high/mid paragraph targets and the repeated `0x0d01`/`0x14e0`/`0x1503`/`0x1490`/`0x1502` runs, and those front words target later candidate decoded records. The remaining words are mostly low decoded offsets with no adjacent repeats, and they target the early decoded records. That makes the front look more like a vector/entrypoint/control table, while the tail looks more like a secondary offset list.")
     lines.append("")
-    lines.append("| image | front 128 words | remaining words | long repeated runs in front table |")
-    lines.append("|---|---|---|---|")
+    lines.append("| image | front 128 words | front target records | remaining words | tail target records | long repeated runs in front table |")
+    lines.append("|---|---|---:|---|---:|---|")
     for image in images:
         if len(image.streams) < 2 or image.name == "XD13":
             continue
         words = cdd1_table_words(image)
         front = words[:128]
         tail = words[128:]
+        targets = cdd1_table_targets(image)
         front_bands = Counter(table_word_band(word) for word in front)
         tail_bands = Counter(table_word_band(word) for word in tail)
         run_text = ", ".join(
@@ -1017,7 +1025,9 @@ def write_report(images: list[CddImage]) -> str:
         )
         lines.append(
             f"| {image.name} | low {front_bands['low']}, mid {front_bands['mid']}, high {front_bands['high']} | "
-            f"low {tail_bands['low']}, mid {tail_bands['mid']}, high {tail_bands['high']} | {run_text} |"
+            f"{table_target_record_range(targets[:128])} | "
+            f"low {tail_bands['low']}, mid {tail_bands['mid']}, high {tail_bands['high']} | "
+            f"{table_target_record_range(targets[128:])} | {run_text} |"
         )
     lines.append("")
     lines.append("Close sibling tables also line up by position. CHS7 and CHS9 have 189 identical same-index table words, including long equal runs, so this table is versioned data with stable structure.")
