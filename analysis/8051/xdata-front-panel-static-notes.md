@@ -98,6 +98,23 @@ The cross-reference map reinforces the existing live negatives. `0x4860..0x486b`
 and the `0x59xx/0x5axx` helper-init shortlist are written as initialization
 clusters and do not look like front-panel output latches.
 
+## Existing Pico Trace Review
+
+Existing GP26 traces also fit the controller-path interpretation. Most
+event-68 traces keep the same qualitative blink shape: a fixed transition count
+with shifted timing. The anomaly scores in `runs/pico-led-analysis` are often
+dominated by event duration changes, not by a new stable held LED level.
+
+The strongest exception remains `0x4780=0xff`: event 68 shortens, the transition
+count drops, recovery fails, and GP26 stays high during the failed recovery
+window. That is consistent with disturbing a controller state path. It is not a
+useful output primitive.
+
+`0x4748` restored one-bit OR probes also alter event-68 timing, but recovery
+returns to the normal multi-transition pattern. That makes `0x4748` useful for
+understanding the currentboot controller transaction, while still being the
+wrong place to look for a byte-rate LED channel.
+
 ## Practical Consequence
 
 The LED path probably needs one of these:
