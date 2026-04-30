@@ -41,17 +41,18 @@ from the active tree. The compact operating set is now in this repo.
 PLDS / DVD+-RW DS-8ABSH / LD5M
 ```
 
-Important caveat: F0 is not byte-stock LD5M. It matches the deliberate
-`currentboot-response-hook-gateway-cdb-bulk` candidate:
+Current caveat: this used to carry the deliberate
+`currentboot-response-hook-gateway-cdb-bulk` patch, but the later normal-mode
+hook test phase restored the visible prefix/cave area. The post-restore
+live-key F0 dump of `0x1000..0x6fff` matched stock LD5M with zero diffs.
 
 ```text
-sha256 11df18bd19d269b959aa7c2270db96a636c27384669194ed0732c9b05e176771
-0x4fc9..0x4fcb -> LJMP 0x6ee3
-0x6ee3..0x6f49 -> currentboot gateway bulk hook payload
+0x4fc9..0x4fcb = 12 62 06
+0x6ee3..       = ff...
 ```
 
-Restore with the `currentboot-response-hook-restore-4fc9-cave` candidate before
-any test that requires stock bytes at `0x4fc9` or in the `0x6ee3` cave.
+Reinstall a currentboot response hook before using the bulk gateway/XDATA
+readout scripts that depend on `0x4fc9 -> 0x6ee3`.
 
 Rediscover:
 
@@ -126,6 +127,11 @@ live edits to the visible F0 identity/profile copy persisted across a true
 cold boot but did not alter normal EXTRAINQ. This is a source-localization clue,
 not a solved resident hook.
 
+Currentboot XDATA `0x811e` has the same shape: it contains the model string and
+is writable/readable through the guarded XDATA hook, but changing it to `X` did
+not alter the next currentboot identity model field. It only changed the
+deliberate hook readback byte. Treat it as metadata, not the live source.
+
 Follow-up timing hooks tested the broad visible command path directly:
 
 ```text
@@ -143,6 +149,7 @@ Evidence:
 
 ```text
 references/evidence/live/normal-mode-hook-tests/normal-mode-hook-tests-summary.md
+references/evidence/live/xdata-source-localizer/currentboot-xdata-811e-source-test.md
 ```
 
 Blank-currentboot details:
@@ -385,10 +392,10 @@ at gateway offset `0x6059`; related gateway routines around `0x642c`, `0x6fe0`,
 and `0x8278` manipulate the same cluster. This is likely a servo/mechanics
 command area, not an LED latch.
 
-Then use the bulk currentboot response hook and timing XDATA channel to map a
-short list of high-value registers before adding hardware. Use the older
-GOOD/DID_ERROR channel only when the value is already known not to drive a messy
-recovery path.
+Reinstall the bulk currentboot response hook if fast currentboot reads are
+needed, then use it alongside the timing XDATA channel to map a short list of
+high-value registers before adding hardware. Use the older GOOD/DID_ERROR
+channel only when the value is already known not to drive a messy recovery path.
 
 - nearby handoff/status bytes around `0x48a0`;
 - controller/finalizer state bytes already seen statically, such as `0x47d2`

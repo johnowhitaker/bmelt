@@ -301,6 +301,14 @@ else.
 Afterward we restored the low-prefix hooks and cave to stock and verified
 `0x1000..0x6fff` byte-for-byte. The drive is back in normal `LD5M`.
 
+A later source-localization test narrowed this further. The currentboot XDATA
+dump contains the normal-looking model string at `xdata[0x811e]`, which made it
+a tempting candidate response source. With the guarded XDATA write hook
+installed, I changed that byte from `D` to `X` and read it back successfully.
+The following currentboot identity response still used the canonical
+`DVD+-RW DS-8ABSH` string; only the hook's explicit readback byte changed. That
+means `0x811e` is real writable state, but not the live identity template.
+
 ## The Response Hook Opens Up
 
 The front-panel work also made the old readout pain impossible to ignore. The
@@ -833,13 +841,14 @@ through every boundary. I wrapped that into
 completed through bank 15 and final `PLDSVUC`. A Pico servo cold boot came back
 as normal `LD5M`.
 
-The recovered F0 image is not byte-identical to the original stock LD5M
-baseline, but it is not random damage. It matches the deliberate
+The recovered F0 image was not byte-identical to the original stock LD5M
+baseline at first, but it was not random damage. It matched the deliberate
 `currentboot-response-hook-gateway-cdb-bulk` candidate: a jump at `0x4fc9` into
-the `0x6ee3` code cave, where the currentboot response hook lives. So the state
-of the project after this recovery is better than before the wedge: we have the
-blank-currentboot exit path, and the useful currentboot bulk-read hook is still
-installed.
+the `0x6ee3` code cave, where the currentboot response hook lived. That was a
+useful temporary state, and it let us keep mapping currentboot memory. A later
+normal-mode hook phase restored `0x4fc9`, `0x6206`, `0x542b`, and the `0x6ee3`
+cave; the post-restore F0 dump over `0x1000..0x6fff` matched stock LD5M with
+zero diffs.
 
 ## The Gateway Map Has A Better Target Than 0x184000
 

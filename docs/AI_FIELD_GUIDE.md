@@ -609,10 +609,18 @@ but not in ordinary normal-mode response handling.
 The stock restore then rewrote `0x1ea0`, `0x542b`, `0x6206`, and the `0x6ee3`
 cave, and a live-key F0 dump of `0x1000..0x6fff` matched stock with zero diffs.
 
+The normal-response static comparison also found a tempting currentboot XDATA
+copy of the model string at `0x811e`. A guarded XDATA write changed
+`xdata[0x811e]` from `D` to `X` and read it back, but the next currentboot
+identity response still returned canonical `DVD+-RW DS-8ABSH`; only the
+deliberate hook readback byte changed. Treat `0x811e` as metadata/key-window
+state, not a live response template.
+
 Evidence:
 
 ```text
 references/evidence/live/normal-mode-hook-tests/normal-mode-hook-tests-summary.md
+references/evidence/live/xdata-source-localizer/currentboot-xdata-811e-source-test.md
 ```
 
 Second pass, after the directory source-address model, also returned zeros:
@@ -1089,8 +1097,8 @@ python3 scripts/recover_liteon_blank_currentboot_linux.py \
 It completed through final `PLDSVUC`, and a Pico servo cold boot re-enumerated
 as `LD5M`.
 
-Current live-drive note: F0 readback is not byte-stock LD5M. It matches the
-known `currentboot-response-hook-gateway-cdb-bulk` candidate:
+Superseded live-drive note: after blank-currentboot recovery, F0 briefly
+carried the known `currentboot-response-hook-gateway-cdb-bulk` candidate:
 
 ```text
 sha256 11df18bd19d269b959aa7c2270db96a636c27384669194ed0732c9b05e176771
@@ -1098,8 +1106,16 @@ diffs  0x4fc9..0x4fcb -> LJMP 0x6ee3
        0x6ee3..0x6f49 -> currentboot gateway bulk hook payload
 ```
 
-Restore with the `currentboot-response-hook-restore-4fc9-cave` candidate before
-any test that needs stock bytes in `0x4fc9` or the `0x6ee3` cave.
+The later normal-mode hook test phase restored stock bytes. A live-key F0 dump
+of `0x1000..0x6fff` matched stock LD5M with zero diffs, including:
+
+```text
+0x4fc9..0x4fcb = 12 62 06
+0x6ee3..       = ff...
+```
+
+Reinstall a currentboot response hook before using the bulk gateway/XDATA
+readout scripts that depend on `0x4fc9 -> 0x6ee3`.
 
 Evidence:
 

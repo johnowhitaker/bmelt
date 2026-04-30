@@ -3,7 +3,8 @@
 Date: 2026-04-30
 
 This is an offline comparison of the normal LD5M read-only command survey
-against the known F0 image and the `0x070000` currentboot gateway dump.
+against the known F0 image, the `0x070000` currentboot gateway dump,
+and the captured currentboot XDATA dump.
 
 ## Summary
 
@@ -20,6 +21,19 @@ F0 identity copies, but live edits to those copies did not affect normal
 LD5M identity after cold boot. So exact F0 equality here means the normal
 runtime uses the same template data, not necessarily that it reads those
 specific flash offsets.
+
+A second useful clue is that currentboot XDATA also contains partial
+normal-response material: the model string appears at `xdata[0x811e]`,
+`GET CONFIGURATION` feature bytes appear near `xdata[0x40a4]`, and a
+`MODE SENSE(10)` fragment appears near `xdata[0x4e1b]`. These are not
+yet proven normal-runtime sources, but they are better carryover/localizer
+targets than another blind visible-F0 hook.
+
+Follow-up live test: `xdata[0x811e] <- 0x58` read back correctly through
+the guarded currentboot XDATA hook, but the next currentboot identity
+response still returned canonical `DVD+-RW DS-8ABSH`; only the deliberate
+hook readback byte changed. So `0x811e` is not the live currentboot
+identity source.
 
 ## Command Surface
 
@@ -51,9 +65,13 @@ specific flash offsets.
 |---|---|---:|---:|---:|---|
 | `inquiry-standard-96` | F0 | `0x05` | `0xd8fd5` (identity/profile area) | `0x2b` | `000000504c4453202020204456442b2d` `...PLDS    DVD+-RW DS-8ABSHLD5M2016/10/1` |
 | `inquiry-standard-96` | F0 | `0x05` | `0x04457` (lower/currentboot identity copy) | `0x1b` | `000000504c4453202020204456442b2d` `...PLDS    DVD+-RW DS-8ABSH` |
+| `inquiry-standard-96` | currentboot XDATA | `0x10` | `0x0811e` (currentboot identity/key/model window) | `0x10` | `4456442b2d52572044532d3841425348` `DVD+-RW DS-8ABSH` |
 | `inquiry-extrainq` | F0 | `0x6f` | `0x044c1` | `0x31` | `100120b4050000000000005fff01000f` `.. ........_............................` |
 | `inquiry-extrainq` | F0 | `0x00` | `0xd8fd0` (identity/profile area) | `0x30` | `05800032ab000000504c445320202020` `...2....PLDS    DVD+-RW DS-8ABSHLD5M2016` |
 | `inquiry-extrainq` | F0 | `0x00` | `0x04452` (lower/currentboot identity copy) | `0x20` | `05800032ab000000504c445320202020` `...2....PLDS    DVD+-RW DS-8ABSH` |
+| `inquiry-extrainq` | currentboot XDATA | `0x10` | `0x0811e` (currentboot identity/key/model window) | `0x10` | `4456442b2d52572044532d3841425348` `DVD+-RW DS-8ABSH` |
+| `inquiry-extrainq` | currentboot XDATA | `0xa0` | `0x08112` (currentboot identity/key/model window) | `0xc` | `314435302d3120204c44354d` `1D50-1  LD5M` |
+| `get-configuration-all` | currentboot XDATA | `0x3c` | `0x040a4` | `0xd` | `00010b08000000070100000000` `.............` |
 
 ## Foothold Implications
 
@@ -71,7 +89,11 @@ The immediate next experiment should not be another visible-F0 prefix hook.
 Better candidates are:
 
 1. a currentboot-to-LD5M RAM carryover marker test using the currentboot
-   XDATA write hook, to see whether any writable state survives recovery;
+   XDATA write hook. Skip `xdata[0x811e]` as a live-template source; it
+   is now tested negative. Better remaining markers are `xdata[0x40a4]`
+   (GET CONFIG feature-list fragment) and `xdata[0x4e1b]` (MODE SENSE
+   fragment), though both are lower-confidence because the matches are
+   shorter and more structured;
 2. a normal-mode standard-command source-localization pass, patching only
    already-proven restorable template bytes if a new candidate source is
    identified;

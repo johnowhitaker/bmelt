@@ -17,6 +17,9 @@ DEFAULT_F0 = ROOT / "references/firmware/extracted/ld5m-f0-window-0x00000-0x1000
 DEFAULT_GATEWAY = (
     ROOT / "references/evidence/live/linux-drive1-currentboot-gateway-070000-10000.bin"
 )
+DEFAULT_XDATA = (
+    ROOT / "references/evidence/live/linux-drive1-currentboot-xdata-0000-ffff-bulk-v2.bin"
+)
 DEFAULT_OUT = ROOT / "analysis/8051/normal-mode-response-surface-analysis.md"
 
 
@@ -35,6 +38,16 @@ GATEWAY_LANDMARKS = (
     (0xF000, 0xFC20, "sealed CDD1 table mirror"),
     (0xFC20, 0xFDA0, "sealed CDD2 duplicate-prefix mirror"),
     (0xFF00, 0x10000, "repeated sealed CDD headers"),
+)
+
+XDATA_LANDMARKS = (
+    (0x4000, 0x4020, "controller/status registers"),
+    (0x4091, 0x4099, "controller address/FIFO registers"),
+    (0x47b0, 0x47d8, "packet/controller status FIFO area"),
+    (0x4E00, 0x4E60, "currentboot work/status table"),
+    (0x803C, 0x803F, "response base pointer"),
+    (0x810E, 0x8130, "currentboot identity/key/model window"),
+    (0x818A, 0x8196, "CDB/packet shadow"),
 )
 
 PAD_BYTES = {0x00, 0x20, 0xFF}
@@ -179,7 +192,7 @@ def parse_sense(stderr: str) -> str:
     return ""
 
 
-def render(report: dict[str, Any], f0: bytes, gateway: bytes) -> str:
+def render(report: dict[str, Any], f0: bytes, gateway: bytes, xdata: bytes) -> str:
     rows: list[dict[str, Any]] = []
     for item in report["probes"]:
         hx = item.get("stdout_hex")
@@ -200,6 +213,9 @@ def render(report: dict[str, Any], f0: bytes, gateway: bytes) -> str:
                 "gateway_hits": find_hits(data, gateway, 8, GATEWAY_LANDMARKS)
                 if data
                 else [],
+                "xdata_hits": find_hits(data, xdata, 8, XDATA_LANDMARKS)
+                if data
+                else [],
             }
         )
 
@@ -209,7 +225,8 @@ def render(report: dict[str, Any], f0: bytes, gateway: bytes) -> str:
         "Date: 2026-04-30",
         "",
         "This is an offline comparison of the normal LD5M read-only command survey",
-        "against the known F0 image and the `0x070000` currentboot gateway dump.",
+        "against the known F0 image, the `0x070000` currentboot gateway dump,",
+        "and the captured currentboot XDATA dump.",
         "",
         "## Summary",
         "",
@@ -226,6 +243,19 @@ def render(report: dict[str, Any], f0: bytes, gateway: bytes) -> str:
         "LD5M identity after cold boot. So exact F0 equality here means the normal",
         "runtime uses the same template data, not necessarily that it reads those",
         "specific flash offsets.",
+        "",
+        "A second useful clue is that currentboot XDATA also contains partial",
+        "normal-response material: the model string appears at `xdata[0x811e]`,",
+        "`GET CONFIGURATION` feature bytes appear near `xdata[0x40a4]`, and a",
+        "`MODE SENSE(10)` fragment appears near `xdata[0x4e1b]`. These are not",
+        "yet proven normal-runtime sources, but they are better carryover/localizer",
+        "targets than another blind visible-F0 hook.",
+        "",
+        "Follow-up live test: `xdata[0x811e] <- 0x58` read back correctly through",
+        "the guarded currentboot XDATA hook, but the next currentboot identity",
+        "response still returned canonical `DVD+-RW DS-8ABSH`; only the deliberate",
+        "hook readback byte changed. So `0x811e` is not the live currentboot",
+        "identity source.",
         "",
         "## Command Surface",
         "",
@@ -247,7 +277,11 @@ def render(report: dict[str, Any], f0: bytes, gateway: bytes) -> str:
         "|---|---|---:|---:|---:|---|",
     ]
     for row in rows:
-        for target_name, key in (("F0", "f0_hits"), ("gateway+0x070000", "gateway_hits")):
+        for target_name, key in (
+            ("F0", "f0_hits"),
+            ("gateway+0x070000", "gateway_hits"),
+            ("currentboot XDATA", "xdata_hits"),
+        ):
             for hit in row[key][:6]:
                 label = f" ({hit['landmark']})" if hit.get("landmark") else ""
                 lines.append(
@@ -274,7 +308,11 @@ def render(report: dict[str, Any], f0: bytes, gateway: bytes) -> str:
         "Better candidates are:",
         "",
         "1. a currentboot-to-LD5M RAM carryover marker test using the currentboot",
-        "   XDATA write hook, to see whether any writable state survives recovery;",
+        "   XDATA write hook. Skip `xdata[0x811e]` as a live-template source; it",
+        "   is now tested negative. Better remaining markers are `xdata[0x40a4]`",
+        "   (GET CONFIG feature-list fragment) and `xdata[0x4e1b]` (MODE SENSE",
+        "   fragment), though both are lower-confidence because the matches are",
+        "   shorter and more structured;",
         "2. a normal-mode standard-command source-localization pass, patching only",
         "   already-proven restorable template bytes if a new candidate source is",
         "   identified;",
@@ -290,14 +328,16 @@ def main() -> None:
     parser.add_argument("--survey", type=Path, default=DEFAULT_SURVEY)
     parser.add_argument("--f0", type=Path, default=DEFAULT_F0)
     parser.add_argument("--gateway", type=Path, default=DEFAULT_GATEWAY)
+    parser.add_argument("--xdata", type=Path, default=DEFAULT_XDATA)
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT)
     args = parser.parse_args()
 
     report = json.loads(args.survey.read_text())
     f0 = args.f0.read_bytes()
     gateway = args.gateway.read_bytes()
+    xdata = args.xdata.read_bytes()
     args.out.parent.mkdir(parents=True, exist_ok=True)
-    args.out.write_text(render(report, f0, gateway) + "\n")
+    args.out.write_text(render(report, f0, gateway, xdata) + "\n")
     print(f"wrote {args.out}")
 
 
