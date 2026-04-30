@@ -185,8 +185,9 @@ by themselves. They may still be known-output pairs for the hard mode, but they
 are not the easy motif mode.
 
 Follow-up with the peer static notes corrected the interpretation of the short
-records. The visible shape is very concrete, but the semantic byte is the
-varying first byte, not the repeated tail.
+records twice. The visible byte-coded layer is very concrete, but it is not the
+repeated tail, and the raw first byte is still a coded cell rather than the
+final group byte.
 
 ```text
 source length: 0x34 = 4 * 13
@@ -197,52 +198,41 @@ each 13-byte source unit:
 ```
 
 All 16 LD5M records with operation key `0d6840031a00` have this same shape.
-The four first bytes in each record obey:
+The four first bytes in each record are cells in a 16-cell affine mask table:
 
 ```text
-v0 = m
-v1 = m ^ 0x19
-v2 = m ^ 0x32
-v3 = m ^ 0x2b
+cell: 00 01 02 03 04 05 06 07 08 09 0a 0b 0c 0d 0e 0f
+mask: 00 19 32 2b 64 7d 56 4f c8 d1 fa e3 ac b5 9e 87
+```
+
+The mask is `carryless_mul8(0x19, cell)`. For a full short record:
+
+```text
+cell = 4 * (record_index & 3) + unit_index
+plain_group_byte = raw_cell_byte ^ mask[cell]
 ```
 
 This holds for 104/104 short records across LD5M, AD12, AHS9, CD12, CHS7, and
-CHS9 when including the related `0c6000031800` form. The `m` byte is stable by
-record index across sibling images. Examples:
-
-```text
-record 109: m=80 across all six images
-record 110: m=2c across all six images
-record 111: m=48 across all six images
-record 397: m=6e across all six images
-record 423: m=28 across all six images
-```
-
-So the previous "drop byte 0" observation should be treated only as a way to
-isolate the fixed scaffold. It is not a semantic decoder. The semantic/control
-payload currently known for these short records is the single `m` byte encoded
-redundantly in the first byte of each unit.
+CHS9 when including the related `0c6000031800` form. The previous "drop byte 0"
+observation should be treated only as a way to isolate the fixed scaffold. The
+previous row-local `m` value should be treated as a raw coded byte, not as the
+final semantic byte.
 
 The close sibling versions show a related but not identical easy-mode shape:
 AD12/AHS9 use operation key `0c6000031800` at corresponding places, with
 source length `0x30` and decoded span `0x30`. Their records are four 12-byte
-units, each beginning with the same varying byte sequence seen in LD5M's
+units, each beginning with the same affine-coded cell bytes seen in LD5M's
 13-byte units, followed by an image-specific 11-byte tail. Operation byte
 `0x0c` vs `0x0d` likely changes the unit width/scaffold convention, while the
-four-way XOR coding of `m` stays the same.
+same affine cell coding stays the same.
 
-The stable `m` values also show a second-level XOR row in consecutive
-short-record runs:
-
-```text
-base^0x00, base^0x64, base^0xc8, base^0xac
-```
-
-For example, records 312..315 decode to `m = 17 73 df bb`, exactly
-`0x17 ^ {00,64,c8,ac}`. Records 109..111, 337..339, 397..399, and 421..423
-fit contiguous three-value slices of the same row. This suggests the short
-records may be arranged in small interleaved/codeword groups, not just isolated
-one-byte literals.
+The bigger result is that the same canonical unit tail appears at the end of
+some longer records. These suffix units usually fill the rightmost missing
+cells of the current record row. Example: CHS9 record 108 ends with three
+canonical-tail units whose first bytes decode as cells 1..3, then records
+109..111 supply cells 4..15. All 15 observations agree on group 27 = `0xe4`.
+So the long records are no longer wholly opaque; at least some suffix cells are
+statically decodable.
 
 This also means the candidate `decoded_span=0x30` is not yet proven to mean
 "48 bytes of ordinary plaintext" for these records. It may be a logical

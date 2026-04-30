@@ -3266,8 +3266,20 @@
           "index": 109,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 128,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "short_affine_plain": 228,
+          "short_affine_plain_observations": [
+            228,
+            228,
+            228,
+            228
+          ],
+          "short_affine_raw_sequence": [
             128,
             153,
             178,
@@ -3286,8 +3298,20 @@
           "index": 110,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 44,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            8,
+            9,
+            10,
+            11
+          ],
+          "short_affine_plain": 228,
+          "short_affine_plain_observations": [
+            228,
+            228,
+            228,
+            228
+          ],
+          "short_affine_raw_sequence": [
             44,
             53,
             30,
@@ -3306,8 +3330,20 @@
           "index": 111,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 72,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "short_affine_plain": 228,
+          "short_affine_plain_observations": [
+            228,
+            228,
+            228,
+            228
+          ],
+          "short_affine_raw_sequence": [
             72,
             81,
             122,
@@ -4691,8 +4727,20 @@
           "index": 206,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 118,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            8,
+            9,
+            10,
+            11
+          ],
+          "short_affine_plain": 190,
+          "short_affine_plain_observations": [
+            190,
+            190,
+            190,
+            190
+          ],
+          "short_affine_raw_sequence": [
             118,
             111,
             68,
@@ -4711,8 +4759,20 @@
           "index": 207,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 18,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "short_affine_plain": 190,
+          "short_affine_plain_observations": [
+            190,
+            190,
+            190,
+            190
+          ],
+          "short_affine_raw_sequence": [
             18,
             11,
             32,
@@ -6104,8 +6164,20 @@
           "index": 279,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 148,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "short_affine_plain": 56,
+          "short_affine_plain_observations": [
+            56,
+            56,
+            56,
+            56
+          ],
+          "short_affine_raw_sequence": [
             148,
             141,
             166,
@@ -6626,8 +6698,20 @@
           "index": 313,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 115,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "short_affine_plain": 23,
+          "short_affine_plain_observations": [
+            23,
+            23,
+            23,
+            23
+          ],
+          "short_affine_raw_sequence": [
             115,
             106,
             65,
@@ -6646,8 +6730,20 @@
           "index": 314,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 223,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            8,
+            9,
+            10,
+            11
+          ],
+          "short_affine_plain": 23,
+          "short_affine_plain_observations": [
+            23,
+            23,
+            23,
+            23
+          ],
+          "short_affine_raw_sequence": [
             223,
             198,
             237,
@@ -6666,8 +6762,20 @@
           "index": 315,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 187,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "short_affine_plain": 23,
+          "short_affine_plain_observations": [
+            23,
+            23,
+            23,
+            23
+          ],
+          "short_affine_raw_sequence": [
             187,
             162,
             137,
@@ -6829,8 +6937,20 @@
           "index": 327,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 185,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "short_affine_plain": 21,
+          "short_affine_plain_observations": [
+            21,
+            21,
+            21,
+            21
+          ],
+          "short_affine_raw_sequence": [
             185,
             160,
             139,
@@ -7746,8 +7866,20 @@
           "index": 397,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 110,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "short_affine_plain": 10,
+          "short_affine_plain_observations": [
+            10,
+            10,
+            10,
+            10
+          ],
+          "short_affine_raw_sequence": [
             110,
             119,
             92,
@@ -7766,8 +7898,20 @@
           "index": 398,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 194,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            8,
+            9,
+            10,
+            11
+          ],
+          "short_affine_plain": 10,
+          "short_affine_plain_observations": [
+            10,
+            10,
+            10,
+            10
+          ],
+          "short_affine_raw_sequence": [
             194,
             219,
             240,
@@ -7786,8 +7930,20 @@
           "index": 399,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 166,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "short_affine_plain": 10,
+          "short_affine_plain_observations": [
+            10,
+            10,
+            10,
+            10
+          ],
+          "short_affine_raw_sequence": [
             166,
             191,
             148,
@@ -8079,8 +8235,20 @@
           "index": 421,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 224,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "short_affine_plain": 132,
+          "short_affine_plain_observations": [
+            132,
+            132,
+            132,
+            132
+          ],
+          "short_affine_raw_sequence": [
             224,
             249,
             210,
@@ -8099,8 +8267,20 @@
           "index": 422,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 76,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            8,
+            9,
+            10,
+            11
+          ],
+          "short_affine_plain": 132,
+          "short_affine_plain_observations": [
+            132,
+            132,
+            132,
+            132
+          ],
+          "short_affine_raw_sequence": [
             76,
             85,
             126,
@@ -8119,8 +8299,20 @@
           "index": 423,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 40,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "short_affine_plain": 132,
+          "short_affine_plain_observations": [
+            132,
+            132,
+            132,
+            132
+          ],
+          "short_affine_raw_sequence": [
             40,
             49,
             26,
@@ -11672,8 +11864,20 @@
           "index": 109,
           "mode": 0,
           "operation_key": "0c6000031800",
-          "short_rm_payload": 128,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "short_affine_plain": 228,
+          "short_affine_plain_observations": [
+            228,
+            228,
+            228,
+            228
+          ],
+          "short_affine_raw_sequence": [
             128,
             153,
             178,
@@ -11692,8 +11896,20 @@
           "index": 110,
           "mode": 0,
           "operation_key": "0c6000031800",
-          "short_rm_payload": 44,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            8,
+            9,
+            10,
+            11
+          ],
+          "short_affine_plain": 228,
+          "short_affine_plain_observations": [
+            228,
+            228,
+            228,
+            228
+          ],
+          "short_affine_raw_sequence": [
             44,
             53,
             30,
@@ -11712,8 +11928,20 @@
           "index": 111,
           "mode": 0,
           "operation_key": "0c6000031800",
-          "short_rm_payload": 72,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "short_affine_plain": 228,
+          "short_affine_plain_observations": [
+            228,
+            228,
+            228,
+            228
+          ],
+          "short_affine_raw_sequence": [
             72,
             81,
             122,
@@ -14494,8 +14722,20 @@
           "index": 279,
           "mode": 0,
           "operation_key": "0c6000031800",
-          "short_rm_payload": 148,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "short_affine_plain": 56,
+          "short_affine_plain_observations": [
+            56,
+            56,
+            56,
+            56
+          ],
+          "short_affine_raw_sequence": [
             148,
             141,
             166,
@@ -14930,8 +15170,20 @@
           "index": 312,
           "mode": 0,
           "operation_key": "0c6000031800",
-          "short_rm_payload": 23,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "short_affine_plain": 23,
+          "short_affine_plain_observations": [
+            23,
+            23,
+            23,
+            23
+          ],
+          "short_affine_raw_sequence": [
             23,
             14,
             37,
@@ -14950,8 +15202,20 @@
           "index": 313,
           "mode": 0,
           "operation_key": "0c6000031800",
-          "short_rm_payload": 115,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "short_affine_plain": 23,
+          "short_affine_plain_observations": [
+            23,
+            23,
+            23,
+            23
+          ],
+          "short_affine_raw_sequence": [
             115,
             106,
             65,
@@ -14970,8 +15234,20 @@
           "index": 314,
           "mode": 0,
           "operation_key": "0c6000031800",
-          "short_rm_payload": 223,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            8,
+            9,
+            10,
+            11
+          ],
+          "short_affine_plain": 23,
+          "short_affine_plain_observations": [
+            23,
+            23,
+            23,
+            23
+          ],
+          "short_affine_raw_sequence": [
             223,
             198,
             237,
@@ -14990,8 +15266,20 @@
           "index": 315,
           "mode": 0,
           "operation_key": "0c6000031800",
-          "short_rm_payload": 187,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "short_affine_plain": 23,
+          "short_affine_plain_observations": [
+            23,
+            23,
+            23,
+            23
+          ],
+          "short_affine_raw_sequence": [
             187,
             162,
             137,
@@ -15153,8 +15441,20 @@
           "index": 327,
           "mode": 0,
           "operation_key": "0c6000031800",
-          "short_rm_payload": 185,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "short_affine_plain": 21,
+          "short_affine_plain_observations": [
+            21,
+            21,
+            21,
+            21
+          ],
+          "short_affine_raw_sequence": [
             185,
             160,
             139,
@@ -15290,8 +15590,20 @@
           "index": 337,
           "mode": 0,
           "operation_key": "0c6000031800",
-          "short_rm_payload": 54,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "short_affine_plain": 82,
+          "short_affine_plain_observations": [
+            82,
+            82,
+            82,
+            82
+          ],
+          "short_affine_raw_sequence": [
             54,
             47,
             4,
@@ -15310,8 +15622,20 @@
           "index": 338,
           "mode": 0,
           "operation_key": "0c6000031800",
-          "short_rm_payload": 154,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            8,
+            9,
+            10,
+            11
+          ],
+          "short_affine_plain": 82,
+          "short_affine_plain_observations": [
+            82,
+            82,
+            82,
+            82
+          ],
+          "short_affine_raw_sequence": [
             154,
             131,
             168,
@@ -15330,8 +15654,20 @@
           "index": 339,
           "mode": 0,
           "operation_key": "0c6000031800",
-          "short_rm_payload": 254,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "short_affine_plain": 82,
+          "short_affine_plain_observations": [
+            82,
+            82,
+            82,
+            82
+          ],
+          "short_affine_raw_sequence": [
             254,
             231,
             204,
@@ -16091,8 +16427,20 @@
           "index": 397,
           "mode": 0,
           "operation_key": "0c6000031800",
-          "short_rm_payload": 110,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "short_affine_plain": 10,
+          "short_affine_plain_observations": [
+            10,
+            10,
+            10,
+            10
+          ],
+          "short_affine_raw_sequence": [
             110,
             119,
             92,
@@ -16111,8 +16459,20 @@
           "index": 398,
           "mode": 0,
           "operation_key": "0c6000031800",
-          "short_rm_payload": 194,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            8,
+            9,
+            10,
+            11
+          ],
+          "short_affine_plain": 10,
+          "short_affine_plain_observations": [
+            10,
+            10,
+            10,
+            10
+          ],
+          "short_affine_raw_sequence": [
             194,
             219,
             240,
@@ -16131,8 +16491,20 @@
           "index": 399,
           "mode": 0,
           "operation_key": "0c6000031800",
-          "short_rm_payload": 166,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "short_affine_plain": 10,
+          "short_affine_plain_observations": [
+            10,
+            10,
+            10,
+            10
+          ],
+          "short_affine_raw_sequence": [
             166,
             191,
             148,
@@ -16424,8 +16796,20 @@
           "index": 421,
           "mode": 0,
           "operation_key": "0c6000031800",
-          "short_rm_payload": 224,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "short_affine_plain": 132,
+          "short_affine_plain_observations": [
+            132,
+            132,
+            132,
+            132
+          ],
+          "short_affine_raw_sequence": [
             224,
             249,
             210,
@@ -16444,8 +16828,20 @@
           "index": 422,
           "mode": 0,
           "operation_key": "0c6000031800",
-          "short_rm_payload": 76,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            8,
+            9,
+            10,
+            11
+          ],
+          "short_affine_plain": 132,
+          "short_affine_plain_observations": [
+            132,
+            132,
+            132,
+            132
+          ],
+          "short_affine_raw_sequence": [
             76,
             85,
             126,
@@ -16464,8 +16860,20 @@
           "index": 423,
           "mode": 0,
           "operation_key": "0c6000031800",
-          "short_rm_payload": 40,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "short_affine_plain": 132,
+          "short_affine_plain_observations": [
+            132,
+            132,
+            132,
+            132
+          ],
+          "short_affine_raw_sequence": [
             40,
             49,
             26,
@@ -19983,8 +20391,20 @@
           "index": 109,
           "mode": 0,
           "operation_key": "0c6000031800",
-          "short_rm_payload": 128,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "short_affine_plain": 228,
+          "short_affine_plain_observations": [
+            228,
+            228,
+            228,
+            228
+          ],
+          "short_affine_raw_sequence": [
             128,
             153,
             178,
@@ -20003,8 +20423,20 @@
           "index": 110,
           "mode": 0,
           "operation_key": "0c6000031800",
-          "short_rm_payload": 44,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            8,
+            9,
+            10,
+            11
+          ],
+          "short_affine_plain": 228,
+          "short_affine_plain_observations": [
+            228,
+            228,
+            228,
+            228
+          ],
+          "short_affine_raw_sequence": [
             44,
             53,
             30,
@@ -20023,8 +20455,20 @@
           "index": 111,
           "mode": 0,
           "operation_key": "0c6000031800",
-          "short_rm_payload": 72,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "short_affine_plain": 228,
+          "short_affine_plain_observations": [
+            228,
+            228,
+            228,
+            228
+          ],
+          "short_affine_raw_sequence": [
             72,
             81,
             122,
@@ -23245,8 +23689,20 @@
           "index": 313,
           "mode": 0,
           "operation_key": "0c6000031800",
-          "short_rm_payload": 115,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "short_affine_plain": 23,
+          "short_affine_plain_observations": [
+            23,
+            23,
+            23,
+            23
+          ],
+          "short_affine_raw_sequence": [
             115,
             106,
             65,
@@ -23265,8 +23721,20 @@
           "index": 314,
           "mode": 0,
           "operation_key": "0c6000031800",
-          "short_rm_payload": 223,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            8,
+            9,
+            10,
+            11
+          ],
+          "short_affine_plain": 23,
+          "short_affine_plain_observations": [
+            23,
+            23,
+            23,
+            23
+          ],
+          "short_affine_raw_sequence": [
             223,
             198,
             237,
@@ -23285,8 +23753,20 @@
           "index": 315,
           "mode": 0,
           "operation_key": "0c6000031800",
-          "short_rm_payload": 187,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "short_affine_plain": 23,
+          "short_affine_plain_observations": [
+            23,
+            23,
+            23,
+            23
+          ],
+          "short_affine_raw_sequence": [
             187,
             162,
             137,
@@ -23448,8 +23928,20 @@
           "index": 327,
           "mode": 0,
           "operation_key": "0c6000031800",
-          "short_rm_payload": 185,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "short_affine_plain": 21,
+          "short_affine_plain_observations": [
+            21,
+            21,
+            21,
+            21
+          ],
+          "short_affine_raw_sequence": [
             185,
             160,
             139,
@@ -23585,8 +24077,20 @@
           "index": 337,
           "mode": 0,
           "operation_key": "0c6000031800",
-          "short_rm_payload": 54,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "short_affine_plain": 82,
+          "short_affine_plain_observations": [
+            82,
+            82,
+            82,
+            82
+          ],
+          "short_affine_raw_sequence": [
             54,
             47,
             4,
@@ -23605,8 +24109,20 @@
           "index": 338,
           "mode": 0,
           "operation_key": "0c6000031800",
-          "short_rm_payload": 154,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            8,
+            9,
+            10,
+            11
+          ],
+          "short_affine_plain": 82,
+          "short_affine_plain_observations": [
+            82,
+            82,
+            82,
+            82
+          ],
+          "short_affine_raw_sequence": [
             154,
             131,
             168,
@@ -23625,8 +24141,20 @@
           "index": 339,
           "mode": 0,
           "operation_key": "0c6000031800",
-          "short_rm_payload": 254,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "short_affine_plain": 82,
+          "short_affine_plain_observations": [
+            82,
+            82,
+            82,
+            82
+          ],
+          "short_affine_raw_sequence": [
             254,
             231,
             204,
@@ -24386,8 +24914,20 @@
           "index": 397,
           "mode": 0,
           "operation_key": "0c6000031800",
-          "short_rm_payload": 110,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "short_affine_plain": 10,
+          "short_affine_plain_observations": [
+            10,
+            10,
+            10,
+            10
+          ],
+          "short_affine_raw_sequence": [
             110,
             119,
             92,
@@ -24406,8 +24946,20 @@
           "index": 398,
           "mode": 0,
           "operation_key": "0c6000031800",
-          "short_rm_payload": 194,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            8,
+            9,
+            10,
+            11
+          ],
+          "short_affine_plain": 10,
+          "short_affine_plain_observations": [
+            10,
+            10,
+            10,
+            10
+          ],
+          "short_affine_raw_sequence": [
             194,
             219,
             240,
@@ -24426,8 +24978,20 @@
           "index": 399,
           "mode": 0,
           "operation_key": "0c6000031800",
-          "short_rm_payload": 166,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "short_affine_plain": 10,
+          "short_affine_plain_observations": [
+            10,
+            10,
+            10,
+            10
+          ],
+          "short_affine_raw_sequence": [
             166,
             191,
             148,
@@ -24719,8 +25283,20 @@
           "index": 421,
           "mode": 0,
           "operation_key": "0c6000031800",
-          "short_rm_payload": 224,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "short_affine_plain": 132,
+          "short_affine_plain_observations": [
+            132,
+            132,
+            132,
+            132
+          ],
+          "short_affine_raw_sequence": [
             224,
             249,
             210,
@@ -24739,8 +25315,20 @@
           "index": 422,
           "mode": 0,
           "operation_key": "0c6000031800",
-          "short_rm_payload": 76,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            8,
+            9,
+            10,
+            11
+          ],
+          "short_affine_plain": 132,
+          "short_affine_plain_observations": [
+            132,
+            132,
+            132,
+            132
+          ],
+          "short_affine_raw_sequence": [
             76,
             85,
             126,
@@ -24759,8 +25347,20 @@
           "index": 423,
           "mode": 0,
           "operation_key": "0c6000031800",
-          "short_rm_payload": 40,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "short_affine_plain": 132,
+          "short_affine_plain_observations": [
+            132,
+            132,
+            132,
+            132
+          ],
+          "short_affine_raw_sequence": [
             40,
             49,
             26,
@@ -26376,8 +26976,20 @@
           "index": 15,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 126,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "short_affine_plain": 210,
+          "short_affine_plain_observations": [
+            210,
+            210,
+            210,
+            210
+          ],
+          "short_affine_raw_sequence": [
             126,
             103,
             76,
@@ -28224,8 +28836,20 @@
           "index": 109,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 128,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "short_affine_plain": 228,
+          "short_affine_plain_observations": [
+            228,
+            228,
+            228,
+            228
+          ],
+          "short_affine_raw_sequence": [
             128,
             153,
             178,
@@ -28244,8 +28868,20 @@
           "index": 110,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 44,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            8,
+            9,
+            10,
+            11
+          ],
+          "short_affine_plain": 228,
+          "short_affine_plain_observations": [
+            228,
+            228,
+            228,
+            228
+          ],
+          "short_affine_raw_sequence": [
             44,
             53,
             30,
@@ -28264,8 +28900,20 @@
           "index": 111,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 72,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "short_affine_plain": 228,
+          "short_affine_plain_observations": [
+            228,
+            228,
+            228,
+            228
+          ],
+          "short_affine_raw_sequence": [
             72,
             81,
             122,
@@ -31553,8 +32201,20 @@
           "index": 312,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 23,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "short_affine_plain": 23,
+          "short_affine_plain_observations": [
+            23,
+            23,
+            23,
+            23
+          ],
+          "short_affine_raw_sequence": [
             23,
             14,
             37,
@@ -31573,8 +32233,20 @@
           "index": 313,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 115,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "short_affine_plain": 23,
+          "short_affine_plain_observations": [
+            23,
+            23,
+            23,
+            23
+          ],
+          "short_affine_raw_sequence": [
             115,
             106,
             65,
@@ -31593,8 +32265,20 @@
           "index": 314,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 223,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            8,
+            9,
+            10,
+            11
+          ],
+          "short_affine_plain": 23,
+          "short_affine_plain_observations": [
+            23,
+            23,
+            23,
+            23
+          ],
+          "short_affine_raw_sequence": [
             223,
             198,
             237,
@@ -31613,8 +32297,20 @@
           "index": 315,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 187,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "short_affine_plain": 23,
+          "short_affine_plain_observations": [
+            23,
+            23,
+            23,
+            23
+          ],
+          "short_affine_raw_sequence": [
             187,
             162,
             137,
@@ -31776,8 +32472,20 @@
           "index": 327,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 185,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "short_affine_plain": 21,
+          "short_affine_plain_observations": [
+            21,
+            21,
+            21,
+            21
+          ],
+          "short_affine_raw_sequence": [
             185,
             160,
             139,
@@ -31913,8 +32621,20 @@
           "index": 337,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 54,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "short_affine_plain": 82,
+          "short_affine_plain_observations": [
+            82,
+            82,
+            82,
+            82
+          ],
+          "short_affine_raw_sequence": [
             54,
             47,
             4,
@@ -31933,8 +32653,20 @@
           "index": 338,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 154,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            8,
+            9,
+            10,
+            11
+          ],
+          "short_affine_plain": 82,
+          "short_affine_plain_observations": [
+            82,
+            82,
+            82,
+            82
+          ],
+          "short_affine_raw_sequence": [
             154,
             131,
             168,
@@ -31953,8 +32685,20 @@
           "index": 339,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 254,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "short_affine_plain": 82,
+          "short_affine_plain_observations": [
+            82,
+            82,
+            82,
+            82
+          ],
+          "short_affine_raw_sequence": [
             254,
             231,
             204,
@@ -32714,8 +33458,20 @@
           "index": 397,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 110,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "short_affine_plain": 10,
+          "short_affine_plain_observations": [
+            10,
+            10,
+            10,
+            10
+          ],
+          "short_affine_raw_sequence": [
             110,
             119,
             92,
@@ -32734,8 +33490,20 @@
           "index": 398,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 194,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            8,
+            9,
+            10,
+            11
+          ],
+          "short_affine_plain": 10,
+          "short_affine_plain_observations": [
+            10,
+            10,
+            10,
+            10
+          ],
+          "short_affine_raw_sequence": [
             194,
             219,
             240,
@@ -32754,8 +33522,20 @@
           "index": 399,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 166,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "short_affine_plain": 10,
+          "short_affine_plain_observations": [
+            10,
+            10,
+            10,
+            10
+          ],
+          "short_affine_raw_sequence": [
             166,
             191,
             148,
@@ -33047,8 +33827,20 @@
           "index": 421,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 224,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "short_affine_plain": 132,
+          "short_affine_plain_observations": [
+            132,
+            132,
+            132,
+            132
+          ],
+          "short_affine_raw_sequence": [
             224,
             249,
             210,
@@ -33067,8 +33859,20 @@
           "index": 422,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 76,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            8,
+            9,
+            10,
+            11
+          ],
+          "short_affine_plain": 132,
+          "short_affine_plain_observations": [
+            132,
+            132,
+            132,
+            132
+          ],
+          "short_affine_raw_sequence": [
             76,
             85,
             126,
@@ -33087,8 +33891,20 @@
           "index": 423,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 40,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "short_affine_plain": 132,
+          "short_affine_plain_observations": [
+            132,
+            132,
+            132,
+            132
+          ],
+          "short_affine_raw_sequence": [
             40,
             49,
             26,
@@ -34704,8 +35520,20 @@
           "index": 15,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 126,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "short_affine_plain": 210,
+          "short_affine_plain_observations": [
+            210,
+            210,
+            210,
+            210
+          ],
+          "short_affine_raw_sequence": [
             126,
             103,
             76,
@@ -35672,8 +36500,20 @@
           "index": 51,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 183,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "short_affine_plain": 27,
+          "short_affine_plain_observations": [
+            27,
+            27,
+            27,
+            27
+          ],
+          "short_affine_raw_sequence": [
             183,
             174,
             133,
@@ -36629,8 +37469,20 @@
           "index": 109,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 128,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "short_affine_plain": 228,
+          "short_affine_plain_observations": [
+            228,
+            228,
+            228,
+            228
+          ],
+          "short_affine_raw_sequence": [
             128,
             153,
             178,
@@ -36649,8 +37501,20 @@
           "index": 110,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 44,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            8,
+            9,
+            10,
+            11
+          ],
+          "short_affine_plain": 228,
+          "short_affine_plain_observations": [
+            228,
+            228,
+            228,
+            228
+          ],
+          "short_affine_raw_sequence": [
             44,
             53,
             30,
@@ -36669,8 +37533,20 @@
           "index": 111,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 72,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "short_affine_plain": 228,
+          "short_affine_plain_observations": [
+            228,
+            228,
+            228,
+            228
+          ],
+          "short_affine_raw_sequence": [
             72,
             81,
             122,
@@ -39891,8 +40767,20 @@
           "index": 313,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 115,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "short_affine_plain": 23,
+          "short_affine_plain_observations": [
+            23,
+            23,
+            23,
+            23
+          ],
+          "short_affine_raw_sequence": [
             115,
             106,
             65,
@@ -39911,8 +40799,20 @@
           "index": 314,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 223,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            8,
+            9,
+            10,
+            11
+          ],
+          "short_affine_plain": 23,
+          "short_affine_plain_observations": [
+            23,
+            23,
+            23,
+            23
+          ],
+          "short_affine_raw_sequence": [
             223,
             198,
             237,
@@ -39931,8 +40831,20 @@
           "index": 315,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 187,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "short_affine_plain": 23,
+          "short_affine_plain_observations": [
+            23,
+            23,
+            23,
+            23
+          ],
+          "short_affine_raw_sequence": [
             187,
             162,
             137,
@@ -40094,8 +41006,20 @@
           "index": 327,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 185,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "short_affine_plain": 21,
+          "short_affine_plain_observations": [
+            21,
+            21,
+            21,
+            21
+          ],
+          "short_affine_raw_sequence": [
             185,
             160,
             139,
@@ -40231,8 +41155,20 @@
           "index": 337,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 54,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "short_affine_plain": 82,
+          "short_affine_plain_observations": [
+            82,
+            82,
+            82,
+            82
+          ],
+          "short_affine_raw_sequence": [
             54,
             47,
             4,
@@ -40251,8 +41187,20 @@
           "index": 338,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 154,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            8,
+            9,
+            10,
+            11
+          ],
+          "short_affine_plain": 82,
+          "short_affine_plain_observations": [
+            82,
+            82,
+            82,
+            82
+          ],
+          "short_affine_raw_sequence": [
             154,
             131,
             168,
@@ -40271,8 +41219,20 @@
           "index": 339,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 254,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "short_affine_plain": 82,
+          "short_affine_plain_observations": [
+            82,
+            82,
+            82,
+            82
+          ],
+          "short_affine_raw_sequence": [
             254,
             231,
             204,
@@ -41032,8 +41992,20 @@
           "index": 397,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 110,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "short_affine_plain": 10,
+          "short_affine_plain_observations": [
+            10,
+            10,
+            10,
+            10
+          ],
+          "short_affine_raw_sequence": [
             110,
             119,
             92,
@@ -41052,8 +42024,20 @@
           "index": 398,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 194,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            8,
+            9,
+            10,
+            11
+          ],
+          "short_affine_plain": 10,
+          "short_affine_plain_observations": [
+            10,
+            10,
+            10,
+            10
+          ],
+          "short_affine_raw_sequence": [
             194,
             219,
             240,
@@ -41072,8 +42056,20 @@
           "index": 399,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 166,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "short_affine_plain": 10,
+          "short_affine_plain_observations": [
+            10,
+            10,
+            10,
+            10
+          ],
+          "short_affine_raw_sequence": [
             166,
             191,
             148,
@@ -41365,8 +42361,20 @@
           "index": 421,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 224,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "short_affine_plain": 132,
+          "short_affine_plain_observations": [
+            132,
+            132,
+            132,
+            132
+          ],
+          "short_affine_raw_sequence": [
             224,
             249,
             210,
@@ -41385,8 +42393,20 @@
           "index": 422,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 76,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            8,
+            9,
+            10,
+            11
+          ],
+          "short_affine_plain": 132,
+          "short_affine_plain_observations": [
+            132,
+            132,
+            132,
+            132
+          ],
+          "short_affine_raw_sequence": [
             76,
             85,
             126,
@@ -41405,8 +42425,20 @@
           "index": 423,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 40,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "short_affine_plain": 132,
+          "short_affine_plain_observations": [
+            132,
+            132,
+            132,
+            132
+          ],
+          "short_affine_raw_sequence": [
             40,
             49,
             26,
@@ -43022,8 +44054,20 @@
           "index": 15,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 126,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "short_affine_plain": 210,
+          "short_affine_plain_observations": [
+            210,
+            210,
+            210,
+            210
+          ],
+          "short_affine_raw_sequence": [
             126,
             103,
             76,
@@ -44015,8 +45059,20 @@
           "index": 51,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 183,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "short_affine_plain": 27,
+          "short_affine_plain_observations": [
+            27,
+            27,
+            27,
+            27
+          ],
+          "short_affine_raw_sequence": [
             183,
             174,
             133,
@@ -44976,8 +46032,20 @@
           "index": 109,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 128,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "short_affine_plain": 228,
+          "short_affine_plain_observations": [
+            228,
+            228,
+            228,
+            228
+          ],
+          "short_affine_raw_sequence": [
             128,
             153,
             178,
@@ -44996,8 +46064,20 @@
           "index": 110,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 44,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            8,
+            9,
+            10,
+            11
+          ],
+          "short_affine_plain": 228,
+          "short_affine_plain_observations": [
+            228,
+            228,
+            228,
+            228
+          ],
+          "short_affine_raw_sequence": [
             44,
             53,
             30,
@@ -45016,8 +46096,20 @@
           "index": 111,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 72,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "short_affine_plain": 228,
+          "short_affine_plain_observations": [
+            228,
+            228,
+            228,
+            228
+          ],
+          "short_affine_raw_sequence": [
             72,
             81,
             122,
@@ -48239,8 +49331,20 @@
           "index": 313,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 115,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "short_affine_plain": 23,
+          "short_affine_plain_observations": [
+            23,
+            23,
+            23,
+            23
+          ],
+          "short_affine_raw_sequence": [
             115,
             106,
             65,
@@ -48259,8 +49363,20 @@
           "index": 314,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 223,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            8,
+            9,
+            10,
+            11
+          ],
+          "short_affine_plain": 23,
+          "short_affine_plain_observations": [
+            23,
+            23,
+            23,
+            23
+          ],
+          "short_affine_raw_sequence": [
             223,
             198,
             237,
@@ -48279,8 +49395,20 @@
           "index": 315,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 187,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "short_affine_plain": 23,
+          "short_affine_plain_observations": [
+            23,
+            23,
+            23,
+            23
+          ],
+          "short_affine_raw_sequence": [
             187,
             162,
             137,
@@ -48442,8 +49570,20 @@
           "index": 327,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 185,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "short_affine_plain": 21,
+          "short_affine_plain_observations": [
+            21,
+            21,
+            21,
+            21
+          ],
+          "short_affine_raw_sequence": [
             185,
             160,
             139,
@@ -48579,8 +49719,20 @@
           "index": 337,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 54,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "short_affine_plain": 82,
+          "short_affine_plain_observations": [
+            82,
+            82,
+            82,
+            82
+          ],
+          "short_affine_raw_sequence": [
             54,
             47,
             4,
@@ -48599,8 +49751,20 @@
           "index": 338,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 154,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            8,
+            9,
+            10,
+            11
+          ],
+          "short_affine_plain": 82,
+          "short_affine_plain_observations": [
+            82,
+            82,
+            82,
+            82
+          ],
+          "short_affine_raw_sequence": [
             154,
             131,
             168,
@@ -48619,8 +49783,20 @@
           "index": 339,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 254,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "short_affine_plain": 82,
+          "short_affine_plain_observations": [
+            82,
+            82,
+            82,
+            82
+          ],
+          "short_affine_raw_sequence": [
             254,
             231,
             204,
@@ -49380,8 +50556,20 @@
           "index": 397,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 110,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "short_affine_plain": 10,
+          "short_affine_plain_observations": [
+            10,
+            10,
+            10,
+            10
+          ],
+          "short_affine_raw_sequence": [
             110,
             119,
             92,
@@ -49400,8 +50588,20 @@
           "index": 398,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 194,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            8,
+            9,
+            10,
+            11
+          ],
+          "short_affine_plain": 10,
+          "short_affine_plain_observations": [
+            10,
+            10,
+            10,
+            10
+          ],
+          "short_affine_raw_sequence": [
             194,
             219,
             240,
@@ -49420,8 +50620,20 @@
           "index": 399,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 166,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "short_affine_plain": 10,
+          "short_affine_plain_observations": [
+            10,
+            10,
+            10,
+            10
+          ],
+          "short_affine_raw_sequence": [
             166,
             191,
             148,
@@ -49713,8 +50925,20 @@
           "index": 421,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 224,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "short_affine_plain": 132,
+          "short_affine_plain_observations": [
+            132,
+            132,
+            132,
+            132
+          ],
+          "short_affine_raw_sequence": [
             224,
             249,
             210,
@@ -49733,8 +50957,20 @@
           "index": 422,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 76,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            8,
+            9,
+            10,
+            11
+          ],
+          "short_affine_plain": 132,
+          "short_affine_plain_observations": [
+            132,
+            132,
+            132,
+            132
+          ],
+          "short_affine_raw_sequence": [
             76,
             85,
             126,
@@ -49753,8 +50989,20 @@
           "index": 423,
           "mode": 0,
           "operation_key": "0d6840031a00",
-          "short_rm_payload": 40,
-          "short_rm_sequence": [
+          "short_affine_cells": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "short_affine_plain": 132,
+          "short_affine_plain_observations": [
+            132,
+            132,
+            132,
+            132
+          ],
+          "short_affine_raw_sequence": [
             40,
             49,
             26,
@@ -49926,6 +51174,6 @@
       "sha256": "6f2552a0a4b938e5edaf7e05ce59da977ab1af3dc96c1a1bcf925c83a83112b9"
     }
   ],
-  "note": "Offline structural map. decoded_start/decoded_span are candidate fields inferred statically, not a completed CDD decode. short_rm_* fields decode only the two known short-operation records.",
-  "schema": "liteon-cdd-record-map-v2"
+  "note": "Offline structural map. decoded_start/decoded_span are candidate fields inferred statically, not a completed CDD decode. short_affine_* fields decode only full-row occurrences of the two known short-operation records.",
+  "schema": "liteon-cdd-record-map-v3"
 }

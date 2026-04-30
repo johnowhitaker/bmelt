@@ -641,30 +641,49 @@ CDD1 table entries that target inside it.
 This also explains the visible 13-byte motif runs. The common
 `0d6840031a00` operation consumes four 13-byte source units, `0x34` bytes
 total, but the candidate decoded span is `0x30`: four 12-byte units. A peer
-static pass caught an important correction here. The "extra" byte is not just
-throwaway parity. Across all 104 known short records, the first byte of each
-of the four units follows:
+static pass caught an important correction here. The first byte is not just
+throwaway parity, and our first "m byte" model was still one level too shallow.
+The real mask table is:
 
 ```text
-m, m^0x19, m^0x32, m^0x2b
+cell: 00 01 02 03 04 05 06 07 08 09 0a 0b 0c 0d 0e 0f
+mask: 00 19 32 2b 64 7d 56 4f c8 d1 fa e3 ac b5 9e 87
 ```
 
-Shared record indices keep the same `m` across the sibling images. So the
-short operations appear to encode one reproducible payload/control byte in a
-four-copy XOR code, plus image/profile-specific scaffold bytes. The related
-`0c6000031800` operation uses 12-byte units but follows the same byte-0 rule.
-
-There is even a second-level pattern in the `m` bytes. Consecutive short-record
-runs fit slices of another XOR row:
+That table is carry-less multiplication by `0x19` over the 4-bit cell index.
+For a short record, the cell is:
 
 ```text
-base^0x00, base^0x64, base^0xc8, base^0xac
+cell = 4 * (record_index & 3) + unit_index
+plain_group_byte = raw_cell_byte ^ mask[cell]
 ```
 
-For example, entries 312..315 have `m = 17 73 df bb`, exactly
-`0x17 ^ {00,64,c8,ac}`. Several three-record runs look like the same row with
-one lane missing. That is not a decoder yet, but it is another sign that CDD is
-using explicit small codewords rather than accidental repeated bytes.
+This turns adjacent short records into observations of one group byte rather
+than independent row-local values. For example, record 423's raw first bytes
+`28 31 1a 03` use cells 12..15 and all decode to `0x84`.
+
+Then Pro's bigger observation held up: the same canonical unit tail appears as
+suffix cells inside longer records. That means some long records are partly
+decodable too. In CHS9, record 108 ends with three canonical-tail units whose
+first bytes decode as cells 1..3, and records 109..111 supply cells 4..15; all
+15 observations agree on group 27 = `0xe4`. This is the first real static
+decode of bytes out of long CDD records, even though it is still only a thin
+suffix-cell layer.
+
+The suffix layer has structure but is not fully solved. Across six sibling
+images, there are 115 suffix records: 49 with one trailing unit, 37 with two,
+and 29 with three. All have `op_key[5] == 0`; excluding the noisy CDD1/CDD2
+boundary group, `op_key[4]` remains the doubled unit size, and every two- or
+three-unit suffix uses the same `0x30` decoded-span field as the short records.
+That is enough to keep decoding literal tail evidence, but not enough to claim
+the op key alone predicts suffix length.
+
+There is also a useful caution here. The affine byte is definitely real
+structure, but we should not over-name it yet. It might be a semantic group
+byte, a parity/control byte, or one visible lane of a broader controller
+codeword. The short-record span still says `0x30` bytes, so one good runtime
+oracle for a known short record would tell us whether the canonical tail is
+actual decoded output, scaffold, or something stranger.
 
 The high two bits of that same byte look like mode flags. They split the record
 set into different redundancy classes: roughly 2x encoded/decoded for mode

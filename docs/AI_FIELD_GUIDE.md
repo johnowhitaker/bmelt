@@ -202,16 +202,25 @@ Key CDD facts:
   `0x34`/`0x30` byte spans, matching the visible motif islands. In these
   records, byte 0 behaves like `N`, byte 1 is `8*N`, byte 4 is `2*N`, and the
   source span is `4*N`.
-- Those short operations have a source-unit format: byte 0 of each of the four
-  units follows `m, m^0x19, m^0x32, m^0x2b` for 104/104 known short records.
-  Shared record indices keep the same `m` across siblings, even when the
-  image/profile-specific unit tail and operation key differ. This corrects the
-  older "extra parity byte" reading: the byte carries a reproducible
-  one-byte payload/control value.
-- Consecutive short-record runs show a second-level XOR pattern: the `m` values
-  fit contiguous slices of `base^0x00, base^0x64, base^0xc8, base^0xac`.
-  Example: entries 312..315 are `17 73 df bb`.
-  See `analysis/cdd-affine-codeword-notes.md`.
+- Those short operations have a source-unit format: byte 0 of each unit is a
+  coded cell in a 16-cell affine group. The mask table is
+  `mask[cell] = carryless_mul8(0x19, cell)`, giving
+  `00 19 32 2b 64 7d 56 4f c8 d1 fa e3 ac b5 9e 87`.
+  The old row-local `m` value was the raw coded byte, not the final semantic
+  byte. Decode with
+  `plain_group_byte = raw_cell_byte ^ mask[4 * (record_index & 3) + unit]`.
+- Matching canonical unit tails also appear as suffix cells inside longer
+  records, recovering additional group bytes without a runtime oracle. See
+  `references/firmware/extracted/liteon-cdd-affine-unit-analysis.md` and
+  `analysis/cdd-affine-codeword-notes.md`.
+- Suffix records are still decoded from literal tail evidence, not from a
+  solved op-key formula. Current constraints: `op_key[5] == 0`; non-boundary
+  suffix records keep `op_key[4] == 0x18/0x1a` as `2 * unit_size`; and every
+  non-boundary `k=2`/`k=3` suffix has decoded-span field `0x30`.
+- Treat the affine byte as proven structure but not yet proven runtime payload.
+  It may be semantic data, parity/control material, or one lane of a larger
+  controller codeword. A runtime oracle for one known short record would settle
+  that ambiguity.
 - CHS7 vs CHS9 same-index source-span comparison has common prefixes up to
   56 bytes, so record indices appear stable across close sibling revisions.
 - Cheap decode probes did not find a global XOR/add/sub mask or standard zlib
