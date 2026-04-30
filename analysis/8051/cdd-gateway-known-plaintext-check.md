@@ -184,8 +184,9 @@ This makes the resident-code overlaps less likely to yield a cheap decode rule
 by themselves. They may still be known-output pairs for the hard mode, but they
 are not the easy motif mode.
 
-For the LD5M `0d6840031a00` records specifically, the easy-mode rule is now
-very concrete:
+Follow-up with the peer static notes corrected the interpretation of the short
+records. The visible shape is very concrete, but the semantic byte is the
+varying first byte, not the repeated tail.
 
 ```text
 source length: 0x34 = 4 * 13
@@ -193,23 +194,47 @@ decoded span:  0x30 = 4 * 12
 
 each 13-byte source unit:
   <varying byte> b8 b8 20 17 14 17 14 1a 77 b8 37 60
-
-drop byte 0 from each 13-byte unit:
-  b8 b8 20 17 14 17 14 1a 77 b8 37 60
 ```
 
 All 16 LD5M records with operation key `0d6840031a00` have this same shape.
-The first byte changes per unit; the following 12 bytes are constant. That
-looks like an address/parity/check/control byte in front of a 12-byte decoded
-unit.
+The four first bytes in each record obey:
+
+```text
+v0 = m
+v1 = m ^ 0x19
+v2 = m ^ 0x32
+v3 = m ^ 0x2b
+```
+
+This holds for 104/104 short records across LD5M, AD12, AHS9, CD12, CHS7, and
+CHS9 when including the related `0c6000031800` form. The `m` byte is stable by
+record index across sibling images. Examples:
+
+```text
+record 109: m=80 across all six images
+record 110: m=2c across all six images
+record 111: m=48 across all six images
+record 397: m=6e across all six images
+record 423: m=28 across all six images
+```
+
+So the previous "drop byte 0" observation should be treated only as a way to
+isolate the fixed scaffold. It is not a semantic decoder. The semantic/control
+payload currently known for these short records is the single `m` byte encoded
+redundantly in the first byte of each unit.
 
 The close sibling versions show a related but not identical easy-mode shape:
 AD12/AHS9 use operation key `0c6000031800` at corresponding places, with
 source length `0x30` and decoded span `0x30`. Their records are four 12-byte
 units, each beginning with the same varying byte sequence seen in LD5M's
-13-byte units, followed by an image-specific 11-byte tail. So operation byte
-`0x0c` vs `0x0d` likely changes the unit width or check-byte convention, not
-the whole record grammar.
+13-byte units, followed by an image-specific 11-byte tail. Operation byte
+`0x0c` vs `0x0d` likely changes the unit width/scaffold convention, while the
+four-way XOR coding of `m` stays the same.
+
+This also means the candidate `decoded_span=0x30` is not yet proven to mean
+"48 bytes of ordinary plaintext" for these records. It may be a logical
+address-space allocation, controller codeword footprint, or scaffolded control
+cell rather than a literal uncompressed byte count.
 
 ## Sibling Cross-Check
 
