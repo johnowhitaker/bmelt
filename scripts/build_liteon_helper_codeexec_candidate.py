@@ -196,8 +196,37 @@ def branch_on_acc_bit_payload(prefix_hex: str, bit: int, *, success_on_one: bool
     )
 
 
+def timing_on_acc_bit_payload(prefix_hex: str, bit: int, delay_count: int, *, delay_on_one: bool) -> str:
+    """Return a GOOD/GOOD timing predicate over one ACC bit.
+
+    The older bit channel encoded 0 by jumping to the helper's DID_ERROR path.
+    That is host-visible, but it also leaves more recovery work behind. This
+    variant always returns via the normal helper success path and only inserts
+    the delay loop on the selected bit value.
+    """
+
+    asm = Asm8051()
+    asm.data.extend(bytes.fromhex(prefix_hex))
+    if delay_on_one:
+        asm.jnb(acc_bit_addr(bit), "success")
+        asm.data.extend(bytes.fromhex(delay_payload(delay_count)))
+        asm.label("success")
+        asm.emit(0x02, 0x32, 0xC4)
+    else:
+        asm.jnb(acc_bit_addr(bit), "delay")
+        asm.emit(0x02, 0x32, 0xC4)
+        asm.label("delay")
+        asm.data.extend(bytes.fromhex(delay_payload(delay_count)))
+        asm.emit(0x02, 0x32, 0xC4)
+    return asm.finish()
+
+
 def immediate_bit_payload(value: int, bit: int, *, success_on_one: bool) -> str:
     return branch_on_acc_bit_payload(f"74{value:02x}", bit, success_on_one=success_on_one)
+
+
+def immediate_bit_timing_payload(value: int, bit: int, delay_count: int, *, delay_on_one: bool) -> str:
+    return timing_on_acc_bit_payload(f"74{value:02x}", bit, delay_count, delay_on_one=delay_on_one)
 
 
 def movc_bit_payload(addr: int, bit: int, *, success_on_one: bool) -> str:
@@ -208,6 +237,11 @@ def movc_bit_payload(addr: int, bit: int, *, success_on_one: bool) -> str:
 def movx_bit_payload(addr: int, bit: int, *, success_on_one: bool) -> str:
     prefix = f"90{addr:04x}e0"  # MOV DPTR,#addr; MOVX A,@DPTR
     return branch_on_acc_bit_payload(prefix, bit, success_on_one=success_on_one)
+
+
+def movx_bit_timing_payload(addr: int, bit: int, delay_count: int, *, delay_on_one: bool) -> str:
+    prefix = f"90{addr:04x}e0"  # MOV DPTR,#addr; MOVX A,@DPTR
+    return timing_on_acc_bit_payload(prefix, bit, delay_count, delay_on_one=delay_on_one)
 
 
 def direct_bit_payload(addr: int, bit: int, *, success_on_one: bool) -> str:
@@ -472,6 +506,16 @@ def parse_args() -> argparse.Namespace:
     immediate.add_argument("--bit", type=parse_bit, required=True)
     immediate.add_argument("--success-on-zero", action="store_true")
 
+    immediate_delay = sub.add_parser(
+        "immediate-bit-delay",
+        help="return GOOD either way, adding a delay when a constant ACC bit has the selected value",
+    )
+    immediate_delay.add_argument("--value", type=parse_byte, required=True)
+    immediate_delay.add_argument("--bit", type=parse_bit, required=True)
+    immediate_delay.add_argument("--payload-offset", type=parse_u16, default=PAYLOAD_PLAIN_OFFSET)
+    immediate_delay.add_argument("--delay-count", type=parse_byte, default=0x20)
+    immediate_delay.add_argument("--delay-on-zero", action="store_true")
+
     movc = sub.add_parser("movc-bit", help="branch based on a code-memory byte bit read with MOVC")
     movc.add_argument("--addr", type=parse_u16, required=True)
     movc.add_argument("--bit", type=parse_bit, required=True)
@@ -481,6 +525,16 @@ def parse_args() -> argparse.Namespace:
     movx.add_argument("--addr", type=parse_u16, required=True)
     movx.add_argument("--bit", type=parse_bit, required=True)
     movx.add_argument("--success-on-zero", action="store_true")
+
+    movx_delay = sub.add_parser(
+        "movx-bit-delay",
+        help="return GOOD either way, adding a delay when an XDATA bit has the selected value",
+    )
+    movx_delay.add_argument("--addr", type=parse_u16, required=True)
+    movx_delay.add_argument("--bit", type=parse_bit, required=True)
+    movx_delay.add_argument("--payload-offset", type=parse_u16, default=PAYLOAD_PLAIN_OFFSET)
+    movx_delay.add_argument("--delay-count", type=parse_byte, default=0x20)
+    movx_delay.add_argument("--delay-on-zero", action="store_true")
 
     direct = sub.add_parser("direct-bit", help="branch based on an 8051 direct/SFR byte bit")
     direct.add_argument("--addr", type=parse_u8, required=True)
@@ -600,6 +654,19 @@ def main() -> int:
                 ),
             ),
         ]
+    elif args.mode == "immediate-bit-delay":
+        patches = [
+            hex_patch(HOOK_PLAIN_OFFSET, ljmp(helper_code_addr(args.payload_offset))),
+            hex_patch(
+                args.payload_offset,
+                immediate_bit_timing_payload(
+                    args.value,
+                    args.bit,
+                    args.delay_count,
+                    delay_on_one=not args.delay_on_zero,
+                ),
+            ),
+        ]
     elif args.mode == "movc-bit":
         patches = [
             hex_patch(HOOK_PLAIN_OFFSET, ljmp(PAYLOAD_CODE_ADDR)),
@@ -621,6 +688,19 @@ def main() -> int:
                     args.addr,
                     args.bit,
                     success_on_one=not args.success_on_zero,
+                ),
+            ),
+        ]
+    elif args.mode == "movx-bit-delay":
+        patches = [
+            hex_patch(HOOK_PLAIN_OFFSET, ljmp(helper_code_addr(args.payload_offset))),
+            hex_patch(
+                args.payload_offset,
+                movx_bit_timing_payload(
+                    args.addr,
+                    args.bit,
+                    args.delay_count,
+                    delay_on_one=not args.delay_on_zero,
                 ),
             ),
         ]

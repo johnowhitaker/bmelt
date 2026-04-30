@@ -272,6 +272,53 @@ Selected follow-up reads at the same hook:
 This is too slow for bulk dumping, but useful for mapping selected XDATA
 registers and validating GPIO/status candidates before using external wiring.
 
+## Helper Timing Channel
+
+The GOOD/DID_ERROR channel is useful but rough: a `0` deliberately enters the
+helper's error path. After an overnight sweep wedged on `xdata[0x4704].0 = 0`,
+we added a GOOD/GOOD timing channel.
+
+The timing reader still uses the late helper hook at code `0x32af`, but jumps
+to a larger payload slot:
+
+```text
+helper plaintext 0x04f6 / code 0x34f0
+```
+
+The old `0x0620` `Flash Type Error` string is only 16 bytes; the conditional
+timing payload is 20 bytes, so use `0x04f6` or another known-large string slot
+for these predicates.
+
+Live calibration with delay `0x20`:
+
+| case | event 68 |
+|---|---:|
+| no delay / bit `0` | `0.255969s` |
+| delay / bit `1` | `0.853324s` |
+| threshold | `0.554646s` |
+
+First confirmed timing read:
+
+```text
+xdata[0x4704] at the late event-68 hook = 0x00
+```
+
+Tool:
+
+```sh
+python3 scripts/read_liteon_xdata_timing_channel.py \
+  --device /dev/sg1 \
+  --addr 0x4704 \
+  --calibrate \
+  --payload-offset 0x04f6
+```
+
+Evidence:
+
+```text
+references/evidence/live/linux-drive1-helper-xdata-timing-channel.md
+```
+
 ## Pico Front-Panel Probe
 
 The gutted-drive front board is wired to a Pico:

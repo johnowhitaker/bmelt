@@ -13,12 +13,14 @@ from the active tree. The compact operating set is now in this repo.
 3. `docs/helper-bypass-write-method.md`
 4. `references/evidence/live/linux-drive1-codeexec-timing-poc.md`
 5. `references/evidence/live/linux-drive1-helper-bit-channel.md`
-6. `scripts/run_liteon_linux_persistence_experiment.py`
-7. `scripts/build_liteon_helper_bypass_candidate.py`
-8. `scripts/build_liteon_helper_codeexec_candidate.py`
-9. `scripts/read_liteon_xdata_bit_channel.py`
-10. `scripts/recover_liteon_currentboot_linux.py`
-11. `scripts/dump_liteon_linux_f0_window.py`
+6. `references/evidence/live/linux-drive1-helper-xdata-timing-channel.md`
+7. `scripts/run_liteon_linux_persistence_experiment.py`
+8. `scripts/build_liteon_helper_bypass_candidate.py`
+9. `scripts/build_liteon_helper_codeexec_candidate.py`
+10. `scripts/read_liteon_xdata_bit_channel.py`
+11. `scripts/read_liteon_xdata_timing_channel.py`
+12. `scripts/recover_liteon_currentboot_linux.py`
+13. `scripts/dump_liteon_linux_f0_window.py`
 
 ## Hardware State
 
@@ -49,7 +51,8 @@ Live-proven:
 - recover known `0D5C` currentboot back to `LD5M`;
 - persist selected F0 bytes with the helper-status bypass;
 - execute patched helper-overlay code and observe host-visible timing;
-- read selected XDATA bits through event-68 GOOD vs DID_ERROR.
+- read selected XDATA bits through event-68 GOOD vs DID_ERROR;
+- read selected XDATA bits through a safer GOOD/GOOD timing channel.
 
 Still unsolved:
 
@@ -165,10 +168,52 @@ python3 scripts/read_liteon_xdata_bit_channel.py \
 This is intentionally slow. It is suitable for selected registers, not bulk
 memory dumps.
 
+## XDATA Timing Channel
+
+The GOOD/DID_ERROR channel is no longer the preferred first choice for unknown
+controller registers. Claude's overnight sweep hit `xdata[0x4704].0 = 0` and
+then recovery wedged until physical replug. The safer channel always returns
+GOOD and encodes the bit in event-68 latency.
+
+Use payload offset `0x04f6` for conditional timing payloads; the old
+`0x0620` `Flash Type Error` string slot is too short for the 20-byte predicate.
+
+Live calibration:
+
+```text
+no delay: 0.255969s
+delay 0x20: 0.853324s
+threshold: 0.554646s
+```
+
+Confirmed:
+
+```text
+xdata[0x4704] at event 68 = 0x00
+```
+
+Read shape:
+
+```sh
+python3 scripts/read_liteon_xdata_timing_channel.py \
+  --device /dev/sg1 \
+  --addr 0x4704 \
+  --calibrate \
+  --payload-offset 0x04f6 \
+  --between-delay 3
+```
+
+Evidence:
+
+```text
+references/evidence/live/linux-drive1-helper-xdata-timing-channel.md
+```
+
 ## Good Next Step
 
-Use the XDATA bit channel to map a short list of high-value registers before
-adding hardware:
+Use the timing XDATA channel to map a short list of high-value registers before
+adding hardware. Use the older GOOD/DID_ERROR channel only when the value is
+already known not to drive a messy recovery path.
 
 - nearby handoff/status bytes around `0x48a0`;
 - controller/finalizer state bytes already seen statically, such as `0x47d2`

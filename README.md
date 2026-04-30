@@ -56,6 +56,12 @@ Recover from known `0D5C` currentboot:
 ssh root@jonathan-thinkpad-t480s 'cd /home/jonathan/boastermelt && python3 scripts/recover_liteon_currentboot_linux.py --device /dev/sg1'
 ```
 
+Read one XDATA byte through the safer GOOD/GOOD timing channel:
+
+```sh
+ssh root@jonathan-thinkpad-t480s 'cd /home/jonathan/boastermelt && python3 scripts/read_liteon_xdata_timing_channel.py --device /dev/sg1 --addr 0x4704 --calibrate --payload-offset 0x04f6 --between-delay 3'
+```
+
 Build a helper-bypass candidate:
 
 ```sh

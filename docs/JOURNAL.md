@@ -185,6 +185,30 @@ soldering anything: what does this status register contain at the hook point,
 does this GPIO bit move when a button changes, does this controller handoff
 flag mean what we think it means?
 
+The error-path bit channel then taught us its own limitation. Claude ran an
+overnight candidate sweep and hit the first organic zero in the controller
+mailbox area: `xdata[0x4704].0 = 0`. The helper reported that zero by jumping
+to `DID_ERROR`, and this time auto-recovery did not finish cleanly without a
+physical replug. That made `0x4704` interesting, but it also made the channel's
+weakness obvious: using a helper error as a data symbol is a blunt instrument.
+
+The fix was to return to the original timing idea, but make it conditional.
+The new payload reads a bit, delays only when the bit is one, and always returns
+through the helper success path. Because that payload is longer than the old
+`Flash Type Error` string slot, it now lives in a larger comment-string slot at
+helper plaintext `0x04f6` / code `0x34f0`.
+
+With a fresh calibration, event `68` was about `0.256s` for no delay and
+`0.853s` for delay `0x20`. Reading all eight bits of `xdata[0x4704]` through
+that safer channel gave:
+
+```text
+xdata[0x4704] = 0x00
+```
+
+That both confirms Claude's bit-zero observation and gives us a less
+punishing way to keep mapping controller registers.
+
 ## Where The Clean Repo Starts
 
 The active repo now keeps only the compact operating set:
@@ -195,7 +219,8 @@ The active repo now keeps only the compact operating set:
 - the minimal Linux dumping/recovery/bypass scripts;
 - the current 8051 binary and Ghidra decompile;
 - the timing code-execution proof;
-- the helper success/error bit-channel proof.
+- the helper success/error bit-channel proof;
+- the helper timing-channel read proof.
 
 The next phase is to use that slow bit channel for targeted internal mapping,
 then decide whether a Pico front-panel link is worth adding for faster,
