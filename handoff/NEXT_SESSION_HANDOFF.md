@@ -190,6 +190,10 @@ Confirmed:
 
 ```text
 xdata[0x4704] at event 68 = 0x00
+xdata[0x4708] at event 68 = 0x90
+xdata[0x4709] at event 68 = 0x00
+xdata[0x470a] at event 68 = 0x64
+xdata[0x470b] at event 68 = 0x06
 ```
 
 Read shape:

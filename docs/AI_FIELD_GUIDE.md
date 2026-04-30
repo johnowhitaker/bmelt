@@ -303,6 +303,16 @@ First confirmed timing read:
 xdata[0x4704] at the late event-68 hook = 0x00
 ```
 
+Nearby controller cluster timing reads:
+
+| address | value |
+|---:|---:|
+| `0x4704` | `0x00` |
+| `0x4708` | `0x90` |
+| `0x4709` | `0x00` |
+| `0x470a` | `0x64` |
+| `0x470b` | `0x06` |
+
 Tool:
 
 ```sh

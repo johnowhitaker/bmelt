@@ -96,6 +96,32 @@ xdata[0x4704] = 0x00
 That confirms Claude's bit-0 finding and shows the whole byte is zero at this
 hook point.
 
+## Follow-Up Controller Cluster Read
+
+Using the same calibration threshold, the next four bytes in the nearby
+controller/status cluster were:
+
+| address | value | bits |
+|---:|---:|---|
+| `0x4708` | `0x90` | `10010000` |
+| `0x4709` | `0x00` | `00000000` |
+| `0x470a` | `0x64` | `01100100` |
+| `0x470b` | `0x06` | `00000110` |
+
+All runs recovered to `LD5M`. The timing split stayed clean: short values were
+around `0.257s`, delayed values around `0.854s`.
+
+Static cross-reference note:
+
+- `0x4708` has resident bit writes at `0x5cf5`/`0x5d17`/`0x5d24`.
+- `0x4709` has resident bit writes at `0x25cb`/`0x25cf`/`0x25d3`/`0x25e5`
+  and `0x5e5c`/`0x5e83`.
+- `0x470a.5` is read at `0x6458` and written at `0x244a`.
+- `0x470b` is written during resident init/servo-controller setup.
+
+These values are much more structured than the all-`0xff` idle reads and are
+worth treating as live initialized controller state, not empty bus noise.
+
 ## Operational Notes
 
 - The first target attempt hit a transient `Unit Attention` on the first
