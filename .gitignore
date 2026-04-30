@@ -4,6 +4,7 @@ runs/
 work/
 .tmp/
 references/firmware/extracted/helper-codeexec-candidates/
+references/firmware/extracted/resident-hook-candidates/
 references/firmware/extracted/profile-tail-mutation-candidates/
 ghidra_export.c
 ghidra_export.h

@@ -503,6 +503,21 @@ Evidence:
 references/evidence/live/linux-drive1-pretail-codeexec-event1-negative.md
 ```
 
+After that, we tested a direct persistent F0 resident-hook route. A helper-built
+candidate patched the normal-looking `REQUEST SENSE` handler at `0x5c72`, then
+another patched the normal-looking `INQUIRY` handler at `0x4ec6`. In both
+cases, delayed F0 readback proved the bytes persisted, but live host command
+timing did not change after SCSI reset, USB bridge deauth/reauth, or a full
+Linux host reboot.
+
+The restore candidate returned `0x0000..0x7000` to byte-identical stock LD5M.
+
+Evidence:
+
+```text
+references/evidence/live/linux-drive1-resident-f0-hook-negative.md
+```
+
 Second pass, after the directory source-address model, also returned zeros:
 
 | target | value |
@@ -641,5 +656,6 @@ Immediate useful directions:
 4. If the LED/button GPIO block is found, switch from timing/error-status output
    to a faster Pico-visible channel.
 5. Keep live tests short through event `68` while iterating on helper code.
-6. Avoid boot-critical persistent F0 hooks until the live normal-mode handler
-   path is mapped.
+6. Do not assume visible F0-prefix functions are live normal-mode handlers.
+   Persistent hooks at `0x4ec6` and `0x5c72` were visible in F0 but did not
+   affect `INQUIRY` or `REQUEST SENSE` timing.

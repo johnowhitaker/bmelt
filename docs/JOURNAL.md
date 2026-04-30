@@ -535,3 +535,24 @@ That closes the easy version of the pre-tail route. The next route is a real
 resident LD5M command hook: patch a live normal-mode SCSI handler, trigger it
 from the host after recovery, and use that as the vantage point for decoded CDD
 or controller memory.
+
+We tried the most direct version of that too. The helper-bypass writer patched
+two normal-looking resident handlers in the visible F0 prefix:
+
+```text
+0x5c72  REQUEST SENSE handler
+0x4ec6  INQUIRY handler
+0x6ee3  FF code cave for a small timing stub
+```
+
+Both hooks persisted. Delayed F0 readback showed the `LJMP 0x6ee3` patch and
+the delay stub in flash. But neither host command slowed down, even after SCSI
+reset, USB bridge deauth/reauth, and a full reboot of the Linux host. After
+that negative result, we restored the patched range and verified
+`0x0000..0x7000` matched stock LD5M byte-for-byte.
+
+That is a useful boundary. We can write the visible F0 prefix, but at least
+these obvious standard-command handlers are not the live normal-mode execution
+path. The "resident hook" route probably needs a RAM/overlay hook, or we need
+to move to a hardware-visible runtime signal path instead of waiting for a
+host-visible SCSI command response.
