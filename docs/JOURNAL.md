@@ -253,3 +253,21 @@ Removing the tray/insert sense band might reduce mechanical risk, but it also
 risks preventing the updater sequence from reaching the helper at all. The
 better next hardware input is a separate line that does not already mean
 "eject" to the drive.
+
+The LED search then became a trace-analysis problem. We added a Pico waveform
+analyzer and started comparing the sampled GP26 shape during event 68 and
+recovery. Direct 8051 port probes were mostly boring: `P1.0..P1.7` and
+`P3.0..P3.5` all produced the same seven-transition LED pattern as the baseline.
+`P3.6` was not boring: clearing it wedged the optical LUN and left the LED on.
+That is probably the 8051 external-memory write strobe showing through, so
+`P3.6` and its neighbors are now off the casual-probe list.
+
+The useful crack came from XDATA. Writing `0x00` to `0x4748` in a held helper
+loop completed and recovered. Writing `0xff` to the same address let event 68
+return, but then GP26 stayed high for the whole attempted recovery and the USB
+side timed out until a physical replug. That is the first strong front-panel LED
+path lead: not yet a communication channel, because whole-byte `0xff` is too
+destructive, but very likely either the LED latch itself or a nearby
+front-panel/control register. The next version of this experiment should be
+bit-level and should preserve/restore the original `0x4748` value instead of
+hammering all bits high.

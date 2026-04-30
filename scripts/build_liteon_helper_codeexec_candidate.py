@@ -267,6 +267,27 @@ def hold_movx_byte_payload(addr: int, value: int, hold_count: int) -> str:
     )
 
 
+def hold_movx_byte_op_payload(addr: int, op: str, value: int, hold_count: int) -> str:
+    asm = Asm8051()
+    asm.emit(0x90, (addr >> 8) & 0xFF, addr & 0xFF)  # MOV DPTR,#addr
+    asm.emit(0x7F, hold_count)  # MOV R7,#outer
+    asm.label("outer")
+    asm.emit(0x7E, 0xFF)  # MOV R6,#0xff
+    asm.label("middle")
+    asm.emit(0x7D, 0xFF)  # MOV R5,#0xff
+    asm.label("inner")
+    if op == "write":
+        asm.emit(0x74, value, 0xF0)  # MOV A,#value; MOVX @DPTR,A
+    else:
+        opcode = {"xor": 0x64, "or": 0x44, "and": 0x54}[op]
+        asm.emit(0xE0, opcode, value, 0xF0)  # MOVX A,@DPTR; op A,#value; MOVX @DPTR,A
+    asm.djnz_r(5, "inner")
+    asm.djnz_r(6, "middle")
+    asm.djnz_r(7, "outer")
+    asm.emit(0x02, 0x32, 0xC4)  # LJMP success path.
+    return asm.finish()
+
+
 def hold_direct_bit_payload(bit_addr: int, op: str, hold_count: int) -> str:
     opcode = {"clear": "c2", "set": "d2"}[op]
     return f"7f{hold_count:02x}7eff7dff{opcode}{bit_addr:02x}ddfcdef8dff4" + ljmp(0x32C4)
@@ -376,6 +397,7 @@ def build_report(args: argparse.Namespace, patches: list[str], outputs: dict[str
         "delayed-movx-byte-op",
         "delayed-direct-bit-op",
         "hold-movx-byte",
+        "hold-movx-byte-op",
         "hold-direct-bit",
         "xdata-parity-range",
     }
@@ -498,6 +520,16 @@ def parse_args() -> argparse.Namespace:
     hold_movx.add_argument("--value", type=parse_byte, required=True)
     hold_movx.add_argument("--payload-offset", type=parse_u16, default=0x0600)
     hold_movx.add_argument("--hold-count", type=parse_byte, default=0x40)
+
+    hold_movx_op = sub.add_parser(
+        "hold-movx-byte-op",
+        help="repeatedly read/modify/write one XDATA byte for a Pico-visible hold window",
+    )
+    hold_movx_op.add_argument("--addr", type=parse_u16, required=True)
+    hold_movx_op.add_argument("--op", choices=("write", "xor", "or", "and"), required=True)
+    hold_movx_op.add_argument("--value", type=parse_byte, required=True)
+    hold_movx_op.add_argument("--payload-offset", type=parse_u16, default=0x0600)
+    hold_movx_op.add_argument("--hold-count", type=parse_byte, default=0x40)
 
     hold_bit = sub.add_parser(
         "hold-direct-bit",
@@ -627,6 +659,14 @@ def main() -> int:
         patches = [
             hex_patch(HOOK_PLAIN_OFFSET, ljmp(helper_code_addr(args.payload_offset))),
             hex_patch(args.payload_offset, hold_movx_byte_payload(args.addr, args.value, args.hold_count)),
+        ]
+    elif args.mode == "hold-movx-byte-op":
+        patches = [
+            hex_patch(HOOK_PLAIN_OFFSET, ljmp(helper_code_addr(args.payload_offset))),
+            hex_patch(
+                args.payload_offset,
+                hold_movx_byte_op_payload(args.addr, args.op, args.value, args.hold_count),
+            ),
         ]
     elif args.mode == "hold-direct-bit":
         patches = [

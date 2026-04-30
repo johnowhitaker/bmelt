@@ -75,15 +75,30 @@ Validated timing windows:
 
 Negative LED-control probes so far:
 
-- direct/SFR `P1.6` set and clear, including looped hold;
+- direct/SFR `P1.0..P1.7` set and clear, including looped hold;
+- direct/SFR `P3.0..P3.5` set and clear, including looped hold;
 - XDATA `0x4023`, `0x4844`, and `0x90fc`, written as both `0x00` and `0xff`
   with looped hold;
 - XDATA `0x5904`, `0x5905`, `0x59c0`, `0x5906`, `0x592a`, `0x59f0`, `0x59f1`,
   `0x5a00`, `0x5a01`, `0x5a24`, `0x5a31`, and `0x5954` in the earlier
   final-tail write probes.
 
+Hazard notes:
+
+- Direct/SFR `P3.6` clear wedged the optical LUN, left the LED stuck on, and
+  did not recover through a Linux reboot. It needed a physical replug, after
+  which normal currentboot recovery restored `LD5M`. Treat `P3.6` as a likely
+  external-memory/control strobe, not as a GPIO candidate.
+- XDATA `0x4748=0xff` is the first strong LED-path hit. Event 68 completed, but
+  GP26 stayed high through the subsequent recovery attempt (`5379/5379`
+  recovery samples high, average about `1.98 V`) and the USB/optical LUN dropped
+  with descriptor timeouts. The paired `0x4748=0x00` probe completed and
+  recovered normally.
+
 Current interpretation: GP26 is definitely usable as an observed front-panel
-LED line, but the tested helper-visible registers are not its latch. GP27 is not
-a good debug input while the mechanism is connected. Removing the tray/insert
-sense band may make motion safer, but it also risks making normal vendor-write
-setup fail as tray-open/not-ready before the helper hook is reached.
+LED line. XDATA `0x4748` is now the best lead for the latch or a nearby
+front-panel/control register, but whole-byte `0xff` is too disruptive to use as
+a communication primitive. GP27 is not a good debug input while the mechanism is
+connected. Removing the tray/insert sense band may make motion safer, but it
+also risks making normal vendor-write setup fail as tray-open/not-ready before
+the helper hook is reached.
