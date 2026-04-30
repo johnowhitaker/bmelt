@@ -471,6 +471,12 @@ sibling images. CHS9 lands at `0x2ffd0`, only `0x30` short of `0x30000`; CD12
 is `0x2fe50`, AD12 `0x2fc20`, CHS7 `0x30350`, and AHS9 `0x30720`. LD5M is the
 looser outlier at `0x2e3b0`, but still in the same neighborhood.
 
+Then the two clues clicked together. If we lay the CDD records out in order
+using that decoded-span candidate, every shifted word from the CDD1 table lands
+inside one of the candidate decoded record intervals, for every DS-8ABSH sample
+we have. That is a strong validation that the table and the operation-key span
+field are talking about the same decoded address space.
+
 This also explains the visible 13-byte motif runs. The common
 `0d6840031a00` operation consumes four 13-byte source units, `0x34` bytes
 total, but the candidate decoded span is `0x30`: four 12-byte units. That

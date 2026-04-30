@@ -13,6 +13,7 @@ import argparse
 import hashlib
 import math
 import zlib
+from bisect import bisect_right
 from collections import Counter, defaultdict
 from dataclasses import dataclass
 from pathlib import Path
@@ -534,6 +535,35 @@ def decoded_offset_delta_runs(left: CddImage, right: CddImage) -> list[tuple[int
     return sorted(runs, reverse=True)
 
 
+def cdd1_table_interval_summary(image: CddImage) -> dict[str, object]:
+    starts = decoded_candidate_starts(image)
+    segments = source_segments(image)
+    ends = [
+        start + decoded_span_candidate(entry)
+        for start, (_, _, _, entry) in zip(starts, segments)
+    ]
+    table = cdd1_table_window(image)
+    words = [int.from_bytes(table[offset : offset + 2], "little") for offset in range(0, len(table) - 1, 2)]
+    hit_records: Counter[int] = Counter()
+    hit_rels: Counter[int] = Counter()
+    misses = 0
+    for word in words:
+        offset = word << 4
+        index = bisect_right(starts, offset) - 1
+        if index >= 0 and index < len(ends) and offset < ends[index]:
+            hit_records[index] += 1
+            hit_rels[offset - starts[index]] += 1
+        else:
+            misses += 1
+    return {
+        "words": len(words),
+        "hits": sum(hit_records.values()),
+        "misses": misses,
+        "records": hit_records.most_common(6),
+        "rels": hit_rels.most_common(6),
+    }
+
+
 def operation_mode_rows(images: list[CddImage]) -> list[dict[str, object]]:
     grouped: defaultdict[int, list[tuple[int, int, bytes]]] = defaultdict(list)
     for image in images:
@@ -882,6 +912,21 @@ def write_report(images: list[CddImage]) -> str:
         deltas = Counter(right_words[index] - left_words[index] for index in range(count)).most_common(6)
         delta_text = ", ".join(f"`{delta:+#x}` x{delta_count}" for delta, delta_count in deltas)
         lines.append(f"| {pair[0]} vs {pair[1]} | {len(left_words)}/{len(right_words)} | {same} | {delta_text} |")
+    lines.append("")
+    lines.append("Once the candidate decoded span field is applied, the table lines up even more tightly: every shifted table word falls inside one of the candidate decoded record intervals.")
+    lines.append("")
+    lines.append("| image | table words in candidate intervals | misses | top target records | common in-record offsets |")
+    lines.append("|---|---:|---:|---|---|")
+    for image in images:
+        if len(image.streams) < 2 or image.name == "XD13":
+            continue
+        summary = cdd1_table_interval_summary(image)
+        records = ", ".join(f"`{index}` x{count}" for index, count in summary["records"])  # type: ignore[index]
+        rels = ", ".join(f"`0x{rel:x}` x{count}" for rel, count in summary["rels"])  # type: ignore[index]
+        lines.append(
+            f"| {image.name} | {summary['hits']}/{summary['words']} | {summary['misses']} | "
+            f"{records} | {rels} |"
+        )
     lines.append("")
 
     ld5m = next((image for image in images if image.name == "LD5M"), None)

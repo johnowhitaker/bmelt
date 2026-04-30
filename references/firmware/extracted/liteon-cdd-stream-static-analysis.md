@@ -172,6 +172,17 @@ Close sibling tables also line up by position. CHS7 and CHS9 have 189 identical 
 | AD12 vs CD12 | 498/494 | 82 | `+0x0` x82, `+0x8` x7, `+0x2` x7, `+0x6` x6, `+0x4` x5, `+0xa` x5 |
 | LD5M vs CHS9 | 490/498 | 49 | `+0x0` x49, `-0x4` x6, `+0x2` x6, `+0xa` x5, `-0x6` x4, `+0x6` x4 |
 
+Once the candidate decoded span field is applied, the table lines up even more tightly: every shifted table word falls inside one of the candidate decoded record intervals.
+
+| image | table words in candidate intervals | misses | top target records | common in-record offsets |
+|---|---:|---:|---|---|
+| LD5M | 490/490 | 0 | `5` x62, `1` x51, `0` x40, `4` x28, `7` x28, `6` x23 | `0xf0` x26, `0x80` x17, `0x40` x16, `0x10` x15, `0x20` x15, `0x0` x15 |
+| AD12 | 498/498 | 0 | `6` x55, `1` x49, `0` x40, `7` x37, `5` x31, `40` x19 | `0xe0` x29, `0x10` x20, `0x70` x18, `0x20` x17, `0xc0` x16, `0x80` x15 |
+| AHS9 | 490/490 | 0 | `1` x50, `7` x47, `0` x41, `5` x37, `4` x21, `9` x19 | `0x2c0` x21, `0x40` x17, `0x60` x17, `0x20` x17, `0x90` x17, `0x70` x17 |
+| CD12 | 494/494 | 0 | `1` x51, `7` x47, `0` x42, `5` x37, `6` x31, `4` x20 | `0x90` x29, `0xb0` x17, `0x10` x17, `0x50` x16, `0x0` x16, `0xd0` x16 |
+| CHS7 | 492/492 | 0 | `1` x48, `0` x44, `6` x41, `5` x34, `7` x23, `8` x21 | `0x240` x21, `0x60` x20, `0xc0` x17, `0xb0` x17, `0xa0` x17, `0x30` x15 |
+| CHS9 | 498/498 | 0 | `1` x49, `0` x43, `6` x41, `5` x34, `7` x24, `8` x21 | `0x130` x25, `0x50` x18, `0x170` x17, `0x10` x17, `0x90` x17, `0xb0` x17 |
+
 LD5M source-segment mapping for useful probe offsets:
 
 | offset | source entry | source range | candidate decoded start/span | entry bytes |

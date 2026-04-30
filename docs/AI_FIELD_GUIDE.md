@@ -155,7 +155,9 @@ Key CDD facts:
 - The CDD1 post-directory table/control window looks like decoded-space
   address material: interpreted as little-endian u16 words, every word shifted
   left by four lands inside the explicit `0x30000` decoded range. CHS7/CHS9
-  share 189 same-index table words.
+  share 189 same-index table words. Stronger: once records are laid out using
+  the candidate decoded-span field below, every shifted table word in all six
+  samples falls inside one of those candidate decoded record intervals.
 - Across the current six DS-8ABSH samples, 2,135 unique operation keys appear
   and none maps to more than one source-span length. A partial length field is
   `u16le(operation_key[2:4]) >> 4`, exact for 106 records and close for many
