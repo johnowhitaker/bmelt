@@ -109,6 +109,50 @@ Working model: CDD is a controller-specific packed/program/data format. The
 hands ranges to the controller. The actual transformation into the runtime
 controller address space is probably controller-side.
 
+## Updater-Side Materialization
+
+The unpacked AHS9 Windows updater does materialize a CDD-bearing firmware
+container, but not a separately decoded CDD runtime image. The reproducible
+path is now:
+
+1. find the `COPYF2K8_SIZE=0000000000` metadata/table area;
+2. derive the FileDecrypt AES-ECB key as
+   `key[i] = table[(selector + i * 0x11) & 0xff]`, with selector byte
+   `table[0x58]`;
+3. AES-ECB decrypt the 1 MiB source object at metadata end + `0x1000`;
+4. apply the COPYF2K8 per-1KiB mask.
+
+For the AHS9 module this yields:
+
+- encrypted source offset: `0x195dc0`;
+- key table offset: `0x819f2a`;
+- selector offset: `0x819f82`, selector `0x07`;
+- AES-ECB key: `7ee34f39b34d5c9248473a39ec976508`;
+- COPYF2K8 mask offset: `0x194dc0`;
+- postprocessed SHA-256:
+  `e556dbed1132638b58600100fcd2c45d731430edc0cad388455cdbf624322af0`.
+
+The COPYF2K8 rule patches one byte per `0x400` block:
+
+```text
+table_byte = mask[block_index]
+relative_offset = table_byte & 0x3f
+xor_delta = sum(NEW_FW1[0:4]) & 0xff if block_index % 7 in {0, 2} else table_byte
+image[block_index * 0x400 + relative_offset] ^= xor_delta
+```
+
+For AHS9, `sum("AHS9") & 0xff = 0x15`. This reproduces the existing
+`AHS9-postprocess-plain.bin` sample byte-for-byte. The updater module has no
+raw `CDD\t` before this decrypt/postprocess path, and no evidence so far that
+the Windows updater decodes the CDD body into controller runtime form.
+
+Detailed report and extractor:
+
+```text
+references/firmware/extracted/liteon-updater-f0-materialization-analysis.md
+scripts/extract_liteon_updater_f0_image.py
+```
+
 ## Immediate Next Static Leads
 
 1. Continue parsing the 8-byte directory format. The final little-endian word

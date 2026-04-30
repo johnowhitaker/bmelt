@@ -313,3 +313,44 @@ looked normal. Restored `0x4780=0x00` looked normal too, but restored
 GP26 high during recovery. The normal recovery script brought it back to LD5M.
 That makes `0x4780` a second hazardous controller-path lead, not yet a clean
 LED output channel.
+
+## Back To The Updaters
+
+After the slow bit-channel work, we took a static detour back into the Windows
+updater dumps to answer a simpler question: does the updater ever hold the CDD
+payload in a more useful plaintext form?
+
+The answer is half yes. The unpacked AHS9 updater module does not contain raw
+`CDD` streams at rest. It contains an encrypted 1 MiB F0 object plus the data
+needed to decrypt it. The FileDecrypt key is built from a 256-byte table after
+the `COPYF2K8_SIZE` marker:
+
+```text
+key[i] = table[(selector + i * 0x11) & 0xff]
+```
+
+For AHS9, selector `0x07` gives:
+
+```text
+7ee34f39b34d5c9248473a39ec976508
+```
+
+AES-ECB decrypting the object at `0x195dc0` produces an almost-valid F0 image:
+the CDD markers, family marker, identity area, and trailer auth are all there.
+The remaining difference turned out to be the old `F2K8` postprocess layer, now
+modeled exactly. The updater applies a 1 KiB mask window, changing one byte in
+each `0x400` block:
+
+```text
+rel = mask[i] & 0x3f
+delta = sum(NEW_FW1[0:4]) & 0xff if i % 7 in {0, 2} else mask[i]
+image[i * 0x400 + rel] ^= delta
+```
+
+For `AHS9`, `sum("AHS9") & 0xff` is `0x15`. Applying that rule reproduces the
+existing `AHS9-postprocess-plain.bin` byte-for-byte.
+
+That is useful cleanup and future tooling, but it does not expose decoded servo
+runtime memory. The Windows updater materializes the sealed F0 container. The
+CDD body still looks like something the drive's controller consumes and
+expands internally.

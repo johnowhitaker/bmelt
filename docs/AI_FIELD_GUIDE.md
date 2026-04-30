@@ -92,6 +92,38 @@ Important boundaries:
   without helper range extension.
 - CDD directory-adjacent `0x704f` caused a hard failure; avoid that area.
 
+## Updater/CDD Static Path
+
+The unpacked AHS9 Windows updater module in ignored scratch space contains an
+encrypted 1 MiB F0 object, not a raw decoded CDD image. The static extractor is:
+
+```sh
+python3 scripts/extract_liteon_updater_f0_image.py
+```
+
+Mapped AHS9 facts:
+
+- encrypted source offset: `0x195dc0`;
+- key table offset: `0x819f2a`;
+- selector offset: `0x819f82`, selector `0x07`;
+- FileDecrypt key: `7ee34f39b34d5c9248473a39ec976508`;
+- COPYF2K8 mask offset: `0x194dc0`;
+- final postprocess SHA-256:
+  `e556dbed1132638b58600100fcd2c45d731430edc0cad388455cdbf624322af0`.
+
+COPYF2K8 postprocess patches one byte per `0x400` block:
+
+```text
+rel = mask[i] & 0x3f
+delta = sum(NEW_FW1[0:4]) & 0xff if i % 7 in {0, 2} else mask[i]
+image[i * 0x400 + rel] ^= delta
+```
+
+This reproduces `AHS9-postprocess-plain.bin` exactly. The Windows updater does
+not appear to decode the CDD body into controller runtime memory; it
+materializes the sealed F0 container that the drive later hands to the
+controller.
+
 ## Read/Dump Path
 
 The useful read-only surface is SCSI `READ BUFFER mode=1`.
