@@ -273,3 +273,18 @@ writes `0x88`/`0x98` to `0x4748` and treats bit 7 as a kick/wait bit beside
 command bytes at `0x474d/0x474e`. The next version of this experiment should be
 bit-level and should preserve/restore the original `0x4748` value instead of
 hammering all bits high.
+
+That follow-up mostly demoted `0x4748` from "possible LED latch" to "controller
+state clue." Reading it through the slow helper bit-channel showed it is already
+`0xff` at the event-68 hook. Restored writes, including restored whole-byte
+`0xff`, recover normally. So the earlier wedge was not the transient write; it
+was leaving that controller byte in the wrong state for the next recovery
+transaction.
+
+The neighboring controller cluster was similarly educational. Restored writes
+to `0x4726`, `0x479e`, `0x4784`, `0x4788`, `0x4756`, `0x47a7`, and `0x4728`
+looked normal. Restored `0x4780=0x00` looked normal too, but restored
+`0x4780=0xff` completed event 68 and then left the drive in currentboot with
+GP26 high during recovery. The normal recovery script brought it back to LD5M.
+That makes `0x4780` a second hazardous controller-path lead, not yet a clean
+LED output channel.

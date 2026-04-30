@@ -97,11 +97,16 @@ Hazard notes:
   bit-7 kick/wait behavior around command bytes `0x474d/0x474e`, so future
   tests should isolate non-stock bits and restore the original byte before
   returning.
+- A later bit-channel read showed `xdata[0x4748] = 0xff` at the event-68 helper
+  hook. Restored `0x4748=0xff` and restored one-bit OR probes recovered
+  normally, so `0x4748` is probably not the LED latch.
+- Restored `0x4780=0xff` completed event 68, then left the drive in 0D5C with
+  GP26 high during recovery. Normal currentboot recovery restored LD5M. Treat
+  `0x4780` as a hazardous neighbor in the same controller cluster.
 
 Current interpretation: GP26 is definitely usable as an observed front-panel
-LED line. XDATA `0x4748` is now the best lead for the latch or a nearby
-front-panel/control register, but whole-byte `0xff` is too disruptive to use as
-a communication primitive. GP27 is not a good debug input while the mechanism is
+LED line. XDATA `0x4748` and `0x4780` are useful controller-path clues, but not
+clean output latches. GP27 is not a good debug input while the mechanism is
 connected. Removing the tray/insert sense band may make motion safer, but it
 also risks making normal vendor-write setup fail as tray-open/not-ready before
 the helper hook is reached.

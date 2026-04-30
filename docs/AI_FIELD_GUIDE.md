@@ -349,6 +349,19 @@ real clue, not a safe output primitive yet: next tests should isolate non-stock
 bits of `0x4748` with `--restore-original` instead of writing whole-byte
 `0xff`, and stop on any optical-LUN loss.
 
+Follow-up narrowed this:
+
+- `xdata[0x4748]` reads as `0xff` at the event-68 helper hook.
+- restored `0x4748=0xff` and restored one-bit `OR` probes complete/recover
+  normally, so the earlier hard failure was likely from leaving the controller
+  in a bad state across recovery, not from the transient write itself.
+- restored `0x4726` and `0x479e` `00`/`ff` probes look normal.
+- restored neighbor probes through `0x4784`, `0x4788`, `0x4756`, `0x47a7`,
+  `0x4728`, and `0x4780=0x00` look normal.
+- restored `0x4780=0xff` completes event 68, then recovery sees currentboot
+  with GP26 stuck high. The known recovery sequence brings it back to `LD5M`.
+  Treat `0x4780` as another hazardous controller-path lead.
+
 For input mapping, the efficient path is a parity/syndrome scan rather than
 one-bit-at-a-time reads:
 
@@ -374,9 +387,9 @@ Immediate useful directions:
 
 1. Prefer a different external input that does not actuate the mechanism. GP27
    should be considered an eject actuator, not a debug input.
-2. Narrow XDATA `0x4748` with bit-level read/modify/write probes rather than
-   whole-byte `0xff`; it is the current best LED-path lead but can wedge the
-   bridge.
+2. Treat XDATA `0x4748` and `0x4780` as controller-path clues, not LED latches.
+   Any further tests there should be bit-level, restored, and followed by an
+   immediate state check.
 3. Use the XDATA bit channel to map a small set of high-value helper/controller
    registers around `0x48a0`, `0x47d2`, `0x8221`, and likely GPIO/status
    candidates.
