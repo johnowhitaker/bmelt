@@ -53,6 +53,8 @@ Readers:
 ```text
 scripts/read_liteon_currentboot_gateway.py
 scripts/read_liteon_currentboot_xdata.py
+scripts/read_liteon_currentboot_xdata_bulk.py
+scripts/write_liteon_currentboot_xdata.py
 ```
 
 ## Constant Response PoC
@@ -165,6 +167,72 @@ xdata[0x4704..] = 00 50 00 04 90 00 64 06 78 ...
 The `0x4704` read confirms Claude's bit-channel finding (`xdata[0x4704].0 = 0`)
 without jumping into the helper `DID_ERROR` path.
 
+## Guarded XDATA Write
+
+Candidate:
+
+```text
+references/firmware/extracted/currentboot-response-hook-candidates/currentboot-response-hook-xdata-cdb-rw/currentboot-response-hook-xdata-cdb-rw/liteon-full-currentboot-ld5m-helper-bypass-currentboot-response-hook-xdata-cdb-rw-candidate.json
+```
+
+Addressing:
+
+```text
+CDB[5] low six bits = byte offset inside a 64-byte window
+CDB[7:8]            = 16-bit big-endian XDATA base address
+CDB[9]              = write value
+CDB[10:11]          = write magic a5 5a
+response[0x20]      = selected byte after optional write
+```
+
+Smoke tests:
+
+```text
+xdata[0x8195] <- 0x33, readback 0x33
+xdata[0x8000] <- 0xa6, next read saw a6...
+xdata[0x8000] <- 0x00, next read restored 00...
+```
+
+This proves guarded currentboot XDATA mutation through the response hook. It is
+not a flash writer and should not be used on hardware/control registers without
+a specific reason.
+
+## Bulk XDATA Read
+
+Candidate:
+
+```text
+references/firmware/extracted/currentboot-response-hook-candidates/currentboot-response-hook-xdata-cdb-bulk-v2/currentboot-response-hook-xdata-cdb-bulk-v2/liteon-full-currentboot-ld5m-helper-bypass-currentboot-response-hook-xdata-cdb-bulk-v2-candidate.json
+```
+
+The first bulk attempt directly `MOVX`-wrote bytes into presumed response
+storage. It installed and executed, but returned the unchanged stock currentboot
+response. Static inspection of `FUN_CODE_6012` and `FUN_CODE_6206` showed why:
+the response buffer is controller-side. Response bytes are written through
+`0x4095..0x4098`, with `0x803c..0x803e` as the current response base.
+
+Version 2 reads each XDATA byte with `MOVX`, calls the stock `FUN_CODE_6012`
+byte writer for response offsets `0x0240..0x02bf`, then calls `FUN_CODE_6206`.
+One INQUIRY CDB now returns 128 XDATA bytes at response offsets `0x20..0x9f`.
+
+Known-good reads:
+
+```text
+xdata[0x4704..0x4743]:
+00500004900064067800de7484890b56660027f600e400001c00000f0f1f920ab408521c1c00c8008e908d800100002a068400d0173b6020a600004002000098
+
+xdata[0x4800..0x48ff]:
+000500040800000100a00090220040008888005fd9212100200000020000008000c001c00a00000000000080104800d080...
+```
+
+Full currentboot XDATA dump:
+
+```text
+path   references/evidence/live/linux-drive1-currentboot-xdata-0000-ffff-bulk-v2.bin
+size   65536
+sha256 6862a4c5ddceab9fa6b9e490ff3b14bd4447fe039f0ad2e3556b0d3761fb5d82
+```
+
 ## Button Differential
 
 With the XDATA hook installed and GP27 controlled by the Pico:
@@ -189,10 +257,9 @@ neighboring `0x488x` bytes also move, but less cleanly across repeats.
 
 The old bit/timing channels were useful proof but slow and awkward: a single
 bit could cost a full helper run and a recovery cycle, sometimes seconds per
-bit. The currentboot response hook reads one byte per ordinary INQUIRY CDB and
-returns through the normal handler. The bandwidth is still not bulk-dump fast,
-but it is fast enough to map pages of XDATA or controller memory without
-wedging the drive on every zero bit.
+bit. The first currentboot response hook read one byte per ordinary INQUIRY CDB.
+The v2 bulk hook now reads 128 XDATA bytes per ordinary INQUIRY CDB, enough to
+dump all 64 KiB of currentboot XDATA in seconds.
 
 The main remaining gap is phase/context. This hook sees currentboot-helper
 state, not necessarily normal LD5M runtime state. The decoded CDD range is

@@ -589,6 +589,16 @@ python3 scripts/build_liteon_currentboot_response_hook_candidate.py \
 python3 scripts/build_liteon_currentboot_response_hook_candidate.py \
   --name xdata-cdb-byte \
   --xdata-cdb-address
+
+# XDATA guarded byte read/write: write CDB[9] if CDB[10:11] == a5 5a
+python3 scripts/build_liteon_currentboot_response_hook_candidate.py \
+  --name xdata-cdb-rw \
+  --xdata-cdb-rw
+
+# XDATA bulk read: copy 128 bytes into response[0x20..0x9f]
+python3 scripts/build_liteon_currentboot_response_hook_candidate.py \
+  --name xdata-cdb-bulk-v2 \
+  --xdata-cdb-bulk
 ```
 
 Install a response hook using the normal helper-bypass full-currentboot runner,
@@ -641,6 +651,39 @@ Known output starts:
 
 ```text
 00 50 00 04 90 00 64 06 78 ...
+```
+
+The `0x4704` read confirms the earlier bit-channel finding
+(`xdata[0x4704].0 = 0`) without jumping into the helper `DID_ERROR` path.
+
+The guarded read/write variant is live-proven too. With magic CDB bytes
+`a5 5a`, `scripts/write_liteon_currentboot_xdata.py` wrote `0xa6` to
+`xdata[0x8000]`, the next read saw `a6`, and a second guarded write restored it
+to `00`. Treat this as currentboot XDATA/RAM mutation only; it is not a direct
+flash writer and should not be aimed at hardware registers casually.
+
+Bulk XDATA read example:
+
+```sh
+ssh root@jonathan-thinkpad-t480s \
+  'cd /home/jonathan/boastermelt && python3 scripts/read_liteon_currentboot_xdata_bulk.py \
+    --device /dev/sg0 \
+    --address 0x0000 \
+    --length 0x10000 \
+    --out runs/currentboot-response-hook/xdata-bulk-v2-smoke/currentboot-xdata-0000-ffff.bin \
+    --quiet'
+```
+
+The v2 bulk hook uses the stock `FUN_CODE_6012` response-byte writer in a loop.
+The first bulk attempt wrote directly to XDATA and returned the unchanged stock
+response because the host response buffer is controller-side, not ordinary
+XDATA. Calling `0x6012` for each byte fixed it.
+
+First full dump:
+
+```text
+references/evidence/live/linux-drive1-currentboot-xdata-0000-ffff-bulk-v2.bin
+sha256 6862a4c5ddceab9fa6b9e490ff3b14bd4447fe039f0ad2e3556b0d3761fb5d82
 ```
 
 Button differential with the Pico:

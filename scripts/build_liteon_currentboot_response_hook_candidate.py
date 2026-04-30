@@ -112,6 +112,74 @@ def source_xdata_cdb_address(selector_mask: int) -> bytes:
     )
 
 
+def xdata_cdb_address_to_r6_r7(selector_mask: int) -> bytes:
+    return b"".join(
+        [
+            mov_dptr(0x818F),  # CDB byte 5: selector in low bits.
+            bytes([0xE0, 0x54, selector_mask & 0xFF, 0xFC]),  # MOVX; ANL; MOV R4,A
+            mov_dptr(0x8192),  # CDB byte 8: low base-address byte.
+            bytes([0xE0, 0x2C, 0xFF]),  # MOVX; ADD A,R4; MOV R7,A
+            mov_dptr(0x8191),  # CDB byte 7: high base-address byte.
+            bytes([0xE0, 0x34, 0x00, 0xFE]),  # MOVX; ADDC A,#0; MOV R6,A
+        ]
+    )
+
+
+def rel8(from_next: int, target: int) -> int:
+    return (target - from_next) & 0xFF
+
+
+def source_xdata_cdb_bulk(selector_mask: int, storage_offset: int, bulk_len: int) -> bytes:
+    if not 1 <= bulk_len <= 0xFF:
+        raise ValueError("--bulk-len must be 1..255")
+    if not 0 <= storage_offset <= 0xFFFF:
+        raise ValueError("response storage offset is outside 16-bit range")
+
+    compute = xdata_cdb_address_to_r6_r7(selector_mask)
+    init = b"".join(
+        [
+            bytes([0xEE, 0xFA, 0xEF, 0xFB]),  # R2:R3 = source XDATA pointer from R6:R7.
+            mov_rn_imm(6, (storage_offset >> 8) & 0xFF),  # R6:R7 = response-buffer offset.
+            mov_rn_imm(7, storage_offset & 0xFF),
+            mov_rn_imm(1, bulk_len),  # R1 = byte count.
+        ]
+    )
+    loop_start = len(compute) + len(init)
+    loop_body = bytes.fromhex(
+        "8a838b82e0fd"  # MOV DPH,R2 ; MOV DPL,R3 ; MOVX A,@DPTR ; MOV R5,A
+        "126012"  # LCALL 0x6012, stock response-byte writer.
+        "0beb70010a"  # source++ in R2:R3
+        "0fef70010e"  # response offset++ in R6:R7
+    )
+    djnz_pos = loop_start + len(loop_body)
+    djnz = bytes([0xD9, rel8(djnz_pos + 2, loop_start)])  # DJNZ R1,loop_start
+    return compute + init + loop_body + djnz
+
+
+def source_xdata_cdb_rw(selector_mask: int) -> bytes:
+    compute = xdata_cdb_address_to_r6_r7(selector_mask)
+    read_back = bytes.fromhex("8e838f82e0fd")
+    write_block = b"".join(
+        [
+            mov_dptr(0x8193),  # CDB byte 9: write value.
+            bytes([0xE0, 0xFD]),  # MOVX A,@DPTR ; MOV R5,A
+            bytes([0x8E, 0x83, 0x8F, 0x82]),  # MOV DPH,R6 ; MOV DPL,R7
+            bytes([0xED, 0xF0]),  # MOV A,R5 ; MOVX @DPTR,A
+        ]
+    )
+    guard = b"".join(
+        [
+            mov_dptr(0x8194),  # CDB byte 10: magic 0xa5.
+            bytes([0xE0, 0x64, 0xA5]),
+            bytes([0x70, len(write_block) + 8]),  # JNZ read_back
+            mov_dptr(0x8195),  # CDB byte 11: magic 0x5a.
+            bytes([0xE0, 0x64, 0x5A]),
+            bytes([0x70, len(write_block)]),  # JNZ read_back
+        ]
+    )
+    return compute + guard + write_block + read_back
+
+
 def source_gateway_cdb_address(selector_mask: int) -> bytes:
     wait_ready = bytes.fromhex("904000e020e7f9")
     return b"".join(
@@ -142,12 +210,15 @@ def build_source(args: argparse.Namespace) -> tuple[str, bytes, dict[str, Any]]:
         args.xdata_direct is not None,
         args.xdata_window is not None,
         args.xdata_cdb_address,
+        args.xdata_cdb_bulk,
+        args.xdata_cdb_rw,
         args.gateway_cdb_address,
     ]
     if sum(modes) != 1:
         raise ValueError(
             "choose exactly one of --constant, --xdata-direct, --xdata-window, "
-            "--xdata-cdb-address, or --gateway-cdb-address"
+            "--xdata-cdb-address, --xdata-cdb-bulk, --xdata-cdb-rw, "
+            "or --gateway-cdb-address"
         )
     if args.constant is not None:
         return "constant", source_constant(args.constant), {"constant": args.constant}
@@ -164,6 +235,31 @@ def build_source(args: argparse.Namespace) -> tuple[str, bytes, dict[str, Any]]:
             "xdata_cdb_address",
             source_xdata_cdb_address(args.selector_mask),
             {"address_source": "cdb_bytes_7_8_plus_control_low_bits", "selector_mask": args.selector_mask},
+        )
+    if args.xdata_cdb_bulk:
+        return (
+            "xdata_cdb_bulk",
+            source_xdata_cdb_bulk(
+                args.selector_mask,
+                RESPONSE_STORAGE_BASE + args.response_offset,
+                args.bulk_len,
+            ),
+            {
+                "address_source": "cdb_bytes_7_8_plus_control_low_bits",
+                "selector_mask": args.selector_mask,
+                "bulk_len": args.bulk_len,
+            },
+        )
+    if args.xdata_cdb_rw:
+        return (
+            "xdata_cdb_rw",
+            source_xdata_cdb_rw(args.selector_mask),
+            {
+                "address_source": "cdb_bytes_7_8_plus_control_low_bits",
+                "write_value_source": "cdb_byte_9",
+                "write_magic": "cdb_10_a5_cdb_11_5a",
+                "selector_mask": args.selector_mask,
+            },
         )
     return (
         "xdata_window",
@@ -303,6 +399,17 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="read XDATA address CDB[7:8] + (CDB[5] & --selector-mask)",
     )
+    parser.add_argument(
+        "--xdata-cdb-bulk",
+        action="store_true",
+        help="copy --bulk-len bytes from XDATA address CDB[7:8] + selector into the INQUIRY response",
+    )
+    parser.add_argument(
+        "--xdata-cdb-rw",
+        action="store_true",
+        help="read XDATA address CDB[7:8] + selector, and write CDB[9] first if CDB[10:11] is a5 5a",
+    )
+    parser.add_argument("--bulk-len", type=parse_byte, default=0x80)
     parser.add_argument("--selector-mask", type=parse_byte, default=0x3F)
     parser.add_argument("--restore", action="store_true")
     parser.add_argument("--dry-run", action="store_true")
@@ -315,6 +422,8 @@ def main() -> int:
         any(value is not None for value in (args.constant, args.xdata_direct, args.xdata_window))
         or args.gateway_cdb_address
         or args.xdata_cdb_address
+        or args.xdata_cdb_bulk
+        or args.xdata_cdb_rw
     ):
         raise ValueError("--restore cannot be combined with a source mode")
     base = args.base_image.read_bytes()

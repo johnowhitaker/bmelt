@@ -36,14 +36,14 @@ def sg_inq(device: str, timeout: int) -> str:
         ["sg_inq", device],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
-        text=True,
         timeout=timeout,
         check=False,
     )
     if proc.returncode:
-        return proc.stderr.strip()
+        return proc.stderr.decode("utf-8", "replace").strip()
+    stdout = proc.stdout.decode("utf-8", "replace")
     lines = []
-    for line in proc.stdout.splitlines():
+    for line in stdout.splitlines():
         if any(label in line for label in ("Vendor identification", "Product identification", "Product revision")):
             lines.append(line.strip())
     return "\n".join(lines)

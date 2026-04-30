@@ -648,3 +648,62 @@ these obvious standard-command handlers are not the live normal-mode execution
 path. The "resident hook" route probably needs a RAM/overlay hook, or we need
 to move to a hardware-visible runtime signal path instead of waiting for a
 host-visible SCSI command response.
+
+## From One Bit To Whole Pages
+
+The next breakthrough was less glamorous than "decrypt the CDD" but much more
+practical: we stopped trying to make the helper report data by deliberately
+failing. The old bit channel worked, but it was painful. To learn one bit, we
+had to build a helper payload, run part of the currentboot update sequence, see
+whether the drive took the success or error path, and often run recovery. A
+single byte could take many seconds and a full 64 KiB XDATA sweep was more of
+an overnight experiment than a normal debugging move.
+
+The Pico servo power switch mattered here. A Linux host reboot or USB reset is
+not the same thing as a drive cold boot; some of our resident F0 changes only
+became meaningful after the drive actually lost `+5V`. The little servo pressing
+a microswitch in the spliced USB power line gave us a repeatable hardware cold
+boot without waiting for a human replug. That made it practical to install a
+resident hook, cut power, enter currentboot again, and see which copy of the
+firmware was really being executed.
+
+The key hook is in the currentboot INQUIRY/EXTRAINQ response path. We patched
+the final response-copy call at `0x4fc9` to jump into the `0x6ee3` FF cave,
+write data into the response, call the original `0x6206`, and return. First it
+just wrote one constant byte: currentboot revision `0D5C` became `XD5C`, which
+was the first clean host-visible proof that our code was running and talking
+back over ordinary SCSI.
+
+Then that became an addressable byte reader. The hook reads CDB parameter bytes
+left in `xdata[0x818a..]`, uses them as an address, and returns one XDATA byte
+or one controller-gateway byte in response byte `0x20`. That immediately
+confirmed earlier slow-channel clues like `xdata[0x4704].0 = 0`, and it found
+the front-panel button sense candidate without sled-moving experiments:
+
+```text
+GP27 released: xdata[0x4814] = d9
+GP27 low:      xdata[0x4814] = c9
+```
+
+There was one more blocker before this became really useful. My first bulk
+reader copied bytes directly into XDATA, but the host response buffer is not
+plain XDATA. The stock code writes response bytes through the controller path
+at `0x4095..0x4098`, with `FUN_CODE_6012` as the byte writer and `FUN_CODE_6206`
+as the final copy/kick. Once the bulk hook used that same `0x6012` helper for
+each byte, it worked: one INQUIRY CDB can now return 128 XDATA bytes.
+
+That changes the pace of the project. A full 64 KiB currentboot XDATA dump now
+takes seconds rather than thousands of tiny proof runs. The first dump has:
+
+```text
+file   references/evidence/live/linux-drive1-currentboot-xdata-0000-ffff-bulk-v2.bin
+size   65536
+sha256 6862a4c5ddceab9fa6b9e490ff3b14bd4447fe039f0ad2e3556b0d3761fb5d82
+```
+
+This still does not magically expose the decoded CDD: the controller
+`0x184000` range remains zero in this currentboot phase. But it gives us a real
+instrument for mapping the 8051's live state, finding hardware latches, checking
+which status bytes move, and designing the next hook from evidence rather than
+single-bit guesses. It is the first point where poking around inside the drive
+starts to feel like debugging instead of divination.
