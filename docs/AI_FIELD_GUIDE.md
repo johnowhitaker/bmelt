@@ -152,14 +152,24 @@ Key CDD facts:
   low nibble groups with bytes 0..4 as a non-source operation key. In CHS7 vs
   CHS9, 380/436 same-index records keep that operation key and all 380 keep the
   same source-span length; 377 differ only in source-address bits.
+- The CDD1 post-directory table/control window looks like decoded-space
+  address material: interpreted as little-endian u16 words, every word shifted
+  left by four lands inside the explicit `0x30000` decoded range. CHS7/CHS9
+  share 189 same-index table words.
 - Across the current six DS-8ABSH samples, 2,135 unique operation keys appear
   and none maps to more than one source-span length. A partial length field is
   `u16le(operation_key[2:4]) >> 4`, exact for 106 records and close for many
   more.
+- A second operation-key field now looks like decoded/output length:
+  `(operation_key[3] & 0x3f) << 4`. Its per-image sum lands near the explicit
+  `0x30000` decoded range: CHS9 is `0x2ffd0`, CD12 `0x2fe50`, AD12 `0x2fc20`,
+  CHS7 `0x30350`, AHS9 `0x30720`, LD5M `0x2e3b0`.
 - Repeated templates `0d6840031a` and `0c60000318` point at short
   `0x34`/`0x30` byte spans, matching the visible motif islands. In these
   records, byte 0 behaves like `N`, byte 1 is `8*N`, byte 4 is `2*N`, and the
-  source span is `4*N`.
+  source span is `4*N`. For the `0d...` operation, four 13-byte source units map
+  to a `0x30` decoded span: exactly four 12-byte units plus one extra
+  parity/check/control byte per unit.
 - Those short operations have a source-unit format: one payload-looking first
   byte followed by an image/profile-specific constant tail. Shared indices
   often keep the same four first bytes across all six images even when the unit

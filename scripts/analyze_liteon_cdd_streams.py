@@ -325,6 +325,17 @@ def operation_key(entry: bytes) -> bytes:
     return entry[:5] + bytes([entry[5] & 0x0F])
 
 
+def decoded_span_from_key(key: bytes) -> int:
+    # The low six bits of operation-key byte 3 behave like a decoded/output
+    # span in 16-byte paragraphs. This is not a full decoder yet, but the sums
+    # line up tightly with the explicit 0x30000 decoded controller range.
+    return (key[3] & 0x3F) << 4
+
+
+def decoded_span_candidate(entry: bytes) -> int:
+    return decoded_span_from_key(operation_key(entry))
+
+
 def segment_for_offset(image: CddImage, offset: int) -> tuple[int, int, int, bytes] | None:
     for segment in source_segments(image):
         _, start, end, _ = segment
@@ -457,6 +468,70 @@ def operation_length_base_rows(images: list[CddImage]) -> list[tuple[str, int, i
             base = int.from_bytes(key[2:4], "little") >> 4
             rows.append((image.name, index, end - start, key.hex(), (end - start) - base))
     return rows
+
+
+def decoded_span_summaries(images: list[CddImage]) -> list[dict[str, object]]:
+    rows: list[dict[str, object]] = []
+    for image in images:
+        if len(image.streams) < 2 or image.name == "XD13":
+            continue
+        cdd1_span = 0
+        cdd2_span = 0
+        source_len = 0
+        for index, start, end, entry in source_segments(image):
+            span = decoded_span_candidate(entry)
+            if index < 388:
+                cdd1_span += span
+            else:
+                cdd2_span += span
+            source_len += end - start
+        total = cdd1_span + cdd2_span
+        rows.append(
+            {
+                "image": image.name,
+                "total": total,
+                "delta": total - 0x30000,
+                "cdd1": cdd1_span,
+                "cdd2": cdd2_span,
+                "source_len": source_len,
+                "ratio": source_len / total if total else 0.0,
+            }
+        )
+    return rows
+
+
+def decoded_candidate_starts(image: CddImage) -> list[int]:
+    starts: list[int] = []
+    cursor = 0
+    for _, _, _, entry in source_segments(image):
+        starts.append(cursor)
+        cursor += decoded_span_candidate(entry)
+    return starts
+
+
+def decoded_offset_delta_runs(left: CddImage, right: CddImage) -> list[tuple[int, int, int, int]]:
+    left_starts = decoded_candidate_starts(left)
+    right_starts = decoded_candidate_starts(right)
+
+    left_segments = source_segments(left)
+    right_segments = source_segments(right)
+    runs: list[tuple[int, int, int, int]] = []
+    index = 0
+    while index < min(len(left_segments), len(right_segments)):
+        if operation_key(left_segments[index][3]) != operation_key(right_segments[index][3]):
+            index += 1
+            continue
+        delta = right_starts[index] - left_starts[index]
+        end = index
+        while (
+            end < min(len(left_segments), len(right_segments))
+            and operation_key(left_segments[end][3]) == operation_key(right_segments[end][3])
+            and right_starts[end] - left_starts[end] == delta
+        ):
+            end += 1
+        runs.append((end - index, index, end, delta))
+        index = end
+    return sorted(runs, reverse=True)
 
 
 def operation_unit_summary(images: list[CddImage], key: bytes) -> dict[str, object]:
@@ -736,20 +811,68 @@ def write_report(images: list[CddImage]) -> str:
             f"{common_words} | `0x{duplicate_end:x}` | `0x{(cdd2_source_rel or 0):x}` |"
         )
     lines.append("")
+
+    lines.append("## CDD1 Table As Decoded Paragraph Offsets")
+    lines.append("")
+    lines.append("Interpreting the CDD1 table/control window as little-endian 16-bit words gives another strong structural clue: every word, shifted left by four, lands inside the explicit decoded range length `0x30000`. This makes the table look like decoded-space paragraph address/control material rather than arbitrary aux bytes.")
+    lines.append("")
+    lines.append("| image | table words | shifted offset range | low/mid/high bands | most common words |")
+    lines.append("|---|---:|---:|---|---|")
+    for image in images:
+        if len(image.streams) < 2 or image.name == "XD13":
+            continue
+        table = cdd1_table_window(image)
+        words = [int.from_bytes(table[offset : offset + 2], "little") for offset in range(0, len(table) - 1, 2)]
+        bands = Counter(
+            "low" if word < 0x0800 else "mid" if word < 0x1800 else "high"
+            for word in words
+        )
+        common = ", ".join(f"`0x{word:04x}` x{count}" for word, count in Counter(words).most_common(5))
+        lines.append(
+            f"| {image.name} | {len(words)} | `0x{min(words) << 4:05x}..0x{max(words) << 4:05x}` | "
+            f"low {bands['low']}, mid {bands['mid']}, high {bands['high']} | {common} |"
+        )
+    lines.append("")
+    lines.append("Close sibling tables also line up by position. CHS7 and CHS9 have 189 identical same-index table words, including long equal runs, so this table is versioned data with stable structure.")
+    lines.append("")
+    lines.append("| pair | table words | same-position equal | most common word deltas |")
+    lines.append("|---|---:|---:|---|")
+    for pair in (("CHS7", "CHS9"), ("AD12", "CD12"), ("LD5M", "CHS9")):
+        left = next((image for image in images if image.name == pair[0]), None)
+        right = next((image for image in images if image.name == pair[1]), None)
+        if not left or not right:
+            continue
+        left_words = [
+            int.from_bytes(cdd1_table_window(left)[offset : offset + 2], "little")
+            for offset in range(0, len(cdd1_table_window(left)) - 1, 2)
+        ]
+        right_words = [
+            int.from_bytes(cdd1_table_window(right)[offset : offset + 2], "little")
+            for offset in range(0, len(cdd1_table_window(right)) - 1, 2)
+        ]
+        count = min(len(left_words), len(right_words))
+        same = sum(left_words[index] == right_words[index] for index in range(count))
+        deltas = Counter(right_words[index] - left_words[index] for index in range(count)).most_common(6)
+        delta_text = ", ".join(f"`{delta:+#x}` x{delta_count}" for delta, delta_count in deltas)
+        lines.append(f"| {pair[0]} vs {pair[1]} | {len(left_words)}/{len(right_words)} | {same} | {delta_text} |")
+    lines.append("")
+
     ld5m = next((image for image in images if image.name == "LD5M"), None)
     if ld5m is not None:
         lines.append("LD5M source-segment mapping for useful probe offsets:")
         lines.append("")
-        lines.append("| offset | source entry | source range | entry bytes |")
-        lines.append("|---:|---:|---:|---|")
+        lines.append("| offset | source entry | source range | candidate decoded start/span | entry bytes |")
+        lines.append("|---:|---:|---:|---:|---|")
+        decoded_starts = decoded_candidate_starts(ld5m)
         for offset in (0x704F, 0x81EC, 0x27D4F, 0xD91A0, 0xD95A0, 0xE7FE0):
             segment = segment_for_offset(ld5m, offset)
             if segment is None:
-                lines.append(f"| `0x{offset:05x}` | none | outside source spans | |")
+                lines.append(f"| `0x{offset:05x}` | none | outside source spans | | |")
             else:
                 index, start, end, entry = segment
                 lines.append(
-                    f"| `0x{offset:05x}` | {index} | `0x{start:05x}..0x{end:05x}` | `{entry.hex()}` |"
+                    f"| `0x{offset:05x}` | {index} | `0x{start:05x}..0x{end:05x}` | "
+                    f"`0x{decoded_starts[index]:05x}`/`0x{decoded_span_candidate(entry):03x}` | `{entry.hex()}` |"
                 )
         lines.append("")
 
@@ -899,12 +1022,48 @@ def write_report(images: list[CddImage]) -> str:
         lines.append(f"| `{residual:+#x}` | {count} |")
     lines.append("")
 
+    lines.append("## Candidate Decoded Span Field")
+    lines.append("")
+    lines.append("A second length-like field appears in operation-key byte 3. The candidate decoded/output span is:")
+    lines.append("")
+    lines.append("```text")
+    lines.append("decoded_span = (operation_key[3] & 0x3f) << 4")
+    lines.append("```")
+    lines.append("")
+    lines.append("This is not a full CDD decoder, but it is the first field that lands near the explicit `0x30000` decoded/controller range instead of the much larger encoded source length.")
+    lines.append("")
+    lines.append("| image | candidate decoded span | delta from `0x30000` | CDD1 entries | CDD2 entries | encoded source / candidate decoded |")
+    lines.append("|---|---:|---:|---:|---:|---:|")
+    for row in decoded_span_summaries(images):
+        lines.append(
+            f"| {row['image']} | `0x{int(row['total']):05x}` | `{int(row['delta']):+#x}` | "
+            f"`0x{int(row['cdd1']):05x}` | `0x{int(row['cdd2']):05x}` | {float(row['ratio']):.3f}x |"
+        )
+    lines.append("")
+    lines.append("The close siblings keep this field aligned in long same-operation runs. For CHS7 vs CHS9, cumulative decoded offsets have piecewise constant deltas across same-operation records, which is what we would expect from a versioned decoded address stream.")
+    lines.append("")
+    lines.append("| pair | longest same-op decoded-offset runs |")
+    lines.append("|---|---|")
+    for pair in (("CHS7", "CHS9"), ("AD12", "CD12")):
+        left = next((image for image in images if image.name == pair[0]), None)
+        right = next((image for image in images if image.name == pair[1]), None)
+        if not left or not right:
+            continue
+        run_text = ", ".join(
+            f"`{start}..{end - 1}` len {length} delta `{delta:+#x}`"
+            for length, start, end, delta in decoded_offset_delta_runs(left, right)[:6]
+        )
+        lines.append(f"| {pair[0]} vs {pair[1]} | {run_text} |")
+    lines.append("")
+    lines.append("This field also explains the most visible motif island. The `0d6840031a00` operation consumes four 13-byte source units (`0x34` bytes total) but has candidate decoded span `0x30`, exactly four 12-byte units. The extra byte per unit is plausibly parity/check/control rather than plaintext. The related `0c6000031800` operation consumes four 12-byte units and also spans `0x30` decoded bytes.")
+    lines.append("")
+
     lines.append("## Short Operation Source Units")
     lines.append("")
     lines.append("The two high-frequency short operations expose a small regular source format. In both cases byte 0 of the operation key is the source unit length, byte 1 is `8 * unit_len`, byte 4 is `2 * unit_len`, and each record source span is `4 * unit_len`.")
     lines.append("")
-    lines.append("| operation key | image | records | unit len | units | constant unit tail | first-byte samples |")
-    lines.append("|---|---|---:|---:|---:|---|---|")
+    lines.append("| operation key | image | records | unit len | source span | decoded span candidate | units | constant unit tail | first-byte samples |")
+    lines.append("|---|---|---:|---:|---:|---:|---:|---|---|")
     for key in (bytes.fromhex("0d6840031a00"), bytes.fromhex("0c6000031800")):
         summary = operation_unit_summary(images, key)
         rows = summary["rows"]  # type: ignore[assignment]
@@ -916,7 +1075,8 @@ def write_report(images: list[CddImage]) -> str:
             tail_text = f"`{tail.hex()}`" if tail else ""
             lines.append(
                 f"| `{key.hex()}` | {image_name} | {record_count_by_image[image_name]} | "
-                f"`0x{int(summary['unit_len']):x}` | {image_row['unit_count']} | {tail_text} | {first_bytes} |"
+                f"`0x{int(summary['unit_len']):x}` | `0x{key[0] * 4:x}` | "
+                f"`0x{decoded_span_from_key(key):x}` | {image_row['unit_count']} | {tail_text} | {first_bytes} |"
             )
     lines.append("")
     lines.append("At shared record indices, the first byte of each short source unit is often identical across images even when the operation key and constant tail differ. That makes the unit shape look like one payload byte plus an image/profile-specific codeword tail.")

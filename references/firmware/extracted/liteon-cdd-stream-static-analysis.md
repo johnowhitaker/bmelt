@@ -151,16 +151,37 @@ The source-address field gives a more precise payload boundary than the copied h
 | CHS7 | `0xdc0` | `0x1198` | `0x3d8` | `0x28` | 6.059 | `0x0d01` x16, `0x14e0` x4, `0x1503` x4 | `0x1a0` | `0x1a0` |
 | CHS9 | `0xdc0` | `0x11a4` | `0x3e4` | `0x1c` | 6.053 | `0x0d01` x16, `0x14e0` x4, `0x1503` x4 | `0x1a0` | `0x1a0` |
 
+## CDD1 Table As Decoded Paragraph Offsets
+
+Interpreting the CDD1 table/control window as little-endian 16-bit words gives another strong structural clue: every word, shifted left by four, lands inside the explicit decoded range length `0x30000`. This makes the table look like decoded-space paragraph address/control material rather than arbitrary aux bytes.
+
+| image | table words | shifted offset range | low/mid/high bands | most common words |
+|---|---:|---:|---|---|
+| LD5M | 490 | `0x00060..0x1efe0` | low 355, mid 35, high 100 | `0x0d01` x16, `0x1503` x4, `0x1490` x4, `0x1502` x4, `0x1880` x2 |
+| AD12 | 498 | `0x00060..0x1f080` | low 365, mid 37, high 96 | `0x0d01` x16, `0x14e0` x4, `0x1503` x4, `0x1490` x4, `0x1502` x4 |
+| AHS9 | 490 | `0x00060..0x1f060` | low 353, mid 41, high 96 | `0x0d01` x16, `0x14e0` x4, `0x1503` x4, `0x1490` x4, `0x1502` x4 |
+| CD12 | 494 | `0x00060..0x1f000` | low 359, mid 39, high 96 | `0x0d01` x16, `0x14e0` x4, `0x1503` x4, `0x1490` x4, `0x1502` x4 |
+| CHS7 | 492 | `0x00060..0x1f080` | low 356, mid 40, high 96 | `0x0d01` x16, `0x14e0` x4, `0x1503` x4, `0x1490` x4, `0x1502` x4 |
+| CHS9 | 498 | `0x00060..0x1f0e0` | low 365, mid 37, high 96 | `0x0d01` x16, `0x14e0` x4, `0x1503` x4, `0x1490` x4, `0x1502` x4 |
+
+Close sibling tables also line up by position. CHS7 and CHS9 have 189 identical same-index table words, including long equal runs, so this table is versioned data with stable structure.
+
+| pair | table words | same-position equal | most common word deltas |
+|---|---:|---:|---|
+| CHS7 vs CHS9 | 492/498 | 189 | `+0x0` x189, `+0x2` x17, `+0x4` x10, `+0x6` x9, `-0x2` x7, `+0xa` x3 |
+| AD12 vs CD12 | 498/494 | 82 | `+0x0` x82, `+0x8` x7, `+0x2` x7, `+0x6` x6, `+0x4` x5, `+0xa` x5 |
+| LD5M vs CHS9 | 490/498 | 49 | `+0x0` x49, `-0x4` x6, `+0x2` x6, `+0xa` x5, `-0x6` x4, `+0x6` x4 |
+
 LD5M source-segment mapping for useful probe offsets:
 
-| offset | source entry | source range | entry bytes |
-|---:|---:|---:|---|
-| `0x0704f` | none | outside source spans | |
-| `0x081ec` | 0 | `0x081c0..0x08d32` | `ef7a96b5bc051c08` |
-| `0x27d4f` | 58 | `0x27825..0x28119` | `66228ca200558227` |
-| `0xd91a0` | 388 | `0xd91a0..0xd9adb` | `0dabd47774031ad9` |
-| `0xd95a0` | 388 | `0xd91a0..0xd9adb` | `0dabd47774031ad9` |
-| `0xe7fe0` | none | outside source spans | |
+| offset | source entry | source range | candidate decoded start/span | entry bytes |
+|---:|---:|---:|---:|---|
+| `0x0704f` | none | outside source spans | | |
+| `0x081ec` | 0 | `0x081c0..0x08d32` | `0x00000`/`0x350` | `ef7a96b5bc051c08` |
+| `0x27d4f` | 58 | `0x27825..0x28119` | `0x06f50`/`0x220` | `66228ca200558227` |
+| `0xd91a0` | 388 | `0xd91a0..0xd9adb` | `0x295a0`/`0x370` | `0dabd47774031ad9` |
+| `0xd95a0` | 388 | `0xd91a0..0xd9adb` | `0x295a0`/`0x370` | `0dabd47774031ad9` |
+| `0xe7fe0` | none | outside source spans | | |
 
 ## CDD2 Directory Duplicate
 
@@ -278,18 +299,46 @@ This equals the source-span length for `106` records. For the rest it is a lengt
 | `+0x1d` | 8 |
 | `-0x4` | 8 |
 
+## Candidate Decoded Span Field
+
+A second length-like field appears in operation-key byte 3. The candidate decoded/output span is:
+
+```text
+decoded_span = (operation_key[3] & 0x3f) << 4
+```
+
+This is not a full CDD decoder, but it is the first field that lands near the explicit `0x30000` decoded/controller range instead of the much larger encoded source length.
+
+| image | candidate decoded span | delta from `0x30000` | CDD1 entries | CDD2 entries | encoded source / candidate decoded |
+|---|---:|---:|---:|---:|---:|
+| LD5M | `0x2e3b0` | `-0x1c50` | `0x295a0` | `0x04e10` | 4.581x |
+| AD12 | `0x2fc20` | `-0x3e0` | `0x2aac0` | `0x05160` | 4.453x |
+| AHS9 | `0x30720` | `+0x720` | `0x2b530` | `0x051f0` | 4.394x |
+| CD12 | `0x2fe50` | `-0x1b0` | `0x2acc0` | `0x05190` | 4.422x |
+| CHS7 | `0x30350` | `+0x350` | `0x2b1d0` | `0x05180` | 4.394x |
+| CHS9 | `0x2ffd0` | `-0x30` | `0x2ae50` | `0x05180` | 4.415x |
+
+The close siblings keep this field aligned in long same-operation runs. For CHS7 vs CHS9, cumulative decoded offsets have piecewise constant deltas across same-operation records, which is what we would expect from a versioned decoded address stream.
+
+| pair | longest same-op decoded-offset runs |
+|---|---|
+| CHS7 vs CHS9 | `252..325` len 74 delta `+0x10`, `136..187` len 52 delta `+0x20`, `51..84` len 34 delta `-0x20`, `20..49` len 30 delta `-0x20`, `348..375` len 28 delta `+0x10`, `413..435` len 23 delta `-0x380` |
+| AD12 vs CD12 | `430..431` len 2 delta `+0x230`, `424..425` len 2 delta `+0x230`, `417..417` len 1 delta `+0x220`, `415..415` len 1 delta `+0x210`, `384..384` len 1 delta `+0x240` |
+
+This field also explains the most visible motif island. The `0d6840031a00` operation consumes four 13-byte source units (`0x34` bytes total) but has candidate decoded span `0x30`, exactly four 12-byte units. The extra byte per unit is plausibly parity/check/control rather than plaintext. The related `0c6000031800` operation consumes four 12-byte units and also spans `0x30` decoded bytes.
+
 ## Short Operation Source Units
 
 The two high-frequency short operations expose a small regular source format. In both cases byte 0 of the operation key is the source unit length, byte 1 is `8 * unit_len`, byte 4 is `2 * unit_len`, and each record source span is `4 * unit_len`.
 
-| operation key | image | records | unit len | units | constant unit tail | first-byte samples |
-|---|---|---:|---:|---:|---|---|
-| `0d6840031a00` | CD12 | 18 | `0xd` | 72 | `c6582018c818c810d1706780` | `0x7e` x2, `0x67` x2, `0x4c` x2, `0x55` x2, `0x80` x1, `0x99` x1, `0xb2` x1, `0xab` x1 |
-| `0d6840031a00` | CHS7 | 18 | `0xd` | 72 | `c07820180c180c0d15706740` | `0x7e` x2, `0x67` x2, `0x4c` x2, `0x55` x2, `0xb7` x1, `0xae` x1, `0x85` x1, `0x9c` x1 |
-| `0d6840031a00` | CHS9 | 18 | `0xd` | 72 | `bef82017dc17dc0c3d706740` | `0x7e` x2, `0x67` x2, `0x4c` x2, `0x55` x2, `0xb7` x1, `0xae` x1, `0x85` x1, `0x9c` x1 |
-| `0d6840031a00` | LD5M | 16 | `0xd` | 64 | `b8b820171417141a77b83760` | `0x94` x2, `0x8d` x2, `0xa6` x2, `0xbf` x2, `0x80` x1, `0x99` x1, `0xb2` x1, `0xab` x1 |
-| `0c6000031800` | AD12 | 18 | `0xc` | 72 | `cf6b016b016b00c8d60680` | `0x94` x2, `0x8d` x2, `0xa6` x2, `0xbf` x2, `0x80` x1, `0x99` x1, `0xb2` x1, `0xab` x1 |
-| `0c6000031800` | AHS9 | 16 | `0xc` | 64 | `d33ac13ac13ac0c9560668` | `0x80` x1, `0x99` x1, `0xb2` x1, `0xab` x1, `0x2c` x1, `0x35` x1, `0x1e` x1, `0x07` x1 |
+| operation key | image | records | unit len | source span | decoded span candidate | units | constant unit tail | first-byte samples |
+|---|---|---:|---:|---:|---:|---:|---|---|
+| `0d6840031a00` | CD12 | 18 | `0xd` | `0x34` | `0x30` | 72 | `c6582018c818c810d1706780` | `0x7e` x2, `0x67` x2, `0x4c` x2, `0x55` x2, `0x80` x1, `0x99` x1, `0xb2` x1, `0xab` x1 |
+| `0d6840031a00` | CHS7 | 18 | `0xd` | `0x34` | `0x30` | 72 | `c07820180c180c0d15706740` | `0x7e` x2, `0x67` x2, `0x4c` x2, `0x55` x2, `0xb7` x1, `0xae` x1, `0x85` x1, `0x9c` x1 |
+| `0d6840031a00` | CHS9 | 18 | `0xd` | `0x34` | `0x30` | 72 | `bef82017dc17dc0c3d706740` | `0x7e` x2, `0x67` x2, `0x4c` x2, `0x55` x2, `0xb7` x1, `0xae` x1, `0x85` x1, `0x9c` x1 |
+| `0d6840031a00` | LD5M | 16 | `0xd` | `0x34` | `0x30` | 64 | `b8b820171417141a77b83760` | `0x94` x2, `0x8d` x2, `0xa6` x2, `0xbf` x2, `0x80` x1, `0x99` x1, `0xb2` x1, `0xab` x1 |
+| `0c6000031800` | AD12 | 18 | `0xc` | `0x30` | `0x30` | 72 | `cf6b016b016b00c8d60680` | `0x94` x2, `0x8d` x2, `0xa6` x2, `0xbf` x2, `0x80` x1, `0x99` x1, `0xb2` x1, `0xab` x1 |
+| `0c6000031800` | AHS9 | 16 | `0xc` | `0x30` | `0x30` | 64 | `d33ac13ac13ac0c9560668` | `0x80` x1, `0x99` x1, `0xb2` x1, `0xab` x1, `0x2c` x1, `0x35` x1, `0x1e` x1, `0x07` x1 |
 
 At shared record indices, the first byte of each short source unit is often identical across images even when the operation key and constant tail differ. That makes the unit shape look like one payload byte plus an image/profile-specific codeword tail.
 

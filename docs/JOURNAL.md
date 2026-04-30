@@ -452,3 +452,35 @@ controller[0x19191a] = 0x00
 That mostly tells us the currentboot helper hook is the wrong vantage point for
 decoded CDD memory. The descriptor can still be right; the decoded/controller
 range may simply not be populated or exposed until normal LD5M runtime.
+
+The latest static pass found two more record-level clues. First, the CDD1
+post-directory table/control window behaves like decoded address material: if
+you read it as little-endian 16-bit words and shift each word left four bits,
+every value lands inside the explicit `0x30000` decoded range. CHS7 and CHS9
+share 189 same-position words in that table, so it is versioned structure, not
+random aux data.
+
+Second, operation-key byte 3 now looks like a decoded span field:
+
+```text
+decoded_span = (operation_key[3] & 0x3f) << 4
+```
+
+That field sums to almost exactly the descriptor's decoded size across the
+sibling images. CHS9 lands at `0x2ffd0`, only `0x30` short of `0x30000`; CD12
+is `0x2fe50`, AD12 `0x2fc20`, CHS7 `0x30350`, and AHS9 `0x30720`. LD5M is the
+looser outlier at `0x2e3b0`, but still in the same neighborhood.
+
+This also explains the visible 13-byte motif runs. The common
+`0d6840031a00` operation consumes four 13-byte source units, `0x34` bytes
+total, but the candidate decoded span is `0x30`: four 12-byte units. That
+extra byte per unit now looks like parity, check, or control material rather
+than decoded payload. The related `0c6000031800` operation consumes four
+12-byte units and also spans `0x30` decoded bytes.
+
+The CDD object is looking less like encryption and more like a
+controller-specific packed/codeword stream: directory records point to encoded
+source spans, operation keys describe how much decoded material is produced,
+and the table window likely carries decoded-space addresses or control
+targets. We still do not have a decoder, but the problem has narrowed from
+"what cipher is this?" to "what is this record grammar?"
