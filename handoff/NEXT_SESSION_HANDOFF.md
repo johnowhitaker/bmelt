@@ -22,6 +22,8 @@ from the active tree. The compact operating set is now in this repo.
 12. `scripts/recover_liteon_currentboot_linux.py`
 13. `scripts/recover_liteon_blank_currentboot_linux.py`
 14. `scripts/dump_liteon_linux_f0_window.py`
+15. `references/evidence/live/normal-mode-readonly/linux-drive1-standard-only-probe.md`
+16. `analysis/8051/normal-mode-response-surface-analysis.md`
 
 ## Hardware State
 
@@ -87,6 +89,42 @@ Still unsolved:
 - the real `0xe7fe0` container seal/auth algorithm;
 - a fast/general host data-return channel from helper code;
 - stable normal-mode persistent F0 resident hooks.
+
+## Normal-Mode Read-Only Surface
+
+A standard-only normal LD5M survey ran on Linux drive #1 with no data-out or
+mechanics commands. Fast host-visible channels with no disc inserted:
+
+```text
+INQUIRY standard       96 bytes, ~7 ms
+EXTRAINQ              176 bytes, ~9 ms
+MODE SENSE(10)        224 bytes, ~9 ms
+GET CONFIGURATION     60/252 bytes, ~8-14 ms
+GET EVENT STATUS      8 bytes, ~10 ms
+MECHANISM STATUS      8 bytes, ~8 ms
+```
+
+Avoid using these as casual probes:
+
+- normal-mode `READ BUFFER id=02`: hung the optical LUN once and needed a Pico
+  servo power-cycle;
+- `GET PERFORMANCE`: returned `DID_TIME_OUT` after about ten seconds.
+
+Scripts/artifacts:
+
+```text
+scripts/probe_liteon_normal_mode_readonly.py
+scripts/analyze_liteon_normal_mode_responses.py
+references/evidence/live/normal-mode-readonly/linux-drive1-standard-only-probe.json
+references/evidence/live/normal-mode-readonly/linux-drive1-standard-only-probe.md
+analysis/8051/normal-mode-response-surface-analysis.md
+```
+
+The exact-match analysis shows normal `INQUIRY`/`EXTRAINQ` data overlaps both
+visible F0 identity copies (`0x04452` and `0xd8fd0`). Do not overread that:
+live edits to the visible F0 identity/profile copy persisted across a true
+cold boot but did not alter normal EXTRAINQ. This is a source-localization clue,
+not a solved resident hook.
 
 Blank-currentboot details:
 
@@ -284,6 +322,15 @@ The live drive is back in a known state: `LD5M`, with the currentboot gateway
 bulk response hook still installed. Decide deliberately whether to keep that
 hook for currentboot reads or restore stock bytes with the
 `currentboot-response-hook-restore-4fc9-cave` candidate before more LED probes.
+
+For the normal-runtime foothold, do not spend the next live run on another
+blind visible-F0 prefix hook. Better next tests:
+
+1. a currentboot-to-LD5M state-carryover marker test, if the right XDATA/write
+   response hook is installed or can be safely reinstalled;
+2. static/source localization for the fast normal-mode response channels above;
+3. decoded-runtime/CDD work if the real normal handlers live outside the
+   visible F0 prefix.
 
 Latest gateway map: the originally guessed decoded CDD window
 `controller[0x184000..0x1b4000]` is still all zero in currentboot, but a sparse

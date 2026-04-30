@@ -538,6 +538,60 @@ event 1 made currentboot EXTRAINQ report `0D5C3011/04/28 09:20`. Auto-recovery
 returned to `LD5M`. This is a useful currentboot-visible lower-prefix data
 hook, even though the normal LD5M identity stayed canonical.
 
+## Normal-Mode Read-Only Surface
+
+After the cold-boot negative on visible F0 resident hooks, we ran a standard
+read-only normal-mode command survey to find better host-visible trigger
+surfaces. The probe script deliberately avoids updater commands, data-out
+commands, START STOP, LOAD/UNLOAD, MODE SELECT, SEND DIAGNOSTIC, and FORMAT.
+
+Run from the Linux host:
+
+```sh
+python3 scripts/probe_liteon_normal_mode_readonly.py \
+  --device /dev/sg0 \
+  --out-json runs/normal-mode-readonly/standard-only-probe.json \
+  --out-md runs/normal-mode-readonly/standard-only-probe.md
+```
+
+Important default: `READ BUFFER` probes are opt-in with
+`--include-read-buffer`. During an earlier manual survey,
+normal-mode `READ BUFFER id=02` hung the optical LUN and required the Pico servo
+power-cycle. `GET PERFORMANCE` also returned `DID_TIME_OUT` after about ten
+seconds, so do not use it as a casual trigger.
+
+Fast, no-disc, host-visible response channels:
+
+```text
+INQUIRY standard       96 bytes, ~7 ms
+EXTRAINQ              176 bytes, ~9 ms
+MODE SENSE(10)        224 bytes, ~9 ms
+GET CONFIGURATION     60/252 bytes, ~8-14 ms
+GET EVENT STATUS      8 bytes, ~10 ms
+MECHANISM STATUS      8 bytes, ~8 ms
+```
+
+Offline matching shows `INQUIRY` and `EXTRAINQ` contain exact strings from both
+visible F0 identity copies (`0x04452` and `0xd8fd0`). That is a source clue, but
+not proof of direct normal-runtime reads from those offsets: live edits to
+`0xd8fd0..0xd8fff` persisted in F0 and still did not change normal EXTRAINQ.
+Treat these as normal-mode command surfaces to localize later, not as solved
+handler locations.
+
+Artifacts:
+
+```text
+scripts/probe_liteon_normal_mode_readonly.py
+scripts/analyze_liteon_normal_mode_responses.py
+references/evidence/live/normal-mode-readonly/linux-drive1-standard-only-probe.md
+references/evidence/live/normal-mode-readonly/linux-drive1-standard-only-probe.json
+analysis/8051/normal-mode-response-surface-analysis.md
+```
+
+The next normal-runtime foothold experiment should be a state-carryover test
+or a better handler-source localization pass, not another blind patch to the
+visible F0 prefix handlers.
+
 Second pass, after the directory source-address model, also returned zeros:
 
 | target | value |

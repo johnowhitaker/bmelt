@@ -259,6 +259,33 @@ which internal bit changes when the eject button line is pulled low. That should
 narrow the front-panel GPIO block more efficiently than brute-forcing output
 registers.
 
+## Normal Runtime Reality Check
+
+The Pico servo power switch turned out to be more than a convenience. It let us
+ask a question that software resets could not answer: if a persistent F0 patch
+is really in flash, does a true cold boot make normal firmware execute it?
+
+For the visible F0 prefix handlers we tried, the answer was no. The patched
+bytes survived a real `+5V` power cut and the drive re-enumerated cleanly, but
+normal `INQUIRY` and EXTRAINQ timing and contents stayed canonical. That means
+those visible routines are real code, and they matter in currentboot, but they
+are not the normal LD5M command handlers we need for an easy resident backdoor.
+
+We then surveyed the normal command surface without sending updater or
+mechanics commands. The drive has several quick, no-disc response channels:
+ordinary INQUIRY, EXTRAINQ, MODE SENSE(10), GET CONFIGURATION, GET EVENT
+STATUS, and MECHANISM STATUS. `GET PERFORMANCE` timed out, and normal-mode
+`READ BUFFER id=02` once hung the optical LUN until the Pico servo power-cycle
+recovered it.
+
+The survey gave a useful but subtle clue. Normal INQUIRY and EXTRAINQ contain
+byte strings that also exist in the visible F0 identity copies, yet editing one
+of those F0 copies did not alter normal EXTRAINQ. So the normal runtime uses
+the same template data, or a copied form of it, but probably not those visible
+flash offsets directly. This narrows the next problem: find where normal LD5M
+materializes those templates, or find a state path that survives from
+currentboot into normal runtime.
+
 ## The Response Hook Opens Up
 
 The front-panel work also made the old readout pain impossible to ignore. The
