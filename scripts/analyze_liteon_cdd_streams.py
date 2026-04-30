@@ -1030,6 +1030,43 @@ def write_report(images: list[CddImage]) -> str:
             f"{table_target_record_range(targets[128:])} | {run_text} |"
         )
     lines.append("")
+
+    ld5m = next((image for image in images if image.name == "LD5M"), None)
+    if ld5m is not None:
+        descriptor = parse_outer_descriptor(ld5m)
+        decoded_base = int(descriptor["decoded_start_a"]) if descriptor else 0x184000
+        targets = cdd1_table_targets(ld5m)
+        decoded_starts = decoded_candidate_starts(ld5m)
+        segments = source_segments(ld5m)
+        oracle_offsets = [
+            (0x00000, "decoded base / record 0"),
+            (0x00060, "minimum CDD1 table target"),
+            (0x0D010, "`0x0d01` x16 repeated front-table target"),
+            (0x14900, "`0x1490` x4 front-table target"),
+            (0x15030, "`0x1503` x4 front-table target"),
+            (0x18020, "`0x1802` x2 front-table target"),
+            (0x18800, "`0x1880` x2 front-table target"),
+            (0x1C000, "high front-table target"),
+            (0x1EFE0, "near-highest LD5M table target"),
+        ]
+        lines.append("LD5M decoded/controller oracle shortlist for future runtime reads:")
+        lines.append("")
+        lines.append("| decoded offset | controller address | reason | table index | target record+rel | source range | operation key |")
+        lines.append("|---:|---:|---|---:|---:|---:|---|")
+        for decoded_offset, reason in oracle_offsets:
+            table_hit = next((target for target in targets if target["decoded_offset"] == decoded_offset), None)
+            record_index = int(table_hit["record_index"]) if table_hit and table_hit["record_index"] is not None else bisect_right(decoded_starts, decoded_offset) - 1
+            if record_index < 0 or record_index >= len(segments):
+                continue
+            _, source_start, source_end, entry = segments[record_index]
+            record_rel = decoded_offset - decoded_starts[record_index]
+            table_index = str(table_hit["table_index"]) if table_hit else ""
+            lines.append(
+                f"| `0x{decoded_offset:05x}` | `0x{decoded_base + decoded_offset:06x}` | {reason} | "
+                f"{table_index} | {record_index}+`0x{record_rel:x}` | `0x{source_start:05x}..0x{source_end:05x}` | "
+                f"`{operation_key(entry).hex()}` |"
+            )
+        lines.append("")
     lines.append("Close sibling tables also line up by position. CHS7 and CHS9 have 189 identical same-index table words, including long equal runs, so this table is versioned data with stable structure.")
     lines.append("")
     lines.append("| pair | table words | same-position equal | most common word deltas |")
@@ -1063,7 +1100,6 @@ def write_report(images: list[CddImage]) -> str:
         )
     lines.append("")
 
-    ld5m = next((image for image in images if image.name == "LD5M"), None)
     if ld5m is not None:
         lines.append("LD5M source-segment mapping for useful probe offsets:")
         lines.append("")

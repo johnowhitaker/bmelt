@@ -175,6 +175,20 @@ Splitting that table at word index 128 exposes two different-looking regions. Th
 | CHS7 | low 0, mid 32, high 96 | 106..275 | low 356, mid 8, high 0 | 0..93 | `0x0d01` x16 @16 -> rec 106+`0x240`, `0x14e0` x4 @4 -> rec 182+`0x10`, `0x1503` x4 @40 -> rec 183+`0xb0`, `0x1490` x4 @80 -> rec 180+`0x190`, `0x1502` x4 @112 -> rec 183+`0xa0` |
 | CHS9 | low 0, mid 32, high 96 | 105..276 | low 365, mid 5, high 0 | 0..93 | `0x0d01` x16 @16 -> rec 105+`0x130`, `0x14e0` x4 @4 -> rec 181+`0x2c0`, `0x1503` x4 @40 -> rec 183+`0x90`, `0x1490` x4 @80 -> rec 180+`0x170`, `0x1502` x4 @112 -> rec 183+`0x80` |
 
+LD5M decoded/controller oracle shortlist for future runtime reads:
+
+| decoded offset | controller address | reason | table index | target record+rel | source range | operation key |
+|---:|---:|---|---:|---:|---:|---|
+| `0x00000` | `0x184000` | decoded base / record 0 |  | 0+`0x0` | `0x081c0..0x08d32` | `ef7a96b5bc05` |
+| `0x00060` | `0x184060` | minimum CDD1 table target | 471 | 0+`0x60` | `0x081c0..0x08d32` | `ef7a96b5bc05` |
+| `0x0d010` | `0x191010` | `0x0d01` x16 repeated front-table target | 16 | 118+`0xf0` | `0x4670e..0x47065` | `03ba94a26604` |
+| `0x14900` | `0x198900` | `0x1490` x4 front-table target | 72 | 186+`0x240` | `0x68949..0x692d7` | `cfe2537e9404` |
+| `0x15030` | `0x199030` | `0x1503` x4 front-table target | 52 | 189+`0x90` | `0x6a15c..0x6a86c` | `7fd1d274c802` |
+| `0x18020` | `0x19c020` | `0x1802` x2 front-table target | 50 | 222+`0x280` | `0x7a001..0x7a7ad` | `01eace6f1e04` |
+| `0x18800` | `0x19c800` | `0x1880` x2 front-table target | 46 | 228+`0x120` | `0x7d029..0x7d962` | `8442127b0205` |
+| `0x1c000` | `0x1a0000` | high front-table target | 112 | 258+`0x330` | `0x8e17c..0x8e92b` | `be01107a1204` |
+| `0x1efe0` | `0x1a2fe0` | near-highest LD5M table target | 122 | 281+`0x340` | `0x9908b..0x999c3` | `fc11147e8405` |
+
 Close sibling tables also line up by position. CHS7 and CHS9 have 189 identical same-index table words, including long equal runs, so this table is versioned data with stable structure.
 
 | pair | table words | same-position equal | most common word deltas |

@@ -486,6 +486,11 @@ the tail points into the early decoded records. I do not want to over-name it
 yet, but the front now looks vector/entrypoint/control-table-like, while the
 tail looks like a different offset list.
 
+That gives us a more principled runtime-read shortlist too. If we sample decoded
+controller space again, addresses like `0x191010` (the `0x0d01` x16 target) or
+`0x198900`/`0x199030` (x4 front-table targets) are better probes than random
+offsets.
+
 I turned that into a JSON record map alongside the markdown report. It is not a
 decoded firmware image, but it is a practical skeleton: each record now has a
 source file range, operation key, mode bits, candidate decoded range, and any

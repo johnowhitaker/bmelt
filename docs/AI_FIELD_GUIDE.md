@@ -172,6 +172,11 @@ Key CDD facts:
   early candidate decoded records. Treat the front as
   vector/entrypoint/control-table-like, and the tail as a different
   offset-list-like structure until proven otherwise.
+- If runtime decoded/controller reads resume, good LD5M oracle addresses from
+  this table are `0x184060` (minimum table target), `0x191010` (`0x0d01` x16
+  target), `0x198900`/`0x199030` (x4 front-table targets), and
+  `0x1a0000`/`0x1a2fe0` (high front-table targets). These are structurally
+  motivated probes, not arbitrary samples.
 - Across the current six DS-8ABSH samples, 2,135 unique operation keys appear
   and none maps to more than one source-span length. A partial length field is
   `u16le(operation_key[2:4]) >> 4`, exact for 106 records and close for many
