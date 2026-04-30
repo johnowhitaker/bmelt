@@ -43,6 +43,13 @@ Rediscover:
 python3 scripts/liteon_linux_status.py
 ```
 
+Power-cycle the bench drive/bridge from the Mac and wait for the Linux optical
+LUN:
+
+```sh
+python3 scripts/pico_power_cycle_linux_drive.py
+```
+
 ## Current Capabilities
 
 Live-proven:
@@ -59,6 +66,16 @@ Still unsolved:
 - the real `0xe7fe0` container seal/auth algorithm;
 - a fast/general host data-return channel from helper code;
 - stable normal-mode persistent F0 resident hooks.
+
+Important 2026-04-30 update: true servo-driven `+5V` power loss did not make
+the persisted F0 `INQUIRY` hook at `0x4ec6` live. Direct F0 readback showed the
+patch, dmesg showed real disconnect/re-enumeration, but command timing stayed
+baseline. A patched identity/profile timestamp at `0xd8ff4` also persisted in
+F0 across cold boot while live EXTRAINQ stayed canonical. See:
+
+```text
+references/evidence/live/linux-drive1-servo-coldboot-persistence-map.md
+```
 
 ## Practical Write Method
 

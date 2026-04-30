@@ -53,6 +53,12 @@ python3 pico/client.py --port /dev/cu.usbmodem2101 "TOGGLE SERVO"
 This cuts the spliced USB `+5V` line for about one second. It has been verified
 to make the optical LUN disappear and reappear as `LD5M`.
 
+Or use the wrapper that toggles the servo and waits for the Linux optical LUN:
+
+```sh
+python3 scripts/pico_power_cycle_linux_drive.py
+```
+
 Dump a full decrypted F0 image:
 
 ```sh

@@ -314,6 +314,16 @@ GP26 high during recovery. The normal recovery script brought it back to LD5M.
 That makes `0x4780` a second hazardous controller-path lead, not yet a clean
 LED output channel.
 
+The servo power switch then gave us a cleaner way to ask what persistent flash
+changes do after a real cold boot. The answer was surprisingly strict. An
+`INQUIRY` hook visibly persisted in F0, but after a true `+5V` cut Linux still
+saw normal 5 ms `INQUIRY` timing. A timestamp byte in the identity/profile area
+also persisted across the same cold boot, but live EXTRAINQ continued to report
+the stock `2016/10/18` timestamp while direct F0 readback showed our temporary
+`3016/10/18` edit. So the helper-bypass writer is genuinely changing flash, but
+some normal host-visible state is coming from a different runtime/controller
+source rather than these obvious F0 copies.
+
 ## Back To The Updaters
 
 After the slow bit-channel work, we took a static detour back into the Windows

@@ -115,6 +115,10 @@ The drive accepts `READ BUFFER F0` reliably at `0x80`-byte chunks.
 - Helper final-status bypass made modified F0 bytes persist.
 - Identity/profile byte `0xd8ff4: 32 -> 33` persisted via the generic builder.
 - The same byte restored to `32` via the generic builder.
+- After a true Pico-servo `+5V` power cycle, direct F0 readback still showed
+  the `0xd8ff4` edit, while live EXTRAINQ stayed canonical. This confirms flash
+  persistence but also confirms this identity/profile copy is not the live
+  EXTRAINQ source.
 - Identity/profile vendor-copy byte `0xd8fd8: 50 -> 40` persisted and restored;
   normal INQUIRY still reported `PLDS`, so that copy is not the normal-mode live
   identity source.

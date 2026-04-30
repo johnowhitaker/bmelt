@@ -512,11 +512,25 @@ Linux host reboot.
 
 The restore candidate returned `0x0000..0x7000` to byte-identical stock LD5M.
 
+After the Pico servo power-cycle primitive was added, the `INQUIRY` hook was
+retested across a true mechanical `+5V` power loss. The result stayed negative:
+F0 still contained the jump/stub patch, Linux dmesg showed a real USB
+disconnect/re-enumeration, and post-cold-boot `INQUIRY` timing remained the same
+roughly 5 ms baseline. Treat visible F0-prefix command handlers as non-live
+normal-mode code unless a later test proves a more exact activation path.
+
 Evidence:
 
 ```text
 references/evidence/live/linux-drive1-resident-f0-hook-negative.md
+references/evidence/live/linux-drive1-servo-coldboot-persistence-map.md
 ```
+
+A related cold-boot data test patched the F0 identity/profile timestamp at
+`0xd8ff4` from `2016` to `3016`. Direct F0 dumps after power loss showed the
+patched byte persisted, but live EXTRAINQ still reported canonical
+`2016/10/18 14:18`. So `0xd8fd0..0xd8fff` is writable persistent data, but not
+the normal runtime EXTRAINQ source.
 
 Second pass, after the directory source-address model, also returned zeros:
 
@@ -653,6 +667,12 @@ Run from the Mac:
 python3 pico/client.py --port /dev/cu.usbmodem2101 "TOGGLE SERVO"
 ```
 
+Preferred wrapper, which also waits for Linux to see the optical LUN:
+
+```sh
+python3 scripts/pico_power_cycle_linux_drive.py
+```
+
 Verified behavior on 2026-04-30:
 
 ```text
@@ -669,6 +689,7 @@ Evidence:
 
 ```text
 references/evidence/live/linux-drive1-pico-servo-power-cycle.md
+references/evidence/live/linux-drive1-servo-coldboot-persistence-map.md
 ```
 
 ## Next Work
@@ -688,4 +709,5 @@ Immediate useful directions:
 5. Keep live tests short through event `68` while iterating on helper code.
 6. Do not assume visible F0-prefix functions are live normal-mode handlers.
    Persistent hooks at `0x4ec6` and `0x5c72` were visible in F0 but did not
-   affect `INQUIRY` or `REQUEST SENSE` timing.
+   affect `INQUIRY` or `REQUEST SENSE` timing. The `0x4ec6` negative now holds
+   even across a true servo-driven `+5V` power cycle.
