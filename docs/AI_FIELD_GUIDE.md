@@ -211,6 +211,7 @@ Key CDD facts:
 - Consecutive short-record runs show a second-level XOR pattern: the `m` values
   fit contiguous slices of `base^0x00, base^0x64, base^0xc8, base^0xac`.
   Example: entries 312..315 are `17 73 df bb`.
+  See `analysis/cdd-affine-codeword-notes.md`.
 - CHS7 vs CHS9 same-index source-span comparison has common prefixes up to
   56 bytes, so record indices appear stable across close sibling revisions.
 - Cheap decode probes did not find a global XOR/add/sub mask or standard zlib
