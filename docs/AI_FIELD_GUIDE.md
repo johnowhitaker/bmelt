@@ -641,6 +641,36 @@ versus low button states gives the index of a single changed bit in about
 this command as disabled unless the mechanism has been made safe and the drive
 can still reach the helper hook.
 
+## Pico Power Cycle
+
+The Pico now also drives a servo on `GP10` which presses a microswitch in the
+spliced USB `+5V` line. This is a real high-side/mechanical power cut for the
+drive/bridge, not a USB logical reset.
+
+Run from the Mac:
+
+```sh
+python3 pico/client.py --port /dev/cu.usbmodem2101 "TOGGLE SERVO"
+```
+
+Verified behavior on 2026-04-30:
+
+```text
+before: sg0:PLDS:DVD+-RW DS-8ABSH:LD5M | sg1:Generic-:SD/MMC:1.00
+during: sg1:Generic-:SD/MMC:1.00
+after:  sg0:PLDS:DVD+-RW DS-8ABSH:LD5M | sg1:Generic-:SD/MMC:1.00
+```
+
+Use this before requesting a manual replug, especially after tests that wedge
+the optical LUN or when a true cold boot is needed to validate whether F0 flash
+patches load into runtime state.
+
+Evidence:
+
+```text
+references/evidence/live/linux-drive1-pico-servo-power-cycle.md
+```
+
 ## Next Work
 
 Immediate useful directions:

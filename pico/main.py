@@ -1,6 +1,6 @@
 import sys
 import time
-from machine import ADC, Pin
+from machine import ADC, PWM, Pin
 
 
 GPIO_IDS = (26, 27, 28)
@@ -10,10 +10,17 @@ ADC_CHANNEL = {
     28: 2,
 }
 ADC_MV = 3300
+SERVO_GPIO = 10
+SERVO_FREQ_HZ = 50
+SERVO_LEFT_US = 1000
+SERVO_RIGHT_US = 2000
+SERVO_PERIOD_US = 1000000 // SERVO_FREQ_HZ
 
 pins = {}
 adcs = {}
 modes = {}
+servo = None
+servo_position = "LEFT"
 
 
 def write_line(text):
@@ -85,6 +92,37 @@ def read_response(target):
     return '{"ok":true,"pin":%s}' % read_pin(target)
 
 
+def servo_duty_u16(pulse_us):
+    return (pulse_us * 65535 + SERVO_PERIOD_US // 2) // SERVO_PERIOD_US
+
+
+def servo_set(position):
+    global servo_position
+    position = position.upper()
+    if position == "LEFT":
+        pulse_us = SERVO_LEFT_US
+    elif position == "RIGHT":
+        pulse_us = SERVO_RIGHT_US
+    else:
+        raise ValueError("servo position must be LEFT or RIGHT")
+    servo.duty_u16(servo_duty_u16(pulse_us))
+    servo_position = position
+
+
+def servo_response():
+    return (
+        '{"ok":true,"servo":{"pin":"GP%d","position":"%s","left_us":%d,"right_us":%d}}'
+        % (SERVO_GPIO, servo_position, SERVO_LEFT_US, SERVO_RIGHT_US)
+    )
+
+
+def toggle_servo():
+    servo_set("RIGHT")
+    time.sleep_ms(1000)
+    servo_set("LEFT")
+    write_line(servo_response())
+
+
 def state_response(target):
     if target is None:
         states = ",".join(
@@ -106,13 +144,23 @@ def handle_command(line):
         write_line(
             '{"ok":true,"commands":["PING","READ [ALL|GP26|GP27|GP28]",'
             '"STATE [ALL|GP26|GP27|GP28]","SET GP26|GP27|GP28 Z|LOW|HIGH",'
-            '"RELEASE GP26|GP27|GP28","ALLZ"]}'
+            '"RELEASE GP26|GP27|GP28","ALLZ","TOGGLE SERVO","SERVO STATE"]}'
         )
         return
 
     if cmd == "PING":
         write_line('{"ok":true,"reply":"pong"}')
         return
+
+    if cmd == "TOGGLE" and len(parts) == 2 and parts[1].upper() == "SERVO":
+        toggle_servo()
+        return
+
+    if cmd == "SERVO":
+        if len(parts) == 2 and parts[1].upper() == "STATE":
+            write_line(servo_response())
+            return
+        raise ValueError("usage: TOGGLE SERVO or SERVO STATE")
 
     if cmd in ("READ", "ADC", "DIG", "DIGITAL"):
         target = None
@@ -161,14 +209,21 @@ def handle_command(line):
 
 
 def init():
+    global servo
     for gpio in GPIO_IDS:
         pins[gpio] = Pin(gpio, Pin.IN, pull=None)
         adcs[gpio] = ADC(ADC_CHANNEL[gpio])
         release_pin(gpio)
+    servo = PWM(Pin(SERVO_GPIO))
+    servo.freq(SERVO_FREQ_HZ)
+    servo_set("LEFT")
 
 
 init()
-write_line('{"ok":true,"ready":"pico-dut-gpio","pins":["GP26","GP27","GP28"],"baud":921600}')
+write_line(
+    '{"ok":true,"ready":"pico-dut-gpio","pins":["GP26","GP27","GP28"],'
+    '"servo":{"pin":"GP10","position":"LEFT"},"baud":921600}'
+)
 
 while True:
     try:

@@ -44,6 +44,15 @@ On the Linux host, discover the drive:
 ssh root@jonathan-thinkpad-t480s 'cd /home/jonathan/boastermelt && python3 scripts/liteon_linux_status.py'
 ```
 
+Power-cycle the Linux drive/bridge from the Mac via the Pico servo microswitch:
+
+```sh
+python3 pico/client.py --port /dev/cu.usbmodem2101 "TOGGLE SERVO"
+```
+
+This cuts the spliced USB `+5V` line for about one second. It has been verified
+to make the optical LUN disappear and reappear as `LD5M`.
+
 Dump a full decrypted F0 image:
 
 ```sh

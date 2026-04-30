@@ -4,7 +4,7 @@ This directory contains the MicroPython script installed on the Raspberry Pi Pic
 
 ## Files
 
-- `main.py`: copy to the Pico as `:main.py`. On boot it leaves GP26, GP27, and GP28 as high-impedance inputs.
+- `main.py`: copy to the Pico as `:main.py`. On boot it leaves GP26, GP27, and GP28 as high-impedance inputs and sets the GP10 servo to the left position.
 - `client.py`: sends line-oriented commands over the Pico USB serial port.
 
 ## Current Drive Wiring
@@ -35,11 +35,36 @@ GP26 / yellow LED line:   ~1.02-1.24 V, digital low
 `SET GP27 LOW` pulls the button line to ~0 V and `SET GP27 Z` releases it back
 high. The drive remained enumerated as `LD5M` after a short GP27 low pulse.
 
+## USB Power-Cycle Servo
+
+The current bench setup also uses a servo on Pico `GP10` to press a microswitch
+that temporarily cuts the spliced USB `+5V` line. This is intentionally a
+mechanical high-side switch: USB/data/front-panel grounds remain common, while
+the drive/bridge loses `+5V`.
+
+Run from the Mac:
+
+```sh
+python3 pico/client.py --port /dev/cu.usbmodem2101 "TOGGLE SERVO"
+```
+
+The servo holds the switch for about one second, then returns to the left/rest
+position. On 2026-04-30 this was verified from Linux as equivalent to a physical
+replug: the optical `PLDS DVD+-RW DS-8ABSH` LUN disappeared, then reappeared as
+`LD5M` a few seconds later.
+
+Evidence:
+
+```text
+references/evidence/live/linux-drive1-pico-servo-power-cycle.md
+```
+
 ## Serial
 
 - Baud: `921600`
 - Responses: one JSON object per line
 - Pins: `GP26`, `GP27`, `GP28`
+- Servo: `GP10`, 50 Hz PWM, 1000 us left, 2000 us right
 
 ## Commands
 
@@ -53,15 +78,21 @@ SET GP26 LOW
 SET GP26 HIGH
 RELEASE GP26
 ALLZ
+TOGGLE SERVO
+SERVO STATE
 ```
 
 Use `Z`, `RELEASE`, or `ALLZ` to return pins to high impedance. The Pico starts in `Z` for all three pins after every boot.
+
+`TOGGLE SERVO` moves GP10 from left to right for one second, then returns it to left.
 
 ## Host Example
 
 ```sh
 python3 pico/client.py "PING" "STATE ALL" "READ ALL"
 python3 pico/client.py "READ GP27" "SET GP27 LOW" "READ GP27" "SET GP27 Z"
+python3 pico/client.py "SERVO STATE" "TOGGLE SERVO" "SERVO STATE"
+python3 pico/client.py --port /dev/cu.usbmodem2101 "TOGGLE SERVO"
 ```
 
 ## Install Example
