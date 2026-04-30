@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import json
 import math
 import zlib
 from bisect import bisect_right
@@ -536,32 +537,56 @@ def decoded_offset_delta_runs(left: CddImage, right: CddImage) -> list[tuple[int
 
 
 def cdd1_table_interval_summary(image: CddImage) -> dict[str, object]:
-    starts = decoded_candidate_starts(image)
-    segments = source_segments(image)
-    ends = [
-        start + decoded_span_candidate(entry)
-        for start, (_, _, _, entry) in zip(starts, segments)
-    ]
-    table = cdd1_table_window(image)
-    words = [int.from_bytes(table[offset : offset + 2], "little") for offset in range(0, len(table) - 1, 2)]
+    table_targets = cdd1_table_targets(image)
     hit_records: Counter[int] = Counter()
     hit_rels: Counter[int] = Counter()
     misses = 0
-    for word in words:
-        offset = word << 4
-        index = bisect_right(starts, offset) - 1
-        if index >= 0 and index < len(ends) and offset < ends[index]:
-            hit_records[index] += 1
-            hit_rels[offset - starts[index]] += 1
-        else:
+    for target in table_targets:
+        if target["record_index"] is None:
             misses += 1
+        else:
+            hit_records[int(target["record_index"])] += 1
+            hit_rels[int(target["record_rel"])] += 1
     return {
-        "words": len(words),
+        "words": len(table_targets),
         "hits": sum(hit_records.values()),
         "misses": misses,
         "records": hit_records.most_common(6),
         "rels": hit_rels.most_common(6),
     }
+
+
+def cdd1_table_targets(image: CddImage) -> list[dict[str, int | None]]:
+    starts = decoded_candidate_starts(image)
+    segments = source_segments(image)
+    ends = [start + decoded_span_candidate(entry) for start, (_, _, _, entry) in zip(starts, segments)]
+    table = cdd1_table_window(image)
+    words = [int.from_bytes(table[offset : offset + 2], "little") for offset in range(0, len(table) - 1, 2)]
+    targets: list[dict[str, int | None]] = []
+    for table_index, word in enumerate(words):
+        offset = word << 4
+        index = bisect_right(starts, offset) - 1
+        if index >= 0 and index < len(ends) and offset < ends[index]:
+            targets.append(
+                {
+                    "table_index": table_index,
+                    "word": word,
+                    "decoded_offset": offset,
+                    "record_index": index,
+                    "record_rel": offset - starts[index],
+                }
+            )
+        else:
+            targets.append(
+                {
+                    "table_index": table_index,
+                    "word": word,
+                    "decoded_offset": offset,
+                    "record_index": None,
+                    "record_rel": None,
+                }
+            )
+    return targets
 
 
 def operation_mode_rows(images: list[CddImage]) -> list[dict[str, object]]:
@@ -694,6 +719,58 @@ def zlib_success_count(data: bytes) -> int:
         if len(out) >= 0x20:
             successes += 1
     return successes
+
+
+def build_record_map(images: list[CddImage]) -> dict[str, object]:
+    mapped_images: list[dict[str, object]] = []
+    for image in images:
+        if len(image.streams) < 2 or image.name == "XD13":
+            continue
+        decoded_starts = decoded_candidate_starts(image)
+        table_targets = cdd1_table_targets(image)
+        targets_by_record: defaultdict[int, list[dict[str, int]]] = defaultdict(list)
+        for target in table_targets:
+            if target["record_index"] is None:
+                continue
+            targets_by_record[int(target["record_index"])].append(
+                {
+                    "table_index": int(target["table_index"]),
+                    "decoded_offset": int(target["decoded_offset"]),
+                    "record_rel": int(target["record_rel"]),
+                }
+            )
+        records = []
+        for decoded_start, (index, source_start, source_end, entry) in zip(decoded_starts, source_segments(image)):
+            key = operation_key(entry)
+            decoded_span = decoded_span_candidate(entry)
+            records.append(
+                {
+                    "index": index,
+                    "entry_hex": entry.hex(),
+                    "operation_key": key.hex(),
+                    "mode": key[3] & 0xC0,
+                    "source_start": source_start,
+                    "source_end": source_end,
+                    "source_len": source_end - source_start,
+                    "decoded_start": decoded_start,
+                    "decoded_span": decoded_span,
+                    "source_minus_decoded": (source_end - source_start) - decoded_span,
+                    "table_targets": targets_by_record.get(index, []),
+                }
+            )
+        mapped_images.append(
+            {
+                "image": image.name,
+                "sha256": hashlib.sha256(image.data).hexdigest(),
+                "decoded_total": sum(decoded_span_candidate(entry) for _, _, _, entry in source_segments(image)),
+                "records": records,
+            }
+        )
+    return {
+        "schema": "liteon-cdd-record-map-v1",
+        "note": "Offline structural map. decoded_start/decoded_span are candidate fields inferred statically, not a completed CDD decode.",
+        "images": mapped_images,
+    }
 
 
 def write_report(images: list[CddImage]) -> str:
@@ -1236,6 +1313,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--image", action="append", type=Path, help="F0 image path. May be supplied more than once.")
     parser.add_argument("--out", type=Path, help="Write markdown report to this path instead of stdout.")
+    parser.add_argument("--map-json", type=Path, help="Write inferred CDD record map JSON to this path.")
     args = parser.parse_args()
 
     paths = args.image if args.image else DEFAULT_IMAGES
@@ -1249,6 +1327,9 @@ def main() -> int:
         args.out.write_text(report)
     else:
         print(report, end="")
+    if args.map_json:
+        args.map_json.parent.mkdir(parents=True, exist_ok=True)
+        args.map_json.write_text(json.dumps(build_record_map(images), indent=2, sort_keys=True) + "\n")
     return 0
 
 

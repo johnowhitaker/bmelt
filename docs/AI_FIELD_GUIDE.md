@@ -128,8 +128,14 @@ The current CDD static report is:
 
 ```sh
 python3 scripts/analyze_liteon_cdd_streams.py \
-  --out references/firmware/extracted/liteon-cdd-stream-static-analysis.md
+  --out references/firmware/extracted/liteon-cdd-stream-static-analysis.md \
+  --map-json references/firmware/extracted/liteon-cdd-record-map.json
 ```
+
+The JSON map is a decoder skeleton: per image it lists each CDD directory
+record, source span, operation key, candidate decoded start/span, mode bits, and
+CDD1 table targets that land inside that decoded interval. It is intentionally
+marked as inferred structure, not decoded bytes.
 
 Key CDD facts:
 

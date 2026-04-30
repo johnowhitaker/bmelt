@@ -477,6 +477,11 @@ inside one of the candidate decoded record intervals, for every DS-8ABSH sample
 we have. That is a strong validation that the table and the operation-key span
 field are talking about the same decoded address space.
 
+I turned that into a JSON record map alongside the markdown report. It is not a
+decoded firmware image, but it is a practical skeleton: each record now has a
+source file range, operation key, mode bits, candidate decoded range, and any
+CDD1 table entries that target inside it.
+
 This also explains the visible 13-byte motif runs. The common
 `0d6840031a00` operation consumes four 13-byte source units, `0x34` bytes
 total, but the candidate decoded span is `0x30`: four 12-byte units. That
