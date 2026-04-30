@@ -798,3 +798,41 @@ the `0x6ee3` code cave, where the currentboot response hook lives. So the state
 of the project after this recovery is better than before the wedge: we have the
 blank-currentboot exit path, and the useful currentboot bulk-read hook is still
 installed.
+
+## The Gateway Map Has A Better Target Than 0x184000
+
+After recovering from blank-currentboot, I used the still-installed
+gateway-bulk hook for a broader controller-memory map. The original hope was
+still the descriptor's decoded CDD range around `0x184000`, but a larger bulk
+read settled that: in this currentboot phase, `0x184000..0x1b3fff` is just
+zero. Not stale, not one weird page; the whole sampled CDD window is blank.
+
+The useful result was elsewhere. A sparse sweep over `0x000000..0x1fffff`
+showed live windows at `0x070000`, `0x074000`, `0x078000`, and `0x07c000`, with
+matching mirrors at `0x170000`, `0x174000`, `0x178000`, and `0x17c000`. Dumping
+the full 64 KiB starting at `0x070000` produced a new artifact:
+
+```text
+file   references/evidence/live/linux-drive1-currentboot-gateway-070000-10000.bin
+size   65536
+sha256 5f517adeab1647dbedf7b93f8be097b1641164fd49e87776364b9e134b9cbc0b
+```
+
+This blob is not a plain static slice from the firmware files we have in the
+clean repo. It has live profile and calibration-looking text:
+`PLDS CORPORATION`, `KEYPARA`, `CDROM`, the media profile names, and a
+drive-specific-looking serial string. More importantly, big parts of it
+disassemble cleanly as 8051. It references the controller FIFO registers
+`0x4000` and `0x4098`, the event/status area around `0x47xx`, and the same
+`0x59xx` hardware cluster that made the sled twitch during LED experiments.
+
+That gives the LED story a much better shape. We probably were not missing a
+simple output latch. The code that touches `0x5904`, `0x5905`, `0x5906`, and
+neighbors is real controller/runtime code, and it sits among broader
+hardware-initialization routines. Random writes there are exactly the kind of
+thing that would move mechanics instead of blinking a nice debug LED. The next
+LED/front-panel work should therefore be guided by this decoded runtime image,
+not by brute-force bit pokes.
+
+I recovered the drive immediately after the map run with the standard
+currentboot recovery script; standard INQUIRY was back to `LD5M`.

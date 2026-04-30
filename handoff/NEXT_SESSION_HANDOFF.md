@@ -285,6 +285,23 @@ bulk response hook still installed. Decide deliberately whether to keep that
 hook for currentboot reads or restore stock bytes with the
 `currentboot-response-hook-restore-4fc9-cave` candidate before more LED probes.
 
+Latest gateway map: the originally guessed decoded CDD window
+`controller[0x184000..0x1b4000]` is still all zero in currentboot, but a sparse
+gateway sweep found a much more useful live region at
+`controller[0x070000..0x07ffff]`, mirrored at `0x170000..0x17ffff`. The first
+full dump is tracked:
+
+```text
+references/evidence/live/linux-drive1-currentboot-gateway-070000-10000.bin
+sha256 5f517adeab1647dbedf7b93f8be097b1641164fd49e87776364b9e134b9cbc0b
+```
+
+It contains profile/calibration strings and disassembles plausibly as 8051 in
+several areas. It references the `0x4098` FIFO, `0x47xx` event/status
+registers, and the `0x59xx` hardware cluster that made the sled move during LED
+experiments. Use this decoded/runtime image to guide front-panel and hook work;
+do not brute-force `0x59xx` writes casually.
+
 Then use the bulk currentboot response hook and timing XDATA channel to map a
 short list of high-value registers before adding hardware. Use the older
 GOOD/DID_ERROR channel only when the value is already known not to drive a messy

@@ -294,3 +294,24 @@ dump all 64 KiB of currentboot XDATA in seconds.
 The main remaining gap is phase/context. This hook sees currentboot-helper
 state, not necessarily normal LD5M runtime state. The decoded CDD range is
 still blank here, and normal-runtime host-visible hooks are still unresolved.
+
+## Controller-Gateway Runtime Map Follow-Up
+
+A later sparse controller-gateway sweep found that `0x184000` is still blank in
+currentboot, but it is not the only useful controller window. The range
+`0x070000..0x07ffff` is live, mirrored at `0x170000..0x17ffff`, and contains
+profile/calibration strings plus 8051-like code that references `0x4098`,
+`0x47xx`, `0x48xx`, and `0x59xx` hardware clusters.
+
+Tracked artifact:
+
+```text
+references/evidence/live/linux-drive1-currentboot-gateway-070000-10000.bin
+sha256 5f517adeab1647dbedf7b93f8be097b1641164fd49e87776364b9e134b9cbc0b
+```
+
+Detailed note:
+
+```text
+references/evidence/live/linux-drive1-currentboot-gateway-runtime-map.md
+```

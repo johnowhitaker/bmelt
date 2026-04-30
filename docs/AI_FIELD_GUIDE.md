@@ -670,6 +670,28 @@ in bulk:
 controller[0x184000..0x184fff] = all 00
 ```
 
+A sparse gateway sweep then found the more useful live currentboot window:
+
+```text
+controller[0x070000..0x07ffff]
+controller[0x170000..0x17ffff]  mirror of 0x070000 sample pages
+```
+
+The first full dump is tracked:
+
+```text
+references/evidence/live/linux-drive1-currentboot-gateway-070000-10000.bin
+sha256 5f517adeab1647dbedf7b93f8be097b1641164fd49e87776364b9e134b9cbc0b
+```
+
+This 64 KiB region contains live profile/calibration strings such as
+`PLDS CORPORATION`, `KEYPARA`, media-profile names, and per-drive-looking serial
+material. It also disassembles plausibly as 8051 in several regions and
+references the same `0x4098`, `0x47xx`, `0x48xx`, and `0x59xx` register
+clusters we have been probing. Treat it as the best current currentboot-phase
+controller/runtime oracle. It is not an exact byte-for-byte static firmware
+slice found in the clean workspace.
+
 XDATA read example:
 
 ```sh
