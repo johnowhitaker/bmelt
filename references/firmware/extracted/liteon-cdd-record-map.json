@@ -3266,6 +3266,13 @@
           "index": 109,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 128,
+          "short_rm_sequence": [
+            128,
+            153,
+            178,
+            171
+          ],
           "source_end": 276784,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -3279,6 +3286,13 @@
           "index": 110,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 44,
+          "short_rm_sequence": [
+            44,
+            53,
+            30,
+            7
+          ],
           "source_end": 276836,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -3292,6 +3306,13 @@
           "index": 111,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 72,
+          "short_rm_sequence": [
+            72,
+            81,
+            122,
+            99
+          ],
           "source_end": 276888,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -4670,6 +4691,13 @@
           "index": 206,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 118,
+          "short_rm_sequence": [
+            118,
+            111,
+            68,
+            93
+          ],
           "source_end": 468209,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -4683,6 +4711,13 @@
           "index": 207,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 18,
+          "short_rm_sequence": [
+            18,
+            11,
+            32,
+            57
+          ],
           "source_end": 468261,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -6069,6 +6104,13 @@
           "index": 279,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 148,
+          "short_rm_sequence": [
+            148,
+            141,
+            166,
+            191
+          ],
           "source_end": 624759,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -6584,6 +6626,13 @@
           "index": 313,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 115,
+          "short_rm_sequence": [
+            115,
+            106,
+            65,
+            88
+          ],
           "source_end": 697475,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -6597,6 +6646,13 @@
           "index": 314,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 223,
+          "short_rm_sequence": [
+            223,
+            198,
+            237,
+            244
+          ],
           "source_end": 697527,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -6610,6 +6666,13 @@
           "index": 315,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 187,
+          "short_rm_sequence": [
+            187,
+            162,
+            137,
+            144
+          ],
           "source_end": 697579,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -6766,6 +6829,13 @@
           "index": 327,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 185,
+          "short_rm_sequence": [
+            185,
+            160,
+            139,
+            146
+          ],
           "source_end": 725235,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -7676,6 +7746,13 @@
           "index": 397,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 110,
+          "short_rm_sequence": [
+            110,
+            119,
+            92,
+            69
+          ],
           "source_end": 901978,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -7689,6 +7766,13 @@
           "index": 398,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 194,
+          "short_rm_sequence": [
+            194,
+            219,
+            240,
+            233
+          ],
           "source_end": 902030,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -7702,6 +7786,13 @@
           "index": 399,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 166,
+          "short_rm_sequence": [
+            166,
+            191,
+            148,
+            141
+          ],
           "source_end": 902082,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -7988,6 +8079,13 @@
           "index": 421,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 224,
+          "short_rm_sequence": [
+            224,
+            249,
+            210,
+            203
+          ],
           "source_end": 929132,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -8001,6 +8099,13 @@
           "index": 422,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 76,
+          "short_rm_sequence": [
+            76,
+            85,
+            126,
+            103
+          ],
           "source_end": 929184,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -8014,6 +8119,13 @@
           "index": 423,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 40,
+          "short_rm_sequence": [
+            40,
+            49,
+            26,
+            3
+          ],
           "source_end": 929236,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -11560,6 +11672,13 @@
           "index": 109,
           "mode": 0,
           "operation_key": "0c6000031800",
+          "short_rm_payload": 128,
+          "short_rm_sequence": [
+            128,
+            153,
+            178,
+            171
+          ],
           "source_end": 276065,
           "source_len": 48,
           "source_minus_decoded": 0,
@@ -11573,6 +11692,13 @@
           "index": 110,
           "mode": 0,
           "operation_key": "0c6000031800",
+          "short_rm_payload": 44,
+          "short_rm_sequence": [
+            44,
+            53,
+            30,
+            7
+          ],
           "source_end": 276113,
           "source_len": 48,
           "source_minus_decoded": 0,
@@ -11586,6 +11712,13 @@
           "index": 111,
           "mode": 0,
           "operation_key": "0c6000031800",
+          "short_rm_payload": 72,
+          "short_rm_sequence": [
+            72,
+            81,
+            122,
+            99
+          ],
           "source_end": 276161,
           "source_len": 48,
           "source_minus_decoded": 0,
@@ -14361,6 +14494,13 @@
           "index": 279,
           "mode": 0,
           "operation_key": "0c6000031800",
+          "short_rm_payload": 148,
+          "short_rm_sequence": [
+            148,
+            141,
+            166,
+            191
+          ],
           "source_end": 634819,
           "source_len": 48,
           "source_minus_decoded": 0,
@@ -14790,6 +14930,13 @@
           "index": 312,
           "mode": 0,
           "operation_key": "0c6000031800",
+          "short_rm_payload": 23,
+          "short_rm_sequence": [
+            23,
+            14,
+            37,
+            60
+          ],
           "source_end": 708715,
           "source_len": 48,
           "source_minus_decoded": 0,
@@ -14803,6 +14950,13 @@
           "index": 313,
           "mode": 0,
           "operation_key": "0c6000031800",
+          "short_rm_payload": 115,
+          "short_rm_sequence": [
+            115,
+            106,
+            65,
+            88
+          ],
           "source_end": 708763,
           "source_len": 48,
           "source_minus_decoded": 0,
@@ -14816,6 +14970,13 @@
           "index": 314,
           "mode": 0,
           "operation_key": "0c6000031800",
+          "short_rm_payload": 223,
+          "short_rm_sequence": [
+            223,
+            198,
+            237,
+            244
+          ],
           "source_end": 708811,
           "source_len": 48,
           "source_minus_decoded": 0,
@@ -14829,6 +14990,13 @@
           "index": 315,
           "mode": 0,
           "operation_key": "0c6000031800",
+          "short_rm_payload": 187,
+          "short_rm_sequence": [
+            187,
+            162,
+            137,
+            144
+          ],
           "source_end": 708859,
           "source_len": 48,
           "source_minus_decoded": 0,
@@ -14985,6 +15153,13 @@
           "index": 327,
           "mode": 0,
           "operation_key": "0c6000031800",
+          "short_rm_payload": 185,
+          "short_rm_sequence": [
+            185,
+            160,
+            139,
+            146
+          ],
           "source_end": 736516,
           "source_len": 48,
           "source_minus_decoded": 0,
@@ -15115,6 +15290,13 @@
           "index": 337,
           "mode": 0,
           "operation_key": "0c6000031800",
+          "short_rm_payload": 54,
+          "short_rm_sequence": [
+            54,
+            47,
+            4,
+            29
+          ],
           "source_end": 754048,
           "source_len": 48,
           "source_minus_decoded": 0,
@@ -15128,6 +15310,13 @@
           "index": 338,
           "mode": 0,
           "operation_key": "0c6000031800",
+          "short_rm_payload": 154,
+          "short_rm_sequence": [
+            154,
+            131,
+            168,
+            177
+          ],
           "source_end": 754096,
           "source_len": 48,
           "source_minus_decoded": 0,
@@ -15141,6 +15330,13 @@
           "index": 339,
           "mode": 0,
           "operation_key": "0c6000031800",
+          "short_rm_payload": 254,
+          "short_rm_sequence": [
+            254,
+            231,
+            204,
+            213
+          ],
           "source_end": 754144,
           "source_len": 48,
           "source_minus_decoded": 0,
@@ -15895,6 +16091,13 @@
           "index": 397,
           "mode": 0,
           "operation_key": "0c6000031800",
+          "short_rm_payload": 110,
+          "short_rm_sequence": [
+            110,
+            119,
+            92,
+            69
+          ],
           "source_end": 902022,
           "source_len": 48,
           "source_minus_decoded": 0,
@@ -15908,6 +16111,13 @@
           "index": 398,
           "mode": 0,
           "operation_key": "0c6000031800",
+          "short_rm_payload": 194,
+          "short_rm_sequence": [
+            194,
+            219,
+            240,
+            233
+          ],
           "source_end": 902070,
           "source_len": 48,
           "source_minus_decoded": 0,
@@ -15921,6 +16131,13 @@
           "index": 399,
           "mode": 0,
           "operation_key": "0c6000031800",
+          "short_rm_payload": 166,
+          "short_rm_sequence": [
+            166,
+            191,
+            148,
+            141
+          ],
           "source_end": 902118,
           "source_len": 48,
           "source_minus_decoded": 0,
@@ -16207,6 +16424,13 @@
           "index": 421,
           "mode": 0,
           "operation_key": "0c6000031800",
+          "short_rm_payload": 224,
+          "short_rm_sequence": [
+            224,
+            249,
+            210,
+            203
+          ],
           "source_end": 928810,
           "source_len": 48,
           "source_minus_decoded": 0,
@@ -16220,6 +16444,13 @@
           "index": 422,
           "mode": 0,
           "operation_key": "0c6000031800",
+          "short_rm_payload": 76,
+          "short_rm_sequence": [
+            76,
+            85,
+            126,
+            103
+          ],
           "source_end": 928858,
           "source_len": 48,
           "source_minus_decoded": 0,
@@ -16233,6 +16464,13 @@
           "index": 423,
           "mode": 0,
           "operation_key": "0c6000031800",
+          "short_rm_payload": 40,
+          "short_rm_sequence": [
+            40,
+            49,
+            26,
+            3
+          ],
           "source_end": 928906,
           "source_len": 48,
           "source_minus_decoded": 0,
@@ -19745,6 +19983,13 @@
           "index": 109,
           "mode": 0,
           "operation_key": "0c6000031800",
+          "short_rm_payload": 128,
+          "short_rm_sequence": [
+            128,
+            153,
+            178,
+            171
+          ],
           "source_end": 275405,
           "source_len": 48,
           "source_minus_decoded": 0,
@@ -19758,6 +20003,13 @@
           "index": 110,
           "mode": 0,
           "operation_key": "0c6000031800",
+          "short_rm_payload": 44,
+          "short_rm_sequence": [
+            44,
+            53,
+            30,
+            7
+          ],
           "source_end": 275453,
           "source_len": 48,
           "source_minus_decoded": 0,
@@ -19771,6 +20023,13 @@
           "index": 111,
           "mode": 0,
           "operation_key": "0c6000031800",
+          "short_rm_payload": 72,
+          "short_rm_sequence": [
+            72,
+            81,
+            122,
+            99
+          ],
           "source_end": 275501,
           "source_len": 48,
           "source_minus_decoded": 0,
@@ -22986,6 +23245,13 @@
           "index": 313,
           "mode": 0,
           "operation_key": "0c6000031800",
+          "short_rm_payload": 115,
+          "short_rm_sequence": [
+            115,
+            106,
+            65,
+            88
+          ],
           "source_end": 709428,
           "source_len": 48,
           "source_minus_decoded": 0,
@@ -22999,6 +23265,13 @@
           "index": 314,
           "mode": 0,
           "operation_key": "0c6000031800",
+          "short_rm_payload": 223,
+          "short_rm_sequence": [
+            223,
+            198,
+            237,
+            244
+          ],
           "source_end": 709476,
           "source_len": 48,
           "source_minus_decoded": 0,
@@ -23012,6 +23285,13 @@
           "index": 315,
           "mode": 0,
           "operation_key": "0c6000031800",
+          "short_rm_payload": 187,
+          "short_rm_sequence": [
+            187,
+            162,
+            137,
+            144
+          ],
           "source_end": 709524,
           "source_len": 48,
           "source_minus_decoded": 0,
@@ -23168,6 +23448,13 @@
           "index": 327,
           "mode": 0,
           "operation_key": "0c6000031800",
+          "short_rm_payload": 185,
+          "short_rm_sequence": [
+            185,
+            160,
+            139,
+            146
+          ],
           "source_end": 737075,
           "source_len": 48,
           "source_minus_decoded": 0,
@@ -23298,6 +23585,13 @@
           "index": 337,
           "mode": 0,
           "operation_key": "0c6000031800",
+          "short_rm_payload": 54,
+          "short_rm_sequence": [
+            54,
+            47,
+            4,
+            29
+          ],
           "source_end": 754613,
           "source_len": 48,
           "source_minus_decoded": 0,
@@ -23311,6 +23605,13 @@
           "index": 338,
           "mode": 0,
           "operation_key": "0c6000031800",
+          "short_rm_payload": 154,
+          "short_rm_sequence": [
+            154,
+            131,
+            168,
+            177
+          ],
           "source_end": 754661,
           "source_len": 48,
           "source_minus_decoded": 0,
@@ -23324,6 +23625,13 @@
           "index": 339,
           "mode": 0,
           "operation_key": "0c6000031800",
+          "short_rm_payload": 254,
+          "short_rm_sequence": [
+            254,
+            231,
+            204,
+            213
+          ],
           "source_end": 754709,
           "source_len": 48,
           "source_minus_decoded": 0,
@@ -24078,6 +24386,13 @@
           "index": 397,
           "mode": 0,
           "operation_key": "0c6000031800",
+          "short_rm_payload": 110,
+          "short_rm_sequence": [
+            110,
+            119,
+            92,
+            69
+          ],
           "source_end": 902050,
           "source_len": 48,
           "source_minus_decoded": 0,
@@ -24091,6 +24406,13 @@
           "index": 398,
           "mode": 0,
           "operation_key": "0c6000031800",
+          "short_rm_payload": 194,
+          "short_rm_sequence": [
+            194,
+            219,
+            240,
+            233
+          ],
           "source_end": 902098,
           "source_len": 48,
           "source_minus_decoded": 0,
@@ -24104,6 +24426,13 @@
           "index": 399,
           "mode": 0,
           "operation_key": "0c6000031800",
+          "short_rm_payload": 166,
+          "short_rm_sequence": [
+            166,
+            191,
+            148,
+            141
+          ],
           "source_end": 902146,
           "source_len": 48,
           "source_minus_decoded": 0,
@@ -24390,6 +24719,13 @@
           "index": 421,
           "mode": 0,
           "operation_key": "0c6000031800",
+          "short_rm_payload": 224,
+          "short_rm_sequence": [
+            224,
+            249,
+            210,
+            203
+          ],
           "source_end": 928902,
           "source_len": 48,
           "source_minus_decoded": 0,
@@ -24403,6 +24739,13 @@
           "index": 422,
           "mode": 0,
           "operation_key": "0c6000031800",
+          "short_rm_payload": 76,
+          "short_rm_sequence": [
+            76,
+            85,
+            126,
+            103
+          ],
           "source_end": 928950,
           "source_len": 48,
           "source_minus_decoded": 0,
@@ -24416,6 +24759,13 @@
           "index": 423,
           "mode": 0,
           "operation_key": "0c6000031800",
+          "short_rm_payload": 40,
+          "short_rm_sequence": [
+            40,
+            49,
+            26,
+            3
+          ],
           "source_end": 928998,
           "source_len": 48,
           "source_minus_decoded": 0,
@@ -26026,6 +26376,13 @@
           "index": 15,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 126,
+          "short_rm_sequence": [
+            126,
+            103,
+            76,
+            85
+          ],
           "source_end": 72159,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -27867,6 +28224,13 @@
           "index": 109,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 128,
+          "short_rm_sequence": [
+            128,
+            153,
+            178,
+            171
+          ],
           "source_end": 274543,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -27880,6 +28244,13 @@
           "index": 110,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 44,
+          "short_rm_sequence": [
+            44,
+            53,
+            30,
+            7
+          ],
           "source_end": 274595,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -27893,6 +28264,13 @@
           "index": 111,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 72,
+          "short_rm_sequence": [
+            72,
+            81,
+            122,
+            99
+          ],
           "source_end": 274647,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -31175,6 +31553,13 @@
           "index": 312,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 23,
+          "short_rm_sequence": [
+            23,
+            14,
+            37,
+            60
+          ],
           "source_end": 705131,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -31188,6 +31573,13 @@
           "index": 313,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 115,
+          "short_rm_sequence": [
+            115,
+            106,
+            65,
+            88
+          ],
           "source_end": 705183,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -31201,6 +31593,13 @@
           "index": 314,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 223,
+          "short_rm_sequence": [
+            223,
+            198,
+            237,
+            244
+          ],
           "source_end": 705235,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -31214,6 +31613,13 @@
           "index": 315,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 187,
+          "short_rm_sequence": [
+            187,
+            162,
+            137,
+            144
+          ],
           "source_end": 705287,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -31370,6 +31776,13 @@
           "index": 327,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 185,
+          "short_rm_sequence": [
+            185,
+            160,
+            139,
+            146
+          ],
           "source_end": 733006,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -31500,6 +31913,13 @@
           "index": 337,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 54,
+          "short_rm_sequence": [
+            54,
+            47,
+            4,
+            29
+          ],
           "source_end": 750540,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -31513,6 +31933,13 @@
           "index": 338,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 154,
+          "short_rm_sequence": [
+            154,
+            131,
+            168,
+            177
+          ],
           "source_end": 750592,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -31526,6 +31953,13 @@
           "index": 339,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 254,
+          "short_rm_sequence": [
+            254,
+            231,
+            204,
+            213
+          ],
           "source_end": 750644,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -32280,6 +32714,13 @@
           "index": 397,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 110,
+          "short_rm_sequence": [
+            110,
+            119,
+            92,
+            69
+          ],
           "source_end": 902024,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -32293,6 +32734,13 @@
           "index": 398,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 194,
+          "short_rm_sequence": [
+            194,
+            219,
+            240,
+            233
+          ],
           "source_end": 902076,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -32306,6 +32754,13 @@
           "index": 399,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 166,
+          "short_rm_sequence": [
+            166,
+            191,
+            148,
+            141
+          ],
           "source_end": 902128,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -32592,6 +33047,13 @@
           "index": 421,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 224,
+          "short_rm_sequence": [
+            224,
+            249,
+            210,
+            203
+          ],
           "source_end": 928827,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -32605,6 +33067,13 @@
           "index": 422,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 76,
+          "short_rm_sequence": [
+            76,
+            85,
+            126,
+            103
+          ],
           "source_end": 928879,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -32618,6 +33087,13 @@
           "index": 423,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 40,
+          "short_rm_sequence": [
+            40,
+            49,
+            26,
+            3
+          ],
           "source_end": 928931,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -34228,6 +34704,13 @@
           "index": 15,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 126,
+          "short_rm_sequence": [
+            126,
+            103,
+            76,
+            85
+          ],
           "source_end": 71905,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -35189,6 +35672,13 @@
           "index": 51,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 183,
+          "short_rm_sequence": [
+            183,
+            174,
+            133,
+            156
+          ],
           "source_end": 146002,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -36139,6 +36629,13 @@
           "index": 109,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 128,
+          "short_rm_sequence": [
+            128,
+            153,
+            178,
+            171
+          ],
           "source_end": 273527,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -36152,6 +36649,13 @@
           "index": 110,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 44,
+          "short_rm_sequence": [
+            44,
+            53,
+            30,
+            7
+          ],
           "source_end": 273579,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -36165,6 +36669,13 @@
           "index": 111,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 72,
+          "short_rm_sequence": [
+            72,
+            81,
+            122,
+            99
+          ],
           "source_end": 273631,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -39380,6 +39891,13 @@
           "index": 313,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 115,
+          "short_rm_sequence": [
+            115,
+            106,
+            65,
+            88
+          ],
           "source_end": 705791,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -39393,6 +39911,13 @@
           "index": 314,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 223,
+          "short_rm_sequence": [
+            223,
+            198,
+            237,
+            244
+          ],
           "source_end": 705843,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -39406,6 +39931,13 @@
           "index": 315,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 187,
+          "short_rm_sequence": [
+            187,
+            162,
+            137,
+            144
+          ],
           "source_end": 705895,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -39562,6 +40094,13 @@
           "index": 327,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 185,
+          "short_rm_sequence": [
+            185,
+            160,
+            139,
+            146
+          ],
           "source_end": 733475,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -39692,6 +40231,13 @@
           "index": 337,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 54,
+          "short_rm_sequence": [
+            54,
+            47,
+            4,
+            29
+          ],
           "source_end": 751010,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -39705,6 +40251,13 @@
           "index": 338,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 154,
+          "short_rm_sequence": [
+            154,
+            131,
+            168,
+            177
+          ],
           "source_end": 751062,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -39718,6 +40271,13 @@
           "index": 339,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 254,
+          "short_rm_sequence": [
+            254,
+            231,
+            204,
+            213
+          ],
           "source_end": 751114,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -40472,6 +41032,13 @@
           "index": 397,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 110,
+          "short_rm_sequence": [
+            110,
+            119,
+            92,
+            69
+          ],
           "source_end": 902032,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -40485,6 +41052,13 @@
           "index": 398,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 194,
+          "short_rm_sequence": [
+            194,
+            219,
+            240,
+            233
+          ],
           "source_end": 902084,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -40498,6 +41072,13 @@
           "index": 399,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 166,
+          "short_rm_sequence": [
+            166,
+            191,
+            148,
+            141
+          ],
           "source_end": 902136,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -40784,6 +41365,13 @@
           "index": 421,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 224,
+          "short_rm_sequence": [
+            224,
+            249,
+            210,
+            203
+          ],
           "source_end": 928855,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -40797,6 +41385,13 @@
           "index": 422,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 76,
+          "short_rm_sequence": [
+            76,
+            85,
+            126,
+            103
+          ],
           "source_end": 928907,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -40810,6 +41405,13 @@
           "index": 423,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 40,
+          "short_rm_sequence": [
+            40,
+            49,
+            26,
+            3
+          ],
           "source_end": 928959,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -42420,6 +43022,13 @@
           "index": 15,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 126,
+          "short_rm_sequence": [
+            126,
+            103,
+            76,
+            85
+          ],
           "source_end": 71891,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -43406,6 +44015,13 @@
           "index": 51,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 183,
+          "short_rm_sequence": [
+            183,
+            174,
+            133,
+            156
+          ],
           "source_end": 145988,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -44360,6 +44976,13 @@
           "index": 109,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 128,
+          "short_rm_sequence": [
+            128,
+            153,
+            178,
+            171
+          ],
           "source_end": 273614,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -44373,6 +44996,13 @@
           "index": 110,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 44,
+          "short_rm_sequence": [
+            44,
+            53,
+            30,
+            7
+          ],
           "source_end": 273666,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -44386,6 +45016,13 @@
           "index": 111,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 72,
+          "short_rm_sequence": [
+            72,
+            81,
+            122,
+            99
+          ],
           "source_end": 273718,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -47602,6 +48239,13 @@
           "index": 313,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 115,
+          "short_rm_sequence": [
+            115,
+            106,
+            65,
+            88
+          ],
           "source_end": 705850,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -47615,6 +48259,13 @@
           "index": 314,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 223,
+          "short_rm_sequence": [
+            223,
+            198,
+            237,
+            244
+          ],
           "source_end": 705902,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -47628,6 +48279,13 @@
           "index": 315,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 187,
+          "short_rm_sequence": [
+            187,
+            162,
+            137,
+            144
+          ],
           "source_end": 705954,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -47784,6 +48442,13 @@
           "index": 327,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 185,
+          "short_rm_sequence": [
+            185,
+            160,
+            139,
+            146
+          ],
           "source_end": 733535,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -47914,6 +48579,13 @@
           "index": 337,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 54,
+          "short_rm_sequence": [
+            54,
+            47,
+            4,
+            29
+          ],
           "source_end": 751071,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -47927,6 +48599,13 @@
           "index": 338,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 154,
+          "short_rm_sequence": [
+            154,
+            131,
+            168,
+            177
+          ],
           "source_end": 751123,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -47940,6 +48619,13 @@
           "index": 339,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 254,
+          "short_rm_sequence": [
+            254,
+            231,
+            204,
+            213
+          ],
           "source_end": 751175,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -48694,6 +49380,13 @@
           "index": 397,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 110,
+          "short_rm_sequence": [
+            110,
+            119,
+            92,
+            69
+          ],
           "source_end": 902031,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -48707,6 +49400,13 @@
           "index": 398,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 194,
+          "short_rm_sequence": [
+            194,
+            219,
+            240,
+            233
+          ],
           "source_end": 902083,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -48720,6 +49420,13 @@
           "index": 399,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 166,
+          "short_rm_sequence": [
+            166,
+            191,
+            148,
+            141
+          ],
           "source_end": 902135,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -49006,6 +49713,13 @@
           "index": 421,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 224,
+          "short_rm_sequence": [
+            224,
+            249,
+            210,
+            203
+          ],
           "source_end": 928852,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -49019,6 +49733,13 @@
           "index": 422,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 76,
+          "short_rm_sequence": [
+            76,
+            85,
+            126,
+            103
+          ],
           "source_end": 928904,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -49032,6 +49753,13 @@
           "index": 423,
           "mode": 0,
           "operation_key": "0d6840031a00",
+          "short_rm_payload": 40,
+          "short_rm_sequence": [
+            40,
+            49,
+            26,
+            3
+          ],
           "source_end": 928956,
           "source_len": 52,
           "source_minus_decoded": 4,
@@ -49198,6 +49926,6 @@
       "sha256": "6f2552a0a4b938e5edaf7e05ce59da977ab1af3dc96c1a1bcf925c83a83112b9"
     }
   ],
-  "note": "Offline structural map. decoded_start/decoded_span are candidate fields inferred statically, not a completed CDD decode.",
-  "schema": "liteon-cdd-record-map-v1"
+  "note": "Offline structural map. decoded_start/decoded_span are candidate fields inferred statically, not a completed CDD decode. short_rm_* fields decode only the two known short-operation records.",
+  "schema": "liteon-cdd-record-map-v2"
 }

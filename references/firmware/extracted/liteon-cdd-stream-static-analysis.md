@@ -361,7 +361,7 @@ The close siblings keep this field aligned in long same-operation runs. For CHS7
 | CHS7 vs CHS9 | `252..325` len 74 delta `+0x10`, `136..187` len 52 delta `+0x20`, `51..84` len 34 delta `-0x20`, `20..49` len 30 delta `-0x20`, `348..375` len 28 delta `+0x10`, `413..435` len 23 delta `-0x380` |
 | AD12 vs CD12 | `430..431` len 2 delta `+0x230`, `424..425` len 2 delta `+0x230`, `417..417` len 1 delta `+0x220`, `415..415` len 1 delta `+0x210`, `384..384` len 1 delta `+0x240` |
 
-This field also explains the most visible motif island. The `0d6840031a00` operation consumes four 13-byte source units (`0x34` bytes total) but has candidate decoded span `0x30`, exactly four 12-byte units. The extra byte per unit is plausibly parity/check/control rather than plaintext. The related `0c6000031800` operation consumes four 12-byte units and also spans `0x30` decoded bytes.
+This field also lands on the two visible short-operation islands. `0d6840031a00` consumes four 13-byte source units (`0x34` bytes total), while `0c6000031800` consumes four 12-byte source units (`0x30` bytes total); both claim candidate decoded span `0x30`. The first byte of each unit is not discardable padding: across every known short record it follows the four-copy XOR code `m, m^0x19, m^0x32, m^0x2b`.
 
 The high two bits of the same operation-key byte look like mode flags. They split the stream into different redundancy classes rather than changing the decoded-span unit.
 
@@ -376,6 +376,10 @@ The high two bits of the same operation-key byte look like mode flags. They spli
 
 The two high-frequency short operations expose a small regular source format. In both cases byte 0 of the operation key is the source unit length, byte 1 is `8 * unit_len`, byte 4 is `2 * unit_len`, and each record source span is `4 * unit_len`.
 
+The byte-0 sequence now has a stronger interpretation: `104/104` short records match `m, m^0x19, m^0x32, m^0x2b`. Across shared entry indices, `22/22` indices keep a single `m` value across the sibling set.
+
+This corrects the earlier parity-only interpretation. The profile-specific unit tails still look like scaffolding or controller coding material, but byte 0 carries a reproducible one-byte payload/control value.
+
 | operation key | image | records | unit len | source span | decoded span candidate | units | constant unit tail | first-byte samples |
 |---|---|---:|---:|---:|---:|---:|---|---|
 | `0d6840031a00` | CD12 | 18 | `0xd` | `0x34` | `0x30` | 72 | `c6582018c818c810d1706780` | `0x7e` x2, `0x67` x2, `0x4c` x2, `0x55` x2, `0x80` x1, `0x99` x1, `0xb2` x1, `0xab` x1 |
@@ -385,20 +389,44 @@ The two high-frequency short operations expose a small regular source format. In
 | `0c6000031800` | AD12 | 18 | `0xc` | `0x30` | `0x30` | 72 | `cf6b016b016b00c8d60680` | `0x94` x2, `0x8d` x2, `0xa6` x2, `0xbf` x2, `0x80` x1, `0x99` x1, `0xb2` x1, `0xab` x1 |
 | `0c6000031800` | AHS9 | 16 | `0xc` | `0x30` | `0x30` | 64 | `d33ac13ac13ac0c9560668` | `0x80` x1, `0x99` x1, `0xb2` x1, `0xab` x1, `0x2c` x1, `0x35` x1, `0x1e` x1, `0x07` x1 |
 
-At shared record indices, the first byte of each short source unit is often identical across images even when the operation key and constant tail differ. That makes the unit shape look like one payload byte plus an image/profile-specific codeword tail.
+Representative short-record `m` values:
 
-| entry | first-byte sequence | images |
-|---:|---|---|
-| 423 | `28 31 1a 03` | AD12, AHS9, CD12, CHS7, CHS9, LD5M |
-| 422 | `4c 55 7e 67` | AD12, AHS9, CD12, CHS7, CHS9, LD5M |
-| 421 | `e0 f9 d2 cb` | AD12, AHS9, CD12, CHS7, CHS9, LD5M |
-| 399 | `a6 bf 94 8d` | AD12, AHS9, CD12, CHS7, CHS9, LD5M |
-| 398 | `c2 db f0 e9` | AD12, AHS9, CD12, CHS7, CHS9, LD5M |
-| 397 | `6e 77 5c 45` | AD12, AHS9, CD12, CHS7, CHS9, LD5M |
-| 327 | `b9 a0 8b 92` | AD12, AHS9, CD12, CHS7, CHS9, LD5M |
-| 315 | `bb a2 89 90` | AD12, AHS9, CD12, CHS7, CHS9, LD5M |
-| 314 | `df c6 ed f4` | AD12, AHS9, CD12, CHS7, CHS9, LD5M |
-| 313 | `73 6a 41 58` | AD12, AHS9, CD12, CHS7, CHS9, LD5M |
+| image | record count | `entry:m` values |
+|---|---:|---|
+| LD5M | 16 | `109:0x80`, `110:0x2c`, `111:0x48`, `206:0x76`, `207:0x12`, `279:0x94`, `313:0x73`, `314:0xdf`, `315:0xbb`, `327:0xb9`, `397:0x6e`, `398:0xc2`, `399:0xa6`, `421:0xe0`, `422:0x4c`, `423:0x28` |
+| AD12 | 18 | `109:0x80`, `110:0x2c`, `111:0x48`, `279:0x94`, `312:0x17`, `313:0x73`, `314:0xdf`, `315:0xbb`, `327:0xb9`, `337:0x36`, `338:0x9a`, `339:0xfe`, `397:0x6e`, `398:0xc2`, `399:0xa6`, `421:0xe0`, `422:0x4c`, `423:0x28` |
+| AHS9 | 16 | `109:0x80`, `110:0x2c`, `111:0x48`, `313:0x73`, `314:0xdf`, `315:0xbb`, `327:0xb9`, `337:0x36`, `338:0x9a`, `339:0xfe`, `397:0x6e`, `398:0xc2`, `399:0xa6`, `421:0xe0`, `422:0x4c`, `423:0x28` |
+| CD12 | 18 | `15:0x7e`, `109:0x80`, `110:0x2c`, `111:0x48`, `312:0x17`, `313:0x73`, `314:0xdf`, `315:0xbb`, `327:0xb9`, `337:0x36`, `338:0x9a`, `339:0xfe`, `397:0x6e`, `398:0xc2`, `399:0xa6`, `421:0xe0`, `422:0x4c`, `423:0x28` |
+| CHS7 | 18 | `15:0x7e`, `51:0xb7`, `109:0x80`, `110:0x2c`, `111:0x48`, `313:0x73`, `314:0xdf`, `315:0xbb`, `327:0xb9`, `337:0x36`, `338:0x9a`, `339:0xfe`, `397:0x6e`, `398:0xc2`, `399:0xa6`, `421:0xe0`, `422:0x4c`, `423:0x28` |
+| CHS9 | 18 | `15:0x7e`, `51:0xb7`, `109:0x80`, `110:0x2c`, `111:0x48`, `313:0x73`, `314:0xdf`, `315:0xbb`, `327:0xb9`, `337:0x36`, `338:0x9a`, `339:0xfe`, `397:0x6e`, `398:0xc2`, `399:0xa6`, `421:0xe0`, `422:0x4c`, `423:0x28` |
+
+Shared-index examples:
+
+| entry | `m` | byte-0 sequence | images |
+|---:|---:|---|---|
+| 423 | `0x28` | `28 31 1a 03` | AD12, AHS9, CD12, CHS7, CHS9, LD5M |
+| 422 | `0x4c` | `4c 55 7e 67` | AD12, AHS9, CD12, CHS7, CHS9, LD5M |
+| 421 | `0xe0` | `e0 f9 d2 cb` | AD12, AHS9, CD12, CHS7, CHS9, LD5M |
+| 399 | `0xa6` | `a6 bf 94 8d` | AD12, AHS9, CD12, CHS7, CHS9, LD5M |
+| 398 | `0xc2` | `c2 db f0 e9` | AD12, AHS9, CD12, CHS7, CHS9, LD5M |
+| 397 | `0x6e` | `6e 77 5c 45` | AD12, AHS9, CD12, CHS7, CHS9, LD5M |
+| 327 | `0xb9` | `b9 a0 8b 92` | AD12, AHS9, CD12, CHS7, CHS9, LD5M |
+| 315 | `0xbb` | `bb a2 89 90` | AD12, AHS9, CD12, CHS7, CHS9, LD5M |
+| 314 | `0xdf` | `df c6 ed f4` | AD12, AHS9, CD12, CHS7, CHS9, LD5M |
+| 313 | `0x73` | `73 6a 41 58` | AD12, AHS9, CD12, CHS7, CHS9, LD5M |
+| 111 | `0x48` | `48 51 7a 63` | AD12, AHS9, CD12, CHS7, CHS9, LD5M |
+| 110 | `0x2c` | `2c 35 1e 07` | AD12, AHS9, CD12, CHS7, CHS9, LD5M |
+
+The `m` values also have a second-level pattern in consecutive short-record runs. Every multi-record run fits a contiguous slice of `base^0x00, base^0x64, base^0xc8, base^0xac`; this may be another small codeword or interleave lane.
+
+| entries | `m` sequence | XOR to first | mask-slice fits |
+|---|---|---|---|
+| 109..111 | `80 2c 48` | `00 ac c8` | start 1, base `0xe4` |
+| 206..207 | `76 12` | `00 64` | start 0, base `0x76`, start 2, base `0xbe` |
+| 312..315 | `17 73 df bb` | `00 64 c8 ac` | start 0, base `0x17` |
+| 337..339 | `36 9a fe` | `00 ac c8` | start 1, base `0x52` |
+| 397..399 | `6e c2 a6` | `00 ac c8` | start 1, base `0x0a` |
+| 421..423 | `e0 4c 28` | `00 ac c8` | start 1, base `0x84` |
 
 ## Simple Decode/Compression Probes
 

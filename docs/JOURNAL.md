@@ -640,10 +640,31 @@ CDD1 table entries that target inside it.
 
 This also explains the visible 13-byte motif runs. The common
 `0d6840031a00` operation consumes four 13-byte source units, `0x34` bytes
-total, but the candidate decoded span is `0x30`: four 12-byte units. That
-extra byte per unit now looks like parity, check, or control material rather
-than decoded payload. The related `0c6000031800` operation consumes four
-12-byte units and also spans `0x30` decoded bytes.
+total, but the candidate decoded span is `0x30`: four 12-byte units. A peer
+static pass caught an important correction here. The "extra" byte is not just
+throwaway parity. Across all 104 known short records, the first byte of each
+of the four units follows:
+
+```text
+m, m^0x19, m^0x32, m^0x2b
+```
+
+Shared record indices keep the same `m` across the sibling images. So the
+short operations appear to encode one reproducible payload/control byte in a
+four-copy XOR code, plus image/profile-specific scaffold bytes. The related
+`0c6000031800` operation uses 12-byte units but follows the same byte-0 rule.
+
+There is even a second-level pattern in the `m` bytes. Consecutive short-record
+runs fit slices of another XOR row:
+
+```text
+base^0x00, base^0x64, base^0xc8, base^0xac
+```
+
+For example, entries 312..315 have `m = 17 73 df bb`, exactly
+`0x17 ^ {00,64,c8,ac}`. Several three-record runs look like the same row with
+one lane missing. That is not a decoder yet, but it is another sign that CDD is
+using explicit small codewords rather than accidental repeated bytes.
 
 The high two bits of that same byte look like mode flags. They split the record
 set into different redundancy classes: roughly 2x encoded/decoded for mode
@@ -657,6 +678,15 @@ source spans, operation keys describe how much decoded material is produced,
 and the table window likely carries decoded-space addresses or control
 targets. We still do not have a decoder, but the problem has narrowed from
 "what cipher is this?" to "what is this record grammar?"
+
+A parallel raw-disassembly check helped clean up the static footing too. The
+quick Ghidra C export is useful, but it is not the thing to trust for exact
+XDATA flow. Looking directly at `analysis/8051/ldm58051.bin`, the CDD parser
+really does package header fields into `xdata[0x4a00..0x4a29]` and issues
+controller command/status work through `xdata[0x4e80/0x4e84/0x4e88/0x4e8c]`
+while polling `xdata[0x4ea0]`. That supports the model that the visible 8051
+sets up a mailbox and waits; the actual CDD body expansion still seems to live
+on the controller side.
 
 ## Pre-Tail Shortcut Attempt
 

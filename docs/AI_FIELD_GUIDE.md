@@ -56,6 +56,15 @@ analysis/8051/ldm58051_c.c
 analysis/8051/ldm58051_c.h
 ```
 
+For static 8051 work, treat `ldm58051.bin` disassembled as 8051 at base 0 as
+ground truth. The Ghidra C export is useful for search/navigation, but it has
+duplicate XDATA declarations and can mislead around `MOVX` pointer flow. The
+current raw-disassembly CDD mailbox note is:
+
+```text
+analysis/8051/cdd-mailbox-handoff-static-notes.md
+```
+
 Code-execution evidence:
 
 ```text
@@ -192,13 +201,16 @@ Key CDD facts:
 - Repeated templates `0d6840031a` and `0c60000318` point at short
   `0x34`/`0x30` byte spans, matching the visible motif islands. In these
   records, byte 0 behaves like `N`, byte 1 is `8*N`, byte 4 is `2*N`, and the
-  source span is `4*N`. For the `0d...` operation, four 13-byte source units map
-  to a `0x30` decoded span: exactly four 12-byte units plus one extra
-  parity/check/control byte per unit.
-- Those short operations have a source-unit format: one payload-looking first
-  byte followed by an image/profile-specific constant tail. Shared indices
-  often keep the same four first bytes across all six images even when the unit
-  tail and operation key differ.
+  source span is `4*N`.
+- Those short operations have a source-unit format: byte 0 of each of the four
+  units follows `m, m^0x19, m^0x32, m^0x2b` for 104/104 known short records.
+  Shared record indices keep the same `m` across siblings, even when the
+  image/profile-specific unit tail and operation key differ. This corrects the
+  older "extra parity byte" reading: the byte carries a reproducible
+  one-byte payload/control value.
+- Consecutive short-record runs show a second-level XOR pattern: the `m` values
+  fit contiguous slices of `base^0x00, base^0x64, base^0xc8, base^0xac`.
+  Example: entries 312..315 are `17 73 df bb`.
 - CHS7 vs CHS9 same-index source-span comparison has common prefixes up to
   56 bytes, so record indices appear stable across close sibling revisions.
 - Cheap decode probes did not find a global XOR/add/sub mask or standard zlib

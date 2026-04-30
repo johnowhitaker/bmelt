@@ -231,6 +231,19 @@ units, each beginning with the same varying byte sequence seen in LD5M's
 `0x0c` vs `0x0d` likely changes the unit width/scaffold convention, while the
 four-way XOR coding of `m` stays the same.
 
+The stable `m` values also show a second-level XOR row in consecutive
+short-record runs:
+
+```text
+base^0x00, base^0x64, base^0xc8, base^0xac
+```
+
+For example, records 312..315 decode to `m = 17 73 df bb`, exactly
+`0x17 ^ {00,64,c8,ac}`. Records 109..111, 337..339, 397..399, and 421..423
+fit contiguous three-value slices of the same row. This suggests the short
+records may be arranged in small interleaved/codeword groups, not just isolated
+one-byte literals.
+
 This also means the candidate `decoded_span=0x30` is not yet proven to mean
 "48 bytes of ordinary plaintext" for these records. It may be a logical
 address-space allocation, controller codeword footprint, or scaffolded control

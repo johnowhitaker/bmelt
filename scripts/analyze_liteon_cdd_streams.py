@@ -31,6 +31,10 @@ DEFAULT_IMAGES = [
     ROOT / "work/cdd-siblings/XD13-postprocess-plain.bin",
 ]
 
+SHORT_OPERATION_KEYS = (bytes.fromhex("0d6840031a00"), bytes.fromhex("0c6000031800"))
+SHORT_RM_MASKS = (0x00, 0x19, 0x32, 0x2B)
+SHORT_RUN_MASKS = (0x00, 0x64, 0xC8, 0xAC)
+
 
 @dataclass(frozen=True)
 class CddStream:
@@ -705,6 +709,84 @@ def operation_unit_summary(images: list[CddImage], key: bytes) -> dict[str, obje
     }
 
 
+def short_rm_sequence(data: bytes, key: bytes) -> tuple[int, ...] | None:
+    unit_len = key[0]
+    if key not in SHORT_OPERATION_KEYS or not unit_len or len(data) != 4 * unit_len:
+        return None
+    return tuple(data[offset] for offset in range(0, len(data), unit_len))
+
+
+def short_rm_payload(sequence: tuple[int, ...]) -> int | None:
+    if len(sequence) != len(SHORT_RM_MASKS):
+        return None
+    candidate = sequence[0]
+    expected = tuple(candidate ^ mask for mask in SHORT_RM_MASKS)
+    return candidate if sequence == expected else None
+
+
+def short_rm_rows(images: list[CddImage]) -> list[dict[str, object]]:
+    rows: list[dict[str, object]] = []
+    for image in images:
+        if len(image.streams) < 2 or image.name == "XD13":
+            continue
+        decoded_starts = decoded_candidate_starts(image)
+        for decoded_start, (index, start, end, entry) in zip(decoded_starts, source_segments(image)):
+            key = operation_key(entry)
+            if key not in SHORT_OPERATION_KEYS:
+                continue
+            sequence = short_rm_sequence(image.data[start:end], key)
+            if sequence is None:
+                payload = None
+            else:
+                payload = short_rm_payload(sequence)
+            rows.append(
+                {
+                    "image": image.name,
+                    "index": index,
+                    "operation_key": key,
+                    "source_start": start,
+                    "source_len": end - start,
+                    "decoded_start": decoded_start,
+                    "decoded_span": decoded_span_candidate(entry),
+                    "sequence": sequence,
+                    "payload": payload,
+                }
+            )
+    return rows
+
+
+def short_rm_stable_payloads(rows: list[dict[str, object]]) -> dict[int, int]:
+    payloads_by_index: defaultdict[int, set[int]] = defaultdict(set)
+    for row in rows:
+        if row["payload"] is not None:
+            payloads_by_index[int(row["index"])].add(int(row["payload"]))
+    return {index: next(iter(values)) for index, values in payloads_by_index.items() if len(values) == 1}
+
+
+def consecutive_runs(indices: list[int]) -> list[list[int]]:
+    runs: list[list[int]] = []
+    position = 0
+    while position < len(indices):
+        end = position + 1
+        while end < len(indices) and indices[end] == indices[end - 1] + 1:
+            end += 1
+        runs.append(indices[position:end])
+        position = end
+    return runs
+
+
+def fit_short_run_masks(sequence: list[int]) -> list[tuple[int, int]]:
+    fits: list[tuple[int, int]] = []
+    if not sequence or len(sequence) > len(SHORT_RUN_MASKS):
+        return fits
+    for mask_start in range(len(SHORT_RUN_MASKS) - len(sequence) + 1):
+        masks = SHORT_RUN_MASKS[mask_start : mask_start + len(sequence)]
+        base = sequence[0] ^ masks[0]
+        if all((base ^ masks[index]) == value for index, value in enumerate(sequence)):
+            fits.append((mask_start, base))
+    return fits
+
+
 def transformed_printable_score(data: bytes, transform: str, key: int) -> float:
     if transform == "xor":
         transformed = ((byte ^ key) for byte in data)
@@ -786,21 +868,26 @@ def build_record_map(images: list[CddImage]) -> dict[str, object]:
         for decoded_start, (index, source_start, source_end, entry) in zip(decoded_starts, source_segments(image)):
             key = operation_key(entry)
             decoded_span = decoded_span_candidate(entry)
-            records.append(
-                {
-                    "index": index,
-                    "entry_hex": entry.hex(),
-                    "operation_key": key.hex(),
-                    "mode": key[3] & 0xC0,
-                    "source_start": source_start,
-                    "source_end": source_end,
-                    "source_len": source_end - source_start,
-                    "decoded_start": decoded_start,
-                    "decoded_span": decoded_span,
-                    "source_minus_decoded": (source_end - source_start) - decoded_span,
-                    "table_targets": targets_by_record.get(index, []),
-                }
-            )
+            source_data = image.data[source_start:source_end]
+            rm_sequence = short_rm_sequence(source_data, key)
+            rm_payload = short_rm_payload(rm_sequence) if rm_sequence is not None else None
+            record = {
+                "index": index,
+                "entry_hex": entry.hex(),
+                "operation_key": key.hex(),
+                "mode": key[3] & 0xC0,
+                "source_start": source_start,
+                "source_end": source_end,
+                "source_len": source_end - source_start,
+                "decoded_start": decoded_start,
+                "decoded_span": decoded_span,
+                "source_minus_decoded": (source_end - source_start) - decoded_span,
+                "table_targets": targets_by_record.get(index, []),
+            }
+            if rm_sequence is not None:
+                record["short_rm_sequence"] = list(rm_sequence)
+                record["short_rm_payload"] = rm_payload
+            records.append(record)
         mapped_images.append(
             {
                 "image": image.name,
@@ -810,8 +897,8 @@ def build_record_map(images: list[CddImage]) -> dict[str, object]:
             }
         )
     return {
-        "schema": "liteon-cdd-record-map-v1",
-        "note": "Offline structural map. decoded_start/decoded_span are candidate fields inferred statically, not a completed CDD decode.",
+        "schema": "liteon-cdd-record-map-v2",
+        "note": "Offline structural map. decoded_start/decoded_span are candidate fields inferred statically, not a completed CDD decode. short_rm_* fields decode only the two known short-operation records.",
         "images": mapped_images,
     }
 
@@ -1297,7 +1384,7 @@ def write_report(images: list[CddImage]) -> str:
         )
         lines.append(f"| {pair[0]} vs {pair[1]} | {run_text} |")
     lines.append("")
-    lines.append("This field also explains the most visible motif island. The `0d6840031a00` operation consumes four 13-byte source units (`0x34` bytes total) but has candidate decoded span `0x30`, exactly four 12-byte units. The extra byte per unit is plausibly parity/check/control rather than plaintext. The related `0c6000031800` operation consumes four 12-byte units and also spans `0x30` decoded bytes.")
+    lines.append("This field also lands on the two visible short-operation islands. `0d6840031a00` consumes four 13-byte source units (`0x34` bytes total), while `0c6000031800` consumes four 12-byte source units (`0x30` bytes total); both claim candidate decoded span `0x30`. The first byte of each unit is not discardable padding: across every known short record it follows the four-copy XOR code `m, m^0x19, m^0x32, m^0x2b`.")
     lines.append("")
     lines.append("The high two bits of the same operation-key byte look like mode flags. They split the stream into different redundancy classes rather than changing the decoded-span unit.")
     lines.append("")
@@ -1316,9 +1403,25 @@ def write_report(images: list[CddImage]) -> str:
     lines.append("")
     lines.append("The two high-frequency short operations expose a small regular source format. In both cases byte 0 of the operation key is the source unit length, byte 1 is `8 * unit_len`, byte 4 is `2 * unit_len`, and each record source span is `4 * unit_len`.")
     lines.append("")
+    rm_rows = short_rm_rows(images)
+    rm_ok = [row for row in rm_rows if row["payload"] is not None]
+    payloads_by_index: defaultdict[int, set[int]] = defaultdict(set)
+    images_by_index: defaultdict[int, set[str]] = defaultdict(set)
+    for row in rm_ok:
+        payloads_by_index[int(row["index"])].add(int(row["payload"]))
+        images_by_index[int(row["index"])].add(str(row["image"]))
+    stable_indices = [index for index, values in payloads_by_index.items() if len(values) == 1]
+    lines.append(
+        f"The byte-0 sequence now has a stronger interpretation: `{len(rm_ok)}/{len(rm_rows)}` "
+        "short records match `m, m^0x19, m^0x32, m^0x2b`. "
+        f"Across shared entry indices, `{len(stable_indices)}/{len(payloads_by_index)}` indices keep a single `m` value across the sibling set."
+    )
+    lines.append("")
+    lines.append("This corrects the earlier parity-only interpretation. The profile-specific unit tails still look like scaffolding or controller coding material, but byte 0 carries a reproducible one-byte payload/control value.")
+    lines.append("")
     lines.append("| operation key | image | records | unit len | source span | decoded span candidate | units | constant unit tail | first-byte samples |")
     lines.append("|---|---|---:|---:|---:|---:|---:|---|---|")
-    for key in (bytes.fromhex("0d6840031a00"), bytes.fromhex("0c6000031800")):
+    for key in SHORT_OPERATION_KEYS:
         summary = operation_unit_summary(images, key)
         rows = summary["rows"]  # type: ignore[assignment]
         record_count_by_image = Counter(row[0] for row in rows)  # type: ignore[index]
@@ -1333,31 +1436,56 @@ def write_report(images: list[CddImage]) -> str:
                 f"`0x{decoded_span_from_key(key):x}` | {image_row['unit_count']} | {tail_text} | {first_bytes} |"
             )
     lines.append("")
-    lines.append("At shared record indices, the first byte of each short source unit is often identical across images even when the operation key and constant tail differ. That makes the unit shape look like one payload byte plus an image/profile-specific codeword tail.")
+    lines.append("Representative short-record `m` values:")
     lines.append("")
-    lines.append("| entry | first-byte sequence | images |")
-    lines.append("|---:|---|---|")
-    short_sequences: defaultdict[int, defaultdict[tuple[int, ...], list[str]]] = defaultdict(lambda: defaultdict(list))
+    lines.append("| image | record count | `entry:m` values |")
+    lines.append("|---|---:|---|")
     for image in images:
-        if len(image.streams) < 2 or image.name == "XD13":
+        image_rows = [row for row in rm_ok if row["image"] == image.name]
+        if not image_rows:
             continue
-        for index, start, end, entry in source_segments(image):
-            key = operation_key(entry)
-            if key not in (bytes.fromhex("0d6840031a00"), bytes.fromhex("0c6000031800")):
-                continue
-            unit_len = key[0]
-            data = image.data[start:end]
-            if unit_len and len(data) % unit_len == 0:
-                first_sequence = tuple(data[offset] for offset in range(0, len(data), unit_len))
-                short_sequences[index][first_sequence].append(image.name)
-    sequence_rows = []
-    for index, groups in short_sequences.items():
-        for sequence, image_names in groups.items():
-            if len(image_names) >= 4:
-                sequence_rows.append((len(image_names), index, sequence, sorted(image_names)))
-    for _, index, sequence, image_names in sorted(sequence_rows, reverse=True)[:10]:
+        values = ", ".join(f"`{int(row['index'])}:0x{int(row['payload']):02x}`" for row in image_rows[:20])
+        if len(image_rows) > 20:
+            values += ", ..."
+        lines.append(f"| {image.name} | {len(image_rows)} | {values} |")
+    lines.append("")
+    lines.append("Shared-index examples:")
+    lines.append("")
+    lines.append("| entry | `m` | byte-0 sequence | images |")
+    lines.append("|---:|---:|---|---|")
+    shared_rows = []
+    for index, values in payloads_by_index.items():
+        if len(values) != 1:
+            continue
+        image_names = sorted(images_by_index[index])
+        if len(image_names) < 4:
+            continue
+        payload = next(iter(values))
+        sequence = tuple(payload ^ mask for mask in SHORT_RM_MASKS)
+        shared_rows.append((len(image_names), index, payload, sequence, image_names))
+    for _, index, payload, sequence, image_names in sorted(shared_rows, reverse=True)[:12]:
         sequence_text = " ".join(f"{byte:02x}" for byte in sequence)
-        lines.append(f"| {index} | `{sequence_text}` | {', '.join(image_names)} |")
+        lines.append(f"| {index} | `0x{payload:02x}` | `{sequence_text}` | {', '.join(image_names)} |")
+    lines.append("")
+
+    stable_payloads = short_rm_stable_payloads(rm_rows)
+    run_rows = []
+    for run in consecutive_runs(sorted(stable_payloads)):
+        sequence = [stable_payloads[index] for index in run]
+        if len(sequence) < 2:
+            continue
+        fits = fit_short_run_masks(sequence)
+        run_rows.append((run, sequence, fits))
+    lines.append("The `m` values also have a second-level pattern in consecutive short-record runs. Every multi-record run fits a contiguous slice of `base^0x00, base^0x64, base^0xc8, base^0xac`; this may be another small codeword or interleave lane.")
+    lines.append("")
+    lines.append("| entries | `m` sequence | XOR to first | mask-slice fits |")
+    lines.append("|---|---|---|---|")
+    for run, sequence, fits in run_rows:
+        entries = f"{run[0]}" if len(run) == 1 else f"{run[0]}..{run[-1]}"
+        sequence_text = " ".join(f"{value:02x}" for value in sequence)
+        xors_text = " ".join(f"{value ^ sequence[0]:02x}" for value in sequence)
+        fits_text = ", ".join(f"start {start}, base `0x{base:02x}`" for start, base in fits) or ""
+        lines.append(f"| {entries} | `{sequence_text}` | `{xors_text}` | {fits_text} |")
     lines.append("")
 
     lines.append("## Simple Decode/Compression Probes")
