@@ -164,6 +164,10 @@ Key CDD facts:
   `(operation_key[3] & 0x3f) << 4`. Its per-image sum lands near the explicit
   `0x30000` decoded range: CHS9 is `0x2ffd0`, CD12 `0x2fe50`, AD12 `0x2fc20`,
   CHS7 `0x30350`, AHS9 `0x30720`, LD5M `0x2e3b0`.
+- The high two bits of operation-key byte 3 look like mode flags. Across the
+  six samples they split records into redundancy classes with encoded/decoded
+  ratios around 2.0x (`0x00`), 3.1x (`0x40`), 5.7x (`0x80`), and rare
+  control-like 26.7x (`0xc0`) records.
 - Repeated templates `0d6840031a` and `0c60000318` point at short
   `0x34`/`0x30` byte spans, matching the visible motif islands. In these
   records, byte 0 behaves like `N`, byte 1 is `8*N`, byte 4 is `2*N`, and the

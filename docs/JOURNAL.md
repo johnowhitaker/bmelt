@@ -478,6 +478,12 @@ extra byte per unit now looks like parity, check, or control material rather
 than decoded payload. The related `0c6000031800` operation consumes four
 12-byte units and also spans `0x30` decoded bytes.
 
+The high two bits of that same byte look like mode flags. They split the record
+set into different redundancy classes: roughly 2x encoded/decoded for mode
+`0x00`, 3x for `0x40`, 5.7x for `0x80`, and a rare high-ratio `0xc0` mode
+that looks more control-like. That is another hint that this is a packed
+controller grammar with checks/codewords, not a single encrypted blob.
+
 The CDD object is looking less like encryption and more like a
 controller-specific packed/codeword stream: directory records point to encoded
 source spans, operation keys describe how much decoded material is produced,

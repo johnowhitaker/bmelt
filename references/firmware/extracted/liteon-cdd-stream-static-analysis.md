@@ -327,6 +327,15 @@ The close siblings keep this field aligned in long same-operation runs. For CHS7
 
 This field also explains the most visible motif island. The `0d6840031a00` operation consumes four 13-byte source units (`0x34` bytes total) but has candidate decoded span `0x30`, exactly four 12-byte units. The extra byte per unit is plausibly parity/check/control rather than plaintext. The related `0c6000031800` operation consumes four 12-byte units and also spans `0x30` decoded bytes.
 
+The high two bits of the same operation-key byte look like mode flags. They split the stream into different redundancy classes rather than changing the decoded-span unit.
+
+| mode bits (`operation_key[3] & 0xc0`) | records | encoded source | decoded span candidate | encoded / decoded | zero-span records | common byte5 flags |
+|---:|---:|---:|---:|---:|---:|---|
+| `0x00` | 272 | `0x26e80` | `0x13ad0` | 1.977x | 0 | `0x0` x211, `0x1` x32, `0x2` x24, `0x3` x2, `0x4` x2, `0x5` x1 |
+| `0x40` | 812 | `0x160cdc` | `0x73810` | 3.054x | 13 | `0x4` x255, `0x3` x225, `0x2` x191, `0x5` x61, `0x1` x50, `0x0` x27 |
+| `0x80` | 1510 | `0x361d94` | `0x96c50` | 5.743x | 21 | `0x4` x737, `0x5` x463, `0x3` x177, `0x2` x79, `0x0` x22, `0x1` x22 |
+| `0xc0` | 22 | `0xf50e` | `0x930` | 26.673x | 3 | `0x6` x10, `0x4` x5, `0x5` x4, `0x3` x3 |
+
 ## Short Operation Source Units
 
 The two high-frequency short operations expose a small regular source format. In both cases byte 0 of the operation key is the source unit length, byte 1 is `8 * unit_len`, byte 4 is `2 * unit_len`, and each record source span is `4 * unit_len`.

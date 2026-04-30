@@ -534,6 +534,33 @@ def decoded_offset_delta_runs(left: CddImage, right: CddImage) -> list[tuple[int
     return sorted(runs, reverse=True)
 
 
+def operation_mode_rows(images: list[CddImage]) -> list[dict[str, object]]:
+    grouped: defaultdict[int, list[tuple[int, int, bytes]]] = defaultdict(list)
+    for image in images:
+        if len(image.streams) < 2 or image.name == "XD13":
+            continue
+        for _, start, end, entry in source_segments(image):
+            key = operation_key(entry)
+            grouped[key[3] & 0xC0].append((end - start, decoded_span_candidate(entry), key))
+
+    rows: list[dict[str, object]] = []
+    for mode, items in sorted(grouped.items()):
+        source_total = sum(item[0] for item in items)
+        decoded_total = sum(item[1] for item in items)
+        rows.append(
+            {
+                "mode": mode,
+                "count": len(items),
+                "source_total": source_total,
+                "decoded_total": decoded_total,
+                "ratio": source_total / decoded_total if decoded_total else 0.0,
+                "key5": Counter(item[2][5] for item in items).most_common(6),
+                "zero_decoded": sum(item[1] == 0 for item in items),
+            }
+        )
+    return rows
+
+
 def operation_unit_summary(images: list[CddImage], key: bytes) -> dict[str, object]:
     rows = []
     units = []
@@ -1056,6 +1083,18 @@ def write_report(images: list[CddImage]) -> str:
         lines.append(f"| {pair[0]} vs {pair[1]} | {run_text} |")
     lines.append("")
     lines.append("This field also explains the most visible motif island. The `0d6840031a00` operation consumes four 13-byte source units (`0x34` bytes total) but has candidate decoded span `0x30`, exactly four 12-byte units. The extra byte per unit is plausibly parity/check/control rather than plaintext. The related `0c6000031800` operation consumes four 12-byte units and also spans `0x30` decoded bytes.")
+    lines.append("")
+    lines.append("The high two bits of the same operation-key byte look like mode flags. They split the stream into different redundancy classes rather than changing the decoded-span unit.")
+    lines.append("")
+    lines.append("| mode bits (`operation_key[3] & 0xc0`) | records | encoded source | decoded span candidate | encoded / decoded | zero-span records | common byte5 flags |")
+    lines.append("|---:|---:|---:|---:|---:|---:|---|")
+    for row in operation_mode_rows(images):
+        key5 = ", ".join(f"`0x{flag:x}` x{count}" for flag, count in row["key5"])  # type: ignore[index]
+        lines.append(
+            f"| `0x{int(row['mode']):02x}` | {row['count']} | `0x{int(row['source_total']):x}` | "
+            f"`0x{int(row['decoded_total']):x}` | {float(row['ratio']):.3f}x | "
+            f"{row['zero_decoded']} | {key5} |"
+        )
     lines.append("")
 
     lines.append("## Short Operation Source Units")
