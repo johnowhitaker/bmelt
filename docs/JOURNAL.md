@@ -1648,3 +1648,13 @@ a clean successful-response route through `0x4099` and the later shadow bytes.
 Failed TOC/performance requests give a status/error route through `0x8a49`,
 `0x8a4d`, and a `0x4098`-looking gateway. That is not yet an oracle, but it is
 another shaped edge of the same machine.
+
+I tried to sharpen that edge by pairing each failing command with an immediate
+`REQUEST SENSE`: fail, capture; sense, capture. This was less clean than I had
+hoped. The pair run did not neatly separate "after the failure" from "after
+sense"; the recurring chunks showed up across both phases, with strong touches
+on `0x4098` and `0x8a23`. That is still useful. It tells us the public work
+window is sampling a longer shared error/status path rather than a tidy
+command-bounded handler. More host-command snapshots may have diminishing
+returns here; the better next step is probably a narrow one-command capture or
+a hook around the `0x8bxx`/`0x9cxx` snippets.

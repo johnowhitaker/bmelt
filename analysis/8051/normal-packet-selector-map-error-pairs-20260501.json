@@ -1,0 +1,1784 @@
+{
+  "by_addr": [
+    {
+      "addr": 35401,
+      "role": "opcode/selector candidate",
+      "total": 453,
+      "unique_values": 11,
+      "values": [
+        {
+          "count": 189,
+          "value": 40
+        },
+        {
+          "count": 63,
+          "value": 3
+        },
+        {
+          "count": 39,
+          "value": 42
+        },
+        {
+          "count": 21,
+          "value": 85
+        },
+        {
+          "count": 21,
+          "value": 230
+        },
+        {
+          "count": 21,
+          "value": 231
+        },
+        {
+          "count": 21,
+          "value": 227
+        },
+        {
+          "count": 21,
+          "value": 224
+        },
+        {
+          "count": 20,
+          "value": 164
+        },
+        {
+          "count": 20,
+          "value": 163
+        },
+        {
+          "count": 17,
+          "value": 27
+        }
+      ]
+    },
+    {
+      "addr": 35402,
+      "role": "CDB byte 1 / op-specific field",
+      "total": 63,
+      "unique_values": 3,
+      "values": [
+        {
+          "count": 21,
+          "value": 6
+        },
+        {
+          "count": 21,
+          "value": 1
+        },
+        {
+          "count": 21,
+          "value": 14
+        }
+      ]
+    },
+    {
+      "addr": 35403,
+      "role": "CDB byte 2 / op-specific field",
+      "total": 42,
+      "unique_values": 2,
+      "values": [
+        {
+          "count": 21,
+          "value": 226
+        },
+        {
+          "count": 21,
+          "value": 34
+        }
+      ]
+    },
+    {
+      "addr": 35404,
+      "role": "controller setup high-ish byte",
+      "total": 2,
+      "unique_values": 1,
+      "values": [
+        {
+          "count": 2,
+          "value": 1
+        }
+      ]
+    },
+    {
+      "addr": 35405,
+      "role": "length/count-ish byte",
+      "total": 42,
+      "unique_values": 2,
+      "values": [
+        {
+          "count": 21,
+          "value": 240
+        },
+        {
+          "count": 21,
+          "value": 1
+        }
+      ]
+    },
+    {
+      "addr": 35406,
+      "role": "subselector/status byte; low nibble tested",
+      "total": 0,
+      "unique_values": 0,
+      "values": []
+    },
+    {
+      "addr": 35407,
+      "role": "payload/field byte",
+      "total": 0,
+      "unique_values": 0,
+      "values": []
+    },
+    {
+      "addr": 35408,
+      "role": "payload/field byte",
+      "total": 0,
+      "unique_values": 0,
+      "values": []
+    },
+    {
+      "addr": 35409,
+      "role": "payload/field byte",
+      "total": 0,
+      "unique_values": 0,
+      "values": []
+    },
+    {
+      "addr": 35410,
+      "role": "payload/field byte",
+      "total": 0,
+      "unique_values": 0,
+      "values": []
+    },
+    {
+      "addr": 35411,
+      "role": "controller response/data shadow byte",
+      "total": 21,
+      "unique_values": 1,
+      "values": [
+        {
+          "count": 21,
+          "value": 1
+        }
+      ]
+    },
+    {
+      "addr": 35412,
+      "role": "controller response/data shadow byte",
+      "total": 0,
+      "unique_values": 0,
+      "values": []
+    }
+  ],
+  "capture_count": 21,
+  "compare_rows": [
+    {
+      "addr": 35401,
+      "branch": "jz",
+      "count": 84,
+      "kind": "xrl_a_imm",
+      "offsets": {
+        "34560": 5,
+        "34624": 4,
+        "34688": 8,
+        "34752": 4,
+        "38400": 21,
+        "38784": 21,
+        "40000": 21
+      },
+      "role": "opcode/selector candidate",
+      "samples": [
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/00-cycle00-baseline-no-stimulus",
+          "hex": "78abf678b0f6908a44e0601a908a49e064286012e0644a600de0600ae064466005e47be06003025bf3025be5908937e0",
+          "offset": 34590
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/00-cycle00-baseline-no-stimulus",
+          "hex": "04efb4be07908243e04480f0908a49e064286003029e319089f7e0ffd39402507cef14602a146027240270606f603a7d",
+          "offset": 38420
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/00-cycle00-baseline-no-stimulus",
+          "hex": "e090892dcff0a3eff0025f2f908a49e064286008e064a86003025e7a301f10908a123455000000407f211241f48017e4",
+          "offset": 38815
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/00-cycle00-baseline-no-stimulus",
+          "hex": "e0ffa3e090892dcff0a3eff0908a49e06428600302a016908a69e0fca3e0fda3e0fea3e0ff908a4be0f8a3e0f9a3e0fa",
+          "offset": 40002
+        }
+      ],
+      "stimuli": {
+        "cycle00-baseline-no-stimulus": 4,
+        "cycle00-get-performance-type00-after-command": 4,
+        "cycle00-get-performance-type00-after-request-sense": 4,
+        "cycle00-read-toc-format-0-after-command": 4,
+        "cycle00-read-toc-format-0-after-request-sense": 4,
+        "cycle00-read-toc-format-4-after-command": 4,
+        "cycle00-read-toc-format-4-after-request-sense": 4,
+        "cycle01-baseline-no-stimulus": 4,
+        "cycle01-get-performance-type00-after-command": 4,
+        "cycle01-get-performance-type00-after-request-sense": 4,
+        "cycle01-read-toc-format-0-after-command": 4,
+        "cycle01-read-toc-format-0-after-request-sense": 4,
+        "cycle01-read-toc-format-4-after-command": 4,
+        "cycle01-read-toc-format-4-after-request-sense": 4,
+        "cycle02-baseline-no-stimulus": 4,
+        "cycle02-get-performance-type00-after-command": 4,
+        "cycle02-get-performance-type00-after-request-sense": 4,
+        "cycle02-read-toc-format-0-after-command": 4,
+        "cycle02-read-toc-format-0-after-request-sense": 4,
+        "cycle02-read-toc-format-4-after-command": 4,
+        "cycle02-read-toc-format-4-after-request-sense": 4
+      },
+      "value": 40
+    },
+    {
+      "addr": 35401,
+      "branch": "jz",
+      "count": 63,
+      "kind": "mov_r7_xrl_imm",
+      "offsets": {
+        "24832": 12,
+        "24960": 9,
+        "38400": 21,
+        "39872": 21
+      },
+      "role": "opcode/selector candidate",
+      "samples": [
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/00-cycle00-baseline-no-stimulus",
+          "hex": "9089c8f09047c4e09089c9f0908a49e0ff64286013ef64be600eef64a86009ef64d56004efb4b9099047c5e4f09047c4",
+          "offset": 24835
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/00-cycle00-baseline-no-stimulus",
+          "hex": "fe1313540147b1e0908a54f0908a49e0ff64286009ef64a86004efb4be07908243e04480f0908a49e064286003029e31",
+          "offset": 38395
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/00-cycle00-baseline-no-stimulus",
+          "hex": "0012050d908988eef0a3eff0908a49e0ff64286004efb4a80f907e167fe512b9637d447e167fe612b9637d467e167fe7",
+          "offset": 39910
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/01-cycle00-read-toc-format-0-after-command",
+          "hex": "9089c8f09047c4e09089c9f0908a49e0ff64286013ef64be600eef64a86009ef64d56004efb4b9099047c5e4f09047c4",
+          "offset": 24835
+        }
+      ],
+      "stimuli": {
+        "cycle00-baseline-no-stimulus": 3,
+        "cycle00-get-performance-type00-after-command": 3,
+        "cycle00-get-performance-type00-after-request-sense": 3,
+        "cycle00-read-toc-format-0-after-command": 3,
+        "cycle00-read-toc-format-0-after-request-sense": 3,
+        "cycle00-read-toc-format-4-after-command": 3,
+        "cycle00-read-toc-format-4-after-request-sense": 3,
+        "cycle01-baseline-no-stimulus": 3,
+        "cycle01-get-performance-type00-after-command": 3,
+        "cycle01-get-performance-type00-after-request-sense": 3,
+        "cycle01-read-toc-format-0-after-command": 3,
+        "cycle01-read-toc-format-0-after-request-sense": 3,
+        "cycle01-read-toc-format-4-after-command": 3,
+        "cycle01-read-toc-format-4-after-request-sense": 3,
+        "cycle02-baseline-no-stimulus": 3,
+        "cycle02-get-performance-type00-after-command": 3,
+        "cycle02-get-performance-type00-after-request-sense": 3,
+        "cycle02-read-toc-format-0-after-command": 3,
+        "cycle02-read-toc-format-0-after-request-sense": 3,
+        "cycle02-read-toc-format-4-after-command": 3,
+        "cycle02-read-toc-format-4-after-request-sense": 3
+      },
+      "value": 40
+    },
+    {
+      "addr": 35401,
+      "branch": "cjne",
+      "count": 42,
+      "kind": "cjne_a_imm",
+      "offsets": {
+        "34560": 5,
+        "34624": 4,
+        "34688": 8,
+        "34752": 4,
+        "40832": 21
+      },
+      "role": "opcode/selector candidate",
+      "samples": [
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/00-cycle00-baseline-no-stimulus",
+          "hex": "063978a976eb08761402711d908a49e0b4030302a4c2e478b5f678abf678b0f6908a44e0601a908a49e064286012e064",
+          "offset": 34564
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/00-cycle00-baseline-no-stimulus",
+          "hex": "e4f0801fc23f9047c97450f0908a49e0b4030a9047cf7401f0a3f080069047d07401f0908a38e054eff09040187403f0",
+          "offset": 40843
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/01-cycle00-read-toc-format-0-after-command",
+          "hex": "063978a976eb08761402711d908a49e0b4030302a4c2e478b5f678abf678b0f6908a44e0601a908a49e064286012e064",
+          "offset": 34628
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/01-cycle00-read-toc-format-0-after-command",
+          "hex": "e4f0801fc23f9047c97450f0908a49e0b4030a9047cf7401f0a3f080069047d07401f0908a38e054eff09040187403f0",
+          "offset": 40843
+        }
+      ],
+      "stimuli": {
+        "cycle00-baseline-no-stimulus": 2,
+        "cycle00-get-performance-type00-after-command": 2,
+        "cycle00-get-performance-type00-after-request-sense": 2,
+        "cycle00-read-toc-format-0-after-command": 2,
+        "cycle00-read-toc-format-0-after-request-sense": 2,
+        "cycle00-read-toc-format-4-after-command": 2,
+        "cycle00-read-toc-format-4-after-request-sense": 2,
+        "cycle01-baseline-no-stimulus": 2,
+        "cycle01-get-performance-type00-after-command": 2,
+        "cycle01-get-performance-type00-after-request-sense": 2,
+        "cycle01-read-toc-format-0-after-command": 2,
+        "cycle01-read-toc-format-0-after-request-sense": 2,
+        "cycle01-read-toc-format-4-after-command": 2,
+        "cycle01-read-toc-format-4-after-request-sense": 2,
+        "cycle02-baseline-no-stimulus": 2,
+        "cycle02-get-performance-type00-after-command": 2,
+        "cycle02-get-performance-type00-after-request-sense": 2,
+        "cycle02-read-toc-format-0-after-command": 2,
+        "cycle02-read-toc-format-0-after-request-sense": 2,
+        "cycle02-read-toc-format-4-after-command": 2,
+        "cycle02-read-toc-format-4-after-request-sense": 2
+      },
+      "value": 3
+    },
+    {
+      "addr": 35401,
+      "branch": "cjne",
+      "count": 42,
+      "kind": "cjne_a_imm",
+      "offsets": {
+        "27392": 21,
+        "39168": 21
+      },
+      "role": "opcode/selector candidate",
+      "samples": [
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/00-cycle00-baseline-no-stimulus",
+          "hex": "7f00020513e478a6f612b092908a49e0b42839908a50e07004a3e06401b1e04402f022908db1e04404f022908db1e044",
+          "offset": 27427
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/00-cycle00-baseline-no-stimulus",
+          "hex": "a99dffee9c908988f0a3eff0908a49e0b42829c3908989e09464908988e09400401ae47f01fefdfc78a21233b2c31233",
+          "offset": 39167
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/01-cycle00-read-toc-format-0-after-command",
+          "hex": "7f00020513e478a6f612b092908a49e0b42839908a50e07004a3e06401b1e04402f022908db1e04404f022908db1e044",
+          "offset": 27427
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/01-cycle00-read-toc-format-0-after-command",
+          "hex": "a99dffee9c908988f0a3eff0908a49e0b42829c3908989e09464908988e09400401ae47f01fefdfc78a21233b2c31233",
+          "offset": 39167
+        }
+      ],
+      "stimuli": {
+        "cycle00-baseline-no-stimulus": 2,
+        "cycle00-get-performance-type00-after-command": 2,
+        "cycle00-get-performance-type00-after-request-sense": 2,
+        "cycle00-read-toc-format-0-after-command": 2,
+        "cycle00-read-toc-format-0-after-request-sense": 2,
+        "cycle00-read-toc-format-4-after-command": 2,
+        "cycle00-read-toc-format-4-after-request-sense": 2,
+        "cycle01-baseline-no-stimulus": 2,
+        "cycle01-get-performance-type00-after-command": 2,
+        "cycle01-get-performance-type00-after-request-sense": 2,
+        "cycle01-read-toc-format-0-after-command": 2,
+        "cycle01-read-toc-format-0-after-request-sense": 2,
+        "cycle01-read-toc-format-4-after-command": 2,
+        "cycle01-read-toc-format-4-after-request-sense": 2,
+        "cycle02-baseline-no-stimulus": 2,
+        "cycle02-get-performance-type00-after-command": 2,
+        "cycle02-get-performance-type00-after-request-sense": 2,
+        "cycle02-read-toc-format-0-after-command": 2,
+        "cycle02-read-toc-format-0-after-request-sense": 2,
+        "cycle02-read-toc-format-4-after-command": 2,
+        "cycle02-read-toc-format-4-after-request-sense": 2
+      },
+      "value": 40
+    },
+    {
+      "addr": 35401,
+      "branch": "jz",
+      "count": 21,
+      "kind": "xrl_a_imm",
+      "offsets": {
+        "25536": 21
+      },
+      "role": "opcode/selector candidate",
+      "samples": [
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/00-cycle00-baseline-no-stimulus",
+          "hex": "6404604720470578b5e66008908a49e064036037908a23e0ff1313543f30e008908a49e07002802390892ce0ffc41354",
+          "offset": 25566
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/01-cycle00-read-toc-format-0-after-command",
+          "hex": "6404604720470578b5e66008908a49e064036037908a23e0ff1313543f30e008908a49e07002802390892ce0ffc41354",
+          "offset": 25566
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/02-cycle00-read-toc-format-0-after-request-sense",
+          "hex": "6404604720470578b5e66008908a49e064036037908a23e0ff1313543f30e008908a49e07002802390892ce0ffc41354",
+          "offset": 25566
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/03-cycle00-read-toc-format-4-after-command",
+          "hex": "6404604720470578b5e66008908a49e064036037908a23e0ff1313543f30e008908a49e07002802390892ce0ffc41354",
+          "offset": 25566
+        }
+      ],
+      "stimuli": {
+        "cycle00-baseline-no-stimulus": 1,
+        "cycle00-get-performance-type00-after-command": 1,
+        "cycle00-get-performance-type00-after-request-sense": 1,
+        "cycle00-read-toc-format-0-after-command": 1,
+        "cycle00-read-toc-format-0-after-request-sense": 1,
+        "cycle00-read-toc-format-4-after-command": 1,
+        "cycle00-read-toc-format-4-after-request-sense": 1,
+        "cycle01-baseline-no-stimulus": 1,
+        "cycle01-get-performance-type00-after-command": 1,
+        "cycle01-get-performance-type00-after-request-sense": 1,
+        "cycle01-read-toc-format-0-after-command": 1,
+        "cycle01-read-toc-format-0-after-request-sense": 1,
+        "cycle01-read-toc-format-4-after-command": 1,
+        "cycle01-read-toc-format-4-after-request-sense": 1,
+        "cycle02-baseline-no-stimulus": 1,
+        "cycle02-get-performance-type00-after-command": 1,
+        "cycle02-get-performance-type00-after-request-sense": 1,
+        "cycle02-read-toc-format-0-after-command": 1,
+        "cycle02-read-toc-format-0-after-request-sense": 1,
+        "cycle02-read-toc-format-4-after-command": 1,
+        "cycle02-read-toc-format-4-after-request-sense": 1
+      },
+      "value": 3
+    },
+    {
+      "addr": 35401,
+      "branch": "cjne",
+      "count": 21,
+      "kind": "cjne_a_imm",
+      "offsets": {
+        "32320": 21
+      },
+      "role": "opcode/selector candidate",
+      "samples": [
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/00-cycle00-baseline-no-stimulus",
+          "hex": "a3f0303e33c24578b5e67029908a49e0b42a0c908a50e070108571e5a8f075a890203e06204f03303f07908a29e030e0",
+          "offset": 32359
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/01-cycle00-read-toc-format-0-after-command",
+          "hex": "a3f0303e33c24578b5e67029908a49e0b42a0c908a50e070108571e5a8f075a890203e06204f03303f07908a29e030e0",
+          "offset": 32359
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/02-cycle00-read-toc-format-0-after-request-sense",
+          "hex": "a3f0303e33c24578b5e67029908a49e0b42a0c908a50e070108571e5a8f075a890203e06204f03303f07908a29e030e0",
+          "offset": 32359
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/03-cycle00-read-toc-format-4-after-command",
+          "hex": "a3f0303e33c24578b5e67029908a49e0b42a0c908a50e070108571e5a8f075a890203e06204f03303f07908a29e030e0",
+          "offset": 32359
+        }
+      ],
+      "stimuli": {
+        "cycle00-baseline-no-stimulus": 1,
+        "cycle00-get-performance-type00-after-command": 1,
+        "cycle00-get-performance-type00-after-request-sense": 1,
+        "cycle00-read-toc-format-0-after-command": 1,
+        "cycle00-read-toc-format-0-after-request-sense": 1,
+        "cycle00-read-toc-format-4-after-command": 1,
+        "cycle00-read-toc-format-4-after-request-sense": 1,
+        "cycle01-baseline-no-stimulus": 1,
+        "cycle01-get-performance-type00-after-command": 1,
+        "cycle01-get-performance-type00-after-request-sense": 1,
+        "cycle01-read-toc-format-0-after-command": 1,
+        "cycle01-read-toc-format-0-after-request-sense": 1,
+        "cycle01-read-toc-format-4-after-command": 1,
+        "cycle01-read-toc-format-4-after-request-sense": 1,
+        "cycle02-baseline-no-stimulus": 1,
+        "cycle02-get-performance-type00-after-command": 1,
+        "cycle02-get-performance-type00-after-request-sense": 1,
+        "cycle02-read-toc-format-0-after-command": 1,
+        "cycle02-read-toc-format-0-after-request-sense": 1,
+        "cycle02-read-toc-format-4-after-command": 1,
+        "cycle02-read-toc-format-4-after-request-sense": 1
+      },
+      "value": 42
+    },
+    {
+      "addr": 35401,
+      "branch": "cjne",
+      "count": 21,
+      "kind": "cjne_a_imm",
+      "offsets": {
+        "32512": 4,
+        "32576": 9,
+        "32640": 7,
+        "32704": 1
+      },
+      "role": "opcode/selector candidate",
+      "samples": [
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/00-cycle00-baseline-no-stimulus",
+          "hex": "0278ab760478b07608020453908a49e0b45506204103304703121497203f03304f09203e067e097fc480047ec316e044",
+          "offset": 32723
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/01-cycle00-read-toc-format-0-after-command",
+          "hex": "0278ab760478b07608020453908a49e0b45506204103304703121497203f03304f09203e067e097fc480047ec3b40407",
+          "offset": 32595
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/02-cycle00-read-toc-format-0-after-request-sense",
+          "hex": "0278ab760478b07608020453908a49e0b45506204103304703121497203f03304f09203e067e097fc480047ec3b40407",
+          "offset": 32595
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/03-cycle00-read-toc-format-4-after-command",
+          "hex": "0278ab760478b07608020453908a49e0b45506204103304703121497203f03304f09203e067e097fc480047ec3b40407",
+          "offset": 32595
+        }
+      ],
+      "stimuli": {
+        "cycle00-baseline-no-stimulus": 1,
+        "cycle00-get-performance-type00-after-command": 1,
+        "cycle00-get-performance-type00-after-request-sense": 1,
+        "cycle00-read-toc-format-0-after-command": 1,
+        "cycle00-read-toc-format-0-after-request-sense": 1,
+        "cycle00-read-toc-format-4-after-command": 1,
+        "cycle00-read-toc-format-4-after-request-sense": 1,
+        "cycle01-baseline-no-stimulus": 1,
+        "cycle01-get-performance-type00-after-command": 1,
+        "cycle01-get-performance-type00-after-request-sense": 1,
+        "cycle01-read-toc-format-0-after-command": 1,
+        "cycle01-read-toc-format-0-after-request-sense": 1,
+        "cycle01-read-toc-format-4-after-command": 1,
+        "cycle01-read-toc-format-4-after-request-sense": 1,
+        "cycle02-baseline-no-stimulus": 1,
+        "cycle02-get-performance-type00-after-command": 1,
+        "cycle02-get-performance-type00-after-request-sense": 1,
+        "cycle02-read-toc-format-0-after-command": 1,
+        "cycle02-read-toc-format-0-after-request-sense": 1,
+        "cycle02-read-toc-format-4-after-command": 1,
+        "cycle02-read-toc-format-4-after-request-sense": 1
+      },
+      "value": 85
+    },
+    {
+      "addr": 35401,
+      "branch": "cjne",
+      "count": 21,
+      "kind": "cjne_a_imm",
+      "offsets": {
+        "40640": 21
+      },
+      "role": "opcode/selector candidate",
+      "samples": [
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/00-cycle00-baseline-no-stimulus",
+          "hex": "908a37e04408f09047cbe4f0908a49e0b4e0fea3e0ffe4122dc7d0e0fbd0e0fad0e0f9d0e0f8122ab28051908626e0fe",
+          "offset": 40687
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/01-cycle00-read-toc-format-0-after-command",
+          "hex": "908a37e04408f09047cbe4f0908a49e0b4e0fea3e0ffe4122dc7d0e0fbd0e0fad0e0f9d0e0f8122ab28051908626e0fe",
+          "offset": 40687
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/02-cycle00-read-toc-format-0-after-request-sense",
+          "hex": "908a37e04408f09047cbe4f0908a49e0b4e0fea3e0ffe4122dc7d0e0fbd0e0fad0e0f9d0e0f8122ab28051908626e0fe",
+          "offset": 40687
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/03-cycle00-read-toc-format-4-after-command",
+          "hex": "908a37e04408f09047cbe4f0908a49e0b4e0fea3e0ffe4122dc7d0e0fbd0e0fad0e0f9d0e0f8122ab28051908626e0fe",
+          "offset": 40687
+        }
+      ],
+      "stimuli": {
+        "cycle00-baseline-no-stimulus": 1,
+        "cycle00-get-performance-type00-after-command": 1,
+        "cycle00-get-performance-type00-after-request-sense": 1,
+        "cycle00-read-toc-format-0-after-command": 1,
+        "cycle00-read-toc-format-0-after-request-sense": 1,
+        "cycle00-read-toc-format-4-after-command": 1,
+        "cycle00-read-toc-format-4-after-request-sense": 1,
+        "cycle01-baseline-no-stimulus": 1,
+        "cycle01-get-performance-type00-after-command": 1,
+        "cycle01-get-performance-type00-after-request-sense": 1,
+        "cycle01-read-toc-format-0-after-command": 1,
+        "cycle01-read-toc-format-0-after-request-sense": 1,
+        "cycle01-read-toc-format-4-after-command": 1,
+        "cycle01-read-toc-format-4-after-request-sense": 1,
+        "cycle02-baseline-no-stimulus": 1,
+        "cycle02-get-performance-type00-after-command": 1,
+        "cycle02-get-performance-type00-after-request-sense": 1,
+        "cycle02-read-toc-format-0-after-command": 1,
+        "cycle02-read-toc-format-0-after-request-sense": 1,
+        "cycle02-read-toc-format-4-after-command": 1,
+        "cycle02-read-toc-format-4-after-request-sense": 1
+      },
+      "value": 224
+    },
+    {
+      "addr": 35401,
+      "branch": "jz",
+      "count": 21,
+      "kind": "mov_r7_xrl_imm",
+      "offsets": {
+        "38720": 21
+      },
+      "role": "opcode/selector candidate",
+      "samples": [
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/00-cycle00-baseline-no-stimulus",
+          "hex": "49e0b4e707c24fd23e027ea2908a49e0ff64e36005ef64e1702c908adfe0540f64037003027f07c24fd23e908a1a7401",
+          "offset": 38733
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/01-cycle00-read-toc-format-0-after-command",
+          "hex": "49e0b4e707c24fd23e027ea2908a49e0ff64e36005ef64e1702c908adfe0540f64037003027f07c24fd23e908a1a7401",
+          "offset": 38733
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/02-cycle00-read-toc-format-0-after-request-sense",
+          "hex": "49e0b4e707c24fd23e027ea2908a49e0ff64e36005ef64e1702c908adfe0540f64037003027f07c24fd23e908a1a7401",
+          "offset": 38733
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/03-cycle00-read-toc-format-4-after-command",
+          "hex": "49e0b4e707c24fd23e027ea2908a49e0ff64e36005ef64e1702c908adfe0540f64037003027f07c24fd23e908a1a7401",
+          "offset": 38733
+        }
+      ],
+      "stimuli": {
+        "cycle00-baseline-no-stimulus": 1,
+        "cycle00-get-performance-type00-after-command": 1,
+        "cycle00-get-performance-type00-after-request-sense": 1,
+        "cycle00-read-toc-format-0-after-command": 1,
+        "cycle00-read-toc-format-0-after-request-sense": 1,
+        "cycle00-read-toc-format-4-after-command": 1,
+        "cycle00-read-toc-format-4-after-request-sense": 1,
+        "cycle01-baseline-no-stimulus": 1,
+        "cycle01-get-performance-type00-after-command": 1,
+        "cycle01-get-performance-type00-after-request-sense": 1,
+        "cycle01-read-toc-format-0-after-command": 1,
+        "cycle01-read-toc-format-0-after-request-sense": 1,
+        "cycle01-read-toc-format-4-after-command": 1,
+        "cycle01-read-toc-format-4-after-request-sense": 1,
+        "cycle02-baseline-no-stimulus": 1,
+        "cycle02-get-performance-type00-after-command": 1,
+        "cycle02-get-performance-type00-after-request-sense": 1,
+        "cycle02-read-toc-format-0-after-command": 1,
+        "cycle02-read-toc-format-0-after-request-sense": 1,
+        "cycle02-read-toc-format-4-after-command": 1,
+        "cycle02-read-toc-format-4-after-request-sense": 1
+      },
+      "value": 227
+    },
+    {
+      "addr": 35401,
+      "branch": "cjne",
+      "count": 21,
+      "kind": "mov_r7_cjne_imm",
+      "offsets": {
+        "34816": 21
+      },
+      "role": "opcode/selector candidate",
+      "samples": [
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/00-cycle00-baseline-no-stimulus",
+          "hex": "4f8f25027d5a127150027d5a908a49e0ffb4e605c23e027ea5204115efb4f311908a4ae0b40e0aa3e0b40205c23e027e",
+          "offset": 34815
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/01-cycle00-read-toc-format-0-after-command",
+          "hex": "e08f25027d5a127150027d5a908a49e0ffb4e605c23e027ea5204115efb4f311908a4ae0b40e0aa3e0b40205c23e027e",
+          "offset": 34815
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/02-cycle00-read-toc-format-0-after-request-sense",
+          "hex": "e08f25027d5a127150027d5a908a49e0ffb4e605c23e027ea5204115efb4f311908a4ae0b40e0aa3e0b40205c23e027e",
+          "offset": 34815
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/03-cycle00-read-toc-format-4-after-command",
+          "hex": "f38f25027d5a127150027d5a908a49e0ffb4e605c23e027ea5204115efb4f311908a4ae0b40e0aa3e0b40205c23e027e",
+          "offset": 34815
+        }
+      ],
+      "stimuli": {
+        "cycle00-baseline-no-stimulus": 1,
+        "cycle00-get-performance-type00-after-command": 1,
+        "cycle00-get-performance-type00-after-request-sense": 1,
+        "cycle00-read-toc-format-0-after-command": 1,
+        "cycle00-read-toc-format-0-after-request-sense": 1,
+        "cycle00-read-toc-format-4-after-command": 1,
+        "cycle00-read-toc-format-4-after-request-sense": 1,
+        "cycle01-baseline-no-stimulus": 1,
+        "cycle01-get-performance-type00-after-command": 1,
+        "cycle01-get-performance-type00-after-request-sense": 1,
+        "cycle01-read-toc-format-0-after-command": 1,
+        "cycle01-read-toc-format-0-after-request-sense": 1,
+        "cycle01-read-toc-format-4-after-command": 1,
+        "cycle01-read-toc-format-4-after-request-sense": 1,
+        "cycle02-baseline-no-stimulus": 1,
+        "cycle02-get-performance-type00-after-command": 1,
+        "cycle02-get-performance-type00-after-request-sense": 1,
+        "cycle02-read-toc-format-0-after-command": 1,
+        "cycle02-read-toc-format-0-after-request-sense": 1,
+        "cycle02-read-toc-format-4-after-command": 1,
+        "cycle02-read-toc-format-4-after-request-sense": 1
+      },
+      "value": 230
+    },
+    {
+      "addr": 35401,
+      "branch": "cjne",
+      "count": 21,
+      "kind": "cjne_a_imm",
+      "offsets": {
+        "38720": 21
+      },
+      "role": "opcode/selector candidate",
+      "samples": [
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/00-cycle00-baseline-no-stimulus",
+          "hex": "947ea5027ea2204f03027ea5908a49e0b4e707c24fd23e027ea2908a49e0ff64e36005ef64e1702c908adfe0540f6403",
+          "offset": 38719
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/01-cycle00-read-toc-format-0-after-command",
+          "hex": "947ea5027ea2204f03027ea5908a49e0b4e707c24fd23e027ea2908a49e0ff64e36005ef64e1702c908adfe0540f6403",
+          "offset": 38719
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/02-cycle00-read-toc-format-0-after-request-sense",
+          "hex": "947ea5027ea2204f03027ea5908a49e0b4e707c24fd23e027ea2908a49e0ff64e36005ef64e1702c908adfe0540f6403",
+          "offset": 38719
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/03-cycle00-read-toc-format-4-after-command",
+          "hex": "947ea5027ea2204f03027ea5908a49e0b4e707c24fd23e027ea2908a49e0ff64e36005ef64e1702c908adfe0540f6403",
+          "offset": 38719
+        }
+      ],
+      "stimuli": {
+        "cycle00-baseline-no-stimulus": 1,
+        "cycle00-get-performance-type00-after-command": 1,
+        "cycle00-get-performance-type00-after-request-sense": 1,
+        "cycle00-read-toc-format-0-after-command": 1,
+        "cycle00-read-toc-format-0-after-request-sense": 1,
+        "cycle00-read-toc-format-4-after-command": 1,
+        "cycle00-read-toc-format-4-after-request-sense": 1,
+        "cycle01-baseline-no-stimulus": 1,
+        "cycle01-get-performance-type00-after-command": 1,
+        "cycle01-get-performance-type00-after-request-sense": 1,
+        "cycle01-read-toc-format-0-after-command": 1,
+        "cycle01-read-toc-format-0-after-request-sense": 1,
+        "cycle01-read-toc-format-4-after-command": 1,
+        "cycle01-read-toc-format-4-after-request-sense": 1,
+        "cycle02-baseline-no-stimulus": 1,
+        "cycle02-get-performance-type00-after-command": 1,
+        "cycle02-get-performance-type00-after-request-sense": 1,
+        "cycle02-read-toc-format-0-after-command": 1,
+        "cycle02-read-toc-format-0-after-request-sense": 1,
+        "cycle02-read-toc-format-4-after-command": 1,
+        "cycle02-read-toc-format-4-after-request-sense": 1
+      },
+      "value": 231
+    },
+    {
+      "addr": 35401,
+      "branch": "cjne",
+      "count": 20,
+      "kind": "cjne_a_imm",
+      "offsets": {
+        "37248": 20
+      },
+      "role": "opcode/selector candidate",
+      "samples": [
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/01-cycle00-read-toc-format-0-after-command",
+          "hex": "8a53e0543fffbf0803026f62908a49e0b4a30d908a53e0543fffbf0603026f73908937e030e70c78b5760278ab763ae4",
+          "offset": 37258
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/02-cycle00-read-toc-format-0-after-request-sense",
+          "hex": "8a53e0543fffbf0803026f62908a49e0b4a30d908a53e0543fffbf0603026f73908937e030e70c78b5760278ab763ae4",
+          "offset": 37258
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/03-cycle00-read-toc-format-4-after-command",
+          "hex": "8a53e0543fffbf0803026f62908a49e0b4a30d908a53e0543fffbf0603026f73908937e030e70c78b5760278ab763ae4",
+          "offset": 37258
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/04-cycle00-read-toc-format-4-after-request-sense",
+          "hex": "8a53e0543fffbf0803026f62908a49e0b4a30d908a53e0543fffbf0603026f73908937e030e70c78b5760278ab763ae4",
+          "offset": 37258
+        }
+      ],
+      "stimuli": {
+        "cycle00-get-performance-type00-after-command": 1,
+        "cycle00-get-performance-type00-after-request-sense": 1,
+        "cycle00-read-toc-format-0-after-command": 1,
+        "cycle00-read-toc-format-0-after-request-sense": 1,
+        "cycle00-read-toc-format-4-after-command": 1,
+        "cycle00-read-toc-format-4-after-request-sense": 1,
+        "cycle01-baseline-no-stimulus": 1,
+        "cycle01-get-performance-type00-after-command": 1,
+        "cycle01-get-performance-type00-after-request-sense": 1,
+        "cycle01-read-toc-format-0-after-command": 1,
+        "cycle01-read-toc-format-0-after-request-sense": 1,
+        "cycle01-read-toc-format-4-after-command": 1,
+        "cycle01-read-toc-format-4-after-request-sense": 1,
+        "cycle02-baseline-no-stimulus": 1,
+        "cycle02-get-performance-type00-after-command": 1,
+        "cycle02-get-performance-type00-after-request-sense": 1,
+        "cycle02-read-toc-format-0-after-command": 1,
+        "cycle02-read-toc-format-0-after-request-sense": 1,
+        "cycle02-read-toc-format-4-after-command": 1,
+        "cycle02-read-toc-format-4-after-request-sense": 1
+      },
+      "value": 163
+    },
+    {
+      "addr": 35401,
+      "branch": "cjne",
+      "count": 20,
+      "kind": "cjne_a_imm",
+      "offsets": {
+        "37248": 20
+      },
+      "role": "opcode/selector candidate",
+      "samples": [
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/01-cycle00-read-toc-format-0-after-command",
+          "hex": "7029a87c08e654c0fe600675908a49e0b4a40d908a53e0543fffbf0803026f62908a49e0b4a30d908a53e0543fffbf06",
+          "offset": 37238
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/02-cycle00-read-toc-format-0-after-request-sense",
+          "hex": "7029a87c08e654c0fe600675908a49e0b4a40d908a53e0543fffbf0803026f62908a49e0b4a30d908a53e0543fffbf06",
+          "offset": 37238
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/03-cycle00-read-toc-format-4-after-command",
+          "hex": "7029a87c08e654c0fe600675908a49e0b4a40d908a53e0543fffbf0803026f62908a49e0b4a30d908a53e0543fffbf06",
+          "offset": 37238
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/04-cycle00-read-toc-format-4-after-request-sense",
+          "hex": "7029a87c08e654c0fe600675908a49e0b4a40d908a53e0543fffbf0803026f62908a49e0b4a30d908a53e0543fffbf06",
+          "offset": 37238
+        }
+      ],
+      "stimuli": {
+        "cycle00-get-performance-type00-after-command": 1,
+        "cycle00-get-performance-type00-after-request-sense": 1,
+        "cycle00-read-toc-format-0-after-command": 1,
+        "cycle00-read-toc-format-0-after-request-sense": 1,
+        "cycle00-read-toc-format-4-after-command": 1,
+        "cycle00-read-toc-format-4-after-request-sense": 1,
+        "cycle01-baseline-no-stimulus": 1,
+        "cycle01-get-performance-type00-after-command": 1,
+        "cycle01-get-performance-type00-after-request-sense": 1,
+        "cycle01-read-toc-format-0-after-command": 1,
+        "cycle01-read-toc-format-0-after-request-sense": 1,
+        "cycle01-read-toc-format-4-after-command": 1,
+        "cycle01-read-toc-format-4-after-request-sense": 1,
+        "cycle02-baseline-no-stimulus": 1,
+        "cycle02-get-performance-type00-after-command": 1,
+        "cycle02-get-performance-type00-after-request-sense": 1,
+        "cycle02-read-toc-format-0-after-command": 1,
+        "cycle02-read-toc-format-0-after-request-sense": 1,
+        "cycle02-read-toc-format-4-after-command": 1,
+        "cycle02-read-toc-format-4-after-request-sense": 1
+      },
+      "value": 164
+    },
+    {
+      "addr": 35401,
+      "branch": "jz",
+      "count": 18,
+      "kind": "xrl_a_imm",
+      "offsets": {
+        "25152": 12,
+        "25216": 6
+      },
+      "role": "opcode/selector candidate",
+      "samples": [
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/01-cycle00-read-toc-format-0-after-command",
+          "hex": "10af01c3c0d0203e0302b319908a49e0642a6004e0b4aa0de4908a18f0a3f0c252c245c24f103f0302b209908a908a4d",
+          "offset": 25171
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/02-cycle00-read-toc-format-0-after-request-sense",
+          "hex": "10af01c3c0d0203e0302b319908a49e0642a6004e0b4aa0de4908a18f0a3f0c252c245c24f103f0302b209908a908a4d",
+          "offset": 25171
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/03-cycle00-read-toc-format-4-after-command",
+          "hex": "10af01c3c0d0203e0302b319908a49e0642a6004e0b4aa0de4908a18f0a3f0c252c245c24f103f0302b209908a908a4d",
+          "offset": 25171
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/04-cycle00-read-toc-format-4-after-request-sense",
+          "hex": "10af01c3c0d0203e0302b319908a49e0642a6004e0b4aa0de4908a18f0a3f0c252c245c24f103f0302b209908a908a4d",
+          "offset": 25171
+        }
+      ],
+      "stimuli": {
+        "cycle00-get-performance-type00-after-command": 1,
+        "cycle00-get-performance-type00-after-request-sense": 1,
+        "cycle00-read-toc-format-0-after-command": 1,
+        "cycle00-read-toc-format-0-after-request-sense": 1,
+        "cycle00-read-toc-format-4-after-command": 1,
+        "cycle00-read-toc-format-4-after-request-sense": 1,
+        "cycle01-baseline-no-stimulus": 1,
+        "cycle01-get-performance-type00-after-command": 1,
+        "cycle01-read-toc-format-0-after-command": 1,
+        "cycle01-read-toc-format-0-after-request-sense": 1,
+        "cycle01-read-toc-format-4-after-command": 1,
+        "cycle01-read-toc-format-4-after-request-sense": 1,
+        "cycle02-get-performance-type00-after-command": 1,
+        "cycle02-get-performance-type00-after-request-sense": 1,
+        "cycle02-read-toc-format-0-after-command": 1,
+        "cycle02-read-toc-format-0-after-request-sense": 1,
+        "cycle02-read-toc-format-4-after-command": 1,
+        "cycle02-read-toc-format-4-after-request-sense": 1
+      },
+      "value": 42
+    },
+    {
+      "addr": 35401,
+      "branch": "jnz",
+      "count": 17,
+      "kind": "xrl_a_imm",
+      "offsets": {
+        "35584": 5,
+        "35712": 6,
+        "35776": 6
+      },
+      "role": "opcode/selector candidate",
+      "samples": [
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/01-cycle00-read-toc-format-0-after-command",
+          "hex": "40e0ffc4540f30e03212b092908a49e0641b7027908a4de0540fffbf021d20431a908a2de0ffc41313540320ff7c007d",
+          "offset": 35732
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/02-cycle00-read-toc-format-0-after-request-sense",
+          "hex": "40e0ffc4540f30e03212b092908a49e0641b7027908a4de0540fffbf021d20431a908a2de0ffc41313540320ff7c007d",
+          "offset": 35732
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/03-cycle00-read-toc-format-4-after-command",
+          "hex": "40e0ffc4540f30e03212b092908a49e0641b7027908a4de0540fffbf021d20431a908a2de0ffc413135403200dade4ff",
+          "offset": 35796
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/04-cycle00-read-toc-format-4-after-request-sense",
+          "hex": "40e0ffc4540f30e03212b092908a49e0641b7027908a4de0540fffbf021d20431a908a2de0ffc413135403200dade4ff",
+          "offset": 35796
+        }
+      ],
+      "stimuli": {
+        "cycle00-get-performance-type00-after-command": 1,
+        "cycle00-get-performance-type00-after-request-sense": 1,
+        "cycle00-read-toc-format-0-after-command": 1,
+        "cycle00-read-toc-format-0-after-request-sense": 1,
+        "cycle00-read-toc-format-4-after-command": 1,
+        "cycle00-read-toc-format-4-after-request-sense": 1,
+        "cycle01-baseline-no-stimulus": 1,
+        "cycle01-read-toc-format-0-after-command": 1,
+        "cycle01-read-toc-format-0-after-request-sense": 1,
+        "cycle01-read-toc-format-4-after-command": 1,
+        "cycle01-read-toc-format-4-after-request-sense": 1,
+        "cycle02-get-performance-type00-after-command": 1,
+        "cycle02-get-performance-type00-after-request-sense": 1,
+        "cycle02-read-toc-format-0-after-command": 1,
+        "cycle02-read-toc-format-0-after-request-sense": 1,
+        "cycle02-read-toc-format-4-after-command": 1,
+        "cycle02-read-toc-format-4-after-request-sense": 1
+      },
+      "value": 27
+    },
+    {
+      "addr": 35402,
+      "branch": "cjne",
+      "count": 21,
+      "kind": "cjne_a_imm",
+      "offsets": {
+        "26432": 21
+      },
+      "role": "CDB byte 1 / op-specific field",
+      "samples": [
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/00-cycle00-baseline-no-stimulus",
+          "hex": "85f5f09085e09047b102a4be908a4ae0b40120a3e0ff6401601cef64026017ef64e26012ef64f0600def64f26008ef64",
+          "offset": 26427
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/01-cycle00-read-toc-format-0-after-command",
+          "hex": "85f5f09085e09047b102a4be908a4ae0b40120a3e0ff6401601cef64026017ef64e26012ef64f0600def64f26008ef64",
+          "offset": 26427
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/02-cycle00-read-toc-format-0-after-request-sense",
+          "hex": "85f5f09085e09047b102a4be908a4ae0b40120a3e0ff6401601cef64026017ef64e26012ef64f0600def64f26008ef64",
+          "offset": 26427
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/03-cycle00-read-toc-format-4-after-command",
+          "hex": "85f5f09085e09047b102a4be908a4ae0b40120a3e0ff6401601cef64026017ef64e26012ef64f0600def64f26008ef64",
+          "offset": 26427
+        }
+      ],
+      "stimuli": {
+        "cycle00-baseline-no-stimulus": 1,
+        "cycle00-get-performance-type00-after-command": 1,
+        "cycle00-get-performance-type00-after-request-sense": 1,
+        "cycle00-read-toc-format-0-after-command": 1,
+        "cycle00-read-toc-format-0-after-request-sense": 1,
+        "cycle00-read-toc-format-4-after-command": 1,
+        "cycle00-read-toc-format-4-after-request-sense": 1,
+        "cycle01-baseline-no-stimulus": 1,
+        "cycle01-get-performance-type00-after-command": 1,
+        "cycle01-get-performance-type00-after-request-sense": 1,
+        "cycle01-read-toc-format-0-after-command": 1,
+        "cycle01-read-toc-format-0-after-request-sense": 1,
+        "cycle01-read-toc-format-4-after-command": 1,
+        "cycle01-read-toc-format-4-after-request-sense": 1,
+        "cycle02-baseline-no-stimulus": 1,
+        "cycle02-get-performance-type00-after-command": 1,
+        "cycle02-get-performance-type00-after-request-sense": 1,
+        "cycle02-read-toc-format-0-after-command": 1,
+        "cycle02-read-toc-format-0-after-request-sense": 1,
+        "cycle02-read-toc-format-4-after-command": 1,
+        "cycle02-read-toc-format-4-after-request-sense": 1
+      },
+      "value": 1
+    },
+    {
+      "addr": 35402,
+      "branch": "jnz",
+      "count": 21,
+      "kind": "xrl_a_imm",
+      "offsets": {
+        "25920": 21
+      },
+      "role": "CDB byte 1 / op-specific field",
+      "samples": [
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/00-cycle00-baseline-no-stimulus",
+          "hex": "65bf01077db17ffb123d8922908a4ae06406705ea3e064677058a3e064787052a3e06489704ca3e0649a700214f09085",
+          "offset": 25941
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/01-cycle00-read-toc-format-0-after-command",
+          "hex": "65bf01077db17ffb123d8922908a4ae06406705ea3e064677058a3e064787052a3e06489704ca3e0649a700214f09085",
+          "offset": 25941
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/02-cycle00-read-toc-format-0-after-request-sense",
+          "hex": "65bf01077db17ffb123d8922908a4ae06406705ea3e064677058a3e064787052a3e06489704ca3e0649a700214f09085",
+          "offset": 25941
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/03-cycle00-read-toc-format-4-after-command",
+          "hex": "65bf01077db17ffb123d8922908a4ae06406705ea3e064677058a3e064787052a3e06489704ca3e0649a700214f09085",
+          "offset": 25941
+        }
+      ],
+      "stimuli": {
+        "cycle00-baseline-no-stimulus": 1,
+        "cycle00-get-performance-type00-after-command": 1,
+        "cycle00-get-performance-type00-after-request-sense": 1,
+        "cycle00-read-toc-format-0-after-command": 1,
+        "cycle00-read-toc-format-0-after-request-sense": 1,
+        "cycle00-read-toc-format-4-after-command": 1,
+        "cycle00-read-toc-format-4-after-request-sense": 1,
+        "cycle01-baseline-no-stimulus": 1,
+        "cycle01-get-performance-type00-after-command": 1,
+        "cycle01-get-performance-type00-after-request-sense": 1,
+        "cycle01-read-toc-format-0-after-command": 1,
+        "cycle01-read-toc-format-0-after-request-sense": 1,
+        "cycle01-read-toc-format-4-after-command": 1,
+        "cycle01-read-toc-format-4-after-request-sense": 1,
+        "cycle02-baseline-no-stimulus": 1,
+        "cycle02-get-performance-type00-after-command": 1,
+        "cycle02-get-performance-type00-after-request-sense": 1,
+        "cycle02-read-toc-format-0-after-command": 1,
+        "cycle02-read-toc-format-0-after-request-sense": 1,
+        "cycle02-read-toc-format-4-after-command": 1,
+        "cycle02-read-toc-format-4-after-request-sense": 1
+      },
+      "value": 6
+    },
+    {
+      "addr": 35402,
+      "branch": "cjne",
+      "count": 21,
+      "kind": "cjne_a_imm",
+      "offsets": {
+        "34816": 21
+      },
+      "role": "CDB byte 1 / op-specific field",
+      "samples": [
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/00-cycle00-baseline-no-stimulus",
+          "hex": "c23e027ea5204115efb4f311908a4ae0b40e0aa3e0b40205c23e027ea5908a49e024087050908a4be0b4220fa3c251c2",
+          "offset": 34835
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/01-cycle00-read-toc-format-0-after-command",
+          "hex": "c23e027ea5204115efb4f311908a4ae0b40e0aa3e0b40205c23e027ea5908a49e024087050908a4be0b4220fa3c251c2",
+          "offset": 34835
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/02-cycle00-read-toc-format-0-after-request-sense",
+          "hex": "c23e027ea5204115efb4f311908a4ae0b40e0aa3e0b40205c23e027ea5908a49e024087050908a4be0b4220fa3c251c2",
+          "offset": 34835
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/03-cycle00-read-toc-format-4-after-command",
+          "hex": "c23e027ea5204115efb4f311908a4ae0b40e0aa3e0b40205c23e027ea5908a49e024087050908a4be0b4220fa3c251c2",
+          "offset": 34835
+        }
+      ],
+      "stimuli": {
+        "cycle00-baseline-no-stimulus": 1,
+        "cycle00-get-performance-type00-after-command": 1,
+        "cycle00-get-performance-type00-after-request-sense": 1,
+        "cycle00-read-toc-format-0-after-command": 1,
+        "cycle00-read-toc-format-0-after-request-sense": 1,
+        "cycle00-read-toc-format-4-after-command": 1,
+        "cycle00-read-toc-format-4-after-request-sense": 1,
+        "cycle01-baseline-no-stimulus": 1,
+        "cycle01-get-performance-type00-after-command": 1,
+        "cycle01-get-performance-type00-after-request-sense": 1,
+        "cycle01-read-toc-format-0-after-command": 1,
+        "cycle01-read-toc-format-0-after-request-sense": 1,
+        "cycle01-read-toc-format-4-after-command": 1,
+        "cycle01-read-toc-format-4-after-request-sense": 1,
+        "cycle02-baseline-no-stimulus": 1,
+        "cycle02-get-performance-type00-after-command": 1,
+        "cycle02-get-performance-type00-after-request-sense": 1,
+        "cycle02-read-toc-format-0-after-command": 1,
+        "cycle02-read-toc-format-0-after-request-sense": 1,
+        "cycle02-read-toc-format-4-after-command": 1,
+        "cycle02-read-toc-format-4-after-request-sense": 1
+      },
+      "value": 14
+    },
+    {
+      "addr": 35403,
+      "branch": "cjne",
+      "count": 21,
+      "kind": "cjne_a_imm",
+      "offsets": {
+        "34816": 21
+      },
+      "role": "CDB byte 2 / op-specific field",
+      "samples": [
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/00-cycle00-baseline-no-stimulus",
+          "hex": "3e027ea5908a49e024087050908a4be0b4220fa3c251c249908a37e054f7f0d23e90483474bff0e4908a18f0a3f09089",
+          "offset": 34860
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/01-cycle00-read-toc-format-0-after-command",
+          "hex": "3e027ea5908a49e024087050908a4be0b4220fa3c251c249908a37e054f7f0d23e90483474bff0e4908a18f0a3f09089",
+          "offset": 34860
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/02-cycle00-read-toc-format-0-after-request-sense",
+          "hex": "3e027ea5908a49e024087050908a4be0b4220fa3c251c249908a37e054f7f0d23e90483474bff0e4908a18f0a3f09089",
+          "offset": 34860
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/03-cycle00-read-toc-format-4-after-command",
+          "hex": "3e027ea5908a49e024087050908a4be0b4220fa3c251c249908a37e054f7f0d23e90483474bff0e4908a18f0a3f09089",
+          "offset": 34860
+        }
+      ],
+      "stimuli": {
+        "cycle00-baseline-no-stimulus": 1,
+        "cycle00-get-performance-type00-after-command": 1,
+        "cycle00-get-performance-type00-after-request-sense": 1,
+        "cycle00-read-toc-format-0-after-command": 1,
+        "cycle00-read-toc-format-0-after-request-sense": 1,
+        "cycle00-read-toc-format-4-after-command": 1,
+        "cycle00-read-toc-format-4-after-request-sense": 1,
+        "cycle01-baseline-no-stimulus": 1,
+        "cycle01-get-performance-type00-after-command": 1,
+        "cycle01-get-performance-type00-after-request-sense": 1,
+        "cycle01-read-toc-format-0-after-command": 1,
+        "cycle01-read-toc-format-0-after-request-sense": 1,
+        "cycle01-read-toc-format-4-after-command": 1,
+        "cycle01-read-toc-format-4-after-request-sense": 1,
+        "cycle02-baseline-no-stimulus": 1,
+        "cycle02-get-performance-type00-after-command": 1,
+        "cycle02-get-performance-type00-after-request-sense": 1,
+        "cycle02-read-toc-format-0-after-command": 1,
+        "cycle02-read-toc-format-0-after-request-sense": 1,
+        "cycle02-read-toc-format-4-after-command": 1,
+        "cycle02-read-toc-format-4-after-request-sense": 1
+      },
+      "value": 34
+    },
+    {
+      "addr": 35403,
+      "branch": "jz",
+      "count": 21,
+      "kind": "mov_r7_xrl_imm",
+      "offsets": {
+        "29248": 21
+      },
+      "role": "CDB byte 2 / op-specific field",
+      "samples": [
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/00-cycle00-baseline-no-stimulus",
+          "hex": "120a6b2290898ee04401f090908a4be0ff64e26004efb4f116908a53e0fea3e0ffc378aa96ee18965005eef608eff678",
+          "offset": 29236
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/01-cycle00-read-toc-format-0-after-command",
+          "hex": "120a6b2290898ee04401f090908a4be0ff64e26004efb4f116908a53e0fea3e0ffc378aa96ee18965005eef608eff678",
+          "offset": 29236
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/02-cycle00-read-toc-format-0-after-request-sense",
+          "hex": "120a6b2290898ee04401f090908a4be0ff64e26004efb4f116908a53e0fea3e0ffc378aa96ee18965005eef608eff678",
+          "offset": 29236
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/03-cycle00-read-toc-format-4-after-command",
+          "hex": "120a6b2290898ee04401f090908a4be0ff64e26004efb4f116908a53e0fea3e0ffc378aa96ee18965005eef608eff678",
+          "offset": 29236
+        }
+      ],
+      "stimuli": {
+        "cycle00-baseline-no-stimulus": 1,
+        "cycle00-get-performance-type00-after-command": 1,
+        "cycle00-get-performance-type00-after-request-sense": 1,
+        "cycle00-read-toc-format-0-after-command": 1,
+        "cycle00-read-toc-format-0-after-request-sense": 1,
+        "cycle00-read-toc-format-4-after-command": 1,
+        "cycle00-read-toc-format-4-after-request-sense": 1,
+        "cycle01-baseline-no-stimulus": 1,
+        "cycle01-get-performance-type00-after-command": 1,
+        "cycle01-get-performance-type00-after-request-sense": 1,
+        "cycle01-read-toc-format-0-after-command": 1,
+        "cycle01-read-toc-format-0-after-request-sense": 1,
+        "cycle01-read-toc-format-4-after-command": 1,
+        "cycle01-read-toc-format-4-after-request-sense": 1,
+        "cycle02-baseline-no-stimulus": 1,
+        "cycle02-get-performance-type00-after-command": 1,
+        "cycle02-get-performance-type00-after-request-sense": 1,
+        "cycle02-read-toc-format-0-after-command": 1,
+        "cycle02-read-toc-format-0-after-request-sense": 1,
+        "cycle02-read-toc-format-4-after-command": 1,
+        "cycle02-read-toc-format-4-after-request-sense": 1
+      },
+      "value": 226
+    },
+    {
+      "addr": 35404,
+      "branch": "jz",
+      "count": 2,
+      "kind": "mov_r7_xrl_imm",
+      "offsets": {
+        "38144": 1,
+        "38272": 1
+      },
+      "role": "controller setup high-ish byte",
+      "samples": [
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/03-cycle00-read-toc-format-4-after-command",
+          "hex": "3d89e4908a33f0d0d092af22908a4ce0ff6401601cef64026017ef64046012ef6405600d78b5760578ab7624e478b0f6",
+          "offset": 38154
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/05-cycle00-get-performance-type00-after-command",
+          "hex": "3d89e4908a33f0d0d092af22908a4ce0ff6401601cef64026017ef64046012ef6405600d78b5760578ab7624e478b0f6",
+          "offset": 38282
+        }
+      ],
+      "stimuli": {
+        "cycle00-get-performance-type00-after-command": 1,
+        "cycle00-read-toc-format-4-after-command": 1
+      },
+      "value": 1
+    },
+    {
+      "addr": 35405,
+      "branch": "cjne",
+      "count": 21,
+      "kind": "cjne_a_imm",
+      "offsets": {
+        "36160": 21
+      },
+      "role": "length/count-ish byte",
+      "samples": [
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/00-cycle00-baseline-no-stimulus",
+          "hex": "4fe0f54ba3e0f54ca3e0f54a908a4de0b40122e4f549e549c3954a5059af497e00e54cef600f78b5760678ab7628e478",
+          "offset": 36189
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/01-cycle00-read-toc-format-0-after-command",
+          "hex": "4fe0f54ba3e0f54ca3e0f54a908a4de0b40122e4f549e549c3954a5059af497e00e54cef600f78b5760678ab7628e478",
+          "offset": 36189
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/02-cycle00-read-toc-format-0-after-request-sense",
+          "hex": "4fe0f54ba3e0f54ca3e0f54a908a4de0b40122e4f549e549c3954a5059af497e00e54cef600f78b5760678ab7628e478",
+          "offset": 36189
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/03-cycle00-read-toc-format-4-after-command",
+          "hex": "4fe0f54ba3e0f54ca3e0f54a908a4de0b40122e4f549e549c3954a5059af497e00e54cef600f78b5760678ab7628e478",
+          "offset": 36189
+        }
+      ],
+      "stimuli": {
+        "cycle00-baseline-no-stimulus": 1,
+        "cycle00-get-performance-type00-after-command": 1,
+        "cycle00-get-performance-type00-after-request-sense": 1,
+        "cycle00-read-toc-format-0-after-command": 1,
+        "cycle00-read-toc-format-0-after-request-sense": 1,
+        "cycle00-read-toc-format-4-after-command": 1,
+        "cycle00-read-toc-format-4-after-request-sense": 1,
+        "cycle01-baseline-no-stimulus": 1,
+        "cycle01-get-performance-type00-after-command": 1,
+        "cycle01-get-performance-type00-after-request-sense": 1,
+        "cycle01-read-toc-format-0-after-command": 1,
+        "cycle01-read-toc-format-0-after-request-sense": 1,
+        "cycle01-read-toc-format-4-after-command": 1,
+        "cycle01-read-toc-format-4-after-request-sense": 1,
+        "cycle02-baseline-no-stimulus": 1,
+        "cycle02-get-performance-type00-after-command": 1,
+        "cycle02-get-performance-type00-after-request-sense": 1,
+        "cycle02-read-toc-format-0-after-command": 1,
+        "cycle02-read-toc-format-0-after-request-sense": 1,
+        "cycle02-read-toc-format-4-after-command": 1,
+        "cycle02-read-toc-format-4-after-request-sense": 1
+      },
+      "value": 1
+    },
+    {
+      "addr": 35405,
+      "branch": "cjne",
+      "count": 21,
+      "kind": "cjne_a_imm",
+      "offsets": {
+        "26368": 21
+      },
+      "role": "length/count-ish byte",
+      "samples": [
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/00-cycle00-baseline-no-stimulus",
+          "hex": "cf2401cf3400fed0d092af22908a4de0b4f0089085f47401f08070908a50e09085f4f0908a51e09085f5f09085e09047",
+          "offset": 26387
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/01-cycle00-read-toc-format-0-after-command",
+          "hex": "cf2401cf3400fed0d092af22908a4de0b4f0089085f47401f08070908a50e09085f4f0908a51e09085f5f09085e09047",
+          "offset": 26387
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/02-cycle00-read-toc-format-0-after-request-sense",
+          "hex": "cf2401cf3400fed0d092af22908a4de0b4f0089085f47401f08070908a50e09085f4f0908a51e09085f5f09085e09047",
+          "offset": 26387
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/03-cycle00-read-toc-format-4-after-command",
+          "hex": "cf2401cf3400fed0d092af22908a4de0b4f0089085f47401f08070908a50e09085f4f0908a51e09085f5f09085e09047",
+          "offset": 26387
+        }
+      ],
+      "stimuli": {
+        "cycle00-baseline-no-stimulus": 1,
+        "cycle00-get-performance-type00-after-command": 1,
+        "cycle00-get-performance-type00-after-request-sense": 1,
+        "cycle00-read-toc-format-0-after-command": 1,
+        "cycle00-read-toc-format-0-after-request-sense": 1,
+        "cycle00-read-toc-format-4-after-command": 1,
+        "cycle00-read-toc-format-4-after-request-sense": 1,
+        "cycle01-baseline-no-stimulus": 1,
+        "cycle01-get-performance-type00-after-command": 1,
+        "cycle01-get-performance-type00-after-request-sense": 1,
+        "cycle01-read-toc-format-0-after-command": 1,
+        "cycle01-read-toc-format-0-after-request-sense": 1,
+        "cycle01-read-toc-format-4-after-command": 1,
+        "cycle01-read-toc-format-4-after-request-sense": 1,
+        "cycle02-baseline-no-stimulus": 1,
+        "cycle02-get-performance-type00-after-command": 1,
+        "cycle02-get-performance-type00-after-request-sense": 1,
+        "cycle02-read-toc-format-0-after-command": 1,
+        "cycle02-read-toc-format-0-after-request-sense": 1,
+        "cycle02-read-toc-format-4-after-command": 1,
+        "cycle02-read-toc-format-4-after-request-sense": 1
+      },
+      "value": 240
+    },
+    {
+      "addr": 35411,
+      "branch": "cjne",
+      "count": 21,
+      "kind": "cjne_a_imm",
+      "offsets": {
+        "36928": 21
+      },
+      "role": "controller response/data shadow byte",
+      "samples": [
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/00-cycle00-baseline-no-stimulus",
+          "hex": "02066902066f02d8f3301c0c908a53e0b401057fac0270b10260e102b57c007ded7f221208b5905a287488f0a37408f0",
+          "offset": 36964
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/01-cycle00-read-toc-format-0-after-command",
+          "hex": "02066902066f02d8f3301c0c908a53e0b401057fac0270b10260e102b57c007ded7f221208b5905a287488f0a37408f0",
+          "offset": 36964
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/02-cycle00-read-toc-format-0-after-request-sense",
+          "hex": "02066902066f02d8f3301c0c908a53e0b401057fac0270b10260e102b57c007ded7f221208b5905a287488f0a37408f0",
+          "offset": 36964
+        },
+        {
+          "capture": "normal-work-window-error-path-pairs-20260501/03-cycle00-read-toc-format-4-after-command",
+          "hex": "02066902066f02d8f3301c0c908a53e0b401057fac0270b10260e102b57c007ded7f221208b5905a287488f0a37408f0",
+          "offset": 36964
+        }
+      ],
+      "stimuli": {
+        "cycle00-baseline-no-stimulus": 1,
+        "cycle00-get-performance-type00-after-command": 1,
+        "cycle00-get-performance-type00-after-request-sense": 1,
+        "cycle00-read-toc-format-0-after-command": 1,
+        "cycle00-read-toc-format-0-after-request-sense": 1,
+        "cycle00-read-toc-format-4-after-command": 1,
+        "cycle00-read-toc-format-4-after-request-sense": 1,
+        "cycle01-baseline-no-stimulus": 1,
+        "cycle01-get-performance-type00-after-command": 1,
+        "cycle01-get-performance-type00-after-request-sense": 1,
+        "cycle01-read-toc-format-0-after-command": 1,
+        "cycle01-read-toc-format-0-after-request-sense": 1,
+        "cycle01-read-toc-format-4-after-command": 1,
+        "cycle01-read-toc-format-4-after-request-sense": 1,
+        "cycle02-baseline-no-stimulus": 1,
+        "cycle02-get-performance-type00-after-command": 1,
+        "cycle02-get-performance-type00-after-request-sense": 1,
+        "cycle02-read-toc-format-0-after-command": 1,
+        "cycle02-read-toc-format-0-after-request-sense": 1,
+        "cycle02-read-toc-format-4-after-command": 1,
+        "cycle02-read-toc-format-4-after-request-sense": 1
+      },
+      "value": 1
+    }
+  ],
+  "edge_rows": [
+    {
+      "addr": 35401,
+      "edges": [],
+      "role": "opcode/selector candidate"
+    },
+    {
+      "addr": 35402,
+      "edges": [
+        {
+          "count": 21,
+          "dst": 35402,
+          "kind": "direct",
+          "sample_offsets": [
+            38080
+          ],
+          "src": 18353
+        }
+      ],
+      "role": "CDB byte 1 / op-specific field"
+    },
+    {
+      "addr": 35403,
+      "edges": [
+        {
+          "count": 21,
+          "dst": 35403,
+          "kind": "direct",
+          "sample_offsets": [
+            38080
+          ],
+          "src": 18353
+        }
+      ],
+      "role": "CDB byte 2 / op-specific field"
+    },
+    {
+      "addr": 35404,
+      "edges": [
+        {
+          "count": 21,
+          "dst": 16401,
+          "kind": "direct",
+          "sample_offsets": [
+            28992,
+            29056
+          ],
+          "src": 35404
+        },
+        {
+          "count": 10,
+          "dst": 35404,
+          "kind": "direct",
+          "sample_offsets": [
+            38080,
+            38144,
+            38208,
+            38272
+          ],
+          "src": 18353
+        }
+      ],
+      "role": "controller setup high-ish byte"
+    },
+    {
+      "addr": 35405,
+      "edges": [
+        {
+          "count": 21,
+          "dst": 35405,
+          "kind": "direct",
+          "sample_offsets": [
+            38144,
+            38208,
+            38272,
+            38336
+          ],
+          "src": 18353
+        },
+        {
+          "count": 21,
+          "dst": 16402,
+          "kind": "direct",
+          "sample_offsets": [
+            28992,
+            29056
+          ],
+          "src": 35405
+        },
+        {
+          "count": 21,
+          "dst": 18390,
+          "kind": "direct",
+          "sample_offsets": [
+            30144
+          ],
+          "src": 35405
+        }
+      ],
+      "role": "length/count-ish byte"
+    },
+    {
+      "addr": 35406,
+      "edges": [
+        {
+          "count": 21,
+          "dst": 35406,
+          "kind": "direct",
+          "sample_offsets": [
+            38144,
+            38208,
+            38272,
+            38336
+          ],
+          "src": 18353
+        },
+        {
+          "count": 21,
+          "dst": 16403,
+          "kind": "direct",
+          "sample_offsets": [
+            28992,
+            29056
+          ],
+          "src": 35406
+        },
+        {
+          "count": 21,
+          "dst": 16537,
+          "kind": "direct",
+          "sample_offsets": [
+            29888
+          ],
+          "src": 35406
+        }
+      ],
+      "role": "subselector/status byte; low nibble tested"
+    },
+    {
+      "addr": 35407,
+      "edges": [
+        {
+          "count": 21,
+          "dst": 35407,
+          "kind": "direct",
+          "sample_offsets": [
+            38144,
+            38208,
+            38272,
+            38336
+          ],
+          "src": 18353
+        }
+      ],
+      "role": "payload/field byte"
+    },
+    {
+      "addr": 35408,
+      "edges": [
+        {
+          "count": 21,
+          "dst": 35408,
+          "kind": "direct",
+          "sample_offsets": [
+            38144,
+            38208,
+            38272,
+            38336
+          ],
+          "src": 18353
+        },
+        {
+          "count": 21,
+          "dst": 34292,
+          "kind": "direct",
+          "sample_offsets": [
+            26368
+          ],
+          "src": 35408
+        }
+      ],
+      "role": "payload/field byte"
+    },
+    {
+      "addr": 35409,
+      "edges": [
+        {
+          "count": 21,
+          "dst": 35409,
+          "kind": "direct",
+          "sample_offsets": [
+            38144,
+            38208,
+            38272,
+            38336
+          ],
+          "src": 18353
+        },
+        {
+          "count": 21,
+          "dst": 34293,
+          "kind": "direct",
+          "sample_offsets": [
+            26368
+          ],
+          "src": 35409
+        }
+      ],
+      "role": "payload/field byte"
+    },
+    {
+      "addr": 35410,
+      "edges": [
+        {
+          "count": 21,
+          "dst": 35410,
+          "kind": "direct",
+          "sample_offsets": [
+            38144,
+            38208,
+            38272,
+            38336
+          ],
+          "src": 18353
+        }
+      ],
+      "role": "payload/field byte"
+    },
+    {
+      "addr": 35411,
+      "edges": [
+        {
+          "count": 21,
+          "dst": 35411,
+          "kind": "direct",
+          "sample_offsets": [
+            38144,
+            38208,
+            38272,
+            38336
+          ],
+          "src": 18353
+        },
+        {
+          "count": 21,
+          "dst": 16537,
+          "kind": "direct",
+          "sample_offsets": [
+            29888
+          ],
+          "src": 35411
+        }
+      ],
+      "role": "controller response/data shadow byte"
+    },
+    {
+      "addr": 35412,
+      "edges": [
+        {
+          "count": 21,
+          "dst": 16537,
+          "kind": "direct",
+          "sample_offsets": [
+            29888
+          ],
+          "src": 35412
+        },
+        {
+          "count": 10,
+          "dst": 35412,
+          "kind": "direct",
+          "sample_offsets": [
+            38336
+          ],
+          "src": 18353
+        }
+      ],
+      "role": "controller response/data shadow byte"
+    }
+  ]
+}

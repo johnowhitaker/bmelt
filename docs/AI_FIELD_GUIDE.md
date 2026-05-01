@@ -1675,3 +1675,14 @@ Immediate useful directions:
     less frequent `+0x7140/+0x7180` `0x4098` gateway-looking chunk. This is a
     separate failed-command/status surface from the GET CONFIG good-response
     `0x4099` bridge.
+49. A paired failure/sense follow-up is in
+    `references/evidence/live/normal-work-window-error-path-pairs-20260501`
+    with reports
+    `analysis/8051/normal-work-window-error-path-pairs-20260501.md`,
+    `analysis/8051/normal-packet-selector-map-error-pairs-20260501.md`, and
+    `analysis/8051/normal-error-path-pairs-20260501.md`. It sends a failing
+    READ TOC or GET PERFORMANCE type00, captures the work window, then sends
+    REQUEST SENSE and captures again. It did not produce a clean after-command
+    versus after-sense split; recurring chunks touched `0x4098` and `0x8a23`
+    in both phases. Treat it as evidence that this public window is sampling a
+    longer shared error/status path rather than a neatly command-bounded one.
