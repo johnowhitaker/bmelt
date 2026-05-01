@@ -352,3 +352,70 @@ grammar. Future analysis should answer:
   decoded CDD/controller addresses;
 - whether table indices line up with the `0x8a49` packet selector or with the
   CDD record/lane schedule.
+
+GET CONFIGURATION current long isolated run:
+
+```text
+references/evidence/live/normal-work-window-get-config-current-long-20260501/
+analysis/8051/normal-work-window-get-config-current-long-20260501.md
+analysis/8051/normal-work-window-get-config-current-long-20260501.json
+```
+
+This read-only run alternated 16 local baseline captures with 16
+`GET CONFIGURATION current` captures. The drive stayed normal `LD5M`.
+Compared only against its own local baselines, the stimulus captures produced
+just two recurring stimulus-only chunks, and both are in the controller bridge
+corridor:
+
+```text
++0x7080/+0x70c0: refs 0x4000, 0x4091, 0x4093, 0x4099
++0x7140/+0x7180: refs 0x4099, 0x8a4b, 0x8a4d, 0x8a4e, 0x8a53, 0x8a54
+```
+
+These chunks were not new to the aggregate corpus, but the alternating run is a
+good tag: GET CONFIGURATION current reliably pulls this bridge into the visible
+window. Representative aligned disassembly around `+0x70c3`:
+
+```text
+MOV DPTR,#4000
+MOVX A,@DPTR
+JB ACC.7,wait
+MOV DPTR,#8ac6
+MOVX A,@DPTR
+MOV DPTR,#4091
+MOVX @DPTR,A
+...
+MOV DPTR,#4093
+MOVX @DPTR,A
+MOV DPTR,#409c
+MOV A,#40
+MOVX @DPTR,A
+MOV A,#24
+MOVX @DPTR,A
+poll 0x409c bit5 clear
+MOV DPTR,#4099
+MOVX A,@DPTR
+```
+
+The companion chunk then stores controller FIFO reads back into the packet
+shadow:
+
+```text
+MOV DPTR,#4099
+MOVX A,@DPTR
+MOV DPTR,#8a4e
+MOVX @DPTR,A
+MOV DPTR,#4099
+MOVX A,@DPTR
+MOV DPTR,#8a53
+MOVX @DPTR,A
+MOV DPTR,#4099
+MOVX A,@DPTR
+MOV DPTR,#8a54
+MOVX @DPTR,A
+```
+
+This strengthens the model that `0x8a4b..0x8a54` is not just a passive CDB
+copy. It is a live packet/controller shadow used while the normal runtime
+turns host commands into controller register traffic and then captures the
+controller response bytes.

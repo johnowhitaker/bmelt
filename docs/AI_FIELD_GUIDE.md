@@ -1590,3 +1590,18 @@ Immediate useful directions:
     selector entries, what the 16-bit `param` values mean, and whether table
     indices correlate with `xdata[0x8a49]` packet selectors or the CDD
     record/lane schedule.
+40. A longer read-only isolated GET CONFIGURATION current run was captured in
+    `references/evidence/live/normal-work-window-get-config-current-long-20260501`
+    and summarized in
+    `analysis/8051/normal-work-window-get-config-current-long-20260501.md`.
+    It alternated 16 baseline captures with 16 GET CONFIGURATION current
+    captures. The drive stayed normal `LD5M`. The run added no new aggregate
+    chunks, but it cleanly tagged two recurring stimulus-only chunks in the
+    controller bridge corridor.
+41. Those tagged GET CONFIGURATION chunks are the best current concrete code
+    snippets for the normal packet/controller handoff. One waits on
+    `xdata[0x4000].7`, writes `xdata[0x8ac6]` and IRAM-derived bytes into
+    `0x4091..0x4093`, kicks/polls `0x409c`, then reads `0x4099`. The companion
+    chunk reads `0x4099` back into `xdata[0x8a4e]`, `0x8a53`, and `0x8a54`.
+    This confirms `0x8a4b..0x8a54` is an active packet/controller shadow, not
+    merely a passive CDB copy.

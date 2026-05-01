@@ -1547,3 +1547,19 @@ smaller: what indexes the first 32 selector entries, what the 16-bit parameters
 mean, and whether those indices connect to the `0x8a49` command shadow or to
 the CDD record/lane schedule. It is another case where the opaque blob has
 turned into a shaped machine part.
+
+After that I let the normal drive run a longer, still read-only,
+GET CONFIGURATION current capture: sixteen baseline snapshots alternating with
+sixteen command snapshots. It did not add any new unique chunks to the big
+normal-window corpus, which is useful in itself because it says this command
+mostly samples a known slice of runtime. But it tagged that slice very cleanly.
+Only two recurring stimulus-only chunks survived the local baseline comparison,
+and both sit exactly in the controller bridge path we care about.
+
+One chunk waits on the controller busy bit at `0x4000`, writes setup bytes into
+`0x4091..0x4093`, kicks `0x409c`, and reads from `0x4099`. The companion chunk
+stores successive `0x4099` reads into the `0x8a` packet shadow, including
+`0x8a4e`, `0x8a53`, and `0x8a54`. That turns "the normal runtime probably has
+a command shadow" into something more concrete: we have a tagged, repeatable
+path where a normal host command becomes controller register traffic and then
+controller response bytes are copied back into the shadow.
