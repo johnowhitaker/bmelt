@@ -1739,3 +1739,18 @@ line up cleanly with the visible 8051 prefix disassembly. So the next real
 breakthrough is not another blind F0 hook. It is finding a normal-mode response
 path that is both live and patchable, or proving that the overlay has to be
 patched through a different route.
+
+I pushed that source question a little harder offline. Comparing the normal
+work-window chunks against everything we have was clarifying: only a tiny slice
+matches the visible F0 prefix, none matches the helper, but a surprisingly large
+part matches the currentboot `0x070000` gateway dump. Normal `id01` and `id02`
+reads are also near-aliases for the public work-window. The high half of that
+window has long exact runs shared between normal and currentboot, especially
+`+0xa000..+0xde80` and `+0xe000..+0xfd80`.
+
+That is good news and bad news. Good: the normal window is not pure fog; it is a
+shared controller/work-memory image we can compare across modes. Bad: the exact
+START STOP `+0x8bxx` branch still does not localize to F0, the helper, or an
+obvious currentboot gateway chunk. The nearby mechanics cluster around
+`+0x92xx/+0x93xx/+0x95xx` does have a few small shifted currentboot overlaps,
+so it may give us cross-mode landmarks even if it is not a direct patch map.

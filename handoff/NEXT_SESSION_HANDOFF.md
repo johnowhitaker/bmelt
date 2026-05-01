@@ -440,3 +440,20 @@ Also do not assume the `+0x8bxx` work-window offset is patchable in the visible
 F0 prefix. Prior F0 resident hooks persisted but did not alter normal command
 timing, and the START STOP snippet itself does not line up cleanly with visible
 prefix disassembly. First find a live, patchable normal response path.
+
+Latest offline localization:
+
+```text
+analysis/8051/normal-work-window-reference-localization-20260501.md
+analysis/8051/normal-currentboot-work-window-overlap-20260501.md
+analysis/8051/normal-work-window-extended-reference-matches-20260501.md/json
+```
+
+High-level result: the normal work-window barely matches visible F0
+(`63/908` chunks) or the visible 8051 prefix (`8/908`), and not the helper at
+all. It does substantially overlap the currentboot gateway `0x070000` dump
+(`510/908` chunks). Normal `id01/id02` snapshots match 693 chunks each and are
+near-aliases. The START STOP `+0x8bxx` branch is still not localized to a known
+patchable image. Shared currentboot/normal pages are strongest at
+`+0xa000..+0xde80`, `+0xe000..+0xfd80`, and `+0x4000..+0x4500`; use those as
+the first candidates if testing currentboot-to-normal RAM patch carryover.

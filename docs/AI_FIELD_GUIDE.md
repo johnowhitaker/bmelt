@@ -1744,3 +1744,14 @@ Immediate useful directions:
     persisted but did not affect normal command timing. Next priority is a
     normal-mode response hook that is live and patchable; only after that should
     START STOP be used again for telemetry.
+55. `analysis/8051/normal-work-window-reference-localization-20260501.md` and
+    `analysis/8051/normal-currentboot-work-window-overlap-20260501.md` compare
+    the normal work-window chunks against F0, the visible 8051 prefix, the
+    helper, currentboot gateway `0x070000`, and normal `id01/id02` snapshots.
+    Out of 908 unique normal chunks, only 63 match F0 and 8 match the visible
+    prefix, but 510 match the currentboot gateway and 693 match each normal
+    `id01/id02` reference. The currentboot/normal exact same-offset overlap is
+    strongest at `+0xa000..+0xde80`, `+0xe000..+0xfd80`, and `+0x4000..+0x4500`.
+    The START STOP `+0x8bxx` branch still does not localize to F0/helper or an
+    obvious currentboot gateway chunk, while the `+0x92xx/+0x93xx/+0x95xx`
+    mechanics cluster has several small shifted currentboot overlaps.
