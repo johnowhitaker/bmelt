@@ -55,12 +55,16 @@ def run_read(
     *,
     sg_raw: str,
     device: str,
+    cmdset: int | None,
     cdb: list[int],
     length: int,
     timeout: int,
     require_good_status: bool = True,
 ) -> bytes:
-    cmd = [sg_raw, "-b", "--request", str(length), "--timeout", str(timeout)]
+    cmd = [sg_raw]
+    if cmdset is not None:
+        cmd.append(f"--cmdset={cmdset}")
+    cmd.extend(["-b", "--request", str(length), "--timeout", str(timeout)])
     cmd.extend([device, *[f"{byte:02x}" for byte in cdb]])
     proc = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     stderr = proc.stderr.decode("utf-8", errors="replace")
@@ -90,6 +94,7 @@ def dump_raw(args: argparse.Namespace) -> bytes:
                     run_read(
                         sg_raw=args.sg_raw,
                         device=args.device,
+                        cmdset=args.cmdset,
                         cdb=cdb,
                         length=length,
                         timeout=args.timeout,
@@ -113,6 +118,7 @@ def maybe_prime_extrainq(args: argparse.Namespace) -> None:
     live = run_read(
         sg_raw=args.sg_raw,
         device=args.device,
+        cmdset=args.cmdset,
         cdb=EXTRAINQ_CDB,
         length=0xB0,
         timeout=args.timeout,
@@ -129,6 +135,12 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--device", default="/dev/sg0")
     parser.add_argument("--sg-raw", default=shutil.which("sg_raw") or "sg_raw")
+    parser.add_argument(
+        "--cmdset",
+        type=lambda value: None if value.lower() == "none" else int(value, 0),
+        default=1,
+        help="sg_raw command set value; use 'none' to omit --cmdset",
+    )
     parser.add_argument("--extrainq", required=True, help="EXTRAINQ response as log/file/hex")
     parser.add_argument("--out", type=Path, required=True, help="decrypted output path")
     parser.add_argument("--raw-out", type=Path, help="encrypted output path")
