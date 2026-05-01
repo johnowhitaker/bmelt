@@ -1839,3 +1839,19 @@ Immediate useful directions:
     feature-list/response-builder sentinel, not as an arbitrary memory oracle.
     The generic `0x8a4c..0x8a4e -> 0x4011..0x4013` pattern appears in all
     captures and belongs to public READ BUFFER response plumbing.
+64. `scripts/stitch_liteon_normal_controller_islands.py` and
+    `analysis/8051/normal-controller-island-stitch-20260501.md/json` treat the
+    normal work-window as rotating `0x40`-byte tiles instead of a guaranteed
+    linear image. The strongest GET CONFIG path is
+    `4037c8574920 -> 8d8c3b0a22a0 -> 20ea2ab16891`: wait on `0x4000.7`,
+    set `0x4091..0x4093`, kick `0x409c=0x40/0x24`, read four bytes from
+    `0x4099` into `0x8a4d/0x8a4e/0x8a53/0x8a54`, branch on
+    `0x8a4d == 0xfe`, then feed the public `0x4011..0x4013` response bridge.
+65. `analysis/8051/normal-controller-island-patchability-20260501.md`
+    checks exact localization. The GET CONFIG-specific setup/seed chunks are
+    not in F0, the saved currentboot gateway dump, or baseline normal id01/id02.
+    They are transient/stimulus-visible. The public bridge chunk
+    `20ea2ab16891` is stable in baseline normal id01/id02 at `+0x7140`, but
+    currentboot `+0x7140` is unrelated. Practical patch implication: a normal
+    response hook should target a true normal-mode RAM/controller write or a
+    proven state-carryover primitive, not a guessed visible-F0 offset.

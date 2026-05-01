@@ -1895,3 +1895,37 @@ burst, `+0x7600/+0x7640` for `0x4091..0x4093` setup, and
 breakthrough probably requires either normal-mode patchability around one of
 these islands or a command family whose stock response builder exposes richer
 controller bytes without requiring a patch.
+
+The next pass treated those islands less like a flat memory dump and more like
+what they seem to be: rotating tiles. I added a stitcher that tracks
+`0x40`-byte chunks and their observed neighbors instead of pretending that two
+adjacent public slots are always adjacent code. That made the GET CONFIG path
+much cleaner. The best observed chain is:
+
+```text
+4037c8574920 -> 8d8c3b0a22a0 -> 20ea2ab16891
+```
+
+In plain language, that chain waits for the controller to be ready, writes a
+three-byte-ish selector/address through `0x4091..0x4093`, kicks the controller
+with `0x409c=0x40` then `0x24`, waits for `0x409c.5` to clear, reads four
+bytes from `0x4099` into `0x8a4d`, `0x8a4e`, `0x8a53`, and `0x8a54`, checks
+whether the first byte is the special `0xfe` sentinel, and then drops into the
+common public response builder that writes `0x8a4c..0x8a4e` into
+`0x4011..0x4013`.
+
+The patchability result was less magical but useful. The GET CONFIG-specific
+setup and seed chunks are not in the visible F0 image, not in the saved
+currentboot gateway dump, and not even in the baseline normal id01/id02
+work-window references. They only show up when the right stimulus has made
+that overlay tile visible. The common response bridge chunk is different: it
+is stable in baseline normal id01/id02 at `+0x7140`, though currentboot
+`+0x7140` contains unrelated code.
+
+So the "where do we hook?" answer is narrower. The transient GET CONFIG chunk
+is an excellent map of the local mechanism, but not an obvious static flash
+patch target. The stable bridge is a better normal-runtime landmark. To turn
+this into a host-visible oracle, we likely need either a real normal-mode
+RAM/controller-memory write primitive or a proven currentboot-to-normal
+state-carryover trick. Writing a visible F0 offset is still the wrong default
+for this path.

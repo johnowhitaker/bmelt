@@ -692,3 +692,61 @@ Static islands worth stitching next:
 +0x7600/+0x7640                   4091..4093 setup and 409c kicks
 +0xdbc0/+0xdc00/+0xdc40           4095..4097 save/restore/FIFO writer
 ```
+
+## Latest Controller Island Stitch
+
+New artifacts:
+
+```text
+scripts/stitch_liteon_normal_controller_islands.py
+analysis/8051/normal-controller-island-stitch-20260501.md/json
+analysis/8051/normal-controller-island-patchability-20260501.md
+```
+
+The stitcher treats the work-window as rotating `0x40`-byte tiles and reports
+chunk adjacency around controller/packet-shadow anchors. The key GET CONFIG
+chain is:
+
+```text
+4037c8574920 -> 8d8c3b0a22a0 -> 20ea2ab16891
+```
+
+Likely local flow:
+
+```text
+wait for 0x4000.7 clear
+xdata[0x8ac6] -> controller[0x4091]
+IRAM/local pointer bytes -> controller[0x4092]
+LCALL 0x2fb7 with DPTR=0x0001, result -> controller[0x4093]
+controller[0x409c] = 0x40, then 0x24
+wait for controller[0x409c].5 clear
+read controller[0x4099] four times into 0x8a4d/0x8a4e/0x8a53/0x8a54
+advance local byte count by four
+if 0x8a4d == 0xfe, skip dynamic length-difference calculation
+copy/clamp 0x8a4c..0x8a4e into controller[0x4011..0x4013]
+copy 0x8a50..0x8a51 into IRAM 0xa9/0xaa
+```
+
+Patchability check:
+
+```text
+4037 GET CONFIG setup: absent from F0/static refs/currentboot gateway/baseline normal id01/id02
+8d8 GET CONFIG seed:  absent from F0/static refs/currentboot gateway/baseline normal id01/id02
+20ea public bridge:   present in baseline normal id01/id02 at +0x7140
+currentboot +0x7140:  unrelated code
+```
+
+Practical implication: the GET CONFIG-specific chunks are transient overlay
+tiles, not static flash patch targets. The stable public bridge at normal
+`+0x7140` is a better landmark, but patching it still requires a true
+normal-mode RAM/controller write or a proven currentboot-to-normal state
+carryover primitive.
+
+Good next directions:
+
+- offline: disassemble/stitch the stable bridge neighborhood
+  `normal id01/id02 +0x7100..0x7200`;
+- live, only if needed: test harmless state carryover by writing a marker into
+  a currentboot gateway page with a known normal counterpart, recover to normal
+  without cold power, and immediately read the normal window;
+- avoid more sled/eject paths until there is a cleaner host-visible hook.
