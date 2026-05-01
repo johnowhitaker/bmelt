@@ -44,6 +44,47 @@ That strongly supports the current model: visible 8051 code validates and
 packages CDD header fields for a controller-side engine; it does not contain a
 complete CDD body decoder.
 
+The caller at `0x4180..0x41de` makes the descriptor-driven setup much more
+specific. Before calling `FUN_CODE_002e`, it copies the early outer-descriptor
+fields into the parser staging window:
+
+```text
+descriptor +0x02..0x05 -> xdata[0x8244..0x8247] = 0x00007000
+descriptor +0x06..0x09 -> xdata[0x8248..0x824b] = 0x00004000
+descriptor +0x0a..0x0d -> xdata[0x824c..0x824f] = 0x00080000
+descriptor +0x0e..0x11 -> xdata[0x8250..0x8253] = 0x00005000
+descriptor +0x12..0x13 -> xdata[0x8254..0x8255] = 0x4000
+```
+
+For LD5M that leads to:
+
+```text
+0x4e0d = 0x40
+0x4e1a = 0x14
+0x4e1c = 0x01
+IRAM[0x60..0x61] = 0x01ff
+```
+
+Then the parser adds the descriptor length (`0x2c`) to the parser base and
+expects the CDD header at `0x0000702c`. The path at `0x01ed..0x0252` sets
+`xdata[0x8256..0x8257] = 0xc000`, calls `FUN_CODE_1717`, and only then reads
+`CDD\x09 10 16` through `xdata[0xc000]`. This makes `0xc000` look like a
+mapped XDATA window, not a literal F0 address. `FUN_CODE_1717` issues a banked
+`0x4e80/84/88/8c` command with selector `2`, pointer `0x0000702c`, companion
+value `0x0007ff00`, and length/window value `0x20`.
+
+The generated static replay plan is:
+
+```text
+references/firmware/extracted/liteon-cdd-mailbox-replay-plan.md
+references/firmware/extracted/liteon-cdd-mailbox-replay-plan.json
+```
+
+The key practical correction is that the live `xdata[0x4a00] = 1` experiment
+was only a negative for a trivial shortcut. It skipped the header-derived
+`0x4a01/03/05/06/20/21/22` package, the descriptor prestate, and the mapped
+header setup.
+
 ## Secondary `0x4a10` Window
 
 The path around `0x079b..0x085e` uses another mailbox/status window:
@@ -140,9 +181,13 @@ controller/CDD side owns the actual decode/servo details.
 
 ## Immediate Static Follow-Ups
 
-- Trace callers of `0x17ae`, `0x17bb`, and `0x189c` to classify the three
-  `0x4e80/84/88/8c` command forms.
+- Trace the exact `0x4e80/84/88/8c` command side effects for the
+  `FUN_CODE_1717` mapped-header call, especially how `0x40b8..0x40ba` make
+  `xdata[0xc000]` point at the CDD header.
 - Cross-reference writes to `0x4a24..0x4a29` and reads from `0x4a26..0x4a27`;
   these may describe controller-returned CDD result windows.
+- If a live follow-up is justified, try the generated replay plan's
+  field-only `0x4a` package before issuing any `0x4e8c` controller-memory
+  command.
 - Keep any future Ghidra claim about `0x4a`/`0x4e` guarded until the exact
   raw `MOVX` path has been checked.

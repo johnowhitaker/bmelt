@@ -1,0 +1,423 @@
+{
+  "candidate_replay_levels": [
+    {
+      "description": "Set only the header-derived 0x4a fields, then ring 0x4a00. This is the smallest useful successor to the failed single-byte doorbell test.",
+      "expected_if_sufficient": "decoded/controller memory near 0x184000 becomes nonzero or 0x4a24..0x4a29 updates",
+      "name": "field-only CDD mailbox",
+      "ordered_byte_writes": [
+        {
+          "address": 18944,
+          "address_hex": "0x4a00",
+          "note": "clear CDD mailbox doorbell before staging fields",
+          "value": 0,
+          "value_hex": "0x00"
+        },
+        {
+          "address": 18945,
+          "address_hex": "0x4a01",
+          "note": "aux length code from header[0x10] high nibble",
+          "value": 3,
+          "value_hex": "0x03"
+        },
+        {
+          "address": 18946,
+          "address_hex": "0x4a02",
+          "note": "resident clears this byte before field package",
+          "value": 0,
+          "value_hex": "0x00"
+        },
+        {
+          "address": 18947,
+          "address_hex": "0x4a03",
+          "note": "header[0x06] low two bits",
+          "value": 3,
+          "value_hex": "0x03"
+        },
+        {
+          "address": 18949,
+          "address_hex": "0x4a05",
+          "note": "header[0x06] upper six bits",
+          "value": 20,
+          "value_hex": "0x14"
+        },
+        {
+          "address": 18950,
+          "address_hex": "0x4a06",
+          "note": "header[0x10] low nibble",
+          "value": 7,
+          "value_hex": "0x07"
+        },
+        {
+          "address": 18976,
+          "address_hex": "0x4a20",
+          "note": "header[0x0d] controller parameter",
+          "value": 3,
+          "value_hex": "0x03"
+        },
+        {
+          "address": 18977,
+          "address_hex": "0x4a21",
+          "note": "header[0x0e] controller parameter",
+          "value": 8,
+          "value_hex": "0x08"
+        },
+        {
+          "address": 18978,
+          "address_hex": "0x4a22",
+          "note": "header[0x0f] controller parameter",
+          "value": 16,
+          "value_hex": "0x10"
+        },
+        {
+          "address": 33368,
+          "address_hex": "0x8258",
+          "note": "CDD2 absolute start from header[0x07..0x09]",
+          "value": 0,
+          "value_hex": "0x00"
+        },
+        {
+          "address": 33369,
+          "address_hex": "0x8259",
+          "note": "CDD2 absolute start from header[0x07..0x09] byte +1",
+          "value": 13,
+          "value_hex": "0x0d"
+        },
+        {
+          "address": 33370,
+          "address_hex": "0x825a",
+          "note": "CDD2 absolute start from header[0x07..0x09] byte +2",
+          "value": 144,
+          "value_hex": "0x90"
+        },
+        {
+          "address": 33371,
+          "address_hex": "0x825b",
+          "note": "CDD2 absolute start from header[0x07..0x09] byte +3",
+          "value": 0,
+          "value_hex": "0x00"
+        },
+        {
+          "address": 18944,
+          "address_hex": "0x4a00",
+          "note": "ring CDD mailbox after staging fields",
+          "value": 1,
+          "value_hex": "0x01"
+        }
+      ],
+      "risk": "low-to-medium; no 0x4e8c command issue, but it does ring the CDD mailbox",
+      "suggested_samples_after": [
+        {
+          "address": 18944,
+          "kind": "xdata",
+          "length": 48,
+          "why": "CDD mailbox/result window, including 0x4a24..0x4a29"
+        },
+        {
+          "address": 19968,
+          "kind": "xdata",
+          "length": 48,
+          "why": "nearby 0x4e status fields and 0x4e14/16/18/1a/1c/1e"
+        },
+        {
+          "address": 20128,
+          "kind": "xdata",
+          "length": 1,
+          "why": "cheap controller command status byte"
+        },
+        {
+          "address": 1589248,
+          "kind": "gateway",
+          "length": 256,
+          "why": "advertised decoded CDD base"
+        },
+        {
+          "address": 1589344,
+          "kind": "gateway",
+          "length": 256,
+          "why": "first table-derived decoded target neighborhood"
+        },
+        {
+          "address": 1640080,
+          "kind": "gateway",
+          "length": 256,
+          "why": "known affine group 27 oracle target from prior work"
+        }
+      ],
+      "writes": {
+        "0x4a00": 1,
+        "0x4a01": 3,
+        "0x4a02": 0,
+        "0x4a03": 3,
+        "0x4a05": 20,
+        "0x4a06": 7,
+        "0x4a20": 3,
+        "0x4a21": 8,
+        "0x4a22": 16,
+        "0x8258..0x825b": 888832
+      }
+    },
+    {
+      "description": "Preload 0x8244..0x825b and the early 0x4e status fields to mirror the resident parser, then ring the 0x4a mailbox.",
+      "expected_if_sufficient": "same as above, plus 0x4e status fields should match resident assumptions",
+      "name": "descriptor prestate plus field mailbox",
+      "risk": "medium; still avoids direct 0x4e8c transfer commands",
+      "writes": {
+        "0x4a00": 1,
+        "0x4a01": 3,
+        "0x4a02": 0,
+        "0x4a03": 3,
+        "0x4a05": 20,
+        "0x4a06": 7,
+        "0x4a20": 3,
+        "0x4a21": 8,
+        "0x4a22": 16,
+        "0x4e0d": 64,
+        "0x4e1a": 20,
+        "0x4e1c": 1,
+        "0x60..0x61": 511,
+        "0x8244..0x8247": 28672,
+        "0x8248..0x824b": 16384,
+        "0x824c..0x824f": 524288,
+        "0x8250..0x8253": 20480,
+        "0x8254..0x8255": 16384,
+        "0x8258..0x825b": 888832
+      }
+    },
+    {
+      "description": "Exercise the 0x4e80/84/88/8c path that normal code uses before it trusts xdata[0xc000] as a CDD header.",
+      "expected_if_sufficient": "xdata[0xc000..0xc01f] aliases or contains the CDD header, enabling the rest of the parser path",
+      "name": "mapped-header command path",
+      "risk": "high; this crosses into controller-memory command issuance, not just passive mailbox fields",
+      "writes": {
+        "doorbell": "xdata[0x4e8c] = 1, then poll xdata[0x4ea0] == 0x06",
+        "note": "0xc000 is not an F0 address. It is a mapped XDATA window; FUN_CODE_1717/FUN_CODE_16ef appear to configure that window before the parser reads CDD\\x09 from xdata[0xc000].",
+        "purpose": "map/read the 0x20-byte CDD header into XDATA window 0xc000",
+        "resident_range": "0x01ed..0x0252 then FUN_CODE_1717",
+        "selector": 2,
+        "xdata_0x4e80": 4223020,
+        "xdata_0x4e84": 524032,
+        "xdata_0x4e88": 32,
+        "xdata_0x8244_after_descriptor_len": 28716,
+        "xdata_0x8256..0x8257": 49152
+      }
+    }
+  ],
+  "cdd_header": {
+    "aux_len": 1024,
+    "aux_len_code": 3,
+    "byte6": 83,
+    "controller_params": [
+      3,
+      8,
+      16
+    ],
+    "decoded_end_inclusive_a": 1785855,
+    "decoded_end_inclusive_b": 1785855,
+    "decoded_start": 1589248,
+    "descriptor_start": 28672,
+    "directory_end": 32236,
+    "final_boundary": 950272,
+    "low_param": 7,
+    "raw_hex": "434444091016530d9000007dec030810870e80000070001840001b3fff1b3fff",
+    "start": 28716,
+    "stream2_start": 888832
+  },
+  "cdd_starts": [
+    28716,
+    888832
+  ],
+  "descriptor": {
+    "cdd1_end": 846872,
+    "cdd2_end": 943105,
+    "decoded_end_exclusive": 1785856,
+    "decoded_start_a": 1589248,
+    "decoded_start_b": 1589248,
+    "final_boundary": 950272,
+    "length": 44,
+    "parser_base": 28672,
+    "parser_mode_word": 16384,
+    "parser_source_size": 524288,
+    "parser_target_size": 20480,
+    "parser_window": 16384,
+    "raw_hex": "002c0000700000004000000800000000500040000018400000184000001b4000000cec18000e6401000e8000",
+    "start": 28672
+  },
+  "early_status_fields": {
+    "0x4e0d": 64,
+    "0x4e1a": 20,
+    "0x4e1c": 1,
+    "0x60..0x61": 511
+  },
+  "field_only_ordered_byte_writes": [
+    {
+      "address": 18944,
+      "address_hex": "0x4a00",
+      "note": "clear CDD mailbox doorbell before staging fields",
+      "value": 0,
+      "value_hex": "0x00"
+    },
+    {
+      "address": 18945,
+      "address_hex": "0x4a01",
+      "note": "aux length code from header[0x10] high nibble",
+      "value": 3,
+      "value_hex": "0x03"
+    },
+    {
+      "address": 18946,
+      "address_hex": "0x4a02",
+      "note": "resident clears this byte before field package",
+      "value": 0,
+      "value_hex": "0x00"
+    },
+    {
+      "address": 18947,
+      "address_hex": "0x4a03",
+      "note": "header[0x06] low two bits",
+      "value": 3,
+      "value_hex": "0x03"
+    },
+    {
+      "address": 18949,
+      "address_hex": "0x4a05",
+      "note": "header[0x06] upper six bits",
+      "value": 20,
+      "value_hex": "0x14"
+    },
+    {
+      "address": 18950,
+      "address_hex": "0x4a06",
+      "note": "header[0x10] low nibble",
+      "value": 7,
+      "value_hex": "0x07"
+    },
+    {
+      "address": 18976,
+      "address_hex": "0x4a20",
+      "note": "header[0x0d] controller parameter",
+      "value": 3,
+      "value_hex": "0x03"
+    },
+    {
+      "address": 18977,
+      "address_hex": "0x4a21",
+      "note": "header[0x0e] controller parameter",
+      "value": 8,
+      "value_hex": "0x08"
+    },
+    {
+      "address": 18978,
+      "address_hex": "0x4a22",
+      "note": "header[0x0f] controller parameter",
+      "value": 16,
+      "value_hex": "0x10"
+    },
+    {
+      "address": 33368,
+      "address_hex": "0x8258",
+      "note": "CDD2 absolute start from header[0x07..0x09]",
+      "value": 0,
+      "value_hex": "0x00"
+    },
+    {
+      "address": 33369,
+      "address_hex": "0x8259",
+      "note": "CDD2 absolute start from header[0x07..0x09] byte +1",
+      "value": 13,
+      "value_hex": "0x0d"
+    },
+    {
+      "address": 33370,
+      "address_hex": "0x825a",
+      "note": "CDD2 absolute start from header[0x07..0x09] byte +2",
+      "value": 144,
+      "value_hex": "0x90"
+    },
+    {
+      "address": 33371,
+      "address_hex": "0x825b",
+      "note": "CDD2 absolute start from header[0x07..0x09] byte +3",
+      "value": 0,
+      "value_hex": "0x00"
+    },
+    {
+      "address": 18944,
+      "address_hex": "0x4a00",
+      "note": "ring CDD mailbox after staging fields",
+      "value": 1,
+      "value_hex": "0x01"
+    }
+  ],
+  "file_size": 1048576,
+  "header_mailbox_fields": {
+    "0x4a00": 1,
+    "0x4a01": 3,
+    "0x4a02": 0,
+    "0x4a03": 3,
+    "0x4a05": 20,
+    "0x4a06": 7,
+    "0x4a20": 3,
+    "0x4a21": 8,
+    "0x4a22": 16,
+    "0x8258..0x825b": 888832
+  },
+  "header_map_command": {
+    "doorbell": "xdata[0x4e8c] = 1, then poll xdata[0x4ea0] == 0x06",
+    "note": "0xc000 is not an F0 address. It is a mapped XDATA window; FUN_CODE_1717/FUN_CODE_16ef appear to configure that window before the parser reads CDD\\x09 from xdata[0xc000].",
+    "purpose": "map/read the 0x20-byte CDD header into XDATA window 0xc000",
+    "resident_range": "0x01ed..0x0252 then FUN_CODE_1717",
+    "selector": 2,
+    "xdata_0x4e80": 4223020,
+    "xdata_0x4e84": 524032,
+    "xdata_0x4e88": 32,
+    "xdata_0x8244_after_descriptor_len": 28716,
+    "xdata_0x8256..0x8257": 49152
+  },
+  "image": "/Users/johno/projects/boastermelt/references/firmware/extracted/ld5m-f0-window-0x00000-0x100000.bin",
+  "parser_prestage": {
+    "0x8244..0x8247": 28672,
+    "0x8248..0x824b": 16384,
+    "0x824c..0x824f": 524288,
+    "0x8250..0x8253": 20480,
+    "0x8254..0x8255": 16384
+  },
+  "static_conclusion": "The previous xdata[0x4a00]=1 test skipped both the header-derived 0x4a field package and the 0xc000 mapped-header setup. It is a valid negative for a trivial shortcut, but not a negative for the resident CDD handoff itself.",
+  "suggested_samples_after_field_only": [
+    {
+      "address": 18944,
+      "kind": "xdata",
+      "length": 48,
+      "why": "CDD mailbox/result window, including 0x4a24..0x4a29"
+    },
+    {
+      "address": 19968,
+      "kind": "xdata",
+      "length": 48,
+      "why": "nearby 0x4e status fields and 0x4e14/16/18/1a/1c/1e"
+    },
+    {
+      "address": 20128,
+      "kind": "xdata",
+      "length": 1,
+      "why": "cheap controller command status byte"
+    },
+    {
+      "address": 1589248,
+      "kind": "gateway",
+      "length": 256,
+      "why": "advertised decoded CDD base"
+    },
+    {
+      "address": 1589344,
+      "kind": "gateway",
+      "length": 256,
+      "why": "first table-derived decoded target neighborhood"
+    },
+    {
+      "address": 1640080,
+      "kind": "gateway",
+      "length": 256,
+      "why": "known affine group 27 oracle target from prior work"
+    }
+  ]
+}

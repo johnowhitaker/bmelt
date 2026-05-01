@@ -65,12 +65,28 @@ current raw-disassembly CDD mailbox note is:
 analysis/8051/cdd-mailbox-handoff-static-notes.md
 ```
 
+Static replay planner:
+
+```text
+scripts/plan_liteon_cdd_mailbox_replay.py
+references/firmware/extracted/liteon-cdd-mailbox-replay-plan.md
+```
+
 Latest 8051 mailbox detail: the `0x4e80/0x4e84/0x4e88/0x4e8c` command wrapper
 uses `r7 = 0/1/2` as a controller address-bank selector. The wrapper shifts the
 selector left by `0x15` bits (`selector << 21`, a `0x200000`-byte bank offset),
 adds it to the first pointer, validates local ranges against the 2 MiB bank
 window, then rings `xdata[0x4e8c] = 1`. That makes the wrapper a banked
 controller-memory command surface, not just a generic small-opcode mailbox.
+
+CDD-parser correction: the failed live `xdata[0x4a00] = 1` doorbell test is
+only a negative for the trivial one-byte shortcut. The resident setup also
+preloads descriptor fields into `xdata[0x8244..0x8255]`, derives `0x4e0d`,
+`0x4e1a`, `0x4e1c`, maps/checks the CDD header through an `xdata[0xc000]`
+window, and only then packages `0x4a01/03/05/06/20/21/22`. The lowest-risk next
+live replay would write that header-derived `0x4a` field package and sample
+`0x4a24..0x4a29`, `0x4ea0`, and decoded CDD targets before attempting the
+higher-risk `0x4e8c` mapped-header command.
 
 Code-execution evidence:
 

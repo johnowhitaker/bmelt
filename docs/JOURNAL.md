@@ -1226,3 +1226,25 @@ The standard READ BUFFER control byte got the same treatment immediately after.
 Changing `CDB[9]` to `01`, `02`, `5a`, `a5`, or `ff` also produced the same
 `f2` page. So the easy selector-hunting on this public command is now pretty
 well exhausted.
+
+That pushed us back to the CDD mailbox path, but with a better question. The
+old live test had written just `xdata[0x4a00] = 1`, hoping the obvious
+doorbell might be enough. A raw 8051 pass showed why that was too hopeful. The
+resident parser first pulls the early outer-descriptor fields into
+`xdata[0x8244..0x8255]`: for LD5M those are `0x7000`, `0x4000`, `0x80000`,
+`0x5000`, and mode word `0x4000`. From those it derives small controller
+status/config bytes like `0x4e0d=0x40`, `0x4e1a=0x14`, and `0x4e1c=1`.
+
+More importantly, the parser does not appear to read the CDD header straight
+from flash. It adds the descriptor length to get `0x702c`, sets
+`xdata[0x8256..0x8257] = 0xc000`, and runs the banked `0x4e80/84/88/8c`
+command path before checking for `CDD\\x09 10 16` at `xdata[0xc000]`. That
+makes `0xc000` look like a mapped XDATA window. Only after that does it package
+the header-derived `0x4a01/03/05/06/20/21/22` fields and ring `0x4a00`.
+
+So the failed one-byte doorbell test is not the end of this route. It just
+rules out the most cartoonishly simple shortcut. The next live version, if we
+choose to try it, is a field-only replay: write the derived `0x4a` package and
+`xdata[0x8258..0x825b]`, ring `0x4a00`, then watch `0x4a24..0x4a29`, `0x4ea0`,
+and the decoded CDD target addresses. A generated static plan now records the
+exact values for that ladder of experiments.
