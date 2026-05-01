@@ -1,0 +1,52 @@
+{
+  "id": 1,
+  "length": 4096,
+  "records": [
+    {
+      "elapsed_s": 0.0049,
+      "first32": "0000004b01ff02ff00000000181a000100010000000000010001000000000000",
+      "id": 1,
+      "length": 1024,
+      "offset": 438272,
+      "returncode": 0,
+      "sha256": "4b607dc2338876a0f6971139eec4ea68cfc7ed14289fed77461fcb2d3cb048c2",
+      "stderr": "SCSI Status: Good \n\nWriting 1024 bytes of data to stdout\n",
+      "stdout_len": 1024
+    },
+    {
+      "elapsed_s": 0.0057,
+      "first32": "4e00000000330008000000021001000000370004000f0000003b000401000000",
+      "id": 1,
+      "length": 1024,
+      "offset": 439296,
+      "returncode": 0,
+      "sha256": "3c99c0f74032c7f198e639f3115272315966fb0d1619e9fe5774f23cade9dc99",
+      "stderr": "SCSI Status: Good \n\nWriting 1024 bytes of data to stdout\n",
+      "stdout_len": 1024
+    },
+    {
+      "elapsed_s": 0.0054,
+      "first32": "0000000000000000000000000000000000000000000000000000000000000000",
+      "id": 1,
+      "length": 1024,
+      "offset": 440320,
+      "returncode": 0,
+      "sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+      "stderr": "SCSI Status: Good \n\nWriting 1024 bytes of data to stdout\n",
+      "stdout_len": 1024
+    },
+    {
+      "elapsed_s": 0.0052,
+      "first32": "0000000000000000000000000000000000000000000000000000000000000000",
+      "id": 1,
+      "length": 1024,
+      "offset": 441344,
+      "returncode": 0,
+      "sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+      "stderr": "SCSI Status: Good \n\nWriting 1024 bytes of data to stdout\n",
+      "stdout_len": 1024
+    }
+  ],
+  "sha256": "47a3217dd7396636bc70cd2ed20ed0f49e6c8d837f355501435f17f8acf17eb4",
+  "start": 438272
+}

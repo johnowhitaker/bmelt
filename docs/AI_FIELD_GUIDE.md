@@ -984,6 +984,31 @@ analysis/8051/currentboot-gateway-extra-20260501.md
 references/evidence/live/currentboot-gateway-extra-20260501/
 ```
 
+Normal `LD5M` also exposes the `0x070000` work window through public
+`READ BUFFER mode=1` IDs `0x01` and `0x02`; no currentboot hook is required.
+Use:
+
+```sh
+python3 scripts/read_liteon_read_buffer_bulk.py \
+  --device /dev/sg0 \
+  --id 0x01 \
+  --offset 0x070000 \
+  --length 0x10000 \
+  --out runs/normal-read-buffer/id01-070000-010000.bin \
+  --json-out runs/normal-read-buffer/id01-070000-010000.json \
+  --quiet
+```
+
+The normal-mode decoded CDD target offsets are still zero for IDs `0x01` and
+`0x02`, but this is now the fastest normal-runtime read surface for the
+controller/work window. Evidence:
+
+```text
+analysis/8051/normal-read-buffer-work-window-20260501.md
+analysis/8051/normal-read-buffer-070000-analysis.md
+references/evidence/live/normal-read-buffer-work-window-20260501/
+```
+
 Evidence:
 
 ```text

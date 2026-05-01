@@ -1122,3 +1122,36 @@ That range is encoded CDD stream 2, so this is not the decoded payload we want.
 But it sharpens the map: currentboot already exposes the active helper and some
 staging buffers quickly through SCSI, while decoded CDD likely requires either
 a normal-runtime hook or a deliberate `0x4e80/84/88/8c` mailbox interaction.
+
+## Normal READ BUFFER Opens The Same Window
+
+The next surprise was that the `0x070000` work window is not currentboot-only.
+In normal `LD5M`, plain public `READ BUFFER mode=1` with buffer IDs `0x01` and
+`0x02` exposes the same class of controller/work memory directly. No currentboot
+hook, no helper, no bit channel.
+
+The first decoded-CDD hope was still negative: `id=01` and `id=02` return all
+zeroes at `0x184000`, `0x184060`, `0x191010`, `0x198900`, `0x199030`,
+`0x19c020`, `0x19c800`, `0x1a0000`, and `0x1a2fe0`. IDs `0xe2`, `0xf0`, and
+`0xf1` just reject those high offsets.
+
+But a sparse first-MiB scan found a normal-mode map:
+
+```text
+0x000000            small header, starts ff 54 54 45
+0x06b000            low-entropy profile/serial table
+0x070000..0x07ffff  mixed work/profile/code window
+```
+
+The full normal `0x070000` dump has the familiar `KEYPARA`, media-profile
+strings, `PLDS CORPORATION`, serial-looking material, and 8051-like code. It is
+not byte-stable: repeated reads change bytes mostly in pages `+0x6000`,
+`+0x8000`, and `+0x9000`. It also differs from the older currentboot dump in
+exactly the places that look runtime-like, while retaining large identical
+runs.
+
+That gives us a better live-read primitive than we had at the start of the day.
+It still does not give decoded CDD, but it gives normal-mode controller state
+quickly enough to monitor experiments. It also brings the front-panel lead back
+into normal mode: the dump has code at `+0x8005` reading `xdata[0x4814]`, the
+same byte whose bit 4 tracked the eject button in the Pico/currentboot tests.
