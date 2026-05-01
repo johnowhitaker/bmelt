@@ -1187,3 +1187,19 @@ in the normal work/code dump: around `+0x6747` there is a separate READ
 BUFFER-like accept list that explicitly includes `f2`, with command bytes
 apparently shadowed around `xdata[0x8a49..]`. That is annoying, but useful: it
 tells us not to hunt for a decoded CDD branch in the wrong visible handler.
+
+The next pass tightened that conclusion rather than opening a new public door.
+An exact-`0x80` scan across high vendor IDs `e0..ff` found only the already
+known responders: `e2`, `f0`, `f1`, and `f2`. The drive remained in normal
+`LD5M`, so this is a safe read-only check we can repeat, but it does not reveal
+another decoded-memory buffer.
+
+The static picture of the normal work window also got more honest. The
+`0x070000` window is partly live work RAM: comparing six captures shows stable
+code/table pages mixed with moving state regions. The useful `f2` accept list
+at `+0x6747` is stable, and so is the packet copy path that reads from the
+`0x47b1` FIFO into `xdata[0x8a49..0x8a4b]`. But the dense `+0xa2xx` dispatch
+area is alignment-sensitive, and some branches land in the middle of the
+obvious six-byte `MOV DPTR; LJMP` records. So the lesson is to trust the
+accept-list and CDB-shadow evidence, but not to over-explain the downstream
+branch targets from one linear disassembly.

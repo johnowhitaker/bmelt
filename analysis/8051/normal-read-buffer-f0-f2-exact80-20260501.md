@@ -96,6 +96,22 @@ alternate READ BUFFER-like accept list at dump offset `+0x6747` with the
 sequence `01, 02, e2, f0, f2, f1`. That makes `f2` a normal-runtime overlay
 surface, not evidence that `FUN_CODE_385c` has a hidden decoded-CDD branch.
 
+A later read-only high-ID exact-`0x80` scan confirmed that this family is small
+at offset zero:
+
+```text
+mode=1 length=0x80 ids=0xe0..0xff
+responders: e2, f0, f1, f2
+all other high IDs: CHECK CONDITION / no data
+post-scan status: normal LD5M
+```
+
+Evidence:
+
+```text
+references/evidence/live/normal-read-buffer-exact80-scan-20260430/
+```
+
 ## Evidence
 
 ```text

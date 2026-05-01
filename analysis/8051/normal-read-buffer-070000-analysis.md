@@ -63,14 +63,73 @@ The special-ID branch currently reads as:
 ```text
 id f0  -> +0x68aa
 id f1  -> +0xa2b1
-id f2  -> +0xa2f0  ; appears to trampoline toward code/data around +0xd7b8
+id f2  -> +0xa2f0
 id e2  -> +0x6863
 other  -> +0xa32a
 ```
 
-The `+0xa2xx` area is a dense trampoline/table region, so these are not clean
-function starts yet. Still, this is the first static anchor for the observed
-normal-mode `f2` responder.
+The `+0xa2xx` area is a dense trampoline/table region, and the branch targets
+land on byte positions that are not aligned to the obvious six-byte
+`MOV DPTR,#imm16; LJMP imm16` records. For example, the apparent record at
+`+0xa2f1` is:
+
+```text
+0xa2f1  mov dptr,#d7b8
++0xa2f4  ljmp 0x01ed
+```
+
+but the `f2` branch target is `+0xa2f0`, one byte earlier:
+
+```text
++0xa2f0  a7 90 d7 b8 02 01 ed ...
+```
+
+So the earlier "f2 jumps to `DPTR=0xd7b8`" reading is too confident. The safe
+interpretation is narrower: the normal overlay has a stable `f2` accept-list
+and a stable special-ID dispatch, but the downstream `a2xx` island needs
+byte-exact control-flow analysis or live confirmation before assigning
+semantic meaning to any individual `DPTR` literal.
+
+This still matters because it is the first static anchor for the observed
+normal-mode `f2` responder. It also explains why reading only the visible
+F0-prefix `FUN_CODE_385c` was misleading.
+
+## Work-Window Stability
+
+The `id01/id02:0x070000..0x080000` artifact is not a frozen ROM dump. Comparing
+the six captures (`id01`, `id02`, and two repeats of each) shows 889 unstable
+byte positions. The moving bytes are localized:
+
+```text
+0x6000..0x6100  256 bytes
+0x8700..0x8800  188 bytes split across short runs
+0x9500..0x9600  256 bytes
+0x9ac0..0x9b00   63 bytes split across two runs
+0x9e00..0x9f00  126 bytes split across four runs
+```
+
+Everything else in the 64 KiB window is stable across those captures. The
+`f2` accept list at `+0x6747` and the special-ID branch at `+0x6848` are in a
+stable part of the window. The packet/CDB intake copy at `+0x9464` is also
+stable:
+
+```text
++0x9464  clear/write 0x47b0
++0x9469  read 0x47b1 -> xdata[0x8a49]
++0x946f  read 0x47b1 -> xdata[0x8a4a]
++0x9477  read 0x47b1 -> xdata[0x8a4b]
+```
+
+That supports the CDB-shadow model:
+
+```text
+xdata[0x8a49..]  normal-runtime packet/CDB shadow
+xdata[0x818a..]  currentboot/F0-prefix packet/CDB shadow
+```
+
+The unstable regions should be treated as live work RAM, state snapshots, or
+self-updated tables. Static conclusions from those pages need repeat-capture
+checks.
 
 ## Page Shape
 

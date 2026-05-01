@@ -1317,3 +1317,13 @@ Immediate useful directions:
     The normal `id01:0x070000` work/code dump has a separate READ BUFFER-like
     accept list at `+0x6747` that includes `f2`; its CDB shadow appears to live
     around `xdata[0x8a49..]`.
+13. The normal `id01/id02:0x070000` work window is partly live state, not a
+    frozen ROM. Across six captures, most bytes are stable, but pages around
+    `+0x6000`, `+0x8700`, `+0x9500`, `+0x9ac0`, and `+0x9e00` move. The `f2`
+    accept list and the `0x47b1 -> xdata[0x8a49..]` packet-shadow copy are in
+    stable areas; the `+0xa2xx` dispatch island is alignment-sensitive and
+    should not be linear-disassembled as ordinary code without checking exact
+    branch targets.
+14. A follow-up exact-`0x80` high-ID scan at offset zero found no hidden
+    siblings beyond the known `e2/f0/f1/f2` responders. The drive stayed normal
+    `LD5M` afterwards.
