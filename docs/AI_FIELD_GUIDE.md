@@ -1656,9 +1656,12 @@ Immediate useful directions:
     `analysis/8051/normal-packet-selector-map-20260501.md/json`. It condenses
     the `0x8a49..0x8a54` shadow checks and copy edges. `0x8a49` is compared
     against opcode-like values including `0x03`, `0x1b`, `0x28`, `0x2a`,
-    `0x55`, `0xa3`, `0xa4`, and LiteOn/vendor `0xe3/0xe6/0xe7`; adjacent
-    fields show `0x8a4d` as length/count-ish and `0x8a4e/0x8a53/0x8a54` as
-    controller data/status-shadow bytes. A plain `0x8a49 == 0x46` GET
+    `0x55`, `0xa3`, `0xa4`, and LiteOn/vendor `0xe3/0xe6/0xe7`. The
+    `+0x8bxx` START STOP snippet anchors the byte map: it checks
+    `0x8a49 == 0x1b` and `(0x8a4d & 0x0f) == 0x02`, matching CDB byte 4's
+    load/eject/start control bits. Treat `0x8a49..0x8a54` as CDB bytes 0..11,
+    with later bytes also reused as controller data/status-shadow bytes in some
+    paths. A plain `0x8a49 == 0x46` GET
     CONFIGURATION compare is still absent even though GET CONFIG tags the
     bridge dynamically, so that path is likely table-driven, handled through an
     unharvested slice, or dispatched before this compare cluster.
@@ -1672,9 +1675,10 @@ Immediate useful directions:
     PERFORMANCE types `0/3`; the drive stayed normal `LD5M`. The no-disc
     READ TOC and GET PERFORMANCE type00 failure paths consistently exposed a
     stimulus-only `+0x8bxx` chunk referencing `0x8a49` and `0x8a4d`, plus a
-    less frequent `+0x7140/+0x7180` `0x4098` gateway-looking chunk. This is a
-    separate failed-command/status surface from the GET CONFIG good-response
-    `0x4099` bridge.
+    less frequent `+0x7140/+0x7180` `0x4098` gateway-looking chunk. The `+0x8bxx`
+    bytes also identify an eject-style START STOP check, making it both an
+    error/status-path clue and a mechanics-path clue. This is separate from the
+    GET CONFIG good-response `0x4099` bridge.
 49. A paired failure/sense follow-up is in
     `references/evidence/live/normal-work-window-error-path-pairs-20260501`
     with reports

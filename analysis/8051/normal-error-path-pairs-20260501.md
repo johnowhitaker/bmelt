@@ -33,6 +33,12 @@ only twice and only after `READ TOC format0`. The `+0x8bxx` selector/count
 chunk remains visible in the selector-map pass for this run, but it was not as
 cleanly stimulus-only as in the broader read/status correlation run.
 
+The `+0x8bxx` chunk is still important statically even when it is not a clean
+pair-run discriminator. It checks `0x8a49 == 0x1b` and then checks
+`(0x8a4d & 0x0f) == 0x02`, which matches the START STOP UNIT eject/control
+field in CDB byte 4. This is the best byte-map anchor so far for the packet
+shadow.
+
 ## Interpretation
 
 This suggests the no-disc failure path and the follow-up sense path share more

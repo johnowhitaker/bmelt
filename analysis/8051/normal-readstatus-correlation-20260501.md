@@ -36,6 +36,19 @@ or ordinary `REQUEST SENSE`. This looks like an error/status path rather than
 the good-response bridge, but it is useful because it consistently exposes the
 opcode/selector byte and the length/count-ish byte in one stimulus class.
 
+The same chunk contains a concrete CDB-shadow anchor:
+
+```text
+90 8a 49 e0 64 1b 70 27      ; compare CDB[0] with START STOP UNIT
+90 8a 4d e0 54 0f ff bf 02   ; compare CDB[4] low nibble with 0x02
+```
+
+For START STOP UNIT, CDB byte 4 carries the load/eject/start bits. Low nibble
+`0x02` is the eject-style case. That means `0x8a4d` is not merely a generic
+count byte; it is CDB byte 4 at least in this path. The better current map is
+`0x8a49 = CDB[0]`, `0x8a4a = CDB[1]`, and so on, with later shadow bytes also
+serving as controller response/data staging in some handlers.
+
 A second recurring chunk in the same failed-command set touched the controller
 gateway:
 

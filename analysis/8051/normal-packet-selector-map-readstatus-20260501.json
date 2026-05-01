@@ -2,7 +2,7 @@
   "by_addr": [
     {
       "addr": 35401,
-      "role": "opcode/selector candidate",
+      "role": "CDB byte 0 / opcode selector",
       "total": 683,
       "unique_values": 11,
       "values": [
@@ -90,7 +90,7 @@
     },
     {
       "addr": 35404,
-      "role": "controller setup high-ish byte",
+      "role": "CDB byte 3 / controller setup byte",
       "total": 6,
       "unique_values": 1,
       "values": [
@@ -102,7 +102,7 @@
     },
     {
       "addr": 35405,
-      "role": "length/count-ish byte",
+      "role": "CDB byte 4 / command-specific control",
       "total": 64,
       "unique_values": 2,
       "values": [
@@ -118,42 +118,42 @@
     },
     {
       "addr": 35406,
-      "role": "subselector/status byte; low nibble tested",
+      "role": "CDB byte 5 / subselector or control byte",
       "total": 0,
       "unique_values": 0,
       "values": []
     },
     {
       "addr": 35407,
-      "role": "payload/field byte",
+      "role": "CDB byte 6 / payload field",
       "total": 0,
       "unique_values": 0,
       "values": []
     },
     {
       "addr": 35408,
-      "role": "payload/field byte",
+      "role": "CDB byte 7 / payload field",
       "total": 0,
       "unique_values": 0,
       "values": []
     },
     {
       "addr": 35409,
-      "role": "payload/field byte",
+      "role": "CDB byte 8 / payload field",
       "total": 0,
       "unique_values": 0,
       "values": []
     },
     {
       "addr": 35410,
-      "role": "payload/field byte",
+      "role": "CDB byte 9 / payload field",
       "total": 0,
       "unique_values": 0,
       "values": []
     },
     {
       "addr": 35411,
-      "role": "controller response/data shadow byte",
+      "role": "CDB byte 10 or controller data shadow",
       "total": 32,
       "unique_values": 1,
       "values": [
@@ -165,7 +165,7 @@
     },
     {
       "addr": 35412,
-      "role": "controller response/data shadow byte",
+      "role": "CDB byte 11 or controller data shadow",
       "total": 0,
       "unique_values": 0,
       "values": []
@@ -187,7 +187,7 @@
         "38784": 32,
         "40000": 32
       },
-      "role": "opcode/selector candidate",
+      "role": "CDB byte 0 / opcode selector",
       "samples": [
         {
           "capture": "normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus",
@@ -258,7 +258,7 @@
         "38400": 32,
         "39872": 32
       },
-      "role": "opcode/selector candidate",
+      "role": "CDB byte 0 / opcode selector",
       "samples": [
         {
           "capture": "normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus",
@@ -329,7 +329,7 @@
         "34752": 7,
         "40832": 32
       },
-      "role": "opcode/selector candidate",
+      "role": "CDB byte 0 / opcode selector",
       "samples": [
         {
           "capture": "normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus",
@@ -399,7 +399,7 @@
         "27520": 7,
         "39168": 32
       },
-      "role": "opcode/selector candidate",
+      "role": "CDB byte 0 / opcode selector",
       "samples": [
         {
           "capture": "normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus",
@@ -466,7 +466,7 @@
       "offsets": {
         "25536": 32
       },
-      "role": "opcode/selector candidate",
+      "role": "CDB byte 0 / opcode selector",
       "samples": [
         {
           "capture": "normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus",
@@ -533,7 +533,7 @@
       "offsets": {
         "40512": 32
       },
-      "role": "opcode/selector candidate",
+      "role": "CDB byte 0 / opcode selector",
       "samples": [
         {
           "capture": "normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus",
@@ -600,7 +600,7 @@
       "offsets": {
         "32448": 32
       },
-      "role": "opcode/selector candidate",
+      "role": "CDB byte 0 / opcode selector",
       "samples": [
         {
           "capture": "normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus",
@@ -667,7 +667,7 @@
       "offsets": {
         "38720": 32
       },
-      "role": "opcode/selector candidate",
+      "role": "CDB byte 0 / opcode selector",
       "samples": [
         {
           "capture": "normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus",
@@ -734,7 +734,7 @@
       "offsets": {
         "34816": 32
       },
-      "role": "opcode/selector candidate",
+      "role": "CDB byte 0 / opcode selector",
       "samples": [
         {
           "capture": "normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus",
@@ -801,7 +801,7 @@
       "offsets": {
         "38720": 32
       },
-      "role": "opcode/selector candidate",
+      "role": "CDB byte 0 / opcode selector",
       "samples": [
         {
           "capture": "normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus",
@@ -868,7 +868,7 @@
       "offsets": {
         "25216": 30
       },
-      "role": "opcode/selector candidate",
+      "role": "CDB byte 0 / opcode selector",
       "samples": [
         {
           "capture": "normal-work-window-readstatus-correlation-20260501/02-cycle00-read-toc-format-0",
@@ -933,7 +933,7 @@
       "offsets": {
         "37248": 30
       },
-      "role": "opcode/selector candidate",
+      "role": "CDB byte 0 / opcode selector",
       "samples": [
         {
           "capture": "normal-work-window-readstatus-correlation-20260501/02-cycle00-read-toc-format-0",
@@ -998,7 +998,7 @@
       "offsets": {
         "37248": 30
       },
-      "role": "opcode/selector candidate",
+      "role": "CDB byte 0 / opcode selector",
       "samples": [
         {
           "capture": "normal-work-window-readstatus-correlation-20260501/02-cycle00-read-toc-format-0",
@@ -1065,7 +1065,7 @@
         "32640": 6,
         "32704": 14
       },
-      "role": "opcode/selector candidate",
+      "role": "CDB byte 0 / opcode selector",
       "samples": [
         {
           "capture": "normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus",
@@ -1132,7 +1132,7 @@
         "35712": 4,
         "35776": 6
       },
-      "role": "opcode/selector candidate",
+      "role": "CDB byte 0 / opcode selector",
       "samples": [
         {
           "capture": "normal-work-window-readstatus-correlation-20260501/02-cycle00-read-toc-format-0",
@@ -1524,7 +1524,7 @@
         "38272": 4,
         "38336": 1
       },
-      "role": "controller setup high-ish byte",
+      "role": "CDB byte 3 / controller setup byte",
       "samples": [
         {
           "capture": "normal-work-window-readstatus-correlation-20260501/07-cycle00-get-performance-type03",
@@ -1565,7 +1565,7 @@
       "offsets": {
         "36160": 32
       },
-      "role": "length/count-ish byte",
+      "role": "CDB byte 4 / command-specific control",
       "samples": [
         {
           "capture": "normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus",
@@ -1632,7 +1632,7 @@
       "offsets": {
         "26368": 32
       },
-      "role": "length/count-ish byte",
+      "role": "CDB byte 4 / command-specific control",
       "samples": [
         {
           "capture": "normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus",
@@ -1699,7 +1699,7 @@
       "offsets": {
         "36928": 32
       },
-      "role": "controller response/data shadow byte",
+      "role": "CDB byte 10 or controller data shadow",
       "samples": [
         {
           "capture": "normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus",
@@ -1763,7 +1763,7 @@
     {
       "addr": 35401,
       "edges": [],
-      "role": "opcode/selector candidate"
+      "role": "CDB byte 0 / opcode selector"
     },
     {
       "addr": 35402,
@@ -1820,7 +1820,7 @@
           "src": 18353
         }
       ],
-      "role": "controller setup high-ish byte"
+      "role": "CDB byte 3 / controller setup byte"
     },
     {
       "addr": 35405,
@@ -1857,7 +1857,7 @@
           "src": 35405
         }
       ],
-      "role": "length/count-ish byte"
+      "role": "CDB byte 4 / command-specific control"
     },
     {
       "addr": 35406,
@@ -1894,7 +1894,7 @@
           "src": 35406
         }
       ],
-      "role": "subselector/status byte; low nibble tested"
+      "role": "CDB byte 5 / subselector or control byte"
     },
     {
       "addr": 35407,
@@ -1921,7 +1921,7 @@
           "src": 35407
         }
       ],
-      "role": "payload/field byte"
+      "role": "CDB byte 6 / payload field"
     },
     {
       "addr": 35408,
@@ -1948,7 +1948,7 @@
           "src": 35408
         }
       ],
-      "role": "payload/field byte"
+      "role": "CDB byte 7 / payload field"
     },
     {
       "addr": 35409,
@@ -1975,7 +1975,7 @@
           "src": 35409
         }
       ],
-      "role": "payload/field byte"
+      "role": "CDB byte 8 / payload field"
     },
     {
       "addr": 35410,
@@ -1993,7 +1993,7 @@
           "src": 18353
         }
       ],
-      "role": "payload/field byte"
+      "role": "CDB byte 9 / payload field"
     },
     {
       "addr": 35411,
@@ -2029,7 +2029,7 @@
           "src": 35411
         }
       ],
-      "role": "controller response/data shadow byte"
+      "role": "CDB byte 10 or controller data shadow"
     },
     {
       "addr": 35412,
@@ -2071,7 +2071,7 @@
           "src": 35412
         }
       ],
-      "role": "controller response/data shadow byte"
+      "role": "CDB byte 11 or controller data shadow"
     }
   ]
 }

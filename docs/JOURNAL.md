@@ -1643,6 +1643,14 @@ opcode/selector and count-ish bytes we care about. A companion chunk around
 `+0x7140/+0x7180` touches the controller gateway through `0x4098`, not the
 `0x4099` bridge seen in the GET CONFIG good-response path.
 
+Looking at that `+0x8b00` chunk more closely produced a better byte map. It is
+not just "some status code." It explicitly checks `0x8a49 == 0x1b`, the START
+STOP UNIT opcode, then checks `(0x8a4d & 0x0f) == 0x02`, which is the
+load/eject/start control nibble in CDB byte 4. So the packet shadow is now much
+less vague: `0x8a49` is CDB byte 0, `0x8a4a` is byte 1, and `0x8a4d` is byte 4.
+Some later bytes are also reused in controller response paths, but the base
+shadow mapping is ordinary CDB order.
+
 So the normal runtime now has two visible surfaces to pull on. GET CONFIG gives
 a clean successful-response route through `0x4099` and the later shadow bytes.
 Failed TOC/performance requests give a status/error route through `0x8a49`,

@@ -38,32 +38,32 @@ a proof that the named command executed that exact branch.
 |---:|---|---|---:|
 | `0x8a4a` | CDB byte 1 / op-specific field | `0x06` x32, `0x01` x32, `0x0e` x32 | 96 |
 | `0x8a4b` | CDB byte 2 / op-specific field | `0xe2` x32, `0x22` x32 | 64 |
-| `0x8a4c` | controller setup high-ish byte | `0x01` x6 | 6 |
-| `0x8a4d` | length/count-ish byte | `0xf0` x32, `0x01` x32 | 64 |
-| `0x8a4e` | subselector/status byte; low nibble tested | - | 0 |
-| `0x8a4f` | payload/field byte | - | 0 |
-| `0x8a50` | payload/field byte | - | 0 |
-| `0x8a51` | payload/field byte | - | 0 |
-| `0x8a52` | payload/field byte | - | 0 |
-| `0x8a53` | controller response/data shadow byte | `0x01` x32 | 32 |
-| `0x8a54` | controller response/data shadow byte | - | 0 |
+| `0x8a4c` | CDB byte 3 / controller setup byte | `0x01` x6 | 6 |
+| `0x8a4d` | CDB byte 4 / command-specific control | `0xf0` x32, `0x01` x32 | 64 |
+| `0x8a4e` | CDB byte 5 / subselector or control byte | - | 0 |
+| `0x8a4f` | CDB byte 6 / payload field | - | 0 |
+| `0x8a50` | CDB byte 7 / payload field | - | 0 |
+| `0x8a51` | CDB byte 8 / payload field | - | 0 |
+| `0x8a52` | CDB byte 9 / payload field | - | 0 |
+| `0x8a53` | CDB byte 10 or controller data shadow | `0x01` x32 | 32 |
+| `0x8a54` | CDB byte 11 or controller data shadow | - | 0 |
 
 ## Shadow Byte Edge Sketch
 
 | addr | role sketch | strongest observed edges |
 |---:|---|---|
-| `0x8a49` | opcode/selector candidate | - |
+| `0x8a49` | CDB byte 0 / opcode selector | - |
 | `0x8a4a` | CDB byte 1 / op-specific field | `0x47b1->0x8a4a` fifo x32 |
 | `0x8a4b` | CDB byte 2 / op-specific field | `0x47b1->0x8a4b` fifo x32 |
-| `0x8a4c` | controller setup high-ish byte | `0x8a4c->0x4011` ctrl x32; `0x47b1->0x8a4c` fifo x12 |
-| `0x8a4d` | length/count-ish byte | `0x47b1->0x8a4d` fifo x32; `0x8a4d->0x4012` ctrl x32; `0x8a4d->0x47d6` copy x32 |
-| `0x8a4e` | subselector/status byte; low nibble tested | `0x47b1->0x8a4e` fifo x32; `0x8a4e->0x4013` ctrl x32; `0x8a4e->0x4099` ctrl x32 |
-| `0x8a4f` | payload/field byte | `0x47b1->0x8a4f` fifo x32; `0x8a4f->0x47d6` copy x7 |
-| `0x8a50` | payload/field byte | `0x47b1->0x8a50` fifo x32; `0x8a50->0x85f4` copy x32 |
-| `0x8a51` | payload/field byte | `0x47b1->0x8a51` fifo x32; `0x8a51->0x85f5` copy x32 |
-| `0x8a52` | payload/field byte | `0x47b1->0x8a52` fifo x32 |
-| `0x8a53` | controller response/data shadow byte | `0x47b1->0x8a53` fifo x32; `0x8a53->0x4099` ctrl x32; `0x8a53->0x47b1` fifo x7 |
-| `0x8a54` | controller response/data shadow byte | `0x8a54->0x4099` ctrl x32; `0x47b1->0x8a54` fifo x17; `0x8a54->0x40b7` ctrl x7; `0x8a54->0x47b1` fifo x7 |
+| `0x8a4c` | CDB byte 3 / controller setup byte | `0x8a4c->0x4011` ctrl x32; `0x47b1->0x8a4c` fifo x12 |
+| `0x8a4d` | CDB byte 4 / command-specific control | `0x47b1->0x8a4d` fifo x32; `0x8a4d->0x4012` ctrl x32; `0x8a4d->0x47d6` copy x32 |
+| `0x8a4e` | CDB byte 5 / subselector or control byte | `0x47b1->0x8a4e` fifo x32; `0x8a4e->0x4013` ctrl x32; `0x8a4e->0x4099` ctrl x32 |
+| `0x8a4f` | CDB byte 6 / payload field | `0x47b1->0x8a4f` fifo x32; `0x8a4f->0x47d6` copy x7 |
+| `0x8a50` | CDB byte 7 / payload field | `0x47b1->0x8a50` fifo x32; `0x8a50->0x85f4` copy x32 |
+| `0x8a51` | CDB byte 8 / payload field | `0x47b1->0x8a51` fifo x32; `0x8a51->0x85f5` copy x32 |
+| `0x8a52` | CDB byte 9 / payload field | `0x47b1->0x8a52` fifo x32 |
+| `0x8a53` | CDB byte 10 or controller data shadow | `0x47b1->0x8a53` fifo x32; `0x8a53->0x4099` ctrl x32; `0x8a53->0x47b1` fifo x7 |
+| `0x8a54` | CDB byte 11 or controller data shadow | `0x8a54->0x4099` ctrl x32; `0x47b1->0x8a54` fifo x17; `0x8a54->0x40b7` ctrl x7; `0x8a54->0x47b1` fifo x7 |
 
 ## Practical Read
 
@@ -72,9 +72,15 @@ a proof that the named command executed that exact branch.
   security-style opcodes, and LiteOn/vendor values. The GET CONFIG path
   that currently looks most useful does not show up as a simple `0x46`
   compare here.
+- The `+0x8bxx` START STOP snippet gives a strong byte-map anchor:
+  it checks `0x8a49 == 0x1b` and `(0x8a4d & 0x0f) == 0x02`, matching
+  CDB byte 4's load/eject/start control bits. So `0x8a49..` should
+  now be read as a packet/CDB shadow, with later bytes sometimes reused
+  as controller response/data shadows.
 - `0x8a4d` and `0x8a4e` are still the best field-control suspects for a
-  future fast oracle. They are checked locally and also bridge into
-  `0x4012/0x4013` or `0x4099` paths.
+  future fast oracle. `0x8a4d` is confirmed as CDB byte 4 in at least
+  the START STOP path, and both bytes bridge into `0x4012/0x4013` or
+  `0x4099` paths.
 - The safest live-probe candidates remain read/status commands that already
   completed cleanly: `INQUIRY`, `REQUEST SENSE`, `MODE SENSE(10)`,
   `GET CONFIGURATION`, `GET EVENT STATUS`, `READ TOC`, and DVD-structure
@@ -89,27 +95,27 @@ a proof that the named command executed that exact branch.
 
 | addr | role | value | kind | branch | count | sample slots | sample captures |
 |---:|---|---:|---|---|---:|---|---|
-| `0x8a49` | opcode/selector candidate | `0x28` | xrl_a_imm | jz | 128 | `+0x8780`, `+0x9600`, `+0x9780`, `+0x9c40`, `+0x8740`, `+0x8700`, `+0x87c0` | `normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus`, `normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus` |
-| `0x8a49` | opcode/selector candidate | `0x28` | mov_r7_xrl_imm | jz | 96 | `+0x6180`, `+0x9600`, `+0x9bc0`, `+0x61c0`, `+0x6100` | `normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus`, `normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus` |
-| `0x8a49` | opcode/selector candidate | `0x03` | cjne_a_imm | cjne | 64 | `+0x8780`, `+0x9f80`, `+0x8740`, `+0x8700`, `+0x87c0` | `normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus`, `normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus` |
-| `0x8a49` | opcode/selector candidate | `0x28` | cjne_a_imm | cjne | 64 | `+0x6b80`, `+0x9900`, `+0x6b00`, `+0x6b40` | `normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus`, `normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus` |
-| `0x8a49` | opcode/selector candidate | `0x03` | xrl_a_imm | jz | 32 | `+0x63c0` | `normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus`, `normal-work-window-readstatus-correlation-20260501/01-cycle00-request-sense` |
-| `0x8a49` | opcode/selector candidate | `0x13` | cjne_a_imm | cjne | 32 | `+0x9e40` | `normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus`, `normal-work-window-readstatus-correlation-20260501/01-cycle00-request-sense` |
-| `0x8a49` | opcode/selector candidate | `0x2a` | cjne_a_imm | cjne | 32 | `+0x7ec0` | `normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus`, `normal-work-window-readstatus-correlation-20260501/01-cycle00-request-sense` |
-| `0x8a49` | opcode/selector candidate | `0xe3` | mov_r7_xrl_imm | jz | 32 | `+0x9740` | `normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus`, `normal-work-window-readstatus-correlation-20260501/01-cycle00-request-sense` |
-| `0x8a49` | opcode/selector candidate | `0xe6` | mov_r7_cjne_imm | cjne | 32 | `+0x8800` | `normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus`, `normal-work-window-readstatus-correlation-20260501/01-cycle00-request-sense` |
-| `0x8a49` | opcode/selector candidate | `0xe7` | cjne_a_imm | cjne | 32 | `+0x9740` | `normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus`, `normal-work-window-readstatus-correlation-20260501/01-cycle00-request-sense` |
-| `0x8a49` | opcode/selector candidate | `0x2a` | xrl_a_imm | jz | 30 | `+0x6280` | `normal-work-window-readstatus-correlation-20260501/02-cycle00-read-toc-format-0`, `normal-work-window-readstatus-correlation-20260501/03-cycle00-read-toc-format-1` |
-| `0x8a49` | opcode/selector candidate | `0xa3` | cjne_a_imm | cjne | 30 | `+0x9180` | `normal-work-window-readstatus-correlation-20260501/02-cycle00-read-toc-format-0`, `normal-work-window-readstatus-correlation-20260501/03-cycle00-read-toc-format-1` |
-| `0x8a49` | opcode/selector candidate | `0xa4` | cjne_a_imm | cjne | 30 | `+0x9180` | `normal-work-window-readstatus-correlation-20260501/02-cycle00-read-toc-format-0`, `normal-work-window-readstatus-correlation-20260501/03-cycle00-read-toc-format-1` |
-| `0x8a49` | opcode/selector candidate | `0x55` | cjne_a_imm | cjne | 29 | `+0x7fc0`, `+0x7f80`, `+0x7f40` | `normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus`, `normal-work-window-readstatus-correlation-20260501/01-cycle00-request-sense` |
-| `0x8a49` | opcode/selector candidate | `0x1b` | xrl_a_imm | jnz | 20 | `+0x8b00`, `+0x8b80`, `+0x8b40`, `+0x8bc0` | `normal-work-window-readstatus-correlation-20260501/02-cycle00-read-toc-format-0`, `normal-work-window-readstatus-correlation-20260501/03-cycle00-read-toc-format-1` |
+| `0x8a49` | CDB byte 0 / opcode selector | `0x28` | xrl_a_imm | jz | 128 | `+0x8780`, `+0x9600`, `+0x9780`, `+0x9c40`, `+0x8740`, `+0x8700`, `+0x87c0` | `normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus`, `normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus` |
+| `0x8a49` | CDB byte 0 / opcode selector | `0x28` | mov_r7_xrl_imm | jz | 96 | `+0x6180`, `+0x9600`, `+0x9bc0`, `+0x61c0`, `+0x6100` | `normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus`, `normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus` |
+| `0x8a49` | CDB byte 0 / opcode selector | `0x03` | cjne_a_imm | cjne | 64 | `+0x8780`, `+0x9f80`, `+0x8740`, `+0x8700`, `+0x87c0` | `normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus`, `normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus` |
+| `0x8a49` | CDB byte 0 / opcode selector | `0x28` | cjne_a_imm | cjne | 64 | `+0x6b80`, `+0x9900`, `+0x6b00`, `+0x6b40` | `normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus`, `normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus` |
+| `0x8a49` | CDB byte 0 / opcode selector | `0x03` | xrl_a_imm | jz | 32 | `+0x63c0` | `normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus`, `normal-work-window-readstatus-correlation-20260501/01-cycle00-request-sense` |
+| `0x8a49` | CDB byte 0 / opcode selector | `0x13` | cjne_a_imm | cjne | 32 | `+0x9e40` | `normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus`, `normal-work-window-readstatus-correlation-20260501/01-cycle00-request-sense` |
+| `0x8a49` | CDB byte 0 / opcode selector | `0x2a` | cjne_a_imm | cjne | 32 | `+0x7ec0` | `normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus`, `normal-work-window-readstatus-correlation-20260501/01-cycle00-request-sense` |
+| `0x8a49` | CDB byte 0 / opcode selector | `0xe3` | mov_r7_xrl_imm | jz | 32 | `+0x9740` | `normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus`, `normal-work-window-readstatus-correlation-20260501/01-cycle00-request-sense` |
+| `0x8a49` | CDB byte 0 / opcode selector | `0xe6` | mov_r7_cjne_imm | cjne | 32 | `+0x8800` | `normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus`, `normal-work-window-readstatus-correlation-20260501/01-cycle00-request-sense` |
+| `0x8a49` | CDB byte 0 / opcode selector | `0xe7` | cjne_a_imm | cjne | 32 | `+0x9740` | `normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus`, `normal-work-window-readstatus-correlation-20260501/01-cycle00-request-sense` |
+| `0x8a49` | CDB byte 0 / opcode selector | `0x2a` | xrl_a_imm | jz | 30 | `+0x6280` | `normal-work-window-readstatus-correlation-20260501/02-cycle00-read-toc-format-0`, `normal-work-window-readstatus-correlation-20260501/03-cycle00-read-toc-format-1` |
+| `0x8a49` | CDB byte 0 / opcode selector | `0xa3` | cjne_a_imm | cjne | 30 | `+0x9180` | `normal-work-window-readstatus-correlation-20260501/02-cycle00-read-toc-format-0`, `normal-work-window-readstatus-correlation-20260501/03-cycle00-read-toc-format-1` |
+| `0x8a49` | CDB byte 0 / opcode selector | `0xa4` | cjne_a_imm | cjne | 30 | `+0x9180` | `normal-work-window-readstatus-correlation-20260501/02-cycle00-read-toc-format-0`, `normal-work-window-readstatus-correlation-20260501/03-cycle00-read-toc-format-1` |
+| `0x8a49` | CDB byte 0 / opcode selector | `0x55` | cjne_a_imm | cjne | 29 | `+0x7fc0`, `+0x7f80`, `+0x7f40` | `normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus`, `normal-work-window-readstatus-correlation-20260501/01-cycle00-request-sense` |
+| `0x8a49` | CDB byte 0 / opcode selector | `0x1b` | xrl_a_imm | jnz | 20 | `+0x8b00`, `+0x8b80`, `+0x8b40`, `+0x8bc0` | `normal-work-window-readstatus-correlation-20260501/02-cycle00-read-toc-format-0`, `normal-work-window-readstatus-correlation-20260501/03-cycle00-read-toc-format-1` |
 | `0x8a4a` | CDB byte 1 / op-specific field | `0x01` | cjne_a_imm | cjne | 32 | `+0x6740` | `normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus`, `normal-work-window-readstatus-correlation-20260501/01-cycle00-request-sense` |
 | `0x8a4a` | CDB byte 1 / op-specific field | `0x06` | xrl_a_imm | jnz | 32 | `+0x6540` | `normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus`, `normal-work-window-readstatus-correlation-20260501/01-cycle00-request-sense` |
 | `0x8a4a` | CDB byte 1 / op-specific field | `0x0e` | cjne_a_imm | cjne | 32 | `+0x8800` | `normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus`, `normal-work-window-readstatus-correlation-20260501/01-cycle00-request-sense` |
 | `0x8a4b` | CDB byte 2 / op-specific field | `0x22` | cjne_a_imm | cjne | 32 | `+0x8800` | `normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus`, `normal-work-window-readstatus-correlation-20260501/01-cycle00-request-sense` |
 | `0x8a4b` | CDB byte 2 / op-specific field | `0xe2` | mov_r7_xrl_imm | jz | 32 | `+0x7240` | `normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus`, `normal-work-window-readstatus-correlation-20260501/01-cycle00-request-sense` |
-| `0x8a4c` | controller setup high-ish byte | `0x01` | mov_r7_xrl_imm | jz | 6 | `+0x9580`, `+0x9540`, `+0x95c0` | `normal-work-window-readstatus-correlation-20260501/07-cycle00-get-performance-type03`, `normal-work-window-readstatus-correlation-20260501/15-cycle01-get-performance-type03` |
-| `0x8a4d` | length/count-ish byte | `0x01` | cjne_a_imm | cjne | 32 | `+0x8d40` | `normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus`, `normal-work-window-readstatus-correlation-20260501/01-cycle00-request-sense` |
-| `0x8a4d` | length/count-ish byte | `0xf0` | cjne_a_imm | cjne | 32 | `+0x6700` | `normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus`, `normal-work-window-readstatus-correlation-20260501/01-cycle00-request-sense` |
-| `0x8a53` | controller response/data shadow byte | `0x01` | cjne_a_imm | cjne | 32 | `+0x9040` | `normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus`, `normal-work-window-readstatus-correlation-20260501/01-cycle00-request-sense` |
+| `0x8a4c` | CDB byte 3 / controller setup byte | `0x01` | mov_r7_xrl_imm | jz | 6 | `+0x9580`, `+0x9540`, `+0x95c0` | `normal-work-window-readstatus-correlation-20260501/07-cycle00-get-performance-type03`, `normal-work-window-readstatus-correlation-20260501/15-cycle01-get-performance-type03` |
+| `0x8a4d` | CDB byte 4 / command-specific control | `0x01` | cjne_a_imm | cjne | 32 | `+0x8d40` | `normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus`, `normal-work-window-readstatus-correlation-20260501/01-cycle00-request-sense` |
+| `0x8a4d` | CDB byte 4 / command-specific control | `0xf0` | cjne_a_imm | cjne | 32 | `+0x6700` | `normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus`, `normal-work-window-readstatus-correlation-20260501/01-cycle00-request-sense` |
+| `0x8a53` | CDB byte 10 or controller data shadow | `0x01` | cjne_a_imm | cjne | 32 | `+0x9040` | `normal-work-window-readstatus-correlation-20260501/00-cycle00-baseline-no-stimulus`, `normal-work-window-readstatus-correlation-20260501/01-cycle00-request-sense` |
