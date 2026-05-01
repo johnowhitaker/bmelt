@@ -125,11 +125,20 @@ id=e2 offset 0x1000 == id=01 offset 0x075000
 id=e2 offset 0x2000 and above at page starts: CHECK CONDITION
 ```
 
+The sibling `id=f1` responder is similarly narrow:
+
+```text
+id=f1 offset 0x0000 == id=01 offset 0x075000
+id=f1 extent        == 0x0b60 bytes
+id=f1 offset 0x0b60 and above: CHECK CONDITION / no data
+```
+
 Report:
 
 ```text
 analysis/8051/normal-read-buffer-e2-alias-20260501.md
 references/evidence/live/normal-read-buffer-e2-alias-20260501/
+references/evidence/live/normal-read-buffer-f1-alias-20260501/
 ```
 
 Evidence:

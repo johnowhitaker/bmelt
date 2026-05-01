@@ -1208,6 +1208,8 @@ branch targets from one linear disassembly.
 One small public-buffer mystery closed cleanly after that. `id=e2` was not a
 new decoder or a second controller image; it was a narrow alias into the same
 normal work window. `e2:0` is `id01:0x074000`, and `e2:0x1000` is
-`id01:0x075000`. Page-start reads from `e2:0x2000` upward reject. So `e2`
-reaches only the profile/table pages we already know how to read, not the
-decoded CDD or the code-heavy tail of the work window.
+`id01:0x075000`. Page-start reads from `e2:0x2000` upward reject. `id=f1` is
+the same pattern from the second page: `f1:0` is `id01:0x075000`, but only for
+`0x0b60` bytes. So `e2` and `f1` reach only the profile/table pages we already
+know how to read, not the decoded CDD or the code-heavy tail of the work
+window.

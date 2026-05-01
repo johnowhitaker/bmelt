@@ -1,4 +1,4 @@
-# Normal READ BUFFER E2 Alias, 2026-05-01
+# Normal READ BUFFER E2/F1 Aliases, 2026-05-01
 
 Host separation:
 
@@ -63,6 +63,37 @@ offset 0xb000  CHECK CONDITION / no data
 
 The optical LUN stayed normal `LD5M` after the scan.
 
+## F1 Sibling Alias
+
+`id=f1` is the same kind of public alias. The existing
+`idf1-000000-000b60.bin` artifact matches
+`id01-070000-010000.bin[0x5000..0x5b5f]` byte-for-byte:
+
+```text
+id=f1 offset 0x0000 == id=01 offset 0x075000
+id=f1 extent        == 0x0b60 bytes
+```
+
+A small follow-up scan shows that reads inside that range work, crossing the
+tail can return a short transfer, and reads starting at/after the end reject:
+
+```text
+offset 0x0000  GOOD, 0x80 bytes, interesting
+offset 0x0800  GOOD, 0x80 bytes, interesting
+offset 0x0ae0  GOOD, 0x80 bytes, all/mostly padding
+offset 0x0b00  GOOD, 0x60 bytes returned for a 0x80 request
+offset 0x0b60  CHECK CONDITION / no data
+offset 0x1000  CHECK CONDITION / no data
+```
+
+Evidence:
+
+```text
+references/evidence/live/normal-read-buffer-extra-buffers-20260501/idf1-000000-000b60.bin
+references/evidence/live/normal-read-buffer-f1-alias-20260501/f1-offsets-len80-summary.txt
+references/evidence/live/normal-read-buffer-f1-alias-20260501/f1-offsets-len80.jsonl
+```
+
 ## Static Anchor
 
 The normal overlay's special READ BUFFER branch has a direct `id=e2` path at
@@ -91,5 +122,6 @@ For future public read-only work:
 
 - Use `id=01 offset 0x070000` for the full `0x070000..0x07ffff` work window.
 - Use `id=e2` only as a sanity alias for `0x074000..0x075fff`.
-- Do not spend CDD-decoder effort on `e2`; it is profile/table material already
-  visible through `id=01`.
+- Use `id=f1` only as a sanity alias for `0x075000..0x075b5f`.
+- Do not spend CDD-decoder effort on `e2` or `f1`; they are profile/table
+  material already visible through `id=01`.
