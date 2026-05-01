@@ -367,7 +367,7 @@ def main() -> int:
     if args.skip_gateway:
         samples = [sample for sample in samples if sample["kind"] != "gateway"]
 
-    stamp = dt.datetime.now(dt.UTC).strftime("%Y%m%dT%H%M%SZ")
+    stamp = dt.datetime.now(dt.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     out_dir = args.out_dir or (ROOT / "runs/currentboot-cdd-mailbox-replay" / stamp)
     record: dict[str, Any] = {
         "timestamp_utc": stamp,
