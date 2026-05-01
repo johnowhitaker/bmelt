@@ -447,7 +447,10 @@ def render_markdown(report: dict[str, Any], ranges: list[tuple[int, int]]) -> st
             f"### `{row['short']}`",
             "",
             f"- observations: `{row['observations']}`",
-            f"- offsets: {', '.join(f'`{item['value']}` x{item['count']}' for item in row['offsets'])}",
+            "- offsets: "
+            + ", ".join(
+                f"`{item['value']}` x{item['count']}" for item in row["offsets"]
+            ),
             "",
             "```text",
             row["sample_hex"],

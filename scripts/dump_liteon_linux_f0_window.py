@@ -15,6 +15,9 @@ from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 import parse_liteon_extrainq
 
 
+EXTRAINQ_CDB = [0x12, 0x00, 0x00, 0x00, 0xF0, 0x40, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+
+
 def read_buffer_cdb(buffer_id: int, offset: int, length: int) -> list[int]:
     return [
         0x3C,
@@ -103,6 +106,23 @@ def dump_raw(args: argparse.Namespace) -> bytes:
     return bytes(out)
 
 
+def maybe_prime_extrainq(args: argparse.Namespace) -> None:
+    if not args.prime_extrainq:
+        return
+    live = run_read(
+        sg_raw=args.sg_raw,
+        device=args.device,
+        cdb=EXTRAINQ_CDB,
+        length=0xB0,
+        timeout=args.timeout,
+    )
+    print(f"primed EXTRAINQ len={len(live)} sha256={hashlib.sha256(live).hexdigest()}")
+    if args.prime_extrainq_out:
+        args.prime_extrainq_out.parent.mkdir(parents=True, exist_ok=True)
+        args.prime_extrainq_out.write_bytes(live)
+        print(f"wrote live EXTRAINQ {args.prime_extrainq_out}")
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--device", default="/dev/sg0")
@@ -115,6 +135,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--size", type=lambda value: int(value, 0), default=0x10000)
     parser.add_argument("--chunk", type=lambda value: int(value, 0), default=0x80)
     parser.add_argument("--crypto-reset", type=lambda value: int(value, 0), default=0x80)
+    parser.add_argument(
+        "--prime-extrainq",
+        action="store_true",
+        help="send a live EXTRAINQ read before READ BUFFER; useful after currentboot/finalizer transitions",
+    )
+    parser.add_argument("--prime-extrainq-out", type=Path, help="optional path to save the live EXTRAINQ response")
     parser.add_argument("--timeout", type=int, default=3)
     parser.add_argument("--retries", type=int, default=1)
     parser.add_argument("--progress-interval", type=lambda value: int(value, 0), default=0x10000)
@@ -137,6 +163,7 @@ def main() -> int:
     response = parse_liteon_extrainq.parse_hex_or_file(args.extrainq)
     iv, key, _, _ = parse_liteon_extrainq.derive_iv_key(response)
 
+    maybe_prime_extrainq(args)
     raw = dump_raw(args)
     decrypted = aes_cbc_decrypt_reset_window(raw, key, iv, args.crypto_reset)
 

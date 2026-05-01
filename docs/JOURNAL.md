@@ -1996,3 +1996,29 @@ even fixed-XOR four-byte seed checks are basically empty. This is useful
 negative evidence: if these are decoded CDD outputs, they are not coming from a
 simple byte copy, fixed XOR, or obvious unpacking. The CDD problem remains a
 real decoder/codeword problem, not a disguised CRC table.
+
+The next live CDD push was more interesting. We picked one of the
+well-understood affine leaf cells in CDD stream 2: group 105, whose stock
+decoded lane-0 byte is `0x84`. Rather than flipping one random encoded byte,
+we rewrote all 12 observed affine lead cells consistently, first so the group
+decoded as `0x85`, then again so it decoded as `0x8b`. Both edits were
+admitted through the helper-bypass path, survived a hardware power-cycle, and
+the drive still cold-booted as normal `LD5M`. Restoring the 12 lead cells gave
+byte-identical F0 again. That is a big practical step: at least this class of
+CDD leaf bytes is mutable without solving the trailer seal.
+
+It did not magically become a CDD decoder. Normal `READ BUFFER id=01/02
+offset=0x070000` captures changed after the CDD edits, but the changes look
+mostly like tile/phase movement in the public work-window, not a direct
+"decoded byte appears here" oracle. The cleanest report is
+`analysis/8051/cdd-affine-g105-live-diff-20260501.md`: across stock,
+`0x84->0x85`, `0x84->0x8b`, and restored stock states, there are 62 stable
+reversible public-window offsets. That is enough to say this CDD leaf affects
+normal runtime state. It is not enough to read arbitrary decoded CDD memory.
+
+One operational trap also became clearer. After finalizer/currentboot work,
+plain F0 READ BUFFER dumps can decrypt as nonsense until a live EXTRAINQ has
+been sent. The key material is not changing; the live EXTRAINQ appears to
+prime or reset the readback transform/state. I added `--prime-extrainq` to
+`scripts/dump_liteon_linux_f0_window.py` so future post-mutation F0
+verification can explicitly perform that handshake before reading F0.

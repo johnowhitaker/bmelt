@@ -1895,3 +1895,24 @@ Immediate useful directions:
     checks against those source spans are negative. This does not disprove a
     CDD relationship; it says the relationship is not simple copying, fixed
     XOR, or obvious byte unpacking.
+70. `scripts/analyze_liteon_cdd_affine_live_diff.py` and
+    `analysis/8051/cdd-affine-g105-live-diff-20260501.md/json` compare the
+    reversible live edits to CDD stream 2 affine group 105. Stock group 105
+    decodes as `0x84`; the live tests rewrote all 12 observed affine lead
+    cells so it decoded as `0x85` and `0x8b`, then restored it. Both mutated
+    states cold-booted as `LD5M`, and the final restore verified byte-identical
+    F0. This proves at least this affine leaf class is mutable through the
+    helper bypass without solving trailer auth14.
+71. The group-105 normal work-window result is not a direct decoded-byte
+    oracle. The analyzer finds 62 clean reversible public-window chunk offsets,
+    plus another noisy mutation-sensitive set. Many rows are full 0x40-byte
+    tile moves. Treat the result as evidence that the CDD leaf influences
+    normal runtime state, not as a linear CDD dump or stable internal address.
+    Low offsets `+0x01c0` and `+0x0280` are useful correlation targets, but
+    `+0x0180/+0x0200/+0x0240` also show stock-to-stock drift between cold
+    boots.
+72. For post-currentboot/finalizer F0 verification, send a live EXTRAINQ before
+    trusting F0 READ BUFFER decrypts. After the `0x84->0x8b` test, F0 reads
+    decrypted as nonsense until a live EXTRAINQ primed the readback state; the
+    same static LD5M key then produced the normal `BOOT` prefix again. Use
+    `scripts/dump_liteon_linux_f0_window.py --prime-extrainq` for this case.

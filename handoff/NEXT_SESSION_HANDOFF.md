@@ -859,3 +859,66 @@ remain poor known-output candidates until a phase/address model is found.
 Recommended next direction after this CDD push: return to normal-mode I/O or
 patchability. Static CDD work is still valuable, but the latest cheap probes
 drew a blank.
+
+## Live CDD Affine Group 105 Differential
+
+New artifacts:
+
+```text
+scripts/analyze_liteon_cdd_affine_live_diff.py
+analysis/8051/cdd-affine-g105-live-diff-20260501.md/json
+```
+
+Live test summary:
+
+```text
+CDD stream 2 affine group: 105
+stock semantic byte:       0x84
+mutations tested:          0x84 -> 0x85, then 0x84 -> 0x8b
+patch style:               all 12 observed affine lead cells rewritten
+restore:                   all 12 lead cells restored to stock
+```
+
+Both mutations were sent through the helper-bypass path and both cold-booted
+as normal `LD5M`. The restore after the `0x8b` run verified byte-identical F0
+again, including the targeted lead bytes:
+
+```text
+e0 f9 d2 cb 4c 55 7e 67 28 31 1a 03
+```
+
+This is the strongest live CDD result so far: at least one affine leaf class is
+persistently mutable without recomputing trailer auth14. It is not yet a CDD
+decoder. Normal `READ BUFFER id=01/02 offset=0x070000` captures do react, but
+mostly as rotating `0x40`-byte public-window tiles. The analyzer found:
+
+```text
+common stable offsets:     997
+clean reversible offsets:  62
+noisy sensitive offsets:   61
+```
+
+Use the clean offsets as correlation targets, not as internal addresses. Low
+public offsets `+0x01c0` and `+0x0280` are the most compact candidates; larger
+offsets such as `+0x6480`, `+0x6b40..0x6bc0`, `+0x7140..0x7180`, and
+`+0x8300..0x85c0` are mostly full tile movements.
+
+Important F0 readback lesson: after currentboot/finalizer work, a hardware
+power-cycle alone may not make F0 READ BUFFER decrypt correctly. In the `0x8b`
+test, offset-zero F0 decrypted as garbage until a live EXTRAINQ was issued.
+After that, the same static LD5M key produced the normal `BOOT` prefix. Use:
+
+```text
+python3 scripts/dump_liteon_linux_f0_window.py ... --prime-extrainq
+```
+
+when verifying F0 after these runs.
+
+Recommended next directions:
+
+- mutate a second affine lane-0 group and look for overlapping public-window
+  responses;
+- if a direct CDD decoder still stalls, return to the normal-mode I/O loop
+  plan and use the reversible CDD offsets as correlation targets;
+- keep using live EXTRAINQ priming before any F0 verification after
+  finalizer/currentboot transitions.
