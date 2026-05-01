@@ -1354,3 +1354,21 @@ but now the question is sharper. We are no longer just asking "what wakes the
 CDD engine?" We have a working currentboot call into the mapped-header path
 and a small status/control snapshot to line up against the resident code around
 `0x16ef`, `0x1717`, and `0x17bb`.
+
+One wider status capture made that line-up much clearer. The `fc e0` trigger
+returns `xdata[0x4e80..0x4ebf]` after the same `0x1717` call, and the important
+bytes are:
+
+```text
+0x4e90: 00 40 70 4c 00 08 00 1f
+0x4ea0: 06 00 00 00 9a d1 bb 4b 00 00 18 00 00 00 00 00
+0x4eb0: 00 08 00 0f 00 00 00 00 07 00 00 00 00 00 00 00
+```
+
+The `0x4ea0 = 06` byte is exactly what the resident loop waits for. The
+`0x4e90` row also fits the static model: `0x0040702c + 0x20 = 0x0040704c` and
+`0x0007ffff + 0x20 = 0x0008001f`. So `0x1717` is no longer mysterious in the
+same way. It issues a banked source-to-window transfer, waits for completion,
+then `0x16ef` makes the `0xc000` window point at the result. The decoded CDD
+range staying zero means the remaining missing step is downstream from this
+header-map operation.

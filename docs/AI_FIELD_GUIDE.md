@@ -1454,3 +1454,12 @@ Immediate useful directions:
     `000000000000000000000000010000000040704c0008001f0000000000000000`;
     decoded CDD target addresses still stayed zero. Evidence:
     `references/evidence/live/currentboot-cdd-mapped-header-status-trigger-v1.md`.
+21. `--gateway-cdb-bulk-with-cdd-mapped-header-status64` widens the status
+    capture through `0x4ebf`. It uses `CDB[7:8] == fc e0`, returns `0xd2`,
+    and copies `xdata[0xc000..0xc01f]` plus `xdata[0x4e80..0x4ebf]`.
+    Live result: `0x4ea0 = 0x06`, matching the resident completion poll after
+    `0x17bb`; `0x4e90..0x4e97 = 00 40 70 4c 00 08 00 1f`, matching the
+    computed end values for source `0x0040702c` and companion `0x0007ffff`
+    after a `0x20` byte transfer. Decoded CDD target addresses still stayed
+    zero. Evidence:
+    `references/evidence/live/currentboot-cdd-mapped-header-status64-trigger-v1.md`.

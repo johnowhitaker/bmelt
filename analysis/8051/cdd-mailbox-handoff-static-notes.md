@@ -85,6 +85,27 @@ was only a negative for a trivial shortcut. It skipped the header-derived
 `0x4a01/03/05/06/20/21/22` package, the descriptor prestate, and the mapped
 header setup.
 
+Live follow-up on 2026-05-01 confirmed this mapped-header setup directly from
+currentboot. A compact hook called `0x1717` with source `0x0000702c`, companion
+end-minus-one value `0x0007ffff`, destination window `xdata[0xc000]`, and
+length `0x20`. It returned the CDD header from `xdata[0xc000]`.
+
+A wider status capture after the same call returned:
+
+```text
+0x4e80: 00 00 00 00 00 00 00 00 00 00 00 00 01 00 00 00
+0x4e90: 00 40 70 4c 00 08 00 1f 00 00 00 00 00 00 00 00
+0x4ea0: 06 00 00 00 9a d1 bb 4b 00 00 18 00 00 00 00 00
+0x4eb0: 00 08 00 0f 00 00 00 00 07 00 00 00 00 00 00 00
+```
+
+`0x4ea0 = 0x06` is the value `0x1717` polls for. The `0x4e90` row matches the
+expected transfer boundaries: source `0x0040702c + 0x20 = 0x0040704c`, and
+companion/destination boundary `0x0007ffff + 0x20 = 0x0008001f`. So the
+visible `0x17bb` transaction has been live-confirmed. It maps the CDD source
+header into `0xc000`; it does not by itself populate the decoded CDD range at
+`0x184000`.
+
 ## Secondary `0x4a10` Window
 
 The path around `0x079b..0x085e` uses another mailbox/status window:
