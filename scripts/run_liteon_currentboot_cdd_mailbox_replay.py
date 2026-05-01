@@ -544,7 +544,7 @@ def main() -> int:
             before.append(sample_one(args, sample, out_dir, "before"))
         record["results"]["before_samples"] = before
 
-    if args.trigger_mode.startswith("cdb-fcdd"):
+    if args.trigger_mode.startswith("cdb-fcd"):
         record["results"]["trigger_record"] = trigger_cdd_field_replay(args)
     else:
         write_records = []
