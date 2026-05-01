@@ -1,0 +1,334 @@
+{
+  "chunk_size": 64,
+  "runs": [
+    {
+      "baseline_captures": 2,
+      "baseline_only_chunks": 8,
+      "baseline_unique_chunks": 765,
+      "path": "references/evidence/live/normal-work-window-get-performance-variants-20260501",
+      "recurring_stimulus_only_chunks": 12,
+      "run": "normal-work-window-get-performance-variants-20260501",
+      "shared_chunks": 757,
+      "stimulus_captures": 36,
+      "stimulus_names": {
+        "gp-byte1-01-type00": 2,
+        "gp-byte1-01-type03": 2,
+        "gp-byte1-02-type00": 2,
+        "gp-byte1-03-type00": 2,
+        "gp-startlba1-type00": 2,
+        "gp-startlba1-type03": 2,
+        "gp-type00-max0001": 2,
+        "gp-type00-max0010": 2,
+        "gp-type00-max00ff": 2,
+        "gp-type01-max0010": 2,
+        "gp-type02-max0010": 2,
+        "gp-type03-max0010": 2,
+        "gp-type04-max0010": 2,
+        "gp-type05-max0010": 2,
+        "gp-type10-max0010": 2,
+        "gp-type11-max0010": 2,
+        "gp-type20-max0010": 2,
+        "gp-typeff-max0010": 2
+      },
+      "stimulus_only_chunks": 13,
+      "stimulus_unique_chunks": 770,
+      "target_stimulus_only_chunks": 8,
+      "top_stimulus_only_chunks": [
+        {
+          "offsets": [
+            35584,
+            35648,
+            35712,
+            35776
+          ],
+          "sample_hex": "8a34e04404f0908a29e020e042105202",
+          "sha256": "707389d4505f57b2502258ccd486d86b54b82e8f0840bae2c4e7b58bb286b8e5",
+          "stimuli": {
+            "gp-byte1-01-type00": 2,
+            "gp-byte1-02-type00": 2,
+            "gp-byte1-03-type00": 2,
+            "gp-startlba1-type00": 2,
+            "gp-type00-max0001": 2,
+            "gp-type00-max0010": 2,
+            "gp-type00-max00ff": 2,
+            "gp-type01-max0010": 2,
+            "gp-type02-max0010": 2,
+            "gp-type04-max0010": 2,
+            "gp-type05-max0010": 2,
+            "gp-type10-max0010": 2,
+            "gp-type11-max0010": 2,
+            "gp-type20-max0010": 2,
+            "gp-typeff-max0010": 2
+          },
+          "stimulus_observations": 30,
+          "target_refs": [
+            35401,
+            35405
+          ]
+        },
+        {
+          "offsets": [
+            28416
+          ],
+          "sample_hex": "78b0f612b09212f846908a23e0ffc454",
+          "sha256": "63ade08676a04436f555eb076a78f7926187d8a96e3ddca24ef12c9354fbaa5c",
+          "stimuli": {
+            "gp-byte1-01-type00": 2,
+            "gp-byte1-01-type03": 1,
+            "gp-byte1-02-type00": 2,
+            "gp-byte1-03-type00": 1,
+            "gp-startlba1-type00": 2,
+            "gp-startlba1-type03": 1,
+            "gp-type00-max0001": 2,
+            "gp-type00-max0010": 2,
+            "gp-type00-max00ff": 1,
+            "gp-type01-max0010": 2,
+            "gp-type02-max0010": 1,
+            "gp-type03-max0010": 1,
+            "gp-type04-max0010": 1,
+            "gp-type05-max0010": 2,
+            "gp-type10-max0010": 1,
+            "gp-type11-max0010": 2,
+            "gp-type20-max0010": 1,
+            "gp-typeff-max0010": 2
+          },
+          "stimulus_observations": 27,
+          "target_refs": [
+            35363
+          ]
+        },
+        {
+          "offsets": [
+            40000,
+            40128
+          ],
+          "sample_hex": "78a9cff608eff62290f0b0e493fd7e00",
+          "sha256": "6c198885fad1b4f1fb53eac35e1069804b2d0e1df2065107a045abbaa95a9295",
+          "stimuli": {
+            "gp-byte1-01-type00": 1,
+            "gp-byte1-01-type03": 1,
+            "gp-byte1-02-type00": 2,
+            "gp-byte1-03-type00": 1,
+            "gp-startlba1-type00": 2,
+            "gp-startlba1-type03": 1,
+            "gp-type00-max0001": 1,
+            "gp-type00-max0010": 2,
+            "gp-type00-max00ff": 1,
+            "gp-type01-max0010": 2,
+            "gp-type02-max0010": 1,
+            "gp-type03-max0010": 1,
+            "gp-type04-max0010": 1,
+            "gp-type05-max0010": 2,
+            "gp-type10-max0010": 1,
+            "gp-type11-max0010": 2,
+            "gp-type20-max0010": 1,
+            "gp-typeff-max0010": 2
+          },
+          "stimulus_observations": 25,
+          "target_refs": [
+            16384,
+            16536
+          ]
+        },
+        {
+          "offsets": [
+            39424
+          ],
+          "sample_hex": "dfe054f0f04404f0908a177401f08012",
+          "sha256": "8d3ce5504635b161b3c9be91a8099b68819e58649ae152204d130cca83868340",
+          "stimuli": {
+            "gp-byte1-01-type00": 2,
+            "gp-byte1-02-type00": 2,
+            "gp-byte1-03-type00": 1,
+            "gp-startlba1-type00": 1,
+            "gp-type00-max0001": 2,
+            "gp-type00-max0010": 2,
+            "gp-type00-max00ff": 2,
+            "gp-type01-max0010": 1,
+            "gp-type02-max0010": 2,
+            "gp-type04-max0010": 2,
+            "gp-type05-max0010": 1,
+            "gp-type10-max0010": 2,
+            "gp-type11-max0010": 2,
+            "gp-type20-max0010": 1,
+            "gp-typeff-max0010": 2
+          },
+          "stimulus_observations": 25,
+          "target_refs": [
+            35363
+          ]
+        },
+        {
+          "offsets": [
+            40448
+          ],
+          "sample_hex": "78aae69047d6f09047afe4f09047b1f0",
+          "sha256": "03044422ea303ce9de2d50de407f8131004956e5600e9b41bee8417878477656",
+          "stimuli": {
+            "gp-byte1-01-type00": 2,
+            "gp-byte1-02-type00": 1,
+            "gp-byte1-03-type00": 1,
+            "gp-type00-max0001": 1,
+            "gp-type00-max0010": 1,
+            "gp-type00-max00ff": 2,
+            "gp-type01-max0010": 2,
+            "gp-type02-max0010": 2,
+            "gp-type04-max0010": 1,
+            "gp-type05-max0010": 1,
+            "gp-type10-max0010": 2,
+            "gp-type11-max0010": 2,
+            "gp-type20-max0010": 2,
+            "gp-typeff-max0010": 2
+          },
+          "stimulus_observations": 22,
+          "target_refs": [
+            18353,
+            35405
+          ]
+        },
+        {
+          "offsets": [
+            24640,
+            24704,
+            24768
+          ],
+          "sample_hex": "809840351207235030908124e030e029",
+          "sha256": "8abb923850ed71bb6029daed037703e07f2c86f7d65ed0cd426a5915ad9d247a",
+          "stimuli": {
+            "gp-byte1-03-type00": 1,
+            "gp-type00-max0001": 2,
+            "gp-type00-max00ff": 1,
+            "gp-type04-max0010": 1,
+            "gp-type05-max0010": 1,
+            "gp-type20-max0010": 2,
+            "gp-typeff-max0010": 1
+          },
+          "stimulus_observations": 9,
+          "target_refs": []
+        },
+        {
+          "offsets": [
+            27392,
+            27520,
+            27584
+          ],
+          "sample_hex": "908988e0ffa3e0fd123d899047d07410",
+          "sha256": "878984a494b8a3a22a21ecc75063d521fb210913d9562a2f87095c41a81323e2",
+          "stimuli": {
+            "gp-byte1-02-type00": 1,
+            "gp-type00-max0001": 1,
+            "gp-type00-max00ff": 1,
+            "gp-type02-max0010": 1,
+            "gp-type05-max0010": 1,
+            "gp-type20-max0010": 2
+          },
+          "stimulus_observations": 7,
+          "target_refs": []
+        },
+        {
+          "offsets": [
+            28928,
+            28992
+          ],
+          "sample_hex": "36f6904762e030e409e054eff0a87c08",
+          "sha256": "8b2115cd509fb860937c94264f922fec9b9bdfd7f462a5cb34d6b8ea7c3dc31d",
+          "stimuli": {
+            "gp-byte1-02-type00": 1,
+            "gp-type00-max0001": 1,
+            "gp-type00-max00ff": 1,
+            "gp-type02-max0010": 1,
+            "gp-type20-max0010": 2
+          },
+          "stimulus_observations": 6,
+          "target_refs": [
+            16384,
+            16529,
+            16531,
+            16536
+          ]
+        },
+        {
+          "offsets": [
+            28672,
+            28864
+          ],
+          "sample_hex": "10af01c3c0d0157c157ca87ceef608ef",
+          "sha256": "eec973076bacae1446519f0a369cd7b1d941f4b7128c00f5eef0d00ec1c45406",
+          "stimuli": {
+            "gp-byte1-02-type00": 1,
+            "gp-type00-max0001": 1,
+            "gp-type00-max00ff": 1,
+            "gp-type02-max0010": 1,
+            "gp-type20-max0010": 2
+          },
+          "stimulus_observations": 6,
+          "target_refs": []
+        },
+        {
+          "offsets": [
+            32384
+          ],
+          "sample_hex": "f618ee36f6908a4ae0640260030273de",
+          "sha256": "fe343ef73975d6766c236d664ff0f6b8c7cac30767666cf803d6fc7fce5de610",
+          "stimuli": {
+            "gp-type00-max0001": 1,
+            "gp-type00-max0010": 1,
+            "gp-type00-max00ff": 1,
+            "gp-type01-max0010": 1,
+            "gp-type02-max0010": 1
+          },
+          "stimulus_observations": 5,
+          "target_refs": [
+            16384,
+            16529,
+            35402
+          ]
+        },
+        {
+          "offsets": [
+            39424
+          ],
+          "sample_hex": "8988e0fca3e0fdc3ef9dffee9cfed3ef",
+          "sha256": "82706242069810215e01465ffacb63b50bbe9daf3e5a7137db9f0a959e22f4bc",
+          "stimuli": {
+            "gp-byte1-03-type00": 1,
+            "gp-startlba1-type00": 1,
+            "gp-type01-max0010": 1,
+            "gp-type05-max0010": 1,
+            "gp-type20-max0010": 1
+          },
+          "stimulus_observations": 5,
+          "target_refs": []
+        },
+        {
+          "offsets": [
+            32640
+          ],
+          "sample_hex": "a3e0ff02cdee9048f8e020e10a30aa07",
+          "sha256": "69db5ec92ba82af904adbc7102cf4748c1b8ba3b805ecd5da7b804c4e7f7160f",
+          "stimuli": {
+            "gp-type00-max0001": 1,
+            "gp-type00-max00ff": 1
+          },
+          "stimulus_observations": 2,
+          "target_refs": []
+        },
+        {
+          "offsets": [
+            24576
+          ],
+          "sample_hex": "540f9047b1f0d378aae6940418e69400",
+          "sha256": "ac6243637e2d318af3fb3b6595814d05999c8dcb056bb614c2c679a55a0c0ae1",
+          "stimuli": {
+            "gp-byte1-03-type00": 1
+          },
+          "stimulus_observations": 1,
+          "target_refs": [
+            18353,
+            35405
+          ]
+        }
+      ]
+    }
+  ]
+}

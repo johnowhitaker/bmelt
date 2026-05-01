@@ -1798,3 +1798,29 @@ Immediate useful directions:
     this stock oracle, but its mapped surface is constrained to the public
     work-window/mirror space. It still does not reach decoded CDD memory at
     `0x184000..0x1b3fff`.
+59. `scripts/scan_liteon_read_buffer_modes.py` scans READ BUFFER CDB byte 1 as
+    a full 8-bit mode byte while staying read-only/no-data-out. Evidence is in
+    `references/evidence/live/normal-read-buffer-mode-byte-scan-20260501` and
+    the summary is
+    `analysis/8051/normal-read-buffer-high-mode-and-get-performance-harvest-20260501.md`.
+    A smoke pass over representative high values and a full pass over
+    `0x20..0xff` against IDs `0x01`, `0x02`, `0xe2`, `0xf0`, `0xf1`, and
+    `0xf2` found no hidden selector: all 1344 full-pass reads returned `rc=5`
+    with no data, no partial windows, and no timeouts.
+60. `scripts/capture_liteon_normal_get_performance_variants.py` sends
+    read-only GET PERFORMANCE variants and captures
+    `READ BUFFER mode=1 id=01 offset=0x070000` after each one. Evidence is in
+    `references/evidence/live/normal-work-window-get-performance-variants-20260501`
+    and
+    `references/evidence/live/normal-work-window-get-performance-variants-long-20260501`.
+    The first two-cycle pass added 77 new chunks to the normal work-window
+    corpus; the four-cycle repeat added zero more. Current combined corpus:
+    6 runs, 208 captures, 862 unique informative chunks, 63 static-matched
+    chunks, 799 runtime/unmatched chunks. GET PERFORMANCE is useful as a
+    one-time normal-runtime tile harvest, but does not look like a direct
+    decoded-memory oracle.
+61. Interpret the GET PERFORMANCE `+0x8bxx` tile carefully. It references
+    `0x8a49` and `0x8a4d`, but the branch checks match the already-confirmed
+    START STOP eject condition: opcode `0x1b` and low nibble `0x02`. This is
+    an overlay tile made visible during the capture sequence, not evidence
+    that GET PERFORMANCE executes the eject path.

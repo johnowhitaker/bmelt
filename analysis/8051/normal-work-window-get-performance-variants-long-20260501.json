@@ -1,0 +1,208 @@
+{
+  "chunk_size": 64,
+  "runs": [
+    {
+      "baseline_captures": 4,
+      "baseline_only_chunks": 0,
+      "baseline_unique_chunks": 755,
+      "path": "references/evidence/live/normal-work-window-get-performance-variants-long-20260501",
+      "recurring_stimulus_only_chunks": 7,
+      "run": "normal-work-window-get-performance-variants-long-20260501",
+      "shared_chunks": 755,
+      "stimulus_captures": 72,
+      "stimulus_names": {
+        "gp-byte1-01-type00": 4,
+        "gp-byte1-01-type03": 4,
+        "gp-byte1-02-type00": 4,
+        "gp-byte1-03-type00": 4,
+        "gp-startlba1-type00": 4,
+        "gp-startlba1-type03": 4,
+        "gp-type00-max0001": 4,
+        "gp-type00-max0010": 4,
+        "gp-type00-max00ff": 4,
+        "gp-type01-max0010": 4,
+        "gp-type02-max0010": 4,
+        "gp-type03-max0010": 4,
+        "gp-type04-max0010": 4,
+        "gp-type05-max0010": 4,
+        "gp-type10-max0010": 4,
+        "gp-type11-max0010": 4,
+        "gp-type20-max0010": 4,
+        "gp-typeff-max0010": 4
+      },
+      "stimulus_only_chunks": 7,
+      "stimulus_unique_chunks": 762,
+      "target_stimulus_only_chunks": 4,
+      "top_stimulus_only_chunks": [
+        {
+          "offsets": [
+            35584,
+            35648,
+            35712,
+            35776
+          ],
+          "sample_hex": "8a34e04404f0908a29e020e042105202",
+          "sha256": "707389d4505f57b2502258ccd486d86b54b82e8f0840bae2c4e7b58bb286b8e5",
+          "stimuli": {
+            "gp-byte1-01-type00": 4,
+            "gp-byte1-02-type00": 4,
+            "gp-byte1-03-type00": 4,
+            "gp-startlba1-type00": 4,
+            "gp-type00-max0001": 4,
+            "gp-type00-max0010": 4,
+            "gp-type00-max00ff": 4,
+            "gp-type01-max0010": 3,
+            "gp-type02-max0010": 4,
+            "gp-type04-max0010": 4,
+            "gp-type05-max0010": 4,
+            "gp-type10-max0010": 4,
+            "gp-type11-max0010": 3,
+            "gp-type20-max0010": 4,
+            "gp-typeff-max0010": 4
+          },
+          "stimulus_observations": 58,
+          "target_refs": [
+            35401,
+            35405
+          ]
+        },
+        {
+          "offsets": [
+            39488,
+            39616
+          ],
+          "sample_hex": "dfe054f0f04404f0908a177401f08012",
+          "sha256": "8d3ce5504635b161b3c9be91a8099b68819e58649ae152204d130cca83868340",
+          "stimuli": {
+            "gp-byte1-01-type00": 4,
+            "gp-byte1-02-type00": 2,
+            "gp-byte1-03-type00": 4,
+            "gp-startlba1-type00": 3,
+            "gp-type00-max0001": 2,
+            "gp-type00-max0010": 4,
+            "gp-type00-max00ff": 4,
+            "gp-type01-max0010": 2,
+            "gp-type02-max0010": 3,
+            "gp-type04-max0010": 3,
+            "gp-type05-max0010": 3,
+            "gp-type10-max0010": 3,
+            "gp-type11-max0010": 3,
+            "gp-type20-max0010": 3,
+            "gp-typeff-max0010": 3
+          },
+          "stimulus_observations": 46,
+          "target_refs": [
+            35363
+          ]
+        },
+        {
+          "offsets": [
+            27392,
+            27520,
+            27584
+          ],
+          "sample_hex": "908988e0ffa3e0fd123d899047d07410",
+          "sha256": "878984a494b8a3a22a21ecc75063d521fb210913d9562a2f87095c41a81323e2",
+          "stimuli": {
+            "gp-byte1-01-type00": 2,
+            "gp-byte1-02-type00": 1,
+            "gp-startlba1-type00": 2,
+            "gp-type00-max00ff": 1,
+            "gp-type01-max0010": 1,
+            "gp-type04-max0010": 3,
+            "gp-type05-max0010": 1,
+            "gp-type11-max0010": 1,
+            "gp-type20-max0010": 1
+          },
+          "stimulus_observations": 13,
+          "target_refs": []
+        },
+        {
+          "offsets": [
+            28928,
+            28992
+          ],
+          "sample_hex": "36f6904762e030e409e054eff0a87c08",
+          "sha256": "8b2115cd509fb860937c94264f922fec9b9bdfd7f462a5cb34d6b8ea7c3dc31d",
+          "stimuli": {
+            "gp-byte1-01-type00": 1,
+            "gp-byte1-02-type00": 1,
+            "gp-startlba1-type00": 2,
+            "gp-type00-max00ff": 1,
+            "gp-type01-max0010": 1,
+            "gp-type04-max0010": 3,
+            "gp-type05-max0010": 1,
+            "gp-type11-max0010": 1,
+            "gp-type20-max0010": 1
+          },
+          "stimulus_observations": 12,
+          "target_refs": [
+            16384,
+            16529,
+            16531,
+            16536
+          ]
+        },
+        {
+          "offsets": [
+            28672,
+            28864
+          ],
+          "sample_hex": "10af01c3c0d0157c157ca87ceef608ef",
+          "sha256": "eec973076bacae1446519f0a369cd7b1d941f4b7128c00f5eef0d00ec1c45406",
+          "stimuli": {
+            "gp-byte1-01-type00": 1,
+            "gp-byte1-02-type00": 1,
+            "gp-startlba1-type00": 2,
+            "gp-type00-max00ff": 1,
+            "gp-type01-max0010": 1,
+            "gp-type04-max0010": 3,
+            "gp-type05-max0010": 1,
+            "gp-type11-max0010": 1,
+            "gp-type20-max0010": 1
+          },
+          "stimulus_observations": 12,
+          "target_refs": []
+        },
+        {
+          "offsets": [
+            39488,
+            39616
+          ],
+          "sample_hex": "11f0e57c2404f8e6904012f07b00e57c",
+          "sha256": "29e7ab54af3468601324b34e74300e76059e83c99893747178c6a12d6ddfb5e6",
+          "stimuli": {
+            "gp-byte1-01-type03": 3,
+            "gp-startlba1-type03": 4,
+            "gp-type03-max0010": 3
+          },
+          "stimulus_observations": 10,
+          "target_refs": []
+        },
+        {
+          "offsets": [
+            38144,
+            38208,
+            38272,
+            38336
+          ],
+          "sample_hex": "7ff9123d89e4fd7f40123d89e4908a33",
+          "sha256": "cd1041a057e9566c2d56c43bb27e27a777627d29e52de05ef970467f1ae2b305",
+          "stimuli": {
+            "gp-byte1-02-type00": 1,
+            "gp-startlba1-type03": 2,
+            "gp-type00-max0001": 1,
+            "gp-type00-max0010": 1,
+            "gp-type02-max0010": 2,
+            "gp-type04-max0010": 1,
+            "gp-type20-max0010": 1
+          },
+          "stimulus_observations": 9,
+          "target_refs": [
+            35404
+          ]
+        }
+      ]
+    }
+  ]
+}

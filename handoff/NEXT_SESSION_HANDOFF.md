@@ -563,3 +563,79 @@ shadow bytes. So do not treat the GET CONFIG field run as evidence for a hidden
 GET CONFIG address register. The stock normal READ BUFFER oracle is real and
 controlled, but it is the already-mapped public work-window/mirror surface; it
 does not reach decoded CDD memory.
+
+## Latest READ BUFFER And GET PERFORMANCE Findings
+
+New helper:
+
+```text
+scripts/scan_liteon_read_buffer_modes.py
+```
+
+Evidence and summary:
+
+```text
+references/evidence/live/normal-read-buffer-mode-byte-scan-20260501/
+analysis/8051/normal-read-buffer-high-mode-and-get-performance-harvest-20260501.md
+```
+
+This scans READ BUFFER CDB byte 1 as an unrestricted 8-bit value. A smoke pass
+over representative high values and a full pass over `0x20..0xff` against IDs
+`0x01`, `0x02`, `0xe2`, `0xf0`, `0xf1`, and `0xf2` found no hidden selector.
+All 1344 full-pass requests returned `rc=5` with no data, no partial responses,
+and no timeouts. So the easy "high mode bit means different window" idea is
+closed for now.
+
+New helper:
+
+```text
+scripts/capture_liteon_normal_get_performance_variants.py
+```
+
+Evidence and reports:
+
+```text
+references/evidence/live/normal-work-window-get-performance-variants-20260501/
+references/evidence/live/normal-work-window-get-performance-variants-long-20260501/
+analysis/8051/normal-work-window-get-performance-variants-20260501.md
+analysis/8051/normal-work-window-get-performance-variants-long-20260501.md
+```
+
+This sends read-only GET PERFORMANCE variants, then captures the public normal
+work window with `READ BUFFER mode=1 id=01 offset=0x070000 length=0x10000`.
+The first pass added 77 new chunks to the normal runtime corpus. The longer
+repeat added zero new chunks, so this command family is likely saturated for
+the current capture method.
+
+Updated combined reports:
+
+```text
+analysis/8051/normal-work-window-chunk-corpus-20260501.md
+analysis/8051/normal-work-window-overlay-map-20260501.md
+analysis/8051/normal-work-window-dptr-refs-20260501.md
+```
+
+Current corpus shape:
+
+```text
+6 runs
+208 captures
+862 unique informative chunks
+63 static-matched chunks
+799 runtime/unmatched chunks
+262 chunks seen at multiple public slots
+```
+
+Caution: the strongest GET PERFORMANCE-only recurring tile at `+0x8bxx`
+references `0x8a49` and `0x8a4d`, but its checks match the known START STOP
+eject branch (`0x8a49 == 0x1b`, `(0x8a4d & 0x0f) == 0x02`). Treat this as an
+overlay tile surfaced by the capture sequence, not as GET PERFORMANCE command
+semantics.
+
+Recommended next directions:
+
+- Offline stitch the harvested `0x8a49..0x8a54` packet-shadow/runtime chunks.
+- Try another harmless command family for tile harvesting instead of looping
+  GET PERFORMANCE again.
+- Continue normal-mode patchability work so the public READ BUFFER machinery
+  can be redirected rather than merely sampled.

@@ -1832,3 +1832,40 @@ one: it reaches the `0x070000` work window and its mirrors, not decoded CDD
 memory. The next question is therefore sharper: can we find another legal
 READ BUFFER selector, or patch that normal READ BUFFER overlay, so the same
 machinery points somewhere more interesting?
+
+I took the legal-selector question seriously before moving on. A new scanner
+sent raw READ BUFFER CDBs where byte 1 was treated as a full 8-bit value, not
+just the ordinary low 5-bit SCSI mode. The smoke pass tried representative
+high values, then the full pass covered every value from `0x20` through
+`0xff` against IDs `0x01`, `0x02`, `0xe2`, `0xf0`, `0xf1`, and `0xf2`. Every
+one of the 1344 full-pass reads returned the same hard `rc=5` no-data shape.
+No timeouts, no partial buffers, no weird high-bit window. So that easy door is
+closed: high READ BUFFER mode bits do not appear to be a hidden normal-runtime
+selector.
+
+The next quiet command family was GET PERFORMANCE. This was not aimed at
+mechanics or writes; it was just a way to perturb the normal command path and
+then capture the public work window again. That worked as a tile harvester.
+The first GET PERFORMANCE variant pass added 77 new normal-runtime chunks to
+the corpus, bringing the combined capture set to 208 work-window snapshots and
+862 unique informative chunks. The longer four-cycle repeat added zero more,
+which is useful in its own way: GET PERFORMANCE is a good one-time pass, but
+not a bottomless source of new tiles.
+
+One tempting chunk from that run needed careful handling. GET PERFORMANCE made
+a strong recurring `+0x8bxx` tile visible, and it references the packet shadow
+at `0x8a49` and `0x8a4d`. But the branch checks are exactly the START STOP
+eject signature we already confirmed live: command opcode `0x1b`, low nibble
+`0x02`. In other words, the GET PERFORMANCE run surfaced the eject overlay
+tile; it did not turn GET PERFORMANCE into an eject command. That distinction
+matters because these public windows show rotating overlay memory, not
+necessarily the currently executing command handler.
+
+That leaves us with a cleaner normal-mode picture. The stock READ BUFFER
+oracle is real but fenced into the public work-window surface. GET CONFIG and
+GET PERFORMANCE are safe ways to tag and harvest pieces of the normal runtime,
+but neither gives direct decoded CDD memory. The next realistic paths are now:
+stitch the harvested packet-shadow code offline, find a different harmless
+command family that exercises new handlers, or solve normal-mode patchability
+so we can redirect the already-known READ BUFFER machinery instead of merely
+watching it rotate past.
