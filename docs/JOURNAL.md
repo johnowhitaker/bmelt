@@ -1929,3 +1929,27 @@ this into a host-visible oracle, we likely need either a real normal-mode
 RAM/controller-memory write primitive or a proven currentboot-to-normal
 state-carryover trick. Writing a visible F0 offset is still the wrong default
 for this path.
+
+After the sled/eject surprise, I kept the next pass offline. The question was:
+are the normal-mode work-window bytes a clean decoded CDD image, or are they a
+rotating overlay surface? I added a classifier for every saved normal
+`0x070000` work-window tile. Across 509 captures it found 888 unique
+`0x40`-byte chunks. About half of them match visible artifacts somewhere
+else, but 387 do not match F0, the visible 8051 prefix, the helper overlay, or
+the saved currentboot gateway dump.
+
+That is exciting and humbling in equal measure. The stable public response
+bridge and the GET CONFIG `0x4099` seed are hidden normal-runtime code, not
+visible F0 bytes. But the same chunks move among public slots: the bridge tile
+appears at `+0x7100`, `+0x7140`, and `+0x7180`. If those offsets were trusted
+as decoded CDD addresses, the same code would land in different CDD records,
+which is nonsense. So this is probably decoded/controller or overlay material,
+but the public `READ BUFFER` offset is a tile viewport, not the true internal
+address.
+
+The practical result is a cleaner rule of engagement. Normal work-window
+tiles are now a useful hidden-runtime corpus for static study. They are not a
+linear dump to patch by offset. The response bridge remains the best
+host-visible hook target, but only after we learn a real normal-mode write
+primitive or a reliable way to carry a currentboot edit into the normal
+runtime.

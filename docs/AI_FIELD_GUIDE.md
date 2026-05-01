@@ -1855,3 +1855,15 @@ Immediate useful directions:
     currentboot `+0x7140` is unrelated. Practical patch implication: a normal
     response hook should target a true normal-mode RAM/controller write or a
     proven state-carryover primitive, not a guessed visible-F0 offset.
+66. `scripts/analyze_liteon_normal_hidden_runtime_chunks.py` and
+    `analysis/8051/normal-hidden-runtime-chunks-20260501.md/json` classify all
+    saved normal-mode `0x070000` work-window captures as rotating `0x40`-byte
+    tiles. Corpus: 509 captures, 888 unique chunks, 501 chunks with exact
+    visible/currentboot/helper reference matches, and 387 chunks without such
+    matches. Hidden-but-stable chunks include the public response bridge
+    `20ea2ab16891`, GET CONFIG seed `8d8c3b0a22a0`, and controller setup
+    chunk `4037c8574920`. The important caution is that the same chunk appears
+    at multiple public offsets, so public slot numbers like `+0x7140` cannot
+    be treated as direct decoded CDD addresses without a separate phase/address
+    model. Use this corpus as hidden-runtime code evidence, not as a linear
+    decoded CDD dump.

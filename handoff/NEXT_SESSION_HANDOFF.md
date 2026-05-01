@@ -750,3 +750,50 @@ Good next directions:
   a currentboot gateway page with a known normal counterpart, recover to normal
   without cold power, and immediately read the normal window;
 - avoid more sled/eject paths until there is a cleaner host-visible hook.
+
+## Latest Hidden Runtime Chunk Classifier
+
+New artifacts:
+
+```text
+scripts/analyze_liteon_normal_hidden_runtime_chunks.py
+analysis/8051/normal-hidden-runtime-chunks-20260501.md/json
+```
+
+This is offline only. It scans all saved normal `0x070000` work-window
+captures as `0x40`-byte rotating tiles and compares each unique tile against
+F0, visible 8051, the helper overlay, and the currentboot gateway dump.
+
+Result:
+
+```text
+captures scanned: 509
+unique chunks: 888
+exact visible/currentboot/helper matches: 501
+hidden/no exact reference match: 387
+```
+
+Important hidden chunks:
+
+```text
+20ea2ab16891  public 0x8a4c..0x8a4e -> 0x4011..0x4013 response bridge
+8d8c3b0a22a0  GET CONFIG 0x4099 -> 0x8a4d/0x8a4e/0x8a53/0x8a54 seed
+4037c8574920  GET CONFIG/controller setup: 0x4091..0x4093 and 0x409c kick
+2111cafaf69c  0x47b1 packet FIFO -> 0x8a4c..0x8a53 intake tile
+```
+
+The key caution: public offsets are not internal decoded addresses. The same
+bridge chunk appears at `+0x7100`, `+0x7140`, and `+0x7180`; if those offsets
+were interpreted directly through the CDD record map, the same code would map
+to different records. Treat the normal work-window as a hidden-runtime tile
+corpus. Do not treat it as a linear decoded CDD image unless a future phase or
+address model explains the rotation.
+
+Recommended next directions:
+
+- keep static work on the hidden tile corpus, especially chunks touching
+  `0x4000..0x409c`, `0x47xx/0x48xx`, and `0x59xx/0x5axx`;
+- look for a normal-mode write primitive or validated currentboot-to-normal
+  state carryover before attempting a response hook;
+- avoid START STOP/eject/mechanics paths for now because the latest live test
+  did an eject/sled dance.

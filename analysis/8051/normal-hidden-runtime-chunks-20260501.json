@@ -1,0 +1,5840 @@
+{
+  "captures_scanned": 509,
+  "run_dirs": [
+    "references/evidence/live/normal-work-window-capture-only-20260501",
+    "references/evidence/live/normal-work-window-error-path-pairs-20260501",
+    "references/evidence/live/normal-work-window-get-config-current-long-20260501",
+    "references/evidence/live/normal-work-window-get-config-field-variants-20260501",
+    "references/evidence/live/normal-work-window-get-config-field-variants-r5-long-20260501",
+    "references/evidence/live/normal-work-window-get-config-r5-01-isolated-20260501",
+    "references/evidence/live/normal-work-window-get-config-r5-f0-isolated-20260501",
+    "references/evidence/live/normal-work-window-get-config-variants-20260501",
+    "references/evidence/live/normal-work-window-get-performance-variants-20260501",
+    "references/evidence/live/normal-work-window-get-performance-variants-long-20260501",
+    "references/evidence/live/normal-work-window-isolated-event-media-20260501",
+    "references/evidence/live/normal-work-window-isolated-extrainq-20260501",
+    "references/evidence/live/normal-work-window-isolated-get-config-current-20260501",
+    "references/evidence/live/normal-work-window-isolated-mode-sense-all-20260501",
+    "references/evidence/live/normal-work-window-readstatus-correlation-20260501",
+    "references/evidence/live/normal-work-window-stimuli-expanded-20260501",
+    "references/evidence/live/normal-work-window-stimuli-focused-20260501",
+    "references/evidence/live/normal-work-window-stimuli-full-20260501",
+    "references/evidence/live/normal-work-window-stimulus-20260501"
+  ],
+  "chunk_size": 64,
+  "unique_chunks": 888,
+  "chunks_with_visible_refs": 501,
+  "chunks_without_visible_refs": 387,
+  "baseline_hashes": [
+    {
+      "path": "references/evidence/live/normal-read-buffer-work-window-20260501/id01-070000-010000-repeat1.bin",
+      "sha256": "1c6b88248e4fdc92edadb8b7d663431cc28b07aa16632b45909cb96038dbb458"
+    },
+    {
+      "path": "references/evidence/live/normal-read-buffer-work-window-20260501/id01-070000-010000-repeat2.bin",
+      "sha256": "d9e97157de47943d16c2b922eba10e796ddb5cb52b2c8631dfec4d6fcd4f5148"
+    },
+    {
+      "path": "references/evidence/live/normal-read-buffer-work-window-20260501/id01-070000-010000.bin",
+      "sha256": "c3cd6e6d3e25a55e54d779a0f71965e93315290ab44537df4f0b6393c0e840e7"
+    },
+    {
+      "path": "references/evidence/live/normal-read-buffer-work-window-20260501/id02-070000-010000-repeat1.bin",
+      "sha256": "7ff6f16aab240dd3b9162933387e9d4d520d336efb36e4dd74e186c24303921b"
+    },
+    {
+      "path": "references/evidence/live/normal-read-buffer-work-window-20260501/id02-070000-010000-repeat2.bin",
+      "sha256": "bc160b7767b3d8c27b89243f8214cbba4af1e729d68c39bb73030de27649ca7a"
+    },
+    {
+      "path": "references/evidence/live/normal-read-buffer-work-window-20260501/id02-070000-010000.bin",
+      "sha256": "3c78f44b80e972eafcdd92be7bc41596ca18481516af1e7525f85792ee379ebd"
+    }
+  ],
+  "anchor_chunks": {
+    "public_bridge_8a4c_to_4011": {
+      "short": "20ea2ab16891",
+      "sha256": "20ea2ab16891b5c70526dc35ea5187e6ab4d45b592920d95e255f52d34a09baa",
+      "observations": 509,
+      "offsets": [
+        {
+          "value": "0x7140",
+          "count": 251
+        },
+        {
+          "value": "0x7100",
+          "count": 136
+        },
+        {
+          "value": "0x7180",
+          "count": 122
+        }
+      ],
+      "runs": [
+        {
+          "value": "normal-work-window-get-performance-variants-long-20260501",
+          "count": 76
+        },
+        {
+          "value": "normal-work-window-get-config-field-variants-r5-long-20260501",
+          "count": 48
+        },
+        {
+          "value": "normal-work-window-stimuli-focused-20260501",
+          "count": 40
+        },
+        {
+          "value": "normal-work-window-get-performance-variants-20260501",
+          "count": 38
+        },
+        {
+          "value": "normal-work-window-get-config-current-long-20260501",
+          "count": 32
+        },
+        {
+          "value": "normal-work-window-get-config-r5-01-isolated-20260501",
+          "count": 32
+        }
+      ],
+      "entropy": 4.3881,
+      "hex": "8a29e0c4540f30e011908a4ce0c3940e4008904011740ef08008908a4ce0904011f0908a4de0904012f0908a4ee0904013f0908a50e0ffa3e078a9cff608eff6",
+      "exact_refs": {},
+      "patterns": {
+        "public_bridge_8a4c_to_4011": [
+          "0x1a"
+        ],
+        "public_bridge_8a4d_to_4012": [
+          "0x22"
+        ],
+        "public_bridge_8a4e_to_4013": [
+          "0x2a"
+        ]
+      },
+      "dptr_refs": [
+        {
+          "value": "0x8a4c",
+          "count": 2
+        },
+        {
+          "value": "0x4011",
+          "count": 2
+        },
+        {
+          "value": "0x8a4d",
+          "count": 1
+        },
+        {
+          "value": "0x4012",
+          "count": 1
+        },
+        {
+          "value": "0x8a4e",
+          "count": 1
+        },
+        {
+          "value": "0x4013",
+          "count": 1
+        },
+        {
+          "value": "0x8a50",
+          "count": 1
+        }
+      ],
+      "interesting_categories": {
+        "packet_shadow": 5,
+        "controller_status": 4
+      },
+      "direct_copies": [
+        {
+          "offset": "0x1a",
+          "src": "0x8a4c",
+          "dst": "0x4011"
+        },
+        {
+          "offset": "0x22",
+          "src": "0x8a4d",
+          "dst": "0x4012"
+        },
+        {
+          "offset": "0x2a",
+          "src": "0x8a4e",
+          "dst": "0x4013"
+        }
+      ],
+      "calls_and_jumps": [
+        {
+          "offset": "0x28",
+          "kind": "lcall",
+          "target": "0xf090"
+        }
+      ],
+      "cdd_public_offset_candidates": [
+        {
+          "public_offset": "0x7140",
+          "count": 251,
+          "record": 58,
+          "record_decoded_start": "0x06f50",
+          "record_decoded_span": "0x220",
+          "record_mode": "0x80",
+          "operation_key": "66228ca20005"
+        },
+        {
+          "public_offset": "0x7100",
+          "count": 136,
+          "record": 58,
+          "record_decoded_start": "0x06f50",
+          "record_decoded_span": "0x220",
+          "record_mode": "0x80",
+          "operation_key": "66228ca20005"
+        },
+        {
+          "public_offset": "0x7180",
+          "count": 122,
+          "record": 59,
+          "record_decoded_start": "0x07170",
+          "record_decoded_span": "0x130",
+          "record_mode": "0x80",
+          "operation_key": "30ca94930e05"
+        }
+      ],
+      "examples": [
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "00-capture-only.window.bin",
+          "offset": 29056
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "01-capture-only.window.bin",
+          "offset": 29056
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "02-capture-only.window.bin",
+          "offset": 29056
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "03-capture-only.window.bin",
+          "offset": 29056
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "04-capture-only.window.bin",
+          "offset": 29056
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "05-capture-only.window.bin",
+          "offset": 29056
+        }
+      ]
+    },
+    "public_bridge_8a4d_to_4012": {
+      "short": "20ea2ab16891",
+      "sha256": "20ea2ab16891b5c70526dc35ea5187e6ab4d45b592920d95e255f52d34a09baa",
+      "observations": 509,
+      "offsets": [
+        {
+          "value": "0x7140",
+          "count": 251
+        },
+        {
+          "value": "0x7100",
+          "count": 136
+        },
+        {
+          "value": "0x7180",
+          "count": 122
+        }
+      ],
+      "runs": [
+        {
+          "value": "normal-work-window-get-performance-variants-long-20260501",
+          "count": 76
+        },
+        {
+          "value": "normal-work-window-get-config-field-variants-r5-long-20260501",
+          "count": 48
+        },
+        {
+          "value": "normal-work-window-stimuli-focused-20260501",
+          "count": 40
+        },
+        {
+          "value": "normal-work-window-get-performance-variants-20260501",
+          "count": 38
+        },
+        {
+          "value": "normal-work-window-get-config-current-long-20260501",
+          "count": 32
+        },
+        {
+          "value": "normal-work-window-get-config-r5-01-isolated-20260501",
+          "count": 32
+        }
+      ],
+      "entropy": 4.3881,
+      "hex": "8a29e0c4540f30e011908a4ce0c3940e4008904011740ef08008908a4ce0904011f0908a4de0904012f0908a4ee0904013f0908a50e0ffa3e078a9cff608eff6",
+      "exact_refs": {},
+      "patterns": {
+        "public_bridge_8a4c_to_4011": [
+          "0x1a"
+        ],
+        "public_bridge_8a4d_to_4012": [
+          "0x22"
+        ],
+        "public_bridge_8a4e_to_4013": [
+          "0x2a"
+        ]
+      },
+      "dptr_refs": [
+        {
+          "value": "0x8a4c",
+          "count": 2
+        },
+        {
+          "value": "0x4011",
+          "count": 2
+        },
+        {
+          "value": "0x8a4d",
+          "count": 1
+        },
+        {
+          "value": "0x4012",
+          "count": 1
+        },
+        {
+          "value": "0x8a4e",
+          "count": 1
+        },
+        {
+          "value": "0x4013",
+          "count": 1
+        },
+        {
+          "value": "0x8a50",
+          "count": 1
+        }
+      ],
+      "interesting_categories": {
+        "packet_shadow": 5,
+        "controller_status": 4
+      },
+      "direct_copies": [
+        {
+          "offset": "0x1a",
+          "src": "0x8a4c",
+          "dst": "0x4011"
+        },
+        {
+          "offset": "0x22",
+          "src": "0x8a4d",
+          "dst": "0x4012"
+        },
+        {
+          "offset": "0x2a",
+          "src": "0x8a4e",
+          "dst": "0x4013"
+        }
+      ],
+      "calls_and_jumps": [
+        {
+          "offset": "0x28",
+          "kind": "lcall",
+          "target": "0xf090"
+        }
+      ],
+      "cdd_public_offset_candidates": [
+        {
+          "public_offset": "0x7140",
+          "count": 251,
+          "record": 58,
+          "record_decoded_start": "0x06f50",
+          "record_decoded_span": "0x220",
+          "record_mode": "0x80",
+          "operation_key": "66228ca20005"
+        },
+        {
+          "public_offset": "0x7100",
+          "count": 136,
+          "record": 58,
+          "record_decoded_start": "0x06f50",
+          "record_decoded_span": "0x220",
+          "record_mode": "0x80",
+          "operation_key": "66228ca20005"
+        },
+        {
+          "public_offset": "0x7180",
+          "count": 122,
+          "record": 59,
+          "record_decoded_start": "0x07170",
+          "record_decoded_span": "0x130",
+          "record_mode": "0x80",
+          "operation_key": "30ca94930e05"
+        }
+      ],
+      "examples": [
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "00-capture-only.window.bin",
+          "offset": 29056
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "01-capture-only.window.bin",
+          "offset": 29056
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "02-capture-only.window.bin",
+          "offset": 29056
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "03-capture-only.window.bin",
+          "offset": 29056
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "04-capture-only.window.bin",
+          "offset": 29056
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "05-capture-only.window.bin",
+          "offset": 29056
+        }
+      ]
+    },
+    "public_bridge_8a4e_to_4013": {
+      "short": "20ea2ab16891",
+      "sha256": "20ea2ab16891b5c70526dc35ea5187e6ab4d45b592920d95e255f52d34a09baa",
+      "observations": 509,
+      "offsets": [
+        {
+          "value": "0x7140",
+          "count": 251
+        },
+        {
+          "value": "0x7100",
+          "count": 136
+        },
+        {
+          "value": "0x7180",
+          "count": 122
+        }
+      ],
+      "runs": [
+        {
+          "value": "normal-work-window-get-performance-variants-long-20260501",
+          "count": 76
+        },
+        {
+          "value": "normal-work-window-get-config-field-variants-r5-long-20260501",
+          "count": 48
+        },
+        {
+          "value": "normal-work-window-stimuli-focused-20260501",
+          "count": 40
+        },
+        {
+          "value": "normal-work-window-get-performance-variants-20260501",
+          "count": 38
+        },
+        {
+          "value": "normal-work-window-get-config-current-long-20260501",
+          "count": 32
+        },
+        {
+          "value": "normal-work-window-get-config-r5-01-isolated-20260501",
+          "count": 32
+        }
+      ],
+      "entropy": 4.3881,
+      "hex": "8a29e0c4540f30e011908a4ce0c3940e4008904011740ef08008908a4ce0904011f0908a4de0904012f0908a4ee0904013f0908a50e0ffa3e078a9cff608eff6",
+      "exact_refs": {},
+      "patterns": {
+        "public_bridge_8a4c_to_4011": [
+          "0x1a"
+        ],
+        "public_bridge_8a4d_to_4012": [
+          "0x22"
+        ],
+        "public_bridge_8a4e_to_4013": [
+          "0x2a"
+        ]
+      },
+      "dptr_refs": [
+        {
+          "value": "0x8a4c",
+          "count": 2
+        },
+        {
+          "value": "0x4011",
+          "count": 2
+        },
+        {
+          "value": "0x8a4d",
+          "count": 1
+        },
+        {
+          "value": "0x4012",
+          "count": 1
+        },
+        {
+          "value": "0x8a4e",
+          "count": 1
+        },
+        {
+          "value": "0x4013",
+          "count": 1
+        },
+        {
+          "value": "0x8a50",
+          "count": 1
+        }
+      ],
+      "interesting_categories": {
+        "packet_shadow": 5,
+        "controller_status": 4
+      },
+      "direct_copies": [
+        {
+          "offset": "0x1a",
+          "src": "0x8a4c",
+          "dst": "0x4011"
+        },
+        {
+          "offset": "0x22",
+          "src": "0x8a4d",
+          "dst": "0x4012"
+        },
+        {
+          "offset": "0x2a",
+          "src": "0x8a4e",
+          "dst": "0x4013"
+        }
+      ],
+      "calls_and_jumps": [
+        {
+          "offset": "0x28",
+          "kind": "lcall",
+          "target": "0xf090"
+        }
+      ],
+      "cdd_public_offset_candidates": [
+        {
+          "public_offset": "0x7140",
+          "count": 251,
+          "record": 58,
+          "record_decoded_start": "0x06f50",
+          "record_decoded_span": "0x220",
+          "record_mode": "0x80",
+          "operation_key": "66228ca20005"
+        },
+        {
+          "public_offset": "0x7100",
+          "count": 136,
+          "record": 58,
+          "record_decoded_start": "0x06f50",
+          "record_decoded_span": "0x220",
+          "record_mode": "0x80",
+          "operation_key": "66228ca20005"
+        },
+        {
+          "public_offset": "0x7180",
+          "count": 122,
+          "record": 59,
+          "record_decoded_start": "0x07170",
+          "record_decoded_span": "0x130",
+          "record_mode": "0x80",
+          "operation_key": "30ca94930e05"
+        }
+      ],
+      "examples": [
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "00-capture-only.window.bin",
+          "offset": 29056
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "01-capture-only.window.bin",
+          "offset": 29056
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "02-capture-only.window.bin",
+          "offset": 29056
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "03-capture-only.window.bin",
+          "offset": 29056
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "04-capture-only.window.bin",
+          "offset": 29056
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "05-capture-only.window.bin",
+          "offset": 29056
+        }
+      ]
+    },
+    "getcfg_4099_to_shadow": {
+      "short": "8d8c3b0a22a0",
+      "sha256": "8d8c3b0a22a0fe85416ac5c659e610b6100fe9052009142cc97f1903545156af",
+      "observations": 39,
+      "offsets": [
+        {
+          "value": "0x7140",
+          "count": 21
+        },
+        {
+          "value": "0x7100",
+          "count": 12
+        },
+        {
+          "value": "0x7180",
+          "count": 6
+        }
+      ],
+      "runs": [
+        {
+          "value": "normal-work-window-get-config-field-variants-r5-long-20260501",
+          "count": 11
+        },
+        {
+          "value": "normal-work-window-get-config-field-variants-20260501",
+          "count": 6
+        },
+        {
+          "value": "normal-work-window-get-config-r5-f0-isolated-20260501",
+          "count": 6
+        },
+        {
+          "value": "normal-work-window-get-config-variants-20260501",
+          "count": 4
+        },
+        {
+          "value": "normal-work-window-stimuli-focused-20260501",
+          "count": 4
+        },
+        {
+          "value": "normal-work-window-get-config-current-long-20260501",
+          "count": 3
+        }
+      ],
+      "entropy": 4.566,
+      "hex": "8a4df0904099e0908a4ef0904099e0908a53f0904099e0908a54f0a87c08740426f618e436f6908a4de0b4fe028014908a4be0fea3e0ffa3e0fca3e0fdc39fec",
+      "exact_refs": {},
+      "patterns": {
+        "getcfg_4099_to_shadow": [
+          "0x3"
+        ],
+        "getcfg_fe_sentinel_branch": [
+          "0x26"
+        ]
+      },
+      "dptr_refs": [
+        {
+          "value": "0x4099",
+          "count": 3
+        },
+        {
+          "value": "0x8a4e",
+          "count": 1
+        },
+        {
+          "value": "0x8a53",
+          "count": 1
+        },
+        {
+          "value": "0x8a54",
+          "count": 1
+        },
+        {
+          "value": "0x8a4d",
+          "count": 1
+        },
+        {
+          "value": "0x8a4b",
+          "count": 1
+        }
+      ],
+      "interesting_categories": {
+        "controller_status": 3,
+        "packet_shadow": 5
+      },
+      "direct_copies": [
+        {
+          "offset": "0x03",
+          "src": "0x4099",
+          "dst": "0x8a4e"
+        },
+        {
+          "offset": "0x0b",
+          "src": "0x4099",
+          "dst": "0x8a53"
+        },
+        {
+          "offset": "0x13",
+          "src": "0x4099",
+          "dst": "0x8a54"
+        }
+      ],
+      "calls_and_jumps": [
+        {
+          "offset": "0x2c",
+          "kind": "ljmp",
+          "target": "0x8014"
+        }
+      ],
+      "cdd_public_offset_candidates": [
+        {
+          "public_offset": "0x7140",
+          "count": 21,
+          "record": 58,
+          "record_decoded_start": "0x06f50",
+          "record_decoded_span": "0x220",
+          "record_mode": "0x80",
+          "operation_key": "66228ca20005"
+        },
+        {
+          "public_offset": "0x7100",
+          "count": 12,
+          "record": 58,
+          "record_decoded_start": "0x06f50",
+          "record_decoded_span": "0x220",
+          "record_mode": "0x80",
+          "operation_key": "66228ca20005"
+        },
+        {
+          "public_offset": "0x7180",
+          "count": 6,
+          "record": 59,
+          "record_decoded_start": "0x07170",
+          "record_decoded_span": "0x130",
+          "record_mode": "0x80",
+          "operation_key": "30ca94930e05"
+        }
+      ],
+      "examples": [
+        {
+          "run": "normal-work-window-get-config-current-long-20260501",
+          "capture": "05-cycle02-get-configuration-current.window.bin",
+          "offset": 29056
+        },
+        {
+          "run": "normal-work-window-get-config-current-long-20260501",
+          "capture": "21-cycle10-get-configuration-current.window.bin",
+          "offset": 29056
+        },
+        {
+          "run": "normal-work-window-get-config-current-long-20260501",
+          "capture": "23-cycle11-get-configuration-current.window.bin",
+          "offset": 28992
+        },
+        {
+          "run": "normal-work-window-get-config-field-variants-20260501",
+          "capture": "02-cycle00-std-current-sf0020-len00fc.window.bin",
+          "offset": 28992
+        },
+        {
+          "run": "normal-work-window-get-config-field-variants-20260501",
+          "capture": "05-cycle00-r5-01-current-sf0000.window.bin",
+          "offset": 28928
+        },
+        {
+          "run": "normal-work-window-get-config-field-variants-20260501",
+          "capture": "17-cycle01-r5-f0-current-sf0000.window.bin",
+          "offset": 28928
+        }
+      ]
+    },
+    "getcfg_fe_sentinel_branch": {
+      "short": "8d8c3b0a22a0",
+      "sha256": "8d8c3b0a22a0fe85416ac5c659e610b6100fe9052009142cc97f1903545156af",
+      "observations": 39,
+      "offsets": [
+        {
+          "value": "0x7140",
+          "count": 21
+        },
+        {
+          "value": "0x7100",
+          "count": 12
+        },
+        {
+          "value": "0x7180",
+          "count": 6
+        }
+      ],
+      "runs": [
+        {
+          "value": "normal-work-window-get-config-field-variants-r5-long-20260501",
+          "count": 11
+        },
+        {
+          "value": "normal-work-window-get-config-field-variants-20260501",
+          "count": 6
+        },
+        {
+          "value": "normal-work-window-get-config-r5-f0-isolated-20260501",
+          "count": 6
+        },
+        {
+          "value": "normal-work-window-get-config-variants-20260501",
+          "count": 4
+        },
+        {
+          "value": "normal-work-window-stimuli-focused-20260501",
+          "count": 4
+        },
+        {
+          "value": "normal-work-window-get-config-current-long-20260501",
+          "count": 3
+        }
+      ],
+      "entropy": 4.566,
+      "hex": "8a4df0904099e0908a4ef0904099e0908a53f0904099e0908a54f0a87c08740426f618e436f6908a4de0b4fe028014908a4be0fea3e0ffa3e0fca3e0fdc39fec",
+      "exact_refs": {},
+      "patterns": {
+        "getcfg_4099_to_shadow": [
+          "0x3"
+        ],
+        "getcfg_fe_sentinel_branch": [
+          "0x26"
+        ]
+      },
+      "dptr_refs": [
+        {
+          "value": "0x4099",
+          "count": 3
+        },
+        {
+          "value": "0x8a4e",
+          "count": 1
+        },
+        {
+          "value": "0x8a53",
+          "count": 1
+        },
+        {
+          "value": "0x8a54",
+          "count": 1
+        },
+        {
+          "value": "0x8a4d",
+          "count": 1
+        },
+        {
+          "value": "0x8a4b",
+          "count": 1
+        }
+      ],
+      "interesting_categories": {
+        "controller_status": 3,
+        "packet_shadow": 5
+      },
+      "direct_copies": [
+        {
+          "offset": "0x03",
+          "src": "0x4099",
+          "dst": "0x8a4e"
+        },
+        {
+          "offset": "0x0b",
+          "src": "0x4099",
+          "dst": "0x8a53"
+        },
+        {
+          "offset": "0x13",
+          "src": "0x4099",
+          "dst": "0x8a54"
+        }
+      ],
+      "calls_and_jumps": [
+        {
+          "offset": "0x2c",
+          "kind": "ljmp",
+          "target": "0x8014"
+        }
+      ],
+      "cdd_public_offset_candidates": [
+        {
+          "public_offset": "0x7140",
+          "count": 21,
+          "record": 58,
+          "record_decoded_start": "0x06f50",
+          "record_decoded_span": "0x220",
+          "record_mode": "0x80",
+          "operation_key": "66228ca20005"
+        },
+        {
+          "public_offset": "0x7100",
+          "count": 12,
+          "record": 58,
+          "record_decoded_start": "0x06f50",
+          "record_decoded_span": "0x220",
+          "record_mode": "0x80",
+          "operation_key": "66228ca20005"
+        },
+        {
+          "public_offset": "0x7180",
+          "count": 6,
+          "record": 59,
+          "record_decoded_start": "0x07170",
+          "record_decoded_span": "0x130",
+          "record_mode": "0x80",
+          "operation_key": "30ca94930e05"
+        }
+      ],
+      "examples": [
+        {
+          "run": "normal-work-window-get-config-current-long-20260501",
+          "capture": "05-cycle02-get-configuration-current.window.bin",
+          "offset": 29056
+        },
+        {
+          "run": "normal-work-window-get-config-current-long-20260501",
+          "capture": "21-cycle10-get-configuration-current.window.bin",
+          "offset": 29056
+        },
+        {
+          "run": "normal-work-window-get-config-current-long-20260501",
+          "capture": "23-cycle11-get-configuration-current.window.bin",
+          "offset": 28992
+        },
+        {
+          "run": "normal-work-window-get-config-field-variants-20260501",
+          "capture": "02-cycle00-std-current-sf0020-len00fc.window.bin",
+          "offset": 28992
+        },
+        {
+          "run": "normal-work-window-get-config-field-variants-20260501",
+          "capture": "05-cycle00-r5-01-current-sf0000.window.bin",
+          "offset": 28928
+        },
+        {
+          "run": "normal-work-window-get-config-field-variants-20260501",
+          "capture": "17-cycle01-r5-f0-current-sf0000.window.bin",
+          "offset": 28928
+        }
+      ]
+    },
+    "controller_addr_4091": {
+      "short": "4037c8574920",
+      "sha256": "4037c8574920413d30329489b03ad575a6b0eb5e0a6fb3452ccbf4acb39ecd55",
+      "observations": 39,
+      "offsets": [
+        {
+          "value": "0x70c0",
+          "count": 17
+        },
+        {
+          "value": "0x7000",
+          "count": 15
+        },
+        {
+          "value": "0x7080",
+          "count": 7
+        }
+      ],
+      "runs": [
+        {
+          "value": "normal-work-window-get-config-field-variants-r5-long-20260501",
+          "count": 11
+        },
+        {
+          "value": "normal-work-window-get-config-field-variants-20260501",
+          "count": 6
+        },
+        {
+          "value": "normal-work-window-get-config-r5-f0-isolated-20260501",
+          "count": 6
+        },
+        {
+          "value": "normal-work-window-get-config-variants-20260501",
+          "count": 4
+        },
+        {
+          "value": "normal-work-window-stimuli-focused-20260501",
+          "count": 4
+        },
+        {
+          "value": "normal-work-window-get-config-current-long-20260501",
+          "count": 3
+        }
+      ],
+      "entropy": 4.554,
+      "hex": "08eff6904000e020e7f9908ac6e0904091f0a87c0808e6a3f07b00a97c09097a00900001122fb7904093f090409c7440f07424f090409ce020e5f9904099e090",
+      "exact_refs": {},
+      "patterns": {
+        "controller_addr_4091": [
+          "0xe"
+        ],
+        "controller_kick_409c": [
+          "0x2b",
+          "0x34"
+        ]
+      },
+      "dptr_refs": [
+        {
+          "value": "0x409c",
+          "count": 2
+        },
+        {
+          "value": "0x4000",
+          "count": 1
+        },
+        {
+          "value": "0x8ac6",
+          "count": 1
+        },
+        {
+          "value": "0x4091",
+          "count": 1
+        },
+        {
+          "value": "0x0001",
+          "count": 1
+        },
+        {
+          "value": "0x4093",
+          "count": 1
+        },
+        {
+          "value": "0x4099",
+          "count": 1
+        }
+      ],
+      "interesting_categories": {
+        "controller_status": 6,
+        "packet_shadow": 1
+      },
+      "direct_copies": [
+        {
+          "offset": "0x0a",
+          "src": "0x8ac6",
+          "dst": "0x4091"
+        }
+      ],
+      "calls_and_jumps": [
+        {
+          "offset": "0x24",
+          "kind": "lcall",
+          "target": "0x2fb7"
+        }
+      ],
+      "cdd_public_offset_candidates": [
+        {
+          "public_offset": "0x70c0",
+          "count": 17,
+          "record": 58,
+          "record_decoded_start": "0x06f50",
+          "record_decoded_span": "0x220",
+          "record_mode": "0x80",
+          "operation_key": "66228ca20005"
+        },
+        {
+          "public_offset": "0x7000",
+          "count": 15,
+          "record": 58,
+          "record_decoded_start": "0x06f50",
+          "record_decoded_span": "0x220",
+          "record_mode": "0x80",
+          "operation_key": "66228ca20005"
+        },
+        {
+          "public_offset": "0x7080",
+          "count": 7,
+          "record": 58,
+          "record_decoded_start": "0x06f50",
+          "record_decoded_span": "0x220",
+          "record_mode": "0x80",
+          "operation_key": "66228ca20005"
+        }
+      ],
+      "examples": [
+        {
+          "run": "normal-work-window-get-config-current-long-20260501",
+          "capture": "05-cycle02-get-configuration-current.window.bin",
+          "offset": 28864
+        },
+        {
+          "run": "normal-work-window-get-config-current-long-20260501",
+          "capture": "21-cycle10-get-configuration-current.window.bin",
+          "offset": 28864
+        },
+        {
+          "run": "normal-work-window-get-config-current-long-20260501",
+          "capture": "23-cycle11-get-configuration-current.window.bin",
+          "offset": 28800
+        },
+        {
+          "run": "normal-work-window-get-config-field-variants-20260501",
+          "capture": "02-cycle00-std-current-sf0020-len00fc.window.bin",
+          "offset": 28672
+        },
+        {
+          "run": "normal-work-window-get-config-field-variants-20260501",
+          "capture": "05-cycle00-r5-01-current-sf0000.window.bin",
+          "offset": 28864
+        },
+        {
+          "run": "normal-work-window-get-config-field-variants-20260501",
+          "capture": "17-cycle01-r5-f0-current-sf0000.window.bin",
+          "offset": 28864
+        }
+      ]
+    },
+    "controller_kick_409c": {
+      "short": "4037c8574920",
+      "sha256": "4037c8574920413d30329489b03ad575a6b0eb5e0a6fb3452ccbf4acb39ecd55",
+      "observations": 39,
+      "offsets": [
+        {
+          "value": "0x70c0",
+          "count": 17
+        },
+        {
+          "value": "0x7000",
+          "count": 15
+        },
+        {
+          "value": "0x7080",
+          "count": 7
+        }
+      ],
+      "runs": [
+        {
+          "value": "normal-work-window-get-config-field-variants-r5-long-20260501",
+          "count": 11
+        },
+        {
+          "value": "normal-work-window-get-config-field-variants-20260501",
+          "count": 6
+        },
+        {
+          "value": "normal-work-window-get-config-r5-f0-isolated-20260501",
+          "count": 6
+        },
+        {
+          "value": "normal-work-window-get-config-variants-20260501",
+          "count": 4
+        },
+        {
+          "value": "normal-work-window-stimuli-focused-20260501",
+          "count": 4
+        },
+        {
+          "value": "normal-work-window-get-config-current-long-20260501",
+          "count": 3
+        }
+      ],
+      "entropy": 4.554,
+      "hex": "08eff6904000e020e7f9908ac6e0904091f0a87c0808e6a3f07b00a97c09097a00900001122fb7904093f090409c7440f07424f090409ce020e5f9904099e090",
+      "exact_refs": {},
+      "patterns": {
+        "controller_addr_4091": [
+          "0xe"
+        ],
+        "controller_kick_409c": [
+          "0x2b",
+          "0x34"
+        ]
+      },
+      "dptr_refs": [
+        {
+          "value": "0x409c",
+          "count": 2
+        },
+        {
+          "value": "0x4000",
+          "count": 1
+        },
+        {
+          "value": "0x8ac6",
+          "count": 1
+        },
+        {
+          "value": "0x4091",
+          "count": 1
+        },
+        {
+          "value": "0x0001",
+          "count": 1
+        },
+        {
+          "value": "0x4093",
+          "count": 1
+        },
+        {
+          "value": "0x4099",
+          "count": 1
+        }
+      ],
+      "interesting_categories": {
+        "controller_status": 6,
+        "packet_shadow": 1
+      },
+      "direct_copies": [
+        {
+          "offset": "0x0a",
+          "src": "0x8ac6",
+          "dst": "0x4091"
+        }
+      ],
+      "calls_and_jumps": [
+        {
+          "offset": "0x24",
+          "kind": "lcall",
+          "target": "0x2fb7"
+        }
+      ],
+      "cdd_public_offset_candidates": [
+        {
+          "public_offset": "0x70c0",
+          "count": 17,
+          "record": 58,
+          "record_decoded_start": "0x06f50",
+          "record_decoded_span": "0x220",
+          "record_mode": "0x80",
+          "operation_key": "66228ca20005"
+        },
+        {
+          "public_offset": "0x7000",
+          "count": 15,
+          "record": 58,
+          "record_decoded_start": "0x06f50",
+          "record_decoded_span": "0x220",
+          "record_mode": "0x80",
+          "operation_key": "66228ca20005"
+        },
+        {
+          "public_offset": "0x7080",
+          "count": 7,
+          "record": 58,
+          "record_decoded_start": "0x06f50",
+          "record_decoded_span": "0x220",
+          "record_mode": "0x80",
+          "operation_key": "66228ca20005"
+        }
+      ],
+      "examples": [
+        {
+          "run": "normal-work-window-get-config-current-long-20260501",
+          "capture": "05-cycle02-get-configuration-current.window.bin",
+          "offset": 28864
+        },
+        {
+          "run": "normal-work-window-get-config-current-long-20260501",
+          "capture": "21-cycle10-get-configuration-current.window.bin",
+          "offset": 28864
+        },
+        {
+          "run": "normal-work-window-get-config-current-long-20260501",
+          "capture": "23-cycle11-get-configuration-current.window.bin",
+          "offset": 28800
+        },
+        {
+          "run": "normal-work-window-get-config-field-variants-20260501",
+          "capture": "02-cycle00-std-current-sf0020-len00fc.window.bin",
+          "offset": 28672
+        },
+        {
+          "run": "normal-work-window-get-config-field-variants-20260501",
+          "capture": "05-cycle00-r5-01-current-sf0000.window.bin",
+          "offset": 28864
+        },
+        {
+          "run": "normal-work-window-get-config-field-variants-20260501",
+          "capture": "17-cycle01-r5-f0-current-sf0000.window.bin",
+          "offset": 28864
+        }
+      ]
+    },
+    "controller_addr_4095": {
+      "short": "28583441dfa8",
+      "sha256": "28583441dfa8a17c7789580205a507d45cf44d71dacddd583a7f3b51cc4cf4c2",
+      "observations": 508,
+      "offsets": [
+        {
+          "value": "0x7380",
+          "count": 508
+        }
+      ],
+      "runs": [
+        {
+          "value": "normal-work-window-get-performance-variants-long-20260501",
+          "count": 76
+        },
+        {
+          "value": "normal-work-window-get-config-field-variants-r5-long-20260501",
+          "count": 48
+        },
+        {
+          "value": "normal-work-window-stimuli-focused-20260501",
+          "count": 40
+        },
+        {
+          "value": "normal-work-window-get-performance-variants-20260501",
+          "count": 38
+        },
+        {
+          "value": "normal-work-window-get-config-current-long-20260501",
+          "count": 32
+        },
+        {
+          "value": "normal-work-window-get-config-r5-01-isolated-20260501",
+          "count": 32
+        }
+      ],
+      "entropy": 4.8496,
+      "hex": "feef78aa26ffee1836a87c0808f608eff6904000e020e7f9908ac6e0904095f0a87c0808e6a3f07b00a97c09097a00900001122fb7904097f090409c7440f090",
+      "exact_refs": {},
+      "patterns": {
+        "controller_addr_4095": [
+          "0x1c"
+        ],
+        "controller_kick_409c": [
+          "0x39"
+        ]
+      },
+      "dptr_refs": [
+        {
+          "value": "0x4000",
+          "count": 1
+        },
+        {
+          "value": "0x8ac6",
+          "count": 1
+        },
+        {
+          "value": "0x4095",
+          "count": 1
+        },
+        {
+          "value": "0x0001",
+          "count": 1
+        },
+        {
+          "value": "0x4097",
+          "count": 1
+        },
+        {
+          "value": "0x409c",
+          "count": 1
+        }
+      ],
+      "interesting_categories": {
+        "controller_status": 4,
+        "packet_shadow": 1
+      },
+      "direct_copies": [
+        {
+          "offset": "0x18",
+          "src": "0x8ac6",
+          "dst": "0x4095"
+        }
+      ],
+      "calls_and_jumps": [
+        {
+          "offset": "0x32",
+          "kind": "lcall",
+          "target": "0x2fb7"
+        }
+      ],
+      "cdd_public_offset_candidates": [
+        {
+          "public_offset": "0x7380",
+          "count": 508,
+          "record": 60,
+          "record_decoded_start": "0x072a0",
+          "record_decoded_span": "0x350",
+          "record_mode": "0x40",
+          "operation_key": "950a90757805"
+        }
+      ],
+      "examples": [
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "00-capture-only.window.bin",
+          "offset": 29568
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "01-capture-only.window.bin",
+          "offset": 29568
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "02-capture-only.window.bin",
+          "offset": 29568
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "03-capture-only.window.bin",
+          "offset": 29568
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "04-capture-only.window.bin",
+          "offset": 29568
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "05-capture-only.window.bin",
+          "offset": 29568
+        }
+      ]
+    }
+  },
+  "top_hidden_runtime_chunks": [
+    {
+      "short": "20ea2ab16891",
+      "sha256": "20ea2ab16891b5c70526dc35ea5187e6ab4d45b592920d95e255f52d34a09baa",
+      "observations": 509,
+      "offsets": [
+        {
+          "value": "0x7140",
+          "count": 251
+        },
+        {
+          "value": "0x7100",
+          "count": 136
+        },
+        {
+          "value": "0x7180",
+          "count": 122
+        }
+      ],
+      "runs": [
+        {
+          "value": "normal-work-window-get-performance-variants-long-20260501",
+          "count": 76
+        },
+        {
+          "value": "normal-work-window-get-config-field-variants-r5-long-20260501",
+          "count": 48
+        },
+        {
+          "value": "normal-work-window-stimuli-focused-20260501",
+          "count": 40
+        },
+        {
+          "value": "normal-work-window-get-performance-variants-20260501",
+          "count": 38
+        },
+        {
+          "value": "normal-work-window-get-config-current-long-20260501",
+          "count": 32
+        },
+        {
+          "value": "normal-work-window-get-config-r5-01-isolated-20260501",
+          "count": 32
+        }
+      ],
+      "entropy": 4.3881,
+      "hex": "8a29e0c4540f30e011908a4ce0c3940e4008904011740ef08008908a4ce0904011f0908a4de0904012f0908a4ee0904013f0908a50e0ffa3e078a9cff608eff6",
+      "exact_refs": {},
+      "patterns": {
+        "public_bridge_8a4c_to_4011": [
+          "0x1a"
+        ],
+        "public_bridge_8a4d_to_4012": [
+          "0x22"
+        ],
+        "public_bridge_8a4e_to_4013": [
+          "0x2a"
+        ]
+      },
+      "dptr_refs": [
+        {
+          "value": "0x8a4c",
+          "count": 2
+        },
+        {
+          "value": "0x4011",
+          "count": 2
+        },
+        {
+          "value": "0x8a4d",
+          "count": 1
+        },
+        {
+          "value": "0x4012",
+          "count": 1
+        },
+        {
+          "value": "0x8a4e",
+          "count": 1
+        },
+        {
+          "value": "0x4013",
+          "count": 1
+        },
+        {
+          "value": "0x8a50",
+          "count": 1
+        }
+      ],
+      "interesting_categories": {
+        "packet_shadow": 5,
+        "controller_status": 4
+      },
+      "direct_copies": [
+        {
+          "offset": "0x1a",
+          "src": "0x8a4c",
+          "dst": "0x4011"
+        },
+        {
+          "offset": "0x22",
+          "src": "0x8a4d",
+          "dst": "0x4012"
+        },
+        {
+          "offset": "0x2a",
+          "src": "0x8a4e",
+          "dst": "0x4013"
+        }
+      ],
+      "calls_and_jumps": [
+        {
+          "offset": "0x28",
+          "kind": "lcall",
+          "target": "0xf090"
+        }
+      ],
+      "cdd_public_offset_candidates": [
+        {
+          "public_offset": "0x7140",
+          "count": 251,
+          "record": 58,
+          "record_decoded_start": "0x06f50",
+          "record_decoded_span": "0x220",
+          "record_mode": "0x80",
+          "operation_key": "66228ca20005"
+        },
+        {
+          "public_offset": "0x7100",
+          "count": 136,
+          "record": 58,
+          "record_decoded_start": "0x06f50",
+          "record_decoded_span": "0x220",
+          "record_mode": "0x80",
+          "operation_key": "66228ca20005"
+        },
+        {
+          "public_offset": "0x7180",
+          "count": 122,
+          "record": 59,
+          "record_decoded_start": "0x07170",
+          "record_decoded_span": "0x130",
+          "record_mode": "0x80",
+          "operation_key": "30ca94930e05"
+        }
+      ],
+      "examples": [
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "00-capture-only.window.bin",
+          "offset": 29056
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "01-capture-only.window.bin",
+          "offset": 29056
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "02-capture-only.window.bin",
+          "offset": 29056
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "03-capture-only.window.bin",
+          "offset": 29056
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "04-capture-only.window.bin",
+          "offset": 29056
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "05-capture-only.window.bin",
+          "offset": 29056
+        }
+      ]
+    },
+    {
+      "short": "8d8c3b0a22a0",
+      "sha256": "8d8c3b0a22a0fe85416ac5c659e610b6100fe9052009142cc97f1903545156af",
+      "observations": 39,
+      "offsets": [
+        {
+          "value": "0x7140",
+          "count": 21
+        },
+        {
+          "value": "0x7100",
+          "count": 12
+        },
+        {
+          "value": "0x7180",
+          "count": 6
+        }
+      ],
+      "runs": [
+        {
+          "value": "normal-work-window-get-config-field-variants-r5-long-20260501",
+          "count": 11
+        },
+        {
+          "value": "normal-work-window-get-config-field-variants-20260501",
+          "count": 6
+        },
+        {
+          "value": "normal-work-window-get-config-r5-f0-isolated-20260501",
+          "count": 6
+        },
+        {
+          "value": "normal-work-window-get-config-variants-20260501",
+          "count": 4
+        },
+        {
+          "value": "normal-work-window-stimuli-focused-20260501",
+          "count": 4
+        },
+        {
+          "value": "normal-work-window-get-config-current-long-20260501",
+          "count": 3
+        }
+      ],
+      "entropy": 4.566,
+      "hex": "8a4df0904099e0908a4ef0904099e0908a53f0904099e0908a54f0a87c08740426f618e436f6908a4de0b4fe028014908a4be0fea3e0ffa3e0fca3e0fdc39fec",
+      "exact_refs": {},
+      "patterns": {
+        "getcfg_4099_to_shadow": [
+          "0x3"
+        ],
+        "getcfg_fe_sentinel_branch": [
+          "0x26"
+        ]
+      },
+      "dptr_refs": [
+        {
+          "value": "0x4099",
+          "count": 3
+        },
+        {
+          "value": "0x8a4e",
+          "count": 1
+        },
+        {
+          "value": "0x8a53",
+          "count": 1
+        },
+        {
+          "value": "0x8a54",
+          "count": 1
+        },
+        {
+          "value": "0x8a4d",
+          "count": 1
+        },
+        {
+          "value": "0x8a4b",
+          "count": 1
+        }
+      ],
+      "interesting_categories": {
+        "controller_status": 3,
+        "packet_shadow": 5
+      },
+      "direct_copies": [
+        {
+          "offset": "0x03",
+          "src": "0x4099",
+          "dst": "0x8a4e"
+        },
+        {
+          "offset": "0x0b",
+          "src": "0x4099",
+          "dst": "0x8a53"
+        },
+        {
+          "offset": "0x13",
+          "src": "0x4099",
+          "dst": "0x8a54"
+        }
+      ],
+      "calls_and_jumps": [
+        {
+          "offset": "0x2c",
+          "kind": "ljmp",
+          "target": "0x8014"
+        }
+      ],
+      "cdd_public_offset_candidates": [
+        {
+          "public_offset": "0x7140",
+          "count": 21,
+          "record": 58,
+          "record_decoded_start": "0x06f50",
+          "record_decoded_span": "0x220",
+          "record_mode": "0x80",
+          "operation_key": "66228ca20005"
+        },
+        {
+          "public_offset": "0x7100",
+          "count": 12,
+          "record": 58,
+          "record_decoded_start": "0x06f50",
+          "record_decoded_span": "0x220",
+          "record_mode": "0x80",
+          "operation_key": "66228ca20005"
+        },
+        {
+          "public_offset": "0x7180",
+          "count": 6,
+          "record": 59,
+          "record_decoded_start": "0x07170",
+          "record_decoded_span": "0x130",
+          "record_mode": "0x80",
+          "operation_key": "30ca94930e05"
+        }
+      ],
+      "examples": [
+        {
+          "run": "normal-work-window-get-config-current-long-20260501",
+          "capture": "05-cycle02-get-configuration-current.window.bin",
+          "offset": 29056
+        },
+        {
+          "run": "normal-work-window-get-config-current-long-20260501",
+          "capture": "21-cycle10-get-configuration-current.window.bin",
+          "offset": 29056
+        },
+        {
+          "run": "normal-work-window-get-config-current-long-20260501",
+          "capture": "23-cycle11-get-configuration-current.window.bin",
+          "offset": 28992
+        },
+        {
+          "run": "normal-work-window-get-config-field-variants-20260501",
+          "capture": "02-cycle00-std-current-sf0020-len00fc.window.bin",
+          "offset": 28992
+        },
+        {
+          "run": "normal-work-window-get-config-field-variants-20260501",
+          "capture": "05-cycle00-r5-01-current-sf0000.window.bin",
+          "offset": 28928
+        },
+        {
+          "run": "normal-work-window-get-config-field-variants-20260501",
+          "capture": "17-cycle01-r5-f0-current-sf0000.window.bin",
+          "offset": 28928
+        }
+      ]
+    },
+    {
+      "short": "2111cafaf69c",
+      "sha256": "2111cafaf69c3db58c6a8fa9f9393e70e78b160c528ad2794f5d67c59a6ccf2e",
+      "observations": 509,
+      "offsets": [
+        {
+          "value": "0x9540",
+          "count": 143
+        },
+        {
+          "value": "0x9500",
+          "count": 130
+        },
+        {
+          "value": "0x9580",
+          "count": 125
+        },
+        {
+          "value": "0x95c0",
+          "count": 111
+        }
+      ],
+      "runs": [
+        {
+          "value": "normal-work-window-get-performance-variants-long-20260501",
+          "count": 76
+        },
+        {
+          "value": "normal-work-window-get-config-field-variants-r5-long-20260501",
+          "count": 48
+        },
+        {
+          "value": "normal-work-window-stimuli-focused-20260501",
+          "count": 40
+        },
+        {
+          "value": "normal-work-window-get-performance-variants-20260501",
+          "count": 38
+        },
+        {
+          "value": "normal-work-window-get-config-current-long-20260501",
+          "count": 32
+        },
+        {
+          "value": "normal-work-window-get-config-r5-01-isolated-20260501",
+          "count": 32
+        }
+      ],
+      "entropy": 3.125,
+      "hex": "47b1e0908a4cf09047b1e0908a4df09047b1e0908a4ef09047b1e0908a4ff09047b1e0908a50f09047b1e0908a51f09047b1e0908a52f09047b1e0908a53f090",
+      "exact_refs": {},
+      "patterns": {},
+      "dptr_refs": [
+        {
+          "value": "0x47b1",
+          "count": 7
+        },
+        {
+          "value": "0x8a4c",
+          "count": 1
+        },
+        {
+          "value": "0x8a4d",
+          "count": 1
+        },
+        {
+          "value": "0x8a4e",
+          "count": 1
+        },
+        {
+          "value": "0x8a4f",
+          "count": 1
+        },
+        {
+          "value": "0x8a50",
+          "count": 1
+        },
+        {
+          "value": "0x8a51",
+          "count": 1
+        },
+        {
+          "value": "0x8a52",
+          "count": 1
+        },
+        {
+          "value": "0x8a53",
+          "count": 1
+        }
+      ],
+      "interesting_categories": {
+        "packet_shadow": 8,
+        "front_panel_or_status": 7
+      },
+      "direct_copies": [
+        {
+          "offset": "0x07",
+          "src": "0x47b1",
+          "dst": "0x8a4d"
+        },
+        {
+          "offset": "0x0f",
+          "src": "0x47b1",
+          "dst": "0x8a4e"
+        },
+        {
+          "offset": "0x17",
+          "src": "0x47b1",
+          "dst": "0x8a4f"
+        },
+        {
+          "offset": "0x1f",
+          "src": "0x47b1",
+          "dst": "0x8a50"
+        },
+        {
+          "offset": "0x27",
+          "src": "0x47b1",
+          "dst": "0x8a51"
+        },
+        {
+          "offset": "0x2f",
+          "src": "0x47b1",
+          "dst": "0x8a52"
+        },
+        {
+          "offset": "0x37",
+          "src": "0x47b1",
+          "dst": "0x8a53"
+        }
+      ],
+      "calls_and_jumps": [],
+      "cdd_public_offset_candidates": [
+        {
+          "public_offset": "0x9540",
+          "count": 143,
+          "record": 84,
+          "record_decoded_start": "0x094e0",
+          "record_decoded_span": "0xa0",
+          "record_mode": "0x80",
+          "operation_key": "3b0a538aa203"
+        },
+        {
+          "public_offset": "0x9500",
+          "count": 130,
+          "record": 84,
+          "record_decoded_start": "0x094e0",
+          "record_decoded_span": "0xa0",
+          "record_mode": "0x80",
+          "operation_key": "3b0a538aa203"
+        },
+        {
+          "public_offset": "0x9580",
+          "count": 125,
+          "record": 85,
+          "record_decoded_start": "0x09580",
+          "record_decoded_span": "0x300",
+          "record_mode": "0x40",
+          "operation_key": "5f925170d804"
+        },
+        {
+          "public_offset": "0x95c0",
+          "count": 111,
+          "record": 85,
+          "record_decoded_start": "0x09580",
+          "record_decoded_span": "0x300",
+          "record_mode": "0x40",
+          "operation_key": "5f925170d804"
+        }
+      ],
+      "examples": [
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "00-capture-only.window.bin",
+          "offset": 38336
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "01-capture-only.window.bin",
+          "offset": 38208
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "02-capture-only.window.bin",
+          "offset": 38336
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "03-capture-only.window.bin",
+          "offset": 38336
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "04-capture-only.window.bin",
+          "offset": 38272
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "05-capture-only.window.bin",
+          "offset": 38208
+        }
+      ]
+    },
+    {
+      "short": "4037c8574920",
+      "sha256": "4037c8574920413d30329489b03ad575a6b0eb5e0a6fb3452ccbf4acb39ecd55",
+      "observations": 39,
+      "offsets": [
+        {
+          "value": "0x70c0",
+          "count": 17
+        },
+        {
+          "value": "0x7000",
+          "count": 15
+        },
+        {
+          "value": "0x7080",
+          "count": 7
+        }
+      ],
+      "runs": [
+        {
+          "value": "normal-work-window-get-config-field-variants-r5-long-20260501",
+          "count": 11
+        },
+        {
+          "value": "normal-work-window-get-config-field-variants-20260501",
+          "count": 6
+        },
+        {
+          "value": "normal-work-window-get-config-r5-f0-isolated-20260501",
+          "count": 6
+        },
+        {
+          "value": "normal-work-window-get-config-variants-20260501",
+          "count": 4
+        },
+        {
+          "value": "normal-work-window-stimuli-focused-20260501",
+          "count": 4
+        },
+        {
+          "value": "normal-work-window-get-config-current-long-20260501",
+          "count": 3
+        }
+      ],
+      "entropy": 4.554,
+      "hex": "08eff6904000e020e7f9908ac6e0904091f0a87c0808e6a3f07b00a97c09097a00900001122fb7904093f090409c7440f07424f090409ce020e5f9904099e090",
+      "exact_refs": {},
+      "patterns": {
+        "controller_addr_4091": [
+          "0xe"
+        ],
+        "controller_kick_409c": [
+          "0x2b",
+          "0x34"
+        ]
+      },
+      "dptr_refs": [
+        {
+          "value": "0x409c",
+          "count": 2
+        },
+        {
+          "value": "0x4000",
+          "count": 1
+        },
+        {
+          "value": "0x8ac6",
+          "count": 1
+        },
+        {
+          "value": "0x4091",
+          "count": 1
+        },
+        {
+          "value": "0x0001",
+          "count": 1
+        },
+        {
+          "value": "0x4093",
+          "count": 1
+        },
+        {
+          "value": "0x4099",
+          "count": 1
+        }
+      ],
+      "interesting_categories": {
+        "controller_status": 6,
+        "packet_shadow": 1
+      },
+      "direct_copies": [
+        {
+          "offset": "0x0a",
+          "src": "0x8ac6",
+          "dst": "0x4091"
+        }
+      ],
+      "calls_and_jumps": [
+        {
+          "offset": "0x24",
+          "kind": "lcall",
+          "target": "0x2fb7"
+        }
+      ],
+      "cdd_public_offset_candidates": [
+        {
+          "public_offset": "0x70c0",
+          "count": 17,
+          "record": 58,
+          "record_decoded_start": "0x06f50",
+          "record_decoded_span": "0x220",
+          "record_mode": "0x80",
+          "operation_key": "66228ca20005"
+        },
+        {
+          "public_offset": "0x7000",
+          "count": 15,
+          "record": 58,
+          "record_decoded_start": "0x06f50",
+          "record_decoded_span": "0x220",
+          "record_mode": "0x80",
+          "operation_key": "66228ca20005"
+        },
+        {
+          "public_offset": "0x7080",
+          "count": 7,
+          "record": 58,
+          "record_decoded_start": "0x06f50",
+          "record_decoded_span": "0x220",
+          "record_mode": "0x80",
+          "operation_key": "66228ca20005"
+        }
+      ],
+      "examples": [
+        {
+          "run": "normal-work-window-get-config-current-long-20260501",
+          "capture": "05-cycle02-get-configuration-current.window.bin",
+          "offset": 28864
+        },
+        {
+          "run": "normal-work-window-get-config-current-long-20260501",
+          "capture": "21-cycle10-get-configuration-current.window.bin",
+          "offset": 28864
+        },
+        {
+          "run": "normal-work-window-get-config-current-long-20260501",
+          "capture": "23-cycle11-get-configuration-current.window.bin",
+          "offset": 28800
+        },
+        {
+          "run": "normal-work-window-get-config-field-variants-20260501",
+          "capture": "02-cycle00-std-current-sf0020-len00fc.window.bin",
+          "offset": 28672
+        },
+        {
+          "run": "normal-work-window-get-config-field-variants-20260501",
+          "capture": "05-cycle00-r5-01-current-sf0000.window.bin",
+          "offset": 28864
+        },
+        {
+          "run": "normal-work-window-get-config-field-variants-20260501",
+          "capture": "17-cycle01-r5-f0-current-sf0000.window.bin",
+          "offset": 28864
+        }
+      ]
+    },
+    {
+      "short": "c5c0741f5daa",
+      "sha256": "c5c0741f5daa580c2f3dd3ba451a6a7060426d388a5ba30ebcd09ea218fa8022",
+      "observations": 509,
+      "offsets": [
+        {
+          "value": "0x84c0",
+          "count": 256
+        },
+        {
+          "value": "0x8480",
+          "count": 253
+        }
+      ],
+      "runs": [
+        {
+          "value": "normal-work-window-get-performance-variants-long-20260501",
+          "count": 76
+        },
+        {
+          "value": "normal-work-window-get-config-field-variants-r5-long-20260501",
+          "count": 48
+        },
+        {
+          "value": "normal-work-window-stimuli-focused-20260501",
+          "count": 40
+        },
+        {
+          "value": "normal-work-window-get-performance-variants-20260501",
+          "count": 38
+        },
+        {
+          "value": "normal-work-window-get-config-current-long-20260501",
+          "count": 32
+        },
+        {
+          "value": "normal-work-window-get-config-r5-01-isolated-20260501",
+          "count": 32
+        }
+      ],
+      "entropy": 3.7377,
+      "hex": "862cf090596ae090862df0905906e0908633f090590de090862ff0905a00e0908632f0904863e0908630f0904840e0908631f090862fe0ff54f790590df09086",
+      "exact_refs": {},
+      "patterns": {},
+      "dptr_refs": [
+        {
+          "value": "0x590d",
+          "count": 2
+        },
+        {
+          "value": "0x862f",
+          "count": 2
+        },
+        {
+          "value": "0x596a",
+          "count": 1
+        },
+        {
+          "value": "0x862d",
+          "count": 1
+        },
+        {
+          "value": "0x5906",
+          "count": 1
+        },
+        {
+          "value": "0x8633",
+          "count": 1
+        },
+        {
+          "value": "0x5a00",
+          "count": 1
+        },
+        {
+          "value": "0x8632",
+          "count": 1
+        },
+        {
+          "value": "0x4863",
+          "count": 1
+        },
+        {
+          "value": "0x8630",
+          "count": 1
+        },
+        {
+          "value": "0x4840",
+          "count": 1
+        },
+        {
+          "value": "0x8631",
+          "count": 1
+        }
+      ],
+      "interesting_categories": {
+        "profile_string_area": 4,
+        "packet_shadow": 7,
+        "front_panel_or_status": 2
+      },
+      "direct_copies": [
+        {
+          "offset": "0x03",
+          "src": "0x596a",
+          "dst": "0x862d"
+        },
+        {
+          "offset": "0x0b",
+          "src": "0x5906",
+          "dst": "0x8633"
+        },
+        {
+          "offset": "0x13",
+          "src": "0x590d",
+          "dst": "0x862f"
+        },
+        {
+          "offset": "0x1b",
+          "src": "0x5a00",
+          "dst": "0x8632"
+        },
+        {
+          "offset": "0x23",
+          "src": "0x4863",
+          "dst": "0x8630"
+        },
+        {
+          "offset": "0x2b",
+          "src": "0x4840",
+          "dst": "0x8631"
+        }
+      ],
+      "calls_and_jumps": [],
+      "cdd_public_offset_candidates": [
+        {
+          "public_offset": "0x84c0",
+          "count": 256,
+          "record": 68,
+          "record_decoded_start": "0x08310",
+          "record_decoded_span": "0x280",
+          "record_mode": "0x80",
+          "operation_key": "0fe212a8d404"
+        },
+        {
+          "public_offset": "0x8480",
+          "count": 253,
+          "record": 68,
+          "record_decoded_start": "0x08310",
+          "record_decoded_span": "0x280",
+          "record_mode": "0x80",
+          "operation_key": "0fe212a8d404"
+        }
+      ],
+      "examples": [
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "00-capture-only.window.bin",
+          "offset": 33920
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "01-capture-only.window.bin",
+          "offset": 33920
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "02-capture-only.window.bin",
+          "offset": 33920
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "03-capture-only.window.bin",
+          "offset": 33920
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "04-capture-only.window.bin",
+          "offset": 33920
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "05-capture-only.window.bin",
+          "offset": 33920
+        }
+      ]
+    },
+    {
+      "short": "28583441dfa8",
+      "sha256": "28583441dfa8a17c7789580205a507d45cf44d71dacddd583a7f3b51cc4cf4c2",
+      "observations": 508,
+      "offsets": [
+        {
+          "value": "0x7380",
+          "count": 508
+        }
+      ],
+      "runs": [
+        {
+          "value": "normal-work-window-get-performance-variants-long-20260501",
+          "count": 76
+        },
+        {
+          "value": "normal-work-window-get-config-field-variants-r5-long-20260501",
+          "count": 48
+        },
+        {
+          "value": "normal-work-window-stimuli-focused-20260501",
+          "count": 40
+        },
+        {
+          "value": "normal-work-window-get-performance-variants-20260501",
+          "count": 38
+        },
+        {
+          "value": "normal-work-window-get-config-current-long-20260501",
+          "count": 32
+        },
+        {
+          "value": "normal-work-window-get-config-r5-01-isolated-20260501",
+          "count": 32
+        }
+      ],
+      "entropy": 4.8496,
+      "hex": "feef78aa26ffee1836a87c0808f608eff6904000e020e7f9908ac6e0904095f0a87c0808e6a3f07b00a97c09097a00900001122fb7904097f090409c7440f090",
+      "exact_refs": {},
+      "patterns": {
+        "controller_addr_4095": [
+          "0x1c"
+        ],
+        "controller_kick_409c": [
+          "0x39"
+        ]
+      },
+      "dptr_refs": [
+        {
+          "value": "0x4000",
+          "count": 1
+        },
+        {
+          "value": "0x8ac6",
+          "count": 1
+        },
+        {
+          "value": "0x4095",
+          "count": 1
+        },
+        {
+          "value": "0x0001",
+          "count": 1
+        },
+        {
+          "value": "0x4097",
+          "count": 1
+        },
+        {
+          "value": "0x409c",
+          "count": 1
+        }
+      ],
+      "interesting_categories": {
+        "controller_status": 4,
+        "packet_shadow": 1
+      },
+      "direct_copies": [
+        {
+          "offset": "0x18",
+          "src": "0x8ac6",
+          "dst": "0x4095"
+        }
+      ],
+      "calls_and_jumps": [
+        {
+          "offset": "0x32",
+          "kind": "lcall",
+          "target": "0x2fb7"
+        }
+      ],
+      "cdd_public_offset_candidates": [
+        {
+          "public_offset": "0x7380",
+          "count": 508,
+          "record": 60,
+          "record_decoded_start": "0x072a0",
+          "record_decoded_span": "0x350",
+          "record_mode": "0x40",
+          "operation_key": "950a90757805"
+        }
+      ],
+      "examples": [
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "00-capture-only.window.bin",
+          "offset": 29568
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "01-capture-only.window.bin",
+          "offset": 29568
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "02-capture-only.window.bin",
+          "offset": 29568
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "03-capture-only.window.bin",
+          "offset": 29568
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "04-capture-only.window.bin",
+          "offset": 29568
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "05-capture-only.window.bin",
+          "offset": 29568
+        }
+      ]
+    },
+    {
+      "short": "0c9a360d26b8",
+      "sha256": "0c9a360d26b83e035c169dd98abb00961fb76184388d3ad0940c3e8a389544b2",
+      "observations": 508,
+      "offsets": [
+        {
+          "value": "0x76c0",
+          "count": 255
+        },
+        {
+          "value": "0x7600",
+          "count": 253
+        }
+      ],
+      "runs": [
+        {
+          "value": "normal-work-window-get-performance-variants-long-20260501",
+          "count": 76
+        },
+        {
+          "value": "normal-work-window-get-config-field-variants-r5-long-20260501",
+          "count": 48
+        },
+        {
+          "value": "normal-work-window-stimuli-focused-20260501",
+          "count": 40
+        },
+        {
+          "value": "normal-work-window-get-performance-variants-20260501",
+          "count": 38
+        },
+        {
+          "value": "normal-work-window-get-config-current-long-20260501",
+          "count": 32
+        },
+        {
+          "value": "normal-work-window-get-config-r5-01-isolated-20260501",
+          "count": 32
+        }
+      ],
+      "entropy": 4.8846,
+      "hex": "8ac6e0904091f0a87c0808e6a3f07b00a97c09097a00900001122fb7904093f090409c7440f07420f090409ce020e5f9908a4ee0540f24a0f582e43440f583e0",
+      "exact_refs": {},
+      "patterns": {
+        "controller_addr_4091": [
+          "0x3"
+        ],
+        "controller_kick_409c": [
+          "0x20",
+          "0x29"
+        ]
+      },
+      "dptr_refs": [
+        {
+          "value": "0x409c",
+          "count": 2
+        },
+        {
+          "value": "0x4091",
+          "count": 1
+        },
+        {
+          "value": "0x0001",
+          "count": 1
+        },
+        {
+          "value": "0x4093",
+          "count": 1
+        },
+        {
+          "value": "0x8a4e",
+          "count": 1
+        }
+      ],
+      "interesting_categories": {
+        "controller_status": 4,
+        "packet_shadow": 1
+      },
+      "direct_copies": [],
+      "calls_and_jumps": [
+        {
+          "offset": "0x19",
+          "kind": "lcall",
+          "target": "0x2fb7"
+        }
+      ],
+      "cdd_public_offset_candidates": [
+        {
+          "public_offset": "0x76c0",
+          "count": 255,
+          "record": 62,
+          "record_decoded_start": "0x07610",
+          "record_decoded_span": "0x1d0",
+          "record_mode": "0x80",
+          "operation_key": "9fd2119d4c04"
+        },
+        {
+          "public_offset": "0x7600",
+          "count": 253,
+          "record": 61,
+          "record_decoded_start": "0x075f0",
+          "record_decoded_span": "0x20",
+          "record_mode": "0x80",
+          "operation_key": "80e25282fa04"
+        }
+      ],
+      "examples": [
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "00-capture-only.window.bin",
+          "offset": 30208
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "01-capture-only.window.bin",
+          "offset": 30208
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "02-capture-only.window.bin",
+          "offset": 30208
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "03-capture-only.window.bin",
+          "offset": 30208
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "04-capture-only.window.bin",
+          "offset": 30208
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "05-capture-only.window.bin",
+          "offset": 30208
+        }
+      ]
+    },
+    {
+      "short": "9b673c066ae4",
+      "sha256": "9b673c066ae46057009d7f962320e5ff963e1c4f7437d95e328290edeb39a3b7",
+      "observations": 506,
+      "offsets": [
+        {
+          "value": "0x74c0",
+          "count": 502
+        },
+        {
+          "value": "0x7480",
+          "count": 4
+        }
+      ],
+      "runs": [
+        {
+          "value": "normal-work-window-get-performance-variants-long-20260501",
+          "count": 76
+        },
+        {
+          "value": "normal-work-window-get-config-field-variants-r5-long-20260501",
+          "count": 48
+        },
+        {
+          "value": "normal-work-window-stimuli-focused-20260501",
+          "count": 40
+        },
+        {
+          "value": "normal-work-window-get-performance-variants-20260501",
+          "count": 38
+        },
+        {
+          "value": "normal-work-window-get-config-current-long-20260501",
+          "count": 32
+        },
+        {
+          "value": "normal-work-window-get-config-r5-01-isolated-20260501",
+          "count": 32
+        }
+      ],
+      "entropy": 4.2434,
+      "hex": "8a4de0904099f0908a4ee0904099f0908a53e0904099f0908a54e0904099f0a3e4f0a304f0a37414f090409ce020e4f978aa740426f618e436f6908a4de07002",
+      "exact_refs": {},
+      "patterns": {
+        "controller_kick_409c": [
+          "0x29"
+        ]
+      },
+      "dptr_refs": [
+        {
+          "value": "0x4099",
+          "count": 4
+        },
+        {
+          "value": "0x8a4e",
+          "count": 1
+        },
+        {
+          "value": "0x8a53",
+          "count": 1
+        },
+        {
+          "value": "0x8a54",
+          "count": 1
+        },
+        {
+          "value": "0x409c",
+          "count": 1
+        },
+        {
+          "value": "0x8a4d",
+          "count": 1
+        }
+      ],
+      "interesting_categories": {
+        "controller_status": 5,
+        "packet_shadow": 4
+      },
+      "direct_copies": [
+        {
+          "offset": "0x07",
+          "src": "0x8a4e",
+          "dst": "0x4099"
+        },
+        {
+          "offset": "0x0f",
+          "src": "0x8a53",
+          "dst": "0x4099"
+        },
+        {
+          "offset": "0x17",
+          "src": "0x8a54",
+          "dst": "0x4099"
+        }
+      ],
+      "calls_and_jumps": [],
+      "cdd_public_offset_candidates": [
+        {
+          "public_offset": "0x74c0",
+          "count": 502,
+          "record": 60,
+          "record_decoded_start": "0x072a0",
+          "record_decoded_span": "0x350",
+          "record_mode": "0x40",
+          "operation_key": "950a90757805"
+        },
+        {
+          "public_offset": "0x7480",
+          "count": 4,
+          "record": 60,
+          "record_decoded_start": "0x072a0",
+          "record_decoded_span": "0x350",
+          "record_mode": "0x40",
+          "operation_key": "950a90757805"
+        }
+      ],
+      "examples": [
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "00-capture-only.window.bin",
+          "offset": 29888
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "01-capture-only.window.bin",
+          "offset": 29888
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "02-capture-only.window.bin",
+          "offset": 29888
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "03-capture-only.window.bin",
+          "offset": 29888
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "04-capture-only.window.bin",
+          "offset": 29888
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "05-capture-only.window.bin",
+          "offset": 29888
+        }
+      ]
+    },
+    {
+      "short": "580b9228d0b9",
+      "sha256": "580b9228d0b9056b382865df7785bb65b7bcabed406da47bb0ef8b5839b544ce",
+      "observations": 256,
+      "offsets": [
+        {
+          "value": "0x7640",
+          "count": 256
+        }
+      ],
+      "runs": [
+        {
+          "value": "normal-work-window-get-performance-variants-long-20260501",
+          "count": 76
+        },
+        {
+          "value": "normal-work-window-get-config-field-variants-r5-long-20260501",
+          "count": 48
+        },
+        {
+          "value": "normal-work-window-get-performance-variants-20260501",
+          "count": 38
+        },
+        {
+          "value": "normal-work-window-get-config-r5-01-isolated-20260501",
+          "count": 32
+        },
+        {
+          "value": "normal-work-window-get-config-r5-f0-isolated-20260501",
+          "count": 32
+        },
+        {
+          "value": "normal-work-window-get-config-field-variants-20260501",
+          "count": 30
+        }
+      ],
+      "entropy": 4.4567,
+      "hex": "1ce03403f543904095eff0a3e543f0a3e544f090409ae4f0a37405f0a3743af090409ce020e4f990409ae4f0a304f0a37432f090409ce020e4f9d0d092af22d3",
+      "exact_refs": {},
+      "patterns": {
+        "controller_addr_4095": [
+          "0x6"
+        ],
+        "controller_kick_409c": [
+          "0x20",
+          "0x33"
+        ]
+      },
+      "dptr_refs": [
+        {
+          "value": "0x409a",
+          "count": 2
+        },
+        {
+          "value": "0x409c",
+          "count": 2
+        },
+        {
+          "value": "0x4095",
+          "count": 1
+        }
+      ],
+      "interesting_categories": {
+        "controller_status": 5
+      },
+      "direct_copies": [],
+      "calls_and_jumps": [],
+      "cdd_public_offset_candidates": [
+        {
+          "public_offset": "0x7640",
+          "count": 256,
+          "record": 62,
+          "record_decoded_start": "0x07610",
+          "record_decoded_span": "0x1d0",
+          "record_mode": "0x80",
+          "operation_key": "9fd2119d4c04"
+        }
+      ],
+      "examples": [
+        {
+          "run": "normal-work-window-get-config-field-variants-20260501",
+          "capture": "00-cycle00-baseline-no-stimulus.window.bin",
+          "offset": 30272
+        },
+        {
+          "run": "normal-work-window-get-config-field-variants-20260501",
+          "capture": "01-cycle00-std-current-sf0000-len00fc.window.bin",
+          "offset": 30272
+        },
+        {
+          "run": "normal-work-window-get-config-field-variants-20260501",
+          "capture": "02-cycle00-std-current-sf0020-len00fc.window.bin",
+          "offset": 30272
+        },
+        {
+          "run": "normal-work-window-get-config-field-variants-20260501",
+          "capture": "03-cycle00-r4-01-current-sf0000.window.bin",
+          "offset": 30272
+        },
+        {
+          "run": "normal-work-window-get-config-field-variants-20260501",
+          "capture": "04-cycle00-r4-fe-current-sf0000.window.bin",
+          "offset": 30272
+        },
+        {
+          "run": "normal-work-window-get-config-field-variants-20260501",
+          "capture": "05-cycle00-r5-01-current-sf0000.window.bin",
+          "offset": 30272
+        }
+      ]
+    },
+    {
+      "short": "fb00deab088b",
+      "sha256": "fb00deab088bdb7eb48f541a37bff391fa3155bd86c433427e42e2158d125f45",
+      "observations": 509,
+      "offsets": [
+        {
+          "value": "0x8780",
+          "count": 217
+        },
+        {
+          "value": "0x8740",
+          "count": 118
+        },
+        {
+          "value": "0x87c0",
+          "count": 93
+        },
+        {
+          "value": "0x8700",
+          "count": 81
+        }
+      ],
+      "runs": [
+        {
+          "value": "normal-work-window-get-performance-variants-long-20260501",
+          "count": 76
+        },
+        {
+          "value": "normal-work-window-get-config-field-variants-r5-long-20260501",
+          "count": 48
+        },
+        {
+          "value": "normal-work-window-stimuli-focused-20260501",
+          "count": 40
+        },
+        {
+          "value": "normal-work-window-get-performance-variants-20260501",
+          "count": 38
+        },
+        {
+          "value": "normal-work-window-get-config-current-long-20260501",
+          "count": 32
+        },
+        {
+          "value": "normal-work-window-get-config-r5-01-isolated-20260501",
+          "count": 32
+        }
+      ],
+      "entropy": 4.0326,
+      "hex": "e0904091f0a3e55ef0a3e55ff0904000e020e7f9904098e0904000e020e7f9904098e0f55f904000e020e7f9904098e55ff0904000e020e7f9d0d092af22c24f",
+      "exact_refs": {},
+      "patterns": {
+        "controller_addr_4091": [
+          "0x1"
+        ]
+      },
+      "dptr_refs": [
+        {
+          "value": "0x4000",
+          "count": 4
+        },
+        {
+          "value": "0x4098",
+          "count": 3
+        },
+        {
+          "value": "0x4091",
+          "count": 1
+        }
+      ],
+      "interesting_categories": {
+        "controller_status": 8
+      },
+      "direct_copies": [],
+      "calls_and_jumps": [],
+      "cdd_public_offset_candidates": [
+        {
+          "public_offset": "0x8780",
+          "count": 217,
+          "record": 70,
+          "record_decoded_start": "0x08700",
+          "record_decoded_span": "0x230",
+          "record_mode": "0x80",
+          "operation_key": "098ad4a36805"
+        },
+        {
+          "public_offset": "0x8740",
+          "count": 118,
+          "record": 70,
+          "record_decoded_start": "0x08700",
+          "record_decoded_span": "0x230",
+          "record_mode": "0x80",
+          "operation_key": "098ad4a36805"
+        },
+        {
+          "public_offset": "0x87c0",
+          "count": 93,
+          "record": 70,
+          "record_decoded_start": "0x08700",
+          "record_decoded_span": "0x230",
+          "record_mode": "0x80",
+          "operation_key": "098ad4a36805"
+        },
+        {
+          "public_offset": "0x8700",
+          "count": 81,
+          "record": 70,
+          "record_decoded_start": "0x08700",
+          "record_decoded_span": "0x230",
+          "record_mode": "0x80",
+          "operation_key": "098ad4a36805"
+        }
+      ],
+      "examples": [
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "00-capture-only.window.bin",
+          "offset": 34624
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "01-capture-only.window.bin",
+          "offset": 34624
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "02-capture-only.window.bin",
+          "offset": 34624
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "03-capture-only.window.bin",
+          "offset": 34624
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "04-capture-only.window.bin",
+          "offset": 34624
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "05-capture-only.window.bin",
+          "offset": 34624
+        }
+      ]
+    },
+    {
+      "short": "95caa55b881e",
+      "sha256": "95caa55b881e4a03c00ebe93d832419d9a78df14262d6e983140861331a52a9a",
+      "observations": 473,
+      "offsets": [
+        {
+          "value": "0x6b80",
+          "count": 248
+        },
+        {
+          "value": "0x6b00",
+          "count": 117
+        },
+        {
+          "value": "0x6bc0",
+          "count": 63
+        },
+        {
+          "value": "0x6b40",
+          "count": 45
+        }
+      ],
+      "runs": [
+        {
+          "value": "normal-work-window-get-performance-variants-long-20260501",
+          "count": 63
+        },
+        {
+          "value": "normal-work-window-get-config-field-variants-r5-long-20260501",
+          "count": 48
+        },
+        {
+          "value": "normal-work-window-stimuli-focused-20260501",
+          "count": 38
+        },
+        {
+          "value": "normal-work-window-get-config-current-long-20260501",
+          "count": 32
+        },
+        {
+          "value": "normal-work-window-get-config-r5-01-isolated-20260501",
+          "count": 32
+        },
+        {
+          "value": "normal-work-window-get-config-r5-f0-isolated-20260501",
+          "count": 32
+        }
+      ],
+      "entropy": 4.1748,
+      "hex": "007e02120b079085efe09048f4f09085f0e09048f5f09085f1e09048f6f09085f2e09048c8f09085f3e09048eff09085eee024ff22908626eff0a31234550000",
+      "exact_refs": {},
+      "patterns": {},
+      "dptr_refs": [
+        {
+          "value": "0x85ef",
+          "count": 1
+        },
+        {
+          "value": "0x48f4",
+          "count": 1
+        },
+        {
+          "value": "0x85f0",
+          "count": 1
+        },
+        {
+          "value": "0x48f5",
+          "count": 1
+        },
+        {
+          "value": "0x85f1",
+          "count": 1
+        },
+        {
+          "value": "0x48f6",
+          "count": 1
+        },
+        {
+          "value": "0x85f2",
+          "count": 1
+        },
+        {
+          "value": "0x48c8",
+          "count": 1
+        },
+        {
+          "value": "0x85f3",
+          "count": 1
+        },
+        {
+          "value": "0x48ef",
+          "count": 1
+        },
+        {
+          "value": "0x85ee",
+          "count": 1
+        },
+        {
+          "value": "0x8626",
+          "count": 1
+        }
+      ],
+      "interesting_categories": {
+        "packet_shadow": 7,
+        "front_panel_or_status": 5
+      },
+      "direct_copies": [
+        {
+          "offset": "0x06",
+          "src": "0x85ef",
+          "dst": "0x48f4"
+        },
+        {
+          "offset": "0x0e",
+          "src": "0x85f0",
+          "dst": "0x48f5"
+        },
+        {
+          "offset": "0x16",
+          "src": "0x85f1",
+          "dst": "0x48f6"
+        },
+        {
+          "offset": "0x1e",
+          "src": "0x85f2",
+          "dst": "0x48c8"
+        },
+        {
+          "offset": "0x26",
+          "src": "0x85f3",
+          "dst": "0x48ef"
+        }
+      ],
+      "calls_and_jumps": [
+        {
+          "offset": "0x02",
+          "kind": "ljmp",
+          "target": "0x120b"
+        },
+        {
+          "offset": "0x03",
+          "kind": "lcall",
+          "target": "0x0b07"
+        },
+        {
+          "offset": "0x3b",
+          "kind": "lcall",
+          "target": "0x3455"
+        }
+      ],
+      "cdd_public_offset_candidates": [
+        {
+          "public_offset": "0x6b80",
+          "count": 248,
+          "record": 55,
+          "record_decoded_start": "0x06940",
+          "record_decoded_span": "0x380",
+          "record_mode": "0x40",
+          "operation_key": "a742d3782e04"
+        },
+        {
+          "public_offset": "0x6b00",
+          "count": 117,
+          "record": 55,
+          "record_decoded_start": "0x06940",
+          "record_decoded_span": "0x380",
+          "record_mode": "0x40",
+          "operation_key": "a742d3782e04"
+        },
+        {
+          "public_offset": "0x6bc0",
+          "count": 63,
+          "record": 55,
+          "record_decoded_start": "0x06940",
+          "record_decoded_span": "0x380",
+          "record_mode": "0x40",
+          "operation_key": "a742d3782e04"
+        },
+        {
+          "public_offset": "0x6b40",
+          "count": 45,
+          "record": 55,
+          "record_decoded_start": "0x06940",
+          "record_decoded_span": "0x380",
+          "record_mode": "0x40",
+          "operation_key": "a742d3782e04"
+        }
+      ],
+      "examples": [
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "00-capture-only.window.bin",
+          "offset": 27520
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "01-capture-only.window.bin",
+          "offset": 27520
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "02-capture-only.window.bin",
+          "offset": 27520
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "03-capture-only.window.bin",
+          "offset": 27520
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "04-capture-only.window.bin",
+          "offset": 27520
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "05-capture-only.window.bin",
+          "offset": 27520
+        }
+      ]
+    },
+    {
+      "short": "efcb6299a750",
+      "sha256": "efcb6299a750931625bb1dc282eaf2f64f65e32d8dc12038f61794a77835d98c",
+      "observations": 264,
+      "offsets": [
+        {
+          "value": "0x7f80",
+          "count": 185
+        },
+        {
+          "value": "0x7fc0",
+          "count": 60
+        },
+        {
+          "value": "0x7f40",
+          "count": 19
+        }
+      ],
+      "runs": [
+        {
+          "value": "normal-work-window-get-config-field-variants-r5-long-20260501",
+          "count": 47
+        },
+        {
+          "value": "normal-work-window-get-config-r5-f0-isolated-20260501",
+          "count": 32
+        },
+        {
+          "value": "normal-work-window-get-config-current-long-20260501",
+          "count": 31
+        },
+        {
+          "value": "normal-work-window-get-config-r5-01-isolated-20260501",
+          "count": 31
+        },
+        {
+          "value": "normal-work-window-stimuli-focused-20260501",
+          "count": 31
+        },
+        {
+          "value": "normal-work-window-get-config-field-variants-20260501",
+          "count": 29
+        }
+      ],
+      "entropy": 4.671,
+      "hex": "097a00900001122fb7904093f090409c7440f07422f090409ce020e5f9904099e0908a53f0904099e0908a54f078a1e66003303907e4908a54f08060301f5d20",
+      "exact_refs": {},
+      "patterns": {
+        "controller_kick_409c": [
+          "0xd",
+          "0x16"
+        ]
+      },
+      "dptr_refs": [
+        {
+          "value": "0x409c",
+          "count": 2
+        },
+        {
+          "value": "0x4099",
+          "count": 2
+        },
+        {
+          "value": "0x8a54",
+          "count": 2
+        },
+        {
+          "value": "0x0001",
+          "count": 1
+        },
+        {
+          "value": "0x4093",
+          "count": 1
+        },
+        {
+          "value": "0x8a53",
+          "count": 1
+        }
+      ],
+      "interesting_categories": {
+        "controller_status": 5,
+        "packet_shadow": 3
+      },
+      "direct_copies": [
+        {
+          "offset": "0x1d",
+          "src": "0x4099",
+          "dst": "0x8a53"
+        },
+        {
+          "offset": "0x25",
+          "src": "0x4099",
+          "dst": "0x8a54"
+        }
+      ],
+      "calls_and_jumps": [
+        {
+          "offset": "0x06",
+          "kind": "lcall",
+          "target": "0x2fb7"
+        }
+      ],
+      "cdd_public_offset_candidates": [
+        {
+          "public_offset": "0x7f80",
+          "count": 185,
+          "record": 66,
+          "record_decoded_start": "0x07db0",
+          "record_decoded_span": "0x2d0",
+          "record_mode": "0x80",
+          "operation_key": "4e8210adb204"
+        },
+        {
+          "public_offset": "0x7fc0",
+          "count": 60,
+          "record": 66,
+          "record_decoded_start": "0x07db0",
+          "record_decoded_span": "0x2d0",
+          "record_mode": "0x80",
+          "operation_key": "4e8210adb204"
+        },
+        {
+          "public_offset": "0x7f40",
+          "count": 19,
+          "record": 66,
+          "record_decoded_start": "0x07db0",
+          "record_decoded_span": "0x2d0",
+          "record_mode": "0x80",
+          "operation_key": "4e8210adb204"
+        }
+      ],
+      "examples": [
+        {
+          "run": "normal-work-window-get-config-current-long-20260501",
+          "capture": "01-cycle00-get-configuration-current.window.bin",
+          "offset": 32640
+        },
+        {
+          "run": "normal-work-window-get-config-current-long-20260501",
+          "capture": "02-cycle01-baseline-no-stimulus.window.bin",
+          "offset": 32640
+        },
+        {
+          "run": "normal-work-window-get-config-current-long-20260501",
+          "capture": "03-cycle01-get-configuration-current.window.bin",
+          "offset": 32640
+        },
+        {
+          "run": "normal-work-window-get-config-current-long-20260501",
+          "capture": "04-cycle02-baseline-no-stimulus.window.bin",
+          "offset": 32640
+        },
+        {
+          "run": "normal-work-window-get-config-current-long-20260501",
+          "capture": "05-cycle02-get-configuration-current.window.bin",
+          "offset": 32640
+        },
+        {
+          "run": "normal-work-window-get-config-current-long-20260501",
+          "capture": "06-cycle03-baseline-no-stimulus.window.bin",
+          "offset": 32640
+        }
+      ]
+    },
+    {
+      "short": "70e7ea0193bb",
+      "sha256": "70e7ea0193bb46087a581d0b17035207696350ffc4aa4f6f6e211afdeb4dace9",
+      "observations": 509,
+      "offsets": [
+        {
+          "value": "0x8800",
+          "count": 256
+        },
+        {
+          "value": "0x8880",
+          "count": 253
+        }
+      ],
+      "runs": [
+        {
+          "value": "normal-work-window-get-performance-variants-long-20260501",
+          "count": 76
+        },
+        {
+          "value": "normal-work-window-get-config-field-variants-r5-long-20260501",
+          "count": 48
+        },
+        {
+          "value": "normal-work-window-stimuli-focused-20260501",
+          "count": 40
+        },
+        {
+          "value": "normal-work-window-get-performance-variants-20260501",
+          "count": 38
+        },
+        {
+          "value": "normal-work-window-get-config-current-long-20260501",
+          "count": 32
+        },
+        {
+          "value": "normal-work-window-get-config-r5-01-isolated-20260501",
+          "count": 32
+        }
+      ],
+      "entropy": 4.4421,
+      "hex": "908633e0905906f090862fe090590df0908631e0904840f0908630e0904863f0908638e060057f031227b7908639e0f5a8908636e0fea3e07806cec313ce13d8",
+      "exact_refs": {},
+      "patterns": {},
+      "dptr_refs": [
+        {
+          "value": "0x8633",
+          "count": 1
+        },
+        {
+          "value": "0x5906",
+          "count": 1
+        },
+        {
+          "value": "0x862f",
+          "count": 1
+        },
+        {
+          "value": "0x590d",
+          "count": 1
+        },
+        {
+          "value": "0x8631",
+          "count": 1
+        },
+        {
+          "value": "0x4840",
+          "count": 1
+        },
+        {
+          "value": "0x8630",
+          "count": 1
+        },
+        {
+          "value": "0x4863",
+          "count": 1
+        },
+        {
+          "value": "0x8638",
+          "count": 1
+        },
+        {
+          "value": "0x8639",
+          "count": 1
+        },
+        {
+          "value": "0x8636",
+          "count": 1
+        }
+      ],
+      "interesting_categories": {
+        "packet_shadow": 7,
+        "profile_string_area": 2,
+        "front_panel_or_status": 2
+      },
+      "direct_copies": [
+        {
+          "offset": "0x00",
+          "src": "0x8633",
+          "dst": "0x5906"
+        },
+        {
+          "offset": "0x08",
+          "src": "0x862f",
+          "dst": "0x590d"
+        },
+        {
+          "offset": "0x10",
+          "src": "0x8631",
+          "dst": "0x4840"
+        },
+        {
+          "offset": "0x18",
+          "src": "0x8630",
+          "dst": "0x4863"
+        }
+      ],
+      "calls_and_jumps": [
+        {
+          "offset": "0x28",
+          "kind": "lcall",
+          "target": "0x27b7"
+        }
+      ],
+      "cdd_public_offset_candidates": [
+        {
+          "public_offset": "0x8800",
+          "count": 256,
+          "record": 70,
+          "record_decoded_start": "0x08700",
+          "record_decoded_span": "0x230",
+          "record_mode": "0x80",
+          "operation_key": "098ad4a36805"
+        },
+        {
+          "public_offset": "0x8880",
+          "count": 253,
+          "record": 70,
+          "record_decoded_start": "0x08700",
+          "record_decoded_span": "0x230",
+          "record_mode": "0x80",
+          "operation_key": "098ad4a36805"
+        }
+      ],
+      "examples": [
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "00-capture-only.window.bin",
+          "offset": 34944
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "01-capture-only.window.bin",
+          "offset": 34944
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "02-capture-only.window.bin",
+          "offset": 34944
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "03-capture-only.window.bin",
+          "offset": 34944
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "04-capture-only.window.bin",
+          "offset": 34944
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "05-capture-only.window.bin",
+          "offset": 34944
+        }
+      ]
+    },
+    {
+      "short": "3465e4783c3d",
+      "sha256": "3465e4783c3d2178b8439a55b79c258e659faf0083af3898129a7a79250fb5f4",
+      "observations": 253,
+      "offsets": [
+        {
+          "value": "0x7640",
+          "count": 253
+        }
+      ],
+      "runs": [
+        {
+          "value": "normal-work-window-stimuli-focused-20260501",
+          "count": 40
+        },
+        {
+          "value": "normal-work-window-get-config-current-long-20260501",
+          "count": 32
+        },
+        {
+          "value": "normal-work-window-readstatus-correlation-20260501",
+          "count": 32
+        },
+        {
+          "value": "normal-work-window-get-config-variants-20260501",
+          "count": 26
+        },
+        {
+          "value": "normal-work-window-stimuli-expanded-20260501",
+          "count": 26
+        },
+        {
+          "value": "normal-work-window-error-path-pairs-20260501",
+          "count": 21
+        }
+      ],
+      "entropy": 4.6018,
+      "hex": "3090891ce0fea3e0a87c08080826f618ee36f67b00a97c09097a00900001122fb7904093f0a87c0808e6904092f090891be0904091f0904098e0a87cf6904000",
+      "exact_refs": {},
+      "patterns": {
+        "controller_addr_4091": [
+          "0x32"
+        ]
+      },
+      "dptr_refs": [
+        {
+          "value": "0x891c",
+          "count": 1
+        },
+        {
+          "value": "0x0001",
+          "count": 1
+        },
+        {
+          "value": "0x4093",
+          "count": 1
+        },
+        {
+          "value": "0x4092",
+          "count": 1
+        },
+        {
+          "value": "0x891b",
+          "count": 1
+        },
+        {
+          "value": "0x4091",
+          "count": 1
+        },
+        {
+          "value": "0x4098",
+          "count": 1
+        },
+        {
+          "value": "0x4000",
+          "count": 1
+        }
+      ],
+      "interesting_categories": {
+        "packet_shadow": 2,
+        "controller_status": 5
+      },
+      "direct_copies": [
+        {
+          "offset": "0x2e",
+          "src": "0x891b",
+          "dst": "0x4091"
+        }
+      ],
+      "calls_and_jumps": [
+        {
+          "offset": "0x1e",
+          "kind": "lcall",
+          "target": "0x2fb7"
+        }
+      ],
+      "cdd_public_offset_candidates": [
+        {
+          "public_offset": "0x7640",
+          "count": 253,
+          "record": 62,
+          "record_decoded_start": "0x07610",
+          "record_decoded_span": "0x1d0",
+          "record_mode": "0x80",
+          "operation_key": "9fd2119d4c04"
+        }
+      ],
+      "examples": [
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "00-capture-only.window.bin",
+          "offset": 30272
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "01-capture-only.window.bin",
+          "offset": 30272
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "02-capture-only.window.bin",
+          "offset": 30272
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "03-capture-only.window.bin",
+          "offset": 30272
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "04-capture-only.window.bin",
+          "offset": 30272
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "05-capture-only.window.bin",
+          "offset": 30272
+        }
+      ]
+    },
+    {
+      "short": "99d4493dc4cf",
+      "sha256": "99d4493dc4cfdc4cea75d21f27ed90af53b0f067d9238f902e536c1eec033b29",
+      "observations": 509,
+      "offsets": [
+        {
+          "value": "0x71c0",
+          "count": 509
+        }
+      ],
+      "runs": [
+        {
+          "value": "normal-work-window-get-performance-variants-long-20260501",
+          "count": 76
+        },
+        {
+          "value": "normal-work-window-get-config-field-variants-r5-long-20260501",
+          "count": 48
+        },
+        {
+          "value": "normal-work-window-stimuli-focused-20260501",
+          "count": 40
+        },
+        {
+          "value": "normal-work-window-get-performance-variants-20260501",
+          "count": 38
+        },
+        {
+          "value": "normal-work-window-get-config-current-long-20260501",
+          "count": 32
+        },
+        {
+          "value": "normal-work-window-get-config-r5-01-isolated-20260501",
+          "count": 32
+        }
+      ],
+      "entropy": 4.6252,
+      "hex": "f608760112efb6057c057c22908857e090885df0908858e090885ef09084afe090885ff09084b0e0908860f07b2a7df17f007e0b908859eef0a3eff090893ce0",
+      "exact_refs": {},
+      "patterns": {},
+      "dptr_refs": [
+        {
+          "value": "0x8857",
+          "count": 1
+        },
+        {
+          "value": "0x885d",
+          "count": 1
+        },
+        {
+          "value": "0x8858",
+          "count": 1
+        },
+        {
+          "value": "0x885e",
+          "count": 1
+        },
+        {
+          "value": "0x84af",
+          "count": 1
+        },
+        {
+          "value": "0x885f",
+          "count": 1
+        },
+        {
+          "value": "0x84b0",
+          "count": 1
+        },
+        {
+          "value": "0x8860",
+          "count": 1
+        },
+        {
+          "value": "0x8859",
+          "count": 1
+        },
+        {
+          "value": "0x893c",
+          "count": 1
+        }
+      ],
+      "interesting_categories": {
+        "packet_shadow": 10
+      },
+      "direct_copies": [
+        {
+          "offset": "0x0c",
+          "src": "0x8857",
+          "dst": "0x885d"
+        },
+        {
+          "offset": "0x14",
+          "src": "0x8858",
+          "dst": "0x885e"
+        },
+        {
+          "offset": "0x1c",
+          "src": "0x84af",
+          "dst": "0x885f"
+        },
+        {
+          "offset": "0x24",
+          "src": "0x84b0",
+          "dst": "0x8860"
+        }
+      ],
+      "calls_and_jumps": [
+        {
+          "offset": "0x04",
+          "kind": "lcall",
+          "target": "0xefb6"
+        }
+      ],
+      "cdd_public_offset_candidates": [
+        {
+          "public_offset": "0x71c0",
+          "count": 509,
+          "record": 59,
+          "record_decoded_start": "0x07170",
+          "record_decoded_span": "0x130",
+          "record_mode": "0x80",
+          "operation_key": "30ca94930e05"
+        }
+      ],
+      "examples": [
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "00-capture-only.window.bin",
+          "offset": 29120
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "01-capture-only.window.bin",
+          "offset": 29120
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "02-capture-only.window.bin",
+          "offset": 29120
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "03-capture-only.window.bin",
+          "offset": 29120
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "04-capture-only.window.bin",
+          "offset": 29120
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "05-capture-only.window.bin",
+          "offset": 29120
+        }
+      ]
+    },
+    {
+      "short": "b69f366c92b6",
+      "sha256": "b69f366c92b68ce2ade4f064e1e296ae657e6a5b3331905e21148efbe7ac0155",
+      "observations": 507,
+      "offsets": [
+        {
+          "value": "0x7b80",
+          "count": 254
+        },
+        {
+          "value": "0x7b00",
+          "count": 253
+        }
+      ],
+      "runs": [
+        {
+          "value": "normal-work-window-get-performance-variants-long-20260501",
+          "count": 76
+        },
+        {
+          "value": "normal-work-window-get-config-field-variants-r5-long-20260501",
+          "count": 48
+        },
+        {
+          "value": "normal-work-window-stimuli-focused-20260501",
+          "count": 40
+        },
+        {
+          "value": "normal-work-window-get-performance-variants-20260501",
+          "count": 38
+        },
+        {
+          "value": "normal-work-window-get-config-current-long-20260501",
+          "count": 32
+        },
+        {
+          "value": "normal-work-window-get-config-r5-01-isolated-20260501",
+          "count": 32
+        }
+      ],
+      "entropy": 4.691,
+      "hex": "fe08e6ff90891fe02fff90891ee03ea87c0808f608eff6904000e020e7f9908ac6e0904091f0a87c0808e6a3f07b00a97c09097a00900001122fb7904093f090",
+      "exact_refs": {},
+      "patterns": {
+        "controller_addr_4091": [
+          "0x22"
+        ]
+      },
+      "dptr_refs": [
+        {
+          "value": "0x891f",
+          "count": 1
+        },
+        {
+          "value": "0x891e",
+          "count": 1
+        },
+        {
+          "value": "0x4000",
+          "count": 1
+        },
+        {
+          "value": "0x8ac6",
+          "count": 1
+        },
+        {
+          "value": "0x4091",
+          "count": 1
+        },
+        {
+          "value": "0x0001",
+          "count": 1
+        },
+        {
+          "value": "0x4093",
+          "count": 1
+        }
+      ],
+      "interesting_categories": {
+        "packet_shadow": 3,
+        "controller_status": 3
+      },
+      "direct_copies": [
+        {
+          "offset": "0x1e",
+          "src": "0x8ac6",
+          "dst": "0x4091"
+        }
+      ],
+      "calls_and_jumps": [
+        {
+          "offset": "0x38",
+          "kind": "lcall",
+          "target": "0x2fb7"
+        }
+      ],
+      "cdd_public_offset_candidates": [
+        {
+          "public_offset": "0x7b80",
+          "count": 254,
+          "record": 64,
+          "record_decoded_start": "0x078e0",
+          "record_decoded_span": "0x2b0",
+          "record_mode": "0x40",
+          "operation_key": "93390e6b7c02"
+        },
+        {
+          "public_offset": "0x7b00",
+          "count": 253,
+          "record": 64,
+          "record_decoded_start": "0x078e0",
+          "record_decoded_span": "0x2b0",
+          "record_mode": "0x40",
+          "operation_key": "93390e6b7c02"
+        }
+      ],
+      "examples": [
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "00-capture-only.window.bin",
+          "offset": 31488
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "01-capture-only.window.bin",
+          "offset": 31488
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "02-capture-only.window.bin",
+          "offset": 31488
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "03-capture-only.window.bin",
+          "offset": 31488
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "04-capture-only.window.bin",
+          "offset": 31488
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "05-capture-only.window.bin",
+          "offset": 31488
+        }
+      ]
+    },
+    {
+      "short": "ba3aab1d5fd2",
+      "sha256": "ba3aab1d5fd2e7d2e53a40dc6d30ee8e321d0d1d7d5c4a775562c56bb68b52ec",
+      "observations": 334,
+      "offsets": [
+        {
+          "value": "0x9b00",
+          "count": 136
+        },
+        {
+          "value": "0x9b40",
+          "count": 129
+        },
+        {
+          "value": "0x9b80",
+          "count": 62
+        },
+        {
+          "value": "0x9bc0",
+          "count": 7
+        }
+      ],
+      "runs": [
+        {
+          "value": "normal-work-window-get-config-field-variants-r5-long-20260501",
+          "count": 47
+        },
+        {
+          "value": "normal-work-window-stimuli-focused-20260501",
+          "count": 40
+        },
+        {
+          "value": "normal-work-window-get-config-r5-f0-isolated-20260501",
+          "count": 32
+        },
+        {
+          "value": "normal-work-window-get-config-current-long-20260501",
+          "count": 31
+        },
+        {
+          "value": "normal-work-window-get-config-r5-01-isolated-20260501",
+          "count": 31
+        },
+        {
+          "value": "normal-work-window-get-config-field-variants-20260501",
+          "count": 29
+        }
+      ],
+      "entropy": 4.6053,
+      "hex": "a9e6a3f008e6a3f0d251e57c2406f57c22d310af01c3c0d0904000e020e7f99040917408f0a3e4f0a3f0904000e020e7f9904098e0904000e020e7f9904098e0",
+      "exact_refs": {},
+      "patterns": {
+        "controller_addr_4091": [
+          "0x1f"
+        ]
+      },
+      "dptr_refs": [
+        {
+          "value": "0x4000",
+          "count": 3
+        },
+        {
+          "value": "0x4098",
+          "count": 2
+        },
+        {
+          "value": "0x4091",
+          "count": 1
+        }
+      ],
+      "interesting_categories": {
+        "controller_status": 6
+      },
+      "direct_copies": [],
+      "calls_and_jumps": [],
+      "cdd_public_offset_candidates": [
+        {
+          "public_offset": "0x9b00",
+          "count": 136,
+          "record": 87,
+          "record_decoded_start": "0x09960",
+          "record_decoded_span": "0x3f0",
+          "record_mode": "0x40",
+          "operation_key": "0af2177f2e01"
+        },
+        {
+          "public_offset": "0x9b40",
+          "count": 129,
+          "record": 87,
+          "record_decoded_start": "0x09960",
+          "record_decoded_span": "0x3f0",
+          "record_mode": "0x40",
+          "operation_key": "0af2177f2e01"
+        },
+        {
+          "public_offset": "0x9b80",
+          "count": 62,
+          "record": 87,
+          "record_decoded_start": "0x09960",
+          "record_decoded_span": "0x3f0",
+          "record_mode": "0x40",
+          "operation_key": "0af2177f2e01"
+        },
+        {
+          "public_offset": "0x9bc0",
+          "count": 7,
+          "record": 87,
+          "record_decoded_start": "0x09960",
+          "record_decoded_span": "0x3f0",
+          "record_mode": "0x40",
+          "operation_key": "0af2177f2e01"
+        }
+      ],
+      "examples": [
+        {
+          "run": "normal-work-window-get-config-current-long-20260501",
+          "capture": "01-cycle00-get-configuration-current.window.bin",
+          "offset": 39744
+        },
+        {
+          "run": "normal-work-window-get-config-current-long-20260501",
+          "capture": "02-cycle01-baseline-no-stimulus.window.bin",
+          "offset": 39744
+        },
+        {
+          "run": "normal-work-window-get-config-current-long-20260501",
+          "capture": "03-cycle01-get-configuration-current.window.bin",
+          "offset": 39744
+        },
+        {
+          "run": "normal-work-window-get-config-current-long-20260501",
+          "capture": "04-cycle02-baseline-no-stimulus.window.bin",
+          "offset": 39744
+        },
+        {
+          "run": "normal-work-window-get-config-current-long-20260501",
+          "capture": "05-cycle02-get-configuration-current.window.bin",
+          "offset": 39744
+        },
+        {
+          "run": "normal-work-window-get-config-current-long-20260501",
+          "capture": "06-cycle03-baseline-no-stimulus.window.bin",
+          "offset": 39744
+        }
+      ]
+    },
+    {
+      "short": "fe343ef73975",
+      "sha256": "fe343ef73975d6766c236d664ff0f6b8c7cac30767666cf803d6fc7fce5de610",
+      "observations": 281,
+      "offsets": [
+        {
+          "value": "0x7e40",
+          "count": 116
+        },
+        {
+          "value": "0x7ec0",
+          "count": 89
+        },
+        {
+          "value": "0x7e80",
+          "count": 68
+        },
+        {
+          "value": "0x7e00",
+          "count": 8
+        }
+      ],
+      "runs": [
+        {
+          "value": "normal-work-window-get-config-field-variants-r5-long-20260501",
+          "count": 47
+        },
+        {
+          "value": "normal-work-window-stimuli-focused-20260501",
+          "count": 38
+        },
+        {
+          "value": "normal-work-window-get-config-r5-f0-isolated-20260501",
+          "count": 32
+        },
+        {
+          "value": "normal-work-window-get-config-current-long-20260501",
+          "count": 31
+        },
+        {
+          "value": "normal-work-window-get-config-r5-01-isolated-20260501",
+          "count": 31
+        },
+        {
+          "value": "normal-work-window-get-config-field-variants-20260501",
+          "count": 29
+        }
+      ],
+      "entropy": 4.9456,
+      "hex": "f618ee36f6908a4ae0640260030273de90891fe02434ff90891ee03407a87c0808f608eff6904000e020e7f9908ac6e0904091f0a87c0808e6a3f07b00a97c09",
+      "exact_refs": {},
+      "patterns": {
+        "controller_addr_4091": [
+          "0x30"
+        ]
+      },
+      "dptr_refs": [
+        {
+          "value": "0x8a4a",
+          "count": 1
+        },
+        {
+          "value": "0x891f",
+          "count": 1
+        },
+        {
+          "value": "0x891e",
+          "count": 1
+        },
+        {
+          "value": "0x4000",
+          "count": 1
+        },
+        {
+          "value": "0x8ac6",
+          "count": 1
+        },
+        {
+          "value": "0x4091",
+          "count": 1
+        }
+      ],
+      "interesting_categories": {
+        "packet_shadow": 4,
+        "controller_status": 2
+      },
+      "direct_copies": [
+        {
+          "offset": "0x2c",
+          "src": "0x8ac6",
+          "dst": "0x4091"
+        }
+      ],
+      "calls_and_jumps": [
+        {
+          "offset": "0x0a",
+          "kind": "ljmp",
+          "target": "0x6003"
+        },
+        {
+          "offset": "0x0d",
+          "kind": "ljmp",
+          "target": "0x73de"
+        }
+      ],
+      "cdd_public_offset_candidates": [
+        {
+          "public_offset": "0x7e40",
+          "count": 116,
+          "record": 66,
+          "record_decoded_start": "0x07db0",
+          "record_decoded_span": "0x2d0",
+          "record_mode": "0x80",
+          "operation_key": "4e8210adb204"
+        },
+        {
+          "public_offset": "0x7ec0",
+          "count": 89,
+          "record": 66,
+          "record_decoded_start": "0x07db0",
+          "record_decoded_span": "0x2d0",
+          "record_mode": "0x80",
+          "operation_key": "4e8210adb204"
+        },
+        {
+          "public_offset": "0x7e80",
+          "count": 68,
+          "record": 66,
+          "record_decoded_start": "0x07db0",
+          "record_decoded_span": "0x2d0",
+          "record_mode": "0x80",
+          "operation_key": "4e8210adb204"
+        },
+        {
+          "public_offset": "0x7e00",
+          "count": 8,
+          "record": 66,
+          "record_decoded_start": "0x07db0",
+          "record_decoded_span": "0x2d0",
+          "record_mode": "0x80",
+          "operation_key": "4e8210adb204"
+        }
+      ],
+      "examples": [
+        {
+          "run": "normal-work-window-get-config-current-long-20260501",
+          "capture": "01-cycle00-get-configuration-current.window.bin",
+          "offset": 32320
+        },
+        {
+          "run": "normal-work-window-get-config-current-long-20260501",
+          "capture": "02-cycle01-baseline-no-stimulus.window.bin",
+          "offset": 32320
+        },
+        {
+          "run": "normal-work-window-get-config-current-long-20260501",
+          "capture": "03-cycle01-get-configuration-current.window.bin",
+          "offset": 32320
+        },
+        {
+          "run": "normal-work-window-get-config-current-long-20260501",
+          "capture": "04-cycle02-baseline-no-stimulus.window.bin",
+          "offset": 32320
+        },
+        {
+          "run": "normal-work-window-get-config-current-long-20260501",
+          "capture": "05-cycle02-get-configuration-current.window.bin",
+          "offset": 32320
+        },
+        {
+          "run": "normal-work-window-get-config-current-long-20260501",
+          "capture": "06-cycle03-baseline-no-stimulus.window.bin",
+          "offset": 32320
+        }
+      ]
+    },
+    {
+      "short": "8b2115cd509f",
+      "sha256": "8b2115cd509fb860937c94264f922fec9b9bdfd7f462a5cb34d6b8ea7c3dc31d",
+      "observations": 27,
+      "offsets": [
+        {
+          "value": "0x7140",
+          "count": 13
+        },
+        {
+          "value": "0x7100",
+          "count": 9
+        },
+        {
+          "value": "0x7180",
+          "count": 5
+        }
+      ],
+      "runs": [
+        {
+          "value": "normal-work-window-get-performance-variants-long-20260501",
+          "count": 12
+        },
+        {
+          "value": "normal-work-window-get-performance-variants-20260501",
+          "count": 6
+        },
+        {
+          "value": "normal-work-window-readstatus-correlation-20260501",
+          "count": 6
+        },
+        {
+          "value": "normal-work-window-error-path-pairs-20260501",
+          "count": 2
+        },
+        {
+          "value": "normal-work-window-stimuli-full-20260501",
+          "count": 1
+        }
+      ],
+      "entropy": 4.7574,
+      "hex": "36f6904762e030e409e054eff0a87c087601904000e020e7f99089a5e0904091f0a87c0808e6a3f07b00a97c09097a00900001122fb7904093f0904098e0a87c",
+      "exact_refs": {},
+      "patterns": {
+        "controller_addr_4091": [
+          "0x1d"
+        ]
+      },
+      "dptr_refs": [
+        {
+          "value": "0x4762",
+          "count": 1
+        },
+        {
+          "value": "0x4000",
+          "count": 1
+        },
+        {
+          "value": "0x89a5",
+          "count": 1
+        },
+        {
+          "value": "0x4091",
+          "count": 1
+        },
+        {
+          "value": "0x0001",
+          "count": 1
+        },
+        {
+          "value": "0x4093",
+          "count": 1
+        },
+        {
+          "value": "0x4098",
+          "count": 1
+        }
+      ],
+      "interesting_categories": {
+        "front_panel_or_status": 1,
+        "controller_status": 4,
+        "packet_shadow": 1
+      },
+      "direct_copies": [
+        {
+          "offset": "0x19",
+          "src": "0x89a5",
+          "dst": "0x4091"
+        }
+      ],
+      "calls_and_jumps": [
+        {
+          "offset": "0x33",
+          "kind": "lcall",
+          "target": "0x2fb7"
+        }
+      ],
+      "cdd_public_offset_candidates": [
+        {
+          "public_offset": "0x7140",
+          "count": 13,
+          "record": 58,
+          "record_decoded_start": "0x06f50",
+          "record_decoded_span": "0x220",
+          "record_mode": "0x80",
+          "operation_key": "66228ca20005"
+        },
+        {
+          "public_offset": "0x7100",
+          "count": 9,
+          "record": 58,
+          "record_decoded_start": "0x06f50",
+          "record_decoded_span": "0x220",
+          "record_mode": "0x80",
+          "operation_key": "66228ca20005"
+        },
+        {
+          "public_offset": "0x7180",
+          "count": 5,
+          "record": 59,
+          "record_decoded_start": "0x07170",
+          "record_decoded_span": "0x130",
+          "record_mode": "0x80",
+          "operation_key": "30ca94930e05"
+        }
+      ],
+      "examples": [
+        {
+          "run": "normal-work-window-error-path-pairs-20260501",
+          "capture": "01-cycle00-read-toc-format-0-after-command.window.bin",
+          "offset": 29056
+        },
+        {
+          "run": "normal-work-window-error-path-pairs-20260501",
+          "capture": "08-cycle01-read-toc-format-0-after-command.window.bin",
+          "offset": 29056
+        },
+        {
+          "run": "normal-work-window-get-performance-variants-20260501",
+          "capture": "01-cycle00-gp-type00-max0001.window.bin",
+          "offset": 28992
+        },
+        {
+          "run": "normal-work-window-get-performance-variants-20260501",
+          "capture": "03-cycle00-gp-type00-max00ff.window.bin",
+          "offset": 28928
+        },
+        {
+          "run": "normal-work-window-get-performance-variants-20260501",
+          "capture": "11-cycle00-gp-type20-max0010.window.bin",
+          "offset": 28928
+        },
+        {
+          "run": "normal-work-window-get-performance-variants-20260501",
+          "capture": "14-cycle00-gp-byte1-02-type00.window.bin",
+          "offset": 28992
+        }
+      ]
+    },
+    {
+      "short": "0c705773105c",
+      "sha256": "0c705773105c535a5186fb1554311925463dbe33f620a441096634659624a6d4",
+      "observations": 509,
+      "offsets": [
+        {
+          "value": "0x6080",
+          "count": 141
+        },
+        {
+          "value": "0x60c0",
+          "count": 127
+        },
+        {
+          "value": "0x6040",
+          "count": 127
+        },
+        {
+          "value": "0x6000",
+          "count": 114
+        }
+      ],
+      "runs": [
+        {
+          "value": "normal-work-window-get-performance-variants-long-20260501",
+          "count": 76
+        },
+        {
+          "value": "normal-work-window-get-config-field-variants-r5-long-20260501",
+          "count": 48
+        },
+        {
+          "value": "normal-work-window-stimuli-focused-20260501",
+          "count": 40
+        },
+        {
+          "value": "normal-work-window-get-performance-variants-20260501",
+          "count": 38
+        },
+        {
+          "value": "normal-work-window-get-config-current-long-20260501",
+          "count": 32
+        },
+        {
+          "value": "normal-work-window-get-config-r5-01-isolated-20260501",
+          "count": 32
+        }
+      ],
+      "entropy": 4.5314,
+      "hex": "ec38fc908996123430800be490896af0908ad0740ff090402be4f09047cfe054eff090403ce054eff09047c1e030e00f9089c8740bf09047d2e04401f0803c90",
+      "exact_refs": {},
+      "patterns": {},
+      "dptr_refs": [
+        {
+          "value": "0x8996",
+          "count": 1
+        },
+        {
+          "value": "0x896a",
+          "count": 1
+        },
+        {
+          "value": "0x8ad0",
+          "count": 1
+        },
+        {
+          "value": "0x402b",
+          "count": 1
+        },
+        {
+          "value": "0x47cf",
+          "count": 1
+        },
+        {
+          "value": "0x403c",
+          "count": 1
+        },
+        {
+          "value": "0x47c1",
+          "count": 1
+        },
+        {
+          "value": "0x89c8",
+          "count": 1
+        },
+        {
+          "value": "0x47d2",
+          "count": 1
+        }
+      ],
+      "interesting_categories": {
+        "packet_shadow": 4,
+        "controller_status": 2,
+        "front_panel_or_status": 3
+      },
+      "direct_copies": [],
+      "calls_and_jumps": [
+        {
+          "offset": "0x06",
+          "kind": "lcall",
+          "target": "0x3430"
+        }
+      ],
+      "cdd_public_offset_candidates": [
+        {
+          "public_offset": "0x6080",
+          "count": 141,
+          "record": 49,
+          "record_decoded_start": "0x05f40",
+          "record_decoded_span": "0x1c0",
+          "record_mode": "0x80",
+          "operation_key": "428a889c5804"
+        },
+        {
+          "public_offset": "0x60c0",
+          "count": 127,
+          "record": 49,
+          "record_decoded_start": "0x05f40",
+          "record_decoded_span": "0x1c0",
+          "record_mode": "0x80",
+          "operation_key": "428a889c5804"
+        },
+        {
+          "public_offset": "0x6040",
+          "count": 127,
+          "record": 49,
+          "record_decoded_start": "0x05f40",
+          "record_decoded_span": "0x1c0",
+          "record_mode": "0x80",
+          "operation_key": "428a889c5804"
+        },
+        {
+          "public_offset": "0x6000",
+          "count": 114,
+          "record": 49,
+          "record_decoded_start": "0x05f40",
+          "record_decoded_span": "0x1c0",
+          "record_mode": "0x80",
+          "operation_key": "428a889c5804"
+        }
+      ],
+      "examples": [
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "00-capture-only.window.bin",
+          "offset": 24704
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "01-capture-only.window.bin",
+          "offset": 24768
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "02-capture-only.window.bin",
+          "offset": 24768
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "03-capture-only.window.bin",
+          "offset": 24768
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "04-capture-only.window.bin",
+          "offset": 24768
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "05-capture-only.window.bin",
+          "offset": 24576
+        }
+      ]
+    },
+    {
+      "short": "8f8e0add044c",
+      "sha256": "8f8e0add044ccff60663762031117f5d99f27f090fbfb5d8a719dedbfeeb89b5",
+      "observations": 509,
+      "offsets": [
+        {
+          "value": "0x70c0",
+          "count": 222
+        },
+        {
+          "value": "0x7080",
+          "count": 153
+        },
+        {
+          "value": "0x7000",
+          "count": 134
+        }
+      ],
+      "runs": [
+        {
+          "value": "normal-work-window-get-performance-variants-long-20260501",
+          "count": 76
+        },
+        {
+          "value": "normal-work-window-get-config-field-variants-r5-long-20260501",
+          "count": 48
+        },
+        {
+          "value": "normal-work-window-stimuli-focused-20260501",
+          "count": 40
+        },
+        {
+          "value": "normal-work-window-get-performance-variants-20260501",
+          "count": 38
+        },
+        {
+          "value": "normal-work-window-get-config-current-long-20260501",
+          "count": 32
+        },
+        {
+          "value": "normal-work-window-get-config-r5-01-isolated-20260501",
+          "count": 32
+        }
+      ],
+      "entropy": 4.6392,
+      "hex": "3407fee43dfde43cfc9085fd123430908a29e0c4540f30e011908a4ce0c3940e4008904011740ef080089085fee0904011f09085ffe0904012f0908600802e90",
+      "exact_refs": {},
+      "patterns": {},
+      "dptr_refs": [
+        {
+          "value": "0x4011",
+          "count": 2
+        },
+        {
+          "value": "0x85fd",
+          "count": 1
+        },
+        {
+          "value": "0x8a29",
+          "count": 1
+        },
+        {
+          "value": "0x8a4c",
+          "count": 1
+        },
+        {
+          "value": "0x85fe",
+          "count": 1
+        },
+        {
+          "value": "0x85ff",
+          "count": 1
+        },
+        {
+          "value": "0x4012",
+          "count": 1
+        },
+        {
+          "value": "0x8600",
+          "count": 1
+        }
+      ],
+      "interesting_categories": {
+        "packet_shadow": 6,
+        "controller_status": 3
+      },
+      "direct_copies": [
+        {
+          "offset": "0x2a",
+          "src": "0x85fe",
+          "dst": "0x4011"
+        },
+        {
+          "offset": "0x32",
+          "src": "0x85ff",
+          "dst": "0x4012"
+        }
+      ],
+      "calls_and_jumps": [
+        {
+          "offset": "0x0c",
+          "kind": "lcall",
+          "target": "0x3430"
+        },
+        {
+          "offset": "0x38",
+          "kind": "lcall",
+          "target": "0xf090"
+        }
+      ],
+      "cdd_public_offset_candidates": [
+        {
+          "public_offset": "0x70c0",
+          "count": 222,
+          "record": 58,
+          "record_decoded_start": "0x06f50",
+          "record_decoded_span": "0x220",
+          "record_mode": "0x80",
+          "operation_key": "66228ca20005"
+        },
+        {
+          "public_offset": "0x7080",
+          "count": 153,
+          "record": 58,
+          "record_decoded_start": "0x06f50",
+          "record_decoded_span": "0x220",
+          "record_mode": "0x80",
+          "operation_key": "66228ca20005"
+        },
+        {
+          "public_offset": "0x7000",
+          "count": 134,
+          "record": 58,
+          "record_decoded_start": "0x06f50",
+          "record_decoded_span": "0x220",
+          "record_mode": "0x80",
+          "operation_key": "66228ca20005"
+        }
+      ],
+      "examples": [
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "00-capture-only.window.bin",
+          "offset": 28800
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "01-capture-only.window.bin",
+          "offset": 28800
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "02-capture-only.window.bin",
+          "offset": 28800
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "03-capture-only.window.bin",
+          "offset": 28800
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "04-capture-only.window.bin",
+          "offset": 28800
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "05-capture-only.window.bin",
+          "offset": 28800
+        }
+      ]
+    },
+    {
+      "short": "144315176c64",
+      "sha256": "144315176c646e312f2abe220481010840cbc370fbe9c862396d647d89595833",
+      "observations": 509,
+      "offsets": [
+        {
+          "value": "0x9480",
+          "count": 270
+        },
+        {
+          "value": "0x94c0",
+          "count": 215
+        },
+        {
+          "value": "0x9400",
+          "count": 24
+        }
+      ],
+      "runs": [
+        {
+          "value": "normal-work-window-get-performance-variants-long-20260501",
+          "count": 76
+        },
+        {
+          "value": "normal-work-window-get-config-field-variants-r5-long-20260501",
+          "count": 48
+        },
+        {
+          "value": "normal-work-window-stimuli-focused-20260501",
+          "count": 40
+        },
+        {
+          "value": "normal-work-window-get-performance-variants-20260501",
+          "count": 38
+        },
+        {
+          "value": "normal-work-window-get-config-current-long-20260501",
+          "count": 32
+        },
+        {
+          "value": "normal-work-window-get-config-r5-01-isolated-20260501",
+          "count": 32
+        }
+      ],
+      "entropy": 4.3691,
+      "hex": "8a23e04401f09088f1e04440f0908940e0c31320e006e478b2f608f6908935e04480f0229047b0e4f0a3e0908a49f09047b1e0908a4af09047b1e0908a4bf090",
+      "exact_refs": {},
+      "patterns": {},
+      "dptr_refs": [
+        {
+          "value": "0x47b1",
+          "count": 2
+        },
+        {
+          "value": "0x88f1",
+          "count": 1
+        },
+        {
+          "value": "0x8940",
+          "count": 1
+        },
+        {
+          "value": "0x8935",
+          "count": 1
+        },
+        {
+          "value": "0x47b0",
+          "count": 1
+        },
+        {
+          "value": "0x8a49",
+          "count": 1
+        },
+        {
+          "value": "0x8a4a",
+          "count": 1
+        },
+        {
+          "value": "0x8a4b",
+          "count": 1
+        }
+      ],
+      "interesting_categories": {
+        "packet_shadow": 6,
+        "front_panel_or_status": 3
+      },
+      "direct_copies": [
+        {
+          "offset": "0x2f",
+          "src": "0x47b1",
+          "dst": "0x8a4a"
+        },
+        {
+          "offset": "0x37",
+          "src": "0x47b1",
+          "dst": "0x8a4b"
+        }
+      ],
+      "calls_and_jumps": [],
+      "cdd_public_offset_candidates": [
+        {
+          "public_offset": "0x9480",
+          "count": 270,
+          "record": 83,
+          "record_decoded_start": "0x09460",
+          "record_decoded_span": "0x80",
+          "record_mode": "0x80",
+          "operation_key": "0caa1588de03"
+        },
+        {
+          "public_offset": "0x94c0",
+          "count": 215,
+          "record": 83,
+          "record_decoded_start": "0x09460",
+          "record_decoded_span": "0x80",
+          "record_mode": "0x80",
+          "operation_key": "0caa1588de03"
+        },
+        {
+          "public_offset": "0x9400",
+          "count": 24,
+          "record": 81,
+          "record_decoded_start": "0x092f0",
+          "record_decoded_span": "0x140",
+          "record_mode": "0x80",
+          "operation_key": "64cace949404"
+        }
+      ],
+      "examples": [
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "00-capture-only.window.bin",
+          "offset": 38080
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "01-capture-only.window.bin",
+          "offset": 38080
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "02-capture-only.window.bin",
+          "offset": 38080
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "03-capture-only.window.bin",
+          "offset": 38080
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "04-capture-only.window.bin",
+          "offset": 38080
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "05-capture-only.window.bin",
+          "offset": 38080
+        }
+      ]
+    },
+    {
+      "short": "25333cae3674",
+      "sha256": "25333cae3674959bfdd6161ddf2aa6c73b9d5761b8c93e5b9294f769b315677d",
+      "observations": 508,
+      "offsets": [
+        {
+          "value": "0x77c0",
+          "count": 255
+        },
+        {
+          "value": "0x7780",
+          "count": 253
+        }
+      ],
+      "runs": [
+        {
+          "value": "normal-work-window-get-performance-variants-long-20260501",
+          "count": 76
+        },
+        {
+          "value": "normal-work-window-get-config-field-variants-r5-long-20260501",
+          "count": 48
+        },
+        {
+          "value": "normal-work-window-stimuli-focused-20260501",
+          "count": 40
+        },
+        {
+          "value": "normal-work-window-get-performance-variants-20260501",
+          "count": 38
+        },
+        {
+          "value": "normal-work-window-get-config-current-long-20260501",
+          "count": 32
+        },
+        {
+          "value": "normal-work-window-get-config-r5-01-isolated-20260501",
+          "count": 32
+        }
+      ],
+      "entropy": 5.1254,
+      "hex": "64fe700302767b90891fe02438ff90891ee03407feef78aa26ffee1836a87c0808f608eff6904000e020e7f9908ac6e0904095f0a87c0808e6a3f07b00a97c09",
+      "exact_refs": {},
+      "patterns": {
+        "controller_addr_4095": [
+          "0x30"
+        ]
+      },
+      "dptr_refs": [
+        {
+          "value": "0x891f",
+          "count": 1
+        },
+        {
+          "value": "0x891e",
+          "count": 1
+        },
+        {
+          "value": "0x4000",
+          "count": 1
+        },
+        {
+          "value": "0x8ac6",
+          "count": 1
+        },
+        {
+          "value": "0x4095",
+          "count": 1
+        }
+      ],
+      "interesting_categories": {
+        "packet_shadow": 3,
+        "controller_status": 2
+      },
+      "direct_copies": [
+        {
+          "offset": "0x2c",
+          "src": "0x8ac6",
+          "dst": "0x4095"
+        }
+      ],
+      "calls_and_jumps": [
+        {
+          "offset": "0x04",
+          "kind": "ljmp",
+          "target": "0x767b"
+        }
+      ],
+      "cdd_public_offset_candidates": [
+        {
+          "public_offset": "0x77c0",
+          "count": 255,
+          "record": 62,
+          "record_decoded_start": "0x07610",
+          "record_decoded_span": "0x1d0",
+          "record_mode": "0x80",
+          "operation_key": "9fd2119d4c04"
+        },
+        {
+          "public_offset": "0x7780",
+          "count": 253,
+          "record": 62,
+          "record_decoded_start": "0x07610",
+          "record_decoded_span": "0x1d0",
+          "record_mode": "0x80",
+          "operation_key": "9fd2119d4c04"
+        }
+      ],
+      "examples": [
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "00-capture-only.window.bin",
+          "offset": 30592
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "01-capture-only.window.bin",
+          "offset": 30592
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "02-capture-only.window.bin",
+          "offset": 30592
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "03-capture-only.window.bin",
+          "offset": 30592
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "04-capture-only.window.bin",
+          "offset": 30592
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "05-capture-only.window.bin",
+          "offset": 30592
+        }
+      ]
+    },
+    {
+      "short": "204291444868",
+      "sha256": "204291444868911fc1664f7105d2999cd02d987f1762771e851df97eaf219566",
+      "observations": 432,
+      "offsets": [
+        {
+          "value": "0x7800",
+          "count": 395
+        },
+        {
+          "value": "0x78c0",
+          "count": 37
+        }
+      ],
+      "runs": [
+        {
+          "value": "normal-work-window-get-config-field-variants-r5-long-20260501",
+          "count": 48
+        },
+        {
+          "value": "normal-work-window-stimuli-focused-20260501",
+          "count": 40
+        },
+        {
+          "value": "normal-work-window-get-performance-variants-20260501",
+          "count": 38
+        },
+        {
+          "value": "normal-work-window-get-config-current-long-20260501",
+          "count": 32
+        },
+        {
+          "value": "normal-work-window-get-config-r5-01-isolated-20260501",
+          "count": 32
+        },
+        {
+          "value": "normal-work-window-get-config-r5-f0-isolated-20260501",
+          "count": 32
+        }
+      ],
+      "entropy": 4.6831,
+      "hex": "097a00900001122fb7904097f090409c7440f0908a4ee0ff540ffe24a0f582e43440f583e0904099f074a12ef582e43440f583e0904099f0ef540fff24a2f582",
+      "exact_refs": {},
+      "patterns": {
+        "controller_kick_409c": [
+          "0xd"
+        ]
+      },
+      "dptr_refs": [
+        {
+          "value": "0x4099",
+          "count": 2
+        },
+        {
+          "value": "0x0001",
+          "count": 1
+        },
+        {
+          "value": "0x4097",
+          "count": 1
+        },
+        {
+          "value": "0x409c",
+          "count": 1
+        },
+        {
+          "value": "0x8a4e",
+          "count": 1
+        }
+      ],
+      "interesting_categories": {
+        "controller_status": 4,
+        "packet_shadow": 1
+      },
+      "direct_copies": [],
+      "calls_and_jumps": [
+        {
+          "offset": "0x06",
+          "kind": "lcall",
+          "target": "0x2fb7"
+        }
+      ],
+      "cdd_public_offset_candidates": [
+        {
+          "public_offset": "0x7800",
+          "count": 395,
+          "record": 63,
+          "record_decoded_start": "0x077e0",
+          "record_decoded_span": "0x100",
+          "record_mode": "0x80",
+          "operation_key": "c89256901a00"
+        },
+        {
+          "public_offset": "0x78c0",
+          "count": 37,
+          "record": 63,
+          "record_decoded_start": "0x077e0",
+          "record_decoded_span": "0x100",
+          "record_mode": "0x80",
+          "operation_key": "c89256901a00"
+        }
+      ],
+      "examples": [
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "00-capture-only.window.bin",
+          "offset": 30720
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "01-capture-only.window.bin",
+          "offset": 30720
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "02-capture-only.window.bin",
+          "offset": 30720
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "03-capture-only.window.bin",
+          "offset": 30720
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "04-capture-only.window.bin",
+          "offset": 30720
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "05-capture-only.window.bin",
+          "offset": 30720
+        }
+      ]
+    },
+    {
+      "short": "7106a72e56d9",
+      "sha256": "7106a72e56d99556fc3629abcd9453e242b8f0af0ebe256867b222364c74194c",
+      "observations": 392,
+      "offsets": [
+        {
+          "value": "0x8580",
+          "count": 179
+        },
+        {
+          "value": "0x8540",
+          "count": 167
+        },
+        {
+          "value": "0x85c0",
+          "count": 46
+        }
+      ],
+      "runs": [
+        {
+          "value": "normal-work-window-get-config-field-variants-r5-long-20260501",
+          "count": 48
+        },
+        {
+          "value": "normal-work-window-stimuli-focused-20260501",
+          "count": 40
+        },
+        {
+          "value": "normal-work-window-get-config-current-long-20260501",
+          "count": 32
+        },
+        {
+          "value": "normal-work-window-get-config-r5-01-isolated-20260501",
+          "count": 32
+        },
+        {
+          "value": "normal-work-window-get-config-r5-f0-isolated-20260501",
+          "count": 32
+        },
+        {
+          "value": "normal-work-window-get-config-field-variants-20260501",
+          "count": 30
+        }
+      ],
+      "entropy": 4.3628,
+      "hex": "30e054df904863f0908631e054fd904840f0908633e0547f905906f0908632e054fe905a00f0905962e054fc4401f09059c67407f09059697428f0a37423f090",
+      "exact_refs": {},
+      "patterns": {},
+      "dptr_refs": [
+        {
+          "value": "0x4863",
+          "count": 1
+        },
+        {
+          "value": "0x8631",
+          "count": 1
+        },
+        {
+          "value": "0x4840",
+          "count": 1
+        },
+        {
+          "value": "0x8633",
+          "count": 1
+        },
+        {
+          "value": "0x5906",
+          "count": 1
+        },
+        {
+          "value": "0x8632",
+          "count": 1
+        },
+        {
+          "value": "0x5a00",
+          "count": 1
+        },
+        {
+          "value": "0x5962",
+          "count": 1
+        },
+        {
+          "value": "0x59c6",
+          "count": 1
+        },
+        {
+          "value": "0x5969",
+          "count": 1
+        }
+      ],
+      "interesting_categories": {
+        "front_panel_or_status": 2,
+        "packet_shadow": 3,
+        "profile_string_area": 4
+      },
+      "direct_copies": [],
+      "calls_and_jumps": [],
+      "cdd_public_offset_candidates": [
+        {
+          "public_offset": "0x8580",
+          "count": 179,
+          "record": 68,
+          "record_decoded_start": "0x08310",
+          "record_decoded_span": "0x280",
+          "record_mode": "0x80",
+          "operation_key": "0fe212a8d404"
+        },
+        {
+          "public_offset": "0x8540",
+          "count": 167,
+          "record": 68,
+          "record_decoded_start": "0x08310",
+          "record_decoded_span": "0x280",
+          "record_mode": "0x80",
+          "operation_key": "0fe212a8d404"
+        },
+        {
+          "public_offset": "0x85c0",
+          "count": 46,
+          "record": 69,
+          "record_decoded_start": "0x08590",
+          "record_decoded_span": "0x170",
+          "record_mode": "0x80",
+          "operation_key": "2cf2cf97b204"
+        }
+      ],
+      "examples": [
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "00-capture-only.window.bin",
+          "offset": 34176
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "01-capture-only.window.bin",
+          "offset": 34176
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "02-capture-only.window.bin",
+          "offset": 34176
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "03-capture-only.window.bin",
+          "offset": 34176
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "04-capture-only.window.bin",
+          "offset": 34176
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "05-capture-only.window.bin",
+          "offset": 34176
+        }
+      ]
+    },
+    {
+      "short": "add3eb18b8cc",
+      "sha256": "add3eb18b8cc24b03f2d1f7d7877e8528cdef309a8d5f4b2102e09daa593e043",
+      "observations": 277,
+      "offsets": [
+        {
+          "value": "0x8240",
+          "count": 277
+        }
+      ],
+      "runs": [
+        {
+          "value": "normal-work-window-get-config-field-variants-r5-long-20260501",
+          "count": 48
+        },
+        {
+          "value": "normal-work-window-get-config-r5-01-isolated-20260501",
+          "count": 32
+        },
+        {
+          "value": "normal-work-window-get-config-r5-f0-isolated-20260501",
+          "count": 32
+        },
+        {
+          "value": "normal-work-window-stimuli-focused-20260501",
+          "count": 32
+        },
+        {
+          "value": "normal-work-window-get-config-current-long-20260501",
+          "count": 31
+        },
+        {
+          "value": "normal-work-window-get-config-field-variants-20260501",
+          "count": 29
+        }
+      ],
+      "entropy": 4.0461,
+      "hex": "e436f69047d7e054fef0908a4fe09047d6f09047afe4f09047b1f0f0e6f008e6f0e4f0f0908a53e09047b1f0908a54e09047b1f074fc26f61874ff36f6d3908a",
+      "exact_refs": {},
+      "patterns": {},
+      "dptr_refs": [
+        {
+          "value": "0x47b1",
+          "count": 3
+        },
+        {
+          "value": "0x47d7",
+          "count": 1
+        },
+        {
+          "value": "0x8a4f",
+          "count": 1
+        },
+        {
+          "value": "0x47d6",
+          "count": 1
+        },
+        {
+          "value": "0x47af",
+          "count": 1
+        },
+        {
+          "value": "0x8a53",
+          "count": 1
+        },
+        {
+          "value": "0x8a54",
+          "count": 1
+        }
+      ],
+      "interesting_categories": {
+        "front_panel_or_status": 6,
+        "packet_shadow": 3
+      },
+      "direct_copies": [
+        {
+          "offset": "0x0a",
+          "src": "0x8a4f",
+          "dst": "0x47d6"
+        },
+        {
+          "offset": "0x24",
+          "src": "0x8a53",
+          "dst": "0x47b1"
+        },
+        {
+          "offset": "0x2c",
+          "src": "0x8a54",
+          "dst": "0x47b1"
+        }
+      ],
+      "calls_and_jumps": [],
+      "cdd_public_offset_candidates": [
+        {
+          "public_offset": "0x8240",
+          "count": 277,
+          "record": 67,
+          "record_decoded_start": "0x08080",
+          "record_decoded_span": "0x290",
+          "record_mode": "0x40",
+          "operation_key": "b0f2d169c404"
+        }
+      ],
+      "examples": [
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "00-capture-only.window.bin",
+          "offset": 33344
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "01-capture-only.window.bin",
+          "offset": 33344
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "02-capture-only.window.bin",
+          "offset": 33344
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "03-capture-only.window.bin",
+          "offset": 33344
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "04-capture-only.window.bin",
+          "offset": 33344
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "05-capture-only.window.bin",
+          "offset": 33344
+        }
+      ]
+    },
+    {
+      "short": "04a2d67cbfff",
+      "sha256": "04a2d67cbfff890e5ba96613f516c9c730e50f84d5a041e82cfce2f3e18b8d35",
+      "observations": 268,
+      "offsets": [
+        {
+          "value": "0x7dc0",
+          "count": 268
+        }
+      ],
+      "runs": [
+        {
+          "value": "normal-work-window-get-config-field-variants-r5-long-20260501",
+          "count": 48
+        },
+        {
+          "value": "normal-work-window-stimuli-focused-20260501",
+          "count": 40
+        },
+        {
+          "value": "normal-work-window-get-config-r5-01-isolated-20260501",
+          "count": 32
+        },
+        {
+          "value": "normal-work-window-get-config-r5-f0-isolated-20260501",
+          "count": 32
+        },
+        {
+          "value": "normal-work-window-get-config-field-variants-20260501",
+          "count": 28
+        },
+        {
+          "value": "normal-work-window-stimuli-expanded-20260501",
+          "count": 25
+        }
+      ],
+      "entropy": 4.554,
+      "hex": "b7904097f0904000e020e7f99040b6e4f0908a54e09040b7f09040b57414f0904000e020e7f99040b57410f0908a54e0ff7e0078aa26f618ee36f6a87c08ef26",
+      "exact_refs": {},
+      "patterns": {},
+      "dptr_refs": [
+        {
+          "value": "0x4000",
+          "count": 2
+        },
+        {
+          "value": "0x8a54",
+          "count": 2
+        },
+        {
+          "value": "0x40b5",
+          "count": 2
+        },
+        {
+          "value": "0x4097",
+          "count": 1
+        },
+        {
+          "value": "0x40b6",
+          "count": 1
+        },
+        {
+          "value": "0x40b7",
+          "count": 1
+        }
+      ],
+      "interesting_categories": {
+        "controller_status": 7,
+        "packet_shadow": 2
+      },
+      "direct_copies": [
+        {
+          "offset": "0x11",
+          "src": "0x8a54",
+          "dst": "0x40b7"
+        }
+      ],
+      "calls_and_jumps": [],
+      "cdd_public_offset_candidates": [
+        {
+          "public_offset": "0x7dc0",
+          "count": 268,
+          "record": 66,
+          "record_decoded_start": "0x07db0",
+          "record_decoded_span": "0x2d0",
+          "record_mode": "0x80",
+          "operation_key": "4e8210adb204"
+        }
+      ],
+      "examples": [
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "00-capture-only.window.bin",
+          "offset": 32192
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "01-capture-only.window.bin",
+          "offset": 32192
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "02-capture-only.window.bin",
+          "offset": 32192
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "03-capture-only.window.bin",
+          "offset": 32192
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "04-capture-only.window.bin",
+          "offset": 32192
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "05-capture-only.window.bin",
+          "offset": 32192
+        }
+      ]
+    },
+    {
+      "short": "6c4f90652e56",
+      "sha256": "6c4f90652e56f0866c745d3b909f434bbc76a047260cbd54fa2bc4a52e743773",
+      "observations": 509,
+      "offsets": [
+        {
+          "value": "0x6180",
+          "count": 169
+        },
+        {
+          "value": "0x61c0",
+          "count": 153
+        },
+        {
+          "value": "0x6100",
+          "count": 109
+        },
+        {
+          "value": "0x6140",
+          "count": 78
+        }
+      ],
+      "runs": [
+        {
+          "value": "normal-work-window-get-performance-variants-long-20260501",
+          "count": 76
+        },
+        {
+          "value": "normal-work-window-get-config-field-variants-r5-long-20260501",
+          "count": 48
+        },
+        {
+          "value": "normal-work-window-stimuli-focused-20260501",
+          "count": 40
+        },
+        {
+          "value": "normal-work-window-get-performance-variants-20260501",
+          "count": 38
+        },
+        {
+          "value": "normal-work-window-get-config-current-long-20260501",
+          "count": 32
+        },
+        {
+          "value": "normal-work-window-get-config-r5-01-isolated-20260501",
+          "count": 32
+        }
+      ],
+      "entropy": 4.545,
+      "hex": "47c5e09089c8f09047c4e09089c9f0908a49e0ff64286013ef64be600eef64a86009ef64d56004efb4b9099047c5e4f09047c4f09047d2e054fef0904014e4f0",
+      "exact_refs": {},
+      "patterns": {},
+      "dptr_refs": [
+        {
+          "value": "0x47c4",
+          "count": 2
+        },
+        {
+          "value": "0x89c8",
+          "count": 1
+        },
+        {
+          "value": "0x89c9",
+          "count": 1
+        },
+        {
+          "value": "0x8a49",
+          "count": 1
+        },
+        {
+          "value": "0x47c5",
+          "count": 1
+        },
+        {
+          "value": "0x47d2",
+          "count": 1
+        },
+        {
+          "value": "0x4014",
+          "count": 1
+        }
+      ],
+      "interesting_categories": {
+        "packet_shadow": 3,
+        "front_panel_or_status": 4,
+        "controller_status": 1
+      },
+      "direct_copies": [
+        {
+          "offset": "0x07",
+          "src": "0x47c4",
+          "dst": "0x89c9"
+        }
+      ],
+      "calls_and_jumps": [],
+      "cdd_public_offset_candidates": [
+        {
+          "public_offset": "0x6180",
+          "count": 169,
+          "record": 50,
+          "record_decoded_start": "0x06100",
+          "record_decoded_span": "0x1f0",
+          "record_mode": "0x80",
+          "operation_key": "6092d29f2405"
+        },
+        {
+          "public_offset": "0x61c0",
+          "count": 153,
+          "record": 50,
+          "record_decoded_start": "0x06100",
+          "record_decoded_span": "0x1f0",
+          "record_mode": "0x80",
+          "operation_key": "6092d29f2405"
+        },
+        {
+          "public_offset": "0x6100",
+          "count": 109,
+          "record": 50,
+          "record_decoded_start": "0x06100",
+          "record_decoded_span": "0x1f0",
+          "record_mode": "0x80",
+          "operation_key": "6092d29f2405"
+        },
+        {
+          "public_offset": "0x6140",
+          "count": 78,
+          "record": 50,
+          "record_decoded_start": "0x06100",
+          "record_decoded_span": "0x1f0",
+          "record_mode": "0x80",
+          "operation_key": "6092d29f2405"
+        }
+      ],
+      "examples": [
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "00-capture-only.window.bin",
+          "offset": 25024
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "01-capture-only.window.bin",
+          "offset": 25024
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "02-capture-only.window.bin",
+          "offset": 24960
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "03-capture-only.window.bin",
+          "offset": 24960
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "04-capture-only.window.bin",
+          "offset": 24960
+        },
+        {
+          "run": "normal-work-window-capture-only-20260501",
+          "capture": "05-capture-only.window.bin",
+          "offset": 24960
+        }
+      ]
+    }
+  ]
+}
