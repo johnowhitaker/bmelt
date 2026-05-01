@@ -825,3 +825,8 @@ match the saved currentboot gateway. This makes `controller[0x07dbc0..0x07dc7f]`
 the best future marker-carryover test region. It is still controller-command
 code, so only patch a behavior-neutral byte first and only when the live drive
 is recoverable.
+
+Safer first carryover test: patch an inert shared data/profile byte, not code,
+at a same-offset currentboot/normal chunk such as `+0x5040`, `+0x5100`, or
+`+0x5140`. If that survives a soft recovery into normal mode, then test a
+neutral byte in the write-side island.

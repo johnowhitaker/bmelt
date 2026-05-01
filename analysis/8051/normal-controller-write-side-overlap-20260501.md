@@ -75,10 +75,14 @@ between currentboot and normal.
 Do not run this automatically. When live work resumes, the clean test would be:
 
 1. Enter currentboot and install the gateway write hook.
-2. Patch one harmless byte in `controller[0x07dbc0..0x07dc7f]` that can be
-   read back immediately and does not change behavior.
+2. First patch an inert-looking shared data/profile byte, not code. Good
+   candidates are exact currentboot/normal chunks such as `+0x5040`, `+0x5100`,
+   or `+0x5140`, which are mostly zero/profile strings and appear at the same
+   public offsets in normal captures.
 3. Recover to normal without a cold power cut if possible.
-4. Read the normal work-window and check whether the exact write-side chunk
+4. Read the normal work-window and check whether the inert marker carried over.
+5. Only if that marker carries over, try a behavior-neutral byte in
+   `controller[0x07dbc0..0x07dc7f]` and check whether the exact write-side chunk
    changed.
 
 If that marker carries over, this becomes the first plausible normal-mode
