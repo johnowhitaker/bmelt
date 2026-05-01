@@ -1300,3 +1300,21 @@ targets zero, the likely missing ingredient is no longer passive descriptor
 prestate; it is either the real mapped-header setup through the
 `0x4e80/84/88/8c` path or a later normal-runtime phase where the controller CDD
 engine is actually awake.
+
+That live shot found a tooling limit before it found a CDD answer. The one-byte
+gateway version installed, but its first high-address baseline read timed out
+before the trigger ran. A Pico cold boot recovered the drive. Rather than chase
+that reader, I made a tighter bulk-reader variant: it keeps the proven fast
+gateway path, drops the derived `0x4e` and direct-byte prestate, and fits by
+writing only the descriptor-derived `0x824x/0x825x` bytes plus the same CDD
+field package. It returned a new `0xcf` marker when triggered with the fake
+`fc dd` gateway prefix.
+
+That descriptor-trigger result was cleanly negative. The trigger executed, the
+known `0x070000` gateway window still read correctly, but decoded CDD targets
+`0x184000`, `0x184060`, and `0x190690` stayed all zero before and after. So the
+missing currentboot ingredient is not just passive descriptor prestate. The
+remaining live mailbox route probably has to exercise the real
+`0x4e80/84/88/8c` mapped-header path, include more internal parser state in a
+different hook shape, or move the readout into normal runtime after the CDD
+engine has already been brought up.

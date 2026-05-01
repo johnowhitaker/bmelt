@@ -1424,3 +1424,14 @@ Immediate useful directions:
     `0x4a00`. Use `run_liteon_currentboot_cdd_mailbox_replay.py` with
     `--trigger-mode cdb-fcdd01 --gateway-read-mode byte --max-sample-length
     0x20` for the first live pass; without the length cap this path is slow.
+    Live correction: this hook installed, but its first high-address byte-mode
+    gateway read timed out before the trigger, and a Pico cold boot recovered
+    the drive. Prefer the bulk-reader descriptor variant below.
+18. `--gateway-cdb-bulk-with-cdd-descriptor-replay` is the live-tested safer
+    successor. It keeps the proven bulk gateway reader and uses `CDB[7:8] ==
+    fc dd` as a compact trigger returning `0xcf`. It writes descriptor-derived
+    fields plus the `0x4a` CDD field package, but omits `0x4e` status/direct
+    prestate to fit. Live result: trigger executed, `0x070000` smoke still
+    worked, but decoded CDD targets `0x184000`, `0x184060`, and `0x190690`
+    stayed all zero. Evidence:
+    `references/evidence/live/currentboot-cdd-descriptor-trigger-v1.md`.

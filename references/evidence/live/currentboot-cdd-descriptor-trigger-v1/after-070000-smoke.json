@@ -1,0 +1,36 @@
+{
+  "address": 458752,
+  "ascii_preview": "................................",
+  "bytes_hex": "aff39a1acffcbc0401a40000cffcbc0401a50000cffcbc0401a60000cffcbc04",
+  "chunk_size": 32,
+  "device": "/dev/sg0",
+  "length": 32,
+  "records": [
+    {
+      "address": 458751,
+      "base": 458688,
+      "bytes_hex": "afaff39a1acffcbc0401a40000cffcbc0401a50000cffcbc0401a60000cffcbc04",
+      "cdb": [
+        18,
+        0,
+        0,
+        0,
+        240,
+        127,
+        0,
+        6,
+        255,
+        192,
+        0,
+        0
+      ],
+      "discarded_stale_first_byte": 175,
+      "length": 33,
+      "requested_address": 458752,
+      "returncode": 0,
+      "selector": 63,
+      "stderr": "SCSI Status: Good \n\nWriting 176 bytes of data to stdout\n",
+      "stdout_len": 176
+    }
+  ]
+}
