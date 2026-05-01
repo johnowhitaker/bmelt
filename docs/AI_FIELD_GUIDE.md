@@ -1725,3 +1725,11 @@ Immediate useful directions:
     out on the first two after-windows, then recovered; `REQUEST SENSE`,
     `MECHANISM STATUS`, and `/dev/sg0` all ended normal `LD5M`. The capture
     script now records failures and saves summaries incrementally.
+53. `analysis/8051/normal-start-stop-variant-matrix-20260501.md` compares all
+    four ordinary START STOP low-nibble variants. `stop` (`0x00`) and `start`
+    (`0x01`) returned quick CHECK/Not Ready with no post-window failures.
+    `load` (`0x03`) returned quick CHECK/Illegal Request with no post-window
+    failures. Only `eject` (`0x02`) caused visible motion, rc `99`
+    DID_TIME_OUT, and temporary `READ BUFFER id=01` timeouts. This strongly
+    supports that the `+0x8bxx` branch is specifically the eject case, not
+    generic START STOP handling.

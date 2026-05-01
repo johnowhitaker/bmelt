@@ -1713,3 +1713,11 @@ windows succeeded. REQUEST SENSE came back clean, MECHANISM STATUS before and
 after was eight zero bytes, and the optical LUN stayed normal. So the practical
 rule is now: START STOP can leave the public work-window path unavailable for
 several seconds after visible motion, but it recovers by itself.
+
+To make sure this was really the low-nibble `0x02` case and not generic START
+STOP weirdness, I ran the other three variants. They were boring in exactly the
+right way. `stop` and `start` returned quick CHECK/Not Ready because there is
+no medium. `load` returned quick CHECK/Illegal Request. All their post-command
+work-window captures succeeded. Only `eject` caused visible movement and the
+multi-second busy timeout. That lines up beautifully with the branch we found:
+opcode `0x1b`, then `(CDB[4] & 0x0f) == 0x02`.
