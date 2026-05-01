@@ -1258,3 +1258,11 @@ CDB bytes `5a a5`. That means the field replay can now read back the `0x4a`
 and `0x4e` status windows without installing a different hook. A runner script
 wraps the whole attempt into one artifact: baseline samples, ordered writes,
 after-samples, and a doorbell restore.
+
+The first read/write version was too clever: it keyed the read and write modes
+off a two-byte magic and the XDATA-read smoke test timed out, probably because
+the command shadow did not preserve that pair the way the hook expected. The
+replacement is deliberately simpler. Gateway mode only happens when both bytes
+are zero; `CDB[10]=0xa5` means XDATA write; `CDB[10]=0x5a` means XDATA read;
+other nonzero selector values return `0xee` instead of accidentally turning
+into a controller-gateway read at some unlucky address.

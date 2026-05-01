@@ -307,19 +307,35 @@ def source_gateway_cdb_bulk_with_xdata_rw(selector_mask: int, storage_offset: in
     """Gateway bulk read with optional guarded XDATA read/write modes.
 
     Normal mode matches source_gateway_cdb_bulk(): CDB[7:9] is a 24-bit
-    controller address. The stock currentboot CDB shadow stores the two guard
-    bytes in reverse order at 0x8194/0x8195. Host CDB[10:11] a5/5a selects
-    XDATA write; host CDB[10:11] 5a/a5 selects XDATA read. build_payload
-    exposes R5 at response[0x20].
+    controller address when CDB[10:11] are both zero. Host CDB[10] 0xa5
+    selects XDATA write; host CDB[10] 0x5a selects XDATA read. CDB[11] is
+    ignored for the read/write selectors because byte 11 proved easier to get
+    wrong than useful. Unknown nonzero selector values return 0xee instead of
+    falling through into a controller-gateway read at an unintended address.
+    build_payload exposes R5 at response[0x20].
     """
 
     source = bytearray()
 
-    jump_to_read_check_positions: list[int] = []
-    for cdb_addr, expected in ((0x8194, 0x5A), (0x8195, 0xA5)):
-        source.extend(mov_dptr(cdb_addr))
-        source.extend(bytes([0xE0, 0x64, expected, 0x70, 0x00]))  # MOVX; XRL; JNZ read_check
-        jump_to_read_check_positions.append(len(source) - 1)
+    source.extend(mov_dptr(0x8194))  # CDB byte 10: mode selector.
+    source.extend(bytes([0xE0, 0x64, 0x5A, 0x70, 0x00]))  # MOVX; XRL; JNZ write_check
+    jump_to_write_check_pos = len(source) - 1
+
+    read_block = b"".join(
+        [
+            xdata_cdb_address_to_r6_r7(selector_mask),
+            bytes([0x8E, 0x83, 0x8F, 0x82]),  # MOV DPH,R6 ; MOV DPL,R7
+            bytes([0xE0, 0xFD]),  # MOVX A,@DPTR ; MOV R5,A
+        ]
+    )
+    source.extend(read_block)
+    skip_after_read_pos = len(source)
+    source.extend(bytes([0x80, 0x00]))  # SJMP end_source
+
+    write_check_start = len(source)
+    source.extend(mov_dptr(0x8194))
+    source.extend(bytes([0xE0, 0x64, 0xA5, 0x70, 0x00]))  # MOVX; XRL; JNZ gateway_check
+    jump_to_gateway_check_pos = len(source) - 1
 
     write_block = b"".join(
         [
@@ -336,34 +352,29 @@ def source_gateway_cdb_bulk_with_xdata_rw(selector_mask: int, storage_offset: in
     skip_after_write_pos = len(source)
     source.extend(bytes([0x80, 0x00]))  # SJMP end_source
 
-    read_check_start = len(source)
-    jump_to_gateway_positions: list[int] = []
-    for cdb_addr, expected in ((0x8194, 0xA5), (0x8195, 0x5A)):
+    gateway_check_start = len(source)
+    jump_to_unknown_mode_positions: list[int] = []
+    for cdb_addr in (0x8194, 0x8195):
         source.extend(mov_dptr(cdb_addr))
-        source.extend(bytes([0xE0, 0x64, expected, 0x70, 0x00]))  # MOVX; XRL; JNZ gateway
-        jump_to_gateway_positions.append(len(source) - 1)
-
-    read_block = b"".join(
-        [
-            xdata_cdb_address_to_r6_r7(selector_mask),
-            bytes([0x8E, 0x83, 0x8F, 0x82]),  # MOV DPH,R6 ; MOV DPL,R7
-            bytes([0xE0, 0xFD]),  # MOVX A,@DPTR ; MOV R5,A
-        ]
-    )
-    source.extend(read_block)
-    skip_after_read_pos = len(source)
-    source.extend(bytes([0x80, 0x00]))  # SJMP end_source
+        source.extend(bytes([0xE0, 0x70, 0x00]))  # MOVX; JNZ unknown_mode
+        jump_to_unknown_mode_positions.append(len(source) - 1)
 
     gateway_start = len(source)
     source.extend(source_gateway_cdb_bulk(selector_mask, storage_offset, bulk_len))
+    skip_after_gateway_pos = len(source)
+    source.extend(bytes([0x80, 0x00]))  # SJMP end_source
+
+    unknown_mode_start = len(source)
+    source.extend(mov_rn_imm(5, 0xEE))
     end_source = len(source)
 
-    for position in jump_to_read_check_positions:
-        source[position] = rel8(position + 1, read_check_start)
-    for position in jump_to_gateway_positions:
-        source[position] = rel8(position + 1, gateway_start)
-    source[skip_after_write_pos + 1] = rel8(skip_after_write_pos + 2, end_source)
+    source[jump_to_write_check_pos] = rel8(jump_to_write_check_pos + 1, write_check_start)
+    source[jump_to_gateway_check_pos] = rel8(jump_to_gateway_check_pos + 1, gateway_check_start)
     source[skip_after_read_pos + 1] = rel8(skip_after_read_pos + 2, end_source)
+    source[skip_after_write_pos + 1] = rel8(skip_after_write_pos + 2, end_source)
+    for position in jump_to_unknown_mode_positions:
+        source[position] = rel8(position + 1, unknown_mode_start)
+    source[skip_after_gateway_pos + 1] = rel8(skip_after_gateway_pos + 2, end_source)
     return bytes(source)
 
 
@@ -436,8 +447,9 @@ def build_source(args: argparse.Namespace) -> tuple[str, bytes, dict[str, Any]]:
             ),
             {
                 "address_source": "normal: cdb_bytes_7_8_9_plus_control_low_bits",
-                "read_mode": "if host cdb_10_5a_cdb_11_a5, read xdata[cdb_7_8_plus_control_low_bits]",
-                "write_mode": "if host cdb_10_a5_cdb_11_5a, write cdb_byte_9 to xdata[cdb_7_8_plus_control_low_bits]",
+                "read_mode": "if host cdb_10_5a, read xdata[cdb_7_8_plus_control_low_bits]",
+                "write_mode": "if host cdb_10_a5, write cdb_byte_9 to xdata[cdb_7_8_plus_control_low_bits]",
+                "unknown_mode": "nonzero cdb_10/cdb_11 values outside read/write selectors return 0xee",
                 "selector_mask": args.selector_mask,
                 "bulk_len": args.bulk_len,
             },
@@ -619,7 +631,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--gateway-cdb-bulk-with-xdata-rw",
         action="store_true",
-        help="like --gateway-cdb-bulk, plus host CDB[10:11]=a5/5a XDATA write and 5a/a5 XDATA read modes",
+        help="like --gateway-cdb-bulk, plus host CDB[10]=a5 XDATA write and CDB[10]=5a XDATA read modes",
     )
     parser.add_argument(
         "--xdata-cdb-address",

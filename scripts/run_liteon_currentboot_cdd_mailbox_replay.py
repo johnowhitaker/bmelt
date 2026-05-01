@@ -5,9 +5,9 @@ This assumes the drive is already in currentboot with a combined
 gateway-bulk/XDATA-read-write response hook installed. It uses only INQUIRY
 commands interpreted by that hook:
 
-- CDB[10:11] == 00 00: controller-gateway bulk read
-- CDB[10:11] == a5 5a: guarded XDATA write
-- CDB[10:11] == 5a a5: guarded XDATA read
+- CDB[10] == 00 and CDB[11] == 00: controller-gateway bulk read
+- CDB[10] == a5: guarded XDATA write
+- CDB[10] == 5a: guarded XDATA read
 """
 
 from __future__ import annotations

@@ -774,10 +774,10 @@ python3 scripts/build_liteon_currentboot_response_hook_candidate.py \
   --gateway-cdb-bulk-with-xdata-write
 
 # combined gateway bulk read plus guarded XDATA read/write:
-# normal mode is gateway bulk; host CDB[10:11]=a5 5a writes XDATA;
-# host CDB[10:11]=5a a5 reads XDATA into response[0x20].
+# normal mode is gateway bulk; host CDB[10]=a5 writes XDATA;
+# host CDB[10]=5a reads XDATA into response[0x20].
 python3 scripts/build_liteon_currentboot_response_hook_candidate.py \
-  --name gateway-cdb-bulk-xdata-rw-v1 \
+  --name gateway-cdb-bulk-xdata-rw-v2 \
   --cave-len 0xdd \
   --gateway-cdb-bulk-with-xdata-rw
 
@@ -872,19 +872,20 @@ response[0x20]      = readback byte
 ```
 
 There is also a newer combined read/write hook with the same default gateway
-bulk mode:
+bulk mode. Use `v2`; `v1` used a brittle two-byte guard and its XDATA-read
+branch timed out in the first live smoke test.
 
 ```text
-references/firmware/extracted/currentboot-response-hook-candidates/currentboot-response-hook-gateway-cdb-bulk-xdata-rw-v1/currentboot-response-hook-gateway-cdb-bulk-xdata-rw-v1/liteon-full-currentboot-ld5m-helper-bypass-currentboot-response-hook-gateway-cdb-bulk-xdata-rw-v1-candidate.json
+references/firmware/extracted/currentboot-response-hook-candidates/currentboot-response-hook-gateway-cdb-bulk-xdata-rw-v2/currentboot-response-hook-gateway-cdb-bulk-xdata-rw-v2/liteon-full-currentboot-ld5m-helper-bypass-currentboot-response-hook-gateway-cdb-bulk-xdata-rw-v2-candidate.json
 ```
 
-The currentboot CDB shadow stores host bytes `10..11` in reverse order at
-`xdata[0x8194..0x8195]`. The host-facing convention is:
+The host-facing convention for v2 is:
 
 ```text
-normal gateway read     CDB[10:11] = 00 00
-guarded XDATA write     CDB[10:11] = a5 5a, CDB[9] = value
-guarded XDATA read      CDB[10:11] = 5a a5
+normal gateway read     CDB[10] = 00 and CDB[11] = 00
+guarded XDATA write     CDB[10] = a5, CDB[9] = value
+guarded XDATA read      CDB[10] = 5a
+unknown nonzero selector returns 0xee instead of falling into gateway mode
 ```
 
 For the read path, use:
