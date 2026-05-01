@@ -1641,3 +1641,13 @@ Immediate useful directions:
     a subpath/status slot. If legal host commands control those fields, this
     could become a much faster decoded/controller-memory oracle than the
     currentboot bit channel.
+46. A read-only GET CONFIGURATION variant run is tracked in
+    `references/evidence/live/normal-work-window-get-config-variants-20260501`
+    and summarized in
+    `analysis/8051/normal-work-window-get-config-variants-20260501.md`.
+    It varied request type, starting feature, and allocation length over two
+    cycles. All commands returned GOOD, host response lengths varied as expected,
+    and the drive stayed normal `LD5M`. The bridge chunks recurred, but the
+    two-cycle run did not cleanly separate them by GET CONFIG field value; treat
+    it as "GET CONFIG tags the bridge" evidence, not yet as proof of address
+    control.

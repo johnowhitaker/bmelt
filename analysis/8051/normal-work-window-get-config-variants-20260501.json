@@ -1,0 +1,118 @@
+{
+  "chunk_size": 64,
+  "runs": [
+    {
+      "baseline_captures": 2,
+      "baseline_only_chunks": 5,
+      "baseline_unique_chunks": 719,
+      "path": "references/evidence/live/normal-work-window-get-config-variants-20260501",
+      "recurring_stimulus_only_chunks": 6,
+      "run": "normal-work-window-get-config-variants-20260501",
+      "shared_chunks": 714,
+      "stimulus_captures": 24,
+      "stimulus_names": {
+        "get-config-all-sf0000-len00fc": 2,
+        "get-config-all-sf0010-len00fc": 2,
+        "get-config-all-sf0020-len00fc": 2,
+        "get-config-current-sf0000-len0010": 2,
+        "get-config-current-sf0000-len0040": 2,
+        "get-config-current-sf0000-len00fc": 2,
+        "get-config-current-sf0001-len00fc": 2,
+        "get-config-current-sf0010-len00fc": 2,
+        "get-config-current-sf0020-len00fc": 2,
+        "get-config-current-sf0030-len00fc": 2,
+        "get-config-current-sf0040-len00fc": 2,
+        "get-config-current-sf0100-len00fc": 2
+      },
+      "stimulus_only_chunks": 7,
+      "stimulus_unique_chunks": 721,
+      "target_stimulus_only_chunks": 3,
+      "top_stimulus_only_chunks": [
+        {
+          "offsets": [
+            40512
+          ],
+          "sample_hex": "cf9a7d0b7e077f2e12cf9a7d077e077f",
+          "sha256": "ac2d53c50f9e667a1a8ba27716c76abb80b095ea333af710a9713c9aafa93e77",
+          "stimulus_observations": 8,
+          "target_refs": []
+        },
+        {
+          "offsets": [
+            28992,
+            29056
+          ],
+          "sample_hex": "8a4df0904099e0908a4ef0904099e090",
+          "sha256": "8d8c3b0a22a0fe85416ac5c659e610b6100fe9052009142cc97f1903545156af",
+          "stimulus_observations": 4,
+          "target_refs": [
+            16537,
+            35403,
+            35405,
+            35406,
+            35411,
+            35412
+          ]
+        },
+        {
+          "offsets": [
+            28800,
+            28864
+          ],
+          "sample_hex": "08eff6904000e020e7f9908ac6e09040",
+          "sha256": "4037c8574920413d30329489b03ad575a6b0eb5e0a6fb3452ccbf4acb39ecd55",
+          "stimulus_observations": 4,
+          "target_refs": [
+            16384,
+            16529,
+            16531,
+            16537
+          ]
+        },
+        {
+          "offsets": [
+            38144,
+            38208,
+            38336
+          ],
+          "sample_hex": "7ff9123d89e4fd7f40123d89e4908a33",
+          "sha256": "cd1041a057e9566c2d56c43bb27e27a777627d29e52de05ef970467f1ae2b305",
+          "stimulus_observations": 4,
+          "target_refs": [
+            35404
+          ]
+        },
+        {
+          "offsets": [
+            24576,
+            24640,
+            24704
+          ],
+          "sample_hex": "809840351207235030908124e030e029",
+          "sha256": "8abb923850ed71bb6029daed037703e07f2c86f7d65ed0cd426a5915ad9d247a",
+          "stimulus_observations": 4,
+          "target_refs": []
+        },
+        {
+          "offsets": [
+            39424,
+            39552
+          ],
+          "sample_hex": "8988e0fca3e0fdc3ef9dffee9cfed3ef",
+          "sha256": "82706242069810215e01465ffacb63b50bbe9daf3e5a7137db9f0a959e22f4bc",
+          "stimulus_observations": 2,
+          "target_refs": []
+        },
+        {
+          "offsets": [
+            40512
+          ],
+          "sample_hex": "f09090d6e0fca3e0fdd3ef9dee9c404a",
+          "sha256": "9b687f59bb161e23d93ebe78f781ed00047d654e632d48c5721f6aef6c9cb536",
+          "stimulus_observations": 1,
+          "target_refs": []
+        }
+      ]
+    }
+  ]
+}

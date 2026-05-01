@@ -119,3 +119,51 @@ Keep the first pass read-only:
 4. If a controllable field is found, try a tiny normal-mode read-only oracle
    over a harmless controller address first, then compare with known public
    response bytes before aiming at decoded CDD targets.
+
+## GET CONFIGURATION Variant Probe
+
+Follow-up live evidence:
+
+```text
+references/evidence/live/normal-work-window-get-config-variants-20260501/
+analysis/8051/normal-work-window-get-config-variants-20260501.md
+analysis/8051/normal-work-window-get-config-variants-20260501.json
+```
+
+This read-only run varied GET CONFIGURATION request type, starting feature, and
+allocation length over two cycles. The drive stayed normal `LD5M`.
+
+The host-visible responses changed exactly as expected:
+
+```text
+current sf=0000 len=0010  -> 16 bytes
+current sf=0000 len=0040  -> 60 bytes
+current sf=0000 len=00fc  -> 60 bytes
+current sf=0001 len=00fc  -> 20 bytes
+current sf=0010 len=00fc  -> 20 bytes
+current sf=0020 len=00fc  -> 24 bytes
+current sf=0030 len=00fc  -> 8 bytes
+current sf=0040 len=00fc  -> 8 bytes
+current sf=0100 len=00fc  -> 16 bytes
+all     sf=0000 len=00fc  -> 252 bytes
+all     sf=0010 len=00fc  -> 252 bytes
+all     sf=0020 len=00fc  -> 232 bytes
+```
+
+The work-window comparison found only seven stimulus-only chunks, six of them
+recurring. The important bridge chunks did recur:
+
+```text
++0x7080/+0x70c0  refs 0x4000, 0x4091, 0x4093, 0x4099
++0x7140/+0x7180  refs 0x4099, 0x8a4b, 0x8a4d, 0x8a4e, 0x8a53, 0x8a54
+```
+
+However, those chunks did not separate cleanly by starting feature or
+allocation length in a two-cycle run. They appear in a handful of variants, but
+the pattern still looks dominated by normal work-window rotation and sampling
+phase. So this run supports "GET CONFIG reliably tags the bridge" but does not
+yet prove "GET CONFIG fields give us direct control of the bridge address."
+
+The next version should either increase cycles for a smaller variant set or
+instrument more directly for packet-shadow values if we want to distinguish
+real field control from window sampling.

@@ -1600,3 +1600,13 @@ the surrounding handler uses packet-shadow bytes like `0x8a4d` and `0x8a4e`
 as count/selector fields. If those bytes are controllable through a legal host
 command, this could become the fast normal-mode oracle we wanted: a way to ask
 the live controller for bytes without waiting seconds per bit.
+
+I tried the first cautious version of that test live: a read-only sweep over
+GET CONFIGURATION variants, changing request type, starting feature, and
+allocation length, with work-window snapshots after each command. The drive
+stayed in normal `LD5M`, and the host responses varied exactly as the command
+fields changed. The bridge chunks still showed up, but they did not sort
+cleanly by start-feature or allocation in only two cycles. So this is not the
+fast oracle yet. It is a useful constraint: GET CONFIG definitely tags the
+bridge, but we still need either more cycles on fewer variants or a more direct
+way to observe the packet-shadow fields.
