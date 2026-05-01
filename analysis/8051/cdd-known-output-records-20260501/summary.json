@@ -1,0 +1,710 @@
+{
+  "schema": "liteon-cdd-known-output-record-export-v1",
+  "pairs": "analysis/8051/cdd-known-plaintext-pairs-with-readonly-harvests-20260501.json",
+  "hidden_chunks": "analysis/8051/normal-hidden-runtime-chunks-with-readonly-harvests-20260501.json",
+  "record_map": "references/firmware/extracted/liteon-cdd-record-map.json",
+  "f0": "references/firmware/extracted/ld5m-f0-window-0x00000-0x100000.bin",
+  "out_dir": "analysis/8051/cdd-known-output-records-20260501",
+  "records": [
+    {
+      "record": 87,
+      "mode": 64,
+      "operation_key": "0af2177f2e01",
+      "source_start": 227836,
+      "source_end": 229783,
+      "source_len": 1947,
+      "decoded_start": 39264,
+      "decoded_span": 1008,
+      "known_bytes": 896,
+      "known_fraction": 0.8888888888888888,
+      "slot_count": 14,
+      "variant_slots": 0,
+      "files": {
+        "encoded_source": "analysis/8051/cdd-known-output-records-20260501/record-087-encoded-source.bin",
+        "known_output": "analysis/8051/cdd-known-output-records-20260501/record-087-known-output.bin",
+        "known_mask": "analysis/8051/cdd-known-output-records-20260501/record-087-known-mask.bin",
+        "slots": "analysis/8051/cdd-known-output-records-20260501/record-087-slots.json"
+      }
+    },
+    {
+      "record": 51,
+      "mode": 128,
+      "operation_key": "a98252b3a002",
+      "source_start": 146217,
+      "source_end": 148543,
+      "source_len": 2326,
+      "decoded_start": 25328,
+      "decoded_span": 816,
+      "known_bytes": 800,
+      "known_fraction": 0.9803921568627451,
+      "slot_count": 13,
+      "variant_slots": 7,
+      "files": {
+        "encoded_source": "analysis/8051/cdd-known-output-records-20260501/record-051-encoded-source.bin",
+        "known_output": "analysis/8051/cdd-known-output-records-20260501/record-051-known-output.bin",
+        "known_mask": "analysis/8051/cdd-known-output-records-20260501/record-051-known-mask.bin",
+        "slots": "analysis/8051/cdd-known-output-records-20260501/record-051-slots.json"
+      }
+    },
+    {
+      "record": 55,
+      "mode": 64,
+      "operation_key": "a742d3782e04",
+      "source_start": 155258,
+      "source_end": 157571,
+      "source_len": 2313,
+      "decoded_start": 26944,
+      "decoded_span": 896,
+      "known_bytes": 768,
+      "known_fraction": 0.8571428571428571,
+      "slot_count": 12,
+      "variant_slots": 7,
+      "files": {
+        "encoded_source": "analysis/8051/cdd-known-output-records-20260501/record-055-encoded-source.bin",
+        "known_output": "analysis/8051/cdd-known-output-records-20260501/record-055-known-output.bin",
+        "known_mask": "analysis/8051/cdd-known-output-records-20260501/record-055-known-mask.bin",
+        "slots": "analysis/8051/cdd-known-output-records-20260501/record-055-slots.json"
+      }
+    },
+    {
+      "record": 66,
+      "mode": 128,
+      "operation_key": "4e8210adb204",
+      "source_start": 179220,
+      "source_end": 181631,
+      "source_len": 2411,
+      "decoded_start": 32176,
+      "decoded_span": 720,
+      "known_bytes": 704,
+      "known_fraction": 0.9777777777777777,
+      "slot_count": 11,
+      "variant_slots": 5,
+      "files": {
+        "encoded_source": "analysis/8051/cdd-known-output-records-20260501/record-066-encoded-source.bin",
+        "known_output": "analysis/8051/cdd-known-output-records-20260501/record-066-known-output.bin",
+        "known_mask": "analysis/8051/cdd-known-output-records-20260501/record-066-known-mask.bin",
+        "slots": "analysis/8051/cdd-known-output-records-20260501/record-066-slots.json"
+      }
+    },
+    {
+      "record": 60,
+      "mode": 64,
+      "operation_key": "950a90757805",
+      "source_start": 166583,
+      "source_end": 168927,
+      "source_len": 2344,
+      "decoded_start": 29344,
+      "decoded_span": 848,
+      "known_bytes": 624,
+      "known_fraction": 0.7358490566037735,
+      "slot_count": 10,
+      "variant_slots": 2,
+      "files": {
+        "encoded_source": "analysis/8051/cdd-known-output-records-20260501/record-060-encoded-source.bin",
+        "known_output": "analysis/8051/cdd-known-output-records-20260501/record-060-known-output.bin",
+        "known_mask": "analysis/8051/cdd-known-output-records-20260501/record-060-known-mask.bin",
+        "slots": "analysis/8051/cdd-known-output-records-20260501/record-060-slots.json"
+      }
+    },
+    {
+      "record": 68,
+      "mode": 128,
+      "operation_key": "0fe212a8d404",
+      "source_start": 183926,
+      "source_end": 186347,
+      "source_len": 2421,
+      "decoded_start": 33552,
+      "decoded_span": 640,
+      "known_bytes": 528,
+      "known_fraction": 0.825,
+      "slot_count": 9,
+      "variant_slots": 2,
+      "files": {
+        "encoded_source": "analysis/8051/cdd-known-output-records-20260501/record-068-encoded-source.bin",
+        "known_output": "analysis/8051/cdd-known-output-records-20260501/record-068-known-output.bin",
+        "known_mask": "analysis/8051/cdd-known-output-records-20260501/record-068-known-mask.bin",
+        "slots": "analysis/8051/cdd-known-output-records-20260501/record-068-slots.json"
+      }
+    },
+    {
+      "record": 88,
+      "mode": 64,
+      "operation_key": "37424f6bc203",
+      "source_start": 229783,
+      "source_end": 231748,
+      "source_len": 1965,
+      "decoded_start": 40272,
+      "decoded_span": 688,
+      "known_bytes": 512,
+      "known_fraction": 0.7441860465116279,
+      "slot_count": 8,
+      "variant_slots": 1,
+      "files": {
+        "encoded_source": "analysis/8051/cdd-known-output-records-20260501/record-088-encoded-source.bin",
+        "known_output": "analysis/8051/cdd-known-output-records-20260501/record-088-known-output.bin",
+        "known_mask": "analysis/8051/cdd-known-output-records-20260501/record-088-known-mask.bin",
+        "slots": "analysis/8051/cdd-known-output-records-20260501/record-088-slots.json"
+      }
+    },
+    {
+      "record": 58,
+      "mode": 128,
+      "operation_key": "66228ca20005",
+      "source_start": 161829,
+      "source_end": 164121,
+      "source_len": 2292,
+      "decoded_start": 28496,
+      "decoded_span": 544,
+      "known_bytes": 496,
+      "known_fraction": 0.9117647058823529,
+      "slot_count": 8,
+      "variant_slots": 5,
+      "files": {
+        "encoded_source": "analysis/8051/cdd-known-output-records-20260501/record-058-encoded-source.bin",
+        "known_output": "analysis/8051/cdd-known-output-records-20260501/record-058-known-output.bin",
+        "known_mask": "analysis/8051/cdd-known-output-records-20260501/record-058-known-mask.bin",
+        "slots": "analysis/8051/cdd-known-output-records-20260501/record-058-slots.json"
+      }
+    },
+    {
+      "record": 70,
+      "mode": 128,
+      "operation_key": "098ad4a36805",
+      "source_start": 188621,
+      "source_end": 191146,
+      "source_len": 2525,
+      "decoded_start": 34560,
+      "decoded_span": 560,
+      "known_bytes": 448,
+      "known_fraction": 0.8,
+      "slot_count": 7,
+      "variant_slots": 5,
+      "files": {
+        "encoded_source": "analysis/8051/cdd-known-output-records-20260501/record-070-encoded-source.bin",
+        "known_output": "analysis/8051/cdd-known-output-records-20260501/record-070-known-output.bin",
+        "known_mask": "analysis/8051/cdd-known-output-records-20260501/record-070-known-mask.bin",
+        "slots": "analysis/8051/cdd-known-output-records-20260501/record-070-slots.json"
+      }
+    },
+    {
+      "record": 50,
+      "mode": 128,
+      "operation_key": "6092d29f2405",
+      "source_start": 143718,
+      "source_end": 146217,
+      "source_len": 2499,
+      "decoded_start": 24832,
+      "decoded_span": 496,
+      "known_bytes": 432,
+      "known_fraction": 0.8709677419354839,
+      "slot_count": 7,
+      "variant_slots": 0,
+      "files": {
+        "encoded_source": "analysis/8051/cdd-known-output-records-20260501/record-050-encoded-source.bin",
+        "known_output": "analysis/8051/cdd-known-output-records-20260501/record-050-known-output.bin",
+        "known_mask": "analysis/8051/cdd-known-output-records-20260501/record-050-known-mask.bin",
+        "slots": "analysis/8051/cdd-known-output-records-20260501/record-050-slots.json"
+      }
+    },
+    {
+      "record": 64,
+      "mode": 64,
+      "operation_key": "93390e6b7c02",
+      "source_start": 175772,
+      "source_end": 177376,
+      "source_len": 1604,
+      "decoded_start": 30944,
+      "decoded_span": 688,
+      "known_bytes": 336,
+      "known_fraction": 0.4883720930232558,
+      "slot_count": 6,
+      "variant_slots": 1,
+      "files": {
+        "encoded_source": "analysis/8051/cdd-known-output-records-20260501/record-064-encoded-source.bin",
+        "known_output": "analysis/8051/cdd-known-output-records-20260501/record-064-known-output.bin",
+        "known_mask": "analysis/8051/cdd-known-output-records-20260501/record-064-known-mask.bin",
+        "slots": "analysis/8051/cdd-known-output-records-20260501/record-064-slots.json"
+      }
+    },
+    {
+      "record": 65,
+      "mode": 128,
+      "operation_key": "3f690aa24004",
+      "source_start": 177376,
+      "source_end": 179220,
+      "source_len": 1844,
+      "decoded_start": 31632,
+      "decoded_span": 544,
+      "known_bytes": 320,
+      "known_fraction": 0.5882352941176471,
+      "slot_count": 5,
+      "variant_slots": 0,
+      "files": {
+        "encoded_source": "analysis/8051/cdd-known-output-records-20260501/record-065-encoded-source.bin",
+        "known_output": "analysis/8051/cdd-known-output-records-20260501/record-065-known-output.bin",
+        "known_mask": "analysis/8051/cdd-known-output-records-20260501/record-065-known-mask.bin",
+        "slots": "analysis/8051/cdd-known-output-records-20260501/record-065-slots.json"
+      }
+    },
+    {
+      "record": 67,
+      "mode": 64,
+      "operation_key": "b0f2d169c404",
+      "source_start": 181631,
+      "source_end": 183926,
+      "source_len": 2295,
+      "decoded_start": 32896,
+      "decoded_span": 656,
+      "known_bytes": 272,
+      "known_fraction": 0.4146341463414634,
+      "slot_count": 5,
+      "variant_slots": 0,
+      "files": {
+        "encoded_source": "analysis/8051/cdd-known-output-records-20260501/record-067-encoded-source.bin",
+        "known_output": "analysis/8051/cdd-known-output-records-20260501/record-067-known-output.bin",
+        "known_mask": "analysis/8051/cdd-known-output-records-20260501/record-067-known-mask.bin",
+        "slots": "analysis/8051/cdd-known-output-records-20260501/record-067-slots.json"
+      }
+    },
+    {
+      "record": 49,
+      "mode": 128,
+      "operation_key": "428a889c5804",
+      "source_start": 141685,
+      "source_end": 143718,
+      "source_len": 2033,
+      "decoded_start": 24384,
+      "decoded_span": 448,
+      "known_bytes": 256,
+      "known_fraction": 0.5714285714285714,
+      "slot_count": 4,
+      "variant_slots": 3,
+      "files": {
+        "encoded_source": "analysis/8051/cdd-known-output-records-20260501/record-049-encoded-source.bin",
+        "known_output": "analysis/8051/cdd-known-output-records-20260501/record-049-known-output.bin",
+        "known_mask": "analysis/8051/cdd-known-output-records-20260501/record-049-known-mask.bin",
+        "slots": "analysis/8051/cdd-known-output-records-20260501/record-049-slots.json"
+      }
+    },
+    {
+      "record": 85,
+      "mode": 64,
+      "operation_key": "5f925170d804",
+      "source_start": 223281,
+      "source_end": 225519,
+      "source_len": 2238,
+      "decoded_start": 38272,
+      "decoded_span": 768,
+      "known_bytes": 256,
+      "known_fraction": 0.3333333333333333,
+      "slot_count": 4,
+      "variant_slots": 0,
+      "files": {
+        "encoded_source": "analysis/8051/cdd-known-output-records-20260501/record-085-encoded-source.bin",
+        "known_output": "analysis/8051/cdd-known-output-records-20260501/record-085-known-output.bin",
+        "known_mask": "analysis/8051/cdd-known-output-records-20260501/record-085-known-mask.bin",
+        "slots": "analysis/8051/cdd-known-output-records-20260501/record-085-slots.json"
+      }
+    },
+    {
+      "record": 62,
+      "mode": 128,
+      "operation_key": "9fd2119d4c04",
+      "source_start": 171329,
+      "source_end": 173748,
+      "source_len": 2419,
+      "decoded_start": 30224,
+      "decoded_span": 464,
+      "known_bytes": 224,
+      "known_fraction": 0.4827586206896552,
+      "slot_count": 4,
+      "variant_slots": 1,
+      "files": {
+        "encoded_source": "analysis/8051/cdd-known-output-records-20260501/record-062-encoded-source.bin",
+        "known_output": "analysis/8051/cdd-known-output-records-20260501/record-062-known-output.bin",
+        "known_mask": "analysis/8051/cdd-known-output-records-20260501/record-062-known-mask.bin",
+        "slots": "analysis/8051/cdd-known-output-records-20260501/record-062-slots.json"
+      }
+    },
+    {
+      "record": 86,
+      "mode": 128,
+      "operation_key": "a3520f8e9004",
+      "source_start": 225519,
+      "source_end": 227836,
+      "source_len": 2317,
+      "decoded_start": 39040,
+      "decoded_span": 224,
+      "known_bytes": 224,
+      "known_fraction": 1.0,
+      "slot_count": 4,
+      "variant_slots": 2,
+      "files": {
+        "encoded_source": "analysis/8051/cdd-known-output-records-20260501/record-086-encoded-source.bin",
+        "known_output": "analysis/8051/cdd-known-output-records-20260501/record-086-known-output.bin",
+        "known_mask": "analysis/8051/cdd-known-output-records-20260501/record-086-known-mask.bin",
+        "slots": "analysis/8051/cdd-known-output-records-20260501/record-086-slots.json"
+      }
+    },
+    {
+      "record": 57,
+      "mode": 64,
+      "operation_key": "3512d253d403",
+      "source_start": 159861,
+      "source_end": 161829,
+      "source_len": 1968,
+      "decoded_start": 28192,
+      "decoded_span": 304,
+      "known_bytes": 208,
+      "known_fraction": 0.6842105263157895,
+      "slot_count": 4,
+      "variant_slots": 1,
+      "files": {
+        "encoded_source": "analysis/8051/cdd-known-output-records-20260501/record-057-encoded-source.bin",
+        "known_output": "analysis/8051/cdd-known-output-records-20260501/record-057-known-output.bin",
+        "known_mask": "analysis/8051/cdd-known-output-records-20260501/record-057-known-mask.bin",
+        "slots": "analysis/8051/cdd-known-output-records-20260501/record-057-slots.json"
+      }
+    },
+    {
+      "record": 52,
+      "mode": 128,
+      "operation_key": "513ad08ef203",
+      "source_start": 148543,
+      "source_end": 150731,
+      "source_len": 2188,
+      "decoded_start": 26144,
+      "decoded_span": 224,
+      "known_bytes": 192,
+      "known_fraction": 0.8571428571428571,
+      "slot_count": 3,
+      "variant_slots": 3,
+      "files": {
+        "encoded_source": "analysis/8051/cdd-known-output-records-20260501/record-052-encoded-source.bin",
+        "known_output": "analysis/8051/cdd-known-output-records-20260501/record-052-known-output.bin",
+        "known_mask": "analysis/8051/cdd-known-output-records-20260501/record-052-known-mask.bin",
+        "slots": "analysis/8051/cdd-known-output-records-20260501/record-052-slots.json"
+      }
+    },
+    {
+      "record": 53,
+      "mode": 128,
+      "operation_key": "eee94e93cc04",
+      "source_start": 150731,
+      "source_end": 152905,
+      "source_len": 2174,
+      "decoded_start": 26368,
+      "decoded_span": 304,
+      "known_bytes": 192,
+      "known_fraction": 0.631578947368421,
+      "slot_count": 3,
+      "variant_slots": 0,
+      "files": {
+        "encoded_source": "analysis/8051/cdd-known-output-records-20260501/record-053-encoded-source.bin",
+        "known_output": "analysis/8051/cdd-known-output-records-20260501/record-053-known-output.bin",
+        "known_mask": "analysis/8051/cdd-known-output-records-20260501/record-053-known-mask.bin",
+        "slots": "analysis/8051/cdd-known-output-records-20260501/record-053-slots.json"
+      }
+    },
+    {
+      "record": 59,
+      "mode": 128,
+      "operation_key": "30ca94930e05",
+      "source_start": 164121,
+      "source_end": 166583,
+      "source_len": 2462,
+      "decoded_start": 29040,
+      "decoded_span": 304,
+      "known_bytes": 192,
+      "known_fraction": 0.631578947368421,
+      "slot_count": 3,
+      "variant_slots": 1,
+      "files": {
+        "encoded_source": "analysis/8051/cdd-known-output-records-20260501/record-059-encoded-source.bin",
+        "known_output": "analysis/8051/cdd-known-output-records-20260501/record-059-known-output.bin",
+        "known_mask": "analysis/8051/cdd-known-output-records-20260501/record-059-known-mask.bin",
+        "slots": "analysis/8051/cdd-known-output-records-20260501/record-059-slots.json"
+      }
+    },
+    {
+      "record": 73,
+      "mode": 128,
+      "operation_key": "0eea91990405",
+      "source_start": 196232,
+      "source_end": 198587,
+      "source_len": 2355,
+      "decoded_start": 35376,
+      "decoded_span": 400,
+      "known_bytes": 192,
+      "known_fraction": 0.48,
+      "slot_count": 3,
+      "variant_slots": 0,
+      "files": {
+        "encoded_source": "analysis/8051/cdd-known-output-records-20260501/record-073-encoded-source.bin",
+        "known_output": "analysis/8051/cdd-known-output-records-20260501/record-073-known-output.bin",
+        "known_mask": "analysis/8051/cdd-known-output-records-20260501/record-073-known-mask.bin",
+        "slots": "analysis/8051/cdd-known-output-records-20260501/record-073-slots.json"
+      }
+    },
+    {
+      "record": 74,
+      "mode": 128,
+      "operation_key": "ccc295b29405",
+      "source_start": 198587,
+      "source_end": 201427,
+      "source_len": 2840,
+      "decoded_start": 35776,
+      "decoded_span": 800,
+      "known_bytes": 192,
+      "known_fraction": 0.24,
+      "slot_count": 3,
+      "variant_slots": 0,
+      "files": {
+        "encoded_source": "analysis/8051/cdd-known-output-records-20260501/record-074-encoded-source.bin",
+        "known_output": "analysis/8051/cdd-known-output-records-20260501/record-074-known-output.bin",
+        "known_mask": "analysis/8051/cdd-known-output-records-20260501/record-074-known-mask.bin",
+        "slots": "analysis/8051/cdd-known-output-records-20260501/record-074-slots.json"
+      }
+    },
+    {
+      "record": 63,
+      "mode": 128,
+      "operation_key": "c89256901a00",
+      "source_start": 173748,
+      "source_end": 175772,
+      "source_len": 2024,
+      "decoded_start": 30688,
+      "decoded_span": 256,
+      "known_bytes": 160,
+      "known_fraction": 0.625,
+      "slot_count": 3,
+      "variant_slots": 1,
+      "files": {
+        "encoded_source": "analysis/8051/cdd-known-output-records-20260501/record-063-encoded-source.bin",
+        "known_output": "analysis/8051/cdd-known-output-records-20260501/record-063-known-output.bin",
+        "known_mask": "analysis/8051/cdd-known-output-records-20260501/record-063-known-mask.bin",
+        "slots": "analysis/8051/cdd-known-output-records-20260501/record-063-slots.json"
+      }
+    },
+    {
+      "record": 54,
+      "mode": 128,
+      "operation_key": "268ace91e605",
+      "source_start": 152905,
+      "source_end": 155258,
+      "source_len": 2353,
+      "decoded_start": 26672,
+      "decoded_span": 272,
+      "known_bytes": 128,
+      "known_fraction": 0.47058823529411764,
+      "slot_count": 2,
+      "variant_slots": 0,
+      "files": {
+        "encoded_source": "analysis/8051/cdd-known-output-records-20260501/record-054-encoded-source.bin",
+        "known_output": "analysis/8051/cdd-known-output-records-20260501/record-054-known-output.bin",
+        "known_mask": "analysis/8051/cdd-known-output-records-20260501/record-054-known-mask.bin",
+        "slots": "analysis/8051/cdd-known-output-records-20260501/record-054-slots.json"
+      }
+    },
+    {
+      "record": 56,
+      "mode": 128,
+      "operation_key": "aba191967205",
+      "source_start": 157571,
+      "source_end": 159861,
+      "source_len": 2290,
+      "decoded_start": 27840,
+      "decoded_span": 352,
+      "known_bytes": 128,
+      "known_fraction": 0.36363636363636365,
+      "slot_count": 2,
+      "variant_slots": 1,
+      "files": {
+        "encoded_source": "analysis/8051/cdd-known-output-records-20260501/record-056-encoded-source.bin",
+        "known_output": "analysis/8051/cdd-known-output-records-20260501/record-056-known-output.bin",
+        "known_mask": "analysis/8051/cdd-known-output-records-20260501/record-056-known-mask.bin",
+        "slots": "analysis/8051/cdd-known-output-records-20260501/record-056-slots.json"
+      }
+    },
+    {
+      "record": 80,
+      "mode": 64,
+      "operation_key": "1f4acc5b4c04",
+      "source_start": 212791,
+      "source_end": 214644,
+      "source_len": 1853,
+      "decoded_start": 37184,
+      "decoded_span": 432,
+      "known_bytes": 128,
+      "known_fraction": 0.2962962962962963,
+      "slot_count": 2,
+      "variant_slots": 2,
+      "files": {
+        "encoded_source": "analysis/8051/cdd-known-output-records-20260501/record-080-encoded-source.bin",
+        "known_output": "analysis/8051/cdd-known-output-records-20260501/record-080-known-output.bin",
+        "known_mask": "analysis/8051/cdd-known-output-records-20260501/record-080-known-mask.bin",
+        "slots": "analysis/8051/cdd-known-output-records-20260501/record-080-slots.json"
+      }
+    },
+    {
+      "record": 84,
+      "mode": 128,
+      "operation_key": "3b0a538aa203",
+      "source_start": 221083,
+      "source_end": 223281,
+      "source_len": 2198,
+      "decoded_start": 38112,
+      "decoded_span": 160,
+      "known_bytes": 128,
+      "known_fraction": 0.8,
+      "slot_count": 2,
+      "variant_slots": 0,
+      "files": {
+        "encoded_source": "analysis/8051/cdd-known-output-records-20260501/record-084-encoded-source.bin",
+        "known_output": "analysis/8051/cdd-known-output-records-20260501/record-084-known-output.bin",
+        "known_mask": "analysis/8051/cdd-known-output-records-20260501/record-084-known-mask.bin",
+        "slots": "analysis/8051/cdd-known-output-records-20260501/record-084-slots.json"
+      }
+    },
+    {
+      "record": 83,
+      "mode": 128,
+      "operation_key": "0caa1588de03",
+      "source_start": 218827,
+      "source_end": 221083,
+      "source_len": 2256,
+      "decoded_start": 37984,
+      "decoded_span": 128,
+      "known_bytes": 96,
+      "known_fraction": 0.75,
+      "slot_count": 2,
+      "variant_slots": 2,
+      "files": {
+        "encoded_source": "analysis/8051/cdd-known-output-records-20260501/record-083-encoded-source.bin",
+        "known_output": "analysis/8051/cdd-known-output-records-20260501/record-083-known-output.bin",
+        "known_mask": "analysis/8051/cdd-known-output-records-20260501/record-083-known-mask.bin",
+        "slots": "analysis/8051/cdd-known-output-records-20260501/record-083-slots.json"
+      }
+    },
+    {
+      "record": 69,
+      "mode": 128,
+      "operation_key": "2cf2cf97b204",
+      "source_start": 186347,
+      "source_end": 188621,
+      "source_len": 2274,
+      "decoded_start": 34192,
+      "decoded_span": 368,
+      "known_bytes": 64,
+      "known_fraction": 0.17391304347826086,
+      "slot_count": 1,
+      "variant_slots": 1,
+      "files": {
+        "encoded_source": "analysis/8051/cdd-known-output-records-20260501/record-069-encoded-source.bin",
+        "known_output": "analysis/8051/cdd-known-output-records-20260501/record-069-known-output.bin",
+        "known_mask": "analysis/8051/cdd-known-output-records-20260501/record-069-known-mask.bin",
+        "slots": "analysis/8051/cdd-known-output-records-20260501/record-069-slots.json"
+      }
+    },
+    {
+      "record": 78,
+      "mode": 128,
+      "operation_key": "bb814988f603",
+      "source_start": 208845,
+      "source_end": 210644,
+      "source_len": 1799,
+      "decoded_start": 37056,
+      "decoded_span": 128,
+      "known_bytes": 64,
+      "known_fraction": 0.5,
+      "slot_count": 1,
+      "variant_slots": 0,
+      "files": {
+        "encoded_source": "analysis/8051/cdd-known-output-records-20260501/record-078-encoded-source.bin",
+        "known_output": "analysis/8051/cdd-known-output-records-20260501/record-078-known-output.bin",
+        "known_mask": "analysis/8051/cdd-known-output-records-20260501/record-078-known-mask.bin",
+        "slots": "analysis/8051/cdd-known-output-records-20260501/record-078-slots.json"
+      }
+    },
+    {
+      "record": 81,
+      "mode": 128,
+      "operation_key": "64cace949404",
+      "source_start": 214644,
+      "source_end": 216910,
+      "source_len": 2266,
+      "decoded_start": 37616,
+      "decoded_span": 320,
+      "known_bytes": 48,
+      "known_fraction": 0.15,
+      "slot_count": 1,
+      "variant_slots": 1,
+      "files": {
+        "encoded_source": "analysis/8051/cdd-known-output-records-20260501/record-081-encoded-source.bin",
+        "known_output": "analysis/8051/cdd-known-output-records-20260501/record-081-known-output.bin",
+        "known_mask": "analysis/8051/cdd-known-output-records-20260501/record-081-known-mask.bin",
+        "slots": "analysis/8051/cdd-known-output-records-20260501/record-081-slots.json"
+      }
+    },
+    {
+      "record": 82,
+      "mode": 128,
+      "operation_key": "e1514a838a04",
+      "source_start": 216910,
+      "source_end": 218827,
+      "source_len": 1917,
+      "decoded_start": 37936,
+      "decoded_span": 48,
+      "known_bytes": 32,
+      "known_fraction": 0.6666666666666666,
+      "slot_count": 1,
+      "variant_slots": 0,
+      "files": {
+        "encoded_source": "analysis/8051/cdd-known-output-records-20260501/record-082-encoded-source.bin",
+        "known_output": "analysis/8051/cdd-known-output-records-20260501/record-082-known-output.bin",
+        "known_mask": "analysis/8051/cdd-known-output-records-20260501/record-082-known-mask.bin",
+        "slots": "analysis/8051/cdd-known-output-records-20260501/record-082-slots.json"
+      }
+    },
+    {
+      "record": 61,
+      "mode": 128,
+      "operation_key": "80e25282fa04",
+      "source_start": 168927,
+      "source_end": 171329,
+      "source_len": 2402,
+      "decoded_start": 30192,
+      "decoded_span": 32,
+      "known_bytes": 16,
+      "known_fraction": 0.5,
+      "slot_count": 1,
+      "variant_slots": 0,
+      "files": {
+        "encoded_source": "analysis/8051/cdd-known-output-records-20260501/record-061-encoded-source.bin",
+        "known_output": "analysis/8051/cdd-known-output-records-20260501/record-061-known-output.bin",
+        "known_mask": "analysis/8051/cdd-known-output-records-20260501/record-061-known-mask.bin",
+        "slots": "analysis/8051/cdd-known-output-records-20260501/record-061-slots.json"
+      }
+    },
+    {
+      "record": 75,
+      "mode": 0,
+      "operation_key": "01a353031a00",
+      "source_start": 201427,
+      "source_end": 202850,
+      "source_len": 1423,
+      "decoded_start": 36576,
+      "decoded_span": 48,
+      "known_bytes": 16,
+      "known_fraction": 0.3333333333333333,
+      "slot_count": 1,
+      "variant_slots": 0,
+      "files": {
+        "encoded_source": "analysis/8051/cdd-known-output-records-20260501/record-075-encoded-source.bin",
+        "known_output": "analysis/8051/cdd-known-output-records-20260501/record-075-known-output.bin",
+        "known_mask": "analysis/8051/cdd-known-output-records-20260501/record-075-known-mask.bin",
+        "slots": "analysis/8051/cdd-known-output-records-20260501/record-075-slots.json"
+      }
+    }
+  ]
+}

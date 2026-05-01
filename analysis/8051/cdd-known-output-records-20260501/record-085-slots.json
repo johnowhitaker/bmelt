@@ -1,0 +1,150 @@
+[
+  {
+    "record_relative": 0,
+    "top_chunk": "2111cafaf69c",
+    "top_sha256": "2111cafaf69c3db58c6a8fa9f9393e70e78b160c528ad2794f5d67c59a6ccf2e",
+    "top_count": 172,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "2111cafaf69c",
+        "sha256": "2111cafaf69c3db58c6a8fa9f9393e70e78b160c528ad2794f5d67c59a6ccf2e",
+        "count": 172,
+        "hex_prefix": "47b1e0908a4cf09047b1e0908a4df09047b1e0908a4ef09047b1e0908a4ff090",
+        "examples": [
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "04-capture-only.window.bin",
+            "public_offset": 38272
+          },
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "03-cycle00-read-toc-format-4-after-command.window.bin",
+            "public_offset": 38272
+          },
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "06-cycle00-get-performance-type00-after-request-sense.window.bin",
+            "public_offset": 38272
+          },
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "11-cycle01-read-toc-format-4-after-request-sense.window.bin",
+            "public_offset": 38272
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 64,
+    "top_chunk": "2111cafaf69c",
+    "top_sha256": "2111cafaf69c3db58c6a8fa9f9393e70e78b160c528ad2794f5d67c59a6ccf2e",
+    "top_count": 157,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "2111cafaf69c",
+        "sha256": "2111cafaf69c3db58c6a8fa9f9393e70e78b160c528ad2794f5d67c59a6ccf2e",
+        "count": 157,
+        "hex_prefix": "47b1e0908a4cf09047b1e0908a4df09047b1e0908a4ef09047b1e0908a4ff090",
+        "examples": [
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "00-capture-only.window.bin",
+            "public_offset": 38336
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "02-capture-only.window.bin",
+            "public_offset": 38336
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "03-capture-only.window.bin",
+            "public_offset": 38336
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "12-capture-only.window.bin",
+            "public_offset": 38336
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 640,
+    "top_chunk": "306eb529b363",
+    "top_sha256": "306eb529b36312db5654267ccebce8d309fc041c78532d0b91d009ca1de25bcf",
+    "top_count": 24,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "306eb529b363",
+        "sha256": "306eb529b36312db5654267ccebce8d309fc041c78532d0b91d009ca1de25bcf",
+        "count": 24,
+        "hex_prefix": "9435ee940040149089f7e004f090893ae02ff0908939e03ef08005e49089f7f0",
+        "examples": [
+          {
+            "run": "normal-work-window-harvest-safe-stimuli-20260501",
+            "capture": "119-cycle07-mode-sense10-capabilities.window.bin",
+            "public_offset": 38912
+          },
+          {
+            "run": "normal-work-window-harvest-safe-stimuli-20260501",
+            "capture": "14-cycle00-mode-sense10-capabilities.window.bin",
+            "public_offset": 38912
+          },
+          {
+            "run": "normal-work-window-harvest-safe-stimuli-20260501",
+            "capture": "15-cycle01-baseline-no-stimulus.window.bin",
+            "public_offset": 38912
+          },
+          {
+            "run": "normal-work-window-harvest-safe-stimuli-20260501",
+            "capture": "16-cycle01-inquiry-standard-96.window.bin",
+            "public_offset": 38912
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 704,
+    "top_chunk": "306eb529b363",
+    "top_sha256": "306eb529b36312db5654267ccebce8d309fc041c78532d0b91d009ca1de25bcf",
+    "top_count": 54,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "306eb529b363",
+        "sha256": "306eb529b36312db5654267ccebce8d309fc041c78532d0b91d009ca1de25bcf",
+        "count": 54,
+        "hex_prefix": "9435ee940040149089f7e004f090893ae02ff0908939e03ef08005e49089f7f0",
+        "examples": [
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "00-capture-only.window.bin",
+            "public_offset": 38976
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "01-capture-only.window.bin",
+            "public_offset": 38976
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "02-capture-only.window.bin",
+            "public_offset": 38976
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "03-capture-only.window.bin",
+            "public_offset": 38976
+          }
+        ]
+      }
+    ]
+  }
+]

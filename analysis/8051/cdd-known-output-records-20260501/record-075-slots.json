@@ -1,0 +1,39 @@
+[
+  {
+    "record_relative": 32,
+    "top_chunk": "2b41f440f0be",
+    "top_sha256": "2b41f440f0bea896b5175105fb8caec91b086995f4f49f94aa687836c7cd548b",
+    "top_count": 669,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "2b41f440f0be",
+        "sha256": "2b41f440f0bea896b5175105fb8caec91b086995f4f49f94aa687836c7cd548b",
+        "count": 669,
+        "hex_prefix": "54fdf09047f3e0547ff09047ffe04420f09047f4e0440cf07f0022e4fd7f1212",
+        "examples": [
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "00-capture-only.window.bin",
+            "public_offset": 36608
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "01-capture-only.window.bin",
+            "public_offset": 36608
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "02-capture-only.window.bin",
+            "public_offset": 36608
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "03-capture-only.window.bin",
+            "public_offset": 36608
+          }
+        ]
+      }
+    ]
+  }
+]

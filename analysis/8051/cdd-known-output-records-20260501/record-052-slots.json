@@ -1,0 +1,197 @@
+[
+  {
+    "record_relative": 32,
+    "top_chunk": "80b60d722518",
+    "top_sha256": "80b60d72251889f9d5331ad5fa05b82080000454d8efbbfe7e125d5cf7e24463",
+    "top_count": 177,
+    "variant_count": 2,
+    "variants": [
+      {
+        "chunk": "80b60d722518",
+        "sha256": "80b60d72251889f9d5331ad5fa05b82080000454d8efbbfe7e125d5cf7e24463",
+        "count": 177,
+        "hex_prefix": "cbf09047c97451f09047a8e05428ffbf280ee04410f0e054eff0908a337401f0",
+        "examples": [
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "00-cycle00-baseline-no-stimulus.window.bin",
+            "public_offset": 26176
+          },
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "01-cycle00-read-toc-format-0-after-command.window.bin",
+            "public_offset": 26176
+          },
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "02-cycle00-read-toc-format-0-after-request-sense.window.bin",
+            "public_offset": 26176
+          },
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "03-cycle00-read-toc-format-4-after-command.window.bin",
+            "public_offset": 26176
+          }
+        ]
+      },
+      {
+        "chunk": "39ab42ddd82a",
+        "sha256": "39ab42ddd82a825a0e1b929e4aa270edc0ecacb6886e9102faa6978c81d15b9a",
+        "count": 28,
+        "hex_prefix": "e4f0a37414f08047908a527403f0a37468f0908a4de4f0a37438f08032908a52",
+        "examples": [
+          {
+            "run": "normal-work-window-isolated-event-media-20260501",
+            "capture": "00-cycle00-baseline-no-stimulus.window.bin",
+            "public_offset": 26176
+          },
+          {
+            "run": "normal-work-window-isolated-event-media-20260501",
+            "capture": "01-cycle00-get-event-status-media.window.bin",
+            "public_offset": 26176
+          },
+          {
+            "run": "normal-work-window-isolated-event-media-20260501",
+            "capture": "02-cycle01-baseline-no-stimulus.window.bin",
+            "public_offset": 26176
+          },
+          {
+            "run": "normal-work-window-isolated-event-media-20260501",
+            "capture": "03-cycle01-get-event-status-media.window.bin",
+            "public_offset": 26176
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 96,
+    "top_chunk": "80b60d722518",
+    "top_sha256": "80b60d72251889f9d5331ad5fa05b82080000454d8efbbfe7e125d5cf7e24463",
+    "top_count": 256,
+    "variant_count": 2,
+    "variants": [
+      {
+        "chunk": "80b60d722518",
+        "sha256": "80b60d72251889f9d5331ad5fa05b82080000454d8efbbfe7e125d5cf7e24463",
+        "count": 256,
+        "hex_prefix": "cbf09047c97451f09047a8e05428ffbf280ee04410f0e054eff0908a337401f0",
+        "examples": [
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "00-cycle00-baseline-no-stimulus.window.bin",
+            "public_offset": 26240
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "01-cycle00-std-current-sf0000-len00fc.window.bin",
+            "public_offset": 26240
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "02-cycle00-std-current-sf0020-len00fc.window.bin",
+            "public_offset": 26240
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "03-cycle00-r4-01-current-sf0000.window.bin",
+            "public_offset": 26240
+          }
+        ]
+      },
+      {
+        "chunk": "39ab42ddd82a",
+        "sha256": "39ab42ddd82a825a0e1b929e4aa270edc0ecacb6886e9102faa6978c81d15b9a",
+        "count": 15,
+        "hex_prefix": "e4f0a37414f08047908a527403f0a37468f0908a4de4f0a37438f08032908a52",
+        "examples": [
+          {
+            "run": "normal-work-window-stimuli-expanded-20260501",
+            "capture": "06-mode-sense10-read-error-recovery.window.bin",
+            "public_offset": 26240
+          },
+          {
+            "run": "normal-work-window-stimuli-expanded-20260501",
+            "capture": "07-mode-sense10-caching.window.bin",
+            "public_offset": 26240
+          },
+          {
+            "run": "normal-work-window-stimuli-expanded-20260501",
+            "capture": "08-mode-sense10-cd-device.window.bin",
+            "public_offset": 26240
+          },
+          {
+            "run": "normal-work-window-stimuli-expanded-20260501",
+            "capture": "09-mode-sense10-cd-audio.window.bin",
+            "public_offset": 26240
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 160,
+    "top_chunk": "80b60d722518",
+    "top_sha256": "80b60d72251889f9d5331ad5fa05b82080000454d8efbbfe7e125d5cf7e24463",
+    "top_count": 53,
+    "variant_count": 2,
+    "variants": [
+      {
+        "chunk": "80b60d722518",
+        "sha256": "80b60d72251889f9d5331ad5fa05b82080000454d8efbbfe7e125d5cf7e24463",
+        "count": 53,
+        "hex_prefix": "cbf09047c97451f09047a8e05428ffbf280ee04410f0e054eff0908a337401f0",
+        "examples": [
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "00-capture-only.window.bin",
+            "public_offset": 26304
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "01-capture-only.window.bin",
+            "public_offset": 26304
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "02-capture-only.window.bin",
+            "public_offset": 26304
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "03-capture-only.window.bin",
+            "public_offset": 26304
+          }
+        ]
+      },
+      {
+        "chunk": "39ab42ddd82a",
+        "sha256": "39ab42ddd82a825a0e1b929e4aa270edc0ecacb6886e9102faa6978c81d15b9a",
+        "count": 43,
+        "hex_prefix": "e4f0a37414f08047908a527403f0a37468f0908a4de4f0a37438f08032908a52",
+        "examples": [
+          {
+            "run": "normal-work-window-harvest-safe-stimuli-20260501",
+            "capture": "03-cycle00-mode-sense10-all.window.bin",
+            "public_offset": 26304
+          },
+          {
+            "run": "normal-work-window-harvest-safe-stimuli-20260501",
+            "capture": "113-cycle07-mode-sense10-read-error-recovery.window.bin",
+            "public_offset": 26304
+          },
+          {
+            "run": "normal-work-window-harvest-safe-stimuli-20260501",
+            "capture": "114-cycle07-mode-sense10-caching.window.bin",
+            "public_offset": 26304
+          },
+          {
+            "run": "normal-work-window-harvest-safe-stimuli-20260501",
+            "capture": "115-cycle07-mode-sense10-cd-device.window.bin",
+            "public_offset": 26304
+          }
+        ]
+      }
+    ]
+  }
+]

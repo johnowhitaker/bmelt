@@ -1,0 +1,113 @@
+[
+  {
+    "record_relative": 208,
+    "top_chunk": "536f157a8567",
+    "top_sha256": "536f157a8567c76e60014b6ed2f78034c4feac738a6fb89309bfc821a9955180",
+    "top_count": 64,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "536f157a8567",
+        "sha256": "536f157a8567c76e60014b6ed2f78034c4feac738a6fb89309bfc821a9955180",
+        "count": 64,
+        "hex_prefix": "02f0a87c7601a87ce6ff057c057cd0d092af22d310af01c3c0d090480ee05403",
+        "examples": [
+          {
+            "run": "normal-work-window-get-performance-variants-20260501",
+            "capture": "24-cycle01-gp-type02-max0010.window.bin",
+            "public_offset": 35584
+          },
+          {
+            "run": "normal-work-window-get-performance-variants-20260501",
+            "capture": "25-cycle01-gp-type03-max0010.window.bin",
+            "public_offset": 35584
+          },
+          {
+            "run": "normal-work-window-get-performance-variants-20260501",
+            "capture": "26-cycle01-gp-type04-max0010.window.bin",
+            "public_offset": 35584
+          },
+          {
+            "run": "normal-work-window-get-performance-variants-20260501",
+            "capture": "27-cycle01-gp-type05-max0010.window.bin",
+            "public_offset": 35584
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 272,
+    "top_chunk": "536f157a8567",
+    "top_sha256": "536f157a8567c76e60014b6ed2f78034c4feac738a6fb89309bfc821a9955180",
+    "top_count": 205,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "536f157a8567",
+        "sha256": "536f157a8567c76e60014b6ed2f78034c4feac738a6fb89309bfc821a9955180",
+        "count": 205,
+        "hex_prefix": "02f0a87c7601a87ce6ff057c057cd0d092af22d310af01c3c0d090480ee05403",
+        "examples": [
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "00-cycle00-baseline-no-stimulus.window.bin",
+            "public_offset": 35648
+          },
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "01-cycle00-read-toc-format-0-after-command.window.bin",
+            "public_offset": 35648
+          },
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "02-cycle00-read-toc-format-0-after-request-sense.window.bin",
+            "public_offset": 35648
+          },
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "03-cycle00-read-toc-format-4-after-command.window.bin",
+            "public_offset": 35648
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 336,
+    "top_chunk": "536f157a8567",
+    "top_sha256": "536f157a8567c76e60014b6ed2f78034c4feac738a6fb89309bfc821a9955180",
+    "top_count": 224,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "536f157a8567",
+        "sha256": "536f157a8567c76e60014b6ed2f78034c4feac738a6fb89309bfc821a9955180",
+        "count": 224,
+        "hex_prefix": "02f0a87c7601a87ce6ff057c057cd0d092af22d310af01c3c0d090480ee05403",
+        "examples": [
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "00-capture-only.window.bin",
+            "public_offset": 35712
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "01-capture-only.window.bin",
+            "public_offset": 35712
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "02-capture-only.window.bin",
+            "public_offset": 35712
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "03-capture-only.window.bin",
+            "public_offset": 35712
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,39 @@
+[
+  {
+    "record_relative": 64,
+    "top_chunk": "1fc002817f62",
+    "top_sha256": "1fc002817f62a80cedd76394df2c04c077e1c490138b986ac2df606590dbeae3",
+    "top_count": 219,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "1fc002817f62",
+        "sha256": "1fc002817f62a80cedd76394df2c04c077e1c490138b986ac2df606590dbeae3",
+        "count": 219,
+        "hex_prefix": "4093f0908661e0f5a8904098e0ff904000e020e7f9904098e0ffd0d092af22e0",
+        "examples": [
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "00-cycle00-baseline-no-stimulus.window.bin",
+            "public_offset": 37120
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "01-cycle00-std-current-sf0000-len00fc.window.bin",
+            "public_offset": 37120
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "02-cycle00-std-current-sf0020-len00fc.window.bin",
+            "public_offset": 37120
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "03-cycle00-r4-01-current-sf0000.window.bin",
+            "public_offset": 37120
+          }
+        ]
+      }
+    ]
+  }
+]

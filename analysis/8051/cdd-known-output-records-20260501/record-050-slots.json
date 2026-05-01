@@ -1,0 +1,261 @@
+[
+  {
+    "record_relative": 0,
+    "top_chunk": "6c4f90652e56",
+    "top_sha256": "6c4f90652e56f0866c745d3b909f434bbc76a047260cbd54fa2bc4a52e743773",
+    "top_count": 136,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "6c4f90652e56",
+        "sha256": "6c4f90652e56f0866c745d3b909f434bbc76a047260cbd54fa2bc4a52e743773",
+        "count": 136,
+        "hex_prefix": "47c5e09089c8f09047c4e09089c9f0908a49e0ff64286013ef64be600eef64a8",
+        "examples": [
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "00-cycle00-baseline-no-stimulus.window.bin",
+            "public_offset": 24832
+          },
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "01-cycle00-read-toc-format-0-after-command.window.bin",
+            "public_offset": 24832
+          },
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "02-cycle00-read-toc-format-0-after-request-sense.window.bin",
+            "public_offset": 24832
+          },
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "03-cycle00-read-toc-format-4-after-command.window.bin",
+            "public_offset": 24832
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 64,
+    "top_chunk": "6c4f90652e56",
+    "top_sha256": "6c4f90652e56f0866c745d3b909f434bbc76a047260cbd54fa2bc4a52e743773",
+    "top_count": 93,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "6c4f90652e56",
+        "sha256": "6c4f90652e56f0866c745d3b909f434bbc76a047260cbd54fa2bc4a52e743773",
+        "count": 93,
+        "hex_prefix": "47c5e09089c8f09047c4e09089c9f0908a49e0ff64286013ef64be600eef64a8",
+        "examples": [
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "00-cycle00-baseline-no-stimulus.window.bin",
+            "public_offset": 24896
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "04-cycle00-r4-fe-current-sf0000.window.bin",
+            "public_offset": 24896
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "07-cycle00-r5-f0-current-sf0000.window.bin",
+            "public_offset": 24896
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "11-cycle01-std-current-sf0000-len00fc.window.bin",
+            "public_offset": 24896
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 128,
+    "top_chunk": "6c4f90652e56",
+    "top_sha256": "6c4f90652e56f0866c745d3b909f434bbc76a047260cbd54fa2bc4a52e743773",
+    "top_count": 222,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "6c4f90652e56",
+        "sha256": "6c4f90652e56f0866c745d3b909f434bbc76a047260cbd54fa2bc4a52e743773",
+        "count": 222,
+        "hex_prefix": "47c5e09089c8f09047c4e09089c9f0908a49e0ff64286013ef64be600eef64a8",
+        "examples": [
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "02-capture-only.window.bin",
+            "public_offset": 24960
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "03-capture-only.window.bin",
+            "public_offset": 24960
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "04-capture-only.window.bin",
+            "public_offset": 24960
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "05-capture-only.window.bin",
+            "public_offset": 24960
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 192,
+    "top_chunk": "6c4f90652e56",
+    "top_sha256": "6c4f90652e56f0866c745d3b909f434bbc76a047260cbd54fa2bc4a52e743773",
+    "top_count": 218,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "6c4f90652e56",
+        "sha256": "6c4f90652e56f0866c745d3b909f434bbc76a047260cbd54fa2bc4a52e743773",
+        "count": 218,
+        "hex_prefix": "47c5e09089c8f09047c4e09089c9f0908a49e0ff64286013ef64be600eef64a8",
+        "examples": [
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "00-capture-only.window.bin",
+            "public_offset": 25024
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "01-capture-only.window.bin",
+            "public_offset": 25024
+          },
+          {
+            "run": "normal-work-window-get-config-current-long-20260501",
+            "capture": "00-cycle00-baseline-no-stimulus.window.bin",
+            "public_offset": 25024
+          },
+          {
+            "run": "normal-work-window-get-config-current-long-20260501",
+            "capture": "05-cycle02-get-configuration-current.window.bin",
+            "public_offset": 25024
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 320,
+    "top_chunk": "2598f9591a20",
+    "top_sha256": "2598f9591a207994caacea8a3d3a8b1d665f515de6ebdaba068e5aa4e7e206f1",
+    "top_count": 345,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "2598f9591a20",
+        "sha256": "2598f9591a207994caacea8a3d3a8b1d665f515de6ebdaba068e5aa4e7e206f1",
+        "count": 345,
+        "hex_prefix": "908a4de030e34130e40c9089a4e0705c908ae4e07056908a4de030e6099089ca",
+        "examples": [
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "13-cycle01-get-performance-type00-after-request-sense.window.bin",
+            "public_offset": 25152
+          },
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "14-cycle02-baseline-no-stimulus.window.bin",
+            "public_offset": 25152
+          },
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "15-cycle02-read-toc-format-0-after-command.window.bin",
+            "public_offset": 25152
+          },
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "16-cycle02-read-toc-format-0-after-request-sense.window.bin",
+            "public_offset": 25152
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 384,
+    "top_chunk": "2598f9591a20",
+    "top_sha256": "2598f9591a207994caacea8a3d3a8b1d665f515de6ebdaba068e5aa4e7e206f1",
+    "top_count": 160,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "2598f9591a20",
+        "sha256": "2598f9591a207994caacea8a3d3a8b1d665f515de6ebdaba068e5aa4e7e206f1",
+        "count": 160,
+        "hex_prefix": "908a4de030e34130e40c9089a4e0705c908ae4e07056908a4de030e6099089ca",
+        "examples": [
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "00-capture-only.window.bin",
+            "public_offset": 25216
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "01-capture-only.window.bin",
+            "public_offset": 25216
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "02-capture-only.window.bin",
+            "public_offset": 25216
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "03-capture-only.window.bin",
+            "public_offset": 25216
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 448,
+    "top_chunk": "2598f9591a20",
+    "top_sha256": "2598f9591a207994caacea8a3d3a8b1d665f515de6ebdaba068e5aa4e7e206f1",
+    "top_count": 139,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "2598f9591a20",
+        "sha256": "2598f9591a207994caacea8a3d3a8b1d665f515de6ebdaba068e5aa4e7e206f1",
+        "count": 139,
+        "hex_prefix": "908a4de030e34130e40c9089a4e0705c908ae4e07056908a4de030e6099089ca",
+        "examples": [
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "00-cycle00-baseline-no-stimulus.window.bin",
+            "public_offset": 25280
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "01-cycle00-std-current-sf0000-len00fc.window.bin",
+            "public_offset": 25280
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "02-cycle00-std-current-sf0020-len00fc.window.bin",
+            "public_offset": 25280
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "03-cycle00-r4-01-current-sf0000.window.bin",
+            "public_offset": 25280
+          }
+        ]
+      }
+    ]
+  }
+]

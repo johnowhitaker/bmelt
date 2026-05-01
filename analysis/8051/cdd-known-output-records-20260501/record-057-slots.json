@@ -1,0 +1,206 @@
+[
+  {
+    "record_relative": 96,
+    "top_chunk": "cfe0a1406283",
+    "top_sha256": "cfe0a1406283027074d0b67e3eddab5c8642ad409bb9cd6520b0eb01a4f369db",
+    "top_count": 413,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "cfe0a1406283",
+        "sha256": "cfe0a1406283027074d0b67e3eddab5c8642ad409bb9cd6520b0eb01a4f369db",
+        "count": 413,
+        "hex_prefix": "f0e054fbf01297dd22908672eff09081f5e06f601c908672e0fb9081f5e09088",
+        "examples": [
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "00-capture-only.window.bin",
+            "public_offset": 28288
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "01-capture-only.window.bin",
+            "public_offset": 28288
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "02-capture-only.window.bin",
+            "public_offset": 28288
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "03-capture-only.window.bin",
+            "public_offset": 28288
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 160,
+    "top_chunk": "cfe0a1406283",
+    "top_sha256": "cfe0a1406283027074d0b67e3eddab5c8642ad409bb9cd6520b0eb01a4f369db",
+    "top_count": 256,
+    "variant_count": 3,
+    "variants": [
+      {
+        "chunk": "cfe0a1406283",
+        "sha256": "cfe0a1406283027074d0b67e3eddab5c8642ad409bb9cd6520b0eb01a4f369db",
+        "count": 256,
+        "hex_prefix": "f0e054fbf01297dd22908672eff09081f5e06f601c908672e0fb9081f5e09088",
+        "examples": [
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "00-cycle00-baseline-no-stimulus.window.bin",
+            "public_offset": 28352
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "01-cycle00-std-current-sf0000-len00fc.window.bin",
+            "public_offset": 28352
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "02-cycle00-std-current-sf0020-len00fc.window.bin",
+            "public_offset": 28352
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "03-cycle00-r4-01-current-sf0000.window.bin",
+            "public_offset": 28352
+          }
+        ]
+      },
+      {
+        "chunk": "ee30d1b5daca",
+        "sha256": "ee30d1b5dacac4fc4145b020e110b67308dd5636cae98ae3fe83e092f8dcd477",
+        "count": 162,
+        "hex_prefix": "a3e0f9a3e0faa3e02fffea3efeed39fdec38fc90895e123430904000e020e7f9",
+        "examples": [
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "00-cycle00-baseline-no-stimulus.window.bin",
+            "public_offset": 28352
+          },
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "01-cycle00-read-toc-format-0-after-command.window.bin",
+            "public_offset": 28352
+          },
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "02-cycle00-read-toc-format-0-after-request-sense.window.bin",
+            "public_offset": 28352
+          },
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "03-cycle00-read-toc-format-4-after-command.window.bin",
+            "public_offset": 28352
+          }
+        ]
+      },
+      {
+        "chunk": "3dcd6687529a",
+        "sha256": "3dcd6687529a6953583f50462b642b3338160cae340aaf0db8b9c629b75ef35c",
+        "count": 14,
+        "hex_prefix": "01122fb79047b1f0803e78a97600087604c3908a51e09404908a50e094005003",
+        "examples": [
+          {
+            "run": "normal-work-window-isolated-extrainq-20260501",
+            "capture": "00-cycle00-baseline-no-stimulus.window.bin",
+            "public_offset": 28352
+          },
+          {
+            "run": "normal-work-window-stimuli-expanded-20260501",
+            "capture": "13-get-event-status-operational.window.bin",
+            "public_offset": 28352
+          },
+          {
+            "run": "normal-work-window-stimuli-expanded-20260501",
+            "capture": "14-get-event-status-power.window.bin",
+            "public_offset": 28352
+          },
+          {
+            "run": "normal-work-window-stimuli-expanded-20260501",
+            "capture": "15-get-event-status-external.window.bin",
+            "public_offset": 28352
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 224,
+    "top_chunk": "5fb5a8bf8f9a",
+    "top_sha256": "5fb5a8bf8f9adbbb1a6aa7a9ddb9e8b9da149a3ca33c8eff02b0f5adac5395b7",
+    "top_count": 190,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "5fb5a8bf8f9a",
+        "sha256": "5fb5a8bf8f9adbbb1a6aa7a9ddb9e8b9da149a3ca33c8eff02b0f5adac5395b7",
+        "count": 190,
+        "hex_prefix": "9081f5e0ff908672e0fe6f6015908c847483f0a374c3f0e4a3f0a3eef07f0412",
+        "examples": [
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "00-cycle00-baseline-no-stimulus.window.bin",
+            "public_offset": 28416
+          },
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "01-cycle00-read-toc-format-0-after-command.window.bin",
+            "public_offset": 28416
+          },
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "02-cycle00-read-toc-format-0-after-request-sense.window.bin",
+            "public_offset": 28416
+          },
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "03-cycle00-read-toc-format-4-after-command.window.bin",
+            "public_offset": 28416
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 288,
+    "top_chunk": "5fb5a8bf8f9a",
+    "top_sha256": "5fb5a8bf8f9adbbb1a6aa7a9ddb9e8b9da149a3ca33c8eff02b0f5adac5395b7",
+    "top_count": 300,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "5fb5a8bf8f9a",
+        "sha256": "5fb5a8bf8f9adbbb1a6aa7a9ddb9e8b9da149a3ca33c8eff02b0f5adac5395b7",
+        "count": 300,
+        "hex_prefix": "9081f5e0ff908672e0fe6f6015908c847483f0a374c3f0e4a3f0a3eef07f0412",
+        "examples": [
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "00-cycle00-baseline-no-stimulus.window.bin",
+            "public_offset": 28480
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "01-cycle00-std-current-sf0000-len00fc.window.bin",
+            "public_offset": 28480
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "02-cycle00-std-current-sf0020-len00fc.window.bin",
+            "public_offset": 28480
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "03-cycle00-r4-01-current-sf0000.window.bin",
+            "public_offset": 28480
+          }
+        ]
+      }
+    ]
+  }
+]

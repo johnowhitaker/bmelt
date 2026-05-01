@@ -1,0 +1,187 @@
+[
+  {
+    "record_relative": 0,
+    "top_chunk": "bd4b736c6b8d",
+    "top_sha256": "bd4b736c6b8d31052ccdcfca05d25645409e5461f7ab079d988397ce5c67ed3e",
+    "top_count": 160,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "bd4b736c6b8d",
+        "sha256": "bd4b736c6b8d31052ccdcfca05d25645409e5461f7ab079d988397ce5c67ed3e",
+        "count": 160,
+        "hex_prefix": "f09089e5e06003e014f0908921e06003e014f09089cde07002a3e0600e9089ce",
+        "examples": [
+          {
+            "run": "normal-work-window-harvest-baseline-20260501",
+            "capture": "00-cycle00-baseline-no-stimulus.window.bin",
+            "public_offset": 32896
+          },
+          {
+            "run": "normal-work-window-harvest-baseline-20260501",
+            "capture": "01-cycle01-baseline-no-stimulus.window.bin",
+            "public_offset": 32896
+          },
+          {
+            "run": "normal-work-window-harvest-baseline-20260501",
+            "capture": "02-cycle02-baseline-no-stimulus.window.bin",
+            "public_offset": 32896
+          },
+          {
+            "run": "normal-work-window-harvest-baseline-20260501",
+            "capture": "03-cycle03-baseline-no-stimulus.window.bin",
+            "public_offset": 32896
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 448,
+    "top_chunk": "add3eb18b8cc",
+    "top_sha256": "add3eb18b8cc24b03f2d1f7d7877e8528cdef309a8d5f4b2102e09daa593e043",
+    "top_count": 400,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "add3eb18b8cc",
+        "sha256": "add3eb18b8cc24b03f2d1f7d7877e8528cdef309a8d5f4b2102e09daa593e043",
+        "count": 400,
+        "hex_prefix": "e436f69047d7e054fef0908a4fe09047d6f09047afe4f09047b1f0f0e6f008e6",
+        "examples": [
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "00-capture-only.window.bin",
+            "public_offset": 33344
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "01-capture-only.window.bin",
+            "public_offset": 33344
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "02-capture-only.window.bin",
+            "public_offset": 33344
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "03-capture-only.window.bin",
+            "public_offset": 33344
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 512,
+    "top_chunk": "037cda80b040",
+    "top_sha256": "037cda80b040f2dd84508b16acfe89bf29a36f9506d1c63f9317111518b507cc",
+    "top_count": 413,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "037cda80b040",
+        "sha256": "037cda80b040f2dd84508b16acfe89bf29a36f9506d1c63f9317111518b507cc",
+        "count": 413,
+        "hex_prefix": "908d2ce004f09089fce06003e014f0908943e004f07006908942e004f090896e",
+        "examples": [
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "00-capture-only.window.bin",
+            "public_offset": 33408
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "01-capture-only.window.bin",
+            "public_offset": 33408
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "02-capture-only.window.bin",
+            "public_offset": 33408
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "03-capture-only.window.bin",
+            "public_offset": 33408
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 576,
+    "top_chunk": "037cda80b040",
+    "top_sha256": "037cda80b040f2dd84508b16acfe89bf29a36f9506d1c63f9317111518b507cc",
+    "top_count": 256,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "037cda80b040",
+        "sha256": "037cda80b040f2dd84508b16acfe89bf29a36f9506d1c63f9317111518b507cc",
+        "count": 256,
+        "hex_prefix": "908d2ce004f09089fce06003e014f0908943e004f07006908942e004f090896e",
+        "examples": [
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "00-cycle00-baseline-no-stimulus.window.bin",
+            "public_offset": 33472
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "01-cycle00-std-current-sf0000-len00fc.window.bin",
+            "public_offset": 33472
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "02-cycle00-std-current-sf0020-len00fc.window.bin",
+            "public_offset": 33472
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "03-cycle00-r4-01-current-sf0000.window.bin",
+            "public_offset": 33472
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 640,
+    "top_chunk": "0803afdb9f57",
+    "top_sha256": "0803afdb9f574a99bdaff33eda0e7efeadc32dcdb44785dd53b33530d8791ed3",
+    "top_count": 427,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "0803afdb9f57",
+        "sha256": "0803afdb9f574a99bdaff33eda0e7efeadc32dcdb44785dd53b33530d8791ed3",
+        "count": 427,
+        "hex_prefix": "12014a9085f1e0fea3e0ffee4f24ff22e4908638f0a3e5a8f075a89090480ee0",
+        "examples": [
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "00-cycle00-baseline-no-stimulus.window.bin",
+            "public_offset": 33536
+          },
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "01-cycle00-read-toc-format-0-after-command.window.bin",
+            "public_offset": 33536
+          },
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "02-cycle00-read-toc-format-0-after-request-sense.window.bin",
+            "public_offset": 33536
+          },
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "03-cycle00-read-toc-format-4-after-command.window.bin",
+            "public_offset": 33536
+          }
+        ]
+      }
+    ]
+  }
+]

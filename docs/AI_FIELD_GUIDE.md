@@ -1991,3 +1991,25 @@ Immediate useful directions:
     enough decoded-looking tile evidence to attack mode `0x40`/`0x80` record
     grammars, and record `58` remains the GET CONFIG / public response-bridge
     neighborhood.
+87. `scripts/analyze_liteon_cdd_tile_adjacency.py` builds a graph of adjacent
+    decoded-looking normal work-window tiles. The current report is
+    `analysis/8051/cdd-tile-adjacency-with-readonly-harvests-20260501.md/json`:
+    669 captures, 11,146 adjacent known-chunk observations, 8,850 same-record
+    slot observations, and 95 unique same-record slot edges. Use this when you
+    need local chunk order rather than just a list of CDD record buckets.
+88. `scripts/export_liteon_cdd_known_output_records.py` writes per-record CDD
+    known-output kits under
+    `analysis/8051/cdd-known-output-records-20260501/`. Each record gets an
+    encoded source span, a public-slot consensus `known-output.bin`, a mask,
+    and slot metadata. These are not full decoded CDD records, but they are the
+    best compact targets for grammar attacks.
+89. `analysis/8051/cdd-known-output-code-shape-20260501.md` summarizes the key
+    result from those exports: several records are mostly covered and
+    disassemble as plausible 8051. Record `87` is 896/1008 bytes known with no
+    slot variants; record `51` is 800/816; record `66` is 704/720; record `58`
+    is 496/544. The strongest records touch `0x47b1`, `0x4000`, `0x4098`,
+    `0x8a4d`, and related packet/controller shadows.
+90. This means at least part of the CDD-decoded material is 8051-side overlay
+    or 8051-executable code. Do not assume the CDDs are only ARM/DSP/servo
+    payloads. The high-coverage known-output records are now a cleaner static
+    route than blind whole-stream CDD decoding.

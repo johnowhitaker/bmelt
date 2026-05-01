@@ -1,0 +1,391 @@
+[
+  {
+    "record_relative": 112,
+    "top_chunk": "0803afdb9f57",
+    "top_sha256": "0803afdb9f574a99bdaff33eda0e7efeadc32dcdb44785dd53b33530d8791ed3",
+    "top_count": 151,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "0803afdb9f57",
+        "sha256": "0803afdb9f574a99bdaff33eda0e7efeadc32dcdb44785dd53b33530d8791ed3",
+        "count": 151,
+        "hex_prefix": "12014a9085f1e0fea3e0ffee4f24ff22e4908638f0a3e5a8f075a89090480ee0",
+        "examples": [
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "00-capture-only.window.bin",
+            "public_offset": 33664
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "01-capture-only.window.bin",
+            "public_offset": 33664
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "02-capture-only.window.bin",
+            "public_offset": 33664
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "03-capture-only.window.bin",
+            "public_offset": 33664
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 176,
+    "top_chunk": "ad2faf50bc31",
+    "top_sha256": "ad2faf50bc317d40116a296c83e56741611f28ad6271fa7c7f92f0ee6e49647a",
+    "top_count": 669,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "ad2faf50bc31",
+        "sha256": "ad2faf50bc317d40116a296c83e56741611f28ad6271fa7c7f92f0ee6e49647a",
+        "count": 669,
+        "hex_prefix": "596ac39089d1e094b89089d0e0940b500ca3e004f070069089d0e004f09089d0",
+        "examples": [
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "00-capture-only.window.bin",
+            "public_offset": 33728
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "01-capture-only.window.bin",
+            "public_offset": 33728
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "02-capture-only.window.bin",
+            "public_offset": 33728
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "03-capture-only.window.bin",
+            "public_offset": 33728
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 240,
+    "top_chunk": "c5c0741f5daa",
+    "top_sha256": "c5c0741f5daa580c2f3dd3ba451a6a7060426d388a5ba30ebcd09ea218fa8022",
+    "top_count": 58,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "c5c0741f5daa",
+        "sha256": "c5c0741f5daa580c2f3dd3ba451a6a7060426d388a5ba30ebcd09ea218fa8022",
+        "count": 58,
+        "hex_prefix": "862cf090596ae090862df0905906e0908633f090590de090862ff0905a00e090",
+        "examples": [
+          {
+            "run": "normal-work-window-harvest-safe-stimuli-20260501",
+            "capture": "08-cycle00-mode-sense10-read-error-recovery.window.bin",
+            "public_offset": 33792
+          },
+          {
+            "run": "normal-work-window-harvest-safe-stimuli-20260501",
+            "capture": "09-cycle00-mode-sense10-caching.window.bin",
+            "public_offset": 33792
+          },
+          {
+            "run": "normal-work-window-harvest-safe-stimuli-20260501",
+            "capture": "10-cycle00-mode-sense10-cd-device.window.bin",
+            "public_offset": 33792
+          },
+          {
+            "run": "normal-work-window-harvest-safe-stimuli-20260501",
+            "capture": "101-cycle06-mode-sense10-cd-audio.window.bin",
+            "public_offset": 33792
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 304,
+    "top_chunk": "85545872cc2b",
+    "top_sha256": "85545872cc2bff4dc33bec52d51126eb99e6a6880c8e030d4d01ce3a530fc675",
+    "top_count": 669,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "85545872cc2b",
+        "sha256": "85545872cc2bff4dc33bec52d51126eb99e6a6880c8e030d4d01ce3a530fc675",
+        "count": 669,
+        "hex_prefix": "b43c13908a14e004f07006908a13e004f0e49089a2f0c3908975e094b8908974",
+        "examples": [
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "00-capture-only.window.bin",
+            "public_offset": 33856
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "01-capture-only.window.bin",
+            "public_offset": 33856
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "02-capture-only.window.bin",
+            "public_offset": 33856
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "03-capture-only.window.bin",
+            "public_offset": 33856
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 368,
+    "top_chunk": "c5c0741f5daa",
+    "top_sha256": "c5c0741f5daa580c2f3dd3ba451a6a7060426d388a5ba30ebcd09ea218fa8022",
+    "top_count": 330,
+    "variant_count": 2,
+    "variants": [
+      {
+        "chunk": "c5c0741f5daa",
+        "sha256": "c5c0741f5daa580c2f3dd3ba451a6a7060426d388a5ba30ebcd09ea218fa8022",
+        "count": 330,
+        "hex_prefix": "862cf090596ae090862df0905906e0908633f090590de090862ff0905a00e090",
+        "examples": [
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "00-capture-only.window.bin",
+            "public_offset": 33920
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "01-capture-only.window.bin",
+            "public_offset": 33920
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "02-capture-only.window.bin",
+            "public_offset": 33920
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "03-capture-only.window.bin",
+            "public_offset": 33920
+          }
+        ]
+      },
+      {
+        "chunk": "5badff03bdb8",
+        "sha256": "5badff03bdb8d6398695b8ce49b0334c65795b7ed703e2f107aef7d50e236691",
+        "count": 148,
+        "hex_prefix": "90824ee064017058908133e0c413540730e04d12f01e908325eef0a3eff09088",
+        "examples": [
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "00-cycle00-baseline-no-stimulus.window.bin",
+            "public_offset": 33920
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "01-cycle00-std-current-sf0000-len00fc.window.bin",
+            "public_offset": 33920
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "02-cycle00-std-current-sf0020-len00fc.window.bin",
+            "public_offset": 33920
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "03-cycle00-r4-01-current-sf0000.window.bin",
+            "public_offset": 33920
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 432,
+    "top_chunk": "c5c0741f5daa",
+    "top_sha256": "c5c0741f5daa580c2f3dd3ba451a6a7060426d388a5ba30ebcd09ea218fa8022",
+    "top_count": 256,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "c5c0741f5daa",
+        "sha256": "c5c0741f5daa580c2f3dd3ba451a6a7060426d388a5ba30ebcd09ea218fa8022",
+        "count": 256,
+        "hex_prefix": "862cf090596ae090862df0905906e0908633f090590de090862ff0905a00e090",
+        "examples": [
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "00-cycle00-baseline-no-stimulus.window.bin",
+            "public_offset": 33984
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "01-cycle00-std-current-sf0000-len00fc.window.bin",
+            "public_offset": 33984
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "02-cycle00-std-current-sf0020-len00fc.window.bin",
+            "public_offset": 33984
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "03-cycle00-r4-01-current-sf0000.window.bin",
+            "public_offset": 33984
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 496,
+    "top_chunk": "17a7e3a30d12",
+    "top_sha256": "17a7e3a30d12b5488c054e0e089d76a1f7c8753dbeeb6e951d88b257aea0864c",
+    "top_count": 669,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "17a7e3a30d12",
+        "sha256": "17a7e3a30d12b5488c054e0e089d76a1f7c8753dbeeb6e951d88b257aea0864c",
+        "count": 669,
+        "hex_prefix": "e0c3943c500ae004f0e4908974f0a3f090894ae0b43c139089dbe004f0700690",
+        "examples": [
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "00-capture-only.window.bin",
+            "public_offset": 34048
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "01-capture-only.window.bin",
+            "public_offset": 34048
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "02-capture-only.window.bin",
+            "public_offset": 34048
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "03-capture-only.window.bin",
+            "public_offset": 34048
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 560,
+    "top_chunk": "7106a72e56d9",
+    "top_sha256": "7106a72e56d99556fc3629abcd9453e242b8f0af0ebe256867b222364c74194c",
+    "top_count": 167,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "7106a72e56d9",
+        "sha256": "7106a72e56d99556fc3629abcd9453e242b8f0af0ebe256867b222364c74194c",
+        "count": 167,
+        "hex_prefix": "30e054df904863f0908631e054fd904840f0908633e0547f905906f0908632e0",
+        "examples": [
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "00-cycle00-baseline-no-stimulus.window.bin",
+            "public_offset": 34112
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "01-cycle00-std-current-sf0000-len00fc.window.bin",
+            "public_offset": 34112
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "02-cycle00-std-current-sf0020-len00fc.window.bin",
+            "public_offset": 34112
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "03-cycle00-r4-01-current-sf0000.window.bin",
+            "public_offset": 34112
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 624,
+    "top_chunk": "7106a72e56d9",
+    "top_sha256": "7106a72e56d99556fc3629abcd9453e242b8f0af0ebe256867b222364c74194c",
+    "top_count": 260,
+    "variant_count": 2,
+    "variants": [
+      {
+        "chunk": "7106a72e56d9",
+        "sha256": "7106a72e56d99556fc3629abcd9453e242b8f0af0ebe256867b222364c74194c",
+        "count": 260,
+        "hex_prefix": "30e054df904863f0908631e054fd904840f0908633e0547f905906f0908632e0",
+        "examples": [
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "00-capture-only.window.bin",
+            "public_offset": 34176
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "01-capture-only.window.bin",
+            "public_offset": 34176
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "02-capture-only.window.bin",
+            "public_offset": 34176
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "03-capture-only.window.bin",
+            "public_offset": 34176
+          }
+        ]
+      },
+      {
+        "chunk": "5a92e83e04a8",
+        "sha256": "5a92e83e04a8bbd5b4bff84dd5bfcb3e206de740a1bf0b791ab8368bcffd7038",
+        "count": 33,
+        "hex_prefix": "9047b1e4f080069047b17410f0908a4ee09047b1f0908a4fe09047b1f0908a50",
+        "examples": [
+          {
+            "run": "normal-work-window-harvest-safe-stimuli-20260501",
+            "capture": "07-cycle00-mechanism-status.window.bin",
+            "public_offset": 34176
+          },
+          {
+            "run": "normal-work-window-harvest-safe-stimuli-20260501",
+            "capture": "08-cycle00-mode-sense10-read-error-recovery.window.bin",
+            "public_offset": 34176
+          },
+          {
+            "run": "normal-work-window-harvest-safe-stimuli-20260501",
+            "capture": "09-cycle00-mode-sense10-caching.window.bin",
+            "public_offset": 34176
+          },
+          {
+            "run": "normal-work-window-harvest-safe-stimuli-20260501",
+            "capture": "10-cycle00-mode-sense10-cd-device.window.bin",
+            "public_offset": 34176
+          }
+        ]
+      }
+    ]
+  }
+]

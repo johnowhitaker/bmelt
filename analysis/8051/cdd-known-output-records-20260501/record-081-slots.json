@@ -1,0 +1,67 @@
+[
+  {
+    "record_relative": 272,
+    "top_chunk": "144315176c64",
+    "top_sha256": "144315176c646e312f2abe220481010840cbc370fbe9c862396d647d89595833",
+    "top_count": 82,
+    "variant_count": 2,
+    "variants": [
+      {
+        "chunk": "144315176c64",
+        "sha256": "144315176c646e312f2abe220481010840cbc370fbe9c862396d647d89595833",
+        "count": 82,
+        "hex_prefix": "8a23e04401f09088f1e04440f0908940e0c31320e006e478b2f608f6908935e0",
+        "examples": [
+          {
+            "run": "normal-work-window-harvest-safe-stimuli-20260501",
+            "capture": "100-cycle06-mode-sense10-cd-device.window.bin",
+            "public_offset": 37888
+          },
+          {
+            "run": "normal-work-window-harvest-safe-stimuli-20260501",
+            "capture": "101-cycle06-mode-sense10-cd-audio.window.bin",
+            "public_offset": 37888
+          },
+          {
+            "run": "normal-work-window-harvest-safe-stimuli-20260501",
+            "capture": "102-cycle06-mode-sense10-power-condition.window.bin",
+            "public_offset": 37888
+          },
+          {
+            "run": "normal-work-window-harvest-safe-stimuli-20260501",
+            "capture": "103-cycle06-mode-sense10-fault-failure.window.bin",
+            "public_offset": 37888
+          }
+        ]
+      },
+      {
+        "chunk": "fbb6be935285",
+        "sha256": "fbb6be935285665bce71cd4596046fba8156115259fa571bdd915da00b238033",
+        "count": 4,
+        "hex_prefix": "9ff090480be054eff0904867e04480f0804fef6404704a90480be020e4199048",
+        "examples": [
+          {
+            "run": "normal-work-window-stimuli-full-20260501",
+            "capture": "00-baseline-no-stimulus.window.bin",
+            "public_offset": 37888
+          },
+          {
+            "run": "normal-work-window-stimuli-full-20260501",
+            "capture": "01-test-unit-ready.window.bin",
+            "public_offset": 37888
+          },
+          {
+            "run": "normal-work-window-stimuli-full-20260501",
+            "capture": "02-request-sense.window.bin",
+            "public_offset": 37888
+          },
+          {
+            "run": "normal-work-window-stimuli-full-20260501",
+            "capture": "03-inquiry-standard-96.window.bin",
+            "public_offset": 37888
+          }
+        ]
+      }
+    ]
+  }
+]

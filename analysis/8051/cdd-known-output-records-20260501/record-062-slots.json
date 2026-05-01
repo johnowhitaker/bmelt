@@ -1,0 +1,178 @@
+[
+  {
+    "record_relative": 48,
+    "top_chunk": "3465e4783c3d",
+    "top_sha256": "3465e4783c3d2178b8439a55b79c258e659faf0083af3898129a7a79250fb5f4",
+    "top_count": 413,
+    "variant_count": 2,
+    "variants": [
+      {
+        "chunk": "3465e4783c3d",
+        "sha256": "3465e4783c3d2178b8439a55b79c258e659faf0083af3898129a7a79250fb5f4",
+        "count": 413,
+        "hex_prefix": "3090891ce0fea3e0a87c08080826f618ee36f67b00a97c09097a00900001122f",
+        "examples": [
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "00-capture-only.window.bin",
+            "public_offset": 30272
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "01-capture-only.window.bin",
+            "public_offset": 30272
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "02-capture-only.window.bin",
+            "public_offset": 30272
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "03-capture-only.window.bin",
+            "public_offset": 30272
+          }
+        ]
+      },
+      {
+        "chunk": "580b9228d0b9",
+        "sha256": "580b9228d0b9056b382865df7785bb65b7bcabed406da47bb0ef8b5839b544ce",
+        "count": 256,
+        "hex_prefix": "1ce03403f543904095eff0a3e543f0a3e544f090409ae4f0a37405f0a3743af0",
+        "examples": [
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "00-cycle00-baseline-no-stimulus.window.bin",
+            "public_offset": 30272
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "01-cycle00-std-current-sf0000-len00fc.window.bin",
+            "public_offset": 30272
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "02-cycle00-std-current-sf0020-len00fc.window.bin",
+            "public_offset": 30272
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "03-cycle00-r4-01-current-sf0000.window.bin",
+            "public_offset": 30272
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 176,
+    "top_chunk": "0c9a360d26b8",
+    "top_sha256": "0c9a360d26b83e035c169dd98abb00961fb76184388d3ad0940c3e8a389544b2",
+    "top_count": 255,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "0c9a360d26b8",
+        "sha256": "0c9a360d26b83e035c169dd98abb00961fb76184388d3ad0940c3e8a389544b2",
+        "count": 255,
+        "hex_prefix": "8ac6e0904091f0a87c0808e6a3f07b00a97c09097a00900001122fb7904093f0",
+        "examples": [
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "01-cycle00-std-current-sf0000-len00fc.window.bin",
+            "public_offset": 30400
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "02-cycle00-std-current-sf0020-len00fc.window.bin",
+            "public_offset": 30400
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "03-cycle00-r4-01-current-sf0000.window.bin",
+            "public_offset": 30400
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "04-cycle00-r4-fe-current-sf0000.window.bin",
+            "public_offset": 30400
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 368,
+    "top_chunk": "25333cae3674",
+    "top_sha256": "25333cae3674959bfdd6161ddf2aa6c73b9d5761b8c93e5b9294f769b315677d",
+    "top_count": 413,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "25333cae3674",
+        "sha256": "25333cae3674959bfdd6161ddf2aa6c73b9d5761b8c93e5b9294f769b315677d",
+        "count": 413,
+        "hex_prefix": "64fe700302767b90891fe02438ff90891ee03407feef78aa26ffee1836a87c08",
+        "examples": [
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "00-capture-only.window.bin",
+            "public_offset": 30592
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "01-capture-only.window.bin",
+            "public_offset": 30592
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "02-capture-only.window.bin",
+            "public_offset": 30592
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "03-capture-only.window.bin",
+            "public_offset": 30592
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 432,
+    "top_chunk": "25333cae3674",
+    "top_sha256": "25333cae3674959bfdd6161ddf2aa6c73b9d5761b8c93e5b9294f769b315677d",
+    "top_count": 255,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "25333cae3674",
+        "sha256": "25333cae3674959bfdd6161ddf2aa6c73b9d5761b8c93e5b9294f769b315677d",
+        "count": 255,
+        "hex_prefix": "64fe700302767b90891fe02438ff90891ee03407feef78aa26ffee1836a87c08",
+        "examples": [
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "01-cycle00-std-current-sf0000-len00fc.window.bin",
+            "public_offset": 30656
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "02-cycle00-std-current-sf0020-len00fc.window.bin",
+            "public_offset": 30656
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "03-cycle00-r4-01-current-sf0000.window.bin",
+            "public_offset": 30656
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "04-cycle00-r4-fe-current-sf0000.window.bin",
+            "public_offset": 30656
+          }
+        ]
+      }
+    ]
+  }
+]

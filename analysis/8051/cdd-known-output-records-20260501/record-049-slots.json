@@ -1,0 +1,199 @@
+[
+  {
+    "record_relative": 192,
+    "top_chunk": "0c705773105c",
+    "top_sha256": "0c705773105c535a5186fb1554311925463dbe33f620a441096634659624a6d4",
+    "top_count": 166,
+    "variant_count": 2,
+    "variants": [
+      {
+        "chunk": "0c705773105c",
+        "sha256": "0c705773105c535a5186fb1554311925463dbe33f620a441096634659624a6d4",
+        "count": 166,
+        "hex_prefix": "ec38fc908996123430800be490896af0908ad0740ff090402be4f09047cfe054",
+        "examples": [
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "05-capture-only.window.bin",
+            "public_offset": 24576
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "08-capture-only.window.bin",
+            "public_offset": 24576
+          },
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "02-cycle00-read-toc-format-0-after-request-sense.window.bin",
+            "public_offset": 24576
+          },
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "03-cycle00-read-toc-format-4-after-command.window.bin",
+            "public_offset": 24576
+          }
+        ]
+      },
+      {
+        "chunk": "ac6243637e2d",
+        "sha256": "ac6243637e2d318af3fb3b6595814d05999c8dcb056bb614c2c679a55a0c0ae1",
+        "count": 1,
+        "hex_prefix": "540f9047b1f0d378aae6940418e6940050030293c8e49089cff00293c8908a4d",
+        "examples": [
+          {
+            "run": "normal-work-window-get-performance-variants-20260501",
+            "capture": "34-cycle01-gp-byte1-03-type00.window.bin",
+            "public_offset": 24576
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 256,
+    "top_chunk": "0c705773105c",
+    "top_sha256": "0c705773105c535a5186fb1554311925463dbe33f620a441096634659624a6d4",
+    "top_count": 162,
+    "variant_count": 2,
+    "variants": [
+      {
+        "chunk": "0c705773105c",
+        "sha256": "0c705773105c535a5186fb1554311925463dbe33f620a441096634659624a6d4",
+        "count": 162,
+        "hex_prefix": "ec38fc908996123430800be490896af0908ad0740ff090402be4f09047cfe054",
+        "examples": [
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "10-capture-only.window.bin",
+            "public_offset": 24640
+          },
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "09-cycle01-read-toc-format-0-after-request-sense.window.bin",
+            "public_offset": 24640
+          },
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "12-cycle01-get-performance-type00-after-command.window.bin",
+            "public_offset": 24640
+          },
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "14-cycle02-baseline-no-stimulus.window.bin",
+            "public_offset": 24640
+          }
+        ]
+      },
+      {
+        "chunk": "ac6243637e2d",
+        "sha256": "ac6243637e2d318af3fb3b6595814d05999c8dcb056bb614c2c679a55a0c0ae1",
+        "count": 1,
+        "hex_prefix": "540f9047b1f0d378aae6940418e6940050030293c8e49089cff00293c8908a4d",
+        "examples": [
+          {
+            "run": "normal-work-window-harvest-safe-stimuli-20260501",
+            "capture": "20-cycle01-get-configuration-all.window.bin",
+            "public_offset": 24640
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 320,
+    "top_chunk": "0c705773105c",
+    "top_sha256": "0c705773105c535a5186fb1554311925463dbe33f620a441096634659624a6d4",
+    "top_count": 174,
+    "variant_count": 2,
+    "variants": [
+      {
+        "chunk": "0c705773105c",
+        "sha256": "0c705773105c535a5186fb1554311925463dbe33f620a441096634659624a6d4",
+        "count": 174,
+        "hex_prefix": "ec38fc908996123430800be490896af0908ad0740ff090402be4f09047cfe054",
+        "examples": [
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "00-capture-only.window.bin",
+            "public_offset": 24704
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "07-capture-only.window.bin",
+            "public_offset": 24704
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "11-capture-only.window.bin",
+            "public_offset": 24704
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "13-capture-only.window.bin",
+            "public_offset": 24704
+          }
+        ]
+      },
+      {
+        "chunk": "ac6243637e2d",
+        "sha256": "ac6243637e2d318af3fb3b6595814d05999c8dcb056bb614c2c679a55a0c0ae1",
+        "count": 3,
+        "hex_prefix": "540f9047b1f0d378aae6940418e6940050030293c8e49089cff00293c8908a4d",
+        "examples": [
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "20-cycle02-baseline-no-stimulus.window.bin",
+            "public_offset": 24704
+          },
+          {
+            "run": "normal-work-window-get-config-r5-01-isolated-20260501",
+            "capture": "07-cycle03-r5-01-current-sf0000.window.bin",
+            "public_offset": 24704
+          },
+          {
+            "run": "normal-work-window-harvest-baseline-20260501",
+            "capture": "27-cycle27-baseline-no-stimulus.window.bin",
+            "public_offset": 24704
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 384,
+    "top_chunk": "0c705773105c",
+    "top_sha256": "0c705773105c535a5186fb1554311925463dbe33f620a441096634659624a6d4",
+    "top_count": 167,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "0c705773105c",
+        "sha256": "0c705773105c535a5186fb1554311925463dbe33f620a441096634659624a6d4",
+        "count": 167,
+        "hex_prefix": "ec38fc908996123430800be490896af0908ad0740ff090402be4f09047cfe054",
+        "examples": [
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "01-capture-only.window.bin",
+            "public_offset": 24768
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "02-capture-only.window.bin",
+            "public_offset": 24768
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "03-capture-only.window.bin",
+            "public_offset": 24768
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "04-capture-only.window.bin",
+            "public_offset": 24768
+          }
+        ]
+      }
+    ]
+  }
+]

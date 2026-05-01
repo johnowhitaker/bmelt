@@ -1,0 +1,39 @@
+[
+  {
+    "record_relative": 16,
+    "top_chunk": "fbb6be935285",
+    "top_sha256": "fbb6be935285665bce71cd4596046fba8156115259fa571bdd915da00b238033",
+    "top_count": 257,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "fbb6be935285",
+        "sha256": "fbb6be935285665bce71cd4596046fba8156115259fa571bdd915da00b238033",
+        "count": 257,
+        "hex_prefix": "9ff090480be054eff0904867e04480f0804fef6404704a90480be020e4199048",
+        "examples": [
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "00-capture-only.window.bin",
+            "public_offset": 37952
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "01-capture-only.window.bin",
+            "public_offset": 37952
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "02-capture-only.window.bin",
+            "public_offset": 37952
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "03-capture-only.window.bin",
+            "public_offset": 37952
+          }
+        ]
+      }
+    ]
+  }
+]

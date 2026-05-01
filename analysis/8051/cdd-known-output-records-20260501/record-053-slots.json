@@ -1,0 +1,113 @@
+[
+  {
+    "record_relative": 0,
+    "top_chunk": "c8c5359c53cb",
+    "top_sha256": "c8c5359c53cb6afb02015a9a3d45e408b5fef387abc13b5ecc8c505a24ecf56f",
+    "top_count": 404,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "c8c5359c53cb",
+        "sha256": "c8c5359c53cb6afb02015a9a3d45e408b5fef387abc13b5ecc8c505a24ecf56f",
+        "count": 404,
+        "hex_prefix": "25e075f00a84fd7c00ef75f0b0a42dffec35f0cf2401cf3400fed0d092af2290",
+        "examples": [
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "00-capture-only.window.bin",
+            "public_offset": 26368
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "01-capture-only.window.bin",
+            "public_offset": 26368
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "02-capture-only.window.bin",
+            "public_offset": 26368
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "03-capture-only.window.bin",
+            "public_offset": 26368
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 64,
+    "top_chunk": "593d3704fc52",
+    "top_sha256": "593d3704fc52c46912dfecab57ca781fb8598d874217996a45cbc166308018a3",
+    "top_count": 256,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "593d3704fc52",
+        "sha256": "593d3704fc52c46912dfecab57ca781fb8598d874217996a45cbc166308018a3",
+        "count": 256,
+        "hex_prefix": "01e054faf07e007f64120a71904864e054fef07f0402c26c905904740cf0905a",
+        "examples": [
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "00-cycle00-baseline-no-stimulus.window.bin",
+            "public_offset": 26432
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "01-cycle00-std-current-sf0000-len00fc.window.bin",
+            "public_offset": 26432
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "02-cycle00-std-current-sf0020-len00fc.window.bin",
+            "public_offset": 26432
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "03-cycle00-r4-01-current-sf0000.window.bin",
+            "public_offset": 26432
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 192,
+    "top_chunk": "c8c5359c53cb",
+    "top_sha256": "c8c5359c53cb6afb02015a9a3d45e408b5fef387abc13b5ecc8c505a24ecf56f",
+    "top_count": 117,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "c8c5359c53cb",
+        "sha256": "c8c5359c53cb6afb02015a9a3d45e408b5fef387abc13b5ecc8c505a24ecf56f",
+        "count": 117,
+        "hex_prefix": "25e075f00a84fd7c00ef75f0b0a42dffec35f0cf2401cf3400fed0d092af2290",
+        "examples": [
+          {
+            "run": "normal-work-window-harvest-safe-stimuli-20260501",
+            "capture": "03-cycle00-mode-sense10-all.window.bin",
+            "public_offset": 26560
+          },
+          {
+            "run": "normal-work-window-harvest-safe-stimuli-20260501",
+            "capture": "04-cycle00-get-configuration-current.window.bin",
+            "public_offset": 26560
+          },
+          {
+            "run": "normal-work-window-harvest-safe-stimuli-20260501",
+            "capture": "05-cycle00-get-configuration-all.window.bin",
+            "public_offset": 26560
+          },
+          {
+            "run": "normal-work-window-harvest-safe-stimuli-20260501",
+            "capture": "06-cycle00-get-event-status-media.window.bin",
+            "public_offset": 26560
+          }
+        ]
+      }
+    ]
+  }
+]

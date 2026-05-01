@@ -1,0 +1,76 @@
+[
+  {
+    "record_relative": 32,
+    "top_chunk": "2111cafaf69c",
+    "top_sha256": "2111cafaf69c3db58c6a8fa9f9393e70e78b160c528ad2794f5d67c59a6ccf2e",
+    "top_count": 170,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "2111cafaf69c",
+        "sha256": "2111cafaf69c3db58c6a8fa9f9393e70e78b160c528ad2794f5d67c59a6ccf2e",
+        "count": 170,
+        "hex_prefix": "47b1e0908a4cf09047b1e0908a4df09047b1e0908a4ef09047b1e0908a4ff090",
+        "examples": [
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "04-cycle00-read-toc-format-4-after-request-sense.window.bin",
+            "public_offset": 38144
+          },
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "07-cycle01-baseline-no-stimulus.window.bin",
+            "public_offset": 38144
+          },
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "08-cycle01-read-toc-format-0-after-command.window.bin",
+            "public_offset": 38144
+          },
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "15-cycle02-read-toc-format-0-after-command.window.bin",
+            "public_offset": 38144
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 96,
+    "top_chunk": "2111cafaf69c",
+    "top_sha256": "2111cafaf69c3db58c6a8fa9f9393e70e78b160c528ad2794f5d67c59a6ccf2e",
+    "top_count": 170,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "2111cafaf69c",
+        "sha256": "2111cafaf69c3db58c6a8fa9f9393e70e78b160c528ad2794f5d67c59a6ccf2e",
+        "count": 170,
+        "hex_prefix": "47b1e0908a4cf09047b1e0908a4df09047b1e0908a4ef09047b1e0908a4ff090",
+        "examples": [
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "01-capture-only.window.bin",
+            "public_offset": 38208
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "05-capture-only.window.bin",
+            "public_offset": 38208
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "06-capture-only.window.bin",
+            "public_offset": 38208
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "07-capture-only.window.bin",
+            "public_offset": 38208
+          }
+        ]
+      }
+    ]
+  }
+]

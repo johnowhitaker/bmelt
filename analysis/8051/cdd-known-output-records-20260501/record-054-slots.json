@@ -1,0 +1,76 @@
+[
+  {
+    "record_relative": 80,
+    "top_chunk": "121190698133",
+    "top_sha256": "121190698133004086d72dff07051379524e40b37895eca8ba539a1433fbf192",
+    "top_count": 256,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "121190698133",
+        "sha256": "121190698133004086d72dff07051379524e40b37895eca8ba539a1433fbf192",
+        "count": 256,
+        "hex_prefix": "9059f074def0a374c0f0905a00e04407f0905a31e04402f0905954e044c0f090",
+        "examples": [
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "00-cycle00-baseline-no-stimulus.window.bin",
+            "public_offset": 26752
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "01-cycle00-std-current-sf0000-len00fc.window.bin",
+            "public_offset": 26752
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "02-cycle00-std-current-sf0020-len00fc.window.bin",
+            "public_offset": 26752
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "03-cycle00-r4-01-current-sf0000.window.bin",
+            "public_offset": 26752
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 144,
+    "top_chunk": "1a8df790ad50",
+    "top_sha256": "1a8df790ad5009964160faa2233c1278348e2400c259684c7b0703588f8501d2",
+    "top_count": 597,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "1a8df790ad50",
+        "sha256": "1a8df790ad5009964160faa2233c1278348e2400c259684c7b0703588f8501d2",
+        "count": 597,
+        "hex_prefix": "6003029464905a31e0540ff022ee707b12fbe0ef70030294649059077435f0a3",
+        "examples": [
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "00-capture-only.window.bin",
+            "public_offset": 26816
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "01-capture-only.window.bin",
+            "public_offset": 26816
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "02-capture-only.window.bin",
+            "public_offset": 26816
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "03-capture-only.window.bin",
+            "public_offset": 26816
+          }
+        ]
+      }
+    ]
+  }
+]

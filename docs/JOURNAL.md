@@ -2107,3 +2107,27 @@ a global scroll key. Still, it gives us real decoded-looking code chunks that
 can be bucketed back to candidate CDD records. The next useful static job is
 to build per-record chunk adjacency graphs and infer record grammars from
 known encoded-source / decoded-tile pairs.
+
+That next job paid off immediately. I added a tile-adjacency pass that scans
+all 669 normal work-window captures and records which known-output chunks sit
+next to each other. It found 11,146 adjacent known-chunk observations, including
+8,850 cases where the adjacent public slots fall in the same candidate CDD
+record bucket. This turns the normal work-window from a bag of loose tiles into
+a set of repeatable local neighborhoods.
+
+The best new artifact is the per-record known-output export. For each CDD
+record with enough evidence, it writes the encoded source bytes, a masked
+consensus known-output binary, a mask, and slot-variant metadata. Several
+records are now mostly known: record 87 is 896/1008 bytes covered with no slot
+variants; record 51 is 800/816; record 66 is 704/720; record 58, the old public
+response bridge neighborhood, is 496/544. Radare2 disassembles the strongest
+known-output bins as plausible 8051. They touch familiar XDATA areas like
+`0x47b1`, `0x4000`, `0x4098`, `0x8a4d`, and related packet/controller shadows.
+
+This is an important conceptual shift. The CDDs are still not decoded, and the
+public work-window still is not a flat address space. But at least part of the
+CDD-decoded material is now visible as 8051-like overlay code, paired with the
+exact encoded CDD record that produced it. That gives the next static attack a
+much smaller target: explain one high-coverage record transform at a time,
+starting with records 87, 51, 66, 58, and 70, rather than trying to solve the
+whole CDD format in one leap.

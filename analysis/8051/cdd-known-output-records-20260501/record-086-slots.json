@@ -1,0 +1,206 @@
+[
+  {
+    "record_relative": 0,
+    "top_chunk": "306eb529b363",
+    "top_sha256": "306eb529b36312db5654267ccebce8d309fc041c78532d0b91d009ca1de25bcf",
+    "top_count": 515,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "306eb529b363",
+        "sha256": "306eb529b36312db5654267ccebce8d309fc041c78532d0b91d009ca1de25bcf",
+        "count": 515,
+        "hex_prefix": "9435ee940040149089f7e004f090893ae02ff0908939e03ef08005e49089f7f0",
+        "examples": [
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "00-cycle00-baseline-no-stimulus.window.bin",
+            "public_offset": 39040
+          },
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "01-cycle00-read-toc-format-0-after-command.window.bin",
+            "public_offset": 39040
+          },
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "02-cycle00-read-toc-format-0-after-request-sense.window.bin",
+            "public_offset": 39040
+          },
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "03-cycle00-read-toc-format-4-after-command.window.bin",
+            "public_offset": 39040
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 64,
+    "top_chunk": "306eb529b363",
+    "top_sha256": "306eb529b36312db5654267ccebce8d309fc041c78532d0b91d009ca1de25bcf",
+    "top_count": 76,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "306eb529b363",
+        "sha256": "306eb529b36312db5654267ccebce8d309fc041c78532d0b91d009ca1de25bcf",
+        "count": 76,
+        "hex_prefix": "9435ee940040149089f7e004f090893ae02ff0908939e03ef08005e49089f7f0",
+        "examples": [
+          {
+            "run": "normal-work-window-harvest-safe-stimuli-20260501",
+            "capture": "18-cycle01-mode-sense10-all.window.bin",
+            "public_offset": 39104
+          },
+          {
+            "run": "normal-work-window-harvest-safe-stimuli-20260501",
+            "capture": "19-cycle01-get-configuration-current.window.bin",
+            "public_offset": 39104
+          },
+          {
+            "run": "normal-work-window-harvest-safe-stimuli-20260501",
+            "capture": "20-cycle01-get-configuration-all.window.bin",
+            "public_offset": 39104
+          },
+          {
+            "run": "normal-work-window-harvest-safe-stimuli-20260501",
+            "capture": "21-cycle01-get-event-status-media.window.bin",
+            "public_offset": 39104
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 128,
+    "top_chunk": "0b045c0906d5",
+    "top_sha256": "0b045c0906d525d251d8edd8cabd7f79dd7f1ba252404027f745ed6ab2c3db4e",
+    "top_count": 419,
+    "variant_count": 2,
+    "variants": [
+      {
+        "chunk": "0b045c0906d5",
+        "sha256": "0b045c0906d525d251d8edd8cabd7f79dd7f1ba252404027f745ed6ab2c3db4e",
+        "count": 419,
+        "hex_prefix": "9dffee9c908988f0a3eff0908a49e0b42829c3908989e09464908988e0940040",
+        "examples": [
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "00-capture-only.window.bin",
+            "public_offset": 39168
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "01-capture-only.window.bin",
+            "public_offset": 39168
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "02-capture-only.window.bin",
+            "public_offset": 39168
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "03-capture-only.window.bin",
+            "public_offset": 39168
+          }
+        ]
+      },
+      {
+        "chunk": "71a589c84051",
+        "sha256": "71a589c84051ae6571d7440798924a4a5ec1c861246bcb70d702fb5758cbb5d8",
+        "count": 31,
+        "hex_prefix": "02bf3790852ee014f0e0700302bf479055c6e090855df0e030e7617f5e1208d9",
+        "examples": [
+          {
+            "run": "normal-work-window-harvest-safe-stimuli-20260501",
+            "capture": "100-cycle06-mode-sense10-cd-device.window.bin",
+            "public_offset": 39168
+          },
+          {
+            "run": "normal-work-window-harvest-safe-stimuli-20260501",
+            "capture": "101-cycle06-mode-sense10-cd-audio.window.bin",
+            "public_offset": 39168
+          },
+          {
+            "run": "normal-work-window-harvest-safe-stimuli-20260501",
+            "capture": "102-cycle06-mode-sense10-power-condition.window.bin",
+            "public_offset": 39168
+          },
+          {
+            "run": "normal-work-window-harvest-safe-stimuli-20260501",
+            "capture": "103-cycle06-mode-sense10-fault-failure.window.bin",
+            "public_offset": 39168
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 192,
+    "top_chunk": "71a589c84051",
+    "top_sha256": "71a589c84051ae6571d7440798924a4a5ec1c861246bcb70d702fb5758cbb5d8",
+    "top_count": 256,
+    "variant_count": 2,
+    "variants": [
+      {
+        "chunk": "71a589c84051",
+        "sha256": "71a589c84051ae6571d7440798924a4a5ec1c861246bcb70d702fb5758cbb5d8",
+        "count": 256,
+        "hex_prefix": "02bf3790852ee014f0e0700302bf479055c6e090855df0e030e7617f5e1208d9",
+        "examples": [
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "00-cycle00-baseline-no-stimulus.window.bin",
+            "public_offset": 39232
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "01-cycle00-std-current-sf0000-len00fc.window.bin",
+            "public_offset": 39232
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "02-cycle00-std-current-sf0020-len00fc.window.bin",
+            "public_offset": 39232
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "03-cycle00-r4-01-current-sf0000.window.bin",
+            "public_offset": 39232
+          }
+        ]
+      },
+      {
+        "chunk": "0b045c0906d5",
+        "sha256": "0b045c0906d525d251d8edd8cabd7f79dd7f1ba252404027f745ed6ab2c3db4e",
+        "count": 198,
+        "hex_prefix": "9dffee9c908988f0a3eff0908a49e0b42829c3908989e09464908988e0940040",
+        "examples": [
+          {
+            "run": "normal-work-window-harvest-baseline-20260501",
+            "capture": "00-cycle00-baseline-no-stimulus.window.bin",
+            "public_offset": 39232
+          },
+          {
+            "run": "normal-work-window-harvest-baseline-20260501",
+            "capture": "01-cycle01-baseline-no-stimulus.window.bin",
+            "public_offset": 39232
+          },
+          {
+            "run": "normal-work-window-harvest-baseline-20260501",
+            "capture": "02-cycle02-baseline-no-stimulus.window.bin",
+            "public_offset": 39232
+          },
+          {
+            "run": "normal-work-window-harvest-baseline-20260501",
+            "capture": "03-cycle03-baseline-no-stimulus.window.bin",
+            "public_offset": 39232
+          }
+        ]
+      }
+    ]
+  }
+]

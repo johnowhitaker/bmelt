@@ -1,0 +1,141 @@
+[
+  {
+    "record_relative": 32,
+    "top_chunk": "204291444868",
+    "top_sha256": "204291444868911fc1664f7105d2999cd02d987f1762771e851df97eaf219566",
+    "top_count": 511,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "204291444868",
+        "sha256": "204291444868911fc1664f7105d2999cd02d987f1762771e851df97eaf219566",
+        "count": 511,
+        "hex_prefix": "097a00900001122fb7904097f090409c7440f0908a4ee0ff540ffe24a0f582e4",
+        "examples": [
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "00-capture-only.window.bin",
+            "public_offset": 30720
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "01-capture-only.window.bin",
+            "public_offset": 30720
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "02-capture-only.window.bin",
+            "public_offset": 30720
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "03-capture-only.window.bin",
+            "public_offset": 30720
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 96,
+    "top_chunk": "2b9a017b9d81",
+    "top_sha256": "2b9a017b9d81d4cf769e289a78958cbc1a8adebed456d9edd2a915b1bb1369a5",
+    "top_count": 413,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "2b9a017b9d81",
+        "sha256": "2b9a017b9d81d4cf769e289a78958cbc1a8adebed456d9edd2a915b1bb1369a5",
+        "count": 413,
+        "hex_prefix": "78b0f67f0122908a4ae054037004a3e06008908a23e04402f022908a4ce07007",
+        "examples": [
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "00-capture-only.window.bin",
+            "public_offset": 30784
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "01-capture-only.window.bin",
+            "public_offset": 30784
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "02-capture-only.window.bin",
+            "public_offset": 30784
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "03-capture-only.window.bin",
+            "public_offset": 30784
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 224,
+    "top_chunk": "2b9a017b9d81",
+    "top_sha256": "2b9a017b9d81d4cf769e289a78958cbc1a8adebed456d9edd2a915b1bb1369a5",
+    "top_count": 219,
+    "variant_count": 2,
+    "variants": [
+      {
+        "chunk": "2b9a017b9d81",
+        "sha256": "2b9a017b9d81d4cf769e289a78958cbc1a8adebed456d9edd2a915b1bb1369a5",
+        "count": 219,
+        "hex_prefix": "78b0f67f0122908a4ae054037004a3e06008908a23e04402f022908a4ce07007",
+        "examples": [
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "00-cycle00-baseline-no-stimulus.window.bin",
+            "public_offset": 30912
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "01-cycle00-std-current-sf0000-len00fc.window.bin",
+            "public_offset": 30912
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "02-cycle00-std-current-sf0020-len00fc.window.bin",
+            "public_offset": 30912
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "03-cycle00-r4-01-current-sf0000.window.bin",
+            "public_offset": 30912
+          }
+        ]
+      },
+      {
+        "chunk": "204291444868",
+        "sha256": "204291444868911fc1664f7105d2999cd02d987f1762771e851df97eaf219566",
+        "count": 37,
+        "hex_prefix": "097a00900001122fb7904097f090409c7440f0908a4ee0ff540ffe24a0f582e4",
+        "examples": [
+          {
+            "run": "normal-work-window-get-performance-variants-20260501",
+            "capture": "01-cycle00-gp-type00-max0001.window.bin",
+            "public_offset": 30912
+          },
+          {
+            "run": "normal-work-window-get-performance-variants-20260501",
+            "capture": "02-cycle00-gp-type00-max0010.window.bin",
+            "public_offset": 30912
+          },
+          {
+            "run": "normal-work-window-get-performance-variants-20260501",
+            "capture": "03-cycle00-gp-type00-max00ff.window.bin",
+            "public_offset": 30912
+          },
+          {
+            "run": "normal-work-window-get-performance-variants-20260501",
+            "capture": "04-cycle00-gp-type01-max0010.window.bin",
+            "public_offset": 30912
+          }
+        ]
+      }
+    ]
+  }
+]

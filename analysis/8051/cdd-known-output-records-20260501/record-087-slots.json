@@ -1,0 +1,520 @@
+[
+  {
+    "record_relative": 32,
+    "top_chunk": "71a589c84051",
+    "top_sha256": "71a589c84051ae6571d7440798924a4a5ec1c861246bcb70d702fb5758cbb5d8",
+    "top_count": 382,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "71a589c84051",
+        "sha256": "71a589c84051ae6571d7440798924a4a5ec1c861246bcb70d702fb5758cbb5d8",
+        "count": 382,
+        "hex_prefix": "02bf3790852ee014f0e0700302bf479055c6e090855df0e030e7617f5e1208d9",
+        "examples": [
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "00-capture-only.window.bin",
+            "public_offset": 39296
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "01-capture-only.window.bin",
+            "public_offset": 39296
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "02-capture-only.window.bin",
+            "public_offset": 39296
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "03-capture-only.window.bin",
+            "public_offset": 39296
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 96,
+    "top_chunk": "0b045c0906d5",
+    "top_sha256": "0b045c0906d525d251d8edd8cabd7f79dd7f1ba252404027f745ed6ab2c3db4e",
+    "top_count": 52,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "0b045c0906d5",
+        "sha256": "0b045c0906d525d251d8edd8cabd7f79dd7f1ba252404027f745ed6ab2c3db4e",
+        "count": 52,
+        "hex_prefix": "9dffee9c908988f0a3eff0908a49e0b42829c3908989e09464908988e0940040",
+        "examples": [
+          {
+            "run": "normal-work-window-harvest-safe-stimuli-20260501",
+            "capture": "100-cycle06-mode-sense10-cd-device.window.bin",
+            "public_offset": 39360
+          },
+          {
+            "run": "normal-work-window-harvest-safe-stimuli-20260501",
+            "capture": "101-cycle06-mode-sense10-cd-audio.window.bin",
+            "public_offset": 39360
+          },
+          {
+            "run": "normal-work-window-harvest-safe-stimuli-20260501",
+            "capture": "102-cycle06-mode-sense10-power-condition.window.bin",
+            "public_offset": 39360
+          },
+          {
+            "run": "normal-work-window-harvest-safe-stimuli-20260501",
+            "capture": "103-cycle06-mode-sense10-fault-failure.window.bin",
+            "public_offset": 39360
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 160,
+    "top_chunk": "183ec6fd07c7",
+    "top_sha256": "183ec6fd07c708648d6c114f46f8ef00eff1019ee2fceadadd50bbb5e3383bfb",
+    "top_count": 130,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "183ec6fd07c7",
+        "sha256": "183ec6fd07c708648d6c114f46f8ef00eff1019ee2fceadadd50bbb5e3383bfb",
+        "count": 130,
+        "hex_prefix": "fef0908ad9e06401705b90893de030e0547da07ffa123d89908a49e0ffa3e0fd",
+        "examples": [
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "00-capture-only.window.bin",
+            "public_offset": 39424
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "01-capture-only.window.bin",
+            "public_offset": 39424
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "02-capture-only.window.bin",
+            "public_offset": 39424
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "03-capture-only.window.bin",
+            "public_offset": 39424
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 224,
+    "top_chunk": "183ec6fd07c7",
+    "top_sha256": "183ec6fd07c708648d6c114f46f8ef00eff1019ee2fceadadd50bbb5e3383bfb",
+    "top_count": 172,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "183ec6fd07c7",
+        "sha256": "183ec6fd07c708648d6c114f46f8ef00eff1019ee2fceadadd50bbb5e3383bfb",
+        "count": 172,
+        "hex_prefix": "fef0908ad9e06401705b90893de030e0547da07ffa123d89908a49e0ffa3e0fd",
+        "examples": [
+          {
+            "run": "normal-work-window-get-config-current-long-20260501",
+            "capture": "00-cycle00-baseline-no-stimulus.window.bin",
+            "public_offset": 39488
+          },
+          {
+            "run": "normal-work-window-get-config-current-long-20260501",
+            "capture": "01-cycle00-get-configuration-current.window.bin",
+            "public_offset": 39488
+          },
+          {
+            "run": "normal-work-window-get-config-current-long-20260501",
+            "capture": "02-cycle01-baseline-no-stimulus.window.bin",
+            "public_offset": 39488
+          },
+          {
+            "run": "normal-work-window-get-config-current-long-20260501",
+            "capture": "03-cycle01-get-configuration-current.window.bin",
+            "public_offset": 39488
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 288,
+    "top_chunk": "183ec6fd07c7",
+    "top_sha256": "183ec6fd07c708648d6c114f46f8ef00eff1019ee2fceadadd50bbb5e3383bfb",
+    "top_count": 142,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "183ec6fd07c7",
+        "sha256": "183ec6fd07c708648d6c114f46f8ef00eff1019ee2fceadadd50bbb5e3383bfb",
+        "count": 142,
+        "hex_prefix": "fef0908ad9e06401705b90893de030e0547da07ffa123d89908a49e0ffa3e0fd",
+        "examples": [
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "00-cycle00-baseline-no-stimulus.window.bin",
+            "public_offset": 39552
+          },
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "01-cycle00-read-toc-format-0-after-command.window.bin",
+            "public_offset": 39552
+          },
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "02-cycle00-read-toc-format-0-after-request-sense.window.bin",
+            "public_offset": 39552
+          },
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "03-cycle00-read-toc-format-4-after-command.window.bin",
+            "public_offset": 39552
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 352,
+    "top_chunk": "183ec6fd07c7",
+    "top_sha256": "183ec6fd07c708648d6c114f46f8ef00eff1019ee2fceadadd50bbb5e3383bfb",
+    "top_count": 225,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "183ec6fd07c7",
+        "sha256": "183ec6fd07c708648d6c114f46f8ef00eff1019ee2fceadadd50bbb5e3383bfb",
+        "count": 225,
+        "hex_prefix": "fef0908ad9e06401705b90893de030e0547da07ffa123d89908a49e0ffa3e0fd",
+        "examples": [
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "12-cycle01-get-performance-type00-after-command.window.bin",
+            "public_offset": 39616
+          },
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "13-cycle01-get-performance-type00-after-request-sense.window.bin",
+            "public_offset": 39616
+          },
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "14-cycle02-baseline-no-stimulus.window.bin",
+            "public_offset": 39616
+          },
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "15-cycle02-read-toc-format-0-after-command.window.bin",
+            "public_offset": 39616
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 416,
+    "top_chunk": "ba3aab1d5fd2",
+    "top_sha256": "ba3aab1d5fd2e7d2e53a40dc6d30ee8e321d0d1d7d5c4a775562c56bb68b52ec",
+    "top_count": 136,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "ba3aab1d5fd2",
+        "sha256": "ba3aab1d5fd2e7d2e53a40dc6d30ee8e321d0d1d7d5c4a775562c56bb68b52ec",
+        "count": 136,
+        "hex_prefix": "a9e6a3f008e6a3f0d251e57c2406f57c22d310af01c3c0d0904000e020e7f990",
+        "examples": [
+          {
+            "run": "normal-work-window-get-config-variants-20260501",
+            "capture": "01-cycle00-get-config-current-sf0000-len0010.window.bin",
+            "public_offset": 39680
+          },
+          {
+            "run": "normal-work-window-get-config-variants-20260501",
+            "capture": "02-cycle00-get-config-current-sf0000-len0040.window.bin",
+            "public_offset": 39680
+          },
+          {
+            "run": "normal-work-window-get-config-variants-20260501",
+            "capture": "03-cycle00-get-config-current-sf0000-len00fc.window.bin",
+            "public_offset": 39680
+          },
+          {
+            "run": "normal-work-window-get-config-variants-20260501",
+            "capture": "04-cycle00-get-config-current-sf0001-len00fc.window.bin",
+            "public_offset": 39680
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 480,
+    "top_chunk": "ba3aab1d5fd2",
+    "top_sha256": "ba3aab1d5fd2e7d2e53a40dc6d30ee8e321d0d1d7d5c4a775562c56bb68b52ec",
+    "top_count": 240,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "ba3aab1d5fd2",
+        "sha256": "ba3aab1d5fd2e7d2e53a40dc6d30ee8e321d0d1d7d5c4a775562c56bb68b52ec",
+        "count": 240,
+        "hex_prefix": "a9e6a3f008e6a3f0d251e57c2406f57c22d310af01c3c0d0904000e020e7f990",
+        "examples": [
+          {
+            "run": "normal-work-window-get-config-current-long-20260501",
+            "capture": "01-cycle00-get-configuration-current.window.bin",
+            "public_offset": 39744
+          },
+          {
+            "run": "normal-work-window-get-config-current-long-20260501",
+            "capture": "02-cycle01-baseline-no-stimulus.window.bin",
+            "public_offset": 39744
+          },
+          {
+            "run": "normal-work-window-get-config-current-long-20260501",
+            "capture": "03-cycle01-get-configuration-current.window.bin",
+            "public_offset": 39744
+          },
+          {
+            "run": "normal-work-window-get-config-current-long-20260501",
+            "capture": "04-cycle02-baseline-no-stimulus.window.bin",
+            "public_offset": 39744
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 544,
+    "top_chunk": "ba3aab1d5fd2",
+    "top_sha256": "ba3aab1d5fd2e7d2e53a40dc6d30ee8e321d0d1d7d5c4a775562c56bb68b52ec",
+    "top_count": 62,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "ba3aab1d5fd2",
+        "sha256": "ba3aab1d5fd2e7d2e53a40dc6d30ee8e321d0d1d7d5c4a775562c56bb68b52ec",
+        "count": 62,
+        "hex_prefix": "a9e6a3f008e6a3f0d251e57c2406f57c22d310af01c3c0d0904000e020e7f990",
+        "examples": [
+          {
+            "run": "normal-work-window-get-config-field-variants-r5-long-20260501",
+            "capture": "01-cycle00-std-current-sf0000-len00fc.window.bin",
+            "public_offset": 39808
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-r5-long-20260501",
+            "capture": "02-cycle00-std-current-sf0020-len00fc.window.bin",
+            "public_offset": 39808
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-r5-long-20260501",
+            "capture": "03-cycle00-r5-01-current-sf0000.window.bin",
+            "public_offset": 39808
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-r5-long-20260501",
+            "capture": "04-cycle00-r5-0f-current-sf0000.window.bin",
+            "public_offset": 39808
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 608,
+    "top_chunk": "ba3aab1d5fd2",
+    "top_sha256": "ba3aab1d5fd2e7d2e53a40dc6d30ee8e321d0d1d7d5c4a775562c56bb68b52ec",
+    "top_count": 7,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "ba3aab1d5fd2",
+        "sha256": "ba3aab1d5fd2e7d2e53a40dc6d30ee8e321d0d1d7d5c4a775562c56bb68b52ec",
+        "count": 7,
+        "hex_prefix": "a9e6a3f008e6a3f0d251e57c2406f57c22d310af01c3c0d0904000e020e7f990",
+        "examples": [
+          {
+            "run": "normal-work-window-get-performance-variants-20260501",
+            "capture": "06-cycle00-gp-type03-max0010.window.bin",
+            "public_offset": 39872
+          },
+          {
+            "run": "normal-work-window-get-performance-variants-20260501",
+            "capture": "16-cycle00-gp-byte1-01-type03.window.bin",
+            "public_offset": 39872
+          },
+          {
+            "run": "normal-work-window-get-performance-variants-20260501",
+            "capture": "18-cycle00-gp-startlba1-type03.window.bin",
+            "public_offset": 39872
+          },
+          {
+            "run": "normal-work-window-get-performance-variants-20260501",
+            "capture": "19-cycle01-baseline-no-stimulus.window.bin",
+            "public_offset": 39872
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 672,
+    "top_chunk": "c2560553eb14",
+    "top_sha256": "c2560553eb1419edcf9aa7f969449025cb496bddc680ead90ebe7ff1dff10be4",
+    "top_count": 164,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "c2560553eb14",
+        "sha256": "c2560553eb1419edcf9aa7f969449025cb496bddc680ead90ebe7ff1dff10be4",
+        "count": 164,
+        "hex_prefix": "c3123d8990855ce0fd7f02123d89908355e0ff3077059080a780039080a2e0fe",
+        "examples": [
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "00-capture-only.window.bin",
+            "public_offset": 39936
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "01-capture-only.window.bin",
+            "public_offset": 39936
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "02-capture-only.window.bin",
+            "public_offset": 39936
+          },
+          {
+            "run": "normal-work-window-capture-only-20260501",
+            "capture": "03-capture-only.window.bin",
+            "public_offset": 39936
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 736,
+    "top_chunk": "c2560553eb14",
+    "top_sha256": "c2560553eb1419edcf9aa7f969449025cb496bddc680ead90ebe7ff1dff10be4",
+    "top_count": 163,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "c2560553eb14",
+        "sha256": "c2560553eb1419edcf9aa7f969449025cb496bddc680ead90ebe7ff1dff10be4",
+        "count": 163,
+        "hex_prefix": "c3123d8990855ce0fd7f02123d89908355e0ff3077059080a780039080a2e0fe",
+        "examples": [
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "00-cycle00-baseline-no-stimulus.window.bin",
+            "public_offset": 40000
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "01-cycle00-std-current-sf0000-len00fc.window.bin",
+            "public_offset": 40000
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "02-cycle00-std-current-sf0020-len00fc.window.bin",
+            "public_offset": 40000
+          },
+          {
+            "run": "normal-work-window-get-config-field-variants-20260501",
+            "capture": "03-cycle00-r4-01-current-sf0000.window.bin",
+            "public_offset": 40000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 800,
+    "top_chunk": "c2560553eb14",
+    "top_sha256": "c2560553eb1419edcf9aa7f969449025cb496bddc680ead90ebe7ff1dff10be4",
+    "top_count": 326,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "c2560553eb14",
+        "sha256": "c2560553eb1419edcf9aa7f969449025cb496bddc680ead90ebe7ff1dff10be4",
+        "count": 326,
+        "hex_prefix": "c3123d8990855ce0fd7f02123d89908355e0ff3077059080a780039080a2e0fe",
+        "examples": [
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "00-cycle00-baseline-no-stimulus.window.bin",
+            "public_offset": 40064
+          },
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "01-cycle00-read-toc-format-0-after-command.window.bin",
+            "public_offset": 40064
+          },
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "02-cycle00-read-toc-format-0-after-request-sense.window.bin",
+            "public_offset": 40064
+          },
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "03-cycle00-read-toc-format-4-after-command.window.bin",
+            "public_offset": 40064
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "record_relative": 864,
+    "top_chunk": "c2560553eb14",
+    "top_sha256": "c2560553eb1419edcf9aa7f969449025cb496bddc680ead90ebe7ff1dff10be4",
+    "top_count": 16,
+    "variant_count": 1,
+    "variants": [
+      {
+        "chunk": "c2560553eb14",
+        "sha256": "c2560553eb1419edcf9aa7f969449025cb496bddc680ead90ebe7ff1dff10be4",
+        "count": 16,
+        "hex_prefix": "c3123d8990855ce0fd7f02123d89908355e0ff3077059080a780039080a2e0fe",
+        "examples": [
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "05-cycle00-get-performance-type00-after-command.window.bin",
+            "public_offset": 40128
+          },
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "06-cycle00-get-performance-type00-after-request-sense.window.bin",
+            "public_offset": 40128
+          },
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "07-cycle01-baseline-no-stimulus.window.bin",
+            "public_offset": 40128
+          },
+          {
+            "run": "normal-work-window-error-path-pairs-20260501",
+            "capture": "08-cycle01-read-toc-format-0-after-command.window.bin",
+            "public_offset": 40128
+          }
+        ]
+      }
+    ]
+  }
+]
