@@ -32,6 +32,46 @@ contains the expected duplicate of the CDD2 prefix and repeated CDD headers.
 So the gateway is a better live oracle than the earlier zero `0x184000`
 guess, but it is not yet the decoded `0x184000..0x1b3fff` runtime payload.
 
+## Normal Overlay READ BUFFER Clue
+
+The normal-mode work/code dump explains why `READ BUFFER id=f2` works even
+though the visible F0-prefix handler at `FUN_CODE_385c` does not accept it.
+There is an alternate READ BUFFER-like check at dump offset `+0x6747`:
+
+```text
+0x6747  mov dptr,#8a4a
+0x674a  movx a,@dptr
+0x674b  cjne a,#01,...      ; byte looks like READ BUFFER mode
+0x674e  inc dptr
+0x674f  movx a,@dptr        ; byte looks like buffer ID
+0x6751  xrl a,#01
+0x6756  xrl a,#02
+0x675b  xrl a,#e2
+0x6760  xrl a,#f0
+0x6765  xrl a,#f2
+0x676a  xrl a,#f1
+```
+
+So the normal runtime has a CDB shadow around `xdata[0x8a49..]`, distinct from
+the F0-prefix/currentboot shadow at `xdata[0x818a..]`, and its handler accepts
+`0xf2`. A nearby branch at `+0x6848` dispatches special cases for `f0`, `f1`,
+`f2`, and `e2`; that path is a better static target than `FUN_CODE_385c` for
+understanding exact-`0x80` `f2` behavior.
+
+The special-ID branch currently reads as:
+
+```text
+id f0  -> +0x68aa
+id f1  -> +0xa2b1
+id f2  -> +0xa2f0  ; appears to trampoline toward code/data around +0xd7b8
+id e2  -> +0x6863
+other  -> +0xa32a
+```
+
+The `+0xa2xx` area is a dense trampoline/table region, so these are not clean
+function starts yet. Still, this is the first static anchor for the observed
+normal-mode `f2` responder.
+
 ## Page Shape
 
 | page | nonzero | non-ff | entropy | note |
@@ -375,4 +415,3 @@ show copied encoded CDD work buffers, but not yet decoded controller code at
 reverse from real runtime bytes. For LED output, it reinforces that the LED
 is probably controller-owned or coupled to controller state, not an easy
 8051 GPIO latch.
-

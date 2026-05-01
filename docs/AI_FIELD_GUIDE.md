@@ -1312,3 +1312,8 @@ Immediate useful directions:
     decrypt with the EXTRAINQ IV/key and AES-CBC reset every `0x80`. `id=f2`
     exposes encoded container material around CDD2/profile/trailer, not decoded
     CDD.
+12. Do not model `id=f2` as a branch of the visible F0-prefix READ BUFFER
+    handler. The disassembly at `FUN_CODE_385c` accepts only `01/02/e2/f0/f1`.
+    The normal `id01:0x070000` work/code dump has a separate READ BUFFER-like
+    accept list at `+0x6747` that includes `f2`; its CDB shadow appears to live
+    around `xdata[0x8a49..]`.

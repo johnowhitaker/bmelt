@@ -64,9 +64,37 @@ f2 +0x0ffd0 == F0 +0xd8fd0  identity/profile area
 f2 +0x1efe0 contains trailer auth14 and DU8A6S/LITE markers
 ```
 
+The full `0x30000` dump is a rebased/container view with two non-erased CDD2
+spans and several erased/pad regions:
+
+```text
+f2 0x00000..0x07000  == F0 0xd9000..0xe0000  CDD2 header and first body span
+f2 0x07000..0x10000  == F0 0xd0000..0xd9000  erased gap, then profile at +0xffd0
+f2 0x10000..0x17000  == all ff                  final erased-region view
+f2 0x17000..0x1d401  == F0 0xe0000..0xe6401  CDD2 tail span
+f2 0x1d401..0x1f000  == F0 0xe6401..0xe8000  gap plus trailer/marker
+f2 0x1f000..0x30000  == all ff                  final erased-region view
+```
+
 Sparse `f2` reads at high candidate decoded-CDD offsets such as `0x184000`
 returned all `ff` for the exact `0x80` request. This is another encoded-object
 view, not the runtime decoded `0x184000..0x1b3fff` range.
+
+One useful static wrinkle: the visible F0-prefix READ BUFFER handler at
+`FUN_CODE_385c` / code `0x385c` explicitly accepts only buffer IDs
+`0x01`, `0x02`, `0xe2`, `0xf0`, and `0xf1`. It has no `0xf2` comparison in the
+F0-prefix binary. A live read-only check still showed
+`READ BUFFER mode=1 id=f2` works, including with a 12-byte ATAPI-style CDB:
+
+```text
+3c 01 f2 00 00 00 00 00 80 00 00 00
+251137803ea5f0fc4ab74077b16be77912d93a303b38989fedc604acedf36731
+```
+
+The normal-mode `id01:0x070000` work/code dump resolves this: it contains an
+alternate READ BUFFER-like accept list at dump offset `+0x6747` with the
+sequence `01, 02, e2, f0, f2, f1`. That makes `f2` a normal-runtime overlay
+surface, not evidence that `FUN_CODE_385c` has a hidden decoded-CDD branch.
 
 ## Evidence
 

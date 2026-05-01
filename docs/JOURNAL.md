@@ -1179,3 +1179,11 @@ It still does not give decoded CDD, but it gives normal-mode controller state
 quickly enough to monitor experiments. It also brings the front-panel lead back
 into normal mode: the dump has code at `+0x8005` reading `xdata[0x4814]`, the
 same byte whose bit 4 tracked the eject button in the Pico/currentboot tests.
+
+One more wrinkle matters for the next static pass. The visible F0-prefix
+`READ BUFFER` handler accepts `01`, `02`, `e2`, `f0`, and `f1`, but not `f2`.
+Live `f2` reads still work, even with a 12-byte ATAPI-style CDB. The answer was
+in the normal work/code dump: around `+0x6747` there is a separate READ
+BUFFER-like accept list that explicitly includes `f2`, with command bytes
+apparently shadowed around `xdata[0x8a49..]`. That is annoying, but useful: it
+tells us not to hunt for a decoded CDD branch in the wrong visible handler.
