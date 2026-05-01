@@ -2275,3 +2275,47 @@ that the public tile surface can have statefulness or instability that outlives
 the obvious firmware byte experiment. The reversible record-59 test remains the
 cleaner CDD ownership proof; record 57 is a warning label for future live
 oracles.
+
+The next normal-mode push shifted from "decode everything" to "rank the
+smallest useful footholds." I added an offline response-diff check over the
+existing CDD perturbation captures to ask a simpler question: did any mutation
+change an actual host-visible SCSI response, not just the rotating public
+work-window? The answer was no for the existing captures. The only response
+payloads in those ownership runs were `GET PERFORMANCE type 00`, and every
+saved payload was empty in stock, mutated, and restored states. So the
+perturbations are real, but they are currently only visible through the normal
+work-window tile surface.
+
+I then combined the work-window chunk metadata, CDD record candidates, packet
+shadow references, and controller-register references into a target-ranking
+pass. It strongly reinforces records 58 and 59 as the normal response/bridge
+neighborhood: their chunks include direct-looking copies from `xdata[0x8a4c]`,
+`0x8a4d`, and `0x8a4e` into controller-ish registers `0x4011..0x4013`, plus a
+GET CONFIG-specific `0x4099 -> 0x8a4e/0x8a53/0x8a54` chunk. Record 59 is still
+the best live target because we already have the reversible contig-4 ownership
+proof there.
+
+The same ranking pass points at records 84/85 as a different kind of target:
+packet intake rather than response setup. Those chunks contain the very clear
+`xdata[0x47b1] -> xdata[0x8a4c..0x8a53]` CDB shadow copy. They are tempting but
+riskier, because breaking packet intake could make normal SCSI recovery harder.
+They are good static reading targets and possible later live probes, not the
+first place to swing a big hammer.
+
+I also re-ran a focused read-only GET CONFIG normal-mode capture with only the
+variants that had previously pulled the bridge chunks into view. More cycles on
+fewer variants gave a small but consistent result: the `r5-f0-current-sf0000`
+variant showed the GET CONFIG `0x4099` bridge/setup tiles 4 times in 12
+captures, `r5-0f` showed them twice, and the stock reserved-field variant
+showed them once. That is not field control yet; rotation still dominates. But
+it does make `GET CONFIG reserved byte 5 = 0xf0` the best read-only trigger for
+making the bridge code visible while we search for a normal-mode IO foothold.
+
+I briefly revisited a clever shortcut: use currentboot writes and recover to
+normal without a hard power cut, hoping some patched controller/XDATA state
+would survive into LD5M. The notes already contained the key negative: the
+gateway write primitive can patch currentboot controller memory, but the known
+full recovery path reloads/canonicalizes the normal pages. Today I confirmed
+the currently installed hook on the drive was the safer XDATA-write service,
+not the gateway-write service, so I did not burn more live cycles there. The
+drive was recovered cleanly back to normal `LD5M`.

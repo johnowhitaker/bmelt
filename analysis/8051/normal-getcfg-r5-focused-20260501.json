@@ -1,0 +1,67 @@
+{
+  "chunk_size": 64,
+  "runs": [
+    {
+      "baseline_captures": 12,
+      "baseline_only_chunks": 20,
+      "baseline_unique_chunks": 735,
+      "path": "references/evidence/live/normal-getcfg-r5-focused-20260501",
+      "recurring_stimulus_only_chunks": 2,
+      "run": "normal-getcfg-r5-focused-20260501",
+      "shared_chunks": 715,
+      "stimulus_captures": 36,
+      "stimulus_names": {
+        "r5-0f-current-sf0000": 12,
+        "r5-f0-current-sf0000": 12,
+        "std-current-sf0000-len00fc": 12
+      },
+      "stimulus_only_chunks": 2,
+      "stimulus_unique_chunks": 717,
+      "target_stimulus_only_chunks": 2,
+      "top_stimulus_only_chunks": [
+        {
+          "offsets": [
+            28992,
+            29056
+          ],
+          "sample_hex": "8a4df0904099e0908a4ef0904099e090",
+          "sha256": "8d8c3b0a22a0fe85416ac5c659e610b6100fe9052009142cc97f1903545156af",
+          "stimuli": {
+            "r5-0f-current-sf0000": 2,
+            "r5-f0-current-sf0000": 4,
+            "std-current-sf0000-len00fc": 1
+          },
+          "stimulus_observations": 7,
+          "target_refs": [
+            16537,
+            35403,
+            35405,
+            35406,
+            35411,
+            35412
+          ]
+        },
+        {
+          "offsets": [
+            28672,
+            28736
+          ],
+          "sample_hex": "08eff6904000e020e7f9908ac6e09040",
+          "sha256": "4037c8574920413d30329489b03ad575a6b0eb5e0a6fb3452ccbf4acb39ecd55",
+          "stimuli": {
+            "r5-0f-current-sf0000": 2,
+            "r5-f0-current-sf0000": 4,
+            "std-current-sf0000-len00fc": 1
+          },
+          "stimulus_observations": 7,
+          "target_refs": [
+            16384,
+            16529,
+            16531,
+            16537
+          ]
+        }
+      ]
+    }
+  ]
+}

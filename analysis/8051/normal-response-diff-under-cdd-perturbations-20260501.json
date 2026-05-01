@@ -1,0 +1,332 @@
+{
+  "experiments": [
+    {
+      "comparisons": [
+        {
+          "experiment": "contig68",
+          "reversible_mutation": false,
+          "stable_hashes": {
+            "mutated": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "restored": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stock": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "states": {
+            "mutated": {
+              "files": 12,
+              "stable": true,
+              "top_count": 12,
+              "top_length": 0,
+              "top_prefix_hex": "",
+              "top_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "unique_variants": 1
+            },
+            "restored": {
+              "files": 12,
+              "stable": true,
+              "top_count": 12,
+              "top_length": 0,
+              "top_prefix_hex": "",
+              "top_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "unique_variants": 1
+            },
+            "stock": {
+              "files": 8,
+              "stable": true,
+              "top_count": 8,
+              "top_length": 0,
+              "top_prefix_hex": "",
+              "top_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "unique_variants": 1
+            }
+          },
+          "stimulus": "get-performance-type00"
+        }
+      ],
+      "name": "contig68",
+      "states": {
+        "mutated": {
+          "label": "mutated",
+          "path": "runs/contig68-ownership/mutated-captures",
+          "response_files": 12,
+          "stimuli": {
+            "get-performance-type00": {
+              "files": 12,
+              "stable": true,
+              "unique_variants": 1,
+              "variants": [
+                {
+                  "count": 12,
+                  "example": "01-cycle00-get-performance-type00.response.bin",
+                  "length": 0,
+                  "prefix_hex": "",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                }
+              ]
+            }
+          }
+        },
+        "restored": {
+          "label": "restored",
+          "path": "runs/contig68-ownership/restored-captures",
+          "response_files": 12,
+          "stimuli": {
+            "get-performance-type00": {
+              "files": 12,
+              "stable": true,
+              "unique_variants": 1,
+              "variants": [
+                {
+                  "count": 12,
+                  "example": "01-cycle00-get-performance-type00.response.bin",
+                  "length": 0,
+                  "prefix_hex": "",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                }
+              ]
+            }
+          }
+        },
+        "stock": {
+          "label": "stock",
+          "path": "runs/contig68-ownership/stock-before",
+          "response_files": 8,
+          "stimuli": {
+            "get-performance-type00": {
+              "files": 8,
+              "stable": true,
+              "unique_variants": 1,
+              "variants": [
+                {
+                  "count": 8,
+                  "example": "01-cycle00-get-performance-type00.response.bin",
+                  "length": 0,
+                  "prefix_hex": "",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "comparisons": [
+        {
+          "experiment": "contig8",
+          "reversible_mutation": false,
+          "stable_hashes": {
+            "base_cold": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "mutated": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "prefix_restored": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "restored": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "restored_cold": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "states": {
+            "base_cold": {
+              "files": 12,
+              "stable": true,
+              "top_count": 12,
+              "top_length": 0,
+              "top_prefix_hex": "",
+              "top_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "unique_variants": 1
+            },
+            "mutated": {
+              "files": 12,
+              "stable": true,
+              "top_count": 12,
+              "top_length": 0,
+              "top_prefix_hex": "",
+              "top_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "unique_variants": 1
+            },
+            "prefix_restored": {
+              "files": 12,
+              "stable": true,
+              "top_count": 12,
+              "top_length": 0,
+              "top_prefix_hex": "",
+              "top_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "unique_variants": 1
+            },
+            "restored": {
+              "files": 12,
+              "stable": true,
+              "top_count": 12,
+              "top_length": 0,
+              "top_prefix_hex": "",
+              "top_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "unique_variants": 1
+            },
+            "restored_cold": {
+              "files": 8,
+              "stable": true,
+              "top_count": 8,
+              "top_length": 0,
+              "top_prefix_hex": "",
+              "top_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "unique_variants": 1
+            }
+          },
+          "stimulus": "get-performance-type00"
+        }
+      ],
+      "name": "contig8",
+      "states": {
+        "base_cold": {
+          "label": "base_cold",
+          "path": "runs/contig8-rec57-ownership/base-readback-cold-captures",
+          "response_files": 12,
+          "stimuli": {
+            "get-performance-type00": {
+              "files": 12,
+              "stable": true,
+              "unique_variants": 1,
+              "variants": [
+                {
+                  "count": 12,
+                  "example": "00-cycle00-get-performance-type00.response.bin",
+                  "length": 0,
+                  "prefix_hex": "",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                }
+              ]
+            }
+          }
+        },
+        "mutated": {
+          "label": "mutated",
+          "path": "runs/contig8-rec57-ownership/mutated-captures",
+          "response_files": 12,
+          "stimuli": {
+            "get-performance-type00": {
+              "files": 12,
+              "stable": true,
+              "unique_variants": 1,
+              "variants": [
+                {
+                  "count": 12,
+                  "example": "01-cycle00-get-performance-type00.response.bin",
+                  "length": 0,
+                  "prefix_hex": "",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                }
+              ]
+            }
+          }
+        },
+        "prefix_restored": {
+          "label": "prefix_restored",
+          "path": "runs/contig8-rec57-ownership/prefix-restored-cold-captures",
+          "response_files": 12,
+          "stimuli": {
+            "get-performance-type00": {
+              "files": 12,
+              "stable": true,
+              "unique_variants": 1,
+              "variants": [
+                {
+                  "count": 12,
+                  "example": "00-cycle00-get-performance-type00.response.bin",
+                  "length": 0,
+                  "prefix_hex": "",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                }
+              ]
+            }
+          }
+        },
+        "restored": {
+          "label": "restored",
+          "path": "runs/contig8-rec57-ownership/restored-captures",
+          "response_files": 12,
+          "stimuli": {
+            "get-performance-type00": {
+              "files": 12,
+              "stable": true,
+              "unique_variants": 1,
+              "variants": [
+                {
+                  "count": 12,
+                  "example": "01-cycle00-get-performance-type00.response.bin",
+                  "length": 0,
+                  "prefix_hex": "",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                }
+              ]
+            }
+          }
+        },
+        "restored_cold": {
+          "label": "restored_cold",
+          "path": "runs/contig8-rec57-ownership/restored-captures-cold",
+          "response_files": 8,
+          "stimuli": {
+            "get-performance-type00": {
+              "files": 8,
+              "stable": true,
+              "unique_variants": 1,
+              "variants": [
+                {
+                  "count": 8,
+                  "example": "01-cycle00-get-performance-type00.response.bin",
+                  "length": 0,
+                  "prefix_hex": "",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "comparisons": [
+        {
+          "experiment": "contig15",
+          "reversible_mutation": false,
+          "stable_hashes": {
+            "mutated": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "states": {
+            "mutated": {
+              "files": 12,
+              "stable": true,
+              "top_count": 12,
+              "top_length": 0,
+              "top_prefix_hex": "",
+              "top_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "unique_variants": 1
+            }
+          },
+          "stimulus": "get-performance-type00"
+        }
+      ],
+      "name": "contig15",
+      "states": {
+        "mutated": {
+          "label": "mutated",
+          "path": "runs/contig15-rec70-ownership/mutated-captures",
+          "response_files": 12,
+          "stimuli": {
+            "get-performance-type00": {
+              "files": 12,
+              "stable": true,
+              "unique_variants": 1,
+              "variants": [
+                {
+                  "count": 12,
+                  "example": "01-cycle00-get-performance-type00.response.bin",
+                  "length": 0,
+                  "prefix_hex": "",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ],
+  "schema": "liteon-normal-response-diff-v1"
+}

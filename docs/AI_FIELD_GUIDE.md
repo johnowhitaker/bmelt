@@ -2113,3 +2113,26 @@ Immediate useful directions:
     instability or hidden controller/runtime state, not as a clean reversible
     ownership proof. Record 59 / contig 4 remains the stronger reversible live
     CDD ownership oracle.
+107. `scripts/analyze_liteon_normal_response_diffs.py` checks whether CDD
+    perturbations changed saved host-visible response payloads. Current result:
+    no. Existing ownership captures only saved empty `GET PERFORMANCE type 00`
+    responses, so the useful oracle is still the public normal work-window.
+108. `scripts/rank_liteon_normal_io_cdd_targets.py` ranks decoded-runtime
+    chunks and candidate CDD records for normal-mode IO work. Records 58/59
+    are the response/bridge neighborhood (`0x8a4c..0x8a4e -> 0x4011..0x4013`,
+    plus `0x4099 -> 0x8a4e/0x8a53/0x8a54`). Record 59 remains the preferred
+    live target because contig 4 already has reversible ownership.
+109. Records 84/85 are the packet-intake neighborhood (`0x47b1 ->
+    0x8a4c..0x8a53`). They are high value but higher risk, because breaking
+    normal packet intake may break SCSI access rather than merely changing a
+    response bridge.
+110. `references/evidence/live/normal-getcfg-r5-focused-20260501/` is the
+    latest focused read-only GET CONFIG run. `reserved byte 5 = 0xf0` is the
+    best current trigger for making the GET CONFIG bridge tiles visible, but
+    the effect is still dominated by public-window rotation rather than direct
+    field control.
+111. Currentboot-to-normal carryover is still a weak shortcut. Gateway writes
+    work inside currentboot when the gateway-RW hook is installed, but the full
+    known recovery path reloads/canonicalizes normal pages. The currently
+    installed service hook was the safer XDATA-write variant and the drive was
+    recovered to normal `LD5M` after checking it.

@@ -1088,3 +1088,47 @@ The ordinary canonical currentboot recovery rewrites stock LD5M and wipes
 installed currentboot response hooks. For quick service-mode tests, a Pico
 power cycle can return the drive to normal `LD5M` without doing that canonical
 rewrite.
+
+## Latest Normal-Mode IO Targeting Pass
+
+New offline scripts/reports:
+
+```text
+scripts/analyze_liteon_normal_response_diffs.py
+analysis/8051/normal-response-diff-under-cdd-perturbations-20260501.md/json
+
+scripts/rank_liteon_normal_io_cdd_targets.py
+analysis/8051/normal-io-cdd-target-ranking-20260501.md/json
+
+analysis/8051/normal-getcfg-r5-focused-20260501.md/json
+references/evidence/live/normal-getcfg-r5-focused-20260501/
+```
+
+Response-diff result: the existing CDD ownership runs do not yet show a
+host-visible response side channel. The saved `GET PERFORMANCE type 00`
+payloads are empty in stock/mutated/restored states. The current practical
+oracle is still the normal `READ BUFFER id=01` work-window tile surface.
+
+Target ranking result: records 58/59 are still the best normal response/bridge
+neighborhood. The key chunks are:
+
+```text
+20ea2ab16891  public bridge, xdata[0x8a4c..0x8a4e] -> 0x4011..0x4013
+8d8c3b0a22a0  GET CONFIG bridge, 0x4099 -> xdata[0x8a4e/0x8a53/0x8a54]
+```
+
+Record 59 is preferred because contig 4 already has a reversible ownership
+proof. Records 84/85 are the best packet-intake candidates because chunk
+`2111cafaf69c` contains `0x47b1 -> 0x8a4c..0x8a53` CDB shadow copies, but they
+are riskier live targets.
+
+Focused GET CONFIG read-only run: over 12 cycles, `r5-f0-current-sf0000`
+exposed the GET CONFIG bridge/setup tiles 4 times, `r5-0f` twice, and the
+stock reserved-field variant once. This is not direct field control, but
+`GET CONFIG reserved byte 5 = 0xf0` is the best current read-only trigger for
+making the bridge visible.
+
+Shortcut check: currentboot-to-normal carryover is still not promising. The
+previous gateway-write carryover through full recovery was negative, and this
+pass confirmed the currently installed hook was the XDATA-write service, not
+gateway-write. The drive was recovered back to normal `LD5M` after the check.
