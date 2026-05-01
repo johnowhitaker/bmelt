@@ -1742,11 +1742,12 @@ patched through a different route.
 
 I pushed that source question a little harder offline. Comparing the normal
 work-window chunks against everything we have was clarifying: only a tiny slice
-matches the visible F0 prefix, none matches the helper, but a surprisingly large
-part matches the currentboot `0x070000` gateway dump. Normal `id01` and `id02`
-reads are also near-aliases for the public work-window. The high half of that
-window has long exact runs shared between normal and currentboot, especially
-`+0xa000..+0xde80` and `+0xe000..+0xfd80`.
+matches the visible F0 prefix, none matches the helper, and almost none matches
+currentboot XDATA. But a surprisingly large part matches the currentboot
+`0x070000` gateway dump. Normal `id01` and `id02` reads are also near-aliases
+for the public work-window. The high half of that window has long exact runs
+shared between normal and currentboot, especially `+0xa000..+0xde80` and
+`+0xe000..+0xfd80`.
 
 That is good news and bad news. Good: the normal window is not pure fog; it is a
 shared controller/work-memory image we can compare across modes. Bad: the exact

@@ -24,6 +24,16 @@ analysis/8051/normal-work-window-extended-reference-matches-20260501.md
 analysis/8051/normal-work-window-extended-reference-matches-20260501.json
 ```
 
+A second scratch pass also compared against the full currentboot XDATA dump:
+
+```text
+references/evidence/live/linux-drive1-currentboot-xdata-0000-ffff-bulk-v2.bin
+```
+
+That added only 2 exact chunk matches out of the same 908 unique chunks, so the
+normal work-window should be treated as controller/gateway memory, not as a
+plain currentboot XDATA image we can already write with the guarded XDATA hook.
+
 ## High-Level Result
 
 With `0x40`-byte informative chunks:
@@ -36,6 +46,7 @@ reference                      exact chunk matches
 LD5M F0 image                  63
 visible 8051 prefix             8
 profile-tail helper             0
+currentboot XDATA               2
 currentboot gateway 0x070000   510
 normal READ BUFFER id01        693
 normal READ BUFFER id02        693
@@ -45,6 +56,7 @@ This changes the model in a useful way:
 
 - the work-window is definitely not just visible F0 prefix code;
 - it is also not the profile-tail helper overlay;
+- it is not meaningfully mirrored in currentboot XDATA;
 - a large fraction overlaps the currentboot `controller[0x070000..0x07ffff]`
   gateway dump;
 - normal `READ BUFFER id01` and `id02` at offset `0x070000` are effectively
@@ -117,7 +129,9 @@ That leads to two practical conclusions:
 
 1. A visible-F0 persistent hook is still the wrong default for normal command
    paths. The exact branch we want is not localized to F0 or the helper.
-2. The currentboot gateway dump is now more valuable than before. It shares
+2. The guarded currentboot XDATA writer is probably not a direct way to patch
+   this normal work-window; only 2 exact chunks overlap currentboot XDATA.
+3. The currentboot gateway dump is now more valuable than before. It shares
    enough with normal runtime that cross-mode localization may identify stable
    routines, mailboxes, or RAM patch points.
 

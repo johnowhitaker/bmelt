@@ -35,6 +35,11 @@ So normal `id01` and `id02` are not byte-identical files, but they are mostly
 the same memory image. Currentboot gateway `0x070000` is also substantially the
 same image, but less so.
 
+A separate scratch comparison against the full currentboot XDATA dump found
+only 2 exact chunks in common with the normal work-window corpus. That matters:
+the shared surface here is the controller/gateway window, not ordinary XDATA
+already covered by the currentboot guarded XDATA write hook.
+
 ## Same-Offset Runs
 
 The strongest normal-id01/currentboot exact runs are:
