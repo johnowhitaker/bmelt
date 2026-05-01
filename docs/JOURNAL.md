@@ -1498,3 +1498,31 @@ overlay analyzer now labels the dense `LJMP`/branch-plus-DPTR patterns as table
 material. That matters for tomorrow: the obvious next target is not to
 linear-disassemble the whole island, but to decode its table entries and
 connect them to the packet-shadow chunks around `0x8a4c`.
+
+The next pass did exactly that: instead of looking at chunks as isolated
+tiles, it scanned whole captured windows for short `MOVX` copy idioms. That
+fixed a subtle alignment issue and turned the packet-shadow story into a
+proper path.
+
+The shape now looks like this. The drive reads bytes from the `0x47b1`
+port/FIFO into a normal-runtime shadow around `xdata[0x8a49..0x8a54]`.
+`0x8a49` is treated like the selector/opcode byte and is compared against a
+long list of command-like values. `0x8a23` is a busy state/flag byte that gets
+masked and ORed in many handlers. Then parts of the shadow are copied into
+controller-facing registers: `0x8a4c..0x8a4e` feed `0x4011..0x4013`,
+`0x8ac6` feeds `0x4091/0x4095`, `0x8a4e/0x8a53/0x8a54` feed `0x4099`, and
+the `0x4095..0x4097` setup bytes are mirrored back into `0x8ade/0x8aeb/0x8aec`.
+
+That is a real bridge from "host sent a packet" to "controller register
+traffic happened." It does not yet give us a hook, but it narrows where a hook
+should live. We are no longer searching the whole normal runtime; we are
+looking at the packet ingress/shadow/controller handoff corridor.
+
+I also ran four small read-only command-specific captures on the Linux drive:
+EXTRAINQ, GET CONFIGURATION current, MODE SENSE all, and GET EVENT STATUS
+media, each alternating with local baseline captures. The drive stayed normal
+`LD5M`. These short runs were mostly dominated by ordinary window rotation,
+but GET CONFIGURATION current gave the clearest recurring stimulus-only chunks
+with target references, particularly around the `0x4099` controller bridge.
+That makes it the best candidate for a longer dedicated capture if we want to
+tag this path more precisely.

@@ -1549,3 +1549,28 @@ Immediate useful directions:
     overlay analyzer now marks dense low-`LJMP` and branch-plus-DPTR chunks as
     `runtime_branch_table_like_chunks`. Treat that region as a dispatch/table
     structure until the entry width and base targets are mapped.
+35. The packet-shadow focused report is
+    `analysis/8051/normal-packet-shadow-analysis-20260501.md`. It scans whole
+    captured windows for `MOV DPTR; MOVX` idioms across chunk boundaries. Main
+    result: the normal runtime copies bytes from `xdata[0x47b1]` into the
+    command shadow `xdata[0x8a49..0x8a54]`. `0x8a49` is the best current
+    selector/opcode candidate; it is compared with values including `0x28`,
+    `0x03`, `0x2a`, `0x55`, `0xa3`, and `0xa4`.
+36. The same report maps the next handoff layer. Shadow/controller edges
+    include `0x8a4c..0x8a4e -> 0x4011..0x4013`,
+    `0x8ac6 -> 0x4091/0x4095`, `0x8a4e/0x8a53/0x8a54 -> 0x4099`,
+    `0x8a54 -> 0x40b7`, and `0x8a5b/0x8a5c -> 0x4096/0x4097`.
+    Controller setup bytes are also mirrored back from `0x4095..0x4097` into
+    `0x8ade/0x8aeb/0x8aec`. Prioritize snippets around public offsets
+    `+0x7140/+0x7180`, `+0x7380`, `+0x74c0`, `+0x95xx`, and
+    `+0xdc00/+0xdc40`.
+37. Four isolated read-only normal captures were run after the packet-shadow
+    report. Evidence dirs:
+    `references/evidence/live/normal-work-window-isolated-extrainq-20260501`,
+    `normal-work-window-isolated-get-config-current-20260501`,
+    `normal-work-window-isolated-mode-sense-all-20260501`, and
+    `normal-work-window-isolated-event-media-20260501`. Summary report:
+    `analysis/8051/normal-work-window-isolated-stimulus-diffs-20260501.md`.
+    The drive stayed normal `LD5M`. GET CONFIGURATION current had the clearest
+    recurring stimulus-only chunks with target references; event-status media
+    added no stimulus-only chunks in the short six-cycle pass.

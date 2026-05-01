@@ -1,0 +1,176 @@
+{
+  "chunk_size": 64,
+  "runs": [
+    {
+      "baseline_captures": 6,
+      "baseline_only_chunks": 13,
+      "baseline_unique_chunks": 718,
+      "path": "references/evidence/live/normal-work-window-isolated-extrainq-20260501",
+      "recurring_stimulus_only_chunks": 1,
+      "run": "normal-work-window-isolated-extrainq-20260501",
+      "shared_chunks": 705,
+      "stimulus_captures": 6,
+      "stimulus_names": {
+        "inquiry-extrainq": 6
+      },
+      "stimulus_only_chunks": 3,
+      "stimulus_unique_chunks": 708,
+      "target_stimulus_only_chunks": 1,
+      "top_stimulus_only_chunks": [
+        {
+          "offsets": [
+            38144,
+            38336
+          ],
+          "sample_hex": "7ff9123d89e4fd7f40123d89e4908a33",
+          "sha256": "cd1041a057e9566c2d56c43bb27e27a777627d29e52de05ef970467f1ae2b305",
+          "stimulus_observations": 3,
+          "target_refs": [
+            35404
+          ]
+        },
+        {
+          "offsets": [
+            28672
+          ],
+          "sample_hex": "e0f9a3e0faa3e02fffea3efeed39fdec",
+          "sha256": "167b6d557116552aa8670fbb75e63c3977652afd9cb46c4d9af3314b356e6253",
+          "stimulus_observations": 1,
+          "target_refs": []
+        },
+        {
+          "offsets": [
+            28992
+          ],
+          "sample_hex": "12dfc0057c057cd0d092af2290881312",
+          "sha256": "957d82183ebfa51713fab7848b8bce549a92981c18b3688cbe714c36f5c869e2",
+          "stimulus_observations": 1,
+          "target_refs": []
+        }
+      ]
+    },
+    {
+      "baseline_captures": 6,
+      "baseline_only_chunks": 18,
+      "baseline_unique_chunks": 721,
+      "path": "references/evidence/live/normal-work-window-isolated-get-config-current-20260501",
+      "recurring_stimulus_only_chunks": 2,
+      "run": "normal-work-window-isolated-get-config-current-20260501",
+      "shared_chunks": 703,
+      "stimulus_captures": 6,
+      "stimulus_names": {
+        "get-configuration-current": 6
+      },
+      "stimulus_only_chunks": 3,
+      "stimulus_unique_chunks": 706,
+      "target_stimulus_only_chunks": 2,
+      "top_stimulus_only_chunks": [
+        {
+          "offsets": [
+            28992,
+            29056
+          ],
+          "sample_hex": "8a4df0904099e0908a4ef0904099e090",
+          "sha256": "8d8c3b0a22a0fe85416ac5c659e610b6100fe9052009142cc97f1903545156af",
+          "stimulus_observations": 2,
+          "target_refs": [
+            16537,
+            35403,
+            35405,
+            35406,
+            35411,
+            35412
+          ]
+        },
+        {
+          "offsets": [
+            28800,
+            28864
+          ],
+          "sample_hex": "08eff6904000e020e7f9908ac6e09040",
+          "sha256": "4037c8574920413d30329489b03ad575a6b0eb5e0a6fb3452ccbf4acb39ecd55",
+          "stimulus_observations": 2,
+          "target_refs": [
+            16384,
+            16529,
+            16531,
+            16537
+          ]
+        },
+        {
+          "offsets": [
+            24768
+          ],
+          "sample_hex": "809840351207235030908124e030e029",
+          "sha256": "8abb923850ed71bb6029daed037703e07f2c86f7d65ed0cd426a5915ad9d247a",
+          "stimulus_observations": 1,
+          "target_refs": []
+        }
+      ]
+    },
+    {
+      "baseline_captures": 6,
+      "baseline_only_chunks": 26,
+      "baseline_unique_chunks": 734,
+      "path": "references/evidence/live/normal-work-window-isolated-mode-sense-all-20260501",
+      "recurring_stimulus_only_chunks": 0,
+      "run": "normal-work-window-isolated-mode-sense-all-20260501",
+      "shared_chunks": 708,
+      "stimulus_captures": 6,
+      "stimulus_names": {
+        "mode-sense10-all": 6
+      },
+      "stimulus_only_chunks": 3,
+      "stimulus_unique_chunks": 711,
+      "target_stimulus_only_chunks": 1,
+      "top_stimulus_only_chunks": [
+        {
+          "offsets": [
+            38208
+          ],
+          "sample_hex": "7ff9123d89e4fd7f40123d89e4908a33",
+          "sha256": "cd1041a057e9566c2d56c43bb27e27a777627d29e52de05ef970467f1ae2b305",
+          "stimulus_observations": 1,
+          "target_refs": [
+            35404
+          ]
+        },
+        {
+          "offsets": [
+            768
+          ],
+          "sample_hex": "0000aff0490000180000aff049000018",
+          "sha256": "be704fe59363d021949108c4c7e3bec34496850a5e9037e3e04de03ba2873dd5",
+          "stimulus_observations": 1,
+          "target_refs": []
+        },
+        {
+          "offsets": [
+            27392
+          ],
+          "sample_hex": "0808161616803c908353e020e735802e",
+          "sha256": "dbf01786a7ed72d519f51d096b03d3bff60d2dfa0da63789c965563e47e79590",
+          "stimulus_observations": 1,
+          "target_refs": []
+        }
+      ]
+    },
+    {
+      "baseline_captures": 6,
+      "baseline_only_chunks": 0,
+      "baseline_unique_chunks": 703,
+      "path": "references/evidence/live/normal-work-window-isolated-event-media-20260501",
+      "recurring_stimulus_only_chunks": 0,
+      "run": "normal-work-window-isolated-event-media-20260501",
+      "shared_chunks": 703,
+      "stimulus_captures": 6,
+      "stimulus_names": {
+        "get-event-status-media": 6
+      },
+      "stimulus_only_chunks": 0,
+      "stimulus_unique_chunks": 703,
+      "target_stimulus_only_chunks": 0,
+      "top_stimulus_only_chunks": []
+    }
+  ]
+}

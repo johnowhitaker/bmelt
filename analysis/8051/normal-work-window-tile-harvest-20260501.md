@@ -272,3 +272,48 @@ The `+0xa180..+0xad40` island is also important, but it is mostly dense
 dispatch/table material: repeated low `LJMP 0x01xx/0x02xx` entries and
 branch-plus-DPTR records. Treat it as a table to decode, not as a normal
 linear function body.
+
+Packet-shadow focused analysis:
+
+```text
+analysis/8051/normal-packet-shadow-analysis-20260501.md
+analysis/8051/normal-packet-shadow-analysis-20260501.json
+```
+
+This report scans whole captured windows rather than only `0x40` chunks, so it
+catches copy sequences that cross public chunk boundaries. It sharpens the
+packet-shadow model:
+
+- `0x47b1` appears to be the byte stream/FIFO port.
+- The normal runtime copies that stream into `xdata[0x8a49..0x8a54]`.
+- `xdata[0x8a49]` is repeatedly compared with command-like values such as
+  `0x28`, `0x03`, `0x2a`, `0x55`, `0xa3`, and `0xa4`.
+- `xdata[0x8a23]` is a heavily toggled state/flag byte, with masks including
+  `0x02`, `0x10`, `0x40`, `0xf7`, and `0xef`.
+- Shadow bytes then feed controller-facing registers:
+  `0x8a4c..0x8a4e -> 0x4011..0x4013`,
+  `0x8ac6 -> 0x4091/0x4095`,
+  `0x8a4e/0x8a53/0x8a54 -> 0x4099`,
+  `0x8a54 -> 0x40b7`, and
+  `0x8a5b/0x8a5c -> 0x4096/0x4097`.
+
+That gives a concrete path from host packet bytes to controller register
+traffic. The next static target is the code around these edge snippets,
+especially `+0x7140/+0x7180`, `+0x7380`, `+0x74c0`, `+0x95xx`, and
+`+0xdc00/+0xdc40`.
+
+Short isolated read-only captures were also run for four commands:
+
+```text
+references/evidence/live/normal-work-window-isolated-extrainq-20260501/
+references/evidence/live/normal-work-window-isolated-get-config-current-20260501/
+references/evidence/live/normal-work-window-isolated-mode-sense-all-20260501/
+references/evidence/live/normal-work-window-isolated-event-media-20260501/
+analysis/8051/normal-work-window-isolated-stimulus-diffs-20260501.md
+```
+
+The drive stayed normal `LD5M`. In these six-cycle alternating baseline runs,
+most changes were still ordinary window rotation. `GET CONFIGURATION current`
+had the clearest recurring target-bearing stimulus-only chunks, especially the
+controller bridge area around `0x4099` and `0x8a4b/4d/4e/53/54`. Event-status
+media produced no stimulus-only chunks in this short pass.
