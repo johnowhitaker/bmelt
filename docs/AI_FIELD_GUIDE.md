@@ -1545,7 +1545,7 @@ Immediate useful directions:
     `xdata[0x8a4c..]`. This is strong live evidence for the normal-mode
     packet/FIFO-to-CDB-shadow path. Prioritize `0x8a49..0x8a54`, `0x8a23`, and
     `0x8adf` when correlating harvested chunks with command handling.
-34. Do not linear-disassemble the `+0xa180..+0xad40` island blindly. The
+34. Do not linear-disassemble the `+0xa180..+0xcaab` island blindly. The
     overlay analyzer now marks dense low-`LJMP` and branch-plus-DPTR chunks as
     `runtime_branch_table_like_chunks`. Treat that region as a dispatch/table
     structure until the entry width and base targets are mapped.
@@ -1574,3 +1574,19 @@ Immediate useful directions:
     The drive stayed normal `LD5M`. GET CONFIGURATION current had the clearest
     recurring stimulus-only chunks with target references; event-status media
     added no stimulus-only chunks in the short six-cycle pass.
+38. The dispatch/table island now has a concrete parser:
+    `scripts/analyze_liteon_normal_dispatch_table.py`. It decodes
+    `analysis/8051/normal-work-window-dispatch-table-20260501.md/json` from
+    the normal capture-only window. The regular table starts at public
+    `+0xa17f`, ends at `+0xcaab`, and contains 1,762 entries:
+    entries `0..31` are `MOV A,#selector; LJMP 0x0162`; entries `32..1761`
+    are `MOV DPTR,#param; LJMP 0x01xx/0x02xx`.
+39. Mapping caveat for that table: public low offsets in the `0x070000` window
+    do not match `analysis/8051/ldm58051.bin`, but the low `LJMP` targets land
+    on plausible resident helper offsets such as `0x0215`, `0x0184`,
+    `0x01ac`, `0x01ed`, `0x01a2`, `0x0206`, and `0x0201`. Do not claim this
+    is a flat code-space dump. The current best label is a banked/threaded
+    runtime artifact. The next questions are what indexes the first 32
+    selector entries, what the 16-bit `param` values mean, and whether table
+    indices correlate with `xdata[0x8a49]` packet selectors or the CDD
+    record/lane schedule.

@@ -1526,3 +1526,24 @@ but GET CONFIGURATION current gave the clearest recurring stimulus-only chunks
 with target references, particularly around the `0x4099` controller bridge.
 That makes it the best candidate for a longer dedicated capture if we want to
 tag this path more precisely.
+
+The morning follow-up decoded the big branch-looking island more carefully.
+The first pass had only marked `+0xa180..` as suspicious; widening the parser
+showed it is a much cleaner structure than that. Starting one byte before the
+chunk boundary, at `+0xa17f`, there are 1,762 regular entries before ordinary
+bytes resume at `+0xcaab`.
+
+The first 32 entries are tiny selector stubs: "load A with selector 0..31, then
+jump to `0x0162`." The remaining 1,730 entries are "load DPTR with a 16-bit
+parameter, then jump into one of a small set of low `0x01xx/0x02xx` helpers."
+Those low targets line up with plausible helper code in the static 8051 prefix,
+but the public work-window bytes at the same low offsets are different, so this
+is not a simple flat dump of active code memory. The best current description
+is a banked or threaded runtime artifact.
+
+That is useful in a very practical way. Instead of trying to disassemble the
+island linearly, we now have an entry grammar. The next questions are much
+smaller: what indexes the first 32 selector entries, what the 16-bit parameters
+mean, and whether those indices connect to the `0x8a49` command shadow or to
+the CDD record/lane schedule. It is another case where the opaque blob has
+turned into a shaped machine part.

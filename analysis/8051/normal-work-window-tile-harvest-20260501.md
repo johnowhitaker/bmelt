@@ -317,3 +317,38 @@ most changes were still ordinary window rotation. `GET CONFIGURATION current`
 had the clearest recurring target-bearing stimulus-only chunks, especially the
 controller bridge area around `0x4099` and `0x8a4b/4d/4e/53/54`. Event-status
 media produced no stimulus-only chunks in this short pass.
+
+Dispatch-table follow-up:
+
+```text
+analysis/8051/normal-work-window-dispatch-table-20260501.md
+analysis/8051/normal-work-window-dispatch-table-20260501.json
+```
+
+The dense branch island is bigger and cleaner than the first `+0xa180..+0xad40`
+note suggested. Starting one byte before the `+0xa180` chunk boundary, the
+parser decodes a regular table from `+0xa17f` through `+0xcaab`:
+
+```text
+entries: 1762
+entry 0..31:      MOV A,#00..1f; LJMP 0x0162
+entry 32..1761:   MOV DPTR,#param; LJMP 0x01xx/0x02xx
+```
+
+The low branch targets cluster tightly around resident helper offsets such as
+`0x0215`, `0x0184`, `0x01ac`, `0x01ed`, `0x01a2`, `0x0206`, and `0x0201`.
+The public work-window bytes at those low offsets do not match the static
+resident bytes, so the `0x070000` public window is not a flat 8051 code-space
+dump. The safest interpretation is a banked/threaded runtime artifact: high
+normal-window stubs or stub-like records refer back to low fixed resident
+helpers, while public offsets are still a sampled work/cache view.
+
+The important practical correction is not to chase this island as linear code.
+Treat it as a large, regular dispatch/threaded-code table with a clean entry
+grammar. Future analysis should answer:
+
+- what code path indexes entry `0..31`;
+- whether the 16-bit `param` values are XDATA pointers, packed literals, or
+  decoded CDD/controller addresses;
+- whether table indices line up with the `0x8a49` packet selector or with the
+  CDD record/lane schedule.
