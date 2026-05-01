@@ -962,8 +962,10 @@ routines, not poking them live one bit at a time.
 The latest currentboot hook folds two tools into one. Instead of installing one
 F0 image to read the controller gateway and another to write XDATA, the v2 hook
 does both. Ordinary parameterized INQUIRY commands bulk-read 128 bytes from the
-controller gateway. If the same command carries guard bytes `5a a5`, the hook
-writes one chosen byte into XDATA and returns the readback byte.
+controller gateway. If the same host command carries guard bytes `a5 5a`, the
+hook writes one chosen byte into XDATA and returns the readback byte. Internally
+currentboot stores those two guard bytes reversed in its CDB shadow, which is
+why some low-level notes describe the observed shadow as `5a a5`.
 
 That sounds like a small convenience, but it changes the shape of experiments:
 we can now set a currentboot control byte, immediately read the controller-side
@@ -1248,3 +1250,11 @@ choose to try it, is a field-only replay: write the derived `0x4a` package and
 `xdata[0x8258..0x825b]`, ring `0x4a00`, then watch `0x4a24..0x4a29`, `0x4ea0`,
 and the decoded CDD target addresses. A generated static plan now records the
 exact values for that ladder of experiments.
+
+I then made the live tooling less brittle before taking that shot. The newest
+combined hook keeps the normal gateway-bulk read path, keeps guarded XDATA
+writes on host CDB bytes `a5 5a`, and adds a guarded XDATA read path on host
+CDB bytes `5a a5`. That means the field replay can now read back the `0x4a`
+and `0x4e` status windows without installing a different hook. A runner script
+wraps the whole attempt into one artifact: baseline samples, ordered writes,
+after-samples, and a doorbell restore.

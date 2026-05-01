@@ -88,6 +88,17 @@ live replay would write that header-derived `0x4a` field package and sample
 `0x4a24..0x4a29`, `0x4ea0`, and decoded CDD targets before attempting the
 higher-risk `0x4e8c` mapped-header command.
 
+Replay helper:
+
+```text
+scripts/run_liteon_currentboot_cdd_mailbox_replay.py
+```
+
+This script assumes the combined gateway/XDATA read-write currentboot hook is
+installed. It samples baseline windows, writes the generated ordered field
+package, samples the same windows afterward, and restores `xdata[0x4a00]` to
+zero unless told otherwise.
+
 Code-execution evidence:
 
 ```text
@@ -756,11 +767,19 @@ python3 scripts/build_liteon_currentboot_response_hook_candidate.py \
   --gateway-cdb-bulk
 
 # combined gateway bulk read plus guarded XDATA write:
-# normal mode is gateway bulk; CDB[10:11]=5a a5 writes CDB[9] to XDATA
+# normal mode is gateway bulk; host CDB[10:11]=a5 5a writes CDB[9] to XDATA
 python3 scripts/build_liteon_currentboot_response_hook_candidate.py \
   --name gateway-cdb-bulk-xdata-write-v2 \
   --cave-len 0xdd \
   --gateway-cdb-bulk-with-xdata-write
+
+# combined gateway bulk read plus guarded XDATA read/write:
+# normal mode is gateway bulk; host CDB[10:11]=a5 5a writes XDATA;
+# host CDB[10:11]=5a a5 reads XDATA into response[0x20].
+python3 scripts/build_liteon_currentboot_response_hook_candidate.py \
+  --name gateway-cdb-bulk-xdata-rw-v1 \
+  --cave-len 0xdd \
+  --gateway-cdb-bulk-with-xdata-rw
 
 # XDATA read: CDB[7:8] + (CDB[5] & 0x3f)
 python3 scripts/build_liteon_currentboot_response_hook_candidate.py \
@@ -848,8 +867,35 @@ Write mode uses:
 CDB[5] low six bits = selector
 CDB[7:8]            = 16-bit XDATA base
 CDB[9]              = write value
-CDB[10:11]          = write magic 5a a5
+CDB[10:11]          = write magic a5 5a
 response[0x20]      = readback byte
+```
+
+There is also a newer combined read/write hook with the same default gateway
+bulk mode:
+
+```text
+references/firmware/extracted/currentboot-response-hook-candidates/currentboot-response-hook-gateway-cdb-bulk-xdata-rw-v1/currentboot-response-hook-gateway-cdb-bulk-xdata-rw-v1/liteon-full-currentboot-ld5m-helper-bypass-currentboot-response-hook-gateway-cdb-bulk-xdata-rw-v1-candidate.json
+```
+
+The currentboot CDB shadow stores host bytes `10..11` in reverse order at
+`xdata[0x8194..0x8195]`. The host-facing convention is:
+
+```text
+normal gateway read     CDB[10:11] = 00 00
+guarded XDATA write     CDB[10:11] = a5 5a, CDB[9] = value
+guarded XDATA read      CDB[10:11] = 5a a5
+```
+
+For the read path, use:
+
+```sh
+ssh root@jonathan-thinkpad-t480s \
+  'cd /home/jonathan/boastermelt && python3 scripts/read_liteon_currentboot_xdata.py \
+    --device /dev/sg0 \
+    --address 0x4a00 \
+    --length 0x30 \
+    --read-magic 5aa5'
 ```
 
 Do not reuse the failed v1 idea of guarding on CDB byte `6`; that byte was not

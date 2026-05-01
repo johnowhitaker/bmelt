@@ -40,6 +40,7 @@ def read_one(
     sg_raw: str,
     device: str,
     address: int,
+    read_magic: tuple[int, int] | None,
     timeout: int,
     request_len: int,
     response_offset: int,
@@ -59,8 +60,8 @@ def read_one(
         (base >> 8) & 0xFF,
         base & 0xFF,
         0x00,
-        0x00,
-        0x00,
+        read_magic[0] if read_magic else 0x00,
+        read_magic[1] if read_magic else 0x00,
     ]
     proc = subprocess.run(
         [
@@ -82,6 +83,7 @@ def read_one(
         "address": address,
         "base": base,
         "selector": selector,
+        "read_magic": list(read_magic) if read_magic else None,
         "cdb": cdb,
         "returncode": proc.returncode,
         "stdout_len": len(proc.stdout),
@@ -110,6 +112,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--request-len", type=int, default=176)
     parser.add_argument("--response-offset", type=parse_int, default=0x20)
     parser.add_argument("--progress-every", type=int, default=256)
+    parser.add_argument(
+        "--read-magic",
+        choices=("none", "5aa5"),
+        default="none",
+        help="set CDB[10:11] read magic for combined gateway/XDATA hooks",
+    )
     return parser.parse_args()
 
 
@@ -119,6 +127,7 @@ def main() -> int:
         raise ValueError("--length must be at least 1")
     if args.address + args.length > 0x10000:
         raise ValueError("requested range crosses the 16-bit XDATA address space")
+    read_magic = (0x5A, 0xA5) if args.read_magic == "5aa5" else None
     data = bytearray()
     records: list[dict[str, Any]] = []
     for offset in range(args.length):
@@ -127,6 +136,7 @@ def main() -> int:
             sg_raw=args.sg_raw,
             device=args.device,
             address=address,
+            read_magic=read_magic,
             timeout=args.timeout,
             request_len=args.request_len,
             response_offset=args.response_offset,

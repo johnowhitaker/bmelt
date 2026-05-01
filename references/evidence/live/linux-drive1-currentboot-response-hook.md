@@ -239,9 +239,10 @@ This combines the useful controller-gateway bulk reader with a guarded XDATA
 byte write mode. Build it with `--cave-len 0xdd`; the combined payload does not
 fit in the older `0x80`-byte cave budget. Normal CDBs still bulk-read 128 bytes
 from a 24-bit controller gateway address in CDB bytes `7..9`. If CDB bytes
-`10..11` are `5a a5`, the same hook instead writes CDB byte `9` to XDATA
-address CDB bytes `7..8` plus the low selector bits, then returns the readback
-byte at response offset `0x20`.
+`10..11` are host bytes `a5 5a`, the same hook instead writes CDB byte `9` to
+XDATA address CDB bytes `7..8` plus the low selector bits, then returns the
+readback byte at response offset `0x20`. The currentboot shadow stores those
+two guard bytes reversed at `xdata[0x8194..0x8195]`.
 
 The first combined candidate used an extra guard in CDB byte `6`; live testing
 showed that byte is not reliable in this currentboot path. The v2 candidate

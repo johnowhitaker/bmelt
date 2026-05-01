@@ -17,7 +17,8 @@ It must be built with `--cave-len 0xdd`; the payload is larger than the older
 `0x80`-byte currentboot hook cave budget.
 
 The hook keeps the bulk controller-gateway reader, but adds a guarded XDATA
-write mode. If CDB bytes `10..11` are `5a a5`, the hook writes CDB byte `9` to:
+write mode. If host CDB bytes `10..11` are `a5 5a`, the hook writes CDB byte
+`9` to:
 
 ```text
 xdata[(CDB[7:8] as big-endian) + (CDB[5] & 0x3f)]
@@ -33,7 +34,8 @@ controller[(CDB[7:9] as big-endian) + (CDB[5] & 0x3f)]
 The first combined version used an additional guard byte in CDB byte `6`. That
 was a bad assumption: byte `6` is not reliably preserved through this
 currentboot INQUIRY path. The live-proven v2 guard uses only CDB bytes
-`10..11`.
+`10..11`. The currentboot CDB shadow stores those two guard bytes reversed at
+`xdata[0x8194..0x8195]`.
 
 ## Live Checks
 
