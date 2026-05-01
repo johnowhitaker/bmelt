@@ -218,3 +218,57 @@ shadow around `xdata[0x8a49..]`; the harvested chunks now show lots of runtime
 code touching that region. Those references are mostly absent from the visible
 F0 prefix, which is exactly what we would expect if normal-mode overlays are
 being paged into the public window.
+
+Overlay/frame atlas:
+
+```text
+analysis/8051/normal-work-window-overlay-map-20260501.md
+analysis/8051/normal-work-window-overlay-map-20260501.json
+```
+
+The atlas folds the 94 captures into public `0x40`-byte slots and separates
+three cases:
+
+- static exact matches against the known LD5M F0/prefix;
+- runtime chunks that move among public slots;
+- dense branch/vector-table-like chunks that should not be chased as
+  straight-line code until their entry layout is understood.
+
+Current overlay summary:
+
+```text
+public slots: 702
+unique informative chunks: 785
+static-matched chunks: 63
+runtime/unmatched chunks: 722
+chunks seen at multiple public slots: 159
+```
+
+The top actionable code-like chunk is the packet-shadow copy loop observed in
+all 94 captures at the `+0x9500..+0x95c0` rotating slots:
+
+```text
+47 b1 e0 90 8a 4c f0 90 47 b1 e0 90 8a 4d f0 ...
+```
+
+Interpreted one byte in, this is the familiar pattern:
+
+```text
+MOV DPTR,#47b1
+MOVX A,@DPTR
+MOV DPTR,#8a4c
+MOVX @DPTR,A
+...
+```
+
+So the normal runtime is not just exposing random work RAM; it is exposing the
+live command/packet ingress plumbing that moves bytes from the `0x47b1`
+port/FIFO into the `0x8a4c..` shadow area. Other high-scoring chunks touch
+`0x4095..0x4098`, `0x4000`, `0x8adf`, and neighboring `0x8a` addresses,
+making the `0x8a49..0x8a54` region the best next static target for understanding
+normal-mode command handling.
+
+The `+0xa180..+0xad40` island is also important, but it is mostly dense
+dispatch/table material: repeated low `LJMP 0x01xx/0x02xx` entries and
+branch-plus-DPTR records. Treat it as a table to decode, not as a normal
+linear function body.

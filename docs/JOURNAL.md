@@ -1476,3 +1476,25 @@ DPTR immediates in the known F0/visible-8051 references, especially the
 normal-window static read: the live normal READ BUFFER handler seems to use a
 packet/CDB shadow around `xdata[0x8a49..]`. Now we have runtime chunks touching
 that shadow directly.
+
+The latest cleanup pass turned those captures into an overlay map instead of a
+bag of bytes. Across 94 normal-runtime snapshots, the public work window has
+702 informative `0x40`-byte slots, 785 unique informative chunks, and 159
+chunks that show up at more than one public offset. Only 63 chunks match the
+known LD5M F0 image exactly. The rest is runtime-only material, live tables, or
+state.
+
+The most satisfying result is a little command-ingress loop hiding in plain
+sight. One harvested chunk repeatedly copies from `xdata[0x47b1]` into
+`xdata[0x8a4c..0x8a50]`. That fits the earlier suspicion that `0x47b1` is the
+packet/FIFO port and that the `0x8a49..` area is the normal-runtime command
+shadow. In practical terms, the public normal-mode window is now giving us
+already-decoded live code and tables that the static F0 image did not expose
+verbatim.
+
+There is also a large dispatch-looking island around public offsets
+`+0xa180..+0xad40`. The first naive scan ranked it as "code-like", but the
+overlay analyzer now labels the dense `LJMP`/branch-plus-DPTR patterns as table
+material. That matters for tomorrow: the obvious next target is not to
+linear-disassemble the whole island, but to decode its table entries and
+connect them to the packet-shadow chunks around `0x8a4c`.

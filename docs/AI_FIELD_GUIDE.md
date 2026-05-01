@@ -1531,3 +1531,21 @@ Immediate useful directions:
     runtime keeps CDB/packet shadow state around `xdata[0x8a49..]` and that the
     public window is exposing overlay/runtime code that touches it. Evidence:
     `analysis/8051/normal-work-window-dptr-refs-20260501.md`.
+32. The overlay/frame atlas for those captures is:
+    `analysis/8051/normal-work-window-overlay-map-20260501.md` and
+    `analysis/8051/normal-work-window-overlay-map-20260501.json`. It merges
+    the capture-only, full-stimulus, focused-stimulus, and expanded-stimulus
+    runs into a public-slot map. Current counts: 702 public slots, 785 unique
+    informative chunks, 63 exact static matches, 722 runtime/unmatched chunks,
+    and 159 chunks seen at multiple public slots.
+33. The best immediate runtime-code target from the overlay map is chunk
+    `2111cafaf69c` at the rotating `+0x9500/+0x9540/+0x9580/+0x95c0` slots.
+    Its bytes include the repeated pattern
+    `90 47 b1 e0 90 8a 4c f0 ...`, i.e. copy from `xdata[0x47b1]` into
+    `xdata[0x8a4c..]`. This is strong live evidence for the normal-mode
+    packet/FIFO-to-CDB-shadow path. Prioritize `0x8a49..0x8a54`, `0x8a23`, and
+    `0x8adf` when correlating harvested chunks with command handling.
+34. Do not linear-disassemble the `+0xa180..+0xad40` island blindly. The
+    overlay analyzer now marks dense low-`LJMP` and branch-plus-DPTR chunks as
+    `runtime_branch_table_like_chunks`. Treat that region as a dispatch/table
+    structure until the entry width and base targets are mapped.
