@@ -358,6 +358,16 @@ def trigger_cdd_field_replay(args: argparse.Namespace) -> dict[str, Any]:
         byte9 = 0x00
         expected = 0xD2
         kind = "cdd_mapped_header_status64_trigger"
+    elif args.trigger_mode == "cdb-fce100":
+        byte8 = 0xE1
+        byte9 = 0x00
+        expected = 0xD3
+        kind = "cdd_parser_call_trigger"
+    elif args.trigger_mode == "cdb-fce200":
+        byte8 = 0xE2
+        byte9 = 0x00
+        expected = 0xD4
+        kind = "cdd_parser_second_doorbell_trigger"
     elif args.trigger_mode == "cdb-fcdd02":
         byte8 = 0xDD
         byte9 = 0x02
@@ -496,6 +506,8 @@ def parse_args() -> argparse.Namespace:
             "cdb-fcde00",
             "cdb-fcdf00",
             "cdb-fce000",
+            "cdb-fce100",
+            "cdb-fce200",
         ),
         default="xdata-writes",
         help="how to replay fields: guarded XDATA writes, or special CDB[7:9]=fc/dd/NN trigger",

@@ -1463,3 +1463,27 @@ Immediate useful directions:
     after a `0x20` byte transfer. Decoded CDD target addresses still stayed
     zero. Evidence:
     `references/evidence/live/currentboot-cdd-mapped-header-status64-trigger-v1.md`.
+22. `--gateway-cdb-bulk-with-cdd-parser-call` uses `CDB[7:8] == fc e1`,
+    returns `0xd3`, seeds the resident descriptor state, calls `FUN_CODE_002e`
+    at `0x002e`, and returns `xdata[0x4a00..0x4a3f]` in response bytes
+    `0x21..0x60`. Live result: the trigger returned a populated mailbox,
+    including `0x4a00 = 01`, `0x4a01 = 03`, `0x4a03 = 03`,
+    `0x4a05..0x4a06 = 14 07`, `0x4a20..0x4a22 = 03 08 10`, and
+    `0x4a24..0x4a25 = 03 fe`. Immediate and delayed decoded-target gateway
+    reads stayed zero. Evidence:
+    `references/evidence/live/currentboot-cdd-parser-call-trigger-v1.md`.
+23. `--gateway-cdb-bulk-with-cdd-parser-second-doorbell` uses `CDB[8] == e2`
+    as a compact trigger, returns `0xd4`, calls `0x002e`, mirrors
+    `xdata[0x4a24/25]` into `xdata[0x4a28/29]`, clears/sets `xdata[0x4a00]`,
+    and calls `0x1667`. Live result: trigger executed and the drive recovered,
+    but immediate and delayed decoded-target gateway reads still stayed zero.
+    Evidence:
+    `references/evidence/live/currentboot-cdd-parser-second-doorbell-trigger-v1.md`.
+24. Currentboot CDD conclusion as of the parser-call/second-doorbell tests:
+    the visible 8051 side of the mailbox can be replayed and observed, but the
+    decoded controller range at `0x184000..` still does not appear. Treat
+    currentboot as useful for exercising visible parser helpers and command
+    mailboxes, not as a proven environment for decoded CDD extraction. The next
+    serious readout route probably needs a normal-runtime hook, a hardware
+    side-channel, or a deeper controller state transition than `0x002e` plus
+    the `0x4a` doorbells.

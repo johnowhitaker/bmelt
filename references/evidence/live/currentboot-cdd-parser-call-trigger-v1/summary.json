@@ -1,0 +1,407 @@
+{
+  "description": "Set only the header-derived 0x4a fields, then ring 0x4a00. This is the smallest useful successor to the failed single-byte doorbell test.",
+  "device": "/dev/sg0",
+  "dry_run": false,
+  "gateway_read_mode": "bulk",
+  "level": "field-only CDD mailbox",
+  "max_sample_length": 32,
+  "plan": "/home/jonathan/bmelt-live/references/firmware/extracted/liteon-cdd-mailbox-replay-plan.json",
+  "results": {
+    "after_samples": [
+      {
+        "address": 1589248,
+        "all_zero": true,
+        "ascii_preview": "................................",
+        "bytes_hex": "0000000000000000000000000000000000000000000000000000000000000000",
+        "kind": "gateway",
+        "length": 32,
+        "out": "runs/currentboot-cdd-mailbox-replay/cdd-parser-call-trigger-v1/after-gateway-184000-0020.bin",
+        "phase": "after",
+        "records": [
+          {
+            "address": 1589247,
+            "base": 1589184,
+            "bytes_hex": "000000000000000000000000000000000000000000000000000000000000000000",
+            "cdb": [
+              18,
+              0,
+              0,
+              0,
+              240,
+              127,
+              0,
+              24,
+              63,
+              192,
+              0,
+              0
+            ],
+            "discarded_stale_first_byte": 0,
+            "kind": "gateway_read",
+            "length": 33,
+            "requested_address": 1589248,
+            "returncode": 0,
+            "selector": 63,
+            "stderr": "SCSI Status: Good \n\nWriting 176 bytes of data to stdout\n",
+            "stdout_len": 176
+          }
+        ],
+        "why": "advertised decoded CDD base"
+      },
+      {
+        "address": 1589344,
+        "all_zero": true,
+        "ascii_preview": "................................",
+        "bytes_hex": "0000000000000000000000000000000000000000000000000000000000000000",
+        "kind": "gateway",
+        "length": 32,
+        "out": "runs/currentboot-cdd-mailbox-replay/cdd-parser-call-trigger-v1/after-gateway-184060-0020.bin",
+        "phase": "after",
+        "records": [
+          {
+            "address": 1589343,
+            "base": 1589312,
+            "bytes_hex": "000000000000000000000000000000000000000000000000000000000000000000",
+            "cdb": [
+              18,
+              0,
+              0,
+              0,
+              240,
+              95,
+              0,
+              24,
+              64,
+              64,
+              0,
+              0
+            ],
+            "discarded_stale_first_byte": 0,
+            "kind": "gateway_read",
+            "length": 33,
+            "requested_address": 1589344,
+            "returncode": 0,
+            "selector": 31,
+            "stderr": "SCSI Status: Good \n\nWriting 176 bytes of data to stdout\n",
+            "stdout_len": 176
+          }
+        ],
+        "why": "first table-derived decoded target neighborhood"
+      },
+      {
+        "address": 1640080,
+        "all_zero": true,
+        "ascii_preview": "................................",
+        "bytes_hex": "0000000000000000000000000000000000000000000000000000000000000000",
+        "kind": "gateway",
+        "length": 32,
+        "out": "runs/currentboot-cdd-mailbox-replay/cdd-parser-call-trigger-v1/after-gateway-190690-0020.bin",
+        "phase": "after",
+        "records": [
+          {
+            "address": 1640079,
+            "base": 1640064,
+            "bytes_hex": "000000000000000000000000000000000000000000000000000000000000000000",
+            "cdb": [
+              18,
+              0,
+              0,
+              0,
+              240,
+              79,
+              0,
+              25,
+              6,
+              128,
+              0,
+              0
+            ],
+            "discarded_stale_first_byte": 0,
+            "kind": "gateway_read",
+            "length": 33,
+            "requested_address": 1640080,
+            "returncode": 0,
+            "selector": 15,
+            "stderr": "SCSI Status: Good \n\nWriting 176 bytes of data to stdout\n",
+            "stdout_len": 176
+          }
+        ],
+        "why": "known affine group 27 oracle target from prior work"
+      }
+    ],
+    "before_samples": [
+      {
+        "address": 1589248,
+        "all_zero": true,
+        "ascii_preview": "................................",
+        "bytes_hex": "0000000000000000000000000000000000000000000000000000000000000000",
+        "kind": "gateway",
+        "length": 32,
+        "out": "runs/currentboot-cdd-mailbox-replay/cdd-parser-call-trigger-v1/before-gateway-184000-0020.bin",
+        "phase": "before",
+        "records": [
+          {
+            "address": 1589247,
+            "base": 1589184,
+            "bytes_hex": "000000000000000000000000000000000000000000000000000000000000000000",
+            "cdb": [
+              18,
+              0,
+              0,
+              0,
+              240,
+              127,
+              0,
+              24,
+              63,
+              192,
+              0,
+              0
+            ],
+            "discarded_stale_first_byte": 0,
+            "kind": "gateway_read",
+            "length": 33,
+            "requested_address": 1589248,
+            "returncode": 0,
+            "selector": 63,
+            "stderr": "SCSI Status: Good \n\nWriting 176 bytes of data to stdout\n",
+            "stdout_len": 176
+          }
+        ],
+        "why": "advertised decoded CDD base"
+      },
+      {
+        "address": 1589344,
+        "all_zero": true,
+        "ascii_preview": "................................",
+        "bytes_hex": "0000000000000000000000000000000000000000000000000000000000000000",
+        "kind": "gateway",
+        "length": 32,
+        "out": "runs/currentboot-cdd-mailbox-replay/cdd-parser-call-trigger-v1/before-gateway-184060-0020.bin",
+        "phase": "before",
+        "records": [
+          {
+            "address": 1589343,
+            "base": 1589312,
+            "bytes_hex": "000000000000000000000000000000000000000000000000000000000000000000",
+            "cdb": [
+              18,
+              0,
+              0,
+              0,
+              240,
+              95,
+              0,
+              24,
+              64,
+              64,
+              0,
+              0
+            ],
+            "discarded_stale_first_byte": 0,
+            "kind": "gateway_read",
+            "length": 33,
+            "requested_address": 1589344,
+            "returncode": 0,
+            "selector": 31,
+            "stderr": "SCSI Status: Good \n\nWriting 176 bytes of data to stdout\n",
+            "stdout_len": 176
+          }
+        ],
+        "why": "first table-derived decoded target neighborhood"
+      },
+      {
+        "address": 1640080,
+        "all_zero": true,
+        "ascii_preview": "................................",
+        "bytes_hex": "0000000000000000000000000000000000000000000000000000000000000000",
+        "kind": "gateway",
+        "length": 32,
+        "out": "runs/currentboot-cdd-mailbox-replay/cdd-parser-call-trigger-v1/before-gateway-190690-0020.bin",
+        "phase": "before",
+        "records": [
+          {
+            "address": 1640079,
+            "base": 1640064,
+            "bytes_hex": "000000000000000000000000000000000000000000000000000000000000000000",
+            "cdb": [
+              18,
+              0,
+              0,
+              0,
+              240,
+              79,
+              0,
+              25,
+              6,
+              128,
+              0,
+              0
+            ],
+            "discarded_stale_first_byte": 0,
+            "kind": "gateway_read",
+            "length": 33,
+            "requested_address": 1640080,
+            "returncode": 0,
+            "selector": 15,
+            "stderr": "SCSI Status: Good \n\nWriting 176 bytes of data to stdout\n",
+            "stdout_len": 176
+          }
+        ],
+        "why": "known affine group 27 oracle target from prior work"
+      }
+    ],
+    "trigger_record": {
+      "cdb": [
+        18,
+        0,
+        0,
+        0,
+        240,
+        64,
+        0,
+        252,
+        225,
+        0,
+        0,
+        0
+      ],
+      "expected_response_byte": 211,
+      "kind": "cdd_parser_call_trigger",
+      "response_byte": 211,
+      "returncode": 0,
+      "stderr": "SCSI Status: Good \n\nWriting 176 bytes of data to stdout\n",
+      "stdout_first64_hex": "05800032ab000000504c4453202020204456442b2d52572044532d3841425348d3010300030014070000000000002000130000000001ea000001000000000000",
+      "stdout_first96_hex": "05800032ab000000504c4453202020204456442b2d52572044532d3841425348d3010300030014070000000000002000130000000001ea000001000000000000000308100003fe000000000001000f000000070f000000000000000000000000",
+      "stdout_hex": "05800032ab000000504c4453202020204456442b2d52572044532d3841425348d3010300030014070000000000002000130000000001ea000001000000000000000308100003fe000000000001000f000000070f00000000000000000000000000000000000000000046ef130000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000020202020202020204c44353001000000",
+      "stdout_len": 176,
+      "trigger": "cdb_7_fc_cdb_8_e1_cdb_9_00"
+    }
+  },
+  "risk": "low-to-medium; no 0x4e8c command issue, but it does ring the CDD mailbox",
+  "samples": [
+    {
+      "address": 1589248,
+      "kind": "gateway",
+      "length": 32,
+      "original_length": 256,
+      "why": "advertised decoded CDD base"
+    },
+    {
+      "address": 1589344,
+      "kind": "gateway",
+      "length": 32,
+      "original_length": 256,
+      "why": "first table-derived decoded target neighborhood"
+    },
+    {
+      "address": 1640080,
+      "kind": "gateway",
+      "length": 32,
+      "original_length": 256,
+      "why": "known affine group 27 oracle target from prior work"
+    }
+  ],
+  "timestamp_utc": "20260501T041244Z",
+  "trigger_mode": "cdb-fce100",
+  "writes": [
+    {
+      "address": 18944,
+      "address_hex": "0x4a00",
+      "note": "clear CDD mailbox doorbell before staging fields",
+      "value": 0,
+      "value_hex": "0x00"
+    },
+    {
+      "address": 18945,
+      "address_hex": "0x4a01",
+      "note": "aux length code from header[0x10] high nibble",
+      "value": 3,
+      "value_hex": "0x03"
+    },
+    {
+      "address": 18946,
+      "address_hex": "0x4a02",
+      "note": "resident clears this byte before field package",
+      "value": 0,
+      "value_hex": "0x00"
+    },
+    {
+      "address": 18947,
+      "address_hex": "0x4a03",
+      "note": "header[0x06] low two bits",
+      "value": 3,
+      "value_hex": "0x03"
+    },
+    {
+      "address": 18949,
+      "address_hex": "0x4a05",
+      "note": "header[0x06] upper six bits",
+      "value": 20,
+      "value_hex": "0x14"
+    },
+    {
+      "address": 18950,
+      "address_hex": "0x4a06",
+      "note": "header[0x10] low nibble",
+      "value": 7,
+      "value_hex": "0x07"
+    },
+    {
+      "address": 18976,
+      "address_hex": "0x4a20",
+      "note": "header[0x0d] controller parameter",
+      "value": 3,
+      "value_hex": "0x03"
+    },
+    {
+      "address": 18977,
+      "address_hex": "0x4a21",
+      "note": "header[0x0e] controller parameter",
+      "value": 8,
+      "value_hex": "0x08"
+    },
+    {
+      "address": 18978,
+      "address_hex": "0x4a22",
+      "note": "header[0x0f] controller parameter",
+      "value": 16,
+      "value_hex": "0x10"
+    },
+    {
+      "address": 33368,
+      "address_hex": "0x8258",
+      "note": "CDD2 absolute start from header[0x07..0x09]",
+      "value": 0,
+      "value_hex": "0x00"
+    },
+    {
+      "address": 33369,
+      "address_hex": "0x8259",
+      "note": "CDD2 absolute start from header[0x07..0x09] byte +1",
+      "value": 13,
+      "value_hex": "0x0d"
+    },
+    {
+      "address": 33370,
+      "address_hex": "0x825a",
+      "note": "CDD2 absolute start from header[0x07..0x09] byte +2",
+      "value": 144,
+      "value_hex": "0x90"
+    },
+    {
+      "address": 33371,
+      "address_hex": "0x825b",
+      "note": "CDD2 absolute start from header[0x07..0x09] byte +3",
+      "value": 0,
+      "value_hex": "0x00"
+    },
+    {
+      "address": 18944,
+      "address_hex": "0x4a00",
+      "note": "ring CDD mailbox after staging fields",
+      "value": 1,
+      "value_hex": "0x01"
+    }
+  ]
+}

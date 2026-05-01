@@ -212,3 +212,42 @@ controller/CDD side owns the actual decode/servo details.
   command.
 - Keep any future Ghidra claim about `0x4a`/`0x4e` guarded until the exact
   raw `MOVX` path has been checked.
+
+## Live Parser-Call Follow-Up
+
+Two more currentboot hooks narrowed this path after the mapped-header tests.
+
+`currentboot-response-hook-gateway-bulk-cdd-parser-call-v1` triggers on
+`CDB[7:8] = fc e1`, seeds the descriptor state for `FUN_CODE_002e`, calls
+`0x002e`, and returns `xdata[0x4a00..0x4a3f]`. It returned marker `0xd3` and a
+populated mailbox:
+
+```text
+0x4a00: 01 03 00 03 00 14 07 00 00 00 00 00 00 20 00 13
+0x4a10: 00 00 00 00 01 ea 00 00 01 00 00 00 00 00 00 00
+0x4a20: 03 08 10 00 03 fe 00 00 00 00 00 01 00 0f 00 00
+0x4a30: 00 07 0f 00 00 00 00 00 00 00 00 00 00 00 00 00
+```
+
+`currentboot-response-hook-gateway-bulk-cdd-parser-second-doorbell-v1`
+triggers on `CDB[8] = e2`, calls the same parser setup, then directly mirrors
+`0x4a24/25 -> 0x4a28/29`, clears/sets `0x4a00`, and calls `0x1667`, matching
+the visible side effects of the later `0x08d0` helper without relying on its
+unclear calling convention. It returned marker `0xd4`.
+
+Both hooks left the decoded CDD candidate targets all zero, immediately and
+after a short delay:
+
+```text
+0x184000
+0x184060
+0x190690
+0x191010
+0x198900
+0x1a0000
+```
+
+The current practical read is that the visible mailbox/parser surface can be
+replayed in currentboot, but decoded CDD memory is not materialized there. The
+decoded range probably belongs to normal runtime or to a controller state that
+requires more than `0x1717`, `0x002e`, and the visible `0x4a` doorbells.

@@ -1372,3 +1372,36 @@ same way. It issues a banked source-to-window transfer, waits for completion,
 then `0x16ef` makes the `0xc000` window point at the result. The decoded CDD
 range staying zero means the remaining missing step is downstream from this
 header-map operation.
+
+The next rung was to stop reimplementing individual fields and call the
+resident parser setup itself. I added a compact `fc e1` trigger that seeds the
+descriptor state expected by `FUN_CODE_002e`, calls `0x002e` with descriptor
+base `0x7000`, then returns `xdata[0x4a00..0x4a3f]` in the INQUIRY response.
+This also installed cleanly and returned marker `0xd3`. More importantly, the
+mailbox came back populated:
+
+```text
+0x4a00: 01 03 00 03 00 14 07 00 00 00 00 00 00 20 00 13
+0x4a10: 00 00 00 00 01 ea 00 00 01 00 00 00 00 00 00 00
+0x4a20: 03 08 10 00 03 fe 00 00 00 00 00 01 00 0f 00 00
+0x4a30: 00 07 0f 00 00 00 00 00 00 00 00 00 00 00 00 00
+```
+
+So the visible parser path is callable from currentboot, and it does build a
+richer mailbox package than the earlier hand-written replay did. But decoded
+CDD reads at `0x184000`, `0x184060`, `0x190690`, and several Pro-suggested
+table targets were still all zero immediately after the trigger and again
+after a delay.
+
+That mailbox snapshot suggested one more obvious test. The later resident path
+around `0x08d0` copies `0x4a24/25` into `0x4a28/29`, writes `0x4a00 = 1`, and
+calls `0x1667`. I added an `fc e2` trigger that calls `0x002e`, then performs
+that second-doorbell sequence directly. It returned marker `0xd4` and left the
+drive recoverable, but decoded CDD targets still stayed zero even after a
+delay. That closes a nice small loop: in currentboot we can call the mapped
+header helper, observe its completion status, call the visible CDD parser, and
+manually ring the later mailbox doorbell, but none of those paths materialize
+the decoded controller range. The likely explanation is that the CDD expansion
+engine is not actually active in currentboot; it is a normal-runtime facility,
+or it needs additional controller state that this boot personality never
+establishes.
