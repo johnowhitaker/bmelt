@@ -342,7 +342,10 @@ def gateway_read_byte_range(
 
 
 def trigger_cdd_field_replay(args: argparse.Namespace) -> dict[str, Any]:
-    if args.trigger_mode == "cdb-fcdd01":
+    if args.trigger_mode == "cdb-fcdd02":
+        byte9 = 0x02
+        expected = 0xCF
+    elif args.trigger_mode == "cdb-fcdd01":
         byte9 = 0x01
         expected = 0xCE
     else:
@@ -461,9 +464,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--chunk-size", type=parse_int, default=0x7F)
     parser.add_argument(
         "--trigger-mode",
-        choices=("xdata-writes", "cdb-fcdd00", "cdb-fcdd01"),
+        choices=("xdata-writes", "cdb-fcdd00", "cdb-fcdd01", "cdb-fcdd02"),
         default="xdata-writes",
-        help="how to replay fields: guarded XDATA writes, or special CDB[7:9]=fc/dd/00 trigger",
+        help="how to replay fields: guarded XDATA writes, or special CDB[7:9]=fc/dd/NN trigger",
     )
     parser.add_argument("--gateway-read-mode", choices=("bulk", "byte"), default="bulk")
     parser.add_argument(

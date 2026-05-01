@@ -446,6 +446,32 @@ def source_cdd_prestage_field_replay_compact() -> bytes:
     )
 
 
+def source_cdd_descriptor_field_replay_compact(response_marker: int = 0xCF) -> bytes:
+    """Write descriptor-derived fields plus CDD field package.
+
+    This leaves out the derived status/direct bytes so it can fit alongside
+    the proven bulk gateway reader in the 0x6ee3 cave.
+    """
+
+    return b"".join(
+        [
+            write_xdata_run(0x8246, [0x70]),
+            write_xdata_run(0x824A, [0x40]),
+            write_xdata_run(0x824D, [0x08]),
+            write_xdata_run(0x8252, [0x50]),
+            write_xdata_run(0x8254, [0x40]),
+            write_xdata_run(0x4A00, [0x00]),
+            write_xdata_run(0x4A01, [0x03]),
+            write_xdata_run(0x4A03, [0x03]),
+            write_xdata_run(0x4A05, [0x14, 0x07]),
+            write_xdata_run(0x4A20, [0x03, 0x08, 0x10]),
+            write_xdata_run(0x8258, [0x00, 0x0D, 0x90, 0x00]),
+            write_xdata_run(0x4A00, [0x01]),
+            mov_rn_imm(5, response_marker),
+        ]
+    )
+
+
 def source_gateway_cdb_bulk_with_cdd_field_replay(
     selector_mask: int, storage_offset: int, bulk_len: int
 ) -> bytes:
@@ -465,6 +491,39 @@ def source_gateway_cdb_bulk_with_cdd_field_replay(
         jump_to_gateway_positions.append(len(source) - 1)
 
     source.extend(source_cdd_field_replay())
+    skip_after_replay_pos = len(source)
+    source.extend(bytes([0x80, 0x00]))  # SJMP end_source
+
+    gateway_start = len(source)
+    source.extend(source_gateway_cdb_bulk(selector_mask, storage_offset, bulk_len))
+    end_source = len(source)
+
+    for position in jump_to_gateway_positions:
+        source[position] = rel8(position + 1, gateway_start)
+    source[skip_after_replay_pos + 1] = rel8(skip_after_replay_pos + 2, end_source)
+    return bytes(source)
+
+
+def source_gateway_cdb_bulk_with_cdd_descriptor_replay(
+    selector_mask: int, storage_offset: int, bulk_len: int
+) -> bytes:
+    """Gateway bulk read with descriptor-prestage CDD replay trigger.
+
+    Normal mode matches source_gateway_cdb_bulk(). The fake address prefix
+    0xfcddxx writes a compact descriptor-derived prestate plus the CDD field
+    package and returns 0xcf at response[0x20]. This is intentionally narrower
+    than the one-byte-gateway prestage hook so the proven bulk reader still
+    fits.
+    """
+
+    source = bytearray()
+    jump_to_gateway_positions: list[int] = []
+    for cdb_addr, expected in ((0x8191, 0xFC), (0x8192, 0xDD)):
+        source.extend(mov_dptr(cdb_addr))
+        source.extend(bytes([0xE0, 0x64, expected, 0x70, 0x00]))  # MOVX; XRL; JNZ gateway
+        jump_to_gateway_positions.append(len(source) - 1)
+
+    source.extend(source_cdd_descriptor_field_replay_compact())
     skip_after_replay_pos = len(source)
     source.extend(bytes([0x80, 0x00]))  # SJMP end_source
 
@@ -520,6 +579,7 @@ def build_source(args: argparse.Namespace) -> tuple[str, bytes, dict[str, Any]]:
         args.gateway_cdb_bulk_with_xdata_write,
         args.gateway_cdb_bulk_with_xdata_rw,
         args.gateway_cdb_bulk_with_cdd_field_replay,
+        args.gateway_cdb_bulk_with_cdd_descriptor_replay,
         args.gateway_byte_with_cdd_prestage_replay,
     ]
     if sum(modes) != 1:
@@ -528,7 +588,8 @@ def build_source(args: argparse.Namespace) -> tuple[str, bytes, dict[str, Any]]:
             "--xdata-cdb-address, --xdata-cdb-bulk, --xdata-cdb-rw, "
             "--gateway-cdb-address, --gateway-cdb-bulk, "
             "--gateway-cdb-bulk-with-xdata-write/--gateway-cdb-bulk-with-xdata-rw, "
-            "--gateway-cdb-bulk-with-cdd-field-replay, or "
+            "--gateway-cdb-bulk-with-cdd-field-replay, "
+            "--gateway-cdb-bulk-with-cdd-descriptor-replay, or "
             "--gateway-byte-with-cdd-prestage-replay"
         )
     if args.constant is not None:
@@ -599,6 +660,22 @@ def build_source(args: argparse.Namespace) -> tuple[str, bytes, dict[str, Any]]:
                 "address_source": "normal: cdb_bytes_7_8_9_plus_control_low_bits",
                 "trigger": "host cdb_7_fc_cdb_8_dd_cdb_9_00 replays LD5M CDD field-only mailbox package",
                 "trigger_response": "0xcd at response[0x20]",
+                "selector_mask": args.selector_mask,
+                "bulk_len": args.bulk_len,
+            },
+        )
+    if args.gateway_cdb_bulk_with_cdd_descriptor_replay:
+        return (
+            "gateway_cdb_bulk_with_cdd_descriptor_replay",
+            source_gateway_cdb_bulk_with_cdd_descriptor_replay(
+                args.selector_mask,
+                RESPONSE_STORAGE_BASE + args.response_offset,
+                args.bulk_len,
+            ),
+            {
+                "address_source": "normal: cdb_bytes_7_8_9_plus_control_low_bits",
+                "trigger": "host cdb_7_fc_cdb_8_dd replays descriptor prestate plus CDD field package",
+                "trigger_response": "0xcf at response[0x20]",
                 "selector_mask": args.selector_mask,
                 "bulk_len": args.bulk_len,
             },
@@ -800,6 +877,11 @@ def parse_args() -> argparse.Namespace:
         help="like --gateway-cdb-bulk, but CDB[7:9]=fc/dd/00 writes the LD5M CDD field-only mailbox package",
     )
     parser.add_argument(
+        "--gateway-cdb-bulk-with-cdd-descriptor-replay",
+        action="store_true",
+        help="like --gateway-cdb-bulk, but CDB[7:9]=fc/dd/02 writes compact descriptor prestate plus the CDD field package",
+    )
+    parser.add_argument(
         "--gateway-byte-with-cdd-prestage-replay",
         action="store_true",
         help="like --gateway-cdb-address, but CDB[7:8]=fc/dd writes compact descriptor prestate plus CDD field package",
@@ -835,6 +917,7 @@ def main() -> int:
         or args.gateway_cdb_bulk_with_xdata_write
         or args.gateway_cdb_bulk_with_xdata_rw
         or args.gateway_cdb_bulk_with_cdd_field_replay
+        or args.gateway_cdb_bulk_with_cdd_descriptor_replay
         or args.gateway_byte_with_cdd_prestage_replay
         or args.xdata_cdb_address
         or args.xdata_cdb_bulk
