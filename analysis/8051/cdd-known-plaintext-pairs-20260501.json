@@ -1,0 +1,3762 @@
+{
+  "f0": "references/firmware/extracted/ld5m-f0-window-0x00000-0x100000.bin",
+  "hidden_chunks": "analysis/8051/normal-hidden-runtime-chunks-20260501.json",
+  "pair_count": 72,
+  "pairs": [
+    {
+      "chunk_sha256": "20ea2ab16891b5c70526dc35ea5187e6ab4d45b592920d95e255f52d34a09baa",
+      "chunk_short": "20ea2ab16891",
+      "decoded_clipped_end": 544,
+      "decoded_clipped_start": 496,
+      "decoded_entropy": 4.388148195373883,
+      "decoded_hex": "8a29e0c4540f30e011908a4ce0c3940e4008904011740ef08008908a4ce0904011f0908a4de0904012f0908a4ee0904013f0908a50e0ffa3e078a9cff608eff6",
+      "decoded_relative": 496,
+      "decoded_sha256": "20ea2ab16891b5c70526dc35ea5187e6ab4d45b592920d95e255f52d34a09baa",
+      "public_offset": 28992,
+      "record": 58,
+      "record_decoded_span": 544,
+      "record_decoded_start": 28496,
+      "record_mode": 128,
+      "record_operation_key": "66228ca20005",
+      "record_source_end": 164121,
+      "record_source_entropy": 7.919942983265344,
+      "record_source_len": 2292,
+      "record_source_prefix": "b9c157fd4afa40ec69d2d866602e20d3150dedaf14b920c2d64402c4933be54c424f38d41e31a772925a1c32f5b18102",
+      "record_source_sha256": "16b1fa7ec92852a975d1ba20551b215ab8cc10be2e75c9c7151dcc1a5c12e272",
+      "record_source_start": 161829,
+      "record_source_suffix": "59436ac31301a32daa56734c47f2f63d57dc187f92d8740ff9e60a358361d2b38a17d2f9ae961b379147cc2ccfe19fbb",
+      "source_to_decoded_ratio": 4.213235294117647,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 253
+        },
+        "bitwise_not": {
+          "decoded_offset": 13,
+          "length": 2,
+          "source_offset": 1868
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 47,
+          "length": 3,
+          "source_offset": 1191,
+          "xor": 19
+        },
+        "direct": {
+          "decoded_offset": 40,
+          "length": 2,
+          "source_offset": 1370
+        }
+      }
+    },
+    {
+      "chunk_sha256": "20ea2ab16891b5c70526dc35ea5187e6ab4d45b592920d95e255f52d34a09baa",
+      "chunk_short": "20ea2ab16891",
+      "decoded_clipped_end": 496,
+      "decoded_clipped_start": 432,
+      "decoded_entropy": 4.388148195373883,
+      "decoded_hex": "8a29e0c4540f30e011908a4ce0c3940e4008904011740ef08008908a4ce0904011f0908a4de0904012f0908a4ee0904013f0908a50e0ffa3e078a9cff608eff6",
+      "decoded_relative": 432,
+      "decoded_sha256": "20ea2ab16891b5c70526dc35ea5187e6ab4d45b592920d95e255f52d34a09baa",
+      "public_offset": 28928,
+      "record": 58,
+      "record_decoded_span": 544,
+      "record_decoded_start": 28496,
+      "record_mode": 128,
+      "record_operation_key": "66228ca20005",
+      "record_source_end": 164121,
+      "record_source_entropy": 7.919942983265344,
+      "record_source_len": 2292,
+      "record_source_prefix": "b9c157fd4afa40ec69d2d866602e20d3150dedaf14b920c2d64402c4933be54c424f38d41e31a772925a1c32f5b18102",
+      "record_source_sha256": "16b1fa7ec92852a975d1ba20551b215ab8cc10be2e75c9c7151dcc1a5c12e272",
+      "record_source_start": 161829,
+      "record_source_suffix": "59436ac31301a32daa56734c47f2f63d57dc187f92d8740ff9e60a358361d2b38a17d2f9ae961b379147cc2ccfe19fbb",
+      "source_to_decoded_ratio": 4.213235294117647,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 253
+        },
+        "bitwise_not": {
+          "decoded_offset": 13,
+          "length": 2,
+          "source_offset": 1868
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 47,
+          "length": 3,
+          "source_offset": 1191,
+          "xor": 19
+        },
+        "direct": {
+          "decoded_offset": 40,
+          "length": 2,
+          "source_offset": 1370
+        }
+      }
+    },
+    {
+      "chunk_sha256": "20ea2ab16891b5c70526dc35ea5187e6ab4d45b592920d95e255f52d34a09baa",
+      "chunk_short": "20ea2ab16891",
+      "decoded_clipped_end": 80,
+      "decoded_clipped_start": 16,
+      "decoded_entropy": 4.388148195373883,
+      "decoded_hex": "8a29e0c4540f30e011908a4ce0c3940e4008904011740ef08008908a4ce0904011f0908a4de0904012f0908a4ee0904013f0908a50e0ffa3e078a9cff608eff6",
+      "decoded_relative": 16,
+      "decoded_sha256": "20ea2ab16891b5c70526dc35ea5187e6ab4d45b592920d95e255f52d34a09baa",
+      "public_offset": 29056,
+      "record": 59,
+      "record_decoded_span": 304,
+      "record_decoded_start": 29040,
+      "record_mode": 128,
+      "record_operation_key": "30ca94930e05",
+      "record_source_end": 166583,
+      "record_source_entropy": 7.913652767092014,
+      "record_source_len": 2462,
+      "record_source_prefix": "d819200a7add2aad9f56a3493851aacce9004d413588afa136854969b751cd3a223aa59866aa6e338a2773d8c162950b",
+      "record_source_sha256": "5046ba46f029d8673a31c6a7369820c477cf30ebf913597c75ca430b9d911a06",
+      "record_source_start": 164121,
+      "record_source_suffix": "ad037e5aad0a7eadbe3a756838282d3ead9ca2e7702c2b46969deda18959ca32d0e560498e5f55bc5e01d67529933760",
+      "source_to_decoded_ratio": 8.098684210526315,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 16,
+          "length": 2,
+          "source_offset": 1855
+        },
+        "bitwise_not": {
+          "decoded_offset": 5,
+          "length": 2,
+          "source_offset": 2069
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 34,
+          "length": 3,
+          "source_offset": 1174,
+          "xor": 6
+        },
+        "direct": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 40
+        }
+      }
+    },
+    {
+      "chunk_sha256": "8d8c3b0a22a0fe85416ac5c659e610b6100fe9052009142cc97f1903545156af",
+      "chunk_short": "8d8c3b0a22a0",
+      "decoded_clipped_end": 544,
+      "decoded_clipped_start": 496,
+      "decoded_entropy": 4.566024413893479,
+      "decoded_hex": "8a4df0904099e0908a4ef0904099e0908a53f0904099e0908a54f0a87c08740426f618e436f6908a4de0b4fe028014908a4be0fea3e0ffa3e0fca3e0fdc39fec",
+      "decoded_relative": 496,
+      "decoded_sha256": "8d8c3b0a22a0fe85416ac5c659e610b6100fe9052009142cc97f1903545156af",
+      "public_offset": 28992,
+      "record": 58,
+      "record_decoded_span": 544,
+      "record_decoded_start": 28496,
+      "record_mode": 128,
+      "record_operation_key": "66228ca20005",
+      "record_source_end": 164121,
+      "record_source_entropy": 7.919942983265344,
+      "record_source_len": 2292,
+      "record_source_prefix": "b9c157fd4afa40ec69d2d866602e20d3150dedaf14b920c2d64402c4933be54c424f38d41e31a772925a1c32f5b18102",
+      "record_source_sha256": "16b1fa7ec92852a975d1ba20551b215ab8cc10be2e75c9c7151dcc1a5c12e272",
+      "record_source_start": 161829,
+      "record_source_suffix": "59436ac31301a32daa56734c47f2f63d57dc187f92d8740ff9e60a358361d2b38a17d2f9ae961b379147cc2ccfe19fbb",
+      "source_to_decoded_ratio": 4.213235294117647,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 30,
+          "length": 2,
+          "source_offset": 13
+        },
+        "bitwise_not": {
+          "decoded_offset": 9,
+          "length": 2,
+          "source_offset": 830
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 37,
+          "length": 3,
+          "source_offset": 351,
+          "xor": 126
+        },
+        "direct": {
+          "decoded_offset": 5,
+          "length": 2,
+          "source_offset": 1298
+        }
+      }
+    },
+    {
+      "chunk_sha256": "8d8c3b0a22a0fe85416ac5c659e610b6100fe9052009142cc97f1903545156af",
+      "chunk_short": "8d8c3b0a22a0",
+      "decoded_clipped_end": 496,
+      "decoded_clipped_start": 432,
+      "decoded_entropy": 4.566024413893479,
+      "decoded_hex": "8a4df0904099e0908a4ef0904099e0908a53f0904099e0908a54f0a87c08740426f618e436f6908a4de0b4fe028014908a4be0fea3e0ffa3e0fca3e0fdc39fec",
+      "decoded_relative": 432,
+      "decoded_sha256": "8d8c3b0a22a0fe85416ac5c659e610b6100fe9052009142cc97f1903545156af",
+      "public_offset": 28928,
+      "record": 58,
+      "record_decoded_span": 544,
+      "record_decoded_start": 28496,
+      "record_mode": 128,
+      "record_operation_key": "66228ca20005",
+      "record_source_end": 164121,
+      "record_source_entropy": 7.919942983265344,
+      "record_source_len": 2292,
+      "record_source_prefix": "b9c157fd4afa40ec69d2d866602e20d3150dedaf14b920c2d64402c4933be54c424f38d41e31a772925a1c32f5b18102",
+      "record_source_sha256": "16b1fa7ec92852a975d1ba20551b215ab8cc10be2e75c9c7151dcc1a5c12e272",
+      "record_source_start": 161829,
+      "record_source_suffix": "59436ac31301a32daa56734c47f2f63d57dc187f92d8740ff9e60a358361d2b38a17d2f9ae961b379147cc2ccfe19fbb",
+      "source_to_decoded_ratio": 4.213235294117647,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 30,
+          "length": 2,
+          "source_offset": 13
+        },
+        "bitwise_not": {
+          "decoded_offset": 9,
+          "length": 2,
+          "source_offset": 830
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 37,
+          "length": 3,
+          "source_offset": 351,
+          "xor": 126
+        },
+        "direct": {
+          "decoded_offset": 5,
+          "length": 2,
+          "source_offset": 1298
+        }
+      }
+    },
+    {
+      "chunk_sha256": "8d8c3b0a22a0fe85416ac5c659e610b6100fe9052009142cc97f1903545156af",
+      "chunk_short": "8d8c3b0a22a0",
+      "decoded_clipped_end": 80,
+      "decoded_clipped_start": 16,
+      "decoded_entropy": 4.566024413893479,
+      "decoded_hex": "8a4df0904099e0908a4ef0904099e0908a53f0904099e0908a54f0a87c08740426f618e436f6908a4de0b4fe028014908a4be0fea3e0ffa3e0fca3e0fdc39fec",
+      "decoded_relative": 16,
+      "decoded_sha256": "8d8c3b0a22a0fe85416ac5c659e610b6100fe9052009142cc97f1903545156af",
+      "public_offset": 29056,
+      "record": 59,
+      "record_decoded_span": 304,
+      "record_decoded_start": 29040,
+      "record_mode": 128,
+      "record_operation_key": "30ca94930e05",
+      "record_source_end": 166583,
+      "record_source_entropy": 7.913652767092014,
+      "record_source_len": 2462,
+      "record_source_prefix": "d819200a7add2aad9f56a3493851aacce9004d413588afa136854969b751cd3a223aa59866aa6e338a2773d8c162950b",
+      "record_source_sha256": "5046ba46f029d8673a31c6a7369820c477cf30ebf913597c75ca430b9d911a06",
+      "record_source_start": 164121,
+      "record_source_suffix": "ad037e5aad0a7eadbe3a756838282d3ead9ca2e7702c2b46969deda18959ca32d0e560498e5f55bc5e01d67529933760",
+      "source_to_decoded_ratio": 8.098684210526315,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 32,
+          "length": 2,
+          "source_offset": 2223
+        },
+        "bitwise_not": {
+          "decoded_offset": 44,
+          "length": 2,
+          "source_offset": 2304
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 38,
+          "length": 3,
+          "source_offset": 1174,
+          "xor": 6
+        },
+        "direct": {
+          "decoded_offset": 50,
+          "length": 2,
+          "source_offset": 689
+        }
+      }
+    },
+    {
+      "chunk_sha256": "2111cafaf69c3db58c6a8fa9f9393e70e78b160c528ad2794f5d67c59a6ccf2e",
+      "chunk_short": "2111cafaf69c",
+      "decoded_clipped_end": 160,
+      "decoded_clipped_start": 96,
+      "decoded_entropy": 3.125,
+      "decoded_hex": "47b1e0908a4cf09047b1e0908a4df09047b1e0908a4ef09047b1e0908a4ff09047b1e0908a50f09047b1e0908a51f09047b1e0908a52f09047b1e0908a53f090",
+      "decoded_relative": 96,
+      "decoded_sha256": "2111cafaf69c3db58c6a8fa9f9393e70e78b160c528ad2794f5d67c59a6ccf2e",
+      "public_offset": 38208,
+      "record": 84,
+      "record_decoded_span": 160,
+      "record_decoded_start": 38112,
+      "record_mode": 128,
+      "record_operation_key": "3b0a538aa203",
+      "record_source_end": 223281,
+      "record_source_entropy": 7.878621161140708,
+      "record_source_len": 2198,
+      "record_source_prefix": "10e471f628b3728805a8d19288f28b1ec130157d36d65887e51476ab45c83cf3215321d0f9f592cf325d2259b3821d89",
+      "record_source_sha256": "107c1d4797246eb1bc35c27430af0346f265bd5fa30c63e3b670e4c657c577b8",
+      "record_source_start": 221083,
+      "record_source_suffix": "ff589531c1a6c8cf336799e2d6dae8612a9eb758f58498a606397f40f4cc51e8ae456cc5366530df4cadc2ec0cadf760",
+      "source_to_decoded_ratio": 13.7375,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 29,
+          "length": 2,
+          "source_offset": 1821
+        },
+        "bitwise_not": {
+          "decoded_offset": 45,
+          "length": 2,
+          "source_offset": 1418
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 51,
+          "length": 3,
+          "source_offset": 853,
+          "xor": 219
+        },
+        "direct": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 283
+        }
+      }
+    },
+    {
+      "chunk_sha256": "2111cafaf69c3db58c6a8fa9f9393e70e78b160c528ad2794f5d67c59a6ccf2e",
+      "chunk_short": "2111cafaf69c",
+      "decoded_clipped_end": 96,
+      "decoded_clipped_start": 32,
+      "decoded_entropy": 3.125,
+      "decoded_hex": "47b1e0908a4cf09047b1e0908a4df09047b1e0908a4ef09047b1e0908a4ff09047b1e0908a50f09047b1e0908a51f09047b1e0908a52f09047b1e0908a53f090",
+      "decoded_relative": 32,
+      "decoded_sha256": "2111cafaf69c3db58c6a8fa9f9393e70e78b160c528ad2794f5d67c59a6ccf2e",
+      "public_offset": 38144,
+      "record": 84,
+      "record_decoded_span": 160,
+      "record_decoded_start": 38112,
+      "record_mode": 128,
+      "record_operation_key": "3b0a538aa203",
+      "record_source_end": 223281,
+      "record_source_entropy": 7.878621161140708,
+      "record_source_len": 2198,
+      "record_source_prefix": "10e471f628b3728805a8d19288f28b1ec130157d36d65887e51476ab45c83cf3215321d0f9f592cf325d2259b3821d89",
+      "record_source_sha256": "107c1d4797246eb1bc35c27430af0346f265bd5fa30c63e3b670e4c657c577b8",
+      "record_source_start": 221083,
+      "record_source_suffix": "ff589531c1a6c8cf336799e2d6dae8612a9eb758f58498a606397f40f4cc51e8ae456cc5366530df4cadc2ec0cadf760",
+      "source_to_decoded_ratio": 13.7375,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 29,
+          "length": 2,
+          "source_offset": 1821
+        },
+        "bitwise_not": {
+          "decoded_offset": 45,
+          "length": 2,
+          "source_offset": 1418
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 51,
+          "length": 3,
+          "source_offset": 853,
+          "xor": 219
+        },
+        "direct": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 283
+        }
+      }
+    },
+    {
+      "chunk_sha256": "2111cafaf69c3db58c6a8fa9f9393e70e78b160c528ad2794f5d67c59a6ccf2e",
+      "chunk_short": "2111cafaf69c",
+      "decoded_clipped_end": 64,
+      "decoded_clipped_start": 0,
+      "decoded_entropy": 3.125,
+      "decoded_hex": "47b1e0908a4cf09047b1e0908a4df09047b1e0908a4ef09047b1e0908a4ff09047b1e0908a50f09047b1e0908a51f09047b1e0908a52f09047b1e0908a53f090",
+      "decoded_relative": 0,
+      "decoded_sha256": "2111cafaf69c3db58c6a8fa9f9393e70e78b160c528ad2794f5d67c59a6ccf2e",
+      "public_offset": 38272,
+      "record": 85,
+      "record_decoded_span": 768,
+      "record_decoded_start": 38272,
+      "record_mode": 64,
+      "record_operation_key": "5f925170d804",
+      "record_source_end": 225519,
+      "record_source_entropy": 7.902617134115831,
+      "record_source_len": 2238,
+      "record_source_prefix": "6b6cd1b176ad7ece8debd7d5dfeb9c240d761d85582dedbb483e05b42f6f483bb75bc0f9077a6a3a4ffacedee16dbdb7",
+      "record_source_sha256": "a8e74985787d46b3cec930ec0fa613d5a020f1118b3f1fb8db41c7feebce74e4",
+      "record_source_start": 223281,
+      "record_source_suffix": "0cd13f33a88051c9c5023bfdc00f38dce566af663ee07e8e74e99ebeaeff5ce3096bb08537af72b140bbe66cf1d1ebbb",
+      "source_to_decoded_ratio": 2.9140625,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 60,
+          "length": 2,
+          "source_offset": 908
+        },
+        "bitwise_not": {
+          "decoded_offset": 29,
+          "length": 2,
+          "source_offset": 1665
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 13,
+          "length": 3,
+          "source_offset": 1,
+          "xor": 33
+        },
+        "direct": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 488
+        }
+      }
+    },
+    {
+      "chunk_sha256": "2111cafaf69c3db58c6a8fa9f9393e70e78b160c528ad2794f5d67c59a6ccf2e",
+      "chunk_short": "2111cafaf69c",
+      "decoded_clipped_end": 128,
+      "decoded_clipped_start": 64,
+      "decoded_entropy": 3.125,
+      "decoded_hex": "47b1e0908a4cf09047b1e0908a4df09047b1e0908a4ef09047b1e0908a4ff09047b1e0908a50f09047b1e0908a51f09047b1e0908a52f09047b1e0908a53f090",
+      "decoded_relative": 64,
+      "decoded_sha256": "2111cafaf69c3db58c6a8fa9f9393e70e78b160c528ad2794f5d67c59a6ccf2e",
+      "public_offset": 38336,
+      "record": 85,
+      "record_decoded_span": 768,
+      "record_decoded_start": 38272,
+      "record_mode": 64,
+      "record_operation_key": "5f925170d804",
+      "record_source_end": 225519,
+      "record_source_entropy": 7.902617134115831,
+      "record_source_len": 2238,
+      "record_source_prefix": "6b6cd1b176ad7ece8debd7d5dfeb9c240d761d85582dedbb483e05b42f6f483bb75bc0f9077a6a3a4ffacedee16dbdb7",
+      "record_source_sha256": "a8e74985787d46b3cec930ec0fa613d5a020f1118b3f1fb8db41c7feebce74e4",
+      "record_source_start": 223281,
+      "record_source_suffix": "0cd13f33a88051c9c5023bfdc00f38dce566af663ee07e8e74e99ebeaeff5ce3096bb08537af72b140bbe66cf1d1ebbb",
+      "source_to_decoded_ratio": 2.9140625,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 60,
+          "length": 2,
+          "source_offset": 908
+        },
+        "bitwise_not": {
+          "decoded_offset": 29,
+          "length": 2,
+          "source_offset": 1665
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 13,
+          "length": 3,
+          "source_offset": 1,
+          "xor": 33
+        },
+        "direct": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 488
+        }
+      }
+    },
+    {
+      "chunk_sha256": "4037c8574920413d30329489b03ad575a6b0eb5e0a6fb3452ccbf4acb39ecd55",
+      "chunk_short": "4037c8574920",
+      "decoded_clipped_end": 432,
+      "decoded_clipped_start": 368,
+      "decoded_entropy": 4.553979102437745,
+      "decoded_hex": "08eff6904000e020e7f9908ac6e0904091f0a87c0808e6a3f07b00a97c09097a00900001122fb7904093f090409c7440f07424f090409ce020e5f9904099e090",
+      "decoded_relative": 368,
+      "decoded_sha256": "4037c8574920413d30329489b03ad575a6b0eb5e0a6fb3452ccbf4acb39ecd55",
+      "public_offset": 28864,
+      "record": 58,
+      "record_decoded_span": 544,
+      "record_decoded_start": 28496,
+      "record_mode": 128,
+      "record_operation_key": "66228ca20005",
+      "record_source_end": 164121,
+      "record_source_entropy": 7.919942983265344,
+      "record_source_len": 2292,
+      "record_source_prefix": "b9c157fd4afa40ec69d2d866602e20d3150dedaf14b920c2d64402c4933be54c424f38d41e31a772925a1c32f5b18102",
+      "record_source_sha256": "16b1fa7ec92852a975d1ba20551b215ab8cc10be2e75c9c7151dcc1a5c12e272",
+      "record_source_start": 161829,
+      "record_source_suffix": "59436ac31301a32daa56734c47f2f63d57dc187f92d8740ff9e60a358361d2b38a17d2f9ae961b379147cc2ccfe19fbb",
+      "source_to_decoded_ratio": 4.213235294117647,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 40,
+          "length": 2,
+          "source_offset": 2076
+        },
+        "bitwise_not": {
+          "decoded_offset": 12,
+          "length": 2,
+          "source_offset": 1574
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 15,
+          "length": 3,
+          "source_offset": 265,
+          "xor": 252
+        },
+        "direct": {
+          "decoded_offset": 9,
+          "length": 2,
+          "source_offset": 836
+        }
+      }
+    },
+    {
+      "chunk_sha256": "4037c8574920413d30329489b03ad575a6b0eb5e0a6fb3452ccbf4acb39ecd55",
+      "chunk_short": "4037c8574920",
+      "decoded_clipped_end": 240,
+      "decoded_clipped_start": 176,
+      "decoded_entropy": 4.553979102437745,
+      "decoded_hex": "08eff6904000e020e7f9908ac6e0904091f0a87c0808e6a3f07b00a97c09097a00900001122fb7904093f090409c7440f07424f090409ce020e5f9904099e090",
+      "decoded_relative": 176,
+      "decoded_sha256": "4037c8574920413d30329489b03ad575a6b0eb5e0a6fb3452ccbf4acb39ecd55",
+      "public_offset": 28672,
+      "record": 58,
+      "record_decoded_span": 544,
+      "record_decoded_start": 28496,
+      "record_mode": 128,
+      "record_operation_key": "66228ca20005",
+      "record_source_end": 164121,
+      "record_source_entropy": 7.919942983265344,
+      "record_source_len": 2292,
+      "record_source_prefix": "b9c157fd4afa40ec69d2d866602e20d3150dedaf14b920c2d64402c4933be54c424f38d41e31a772925a1c32f5b18102",
+      "record_source_sha256": "16b1fa7ec92852a975d1ba20551b215ab8cc10be2e75c9c7151dcc1a5c12e272",
+      "record_source_start": 161829,
+      "record_source_suffix": "59436ac31301a32daa56734c47f2f63d57dc187f92d8740ff9e60a358361d2b38a17d2f9ae961b379147cc2ccfe19fbb",
+      "source_to_decoded_ratio": 4.213235294117647,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 40,
+          "length": 2,
+          "source_offset": 2076
+        },
+        "bitwise_not": {
+          "decoded_offset": 12,
+          "length": 2,
+          "source_offset": 1574
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 15,
+          "length": 3,
+          "source_offset": 265,
+          "xor": 252
+        },
+        "direct": {
+          "decoded_offset": 9,
+          "length": 2,
+          "source_offset": 836
+        }
+      }
+    },
+    {
+      "chunk_sha256": "4037c8574920413d30329489b03ad575a6b0eb5e0a6fb3452ccbf4acb39ecd55",
+      "chunk_short": "4037c8574920",
+      "decoded_clipped_end": 368,
+      "decoded_clipped_start": 304,
+      "decoded_entropy": 4.553979102437745,
+      "decoded_hex": "08eff6904000e020e7f9908ac6e0904091f0a87c0808e6a3f07b00a97c09097a00900001122fb7904093f090409c7440f07424f090409ce020e5f9904099e090",
+      "decoded_relative": 304,
+      "decoded_sha256": "4037c8574920413d30329489b03ad575a6b0eb5e0a6fb3452ccbf4acb39ecd55",
+      "public_offset": 28800,
+      "record": 58,
+      "record_decoded_span": 544,
+      "record_decoded_start": 28496,
+      "record_mode": 128,
+      "record_operation_key": "66228ca20005",
+      "record_source_end": 164121,
+      "record_source_entropy": 7.919942983265344,
+      "record_source_len": 2292,
+      "record_source_prefix": "b9c157fd4afa40ec69d2d866602e20d3150dedaf14b920c2d64402c4933be54c424f38d41e31a772925a1c32f5b18102",
+      "record_source_sha256": "16b1fa7ec92852a975d1ba20551b215ab8cc10be2e75c9c7151dcc1a5c12e272",
+      "record_source_start": 161829,
+      "record_source_suffix": "59436ac31301a32daa56734c47f2f63d57dc187f92d8740ff9e60a358361d2b38a17d2f9ae961b379147cc2ccfe19fbb",
+      "source_to_decoded_ratio": 4.213235294117647,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 40,
+          "length": 2,
+          "source_offset": 2076
+        },
+        "bitwise_not": {
+          "decoded_offset": 12,
+          "length": 2,
+          "source_offset": 1574
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 15,
+          "length": 3,
+          "source_offset": 265,
+          "xor": 252
+        },
+        "direct": {
+          "decoded_offset": 9,
+          "length": 2,
+          "source_offset": 836
+        }
+      }
+    },
+    {
+      "chunk_sha256": "c5c0741f5daa580c2f3dd3ba451a6a7060426d388a5ba30ebcd09ea218fa8022",
+      "chunk_short": "c5c0741f5daa",
+      "decoded_clipped_end": 496,
+      "decoded_clipped_start": 432,
+      "decoded_entropy": 3.737747368726378,
+      "decoded_hex": "862cf090596ae090862df0905906e0908633f090590de090862ff0905a00e0908632f0904863e0908630f0904840e0908631f090862fe0ff54f790590df09086",
+      "decoded_relative": 432,
+      "decoded_sha256": "c5c0741f5daa580c2f3dd3ba451a6a7060426d388a5ba30ebcd09ea218fa8022",
+      "public_offset": 33984,
+      "record": 68,
+      "record_decoded_span": 640,
+      "record_decoded_start": 33552,
+      "record_mode": 128,
+      "record_operation_key": "0fe212a8d404",
+      "record_source_end": 186347,
+      "record_source_entropy": 7.905081526670297,
+      "record_source_len": 2421,
+      "record_source_prefix": "2d5d5a6e0d992c7deca3187eb808eec6c437f1e23f05abdcf5ecf9963d7b1e669e25fcf175ecf12ebd8e25d7eac4b9a4",
+      "record_source_sha256": "a8a07d23d8e60ffdc5995adfc42b79db4ea764ceae118358d195309d7e066eda",
+      "record_source_start": 183926,
+      "record_source_suffix": "8326bcb4bb9f8d6b63f9cdb1ef25c208b5ebd9f334baf63ccc35996e0d5f5249b8c25f3923a191dd7b5fddf8bcca5bb0",
+      "source_to_decoded_ratio": 3.7828125,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 0,
+          "length": 2,
+          "source_offset": 1641
+        },
+        "bitwise_not": {
+          "decoded_offset": 13,
+          "length": 2,
+          "source_offset": 1872
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 28,
+          "length": 3,
+          "source_offset": 651,
+          "xor": 116
+        },
+        "direct": {
+          "decoded_offset": 53,
+          "length": 2,
+          "source_offset": 1073
+        }
+      }
+    },
+    {
+      "chunk_sha256": "c5c0741f5daa580c2f3dd3ba451a6a7060426d388a5ba30ebcd09ea218fa8022",
+      "chunk_short": "c5c0741f5daa",
+      "decoded_clipped_end": 432,
+      "decoded_clipped_start": 368,
+      "decoded_entropy": 3.737747368726378,
+      "decoded_hex": "862cf090596ae090862df0905906e0908633f090590de090862ff0905a00e0908632f0904863e0908630f0904840e0908631f090862fe0ff54f790590df09086",
+      "decoded_relative": 368,
+      "decoded_sha256": "c5c0741f5daa580c2f3dd3ba451a6a7060426d388a5ba30ebcd09ea218fa8022",
+      "public_offset": 33920,
+      "record": 68,
+      "record_decoded_span": 640,
+      "record_decoded_start": 33552,
+      "record_mode": 128,
+      "record_operation_key": "0fe212a8d404",
+      "record_source_end": 186347,
+      "record_source_entropy": 7.905081526670297,
+      "record_source_len": 2421,
+      "record_source_prefix": "2d5d5a6e0d992c7deca3187eb808eec6c437f1e23f05abdcf5ecf9963d7b1e669e25fcf175ecf12ebd8e25d7eac4b9a4",
+      "record_source_sha256": "a8a07d23d8e60ffdc5995adfc42b79db4ea764ceae118358d195309d7e066eda",
+      "record_source_start": 183926,
+      "record_source_suffix": "8326bcb4bb9f8d6b63f9cdb1ef25c208b5ebd9f334baf63ccc35996e0d5f5249b8c25f3923a191dd7b5fddf8bcca5bb0",
+      "source_to_decoded_ratio": 3.7828125,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 0,
+          "length": 2,
+          "source_offset": 1641
+        },
+        "bitwise_not": {
+          "decoded_offset": 13,
+          "length": 2,
+          "source_offset": 1872
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 28,
+          "length": 3,
+          "source_offset": 651,
+          "xor": 116
+        },
+        "direct": {
+          "decoded_offset": 53,
+          "length": 2,
+          "source_offset": 1073
+        }
+      }
+    },
+    {
+      "chunk_sha256": "28583441dfa8a17c7789580205a507d45cf44d71dacddd583a7f3b51cc4cf4c2",
+      "chunk_short": "28583441dfa8",
+      "decoded_clipped_end": 288,
+      "decoded_clipped_start": 224,
+      "decoded_entropy": 4.849599173352495,
+      "decoded_hex": "feef78aa26ffee1836a87c0808f608eff6904000e020e7f9908ac6e0904095f0a87c0808e6a3f07b00a97c09097a00900001122fb7904097f090409c7440f090",
+      "decoded_relative": 224,
+      "decoded_sha256": "28583441dfa8a17c7789580205a507d45cf44d71dacddd583a7f3b51cc4cf4c2",
+      "public_offset": 29568,
+      "record": 60,
+      "record_decoded_span": 848,
+      "record_decoded_start": 29344,
+      "record_mode": 64,
+      "record_operation_key": "950a90757805",
+      "record_source_end": 168927,
+      "record_source_entropy": 7.905170365187971,
+      "record_source_len": 2344,
+      "record_source_prefix": "495dfa4b98efcc2dcf492753338f17f4c62dead9cae1f702c2b471c989a173e6965d975047b4e6961b24ee5fc4e9387b",
+      "record_source_sha256": "65927fd12dbf45e9108d49dcb3bf3576ad5b16a1f6407471b6aae05bc37f6260",
+      "record_source_start": 166583,
+      "record_source_suffix": "c0cc924bcac6c6e3f01fa4cf338c2c7c83bbb59005c26650e34c186b6fb97a4266a6a911e199a2d2ccd6a68e937f2dd8",
+      "source_to_decoded_ratio": 2.7641509433962264,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 0,
+          "length": 2,
+          "source_offset": 568
+        },
+        "bitwise_not": {
+          "decoded_offset": 19,
+          "length": 2,
+          "source_offset": 1437
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 30,
+          "length": 4,
+          "source_offset": 2097,
+          "xor": 123
+        },
+        "direct": {
+          "decoded_offset": 0,
+          "length": 2,
+          "source_offset": 1114
+        }
+      }
+    },
+    {
+      "chunk_sha256": "0c9a360d26b83e035c169dd98abb00961fb76184388d3ad0940c3e8a389544b2",
+      "chunk_short": "0c9a360d26b8",
+      "decoded_clipped_end": 240,
+      "decoded_clipped_start": 176,
+      "decoded_entropy": 4.884623781480403,
+      "decoded_hex": "8ac6e0904091f0a87c0808e6a3f07b00a97c09097a00900001122fb7904093f090409c7440f07420f090409ce020e5f9908a4ee0540f24a0f582e43440f583e0",
+      "decoded_relative": 176,
+      "decoded_sha256": "0c9a360d26b83e035c169dd98abb00961fb76184388d3ad0940c3e8a389544b2",
+      "public_offset": 30400,
+      "record": 62,
+      "record_decoded_span": 464,
+      "record_decoded_start": 30224,
+      "record_mode": 128,
+      "record_operation_key": "9fd2119d4c04",
+      "record_source_end": 173748,
+      "record_source_entropy": 7.887755197037631,
+      "record_source_len": 2419,
+      "record_source_prefix": "c6a40c2ea57363f2c3ba901ccd4e4a1fcd65d3956094f1cdacee386b6d28cdb7fdf4d2c49bd091ac80509a969ef051f5",
+      "record_source_sha256": "3fb5dd547287ae46cf8c66835099dfe90476ec165f27f71ad1053f919e6d1aa8",
+      "record_source_start": 171329,
+      "record_source_suffix": "6b0d2ece3ab797711c7039ad5e7eefdc125d1e4d8bda6fee10a92f9f6a4be4a4227da926826c2b19b39893fcae3e5bb0",
+      "source_to_decoded_ratio": 5.213362068965517,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 16,
+          "length": 2,
+          "source_offset": 1296
+        },
+        "bitwise_not": {
+          "decoded_offset": 5,
+          "length": 2,
+          "source_offset": 1905
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 0,
+          "length": 0,
+          "source_offset": 0,
+          "xor": null
+        },
+        "direct": {
+          "decoded_offset": 17,
+          "length": 2,
+          "source_offset": 2098
+        }
+      }
+    },
+    {
+      "chunk_sha256": "0c9a360d26b83e035c169dd98abb00961fb76184388d3ad0940c3e8a389544b2",
+      "chunk_short": "0c9a360d26b8",
+      "decoded_clipped_end": 32,
+      "decoded_clipped_start": 16,
+      "decoded_entropy": 4.884623781480403,
+      "decoded_hex": "8ac6e0904091f0a87c0808e6a3f07b00a97c09097a00900001122fb7904093f090409c7440f07420f090409ce020e5f9908a4ee0540f24a0f582e43440f583e0",
+      "decoded_relative": 16,
+      "decoded_sha256": "0c9a360d26b83e035c169dd98abb00961fb76184388d3ad0940c3e8a389544b2",
+      "public_offset": 30208,
+      "record": 61,
+      "record_decoded_span": 32,
+      "record_decoded_start": 30192,
+      "record_mode": 128,
+      "record_operation_key": "80e25282fa04",
+      "record_source_end": 171329,
+      "record_source_entropy": 7.895965373284321,
+      "record_source_len": 2402,
+      "record_source_prefix": "f34edd7e358bb9fa9e795ef773c7907776b200b84c825c69830ced2e5e9dbbdd81c5d3d2dc257b872fb9deec1cd9366b",
+      "record_source_sha256": "f673e9a989e284eb5b9a1ef45066790ff6982c6f1fa54d606245a424bb426280",
+      "record_source_start": 168927,
+      "record_source_suffix": "47fca8ce48f51120e65bf9eab28b9753e373fcb33bda662a5710e9b61350947e3f500c3285c39b6023d974be41d349bb",
+      "source_to_decoded_ratio": 75.0625,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 1,
+          "length": 2,
+          "source_offset": 1866
+        },
+        "bitwise_not": {
+          "decoded_offset": 29,
+          "length": 2,
+          "source_offset": 1044
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 55,
+          "length": 3,
+          "source_offset": 1370,
+          "xor": 21
+        },
+        "direct": {
+          "decoded_offset": 22,
+          "length": 2,
+          "source_offset": 1785
+        }
+      }
+    },
+    {
+      "chunk_sha256": "9b673c066ae46057009d7f962320e5ff963e1c4f7437d95e328290edeb39a3b7",
+      "chunk_short": "9b673c066ae4",
+      "decoded_clipped_end": 608,
+      "decoded_clipped_start": 544,
+      "decoded_entropy": 4.243443118360757,
+      "decoded_hex": "8a4de0904099f0908a4ee0904099f0908a53e0904099f0908a54e0904099f0a3e4f0a304f0a37414f090409ce020e4f978aa740426f618e436f6908a4de07002",
+      "decoded_relative": 544,
+      "decoded_sha256": "9b673c066ae46057009d7f962320e5ff963e1c4f7437d95e328290edeb39a3b7",
+      "public_offset": 29888,
+      "record": 60,
+      "record_decoded_span": 848,
+      "record_decoded_start": 29344,
+      "record_mode": 64,
+      "record_operation_key": "950a90757805",
+      "record_source_end": 168927,
+      "record_source_entropy": 7.905170365187971,
+      "record_source_len": 2344,
+      "record_source_prefix": "495dfa4b98efcc2dcf492753338f17f4c62dead9cae1f702c2b471c989a173e6965d975047b4e6961b24ee5fc4e9387b",
+      "record_source_sha256": "65927fd12dbf45e9108d49dcb3bf3576ad5b16a1f6407471b6aae05bc37f6260",
+      "record_source_start": 166583,
+      "record_source_suffix": "c0cc924bcac6c6e3f01fa4cf338c2c7c83bbb59005c26650e34c186b6fb97a4266a6a911e199a2d2ccd6a68e937f2dd8",
+      "source_to_decoded_ratio": 2.7641509433962264,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 244
+        },
+        "bitwise_not": {
+          "decoded_offset": 32,
+          "length": 2,
+          "source_offset": 740
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 0,
+          "length": 0,
+          "source_offset": 0,
+          "xor": null
+        },
+        "direct": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 68
+        }
+      }
+    },
+    {
+      "chunk_sha256": "9b673c066ae46057009d7f962320e5ff963e1c4f7437d95e328290edeb39a3b7",
+      "chunk_short": "9b673c066ae4",
+      "decoded_clipped_end": 544,
+      "decoded_clipped_start": 480,
+      "decoded_entropy": 4.243443118360757,
+      "decoded_hex": "8a4de0904099f0908a4ee0904099f0908a53e0904099f0908a54e0904099f0a3e4f0a304f0a37414f090409ce020e4f978aa740426f618e436f6908a4de07002",
+      "decoded_relative": 480,
+      "decoded_sha256": "9b673c066ae46057009d7f962320e5ff963e1c4f7437d95e328290edeb39a3b7",
+      "public_offset": 29824,
+      "record": 60,
+      "record_decoded_span": 848,
+      "record_decoded_start": 29344,
+      "record_mode": 64,
+      "record_operation_key": "950a90757805",
+      "record_source_end": 168927,
+      "record_source_entropy": 7.905170365187971,
+      "record_source_len": 2344,
+      "record_source_prefix": "495dfa4b98efcc2dcf492753338f17f4c62dead9cae1f702c2b471c989a173e6965d975047b4e6961b24ee5fc4e9387b",
+      "record_source_sha256": "65927fd12dbf45e9108d49dcb3bf3576ad5b16a1f6407471b6aae05bc37f6260",
+      "record_source_start": 166583,
+      "record_source_suffix": "c0cc924bcac6c6e3f01fa4cf338c2c7c83bbb59005c26650e34c186b6fb97a4266a6a911e199a2d2ccd6a68e937f2dd8",
+      "source_to_decoded_ratio": 2.7641509433962264,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 244
+        },
+        "bitwise_not": {
+          "decoded_offset": 32,
+          "length": 2,
+          "source_offset": 740
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 0,
+          "length": 0,
+          "source_offset": 0,
+          "xor": null
+        },
+        "direct": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 68
+        }
+      }
+    },
+    {
+      "chunk_sha256": "580b9228d0b9056b382865df7785bb65b7bcabed406da47bb0ef8b5839b544ce",
+      "chunk_short": "580b9228d0b9",
+      "decoded_clipped_end": 112,
+      "decoded_clipped_start": 48,
+      "decoded_entropy": 4.456747562960808,
+      "decoded_hex": "1ce03403f543904095eff0a3e543f0a3e544f090409ae4f0a37405f0a3743af090409ce020e4f990409ae4f0a304f0a37432f090409ce020e4f9d0d092af22d3",
+      "decoded_relative": 48,
+      "decoded_sha256": "580b9228d0b9056b382865df7785bb65b7bcabed406da47bb0ef8b5839b544ce",
+      "public_offset": 30272,
+      "record": 62,
+      "record_decoded_span": 464,
+      "record_decoded_start": 30224,
+      "record_mode": 128,
+      "record_operation_key": "9fd2119d4c04",
+      "record_source_end": 173748,
+      "record_source_entropy": 7.887755197037631,
+      "record_source_len": 2419,
+      "record_source_prefix": "c6a40c2ea57363f2c3ba901ccd4e4a1fcd65d3956094f1cdacee386b6d28cdb7fdf4d2c49bd091ac80509a969ef051f5",
+      "record_source_sha256": "3fb5dd547287ae46cf8c66835099dfe90476ec165f27f71ad1053f919e6d1aa8",
+      "record_source_start": 171329,
+      "record_source_suffix": "6b0d2ece3ab797711c7039ad5e7eefdc125d1e4d8bda6fee10a92f9f6a4be4a4227da926826c2b19b39893fcae3e5bb0",
+      "source_to_decoded_ratio": 5.213362068965517,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 26
+        },
+        "bitwise_not": {
+          "decoded_offset": 62,
+          "length": 2,
+          "source_offset": 774
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 0,
+          "length": 0,
+          "source_offset": 0,
+          "xor": null
+        },
+        "direct": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 11
+        }
+      }
+    },
+    {
+      "chunk_sha256": "fb00deab088bdb7eb48f541a37bff391fa3155bd86c433427e42e2158d125f45",
+      "chunk_short": "fb00deab088b",
+      "decoded_clipped_end": 192,
+      "decoded_clipped_start": 128,
+      "decoded_entropy": 4.032560203736037,
+      "decoded_hex": "e0904091f0a3e55ef0a3e55ff0904000e020e7f9904098e0904000e020e7f9904098e0f55f904000e020e7f9904098e55ff0904000e020e7f9d0d092af22c24f",
+      "decoded_relative": 128,
+      "decoded_sha256": "fb00deab088bdb7eb48f541a37bff391fa3155bd86c433427e42e2158d125f45",
+      "public_offset": 34688,
+      "record": 70,
+      "record_decoded_span": 560,
+      "record_decoded_start": 34560,
+      "record_mode": 128,
+      "record_operation_key": "098ad4a36805",
+      "record_source_end": 191146,
+      "record_source_entropy": 7.919482690504679,
+      "record_source_len": 2525,
+      "record_source_prefix": "4312b2e69fe30069966ab128fcb49a6ce4266a96afcf2ab7b66e3b4b33d4e748ed8f1912894c6ae2f5b392bbbcdf11a3",
+      "record_source_sha256": "00d2c8256caf8c2cfbfd403b2010a0f0203459b4afe233029ee7b28da260f281",
+      "record_source_start": 188621,
+      "record_source_suffix": "596ba3978a2da9302c2b5522948f4fa37f2de36f4cd0dfcdee504b7ebf5732cc2394d781e894cfe64172505928376eec",
+      "source_to_decoded_ratio": 4.508928571428571,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 57,
+          "length": 2,
+          "source_offset": 1973
+        },
+        "bitwise_not": {
+          "decoded_offset": 0,
+          "length": 2,
+          "source_offset": 1020
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 33,
+          "length": 3,
+          "source_offset": 209,
+          "xor": 199
+        },
+        "direct": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 93
+        }
+      }
+    },
+    {
+      "chunk_sha256": "fb00deab088bdb7eb48f541a37bff391fa3155bd86c433427e42e2158d125f45",
+      "chunk_short": "fb00deab088b",
+      "decoded_clipped_end": 128,
+      "decoded_clipped_start": 64,
+      "decoded_entropy": 4.032560203736037,
+      "decoded_hex": "e0904091f0a3e55ef0a3e55ff0904000e020e7f9904098e0904000e020e7f9904098e0f55f904000e020e7f9904098e55ff0904000e020e7f9d0d092af22c24f",
+      "decoded_relative": 64,
+      "decoded_sha256": "fb00deab088bdb7eb48f541a37bff391fa3155bd86c433427e42e2158d125f45",
+      "public_offset": 34624,
+      "record": 70,
+      "record_decoded_span": 560,
+      "record_decoded_start": 34560,
+      "record_mode": 128,
+      "record_operation_key": "098ad4a36805",
+      "record_source_end": 191146,
+      "record_source_entropy": 7.919482690504679,
+      "record_source_len": 2525,
+      "record_source_prefix": "4312b2e69fe30069966ab128fcb49a6ce4266a96afcf2ab7b66e3b4b33d4e748ed8f1912894c6ae2f5b392bbbcdf11a3",
+      "record_source_sha256": "00d2c8256caf8c2cfbfd403b2010a0f0203459b4afe233029ee7b28da260f281",
+      "record_source_start": 188621,
+      "record_source_suffix": "596ba3978a2da9302c2b5522948f4fa37f2de36f4cd0dfcdee504b7ebf5732cc2394d781e894cfe64172505928376eec",
+      "source_to_decoded_ratio": 4.508928571428571,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 57,
+          "length": 2,
+          "source_offset": 1973
+        },
+        "bitwise_not": {
+          "decoded_offset": 0,
+          "length": 2,
+          "source_offset": 1020
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 33,
+          "length": 3,
+          "source_offset": 209,
+          "xor": 199
+        },
+        "direct": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 93
+        }
+      }
+    },
+    {
+      "chunk_sha256": "fb00deab088bdb7eb48f541a37bff391fa3155bd86c433427e42e2158d125f45",
+      "chunk_short": "fb00deab088b",
+      "decoded_clipped_end": 256,
+      "decoded_clipped_start": 192,
+      "decoded_entropy": 4.032560203736037,
+      "decoded_hex": "e0904091f0a3e55ef0a3e55ff0904000e020e7f9904098e0904000e020e7f9904098e0f55f904000e020e7f9904098e55ff0904000e020e7f9d0d092af22c24f",
+      "decoded_relative": 192,
+      "decoded_sha256": "fb00deab088bdb7eb48f541a37bff391fa3155bd86c433427e42e2158d125f45",
+      "public_offset": 34752,
+      "record": 70,
+      "record_decoded_span": 560,
+      "record_decoded_start": 34560,
+      "record_mode": 128,
+      "record_operation_key": "098ad4a36805",
+      "record_source_end": 191146,
+      "record_source_entropy": 7.919482690504679,
+      "record_source_len": 2525,
+      "record_source_prefix": "4312b2e69fe30069966ab128fcb49a6ce4266a96afcf2ab7b66e3b4b33d4e748ed8f1912894c6ae2f5b392bbbcdf11a3",
+      "record_source_sha256": "00d2c8256caf8c2cfbfd403b2010a0f0203459b4afe233029ee7b28da260f281",
+      "record_source_start": 188621,
+      "record_source_suffix": "596ba3978a2da9302c2b5522948f4fa37f2de36f4cd0dfcdee504b7ebf5732cc2394d781e894cfe64172505928376eec",
+      "source_to_decoded_ratio": 4.508928571428571,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 57,
+          "length": 2,
+          "source_offset": 1973
+        },
+        "bitwise_not": {
+          "decoded_offset": 0,
+          "length": 2,
+          "source_offset": 1020
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 33,
+          "length": 3,
+          "source_offset": 209,
+          "xor": 199
+        },
+        "direct": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 93
+        }
+      }
+    },
+    {
+      "chunk_sha256": "fb00deab088bdb7eb48f541a37bff391fa3155bd86c433427e42e2158d125f45",
+      "chunk_short": "fb00deab088b",
+      "decoded_clipped_end": 64,
+      "decoded_clipped_start": 0,
+      "decoded_entropy": 4.032560203736037,
+      "decoded_hex": "e0904091f0a3e55ef0a3e55ff0904000e020e7f9904098e0904000e020e7f9904098e0f55f904000e020e7f9904098e55ff0904000e020e7f9d0d092af22c24f",
+      "decoded_relative": 0,
+      "decoded_sha256": "fb00deab088bdb7eb48f541a37bff391fa3155bd86c433427e42e2158d125f45",
+      "public_offset": 34560,
+      "record": 70,
+      "record_decoded_span": 560,
+      "record_decoded_start": 34560,
+      "record_mode": 128,
+      "record_operation_key": "098ad4a36805",
+      "record_source_end": 191146,
+      "record_source_entropy": 7.919482690504679,
+      "record_source_len": 2525,
+      "record_source_prefix": "4312b2e69fe30069966ab128fcb49a6ce4266a96afcf2ab7b66e3b4b33d4e748ed8f1912894c6ae2f5b392bbbcdf11a3",
+      "record_source_sha256": "00d2c8256caf8c2cfbfd403b2010a0f0203459b4afe233029ee7b28da260f281",
+      "record_source_start": 188621,
+      "record_source_suffix": "596ba3978a2da9302c2b5522948f4fa37f2de36f4cd0dfcdee504b7ebf5732cc2394d781e894cfe64172505928376eec",
+      "source_to_decoded_ratio": 4.508928571428571,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 57,
+          "length": 2,
+          "source_offset": 1973
+        },
+        "bitwise_not": {
+          "decoded_offset": 0,
+          "length": 2,
+          "source_offset": 1020
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 33,
+          "length": 3,
+          "source_offset": 209,
+          "xor": 199
+        },
+        "direct": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 93
+        }
+      }
+    },
+    {
+      "chunk_sha256": "95caa55b881e4a03c00ebe93d832419d9a78df14262d6e983140861331a52a9a",
+      "chunk_short": "95caa55b881e",
+      "decoded_clipped_end": 640,
+      "decoded_clipped_start": 576,
+      "decoded_entropy": 4.1748437507738325,
+      "decoded_hex": "007e02120b079085efe09048f4f09085f0e09048f5f09085f1e09048f6f09085f2e09048c8f09085f3e09048eff09085eee024ff22908626eff0a31234550000",
+      "decoded_relative": 576,
+      "decoded_sha256": "95caa55b881e4a03c00ebe93d832419d9a78df14262d6e983140861331a52a9a",
+      "public_offset": 27520,
+      "record": 55,
+      "record_decoded_span": 896,
+      "record_decoded_start": 26944,
+      "record_mode": 64,
+      "record_operation_key": "a742d3782e04",
+      "record_source_end": 157571,
+      "record_source_entropy": 7.91750061725466,
+      "record_source_len": 2313,
+      "record_source_prefix": "6743cf2fec72bcf69314f8dfcb828aaa6a0e21fdf7402f8395a72efbf2fa9a5e7df638fc5f575bd9efabf359efbdf7ba",
+      "record_source_sha256": "7ad9e4ea19a9a6f5064c0c389fa95067922cc9d4f1bbe4070fd0af8b18c4d8e0",
+      "record_source_start": 155258,
+      "record_source_suffix": "84fdc3da545b0e4fa1a0ced899a63d5ed3424557357f90c42554731b8db48d077bd7d6f0661c3a4ffcb8e396cc2727bb",
+      "source_to_decoded_ratio": 2.5814732142857144,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 54,
+          "length": 3,
+          "source_offset": 1279
+        },
+        "bitwise_not": {
+          "decoded_offset": 19,
+          "length": 2,
+          "source_offset": 580
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 15,
+          "length": 3,
+          "source_offset": 1693,
+          "xor": 22
+        },
+        "direct": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 57
+        }
+      }
+    },
+    {
+      "chunk_sha256": "95caa55b881e4a03c00ebe93d832419d9a78df14262d6e983140861331a52a9a",
+      "chunk_short": "95caa55b881e",
+      "decoded_clipped_end": 512,
+      "decoded_clipped_start": 448,
+      "decoded_entropy": 4.1748437507738325,
+      "decoded_hex": "007e02120b079085efe09048f4f09085f0e09048f5f09085f1e09048f6f09085f2e09048c8f09085f3e09048eff09085eee024ff22908626eff0a31234550000",
+      "decoded_relative": 448,
+      "decoded_sha256": "95caa55b881e4a03c00ebe93d832419d9a78df14262d6e983140861331a52a9a",
+      "public_offset": 27392,
+      "record": 55,
+      "record_decoded_span": 896,
+      "record_decoded_start": 26944,
+      "record_mode": 64,
+      "record_operation_key": "a742d3782e04",
+      "record_source_end": 157571,
+      "record_source_entropy": 7.91750061725466,
+      "record_source_len": 2313,
+      "record_source_prefix": "6743cf2fec72bcf69314f8dfcb828aaa6a0e21fdf7402f8395a72efbf2fa9a5e7df638fc5f575bd9efabf359efbdf7ba",
+      "record_source_sha256": "7ad9e4ea19a9a6f5064c0c389fa95067922cc9d4f1bbe4070fd0af8b18c4d8e0",
+      "record_source_start": 155258,
+      "record_source_suffix": "84fdc3da545b0e4fa1a0ced899a63d5ed3424557357f90c42554731b8db48d077bd7d6f0661c3a4ffcb8e396cc2727bb",
+      "source_to_decoded_ratio": 2.5814732142857144,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 54,
+          "length": 3,
+          "source_offset": 1279
+        },
+        "bitwise_not": {
+          "decoded_offset": 19,
+          "length": 2,
+          "source_offset": 580
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 15,
+          "length": 3,
+          "source_offset": 1693,
+          "xor": 22
+        },
+        "direct": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 57
+        }
+      }
+    },
+    {
+      "chunk_sha256": "95caa55b881e4a03c00ebe93d832419d9a78df14262d6e983140861331a52a9a",
+      "chunk_short": "95caa55b881e",
+      "decoded_clipped_end": 704,
+      "decoded_clipped_start": 640,
+      "decoded_entropy": 4.1748437507738325,
+      "decoded_hex": "007e02120b079085efe09048f4f09085f0e09048f5f09085f1e09048f6f09085f2e09048c8f09085f3e09048eff09085eee024ff22908626eff0a31234550000",
+      "decoded_relative": 640,
+      "decoded_sha256": "95caa55b881e4a03c00ebe93d832419d9a78df14262d6e983140861331a52a9a",
+      "public_offset": 27584,
+      "record": 55,
+      "record_decoded_span": 896,
+      "record_decoded_start": 26944,
+      "record_mode": 64,
+      "record_operation_key": "a742d3782e04",
+      "record_source_end": 157571,
+      "record_source_entropy": 7.91750061725466,
+      "record_source_len": 2313,
+      "record_source_prefix": "6743cf2fec72bcf69314f8dfcb828aaa6a0e21fdf7402f8395a72efbf2fa9a5e7df638fc5f575bd9efabf359efbdf7ba",
+      "record_source_sha256": "7ad9e4ea19a9a6f5064c0c389fa95067922cc9d4f1bbe4070fd0af8b18c4d8e0",
+      "record_source_start": 155258,
+      "record_source_suffix": "84fdc3da545b0e4fa1a0ced899a63d5ed3424557357f90c42554731b8db48d077bd7d6f0661c3a4ffcb8e396cc2727bb",
+      "source_to_decoded_ratio": 2.5814732142857144,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 54,
+          "length": 3,
+          "source_offset": 1279
+        },
+        "bitwise_not": {
+          "decoded_offset": 19,
+          "length": 2,
+          "source_offset": 580
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 15,
+          "length": 3,
+          "source_offset": 1693,
+          "xor": 22
+        },
+        "direct": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 57
+        }
+      }
+    },
+    {
+      "chunk_sha256": "95caa55b881e4a03c00ebe93d832419d9a78df14262d6e983140861331a52a9a",
+      "chunk_short": "95caa55b881e",
+      "decoded_clipped_end": 576,
+      "decoded_clipped_start": 512,
+      "decoded_entropy": 4.1748437507738325,
+      "decoded_hex": "007e02120b079085efe09048f4f09085f0e09048f5f09085f1e09048f6f09085f2e09048c8f09085f3e09048eff09085eee024ff22908626eff0a31234550000",
+      "decoded_relative": 512,
+      "decoded_sha256": "95caa55b881e4a03c00ebe93d832419d9a78df14262d6e983140861331a52a9a",
+      "public_offset": 27456,
+      "record": 55,
+      "record_decoded_span": 896,
+      "record_decoded_start": 26944,
+      "record_mode": 64,
+      "record_operation_key": "a742d3782e04",
+      "record_source_end": 157571,
+      "record_source_entropy": 7.91750061725466,
+      "record_source_len": 2313,
+      "record_source_prefix": "6743cf2fec72bcf69314f8dfcb828aaa6a0e21fdf7402f8395a72efbf2fa9a5e7df638fc5f575bd9efabf359efbdf7ba",
+      "record_source_sha256": "7ad9e4ea19a9a6f5064c0c389fa95067922cc9d4f1bbe4070fd0af8b18c4d8e0",
+      "record_source_start": 155258,
+      "record_source_suffix": "84fdc3da545b0e4fa1a0ced899a63d5ed3424557357f90c42554731b8db48d077bd7d6f0661c3a4ffcb8e396cc2727bb",
+      "source_to_decoded_ratio": 2.5814732142857144,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 54,
+          "length": 3,
+          "source_offset": 1279
+        },
+        "bitwise_not": {
+          "decoded_offset": 19,
+          "length": 2,
+          "source_offset": 580
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 15,
+          "length": 3,
+          "source_offset": 1693,
+          "xor": 22
+        },
+        "direct": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 57
+        }
+      }
+    },
+    {
+      "chunk_sha256": "efcb6299a750931625bb1dc282eaf2f64f65e32d8dc12038f61794a77835d98c",
+      "chunk_short": "efcb6299a750",
+      "decoded_clipped_end": 528,
+      "decoded_clipped_start": 464,
+      "decoded_entropy": 4.670958593344349,
+      "decoded_hex": "097a00900001122fb7904093f090409c7440f07422f090409ce020e5f9904099e0908a53f0904099e0908a54f078a1e66003303907e4908a54f08060301f5d20",
+      "decoded_relative": 464,
+      "decoded_sha256": "efcb6299a750931625bb1dc282eaf2f64f65e32d8dc12038f61794a77835d98c",
+      "public_offset": 32640,
+      "record": 66,
+      "record_decoded_span": 720,
+      "record_decoded_start": 32176,
+      "record_mode": 128,
+      "record_operation_key": "4e8210adb204",
+      "record_source_end": 181631,
+      "record_source_entropy": 7.9081364774740655,
+      "record_source_len": 2411,
+      "record_source_prefix": "cfef3de32a3eaf877a5c636a732d91339ef06853f28d01fe56bcb7b6bc4c338dd6d0e5749303f00ae9aae589440a3b5a",
+      "record_source_sha256": "d803ff8d4d20cf7e68790a3c8b2944b9dda034aec51f702770a1aa2fdd5a483e",
+      "record_source_start": 179220,
+      "record_source_suffix": "cccdf1b41abfdedbcba8d35ab990cd5c72073066ea33b4b8f4693f804cb2345a206b3420d18251973e9cad105972eec0",
+      "source_to_decoded_ratio": 3.348611111111111,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 141
+        },
+        "bitwise_not": {
+          "decoded_offset": 27,
+          "length": 2,
+          "source_offset": 121
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 53,
+          "length": 3,
+          "source_offset": 2265,
+          "xor": 175
+        },
+        "direct": {
+          "decoded_offset": 60,
+          "length": 2,
+          "source_offset": 1559
+        }
+      }
+    },
+    {
+      "chunk_sha256": "efcb6299a750931625bb1dc282eaf2f64f65e32d8dc12038f61794a77835d98c",
+      "chunk_short": "efcb6299a750",
+      "decoded_clipped_end": 592,
+      "decoded_clipped_start": 528,
+      "decoded_entropy": 4.670958593344349,
+      "decoded_hex": "097a00900001122fb7904093f090409c7440f07422f090409ce020e5f9904099e0908a53f0904099e0908a54f078a1e66003303907e4908a54f08060301f5d20",
+      "decoded_relative": 528,
+      "decoded_sha256": "efcb6299a750931625bb1dc282eaf2f64f65e32d8dc12038f61794a77835d98c",
+      "public_offset": 32704,
+      "record": 66,
+      "record_decoded_span": 720,
+      "record_decoded_start": 32176,
+      "record_mode": 128,
+      "record_operation_key": "4e8210adb204",
+      "record_source_end": 181631,
+      "record_source_entropy": 7.9081364774740655,
+      "record_source_len": 2411,
+      "record_source_prefix": "cfef3de32a3eaf877a5c636a732d91339ef06853f28d01fe56bcb7b6bc4c338dd6d0e5749303f00ae9aae589440a3b5a",
+      "record_source_sha256": "d803ff8d4d20cf7e68790a3c8b2944b9dda034aec51f702770a1aa2fdd5a483e",
+      "record_source_start": 179220,
+      "record_source_suffix": "cccdf1b41abfdedbcba8d35ab990cd5c72073066ea33b4b8f4693f804cb2345a206b3420d18251973e9cad105972eec0",
+      "source_to_decoded_ratio": 3.348611111111111,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 141
+        },
+        "bitwise_not": {
+          "decoded_offset": 27,
+          "length": 2,
+          "source_offset": 121
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 53,
+          "length": 3,
+          "source_offset": 2265,
+          "xor": 175
+        },
+        "direct": {
+          "decoded_offset": 60,
+          "length": 2,
+          "source_offset": 1559
+        }
+      }
+    },
+    {
+      "chunk_sha256": "efcb6299a750931625bb1dc282eaf2f64f65e32d8dc12038f61794a77835d98c",
+      "chunk_short": "efcb6299a750",
+      "decoded_clipped_end": 464,
+      "decoded_clipped_start": 400,
+      "decoded_entropy": 4.670958593344349,
+      "decoded_hex": "097a00900001122fb7904093f090409c7440f07422f090409ce020e5f9904099e0908a53f0904099e0908a54f078a1e66003303907e4908a54f08060301f5d20",
+      "decoded_relative": 400,
+      "decoded_sha256": "efcb6299a750931625bb1dc282eaf2f64f65e32d8dc12038f61794a77835d98c",
+      "public_offset": 32576,
+      "record": 66,
+      "record_decoded_span": 720,
+      "record_decoded_start": 32176,
+      "record_mode": 128,
+      "record_operation_key": "4e8210adb204",
+      "record_source_end": 181631,
+      "record_source_entropy": 7.9081364774740655,
+      "record_source_len": 2411,
+      "record_source_prefix": "cfef3de32a3eaf877a5c636a732d91339ef06853f28d01fe56bcb7b6bc4c338dd6d0e5749303f00ae9aae589440a3b5a",
+      "record_source_sha256": "d803ff8d4d20cf7e68790a3c8b2944b9dda034aec51f702770a1aa2fdd5a483e",
+      "record_source_start": 179220,
+      "record_source_suffix": "cccdf1b41abfdedbcba8d35ab990cd5c72073066ea33b4b8f4693f804cb2345a206b3420d18251973e9cad105972eec0",
+      "source_to_decoded_ratio": 3.348611111111111,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 141
+        },
+        "bitwise_not": {
+          "decoded_offset": 27,
+          "length": 2,
+          "source_offset": 121
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 53,
+          "length": 3,
+          "source_offset": 2265,
+          "xor": 175
+        },
+        "direct": {
+          "decoded_offset": 60,
+          "length": 2,
+          "source_offset": 1559
+        }
+      }
+    },
+    {
+      "chunk_sha256": "70e7ea0193bb46087a581d0b17035207696350ffc4aa4f6f6e211afdeb4dace9",
+      "chunk_short": "70e7ea0193bb",
+      "decoded_clipped_end": 320,
+      "decoded_clipped_start": 256,
+      "decoded_entropy": 4.442105745946664,
+      "decoded_hex": "908633e0905906f090862fe090590df0908631e0904840f0908630e0904863f0908638e060057f031227b7908639e0f5a8908636e0fea3e07806cec313ce13d8",
+      "decoded_relative": 256,
+      "decoded_sha256": "70e7ea0193bb46087a581d0b17035207696350ffc4aa4f6f6e211afdeb4dace9",
+      "public_offset": 34816,
+      "record": 70,
+      "record_decoded_span": 560,
+      "record_decoded_start": 34560,
+      "record_mode": 128,
+      "record_operation_key": "098ad4a36805",
+      "record_source_end": 191146,
+      "record_source_entropy": 7.919482690504679,
+      "record_source_len": 2525,
+      "record_source_prefix": "4312b2e69fe30069966ab128fcb49a6ce4266a96afcf2ab7b66e3b4b33d4e748ed8f1912894c6ae2f5b392bbbcdf11a3",
+      "record_source_sha256": "00d2c8256caf8c2cfbfd403b2010a0f0203459b4afe233029ee7b28da260f281",
+      "record_source_start": 188621,
+      "record_source_suffix": "596ba3978a2da9302c2b5522948f4fa37f2de36f4cd0dfcdee504b7ebf5732cc2394d781e894cfe64172505928376eec",
+      "source_to_decoded_ratio": 4.508928571428571,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 10,
+          "length": 2,
+          "source_offset": 1148
+        },
+        "bitwise_not": {
+          "decoded_offset": 3,
+          "length": 2,
+          "source_offset": 1020
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 3,
+          "length": 3,
+          "source_offset": 828,
+          "xor": 23
+        },
+        "direct": {
+          "decoded_offset": 4,
+          "length": 2,
+          "source_offset": 976
+        }
+      }
+    },
+    {
+      "chunk_sha256": "70e7ea0193bb46087a581d0b17035207696350ffc4aa4f6f6e211afdeb4dace9",
+      "chunk_short": "70e7ea0193bb",
+      "decoded_clipped_end": 448,
+      "decoded_clipped_start": 384,
+      "decoded_entropy": 4.442105745946664,
+      "decoded_hex": "908633e0905906f090862fe090590df0908631e0904840f0908630e0904863f0908638e060057f031227b7908639e0f5a8908636e0fea3e07806cec313ce13d8",
+      "decoded_relative": 384,
+      "decoded_sha256": "70e7ea0193bb46087a581d0b17035207696350ffc4aa4f6f6e211afdeb4dace9",
+      "public_offset": 34944,
+      "record": 70,
+      "record_decoded_span": 560,
+      "record_decoded_start": 34560,
+      "record_mode": 128,
+      "record_operation_key": "098ad4a36805",
+      "record_source_end": 191146,
+      "record_source_entropy": 7.919482690504679,
+      "record_source_len": 2525,
+      "record_source_prefix": "4312b2e69fe30069966ab128fcb49a6ce4266a96afcf2ab7b66e3b4b33d4e748ed8f1912894c6ae2f5b392bbbcdf11a3",
+      "record_source_sha256": "00d2c8256caf8c2cfbfd403b2010a0f0203459b4afe233029ee7b28da260f281",
+      "record_source_start": 188621,
+      "record_source_suffix": "596ba3978a2da9302c2b5522948f4fa37f2de36f4cd0dfcdee504b7ebf5732cc2394d781e894cfe64172505928376eec",
+      "source_to_decoded_ratio": 4.508928571428571,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 10,
+          "length": 2,
+          "source_offset": 1148
+        },
+        "bitwise_not": {
+          "decoded_offset": 3,
+          "length": 2,
+          "source_offset": 1020
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 3,
+          "length": 3,
+          "source_offset": 828,
+          "xor": 23
+        },
+        "direct": {
+          "decoded_offset": 4,
+          "length": 2,
+          "source_offset": 976
+        }
+      }
+    },
+    {
+      "chunk_sha256": "3465e4783c3d2178b8439a55b79c258e659faf0083af3898129a7a79250fb5f4",
+      "chunk_short": "3465e4783c3d",
+      "decoded_clipped_end": 112,
+      "decoded_clipped_start": 48,
+      "decoded_entropy": 4.601813383509937,
+      "decoded_hex": "3090891ce0fea3e0a87c08080826f618ee36f67b00a97c09097a00900001122fb7904093f0a87c0808e6904092f090891be0904091f0904098e0a87cf6904000",
+      "decoded_relative": 48,
+      "decoded_sha256": "3465e4783c3d2178b8439a55b79c258e659faf0083af3898129a7a79250fb5f4",
+      "public_offset": 30272,
+      "record": 62,
+      "record_decoded_span": 464,
+      "record_decoded_start": 30224,
+      "record_mode": 128,
+      "record_operation_key": "9fd2119d4c04",
+      "record_source_end": 173748,
+      "record_source_entropy": 7.887755197037631,
+      "record_source_len": 2419,
+      "record_source_prefix": "c6a40c2ea57363f2c3ba901ccd4e4a1fcd65d3956094f1cdacee386b6d28cdb7fdf4d2c49bd091ac80509a969ef051f5",
+      "record_source_sha256": "3fb5dd547287ae46cf8c66835099dfe90476ec165f27f71ad1053f919e6d1aa8",
+      "record_source_start": 171329,
+      "record_source_suffix": "6b0d2ece3ab797711c7039ad5e7eefdc125d1e4d8bda6fee10a92f9f6a4be4a4227da926826c2b19b39893fcae3e5bb0",
+      "source_to_decoded_ratio": 5.213362068965517,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 21,
+          "length": 2,
+          "source_offset": 1296
+        },
+        "bitwise_not": {
+          "decoded_offset": 16,
+          "length": 2,
+          "source_offset": 1189
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 0,
+          "length": 0,
+          "source_offset": 0,
+          "xor": null
+        },
+        "direct": {
+          "decoded_offset": 22,
+          "length": 2,
+          "source_offset": 2098
+        }
+      }
+    },
+    {
+      "chunk_sha256": "99d4493dc4cfdc4cea75d21f27ed90af53b0f067d9238f902e536c1eec033b29",
+      "chunk_short": "99d4493dc4cf",
+      "decoded_clipped_end": 144,
+      "decoded_clipped_start": 80,
+      "decoded_entropy": 4.625153423718116,
+      "decoded_hex": "f608760112efb6057c057c22908857e090885df0908858e090885ef09084afe090885ff09084b0e0908860f07b2a7df17f007e0b908859eef0a3eff090893ce0",
+      "decoded_relative": 80,
+      "decoded_sha256": "99d4493dc4cfdc4cea75d21f27ed90af53b0f067d9238f902e536c1eec033b29",
+      "public_offset": 29120,
+      "record": 59,
+      "record_decoded_span": 304,
+      "record_decoded_start": 29040,
+      "record_mode": 128,
+      "record_operation_key": "30ca94930e05",
+      "record_source_end": 166583,
+      "record_source_entropy": 7.913652767092014,
+      "record_source_len": 2462,
+      "record_source_prefix": "d819200a7add2aad9f56a3493851aacce9004d413588afa136854969b751cd3a223aa59866aa6e338a2773d8c162950b",
+      "record_source_sha256": "5046ba46f029d8673a31c6a7369820c477cf30ebf913597c75ca430b9d911a06",
+      "record_source_start": 164121,
+      "record_source_suffix": "ad037e5aad0a7eadbe3a756838282d3ead9ca2e7702c2b46969deda18959ca32d0e560498e5f55bc5e01d67529933760",
+      "source_to_decoded_ratio": 8.098684210526315,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 67
+        },
+        "bitwise_not": {
+          "decoded_offset": 1,
+          "length": 2,
+          "source_offset": 1537
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 40,
+          "length": 3,
+          "source_offset": 1691,
+          "xor": 25
+        },
+        "direct": {
+          "decoded_offset": 4,
+          "length": 2,
+          "source_offset": 1149
+        }
+      }
+    },
+    {
+      "chunk_sha256": "b69f366c92b68ce2ade4f064e1e296ae657e6a5b3331905e21148efbe7ac0155",
+      "chunk_short": "b69f366c92b6",
+      "decoded_clipped_end": 688,
+      "decoded_clipped_start": 672,
+      "decoded_entropy": 4.691024413893479,
+      "decoded_hex": "fe08e6ff90891fe02fff90891ee03ea87c0808f608eff6904000e020e7f9908ac6e0904091f0a87c0808e6a3f07b00a97c09097a00900001122fb7904093f090",
+      "decoded_relative": 672,
+      "decoded_sha256": "b69f366c92b68ce2ade4f064e1e296ae657e6a5b3331905e21148efbe7ac0155",
+      "public_offset": 31616,
+      "record": 64,
+      "record_decoded_span": 688,
+      "record_decoded_start": 30944,
+      "record_mode": 64,
+      "record_operation_key": "93390e6b7c02",
+      "record_source_end": 177376,
+      "record_source_entropy": 7.785742887983714,
+      "record_source_len": 1604,
+      "record_source_prefix": "129ece7a4c465cdfba706455b829c2bf2397b070e14821b9f6e8ece42b846d9c8fd62c669e4ae03377fa3ba601a023c4",
+      "record_source_sha256": "e65e59fd29590d1eee7c7337d6dd07cbe6b92131204d1ba0148c6f222feb4e15",
+      "record_source_start": 175772,
+      "record_source_suffix": "c86876196e8e999282fabc47416b765b347d9b8d827d881d9b3ecd1b416faedd05f608dbbd4f10cef3656e8ea0ccff76",
+      "source_to_decoded_ratio": 2.3313953488372094,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 19,
+          "length": 2,
+          "source_offset": 1245
+        },
+        "bitwise_not": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 44
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 0,
+          "length": 0,
+          "source_offset": 0,
+          "xor": null
+        },
+        "direct": {
+          "decoded_offset": 19,
+          "length": 2,
+          "source_offset": 1589
+        }
+      }
+    },
+    {
+      "chunk_sha256": "b69f366c92b68ce2ade4f064e1e296ae657e6a5b3331905e21148efbe7ac0155",
+      "chunk_short": "b69f366c92b6",
+      "decoded_clipped_end": 608,
+      "decoded_clipped_start": 544,
+      "decoded_entropy": 4.691024413893479,
+      "decoded_hex": "fe08e6ff90891fe02fff90891ee03ea87c0808f608eff6904000e020e7f9908ac6e0904091f0a87c0808e6a3f07b00a97c09097a00900001122fb7904093f090",
+      "decoded_relative": 544,
+      "decoded_sha256": "b69f366c92b68ce2ade4f064e1e296ae657e6a5b3331905e21148efbe7ac0155",
+      "public_offset": 31488,
+      "record": 64,
+      "record_decoded_span": 688,
+      "record_decoded_start": 30944,
+      "record_mode": 64,
+      "record_operation_key": "93390e6b7c02",
+      "record_source_end": 177376,
+      "record_source_entropy": 7.785742887983714,
+      "record_source_len": 1604,
+      "record_source_prefix": "129ece7a4c465cdfba706455b829c2bf2397b070e14821b9f6e8ece42b846d9c8fd62c669e4ae03377fa3ba601a023c4",
+      "record_source_sha256": "e65e59fd29590d1eee7c7337d6dd07cbe6b92131204d1ba0148c6f222feb4e15",
+      "record_source_start": 175772,
+      "record_source_suffix": "c86876196e8e999282fabc47416b765b347d9b8d827d881d9b3ecd1b416faedd05f608dbbd4f10cef3656e8ea0ccff76",
+      "source_to_decoded_ratio": 2.3313953488372094,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 19,
+          "length": 2,
+          "source_offset": 1245
+        },
+        "bitwise_not": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 44
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 0,
+          "length": 0,
+          "source_offset": 0,
+          "xor": null
+        },
+        "direct": {
+          "decoded_offset": 19,
+          "length": 2,
+          "source_offset": 1589
+        }
+      }
+    },
+    {
+      "chunk_sha256": "ba3aab1d5fd2e7d2e53a40dc6d30ee8e321d0d1d7d5c4a775562c56bb68b52ec",
+      "chunk_short": "ba3aab1d5fd2",
+      "decoded_clipped_end": 480,
+      "decoded_clipped_start": 416,
+      "decoded_entropy": 4.605337797403416,
+      "decoded_hex": "a9e6a3f008e6a3f0d251e57c2406f57c22d310af01c3c0d0904000e020e7f99040917408f0a3e4f0a3f0904000e020e7f9904098e0904000e020e7f9904098e0",
+      "decoded_relative": 416,
+      "decoded_sha256": "ba3aab1d5fd2e7d2e53a40dc6d30ee8e321d0d1d7d5c4a775562c56bb68b52ec",
+      "public_offset": 39680,
+      "record": 87,
+      "record_decoded_span": 1008,
+      "record_decoded_start": 39264,
+      "record_mode": 64,
+      "record_operation_key": "0af2177f2e01",
+      "record_source_end": 229783,
+      "record_source_entropy": 7.883722372706498,
+      "record_source_len": 1947,
+      "record_source_prefix": "17ad87803b1a74a728ae12e13fbc0ce3959bc35bd6c4e61e4acda26bd0ac74b4a123096669fd51c85e136cd8deb62dcc",
+      "record_source_sha256": "142bb4ea34042aa37ccafa22e52d0808e6c6c1c98a78673ef02d5227533ea5fa",
+      "record_source_start": 227836,
+      "record_source_suffix": "8965e39b7bd99dee678e6cb7ed694d25b1b8539629cd2b30f99735b2f988da55392a575cd7170706e282e28110606ec0",
+      "source_to_decoded_ratio": 1.931547619047619,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 2,
+          "length": 2,
+          "source_offset": 1587
+        },
+        "bitwise_not": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 455
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 31,
+          "length": 3,
+          "source_offset": 217,
+          "xor": 181
+        },
+        "direct": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 562
+        }
+      }
+    },
+    {
+      "chunk_sha256": "ba3aab1d5fd2e7d2e53a40dc6d30ee8e321d0d1d7d5c4a775562c56bb68b52ec",
+      "chunk_short": "ba3aab1d5fd2",
+      "decoded_clipped_end": 544,
+      "decoded_clipped_start": 480,
+      "decoded_entropy": 4.605337797403416,
+      "decoded_hex": "a9e6a3f008e6a3f0d251e57c2406f57c22d310af01c3c0d0904000e020e7f99040917408f0a3e4f0a3f0904000e020e7f9904098e0904000e020e7f9904098e0",
+      "decoded_relative": 480,
+      "decoded_sha256": "ba3aab1d5fd2e7d2e53a40dc6d30ee8e321d0d1d7d5c4a775562c56bb68b52ec",
+      "public_offset": 39744,
+      "record": 87,
+      "record_decoded_span": 1008,
+      "record_decoded_start": 39264,
+      "record_mode": 64,
+      "record_operation_key": "0af2177f2e01",
+      "record_source_end": 229783,
+      "record_source_entropy": 7.883722372706498,
+      "record_source_len": 1947,
+      "record_source_prefix": "17ad87803b1a74a728ae12e13fbc0ce3959bc35bd6c4e61e4acda26bd0ac74b4a123096669fd51c85e136cd8deb62dcc",
+      "record_source_sha256": "142bb4ea34042aa37ccafa22e52d0808e6c6c1c98a78673ef02d5227533ea5fa",
+      "record_source_start": 227836,
+      "record_source_suffix": "8965e39b7bd99dee678e6cb7ed694d25b1b8539629cd2b30f99735b2f988da55392a575cd7170706e282e28110606ec0",
+      "source_to_decoded_ratio": 1.931547619047619,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 2,
+          "length": 2,
+          "source_offset": 1587
+        },
+        "bitwise_not": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 455
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 31,
+          "length": 3,
+          "source_offset": 217,
+          "xor": 181
+        },
+        "direct": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 562
+        }
+      }
+    },
+    {
+      "chunk_sha256": "ba3aab1d5fd2e7d2e53a40dc6d30ee8e321d0d1d7d5c4a775562c56bb68b52ec",
+      "chunk_short": "ba3aab1d5fd2",
+      "decoded_clipped_end": 608,
+      "decoded_clipped_start": 544,
+      "decoded_entropy": 4.605337797403416,
+      "decoded_hex": "a9e6a3f008e6a3f0d251e57c2406f57c22d310af01c3c0d0904000e020e7f99040917408f0a3e4f0a3f0904000e020e7f9904098e0904000e020e7f9904098e0",
+      "decoded_relative": 544,
+      "decoded_sha256": "ba3aab1d5fd2e7d2e53a40dc6d30ee8e321d0d1d7d5c4a775562c56bb68b52ec",
+      "public_offset": 39808,
+      "record": 87,
+      "record_decoded_span": 1008,
+      "record_decoded_start": 39264,
+      "record_mode": 64,
+      "record_operation_key": "0af2177f2e01",
+      "record_source_end": 229783,
+      "record_source_entropy": 7.883722372706498,
+      "record_source_len": 1947,
+      "record_source_prefix": "17ad87803b1a74a728ae12e13fbc0ce3959bc35bd6c4e61e4acda26bd0ac74b4a123096669fd51c85e136cd8deb62dcc",
+      "record_source_sha256": "142bb4ea34042aa37ccafa22e52d0808e6c6c1c98a78673ef02d5227533ea5fa",
+      "record_source_start": 227836,
+      "record_source_suffix": "8965e39b7bd99dee678e6cb7ed694d25b1b8539629cd2b30f99735b2f988da55392a575cd7170706e282e28110606ec0",
+      "source_to_decoded_ratio": 1.931547619047619,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 2,
+          "length": 2,
+          "source_offset": 1587
+        },
+        "bitwise_not": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 455
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 31,
+          "length": 3,
+          "source_offset": 217,
+          "xor": 181
+        },
+        "direct": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 562
+        }
+      }
+    },
+    {
+      "chunk_sha256": "ba3aab1d5fd2e7d2e53a40dc6d30ee8e321d0d1d7d5c4a775562c56bb68b52ec",
+      "chunk_short": "ba3aab1d5fd2",
+      "decoded_clipped_end": 672,
+      "decoded_clipped_start": 608,
+      "decoded_entropy": 4.605337797403416,
+      "decoded_hex": "a9e6a3f008e6a3f0d251e57c2406f57c22d310af01c3c0d0904000e020e7f99040917408f0a3e4f0a3f0904000e020e7f9904098e0904000e020e7f9904098e0",
+      "decoded_relative": 608,
+      "decoded_sha256": "ba3aab1d5fd2e7d2e53a40dc6d30ee8e321d0d1d7d5c4a775562c56bb68b52ec",
+      "public_offset": 39872,
+      "record": 87,
+      "record_decoded_span": 1008,
+      "record_decoded_start": 39264,
+      "record_mode": 64,
+      "record_operation_key": "0af2177f2e01",
+      "record_source_end": 229783,
+      "record_source_entropy": 7.883722372706498,
+      "record_source_len": 1947,
+      "record_source_prefix": "17ad87803b1a74a728ae12e13fbc0ce3959bc35bd6c4e61e4acda26bd0ac74b4a123096669fd51c85e136cd8deb62dcc",
+      "record_source_sha256": "142bb4ea34042aa37ccafa22e52d0808e6c6c1c98a78673ef02d5227533ea5fa",
+      "record_source_start": 227836,
+      "record_source_suffix": "8965e39b7bd99dee678e6cb7ed694d25b1b8539629cd2b30f99735b2f988da55392a575cd7170706e282e28110606ec0",
+      "source_to_decoded_ratio": 1.931547619047619,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 2,
+          "length": 2,
+          "source_offset": 1587
+        },
+        "bitwise_not": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 455
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 31,
+          "length": 3,
+          "source_offset": 217,
+          "xor": 181
+        },
+        "direct": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 562
+        }
+      }
+    },
+    {
+      "chunk_sha256": "fe343ef73975d6766c236d664ff0f6b8c7cac30767666cf803d6fc7fce5de610",
+      "chunk_short": "fe343ef73975",
+      "decoded_clipped_end": 208,
+      "decoded_clipped_start": 144,
+      "decoded_entropy": 4.945563383509937,
+      "decoded_hex": "f618ee36f6908a4ae0640260030273de90891fe02434ff90891ee03407a87c0808f608eff6904000e020e7f9908ac6e0904091f0a87c0808e6a3f07b00a97c09",
+      "decoded_relative": 144,
+      "decoded_sha256": "fe343ef73975d6766c236d664ff0f6b8c7cac30767666cf803d6fc7fce5de610",
+      "public_offset": 32320,
+      "record": 66,
+      "record_decoded_span": 720,
+      "record_decoded_start": 32176,
+      "record_mode": 128,
+      "record_operation_key": "4e8210adb204",
+      "record_source_end": 181631,
+      "record_source_entropy": 7.9081364774740655,
+      "record_source_len": 2411,
+      "record_source_prefix": "cfef3de32a3eaf877a5c636a732d91339ef06853f28d01fe56bcb7b6bc4c338dd6d0e5749303f00ae9aae589440a3b5a",
+      "record_source_sha256": "d803ff8d4d20cf7e68790a3c8b2944b9dda034aec51f702770a1aa2fdd5a483e",
+      "record_source_start": 179220,
+      "record_source_suffix": "cccdf1b41abfdedbcba8d35ab990cd5c72073066ea33b4b8f4693f804cb2345a206b3420d18251973e9cad105972eec0",
+      "source_to_decoded_ratio": 3.348611111111111,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 2,
+          "length": 2,
+          "source_offset": 2259
+        },
+        "bitwise_not": {
+          "decoded_offset": 20,
+          "length": 2,
+          "source_offset": 2370
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 12,
+          "length": 3,
+          "source_offset": 1246,
+          "xor": 46
+        },
+        "direct": {
+          "decoded_offset": 22,
+          "length": 2,
+          "source_offset": 1669
+        }
+      }
+    },
+    {
+      "chunk_sha256": "fe343ef73975d6766c236d664ff0f6b8c7cac30767666cf803d6fc7fce5de610",
+      "chunk_short": "fe343ef73975",
+      "decoded_clipped_end": 336,
+      "decoded_clipped_start": 272,
+      "decoded_entropy": 4.945563383509937,
+      "decoded_hex": "f618ee36f6908a4ae0640260030273de90891fe02434ff90891ee03407a87c0808f608eff6904000e020e7f9908ac6e0904091f0a87c0808e6a3f07b00a97c09",
+      "decoded_relative": 272,
+      "decoded_sha256": "fe343ef73975d6766c236d664ff0f6b8c7cac30767666cf803d6fc7fce5de610",
+      "public_offset": 32448,
+      "record": 66,
+      "record_decoded_span": 720,
+      "record_decoded_start": 32176,
+      "record_mode": 128,
+      "record_operation_key": "4e8210adb204",
+      "record_source_end": 181631,
+      "record_source_entropy": 7.9081364774740655,
+      "record_source_len": 2411,
+      "record_source_prefix": "cfef3de32a3eaf877a5c636a732d91339ef06853f28d01fe56bcb7b6bc4c338dd6d0e5749303f00ae9aae589440a3b5a",
+      "record_source_sha256": "d803ff8d4d20cf7e68790a3c8b2944b9dda034aec51f702770a1aa2fdd5a483e",
+      "record_source_start": 179220,
+      "record_source_suffix": "cccdf1b41abfdedbcba8d35ab990cd5c72073066ea33b4b8f4693f804cb2345a206b3420d18251973e9cad105972eec0",
+      "source_to_decoded_ratio": 3.348611111111111,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 2,
+          "length": 2,
+          "source_offset": 2259
+        },
+        "bitwise_not": {
+          "decoded_offset": 20,
+          "length": 2,
+          "source_offset": 2370
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 12,
+          "length": 3,
+          "source_offset": 1246,
+          "xor": 46
+        },
+        "direct": {
+          "decoded_offset": 22,
+          "length": 2,
+          "source_offset": 1669
+        }
+      }
+    },
+    {
+      "chunk_sha256": "fe343ef73975d6766c236d664ff0f6b8c7cac30767666cf803d6fc7fce5de610",
+      "chunk_short": "fe343ef73975",
+      "decoded_clipped_end": 272,
+      "decoded_clipped_start": 208,
+      "decoded_entropy": 4.945563383509937,
+      "decoded_hex": "f618ee36f6908a4ae0640260030273de90891fe02434ff90891ee03407a87c0808f608eff6904000e020e7f9908ac6e0904091f0a87c0808e6a3f07b00a97c09",
+      "decoded_relative": 208,
+      "decoded_sha256": "fe343ef73975d6766c236d664ff0f6b8c7cac30767666cf803d6fc7fce5de610",
+      "public_offset": 32384,
+      "record": 66,
+      "record_decoded_span": 720,
+      "record_decoded_start": 32176,
+      "record_mode": 128,
+      "record_operation_key": "4e8210adb204",
+      "record_source_end": 181631,
+      "record_source_entropy": 7.9081364774740655,
+      "record_source_len": 2411,
+      "record_source_prefix": "cfef3de32a3eaf877a5c636a732d91339ef06853f28d01fe56bcb7b6bc4c338dd6d0e5749303f00ae9aae589440a3b5a",
+      "record_source_sha256": "d803ff8d4d20cf7e68790a3c8b2944b9dda034aec51f702770a1aa2fdd5a483e",
+      "record_source_start": 179220,
+      "record_source_suffix": "cccdf1b41abfdedbcba8d35ab990cd5c72073066ea33b4b8f4693f804cb2345a206b3420d18251973e9cad105972eec0",
+      "source_to_decoded_ratio": 3.348611111111111,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 2,
+          "length": 2,
+          "source_offset": 2259
+        },
+        "bitwise_not": {
+          "decoded_offset": 20,
+          "length": 2,
+          "source_offset": 2370
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 12,
+          "length": 3,
+          "source_offset": 1246,
+          "xor": 46
+        },
+        "direct": {
+          "decoded_offset": 22,
+          "length": 2,
+          "source_offset": 1669
+        }
+      }
+    },
+    {
+      "chunk_sha256": "fe343ef73975d6766c236d664ff0f6b8c7cac30767666cf803d6fc7fce5de610",
+      "chunk_short": "fe343ef73975",
+      "decoded_clipped_end": 144,
+      "decoded_clipped_start": 80,
+      "decoded_entropy": 4.945563383509937,
+      "decoded_hex": "f618ee36f6908a4ae0640260030273de90891fe02434ff90891ee03407a87c0808f608eff6904000e020e7f9908ac6e0904091f0a87c0808e6a3f07b00a97c09",
+      "decoded_relative": 80,
+      "decoded_sha256": "fe343ef73975d6766c236d664ff0f6b8c7cac30767666cf803d6fc7fce5de610",
+      "public_offset": 32256,
+      "record": 66,
+      "record_decoded_span": 720,
+      "record_decoded_start": 32176,
+      "record_mode": 128,
+      "record_operation_key": "4e8210adb204",
+      "record_source_end": 181631,
+      "record_source_entropy": 7.9081364774740655,
+      "record_source_len": 2411,
+      "record_source_prefix": "cfef3de32a3eaf877a5c636a732d91339ef06853f28d01fe56bcb7b6bc4c338dd6d0e5749303f00ae9aae589440a3b5a",
+      "record_source_sha256": "d803ff8d4d20cf7e68790a3c8b2944b9dda034aec51f702770a1aa2fdd5a483e",
+      "record_source_start": 179220,
+      "record_source_suffix": "cccdf1b41abfdedbcba8d35ab990cd5c72073066ea33b4b8f4693f804cb2345a206b3420d18251973e9cad105972eec0",
+      "source_to_decoded_ratio": 3.348611111111111,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 2,
+          "length": 2,
+          "source_offset": 2259
+        },
+        "bitwise_not": {
+          "decoded_offset": 20,
+          "length": 2,
+          "source_offset": 2370
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 12,
+          "length": 3,
+          "source_offset": 1246,
+          "xor": 46
+        },
+        "direct": {
+          "decoded_offset": 22,
+          "length": 2,
+          "source_offset": 1669
+        }
+      }
+    },
+    {
+      "chunk_sha256": "8b2115cd509fb860937c94264f922fec9b9bdfd7f462a5cb34d6b8ea7c3dc31d",
+      "chunk_short": "8b2115cd509f",
+      "decoded_clipped_end": 544,
+      "decoded_clipped_start": 496,
+      "decoded_entropy": 4.757409571322961,
+      "decoded_hex": "36f6904762e030e409e054eff0a87c087601904000e020e7f99089a5e0904091f0a87c0808e6a3f07b00a97c09097a00900001122fb7904093f0904098e0a87c",
+      "decoded_relative": 496,
+      "decoded_sha256": "8b2115cd509fb860937c94264f922fec9b9bdfd7f462a5cb34d6b8ea7c3dc31d",
+      "public_offset": 28992,
+      "record": 58,
+      "record_decoded_span": 544,
+      "record_decoded_start": 28496,
+      "record_mode": 128,
+      "record_operation_key": "66228ca20005",
+      "record_source_end": 164121,
+      "record_source_entropy": 7.919942983265344,
+      "record_source_len": 2292,
+      "record_source_prefix": "b9c157fd4afa40ec69d2d866602e20d3150dedaf14b920c2d64402c4933be54c424f38d41e31a772925a1c32f5b18102",
+      "record_source_sha256": "16b1fa7ec92852a975d1ba20551b215ab8cc10be2e75c9c7151dcc1a5c12e272",
+      "record_source_start": 161829,
+      "record_source_suffix": "59436ac31301a32daa56734c47f2f63d57dc187f92d8740ff9e60a358361d2b38a17d2f9ae961b379147cc2ccfe19fbb",
+      "source_to_decoded_ratio": 4.213235294117647,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 4,
+          "length": 2,
+          "source_offset": 994
+        },
+        "bitwise_not": {
+          "decoded_offset": 3,
+          "length": 2,
+          "source_offset": 824
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 5,
+          "length": 3,
+          "source_offset": 81,
+          "xor": 123
+        },
+        "direct": {
+          "decoded_offset": 6,
+          "length": 2,
+          "source_offset": 291
+        }
+      }
+    },
+    {
+      "chunk_sha256": "8b2115cd509fb860937c94264f922fec9b9bdfd7f462a5cb34d6b8ea7c3dc31d",
+      "chunk_short": "8b2115cd509f",
+      "decoded_clipped_end": 496,
+      "decoded_clipped_start": 432,
+      "decoded_entropy": 4.757409571322961,
+      "decoded_hex": "36f6904762e030e409e054eff0a87c087601904000e020e7f99089a5e0904091f0a87c0808e6a3f07b00a97c09097a00900001122fb7904093f0904098e0a87c",
+      "decoded_relative": 432,
+      "decoded_sha256": "8b2115cd509fb860937c94264f922fec9b9bdfd7f462a5cb34d6b8ea7c3dc31d",
+      "public_offset": 28928,
+      "record": 58,
+      "record_decoded_span": 544,
+      "record_decoded_start": 28496,
+      "record_mode": 128,
+      "record_operation_key": "66228ca20005",
+      "record_source_end": 164121,
+      "record_source_entropy": 7.919942983265344,
+      "record_source_len": 2292,
+      "record_source_prefix": "b9c157fd4afa40ec69d2d866602e20d3150dedaf14b920c2d64402c4933be54c424f38d41e31a772925a1c32f5b18102",
+      "record_source_sha256": "16b1fa7ec92852a975d1ba20551b215ab8cc10be2e75c9c7151dcc1a5c12e272",
+      "record_source_start": 161829,
+      "record_source_suffix": "59436ac31301a32daa56734c47f2f63d57dc187f92d8740ff9e60a358361d2b38a17d2f9ae961b379147cc2ccfe19fbb",
+      "source_to_decoded_ratio": 4.213235294117647,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 4,
+          "length": 2,
+          "source_offset": 994
+        },
+        "bitwise_not": {
+          "decoded_offset": 3,
+          "length": 2,
+          "source_offset": 824
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 5,
+          "length": 3,
+          "source_offset": 81,
+          "xor": 123
+        },
+        "direct": {
+          "decoded_offset": 6,
+          "length": 2,
+          "source_offset": 291
+        }
+      }
+    },
+    {
+      "chunk_sha256": "8b2115cd509fb860937c94264f922fec9b9bdfd7f462a5cb34d6b8ea7c3dc31d",
+      "chunk_short": "8b2115cd509f",
+      "decoded_clipped_end": 80,
+      "decoded_clipped_start": 16,
+      "decoded_entropy": 4.757409571322961,
+      "decoded_hex": "36f6904762e030e409e054eff0a87c087601904000e020e7f99089a5e0904091f0a87c0808e6a3f07b00a97c09097a00900001122fb7904093f0904098e0a87c",
+      "decoded_relative": 16,
+      "decoded_sha256": "8b2115cd509fb860937c94264f922fec9b9bdfd7f462a5cb34d6b8ea7c3dc31d",
+      "public_offset": 29056,
+      "record": 59,
+      "record_decoded_span": 304,
+      "record_decoded_start": 29040,
+      "record_mode": 128,
+      "record_operation_key": "30ca94930e05",
+      "record_source_end": 166583,
+      "record_source_entropy": 7.913652767092014,
+      "record_source_len": 2462,
+      "record_source_prefix": "d819200a7add2aad9f56a3493851aacce9004d413588afa136854969b751cd3a223aa59866aa6e338a2773d8c162950b",
+      "record_source_sha256": "5046ba46f029d8673a31c6a7369820c477cf30ebf913597c75ca430b9d911a06",
+      "record_source_start": 164121,
+      "record_source_suffix": "ad037e5aad0a7eadbe3a756838282d3ead9ca2e7702c2b46969deda18959ca32d0e560498e5f55bc5e01d67529933760",
+      "source_to_decoded_ratio": 8.098684210526315,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 30,
+          "length": 2,
+          "source_offset": 1273
+        },
+        "bitwise_not": {
+          "decoded_offset": 5,
+          "length": 2,
+          "source_offset": 534
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 8,
+          "length": 3,
+          "source_offset": 2354,
+          "xor": 85
+        },
+        "direct": {
+          "decoded_offset": 9,
+          "length": 2,
+          "source_offset": 958
+        }
+      }
+    },
+    {
+      "chunk_sha256": "0c705773105c535a5186fb1554311925463dbe33f620a441096634659624a6d4",
+      "chunk_short": "0c705773105c",
+      "decoded_clipped_end": 384,
+      "decoded_clipped_start": 320,
+      "decoded_entropy": 4.531403423718116,
+      "decoded_hex": "ec38fc908996123430800be490896af0908ad0740ff090402be4f09047cfe054eff090403ce054eff09047c1e030e00f9089c8740bf09047d2e04401f0803c90",
+      "decoded_relative": 320,
+      "decoded_sha256": "0c705773105c535a5186fb1554311925463dbe33f620a441096634659624a6d4",
+      "public_offset": 24704,
+      "record": 49,
+      "record_decoded_span": 448,
+      "record_decoded_start": 24384,
+      "record_mode": 128,
+      "record_operation_key": "428a889c5804",
+      "record_source_end": 143718,
+      "record_source_entropy": 7.893996477315746,
+      "record_source_len": 2033,
+      "record_source_prefix": "19fe54ccb84fef0338e41eee7410b4b5f28dc490e8b85956b092f19092f1483e34d4d04ac8153e435a7c4437b8a2839c",
+      "record_source_sha256": "c28bb8b6d3041ff9e101233232c75cfea778f7e8847afe2131f30936b86c1002",
+      "record_source_start": 141685,
+      "record_source_suffix": "beaef3a706f6aa84c16355cc175b8be8ec33e362bc884c56379d18a6bafe6ec6714974fef4b70b4366fb3e192c7badd8",
+      "source_to_decoded_ratio": 4.537946428571429,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 14,
+          "length": 2,
+          "source_offset": 805
+        },
+        "bitwise_not": {
+          "decoded_offset": 61,
+          "length": 2,
+          "source_offset": 971
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 0,
+          "length": 0,
+          "source_offset": 0,
+          "xor": null
+        },
+        "direct": {
+          "decoded_offset": 36,
+          "length": 2,
+          "source_offset": 1740
+        }
+      }
+    },
+    {
+      "chunk_sha256": "0c705773105c535a5186fb1554311925463dbe33f620a441096634659624a6d4",
+      "chunk_short": "0c705773105c",
+      "decoded_clipped_end": 448,
+      "decoded_clipped_start": 384,
+      "decoded_entropy": 4.531403423718116,
+      "decoded_hex": "ec38fc908996123430800be490896af0908ad0740ff090402be4f09047cfe054eff090403ce054eff09047c1e030e00f9089c8740bf09047d2e04401f0803c90",
+      "decoded_relative": 384,
+      "decoded_sha256": "0c705773105c535a5186fb1554311925463dbe33f620a441096634659624a6d4",
+      "public_offset": 24768,
+      "record": 49,
+      "record_decoded_span": 448,
+      "record_decoded_start": 24384,
+      "record_mode": 128,
+      "record_operation_key": "428a889c5804",
+      "record_source_end": 143718,
+      "record_source_entropy": 7.893996477315746,
+      "record_source_len": 2033,
+      "record_source_prefix": "19fe54ccb84fef0338e41eee7410b4b5f28dc490e8b85956b092f19092f1483e34d4d04ac8153e435a7c4437b8a2839c",
+      "record_source_sha256": "c28bb8b6d3041ff9e101233232c75cfea778f7e8847afe2131f30936b86c1002",
+      "record_source_start": 141685,
+      "record_source_suffix": "beaef3a706f6aa84c16355cc175b8be8ec33e362bc884c56379d18a6bafe6ec6714974fef4b70b4366fb3e192c7badd8",
+      "source_to_decoded_ratio": 4.537946428571429,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 14,
+          "length": 2,
+          "source_offset": 805
+        },
+        "bitwise_not": {
+          "decoded_offset": 61,
+          "length": 2,
+          "source_offset": 971
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 0,
+          "length": 0,
+          "source_offset": 0,
+          "xor": null
+        },
+        "direct": {
+          "decoded_offset": 36,
+          "length": 2,
+          "source_offset": 1740
+        }
+      }
+    },
+    {
+      "chunk_sha256": "0c705773105c535a5186fb1554311925463dbe33f620a441096634659624a6d4",
+      "chunk_short": "0c705773105c",
+      "decoded_clipped_end": 320,
+      "decoded_clipped_start": 256,
+      "decoded_entropy": 4.531403423718116,
+      "decoded_hex": "ec38fc908996123430800be490896af0908ad0740ff090402be4f09047cfe054eff090403ce054eff09047c1e030e00f9089c8740bf09047d2e04401f0803c90",
+      "decoded_relative": 256,
+      "decoded_sha256": "0c705773105c535a5186fb1554311925463dbe33f620a441096634659624a6d4",
+      "public_offset": 24640,
+      "record": 49,
+      "record_decoded_span": 448,
+      "record_decoded_start": 24384,
+      "record_mode": 128,
+      "record_operation_key": "428a889c5804",
+      "record_source_end": 143718,
+      "record_source_entropy": 7.893996477315746,
+      "record_source_len": 2033,
+      "record_source_prefix": "19fe54ccb84fef0338e41eee7410b4b5f28dc490e8b85956b092f19092f1483e34d4d04ac8153e435a7c4437b8a2839c",
+      "record_source_sha256": "c28bb8b6d3041ff9e101233232c75cfea778f7e8847afe2131f30936b86c1002",
+      "record_source_start": 141685,
+      "record_source_suffix": "beaef3a706f6aa84c16355cc175b8be8ec33e362bc884c56379d18a6bafe6ec6714974fef4b70b4366fb3e192c7badd8",
+      "source_to_decoded_ratio": 4.537946428571429,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 14,
+          "length": 2,
+          "source_offset": 805
+        },
+        "bitwise_not": {
+          "decoded_offset": 61,
+          "length": 2,
+          "source_offset": 971
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 0,
+          "length": 0,
+          "source_offset": 0,
+          "xor": null
+        },
+        "direct": {
+          "decoded_offset": 36,
+          "length": 2,
+          "source_offset": 1740
+        }
+      }
+    },
+    {
+      "chunk_sha256": "0c705773105c535a5186fb1554311925463dbe33f620a441096634659624a6d4",
+      "chunk_short": "0c705773105c",
+      "decoded_clipped_end": 256,
+      "decoded_clipped_start": 192,
+      "decoded_entropy": 4.531403423718116,
+      "decoded_hex": "ec38fc908996123430800be490896af0908ad0740ff090402be4f09047cfe054eff090403ce054eff09047c1e030e00f9089c8740bf09047d2e04401f0803c90",
+      "decoded_relative": 192,
+      "decoded_sha256": "0c705773105c535a5186fb1554311925463dbe33f620a441096634659624a6d4",
+      "public_offset": 24576,
+      "record": 49,
+      "record_decoded_span": 448,
+      "record_decoded_start": 24384,
+      "record_mode": 128,
+      "record_operation_key": "428a889c5804",
+      "record_source_end": 143718,
+      "record_source_entropy": 7.893996477315746,
+      "record_source_len": 2033,
+      "record_source_prefix": "19fe54ccb84fef0338e41eee7410b4b5f28dc490e8b85956b092f19092f1483e34d4d04ac8153e435a7c4437b8a2839c",
+      "record_source_sha256": "c28bb8b6d3041ff9e101233232c75cfea778f7e8847afe2131f30936b86c1002",
+      "record_source_start": 141685,
+      "record_source_suffix": "beaef3a706f6aa84c16355cc175b8be8ec33e362bc884c56379d18a6bafe6ec6714974fef4b70b4366fb3e192c7badd8",
+      "source_to_decoded_ratio": 4.537946428571429,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 14,
+          "length": 2,
+          "source_offset": 805
+        },
+        "bitwise_not": {
+          "decoded_offset": 61,
+          "length": 2,
+          "source_offset": 971
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 0,
+          "length": 0,
+          "source_offset": 0,
+          "xor": null
+        },
+        "direct": {
+          "decoded_offset": 36,
+          "length": 2,
+          "source_offset": 1740
+        }
+      }
+    },
+    {
+      "chunk_sha256": "8f8e0add044ccff60663762031117f5d99f27f090fbfb5d8a719dedbfeeb89b5",
+      "chunk_short": "8f8e0add044c",
+      "decoded_clipped_end": 432,
+      "decoded_clipped_start": 368,
+      "decoded_entropy": 4.639162751096862,
+      "decoded_hex": "3407fee43dfde43cfc9085fd123430908a29e0c4540f30e011908a4ce0c3940e4008904011740ef080089085fee0904011f09085ffe0904012f0908600802e90",
+      "decoded_relative": 368,
+      "decoded_sha256": "8f8e0add044ccff60663762031117f5d99f27f090fbfb5d8a719dedbfeeb89b5",
+      "public_offset": 28864,
+      "record": 58,
+      "record_decoded_span": 544,
+      "record_decoded_start": 28496,
+      "record_mode": 128,
+      "record_operation_key": "66228ca20005",
+      "record_source_end": 164121,
+      "record_source_entropy": 7.919942983265344,
+      "record_source_len": 2292,
+      "record_source_prefix": "b9c157fd4afa40ec69d2d866602e20d3150dedaf14b920c2d64402c4933be54c424f38d41e31a772925a1c32f5b18102",
+      "record_source_sha256": "16b1fa7ec92852a975d1ba20551b215ab8cc10be2e75c9c7151dcc1a5c12e272",
+      "record_source_start": 161829,
+      "record_source_suffix": "59436ac31301a32daa56734c47f2f63d57dc187f92d8740ff9e60a358361d2b38a17d2f9ae961b379147cc2ccfe19fbb",
+      "source_to_decoded_ratio": 4.213235294117647,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 154
+        },
+        "bitwise_not": {
+          "decoded_offset": 29,
+          "length": 2,
+          "source_offset": 1868
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 3,
+          "length": 3,
+          "source_offset": 737,
+          "xor": 127
+        },
+        "direct": {
+          "decoded_offset": 56,
+          "length": 2,
+          "source_offset": 1370
+        }
+      }
+    },
+    {
+      "chunk_sha256": "8f8e0add044ccff60663762031117f5d99f27f090fbfb5d8a719dedbfeeb89b5",
+      "chunk_short": "8f8e0add044c",
+      "decoded_clipped_end": 368,
+      "decoded_clipped_start": 304,
+      "decoded_entropy": 4.639162751096862,
+      "decoded_hex": "3407fee43dfde43cfc9085fd123430908a29e0c4540f30e011908a4ce0c3940e4008904011740ef080089085fee0904011f09085ffe0904012f0908600802e90",
+      "decoded_relative": 304,
+      "decoded_sha256": "8f8e0add044ccff60663762031117f5d99f27f090fbfb5d8a719dedbfeeb89b5",
+      "public_offset": 28800,
+      "record": 58,
+      "record_decoded_span": 544,
+      "record_decoded_start": 28496,
+      "record_mode": 128,
+      "record_operation_key": "66228ca20005",
+      "record_source_end": 164121,
+      "record_source_entropy": 7.919942983265344,
+      "record_source_len": 2292,
+      "record_source_prefix": "b9c157fd4afa40ec69d2d866602e20d3150dedaf14b920c2d64402c4933be54c424f38d41e31a772925a1c32f5b18102",
+      "record_source_sha256": "16b1fa7ec92852a975d1ba20551b215ab8cc10be2e75c9c7151dcc1a5c12e272",
+      "record_source_start": 161829,
+      "record_source_suffix": "59436ac31301a32daa56734c47f2f63d57dc187f92d8740ff9e60a358361d2b38a17d2f9ae961b379147cc2ccfe19fbb",
+      "source_to_decoded_ratio": 4.213235294117647,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 154
+        },
+        "bitwise_not": {
+          "decoded_offset": 29,
+          "length": 2,
+          "source_offset": 1868
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 3,
+          "length": 3,
+          "source_offset": 737,
+          "xor": 127
+        },
+        "direct": {
+          "decoded_offset": 56,
+          "length": 2,
+          "source_offset": 1370
+        }
+      }
+    },
+    {
+      "chunk_sha256": "8f8e0add044ccff60663762031117f5d99f27f090fbfb5d8a719dedbfeeb89b5",
+      "chunk_short": "8f8e0add044c",
+      "decoded_clipped_end": 240,
+      "decoded_clipped_start": 176,
+      "decoded_entropy": 4.639162751096862,
+      "decoded_hex": "3407fee43dfde43cfc9085fd123430908a29e0c4540f30e011908a4ce0c3940e4008904011740ef080089085fee0904011f09085ffe0904012f0908600802e90",
+      "decoded_relative": 176,
+      "decoded_sha256": "8f8e0add044ccff60663762031117f5d99f27f090fbfb5d8a719dedbfeeb89b5",
+      "public_offset": 28672,
+      "record": 58,
+      "record_decoded_span": 544,
+      "record_decoded_start": 28496,
+      "record_mode": 128,
+      "record_operation_key": "66228ca20005",
+      "record_source_end": 164121,
+      "record_source_entropy": 7.919942983265344,
+      "record_source_len": 2292,
+      "record_source_prefix": "b9c157fd4afa40ec69d2d866602e20d3150dedaf14b920c2d64402c4933be54c424f38d41e31a772925a1c32f5b18102",
+      "record_source_sha256": "16b1fa7ec92852a975d1ba20551b215ab8cc10be2e75c9c7151dcc1a5c12e272",
+      "record_source_start": 161829,
+      "record_source_suffix": "59436ac31301a32daa56734c47f2f63d57dc187f92d8740ff9e60a358361d2b38a17d2f9ae961b379147cc2ccfe19fbb",
+      "source_to_decoded_ratio": 4.213235294117647,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 154
+        },
+        "bitwise_not": {
+          "decoded_offset": 29,
+          "length": 2,
+          "source_offset": 1868
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 3,
+          "length": 3,
+          "source_offset": 737,
+          "xor": 127
+        },
+        "direct": {
+          "decoded_offset": 56,
+          "length": 2,
+          "source_offset": 1370
+        }
+      }
+    },
+    {
+      "chunk_sha256": "144315176c646e312f2abe220481010840cbc370fbe9c862396d647d89595833",
+      "chunk_short": "144315176c64",
+      "decoded_clipped_end": 96,
+      "decoded_clipped_start": 32,
+      "decoded_entropy": 4.369054056131191,
+      "decoded_hex": "8a23e04401f09088f1e04440f0908940e0c31320e006e478b2f608f6908935e04480f0229047b0e4f0a3e0908a49f09047b1e0908a4af09047b1e0908a4bf090",
+      "decoded_relative": 32,
+      "decoded_sha256": "144315176c646e312f2abe220481010840cbc370fbe9c862396d647d89595833",
+      "public_offset": 38016,
+      "record": 83,
+      "record_decoded_span": 128,
+      "record_decoded_start": 37984,
+      "record_mode": 128,
+      "record_operation_key": "0caa1588de03",
+      "record_source_end": 221083,
+      "record_source_entropy": 7.896049235476551,
+      "record_source_len": 2256,
+      "record_source_prefix": "a290715d658734212d7546ccbb0b2a748e3b10cd166f01473430e2ca1a778fb4ef1d658ee225f992d1e4b804b1212f48",
+      "record_source_sha256": "360c0d1a83f6eeea4fedf347f1ef184f0ef866aaf29b8b5e3dbf8153fdc67f83",
+      "record_source_start": 218827,
+      "record_source_suffix": "cc7f4109b77a5b85a1a2dd0514acf31766f33257b86fe8db195f6aad2e8295ee1cbe4a2cdafcdfc1cc9780d7e4507760",
+      "source_to_decoded_ratio": 17.625,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 39,
+          "length": 2,
+          "source_offset": 1145
+        },
+        "bitwise_not": {
+          "decoded_offset": 7,
+          "length": 2,
+          "source_offset": 563
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 22,
+          "length": 3,
+          "source_offset": 1362,
+          "xor": 232
+        },
+        "direct": {
+          "decoded_offset": 37,
+          "length": 2,
+          "source_offset": 163
+        }
+      }
+    },
+    {
+      "chunk_sha256": "144315176c646e312f2abe220481010840cbc370fbe9c862396d647d89595833",
+      "chunk_short": "144315176c64",
+      "decoded_clipped_end": 128,
+      "decoded_clipped_start": 96,
+      "decoded_entropy": 4.369054056131191,
+      "decoded_hex": "8a23e04401f09088f1e04440f0908940e0c31320e006e478b2f608f6908935e04480f0229047b0e4f0a3e0908a49f09047b1e0908a4af09047b1e0908a4bf090",
+      "decoded_relative": 96,
+      "decoded_sha256": "144315176c646e312f2abe220481010840cbc370fbe9c862396d647d89595833",
+      "public_offset": 38080,
+      "record": 83,
+      "record_decoded_span": 128,
+      "record_decoded_start": 37984,
+      "record_mode": 128,
+      "record_operation_key": "0caa1588de03",
+      "record_source_end": 221083,
+      "record_source_entropy": 7.896049235476551,
+      "record_source_len": 2256,
+      "record_source_prefix": "a290715d658734212d7546ccbb0b2a748e3b10cd166f01473430e2ca1a778fb4ef1d658ee225f992d1e4b804b1212f48",
+      "record_source_sha256": "360c0d1a83f6eeea4fedf347f1ef184f0ef866aaf29b8b5e3dbf8153fdc67f83",
+      "record_source_start": 218827,
+      "record_source_suffix": "cc7f4109b77a5b85a1a2dd0514acf31766f33257b86fe8db195f6aad2e8295ee1cbe4a2cdafcdfc1cc9780d7e4507760",
+      "source_to_decoded_ratio": 17.625,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 39,
+          "length": 2,
+          "source_offset": 1145
+        },
+        "bitwise_not": {
+          "decoded_offset": 7,
+          "length": 2,
+          "source_offset": 563
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 22,
+          "length": 3,
+          "source_offset": 1362,
+          "xor": 232
+        },
+        "direct": {
+          "decoded_offset": 37,
+          "length": 2,
+          "source_offset": 163
+        }
+      }
+    },
+    {
+      "chunk_sha256": "144315176c646e312f2abe220481010840cbc370fbe9c862396d647d89595833",
+      "chunk_short": "144315176c64",
+      "decoded_clipped_end": 320,
+      "decoded_clipped_start": 272,
+      "decoded_entropy": 4.369054056131191,
+      "decoded_hex": "8a23e04401f09088f1e04440f0908940e0c31320e006e478b2f608f6908935e04480f0229047b0e4f0a3e0908a49f09047b1e0908a4af09047b1e0908a4bf090",
+      "decoded_relative": 272,
+      "decoded_sha256": "144315176c646e312f2abe220481010840cbc370fbe9c862396d647d89595833",
+      "public_offset": 37888,
+      "record": 81,
+      "record_decoded_span": 320,
+      "record_decoded_start": 37616,
+      "record_mode": 128,
+      "record_operation_key": "64cace949404",
+      "record_source_end": 216910,
+      "record_source_entropy": 7.917648187070542,
+      "record_source_len": 2266,
+      "record_source_prefix": "2c2ef41b04bc1cc5c9dd188959b0baf331f147d56380e266cbc1075589b7490a3d7756470d8c327753fc617f017fcb6d",
+      "record_source_sha256": "65071fd8f5db90fdb712e898440aecaa25ce443e1bbf4d7ab19c5441ab3b85c8",
+      "record_source_start": 214644,
+      "record_source_suffix": "0f24e00d26a1f267307b4ff51da7e0af9b897ac545705165e5da3ea37717b1f71625f71738fb8ba8ecc5ef220f0e1bb0",
+      "source_to_decoded_ratio": 7.08125,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 23,
+          "length": 2,
+          "source_offset": 1491
+        },
+        "bitwise_not": {
+          "decoded_offset": 15,
+          "length": 2,
+          "source_offset": 606
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 26,
+          "length": 3,
+          "source_offset": 679,
+          "xor": 75
+        },
+        "direct": {
+          "decoded_offset": 61,
+          "length": 2,
+          "source_offset": 777
+        }
+      }
+    },
+    {
+      "chunk_sha256": "25333cae3674959bfdd6161ddf2aa6c73b9d5761b8c93e5b9294f769b315677d",
+      "chunk_short": "25333cae3674",
+      "decoded_clipped_end": 464,
+      "decoded_clipped_start": 432,
+      "decoded_entropy": 5.1254036179525455,
+      "decoded_hex": "64fe700302767b90891fe02438ff90891ee03407feef78aa26ffee1836a87c0808f608eff6904000e020e7f9908ac6e0904095f0a87c0808e6a3f07b00a97c09",
+      "decoded_relative": 432,
+      "decoded_sha256": "25333cae3674959bfdd6161ddf2aa6c73b9d5761b8c93e5b9294f769b315677d",
+      "public_offset": 30656,
+      "record": 62,
+      "record_decoded_span": 464,
+      "record_decoded_start": 30224,
+      "record_mode": 128,
+      "record_operation_key": "9fd2119d4c04",
+      "record_source_end": 173748,
+      "record_source_entropy": 7.887755197037631,
+      "record_source_len": 2419,
+      "record_source_prefix": "c6a40c2ea57363f2c3ba901ccd4e4a1fcd65d3956094f1cdacee386b6d28cdb7fdf4d2c49bd091ac80509a969ef051f5",
+      "record_source_sha256": "3fb5dd547287ae46cf8c66835099dfe90476ec165f27f71ad1053f919e6d1aa8",
+      "record_source_start": 171329,
+      "record_source_suffix": "6b0d2ece3ab797711c7039ad5e7eefdc125d1e4d8bda6fee10a92f9f6a4be4a4227da926826c2b19b39893fcae3e5bb0",
+      "source_to_decoded_ratio": 5.213362068965517,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 44,
+          "length": 2,
+          "source_offset": 204
+        },
+        "bitwise_not": {
+          "decoded_offset": 10,
+          "length": 2,
+          "source_offset": 225
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 28,
+          "length": 3,
+          "source_offset": 1530,
+          "xor": 56
+        },
+        "direct": {
+          "decoded_offset": 62,
+          "length": 2,
+          "source_offset": 2098
+        }
+      }
+    },
+    {
+      "chunk_sha256": "25333cae3674959bfdd6161ddf2aa6c73b9d5761b8c93e5b9294f769b315677d",
+      "chunk_short": "25333cae3674",
+      "decoded_clipped_end": 432,
+      "decoded_clipped_start": 368,
+      "decoded_entropy": 5.1254036179525455,
+      "decoded_hex": "64fe700302767b90891fe02438ff90891ee03407feef78aa26ffee1836a87c0808f608eff6904000e020e7f9908ac6e0904095f0a87c0808e6a3f07b00a97c09",
+      "decoded_relative": 368,
+      "decoded_sha256": "25333cae3674959bfdd6161ddf2aa6c73b9d5761b8c93e5b9294f769b315677d",
+      "public_offset": 30592,
+      "record": 62,
+      "record_decoded_span": 464,
+      "record_decoded_start": 30224,
+      "record_mode": 128,
+      "record_operation_key": "9fd2119d4c04",
+      "record_source_end": 173748,
+      "record_source_entropy": 7.887755197037631,
+      "record_source_len": 2419,
+      "record_source_prefix": "c6a40c2ea57363f2c3ba901ccd4e4a1fcd65d3956094f1cdacee386b6d28cdb7fdf4d2c49bd091ac80509a969ef051f5",
+      "record_source_sha256": "3fb5dd547287ae46cf8c66835099dfe90476ec165f27f71ad1053f919e6d1aa8",
+      "record_source_start": 171329,
+      "record_source_suffix": "6b0d2ece3ab797711c7039ad5e7eefdc125d1e4d8bda6fee10a92f9f6a4be4a4227da926826c2b19b39893fcae3e5bb0",
+      "source_to_decoded_ratio": 5.213362068965517,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 44,
+          "length": 2,
+          "source_offset": 204
+        },
+        "bitwise_not": {
+          "decoded_offset": 10,
+          "length": 2,
+          "source_offset": 225
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 28,
+          "length": 3,
+          "source_offset": 1530,
+          "xor": 56
+        },
+        "direct": {
+          "decoded_offset": 62,
+          "length": 2,
+          "source_offset": 2098
+        }
+      }
+    },
+    {
+      "chunk_sha256": "204291444868911fc1664f7105d2999cd02d987f1762771e851df97eaf219566",
+      "chunk_short": "204291444868",
+      "decoded_clipped_end": 96,
+      "decoded_clipped_start": 32,
+      "decoded_entropy": 4.683114454101657,
+      "decoded_hex": "097a00900001122fb7904097f090409c7440f0908a4ee0ff540ffe24a0f582e43440f583e0904099f074a12ef582e43440f583e0904099f0ef540fff24a2f582",
+      "decoded_relative": 32,
+      "decoded_sha256": "204291444868911fc1664f7105d2999cd02d987f1762771e851df97eaf219566",
+      "public_offset": 30720,
+      "record": 63,
+      "record_decoded_span": 256,
+      "record_decoded_start": 30688,
+      "record_mode": 128,
+      "record_operation_key": "c89256901a00",
+      "record_source_end": 175772,
+      "record_source_entropy": 7.8738820766404904,
+      "record_source_len": 2024,
+      "record_source_prefix": "349631e76e40fae22dc7bec3dc6d3b87311147ad9bf51a41c44de7149b874db75724ea7afb731cd957eeff0d92fd71cd",
+      "record_source_sha256": "d7c7b2c35ede23e9e622835c73f28630dd74d441981bda32662e404366adac1e",
+      "record_source_start": 173748,
+      "record_source_suffix": "e8378b933a4c397932e9e4132e9e4777fbdcddf985f376f605cd6749cda773e1ff6ec04eb8b820171417141a77b83760",
+      "source_to_decoded_ratio": 7.90625,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 598
+        },
+        "bitwise_not": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 168
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 56,
+          "length": 3,
+          "source_offset": 1294,
+          "xor": 245
+        },
+        "direct": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 374
+        }
+      }
+    },
+    {
+      "chunk_sha256": "204291444868911fc1664f7105d2999cd02d987f1762771e851df97eaf219566",
+      "chunk_short": "204291444868",
+      "decoded_clipped_end": 256,
+      "decoded_clipped_start": 224,
+      "decoded_entropy": 4.683114454101657,
+      "decoded_hex": "097a00900001122fb7904097f090409c7440f0908a4ee0ff540ffe24a0f582e43440f583e0904099f074a12ef582e43440f583e0904099f0ef540fff24a2f582",
+      "decoded_relative": 224,
+      "decoded_sha256": "204291444868911fc1664f7105d2999cd02d987f1762771e851df97eaf219566",
+      "public_offset": 30912,
+      "record": 63,
+      "record_decoded_span": 256,
+      "record_decoded_start": 30688,
+      "record_mode": 128,
+      "record_operation_key": "c89256901a00",
+      "record_source_end": 175772,
+      "record_source_entropy": 7.8738820766404904,
+      "record_source_len": 2024,
+      "record_source_prefix": "349631e76e40fae22dc7bec3dc6d3b87311147ad9bf51a41c44de7149b874db75724ea7afb731cd957eeff0d92fd71cd",
+      "record_source_sha256": "d7c7b2c35ede23e9e622835c73f28630dd74d441981bda32662e404366adac1e",
+      "record_source_start": 173748,
+      "record_source_suffix": "e8378b933a4c397932e9e4132e9e4777fbdcddf985f376f605cd6749cda773e1ff6ec04eb8b820171417141a77b83760",
+      "source_to_decoded_ratio": 7.90625,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 598
+        },
+        "bitwise_not": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 168
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 56,
+          "length": 3,
+          "source_offset": 1294,
+          "xor": 245
+        },
+        "direct": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 374
+        }
+      }
+    },
+    {
+      "chunk_sha256": "7106a72e56d99556fc3629abcd9453e242b8f0af0ebe256867b222364c74194c",
+      "chunk_short": "7106a72e56d9",
+      "decoded_clipped_end": 640,
+      "decoded_clipped_start": 624,
+      "decoded_entropy": 4.362768691277956,
+      "decoded_hex": "30e054df904863f0908631e054fd904840f0908633e0547f905906f0908632e054fe905a00f0905962e054fc4401f09059c67407f09059697428f0a37423f090",
+      "decoded_relative": 624,
+      "decoded_sha256": "7106a72e56d99556fc3629abcd9453e242b8f0af0ebe256867b222364c74194c",
+      "public_offset": 34176,
+      "record": 68,
+      "record_decoded_span": 640,
+      "record_decoded_start": 33552,
+      "record_mode": 128,
+      "record_operation_key": "0fe212a8d404",
+      "record_source_end": 186347,
+      "record_source_entropy": 7.905081526670297,
+      "record_source_len": 2421,
+      "record_source_prefix": "2d5d5a6e0d992c7deca3187eb808eec6c437f1e23f05abdcf5ecf9963d7b1e669e25fcf175ecf12ebd8e25d7eac4b9a4",
+      "record_source_sha256": "a8a07d23d8e60ffdc5995adfc42b79db4ea764ceae118358d195309d7e066eda",
+      "record_source_start": 183926,
+      "record_source_suffix": "8326bcb4bb9f8d6b63f9cdb1ef25c208b5ebd9f334baf63ccc35996e0d5f5249b8c25f3923a191dd7b5fddf8bcca5bb0",
+      "source_to_decoded_ratio": 3.7828125,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 33,
+          "length": 2,
+          "source_offset": 275
+        },
+        "bitwise_not": {
+          "decoded_offset": 32,
+          "length": 2,
+          "source_offset": 2001
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 25,
+          "length": 3,
+          "source_offset": 762,
+          "xor": 9
+        },
+        "direct": {
+          "decoded_offset": 22,
+          "length": 2,
+          "source_offset": 1117
+        }
+      }
+    },
+    {
+      "chunk_sha256": "7106a72e56d99556fc3629abcd9453e242b8f0af0ebe256867b222364c74194c",
+      "chunk_short": "7106a72e56d9",
+      "decoded_clipped_end": 624,
+      "decoded_clipped_start": 560,
+      "decoded_entropy": 4.362768691277956,
+      "decoded_hex": "30e054df904863f0908631e054fd904840f0908633e0547f905906f0908632e054fe905a00f0905962e054fc4401f09059c67407f09059697428f0a37423f090",
+      "decoded_relative": 560,
+      "decoded_sha256": "7106a72e56d99556fc3629abcd9453e242b8f0af0ebe256867b222364c74194c",
+      "public_offset": 34112,
+      "record": 68,
+      "record_decoded_span": 640,
+      "record_decoded_start": 33552,
+      "record_mode": 128,
+      "record_operation_key": "0fe212a8d404",
+      "record_source_end": 186347,
+      "record_source_entropy": 7.905081526670297,
+      "record_source_len": 2421,
+      "record_source_prefix": "2d5d5a6e0d992c7deca3187eb808eec6c437f1e23f05abdcf5ecf9963d7b1e669e25fcf175ecf12ebd8e25d7eac4b9a4",
+      "record_source_sha256": "a8a07d23d8e60ffdc5995adfc42b79db4ea764ceae118358d195309d7e066eda",
+      "record_source_start": 183926,
+      "record_source_suffix": "8326bcb4bb9f8d6b63f9cdb1ef25c208b5ebd9f334baf63ccc35996e0d5f5249b8c25f3923a191dd7b5fddf8bcca5bb0",
+      "source_to_decoded_ratio": 3.7828125,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 33,
+          "length": 2,
+          "source_offset": 275
+        },
+        "bitwise_not": {
+          "decoded_offset": 32,
+          "length": 2,
+          "source_offset": 2001
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 25,
+          "length": 3,
+          "source_offset": 762,
+          "xor": 9
+        },
+        "direct": {
+          "decoded_offset": 22,
+          "length": 2,
+          "source_offset": 1117
+        }
+      }
+    },
+    {
+      "chunk_sha256": "7106a72e56d99556fc3629abcd9453e242b8f0af0ebe256867b222364c74194c",
+      "chunk_short": "7106a72e56d9",
+      "decoded_clipped_end": 112,
+      "decoded_clipped_start": 48,
+      "decoded_entropy": 4.362768691277956,
+      "decoded_hex": "30e054df904863f0908631e054fd904840f0908633e0547f905906f0908632e054fe905a00f0905962e054fc4401f09059c67407f09059697428f0a37423f090",
+      "decoded_relative": 48,
+      "decoded_sha256": "7106a72e56d99556fc3629abcd9453e242b8f0af0ebe256867b222364c74194c",
+      "public_offset": 34240,
+      "record": 69,
+      "record_decoded_span": 368,
+      "record_decoded_start": 34192,
+      "record_mode": 128,
+      "record_operation_key": "2cf2cf97b204",
+      "record_source_end": 188621,
+      "record_source_entropy": 7.890118131980324,
+      "record_source_len": 2274,
+      "record_source_prefix": "742be9d19fe6df65acaee2592c47d9627ecbdcb4bbcf1a4fe00708198263923a191dd5794e985f1b203dfeb53eaa4414",
+      "record_source_sha256": "d1bb3793152fb4574eccc3082a68481c3a78c3a4e39a83d386731adfa39db57a",
+      "record_source_start": 186347,
+      "record_source_suffix": "ba58261a046c35c0e3a80c340b661a70fb0d81b04c34716bdc49fb50186a56cc3543ec36eac130c96361b0b4e4261b76",
+      "source_to_decoded_ratio": 6.179347826086956,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 3,
+          "length": 2,
+          "source_offset": 1539
+        },
+        "bitwise_not": {
+          "decoded_offset": 57,
+          "length": 2,
+          "source_offset": 214
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 23,
+          "length": 3,
+          "source_offset": 2086,
+          "xor": 7
+        },
+        "direct": {
+          "decoded_offset": 60,
+          "length": 2,
+          "source_offset": 1777
+        }
+      }
+    },
+    {
+      "chunk_sha256": "add3eb18b8cc24b03f2d1f7d7877e8528cdef309a8d5f4b2102e09daa593e043",
+      "chunk_short": "add3eb18b8cc",
+      "decoded_clipped_end": 512,
+      "decoded_clipped_start": 448,
+      "decoded_entropy": 4.046133339614043,
+      "decoded_hex": "e436f69047d7e054fef0908a4fe09047d6f09047afe4f09047b1f0f0e6f008e6f0e4f0f0908a53e09047b1f0908a54e09047b1f074fc26f61874ff36f6d3908a",
+      "decoded_relative": 448,
+      "decoded_sha256": "add3eb18b8cc24b03f2d1f7d7877e8528cdef309a8d5f4b2102e09daa593e043",
+      "public_offset": 33344,
+      "record": 67,
+      "record_decoded_span": 656,
+      "record_decoded_start": 32896,
+      "record_mode": 64,
+      "record_operation_key": "b0f2d169c404",
+      "record_source_end": 183926,
+      "record_source_entropy": 7.902598573618902,
+      "record_source_len": 2295,
+      "record_source_prefix": "3ce79c23e8847fe7a23b49ff436bcbca1ae9bdc55e24fe8aac9e302dcd25aa8f332d7fc82f47510cb9e21ae03f6427c1",
+      "record_source_sha256": "4dc869d021894341dd4ff2e7a666f619d7475ab695dff91a962f2d357b97b104",
+      "record_source_start": 181631,
+      "record_source_suffix": "df751f934ce95c57be6ceebab9f962465ee6ff35f6b5f71f6c3fdd0e31ae877ed74307f00f41fc03acb98d857a62af76",
+      "source_to_decoded_ratio": 3.4984756097560976,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 0,
+          "length": 2,
+          "source_offset": 2202
+        },
+        "bitwise_not": {
+          "decoded_offset": 2,
+          "length": 2,
+          "source_offset": 1453
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 54,
+          "length": 3,
+          "source_offset": 1451,
+          "xor": 17
+        },
+        "direct": {
+          "decoded_offset": 30,
+          "length": 2,
+          "source_offset": 159
+        }
+      }
+    },
+    {
+      "chunk_sha256": "04a2d67cbfff890e5ba96613f516c9c730e50f84d5a041e82cfce2f3e18b8d35",
+      "chunk_short": "04a2d67cbfff",
+      "decoded_clipped_end": 80,
+      "decoded_clipped_start": 16,
+      "decoded_entropy": 4.553979102437745,
+      "decoded_hex": "b7904097f0904000e020e7f99040b6e4f0908a54e09040b7f09040b57414f0904000e020e7f99040b57410f0908a54e0ff7e0078aa26f618ee36f6a87c08ef26",
+      "decoded_relative": 16,
+      "decoded_sha256": "04a2d67cbfff890e5ba96613f516c9c730e50f84d5a041e82cfce2f3e18b8d35",
+      "public_offset": 32192,
+      "record": 66,
+      "record_decoded_span": 720,
+      "record_decoded_start": 32176,
+      "record_mode": 128,
+      "record_operation_key": "4e8210adb204",
+      "record_source_end": 181631,
+      "record_source_entropy": 7.9081364774740655,
+      "record_source_len": 2411,
+      "record_source_prefix": "cfef3de32a3eaf877a5c636a732d91339ef06853f28d01fe56bcb7b6bc4c338dd6d0e5749303f00ae9aae589440a3b5a",
+      "record_source_sha256": "d803ff8d4d20cf7e68790a3c8b2944b9dda034aec51f702770a1aa2fdd5a483e",
+      "record_source_start": 179220,
+      "record_source_suffix": "cccdf1b41abfdedbcba8d35ab990cd5c72073066ea33b4b8f4693f804cb2345a206b3420d18251973e9cad105972eec0",
+      "source_to_decoded_ratio": 3.348611111111111,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 3,
+          "length": 2,
+          "source_offset": 2171
+        },
+        "bitwise_not": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 508
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 52,
+          "length": 3,
+          "source_offset": 307,
+          "xor": 112
+        },
+        "direct": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 26
+        }
+      }
+    },
+    {
+      "chunk_sha256": "6c4f90652e56f0866c745d3b909f434bbc76a047260cbd54fa2bc4a52e743773",
+      "chunk_short": "6c4f90652e56",
+      "decoded_clipped_end": 192,
+      "decoded_clipped_start": 128,
+      "decoded_entropy": 4.545009133144316,
+      "decoded_hex": "47c5e09089c8f09047c4e09089c9f0908a49e0ff64286013ef64be600eef64a86009ef64d56004efb4b9099047c5e4f09047c4f09047d2e054fef0904014e4f0",
+      "decoded_relative": 128,
+      "decoded_sha256": "6c4f90652e56f0866c745d3b909f434bbc76a047260cbd54fa2bc4a52e743773",
+      "public_offset": 24960,
+      "record": 50,
+      "record_decoded_span": 496,
+      "record_decoded_start": 24832,
+      "record_mode": 128,
+      "record_operation_key": "6092d29f2405",
+      "record_source_end": 146217,
+      "record_source_entropy": 7.898472426649278,
+      "record_source_len": 2499,
+      "record_source_prefix": "ccfbfc735f77390ef4b70b4371920000356a79ca205f3059716e828b29270ef305eda07d7c8d6bba7d237319ea1d7ce0",
+      "record_source_sha256": "d780551dd419ac8628c71c5d1f1f0cb912c674eff4386d4d0f20d4821896f679",
+      "record_source_start": 143718,
+      "record_source_suffix": "3ba42ffa1363f3b4226d67f9aacc33097d4f2f131eb38919b7322bc1b857a34fad2b358933d791a55e358d713f1af760",
+      "source_to_decoded_ratio": 5.038306451612903,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 120
+        },
+        "bitwise_not": {
+          "decoded_offset": 15,
+          "length": 2,
+          "source_offset": 2220
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 61,
+          "length": 3,
+          "source_offset": 446,
+          "xor": 1
+        },
+        "direct": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 133
+        }
+      }
+    },
+    {
+      "chunk_sha256": "6c4f90652e56f0866c745d3b909f434bbc76a047260cbd54fa2bc4a52e743773",
+      "chunk_short": "6c4f90652e56",
+      "decoded_clipped_end": 256,
+      "decoded_clipped_start": 192,
+      "decoded_entropy": 4.545009133144316,
+      "decoded_hex": "47c5e09089c8f09047c4e09089c9f0908a49e0ff64286013ef64be600eef64a86009ef64d56004efb4b9099047c5e4f09047c4f09047d2e054fef0904014e4f0",
+      "decoded_relative": 192,
+      "decoded_sha256": "6c4f90652e56f0866c745d3b909f434bbc76a047260cbd54fa2bc4a52e743773",
+      "public_offset": 25024,
+      "record": 50,
+      "record_decoded_span": 496,
+      "record_decoded_start": 24832,
+      "record_mode": 128,
+      "record_operation_key": "6092d29f2405",
+      "record_source_end": 146217,
+      "record_source_entropy": 7.898472426649278,
+      "record_source_len": 2499,
+      "record_source_prefix": "ccfbfc735f77390ef4b70b4371920000356a79ca205f3059716e828b29270ef305eda07d7c8d6bba7d237319ea1d7ce0",
+      "record_source_sha256": "d780551dd419ac8628c71c5d1f1f0cb912c674eff4386d4d0f20d4821896f679",
+      "record_source_start": 143718,
+      "record_source_suffix": "3ba42ffa1363f3b4226d67f9aacc33097d4f2f131eb38919b7322bc1b857a34fad2b358933d791a55e358d713f1af760",
+      "source_to_decoded_ratio": 5.038306451612903,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 120
+        },
+        "bitwise_not": {
+          "decoded_offset": 15,
+          "length": 2,
+          "source_offset": 2220
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 61,
+          "length": 3,
+          "source_offset": 446,
+          "xor": 1
+        },
+        "direct": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 133
+        }
+      }
+    },
+    {
+      "chunk_sha256": "6c4f90652e56f0866c745d3b909f434bbc76a047260cbd54fa2bc4a52e743773",
+      "chunk_short": "6c4f90652e56",
+      "decoded_clipped_end": 64,
+      "decoded_clipped_start": 0,
+      "decoded_entropy": 4.545009133144316,
+      "decoded_hex": "47c5e09089c8f09047c4e09089c9f0908a49e0ff64286013ef64be600eef64a86009ef64d56004efb4b9099047c5e4f09047c4f09047d2e054fef0904014e4f0",
+      "decoded_relative": 0,
+      "decoded_sha256": "6c4f90652e56f0866c745d3b909f434bbc76a047260cbd54fa2bc4a52e743773",
+      "public_offset": 24832,
+      "record": 50,
+      "record_decoded_span": 496,
+      "record_decoded_start": 24832,
+      "record_mode": 128,
+      "record_operation_key": "6092d29f2405",
+      "record_source_end": 146217,
+      "record_source_entropy": 7.898472426649278,
+      "record_source_len": 2499,
+      "record_source_prefix": "ccfbfc735f77390ef4b70b4371920000356a79ca205f3059716e828b29270ef305eda07d7c8d6bba7d237319ea1d7ce0",
+      "record_source_sha256": "d780551dd419ac8628c71c5d1f1f0cb912c674eff4386d4d0f20d4821896f679",
+      "record_source_start": 143718,
+      "record_source_suffix": "3ba42ffa1363f3b4226d67f9aacc33097d4f2f131eb38919b7322bc1b857a34fad2b358933d791a55e358d713f1af760",
+      "source_to_decoded_ratio": 5.038306451612903,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 120
+        },
+        "bitwise_not": {
+          "decoded_offset": 15,
+          "length": 2,
+          "source_offset": 2220
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 61,
+          "length": 3,
+          "source_offset": 446,
+          "xor": 1
+        },
+        "direct": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 133
+        }
+      }
+    },
+    {
+      "chunk_sha256": "6c4f90652e56f0866c745d3b909f434bbc76a047260cbd54fa2bc4a52e743773",
+      "chunk_short": "6c4f90652e56",
+      "decoded_clipped_end": 128,
+      "decoded_clipped_start": 64,
+      "decoded_entropy": 4.545009133144316,
+      "decoded_hex": "47c5e09089c8f09047c4e09089c9f0908a49e0ff64286013ef64be600eef64a86009ef64d56004efb4b9099047c5e4f09047c4f09047d2e054fef0904014e4f0",
+      "decoded_relative": 64,
+      "decoded_sha256": "6c4f90652e56f0866c745d3b909f434bbc76a047260cbd54fa2bc4a52e743773",
+      "public_offset": 24896,
+      "record": 50,
+      "record_decoded_span": 496,
+      "record_decoded_start": 24832,
+      "record_mode": 128,
+      "record_operation_key": "6092d29f2405",
+      "record_source_end": 146217,
+      "record_source_entropy": 7.898472426649278,
+      "record_source_len": 2499,
+      "record_source_prefix": "ccfbfc735f77390ef4b70b4371920000356a79ca205f3059716e828b29270ef305eda07d7c8d6bba7d237319ea1d7ce0",
+      "record_source_sha256": "d780551dd419ac8628c71c5d1f1f0cb912c674eff4386d4d0f20d4821896f679",
+      "record_source_start": 143718,
+      "record_source_suffix": "3ba42ffa1363f3b4226d67f9aacc33097d4f2f131eb38919b7322bc1b857a34fad2b358933d791a55e358d713f1af760",
+      "source_to_decoded_ratio": 5.038306451612903,
+      "transform_checks": {
+        "bit_reverse": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 120
+        },
+        "bitwise_not": {
+          "decoded_offset": 15,
+          "length": 2,
+          "source_offset": 2220
+        },
+        "constant_xor_ngram": {
+          "decoded_offset": 61,
+          "length": 3,
+          "source_offset": 446,
+          "xor": 1
+        },
+        "direct": {
+          "decoded_offset": 0,
+          "length": 1,
+          "source_offset": 133
+        }
+      }
+    }
+  ],
+  "record_map": "references/firmware/extracted/liteon-cdd-record-map.json",
+  "records": [
+    {
+      "chunks": [
+        {
+          "chunk": "0c705773105c",
+          "observations": 509
+        }
+      ],
+      "decoded_span": 448,
+      "known_decoded_bytes": 256,
+      "known_decoded_fraction": 0.5714285714285714,
+      "mode": 128,
+      "operation_key": "428a889c5804",
+      "record": 49,
+      "source_len": 2033
+    },
+    {
+      "chunks": [
+        {
+          "chunk": "6c4f90652e56",
+          "observations": 509
+        }
+      ],
+      "decoded_span": 496,
+      "known_decoded_bytes": 256,
+      "known_decoded_fraction": 0.5161290322580645,
+      "mode": 128,
+      "operation_key": "6092d29f2405",
+      "record": 50,
+      "source_len": 2499
+    },
+    {
+      "chunks": [
+        {
+          "chunk": "95caa55b881e",
+          "observations": 473
+        }
+      ],
+      "decoded_span": 896,
+      "known_decoded_bytes": 256,
+      "known_decoded_fraction": 0.2857142857142857,
+      "mode": 64,
+      "operation_key": "a742d3782e04",
+      "record": 55,
+      "source_len": 2313
+    },
+    {
+      "chunks": [
+        {
+          "chunk": "8f8e0add044c",
+          "observations": 509
+        },
+        {
+          "chunk": "20ea2ab16891",
+          "observations": 387
+        },
+        {
+          "chunk": "4037c8574920",
+          "observations": 39
+        },
+        {
+          "chunk": "8d8c3b0a22a0",
+          "observations": 33
+        },
+        {
+          "chunk": "8b2115cd509f",
+          "observations": 22
+        }
+      ],
+      "decoded_span": 544,
+      "known_decoded_bytes": 304,
+      "known_decoded_fraction": 0.5588235294117647,
+      "mode": 128,
+      "operation_key": "66228ca20005",
+      "record": 58,
+      "source_len": 2292
+    },
+    {
+      "chunks": [
+        {
+          "chunk": "99d4493dc4cf",
+          "observations": 509
+        },
+        {
+          "chunk": "20ea2ab16891",
+          "observations": 122
+        },
+        {
+          "chunk": "8d8c3b0a22a0",
+          "observations": 6
+        },
+        {
+          "chunk": "8b2115cd509f",
+          "observations": 5
+        }
+      ],
+      "decoded_span": 304,
+      "known_decoded_bytes": 128,
+      "known_decoded_fraction": 0.42105263157894735,
+      "mode": 128,
+      "operation_key": "30ca94930e05",
+      "record": 59,
+      "source_len": 2462
+    },
+    {
+      "chunks": [
+        {
+          "chunk": "28583441dfa8",
+          "observations": 508
+        },
+        {
+          "chunk": "9b673c066ae4",
+          "observations": 506
+        }
+      ],
+      "decoded_span": 848,
+      "known_decoded_bytes": 192,
+      "known_decoded_fraction": 0.22641509433962265,
+      "mode": 64,
+      "operation_key": "950a90757805",
+      "record": 60,
+      "source_len": 2344
+    },
+    {
+      "chunks": [
+        {
+          "chunk": "0c9a360d26b8",
+          "observations": 253
+        }
+      ],
+      "decoded_span": 32,
+      "known_decoded_bytes": 16,
+      "known_decoded_fraction": 0.5,
+      "mode": 128,
+      "operation_key": "80e25282fa04",
+      "record": 61,
+      "source_len": 2402
+    },
+    {
+      "chunks": [
+        {
+          "chunk": "25333cae3674",
+          "observations": 508
+        },
+        {
+          "chunk": "580b9228d0b9",
+          "observations": 256
+        },
+        {
+          "chunk": "0c9a360d26b8",
+          "observations": 255
+        },
+        {
+          "chunk": "3465e4783c3d",
+          "observations": 253
+        }
+      ],
+      "decoded_span": 464,
+      "known_decoded_bytes": 224,
+      "known_decoded_fraction": 0.4827586206896552,
+      "mode": 128,
+      "operation_key": "9fd2119d4c04",
+      "record": 62,
+      "source_len": 2419
+    },
+    {
+      "chunks": [
+        {
+          "chunk": "204291444868",
+          "observations": 432
+        }
+      ],
+      "decoded_span": 256,
+      "known_decoded_bytes": 96,
+      "known_decoded_fraction": 0.375,
+      "mode": 128,
+      "operation_key": "c89256901a00",
+      "record": 63,
+      "source_len": 2024
+    },
+    {
+      "chunks": [
+        {
+          "chunk": "b69f366c92b6",
+          "observations": 507
+        }
+      ],
+      "decoded_span": 688,
+      "known_decoded_bytes": 80,
+      "known_decoded_fraction": 0.11627906976744186,
+      "mode": 64,
+      "operation_key": "93390e6b7c02",
+      "record": 64,
+      "source_len": 1604
+    },
+    {
+      "chunks": [
+        {
+          "chunk": "fe343ef73975",
+          "observations": 281
+        },
+        {
+          "chunk": "04a2d67cbfff",
+          "observations": 268
+        },
+        {
+          "chunk": "efcb6299a750",
+          "observations": 264
+        }
+      ],
+      "decoded_span": 720,
+      "known_decoded_bytes": 512,
+      "known_decoded_fraction": 0.7111111111111111,
+      "mode": 128,
+      "operation_key": "4e8210adb204",
+      "record": 66,
+      "source_len": 2411
+    },
+    {
+      "chunks": [
+        {
+          "chunk": "add3eb18b8cc",
+          "observations": 277
+        }
+      ],
+      "decoded_span": 656,
+      "known_decoded_bytes": 64,
+      "known_decoded_fraction": 0.0975609756097561,
+      "mode": 64,
+      "operation_key": "b0f2d169c404",
+      "record": 67,
+      "source_len": 2295
+    },
+    {
+      "chunks": [
+        {
+          "chunk": "c5c0741f5daa",
+          "observations": 509
+        },
+        {
+          "chunk": "7106a72e56d9",
+          "observations": 346
+        }
+      ],
+      "decoded_span": 640,
+      "known_decoded_bytes": 208,
+      "known_decoded_fraction": 0.325,
+      "mode": 128,
+      "operation_key": "0fe212a8d404",
+      "record": 68,
+      "source_len": 2421
+    },
+    {
+      "chunks": [
+        {
+          "chunk": "7106a72e56d9",
+          "observations": 46
+        }
+      ],
+      "decoded_span": 368,
+      "known_decoded_bytes": 64,
+      "known_decoded_fraction": 0.17391304347826086,
+      "mode": 128,
+      "operation_key": "2cf2cf97b204",
+      "record": 69,
+      "source_len": 2274
+    },
+    {
+      "chunks": [
+        {
+          "chunk": "fb00deab088b",
+          "observations": 509
+        },
+        {
+          "chunk": "70e7ea0193bb",
+          "observations": 509
+        }
+      ],
+      "decoded_span": 560,
+      "known_decoded_bytes": 384,
+      "known_decoded_fraction": 0.6857142857142857,
+      "mode": 128,
+      "operation_key": "098ad4a36805",
+      "record": 70,
+      "source_len": 2525
+    },
+    {
+      "chunks": [
+        {
+          "chunk": "144315176c64",
+          "observations": 24
+        }
+      ],
+      "decoded_span": 320,
+      "known_decoded_bytes": 48,
+      "known_decoded_fraction": 0.15,
+      "mode": 128,
+      "operation_key": "64cace949404",
+      "record": 81,
+      "source_len": 2266
+    },
+    {
+      "chunks": [
+        {
+          "chunk": "144315176c64",
+          "observations": 485
+        }
+      ],
+      "decoded_span": 128,
+      "known_decoded_bytes": 96,
+      "known_decoded_fraction": 0.75,
+      "mode": 128,
+      "operation_key": "0caa1588de03",
+      "record": 83,
+      "source_len": 2256
+    },
+    {
+      "chunks": [
+        {
+          "chunk": "2111cafaf69c",
+          "observations": 273
+        }
+      ],
+      "decoded_span": 160,
+      "known_decoded_bytes": 128,
+      "known_decoded_fraction": 0.8,
+      "mode": 128,
+      "operation_key": "3b0a538aa203",
+      "record": 84,
+      "source_len": 2198
+    },
+    {
+      "chunks": [
+        {
+          "chunk": "2111cafaf69c",
+          "observations": 236
+        }
+      ],
+      "decoded_span": 768,
+      "known_decoded_bytes": 128,
+      "known_decoded_fraction": 0.16666666666666666,
+      "mode": 64,
+      "operation_key": "5f925170d804",
+      "record": 85,
+      "source_len": 2238
+    },
+    {
+      "chunks": [
+        {
+          "chunk": "ba3aab1d5fd2",
+          "observations": 334
+        }
+      ],
+      "decoded_span": 1008,
+      "known_decoded_bytes": 256,
+      "known_decoded_fraction": 0.25396825396825395,
+      "mode": 64,
+      "operation_key": "0af2177f2e01",
+      "record": 87,
+      "source_len": 1947
+    }
+  ],
+  "records_with_pairs": 20,
+  "schema": "liteon-cdd-known-plaintext-pairs-v1",
+  "summary": {
+    "max_bit_reverse_lcs": 3,
+    "max_constant_xor_ngram": 4,
+    "max_direct_lcs": 2,
+    "max_not_lcs": 2
+  }
+}

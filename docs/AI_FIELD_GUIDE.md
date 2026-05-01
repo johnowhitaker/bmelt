@@ -1967,3 +1967,27 @@ Immediate useful directions:
     `+0x9d80`, and `+0x9dc0`. The response bridge pair `+0x7140/+0x7180`
     reacts to the two late CDD2 edits but not to group 27, so treat it as a
     specific bridge probe rather than a universal CDD detector.
+82. `fw_static_re_bundle_20260501.zip` is the current external-AI CDD/static
+    bundle. It includes `START_HERE.md`, sibling F0 images, the 8051 binary and
+    decompile, CDD record maps, affine-lane reports, trailer/auth negatives,
+    recent CDD affine live reports, and Claude's short-op plaintext artifacts.
+83. `scripts/analyze_liteon_cdd_known_plaintext_pairs.py` builds a candidate
+    known-output corpus by pairing encoded CDD record source spans with
+    decoded-looking 0x40-byte normal-runtime chunks from the public normal
+    work-window. Use the `with-readonly-harvests` report first:
+    `analysis/8051/cdd-known-plaintext-pairs-with-readonly-harvests-20260501.md/json`.
+84. `analysis/8051/normal-readonly-harvest-20260501.md` documents the latest
+    no-write normal-mode harvesting pass. It captured 40 baseline-only windows
+    and 8 cycles of safe standard commands from `/dev/sg0`; the drive stayed
+    normal `LD5M`. The corpus is now 669 captures / 902 unique 0x40-byte
+    chunks.
+85. Treat the normal work-window as a passive decoded-runtime tile sampler, not
+    as a flat decoded CDD image. The bridge chunk appears at `+0x7140`,
+    `+0x7180`, or `+0x7100`; aligning on it makes the rest of the window less
+    stable, not more. Use chunk identity and adjacency, not public slot order,
+    to reconstruct local hidden-runtime code.
+86. The best candidate CDD records for known-output grammar work are currently
+    records `51`, `55`, `58`, `60`, `66`, `68`, `70`, and `87`. They have
+    enough decoded-looking tile evidence to attack mode `0x40`/`0x80` record
+    grammars, and record `58` remains the GET CONFIG / public response-bridge
+    neighborhood.

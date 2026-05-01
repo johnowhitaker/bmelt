@@ -2070,3 +2070,40 @@ response-bridge pair `+0x7140/+0x7180` is still useful, but it is specific to
 the two late CDD2 edits and did not show up in the group-27 clean set. That is
 actually helpful: we now have a general detector set and a more specific
 response-bridge probe for future normal-mode hook work.
+
+Before pushing more risky live experiments, I rebuilt the external AI handoff
+bundle as `fw_static_re_bundle_20260501.zip`. The new bundle is much smaller
+than the old project dump and starts with a `START_HERE.md` that explains the
+current CDD problem, the valid sibling images, the affine leaf decoder, the
+three live affine edits, and the normal-mode detector offsets. It also includes
+the 8051 decompile, CDD record maps, trailer/auth negatives, and Claude's
+short-op plaintext artifacts. The point is to give other models a clean static
+surface while we continue live work locally.
+
+The next creative pivot was to stop treating normal `READ BUFFER id=01
+offset=0x070000` only as a flaky detector and start treating it as a passive
+decoded-runtime sampler. I ran two read-only harvests on the Linux drive while
+it was normal `LD5M`: 40 baseline capture-only windows, then 8 cycles of safe
+standard commands such as INQUIRY, EXTRAINQ, MODE SENSE, GET CONFIGURATION,
+GET EVENT STATUS, and MECHANISM STATUS. No firmware writes or helper payloads
+were sent, and the drive still reported normal `LD5M` afterward.
+
+That worked well enough to become a real avenue. The normal work-window corpus
+grew from 509 captures / 888 unique chunks to 669 captures / 902 unique
+chunks. More importantly, I made `analyze_liteon_cdd_known_plaintext_pairs.py`,
+which pairs encoded CDD record spans with decoded-looking 64-byte normal
+runtime chunks. With the new harvests, it gives 247 candidate known-output
+pairs across 35 CDD records. Simple direct, bitwise-NOT, bit-reversed, and
+constant-XOR checks are still negative, so this is not a trivial byte transform.
+But records such as 51, 55, 58, 60, 66, 68, 70, and 87 now have enough
+decoded-looking tile evidence to be useful static targets.
+
+This gives us a third path around the CDD wall. We still have the pure static
+sibling-image work, and we still have the slow currentboot/controller oracle,
+but now we also have a no-write normal-mode sampler for hidden decoded runtime
+tiles. It does not provide a flat decoded CDD dump: the public window rotates,
+and the bridge at `+0x7140/+0x7180/+0x7100` is only a local island anchor, not
+a global scroll key. Still, it gives us real decoded-looking code chunks that
+can be bucketed back to candidate CDD records. The next useful static job is
+to build per-record chunk adjacency graphs and infer record grammars from
+known encoded-source / decoded-tile pairs.
