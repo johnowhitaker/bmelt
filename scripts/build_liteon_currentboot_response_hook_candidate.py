@@ -260,17 +260,18 @@ def source_gateway_cdb_rw(selector_mask: int) -> bytes:
     """Read controller gateway, with guarded one-byte write mode.
 
     Normal mode is the proven one-byte gateway read. Write mode requires
-    CDB[6] == 0xa6 and CDB[10] == 0x5a, writes CDB[11] to the gateway address
-    selected by CDB[7:9] plus CDB[5]'s selector bits, then returns readback.
+    CDB[10] == 0x5a, writes CDB[11] to the gateway address selected by
+    CDB[7:9] plus CDB[5]'s selector bits, then returns readback.
+
+    Keep the guard in the proven preserved parameter window. An earlier v1
+    attempt also checked CDB[6], but live smoke tests showed that byte is not
+    preserved reliably enough by this currentboot handler.
     """
 
     source = bytearray()
-    source.extend(mov_dptr(0x8190))  # CDB byte 6: first write guard.
-    source.extend(bytes([0xE0, 0x64, 0xA6, 0x70, 0x00]))  # MOVX; XRL; JNZ read
-    jump_to_read_pos_1 = len(source) - 1
-    source.extend(mov_dptr(0x8194))  # CDB byte 10: second write guard.
+    source.extend(mov_dptr(0x8194))  # CDB byte 10: write guard.
     source.extend(bytes([0xE0, 0x64, 0x5A, 0x70, 0x00]))  # MOVX; XRL; JNZ read
-    jump_to_read_pos_2 = len(source) - 1
+    jump_to_read_pos = len(source) - 1
 
     source.extend(gateway_cdb_address_to_r5_r6_r7(selector_mask))
     source.extend(mov_dptr(0x8195))  # CDB byte 11: write value.
@@ -285,8 +286,7 @@ def source_gateway_cdb_rw(selector_mask: int) -> bytes:
     source.extend(gateway_read_r5_r6_r7_to_r5())
     end_source = len(source)
 
-    source[jump_to_read_pos_1] = rel8(jump_to_read_pos_1 + 1, read_start)
-    source[jump_to_read_pos_2] = rel8(jump_to_read_pos_2 + 1, read_start)
+    source[jump_to_read_pos] = rel8(jump_to_read_pos + 1, read_start)
     source[skip_read_pos + 1] = rel8(skip_read_pos + 2, end_source)
     return bytes(source)
 
@@ -1020,7 +1020,7 @@ def build_source(args: argparse.Namespace) -> tuple[str, bytes, dict[str, Any]]:
             {
                 "address_source": "cdb_bytes_7_8_9_plus_control_low_bits",
                 "write_value_source": "cdb_byte_11",
-                "write_magic": "cdb_6_a6_cdb_10_5a",
+                "write_magic": "cdb_10_5a",
                 "selector_mask": args.selector_mask,
                 "gateway_mode": "one_byte",
             },
@@ -1362,7 +1362,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--gateway-cdb-rw",
         action="store_true",
-        help="read controller gateway address CDB[7:9] + selector, and write CDB[11] first if CDB[6]=a6 and CDB[10]=5a",
+        help="read controller gateway address CDB[7:9] + selector, and write CDB[11] first if CDB[10]=5a",
     )
     parser.add_argument(
         "--gateway-cdb-bulk",

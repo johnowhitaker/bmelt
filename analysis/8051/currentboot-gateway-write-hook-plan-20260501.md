@@ -33,11 +33,13 @@ try a volatile controller/gateway RAM patch first.
 
 ## New Hook Mode
 
-Added builder mode:
+Added builder mode. Use the v2 name below; v1 also checked `CDB[6]`, and live
+smoke testing showed that byte is not preserved reliably enough by this
+currentboot handler.
 
 ```sh
 python3 scripts/build_liteon_currentboot_response_hook_candidate.py \
-  --name gateway-cdb-rw-v1 \
+  --name gateway-cdb-rw-v2 \
   --gateway-cdb-rw \
   --cave-len 0xdd
 ```
@@ -51,10 +53,9 @@ CDB[6]           00
 CDB[10]          00
 ```
 
-Write mode requires both guards:
+Write mode requires this guard:
 
 ```text
-CDB[6]  = a6
 CDB[10] = 5a
 CDB[11] = value to write
 ```
@@ -82,7 +83,21 @@ python3 scripts/write_liteon_currentboot_gateway.py \
 reader already recovers the helper string `Flash Type Error` there. A write
 test can change `F` to `G`, read back, then restore `F`.
 
+For multi-byte writes, use:
+
+```sh
+python3 scripts/write_liteon_currentboot_gateway_blob.py \
+  --device /dev/sg0 \
+  --address 0x018620 \
+  --hex 476c617368
+```
+
 ## Caution
+
+Live note: `gateway-cdb-rw-v1` installed cleanly and the read side returned
+`Flash Type Error` from `0x018620`, but the write smoke test returned GOOD with
+unchanged readback. That negative matches the old CDB[6] preservation warning
+and is the reason v2 keeps the guard in `CDB[10]`.
 
 This is a controller-memory write primitive, not persistent flash programming.
 It should be tested first on known scratch/currentboot helper text, then on

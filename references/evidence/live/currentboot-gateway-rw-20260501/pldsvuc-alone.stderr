@@ -1,0 +1,6 @@
+SCSI Status: Check Condition 
+
+Sense Information:
+Fixed format, current; Sense key: Not Ready
+Additional sense: Medium not present
+

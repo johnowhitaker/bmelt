@@ -2,9 +2,9 @@
 """Write one controller-gateway byte through the guarded currentboot hook.
 
 This assumes the `gateway-cdb-rw` currentboot response hook is installed. The
-hook writes only when CDB[6] is `0xa6` and CDB[10] is `0x5a`; otherwise the
-same CDB shape is a one-byte gateway read. The hook returns the readback byte
-at response byte 0x20.
+v2 hook writes only when CDB[10] is `0x5a`; otherwise the same CDB shape is a
+one-byte gateway read. The hook returns the readback byte at response byte
+0x20.
 """
 
 from __future__ import annotations
@@ -60,7 +60,7 @@ def main() -> int:
         0x00,
         0xF0,
         0x40 | selector,
-        0xA6,
+        0x00,
         (base >> 16) & 0xFF,
         (base >> 8) & 0xFF,
         base & 0xFF,

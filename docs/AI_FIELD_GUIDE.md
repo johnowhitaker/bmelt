@@ -1759,11 +1759,13 @@ Immediate useful directions:
 56. `analysis/8051/currentboot-gateway-write-hook-plan-20260501.md` adds the
     next volatile primitive: `--gateway-cdb-rw` in
     `scripts/build_liteon_currentboot_response_hook_candidate.py`, plus
-    `scripts/write_liteon_currentboot_gateway.py`. The hook reads the controller
-    gateway normally, but if CDB[6] is `a6` and CDB[10] is `5a`, it writes
-    CDB[11] through `0x4095..0x4098` and returns readback. It needs
-    `--cave-len 0xdd` because the payload is 0xc0 bytes. First smoke test should
-    be a reversible write to currentboot helper text around controller
-    `0x018620`; if that works, this becomes the candidate route for testing
-    volatile controller/gateway page patches before attempting more sealed-flash
-    edits.
+    `scripts/write_liteon_currentboot_gateway.py` and
+    `scripts/write_liteon_currentboot_gateway_blob.py`. The hook reads the
+    controller gateway normally, but if CDB[10] is `5a`, it writes CDB[11]
+    through `0x4095..0x4098` and returns readback. Use a v2 artifact name: v1
+    also checked CDB[6], installed cleanly, and read `Flash Type Error` from
+    `0x018620`, but its write branch did not fire. V2 is live-proven:
+    `0x018620` changed from `Flash Type Error` to `Glash Type Error` and was
+    restored. A harmless `0x074030` marker showed no trivial carryover into
+    normal mode: bare `PLDSVUC` stayed currentboot, and full recovery wiped the
+    marker before normal `READ BUFFER`.

@@ -1768,10 +1768,25 @@ image.
 That pushed the next idea sideways: if the normal window is mostly
 controller/gateway memory, make the currentboot hook write that memory
 directly. I added a guarded `gateway-cdb-rw` hook mode. In ordinary use it is
-the same one-byte controller-gateway reader we already trust. If CDB[6] is
-`a6` and CDB[10] is `5a`, it writes CDB[11] through `0x4095..0x4098`, then
-reads the same address back and returns the byte at response offset `0x20`.
-The first intended smoke test is reversible and currentboot-local: change the
-helper string at controller `0x018620` from `Flash...` to `Glash...`, read it
-back, then restore it. If that works, we have a volatile controller-memory
-patch primitive to test before committing anything to sealed flash.
+the same one-byte controller-gateway reader we already trust. The first version
+required `CDB[6] == 0xa6` and `CDB[10] == 0x5a`, then wrote `CDB[11]` through
+`0x4095..0x4098`, read the same address back, and returned the byte at response
+offset `0x20`.
+
+That v1 hook half-worked in exactly the useful way: it installed cleanly, and
+the read path returned `Flash Type Error` from controller `0x018620`, but the
+write branch did not fire. The command returned GOOD and readback stayed
+`0x46`. That lines up with the older warning that CDB byte 6 is not preserved
+reliably in this handler. I rebuilt the hook as v2 so the guard lives only in
+the proven parameter window: `CDB[10] == 0x5a`, with the write value in
+`CDB[11]`. The smoke test remains reversible and currentboot-local: change
+`Flash...` to `Glash...`, read it back, then restore it.
+
+V2 worked. The smoke test changed the helper string from `Flash Type Error` to
+`Glash Type Error`, then restored it. I also used a padding byte before the
+`PLDS CORPORATION` string at controller `0x074030` as a harmless carryover
+marker. A bare `PLDSVUC` lock did not exit currentboot; it returned CHECK/Not
+Ready and stayed in the hooked `;D5C` view. The full recovery path returned to
+LD5M, but the marker was gone in normal `READ BUFFER`, so this is a strong
+currentboot volatile write primitive, not yet a trivial way to patch normal
+controller memory across recovery.

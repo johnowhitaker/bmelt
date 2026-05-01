@@ -466,20 +466,27 @@ New files:
 
 ```text
 analysis/8051/currentboot-gateway-write-hook-plan-20260501.md
+analysis/8051/currentboot-gateway-rw-live-20260501.md
 scripts/write_liteon_currentboot_gateway.py
+scripts/write_liteon_currentboot_gateway_blob.py
 ```
 
 `scripts/build_liteon_currentboot_response_hook_candidate.py` now has
 `--gateway-cdb-rw`. It is a one-byte controller gateway reader by default. If
-host CDB[6] is `a6` and CDB[10] is `5a`, it writes CDB[11] through
-`0x4095..0x4098`, reads the same controller address back through
-`0x4091..0x4098`, and returns the readback byte at response offset `0x20`.
+host `CDB[10]` is `5a`, it writes `CDB[11]` through `0x4095..0x4098`, reads the
+same controller address back through `0x4091..0x4098`, and returns the readback
+byte at response offset `0x20`.
+
+Use the v2 artifact name. v1 also checked `CDB[6] == a6`; it installed cleanly
+and the read side returned `Flash Type Error` from `0x018620`, but the write
+branch did not fire. Treat that as another confirmation that CDB byte 6 is not
+a safe parameter byte in this handler.
 
 Build with the larger proven FF cave:
 
 ```sh
 python3 scripts/build_liteon_currentboot_response_hook_candidate.py \
-  --name gateway-cdb-rw-v1 \
+  --name gateway-cdb-rw-v2 \
   --gateway-cdb-rw \
   --cave-len 0xdd
 ```
@@ -488,7 +495,7 @@ The dry-run payload is `0xc0` bytes, so the old `0x80` cave default is too
 small. The `0x6ee3` cave is all-FF through `0x6fbf`, so `0xdd` bytes is still
 below `0x6ff0`.
 
-First live smoke test should be reversible:
+Live smoke test passed:
 
 ```sh
 # read first to confirm "Flash Type Error"
@@ -502,7 +509,9 @@ python3 scripts/write_liteon_currentboot_gateway.py --device /dev/sg0 \
   --address 0x018620 --value 0x46
 ```
 
-If that works, the next high-value test is a volatile patch to a
-currentboot/normal-overlap controller page, followed by recovery into normal
-mode to see whether the patch carries over long enough to affect a safe command
-path. Do not test this first on the START STOP branch.
+The v2 write changed `Flash Type Error` to `Glash Type Error` and restored it.
+The blob writer repeated the same proof for the five-byte prefix. A harmless
+marker at controller `0x074030` also wrote/read in currentboot, but did not
+survive either bare `PLDSVUC` or the known full recovery path into normal mode.
+So this is a currentboot volatile controller-memory write primitive, not a
+trivial normal-runtime patch primitive.

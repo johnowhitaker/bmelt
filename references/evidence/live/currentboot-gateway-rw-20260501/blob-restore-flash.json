@@ -1,0 +1,121 @@
+{
+  "address": 99872,
+  "ascii_preview": "Flash",
+  "bytes_hex": "466c617368",
+  "device": "/dev/sg0",
+  "length": 5,
+  "readback_ascii_preview": "Flash",
+  "readback_hex": "466c617368",
+  "records": [
+    {
+      "address": 99872,
+      "cdb": [
+        18,
+        0,
+        0,
+        0,
+        240,
+        96,
+        0,
+        1,
+        134,
+        0,
+        90,
+        70
+      ],
+      "readback": 70,
+      "returncode": 0,
+      "stderr": "SCSI Status: Good \n\nWriting 176 bytes of data to stdout\n",
+      "stdout_len": 176,
+      "value": 70
+    },
+    {
+      "address": 99873,
+      "cdb": [
+        18,
+        0,
+        0,
+        0,
+        240,
+        97,
+        0,
+        1,
+        134,
+        0,
+        90,
+        108
+      ],
+      "readback": 108,
+      "returncode": 0,
+      "stderr": "SCSI Status: Good \n\nWriting 176 bytes of data to stdout\n",
+      "stdout_len": 176,
+      "value": 108
+    },
+    {
+      "address": 99874,
+      "cdb": [
+        18,
+        0,
+        0,
+        0,
+        240,
+        98,
+        0,
+        1,
+        134,
+        0,
+        90,
+        97
+      ],
+      "readback": 97,
+      "returncode": 0,
+      "stderr": "SCSI Status: Good \n\nWriting 176 bytes of data to stdout\n",
+      "stdout_len": 176,
+      "value": 97
+    },
+    {
+      "address": 99875,
+      "cdb": [
+        18,
+        0,
+        0,
+        0,
+        240,
+        99,
+        0,
+        1,
+        134,
+        0,
+        90,
+        115
+      ],
+      "readback": 115,
+      "returncode": 0,
+      "stderr": "SCSI Status: Good \n\nWriting 176 bytes of data to stdout\n",
+      "stdout_len": 176,
+      "value": 115
+    },
+    {
+      "address": 99876,
+      "cdb": [
+        18,
+        0,
+        0,
+        0,
+        240,
+        100,
+        0,
+        1,
+        134,
+        0,
+        90,
+        104
+      ],
+      "readback": 104,
+      "returncode": 0,
+      "stderr": "SCSI Status: Good \n\nWriting 176 bytes of data to stdout\n",
+      "stdout_len": 176,
+      "value": 104
+    }
+  ]
+}

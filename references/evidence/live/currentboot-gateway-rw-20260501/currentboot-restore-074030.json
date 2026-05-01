@@ -1,0 +1,1 @@
+{"address": 475184, "base": 475136, "cdb": [18, 0, 0, 0, 240, 112, 0, 7, 64, 0, 90, 255], "device": "/dev/sg0", "readback": 255, "returncode": 0, "selector": 48, "stderr": "SCSI Status: Good \n\nWriting 176 bytes of data to stdout\n", "stdout_len": 176, "value": 255}
