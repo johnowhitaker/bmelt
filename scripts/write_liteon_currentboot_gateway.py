@@ -5,6 +5,12 @@ This assumes the `gateway-cdb-rw` currentboot response hook is installed. The
 v2 hook writes only when CDB[10] is `0x5a`; otherwise the same CDB shape is a
 one-byte gateway read. The hook returns the readback byte at response byte
 0x20.
+
+By default the tool keeps CDB[5] at the canonical EXTRAINQ value `0x40` and
+puts the full 24-bit address in CDB[7:9]. The older CDB[5] selector form is
+still available for reproducing old logs. Both forms smoke-tested cleanly on
+2026-05-01 when the hook was actually installed; earlier `0x30` readbacks were
+caused by testing after canonical recovery had wiped the hook.
 """
 
 from __future__ import annotations
@@ -44,6 +50,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--timeout", type=int, default=10)
     parser.add_argument("--request-len", type=int, default=176)
     parser.add_argument("--response-offset", type=parse_int, default=0x20)
+    parser.add_argument(
+        "--use-cdb5-selector",
+        action="store_true",
+        help="legacy mode: put address low six bits in CDB[5] instead of CDB[9]",
+    )
     return parser.parse_args()
 
 
@@ -51,8 +62,12 @@ def main() -> int:
     args = parse_args()
     if not 0 <= args.address <= 0xFFFFFF:
         raise ValueError(f"controller address out of 24-bit range: 0x{args.address:x}")
-    base = args.address & ~0x3F
-    selector = args.address & 0x3F
+    if args.use_cdb5_selector:
+        cdb_address = args.address & ~0x3F
+        selector = args.address & 0x3F
+    else:
+        cdb_address = args.address
+        selector = 0
     cdb = [
         0x12,
         0x00,
@@ -61,9 +76,9 @@ def main() -> int:
         0xF0,
         0x40 | selector,
         0x00,
-        (base >> 16) & 0xFF,
-        (base >> 8) & 0xFF,
-        base & 0xFF,
+        (cdb_address >> 16) & 0xFF,
+        (cdb_address >> 8) & 0xFF,
+        cdb_address & 0xFF,
         0x5A,
         args.value,
     ]
@@ -86,8 +101,9 @@ def main() -> int:
     record: dict[str, Any] = {
         "device": args.device,
         "address": args.address,
-        "base": base,
+        "cdb_address": cdb_address,
         "selector": selector,
+        "use_cdb5_selector": args.use_cdb5_selector,
         "value": args.value,
         "cdb": cdb,
         "returncode": proc.returncode,

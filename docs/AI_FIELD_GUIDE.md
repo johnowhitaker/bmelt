@@ -874,6 +874,11 @@ instrument when both controller reads and small XDATA writes are needed:
 references/firmware/extracted/currentboot-response-hook-candidates/currentboot-response-hook-gateway-cdb-bulk-xdata-write-v2/currentboot-response-hook-gateway-cdb-bulk-xdata-write-v2/liteon-full-currentboot-ld5m-helper-bypass-currentboot-response-hook-gateway-cdb-bulk-xdata-write-v2-candidate.json
 ```
 
+Live correction from 2026-05-01: the builder now checks `CDB[10] == a5`
+directly. An earlier write-only build used the wrong guard-byte order and fell
+through to the gateway reader. The corrected candidate was installed and
+smoke-tested with both a bulk gateway read and an XDATA write.
+
 Write mode uses:
 
 ```text
@@ -884,9 +889,17 @@ CDB[10:11]          = write magic a5 5a
 response[0x20]      = readback byte
 ```
 
-There is also a newer combined read/write hook with the same default gateway
-bulk mode. Use `v2`; `v1` used a brittle two-byte guard and its XDATA-read
-branch timed out in the first live smoke test.
+There is also a rebuilt combined read/write hook with the same default gateway
+bulk mode. As of the 2026-05-01 smoke test, prefer the write-only candidate
+above; if using the RW candidate, use it only as:
+
+```text
+bulk gateway read + guarded XDATA write
+```
+
+Do not use the RW candidate's XDATA-read branch for routine work. The
+`CDB[10] = 5a` read branch timed out live and blocked the SCSI path until the
+stuck host process was killed and the drive was Pico power-cycled.
 
 ```text
 references/firmware/extracted/currentboot-response-hook-candidates/currentboot-response-hook-gateway-cdb-bulk-xdata-rw-v2/currentboot-response-hook-gateway-cdb-bulk-xdata-rw-v2/liteon-full-currentboot-ld5m-helper-bypass-currentboot-response-hook-gateway-cdb-bulk-xdata-rw-v2-candidate.json
@@ -897,19 +910,18 @@ The host-facing convention for v2 is:
 ```text
 normal gateway read     CDB[10] = 00 and CDB[11] = 00
 guarded XDATA write     CDB[10] = a5, CDB[9] = value
-guarded XDATA read      CDB[10] = 5a
+guarded XDATA read      CDB[10] = 5a   # live-hangs; avoid
 unknown nonzero selector returns 0xee instead of falling into gateway mode
 ```
 
-For the read path, use:
+Working write smoke:
 
 ```sh
 ssh root@jonathan-thinkpad-t480s \
-  'cd /home/jonathan/boastermelt && python3 scripts/read_liteon_currentboot_xdata.py \
+  'cd /home/jonathan/boastermelt && python3 scripts/write_liteon_currentboot_xdata.py \
     --device /dev/sg0 \
-    --address 0x4a00 \
-    --length 0x30 \
-    --read-magic 5aa5'
+    --address 0x8000 \
+    --value 0x5a'
 ```
 
 Do not reuse the failed v1 idea of guarding on CDB byte `6`; that byte was not

@@ -342,19 +342,17 @@ def source_gateway_cdb_bulk_with_xdata_write(selector_mask: int, storage_offset:
     """Gateway bulk read with an optional guarded XDATA write mode.
 
     Normal mode matches source_gateway_cdb_bulk(): CDB[7:9] is a 24-bit
-    controller address. The stock currentboot CDB shadow stores the two guard
-    bytes in reverse order at 0x8194/0x8195, so the host sends CDB[10:11] as
-    a5/5a for this write mode. The hook writes CDB[9] to XDATA address
-    CDB[7:8] + selector and returns the readback byte in R5. build_payload's
-    standard response-byte write exposes that readback at response[0x20].
+    controller address. Live smoke tests showed that CDB byte 10 is preserved
+    at xdata[0x8194], so the host selects write mode with CDB[10] == 0xa5.
+    CDB[11] is ignored. The hook writes CDB[9] to XDATA address CDB[7:8] +
+    selector and returns the readback byte in R5. build_payload's standard
+    response-byte write exposes that readback at response[0x20].
     """
 
     checks = bytearray()
-    jump_to_gateway_positions: list[int] = []
-    for cdb_addr, expected in ((0x8194, 0x5A), (0x8195, 0xA5)):
-        checks.extend(mov_dptr(cdb_addr))
-        checks.extend(bytes([0xE0, 0x64, expected, 0x70, 0x00]))  # MOVX; XRL; JNZ gateway
-        jump_to_gateway_positions.append(len(checks) - 1)
+    checks.extend(mov_dptr(0x8194))  # CDB byte 10: write selector.
+    checks.extend(bytes([0xE0, 0x64, 0xA5, 0x70, 0x00]))  # MOVX; XRL; JNZ gateway
+    jump_to_gateway_pos = len(checks) - 1
 
     write_block = b"".join(
         [
@@ -377,8 +375,7 @@ def source_gateway_cdb_bulk_with_xdata_write(selector_mask: int, storage_offset:
     source.extend(source_gateway_cdb_bulk(selector_mask, storage_offset, bulk_len))
     end_source = len(source)
 
-    for position in jump_to_gateway_positions:
-        source[position] = rel8(position + 1, gateway_start)
+    source[jump_to_gateway_pos] = rel8(jump_to_gateway_pos + 1, gateway_start)
     source[skip_gateway_pos + 1] = rel8(skip_gateway_pos + 2, end_source)
     return bytes(source)
 

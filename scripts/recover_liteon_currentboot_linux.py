@@ -127,6 +127,17 @@ def describe_extrainq(data: bytes) -> dict[str, Any]:
     return out
 
 
+def is_currentboot_revision(revision: str | None) -> bool:
+    """Return true for the stock and response-hooked currentboot revisions."""
+    if not revision:
+        return False
+    # The currentboot response hook writes a diagnostic byte into response[0x20],
+    # which is also the first byte of the standard INQUIRY revision field.
+    # Values like "ZD5C" and ";D5C" are therefore still the recoverable
+    # DS-8ABSH currentboot personality, not a different firmware revision.
+    return revision == "0D5C" or (len(revision) == 4 and revision[1:] == "D5C")
+
+
 def capture_identity(sg_raw: str, device: str, timeout: int) -> dict[str, Any]:
     standard = run_sg_raw(sg_raw, device, STANDARD_INQUIRY_CDB, request_len=36, timeout=timeout)
     extrainq = run_sg_raw(sg_raw, device, EXTRAINQ_CDB, request_len=0xF0, timeout=timeout)
@@ -250,8 +261,12 @@ def main() -> int:
     try:
         result["identity_before"] = capture_identity(args.sg_raw, args.device, args.timeout)
         before_rev = result["identity_before"]["standard"].get("revision")
-        if before_rev != "0D5C" and not args.force:
-            raise RuntimeError(f"preflight revision is {before_rev!r}, expected 0D5C; use --force to run anyway")
+        result["preflight_currentboot_like"] = is_currentboot_revision(before_rev)
+        if not result["preflight_currentboot_like"] and not args.force:
+            raise RuntimeError(
+                f"preflight revision is {before_rev!r}, expected currentboot-like *D5C; "
+                "use --force to run anyway"
+            )
         expected_readback: bytes | None = None
         for ordinal, event in enumerate(sequence):
             item, expected_readback = send_event(args, event, expected_readback=expected_readback)

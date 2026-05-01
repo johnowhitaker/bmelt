@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
-"""Write a byte string through the guarded currentboot controller-gateway hook."""
+"""Write a byte string through the guarded currentboot controller-gateway hook.
+
+By default this keeps CDB[5] at the canonical EXTRAINQ value `0x40` and sends
+the full 24-bit address in CDB[7:9]. The older CDB[5] selector form is retained
+behind --use-cdb5-selector for reproducing old logs. Both forms smoke-tested
+cleanly on 2026-05-01 when the hook was installed.
+"""
 
 from __future__ import annotations
 
@@ -42,11 +48,15 @@ def ascii_preview(data: bytes) -> str:
     return "".join(chr(byte) if 0x20 <= byte < 0x7F else "." for byte in data)
 
 
-def gateway_cdb(address: int, *, value: int | None) -> list[int]:
+def gateway_cdb(address: int, *, value: int | None, use_cdb5_selector: bool) -> list[int]:
     if not 0 <= address <= 0xFFFFFF:
         raise ValueError(f"controller address out of 24-bit range: 0x{address:x}")
-    base = address & ~0x3F
-    selector = address & 0x3F
+    if use_cdb5_selector:
+        cdb_address = address & ~0x3F
+        selector = address & 0x3F
+    else:
+        cdb_address = address
+        selector = 0
     return [
         0x12,
         0x00,
@@ -55,9 +65,9 @@ def gateway_cdb(address: int, *, value: int | None) -> list[int]:
         0xF0,
         0x40 | selector,
         0x00,
-        (base >> 16) & 0xFF,
-        (base >> 8) & 0xFF,
-        base & 0xFF,
+        (cdb_address >> 16) & 0xFF,
+        (cdb_address >> 8) & 0xFF,
+        cdb_address & 0xFF,
         0x5A if value is not None else 0x00,
         value if value is not None else 0x00,
     ]
@@ -109,6 +119,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--timeout", type=int, default=10)
     parser.add_argument("--request-len", type=int, default=176)
     parser.add_argument(
+        "--use-cdb5-selector",
+        action="store_true",
+        help="legacy mode: put address low six bits in CDB[5] instead of CDB[9]",
+    )
+    parser.add_argument(
         "--no-verify",
         action="store_true",
         help="do not fail if a returned readback byte differs from the written byte",
@@ -125,7 +140,7 @@ def main() -> int:
     readback = bytearray()
     for offset, value in enumerate(payload):
         address = args.address + offset
-        cdb = gateway_cdb(address, value=value)
+        cdb = gateway_cdb(address, value=value, use_cdb5_selector=args.use_cdb5_selector)
         got, record = run_inquiry(
             sg_raw=args.sg_raw,
             device=args.device,
@@ -133,7 +148,14 @@ def main() -> int:
             timeout=args.timeout,
             request_len=args.request_len,
         )
-        record.update({"address": address, "value": value, "readback": got})
+        record.update(
+            {
+                "address": address,
+                "value": value,
+                "readback": got,
+                "use_cdb5_selector": args.use_cdb5_selector,
+            }
+        )
         records.append(record)
         if got < 0:
             raise RuntimeError(f"short INQUIRY response at 0x{address:06x}")
@@ -149,6 +171,7 @@ def main() -> int:
         "readback_hex": bytes(readback).hex(),
         "ascii_preview": ascii_preview(payload),
         "readback_ascii_preview": ascii_preview(bytes(readback)),
+        "use_cdb5_selector": args.use_cdb5_selector,
         "records": records,
     }
     if args.json_out:

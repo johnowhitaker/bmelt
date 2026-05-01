@@ -131,19 +131,20 @@ def gateway_write_cdb(address: int, value: int) -> list[int]:
         raise ValueError(f"controller gateway address out of range: 0x{address:x}")
     if not 0 <= value <= 0xFF:
         raise ValueError(f"gateway write value out of range: 0x{value:x}")
-    base = address & ~0x3F
-    selector = address & 0x3F
+    # Keep CDB[5] at the canonical EXTRAINQ value for new patch specs. The
+    # legacy selector form also works when the hook is installed, but direct
+    # addressing makes per-byte patch records easier to audit.
     return [
         0x12,
         0x00,
         0x00,
         0x00,
         0xF0,
-        0x40 | selector,
+        0x40,
         0x00,
-        (base >> 16) & 0xFF,
-        (base >> 8) & 0xFF,
-        base & 0xFF,
+        (address >> 16) & 0xFF,
+        (address >> 8) & 0xFF,
+        address & 0xFF,
         0x5A,
         value,
     ]
@@ -641,6 +642,7 @@ def expected_sha_for_size(expected: dict[str, Any], key: str, size: int | None) 
 def should_recover_after_run(
     *,
     recover_on_currentboot: bool,
+    force_recover_currentboot: bool,
     final_revision: str | None,
     baseline_revision: str,
     expected_revision: str,
@@ -649,6 +651,8 @@ def should_recover_after_run(
         return False
     if not final_revision:
         return True
+    if force_recover_currentboot:
+        return final_revision != baseline_revision
     # A successful official-image probe may legitimately report AD12/AHS9/etc.
     # Do not immediately overwrite that evidence with the LD5M recovery path.
     if final_revision in {baseline_revision, expected_revision}:
@@ -680,6 +684,14 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--buffer-id", type=lambda value: int(value, 0), default=0xF0)
     parser.add_argument("--crypto-reset", type=lambda value: int(value, 0), default=0x80)
     parser.add_argument("--recover-on-currentboot", action="store_true")
+    parser.add_argument(
+        "--force-recover-currentboot",
+        action="store_true",
+        help=(
+            "with --recover-on-currentboot, run recovery for any non-baseline revision "
+            "even if the candidate metadata says that currentboot is the expected endpoint"
+        ),
+    )
     parser.add_argument("--f0-read-retries", type=int, default=8)
     parser.add_argument("--f0-read-retry-delay", type=float, default=2.0)
     parser.add_argument(
@@ -853,6 +865,7 @@ def main() -> int:
 
         if should_recover_after_run(
             recover_on_currentboot=args.recover_on_currentboot,
+            force_recover_currentboot=args.force_recover_currentboot,
             final_revision=final_rev,
             baseline_revision=args.recovery_baseline_revision,
             expected_revision=expected_revision,
@@ -866,6 +879,7 @@ def main() -> int:
             after_error_rev = result["identity_after_error"]["standard"].get("revision")
             if should_recover_after_run(
                 recover_on_currentboot=args.recover_on_currentboot,
+                force_recover_currentboot=args.force_recover_currentboot,
                 final_revision=after_error_rev,
                 baseline_revision=args.recovery_baseline_revision,
                 expected_revision=expected_revision,

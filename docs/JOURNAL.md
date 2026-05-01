@@ -816,6 +816,18 @@ They also confirm the awkward negative result at useful scale:
 gateway-bulk tool is real, but the decoded CDD likely needs a later runtime
 phase, not just a faster read of the same early phase.
 
+The next IO cleanup pass sharpened that into a more useful service mode. A
+rebuilt service hook can do bulk controller-gateway reads and guarded XDATA
+writes from the same currentboot response path. The good half is solid:
+`controller[0x018620..]` returns the helper text `Flash Type Error` in one
+bulk response, and `xdata[0x8000] <- 0x5a` read back as `0x5a`. The bad half is
+also now documented: the combined hook's XDATA-read branch timed out and left
+the SCSI path wedged until the host process was killed and the Pico cut drive
+power. I rebuilt the write-only hook to use the proven `CDB[10] = a5` guard
+directly and left that as the preferred service hook. So the practical debug
+primitive is now "bulk gateway read plus XDATA write", not generic XDATA
+read/write.
+
 ## The LED Is Probably Not A Simple Latch
 
 With the bulk reader working, the obvious next dream was a fast hardware-visible

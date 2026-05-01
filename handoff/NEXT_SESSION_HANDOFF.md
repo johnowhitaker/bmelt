@@ -1051,3 +1051,40 @@ Best general normal-mode detector offsets:
 Bridge-specific note: `0x7140/0x7180` reacts to group99 and group105 but not
 group27, so it remains useful for response-bridge work but is not the universal
 CDD-affine detector.
+
+## Currentboot Bulk IO Smoke
+
+Latest IO work rebuilt and tested:
+
+```text
+currentboot-response-hook-gateway-cdb-bulk-xdata-write-v2
+```
+
+Live result:
+
+- bulk controller-gateway reads work;
+- guarded XDATA writes work;
+- guarded XDATA reads through the separate `rw-v2` combined hook do **not**
+  work and timed out badly enough to require killing the stuck `sg_raw` process
+  plus a Pico power cycle.
+
+Known-good smoke reads:
+
+```text
+controller[0x018620..] -> "Flash Type Error" plus helper code
+xdata[0x8000] <- 0x5a  -> readback 0x5a
+```
+
+Use this service mode as "bulk gateway read + XDATA write". Do not pass
+`--read-magic 5aa5` to `read_liteon_currentboot_xdata.py` unless intentionally
+reproducing the bad branch; the script now requires an explicit hazard flag for
+that path.
+
+Builder correction: the first write-only build used the wrong guard-byte order
+and fell through to the gateway reader. The builder now checks `CDB[10] == a5`
+directly, and the corrected candidate was installed and smoke-tested.
+
+The ordinary canonical currentboot recovery rewrites stock LD5M and wipes
+installed currentboot response hooks. For quick service-mode tests, a Pico
+power cycle can return the drive to normal `LD5M` without doing that canonical
+rewrite.

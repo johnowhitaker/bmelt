@@ -116,7 +116,16 @@ def parse_args() -> argparse.Namespace:
         "--read-magic",
         choices=("none", "5aa5"),
         default="none",
-        help="set CDB[10:11] read magic for combined gateway/XDATA hooks",
+        help=(
+            "set CDB[10:11] read magic for combined gateway/XDATA hooks. "
+            "The rebuilt gateway-cdb-bulk-xdata-rw-v2 read branch hung live "
+            "on 2026-05-01; use only with the explicit hazard acknowledgement."
+        ),
+    )
+    parser.add_argument(
+        "--allow-known-hanging-combined-read",
+        action="store_true",
+        help="allow --read-magic 5aa5 despite the live timeout observed for the combined RW hook",
     )
     return parser.parse_args()
 
@@ -127,6 +136,12 @@ def main() -> int:
         raise ValueError("--length must be at least 1")
     if args.address + args.length > 0x10000:
         raise ValueError("requested range crosses the 16-bit XDATA address space")
+    if args.read_magic == "5aa5" and not args.allow_known_hanging_combined_read:
+        raise SystemExit(
+            "--read-magic 5aa5 is guarded because the combined RW hook's XDATA-read "
+            "branch timed out live; pass --allow-known-hanging-combined-read only "
+            "when intentionally reproducing that path"
+        )
     read_magic = (0x5A, 0xA5) if args.read_magic == "5aa5" else None
     data = bytearray()
     records: list[dict[str, Any]] = []
