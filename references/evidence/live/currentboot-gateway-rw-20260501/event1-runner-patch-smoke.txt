@@ -1,0 +1,17 @@
+event=0 phase=live_extrainq_read rc=0 out=0 in=176
+event=1 phase=profile_tail_arg7f rc=0 out=3024 in=0
+gateway-patch-after event=1 phase=profile_tail_arg7f address=0x018620 len=5
+wrote runs/currentboot-response-hook/event1-gateway-patch-smoke/liteon-persistence-20260501T142325Z/persistence-experiment-result.json
+success=0
+final_revision_after_sequence=;D5C
+{
+  "expected_post_sha256_for_size": "488f49c7f5d8141186db6ca006a33cccefcc391b537d2a903f4ebaa7ea8f2e39",
+  "expected_pre_sha256_for_size": "488f49c7f5d8141186db6ca006a33cccefcc391b537d2a903f4ebaa7ea8f2e39",
+  "post_decrypted_sha256": null,
+  "post_matches_expected_pre": false,
+  "post_matches_expected_target": false,
+  "post_size": null,
+  "pre_decrypted_sha256": null,
+  "pre_matches_expected": false,
+  "pre_size": null
+}

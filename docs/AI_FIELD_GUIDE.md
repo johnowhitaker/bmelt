@@ -1768,4 +1768,8 @@ Immediate useful directions:
     `0x018620` changed from `Flash Type Error` to `Glash Type Error` and was
     restored. A harmless `0x074030` marker showed no trivial carryover into
     normal mode: bare `PLDSVUC` stayed currentboot, and full recovery wiped the
-    marker before normal `READ BUFFER`.
+    marker before normal `READ BUFFER`. The Linux persistence runner also has
+    `--gateway-patch-after-event EVENT:ADDR:HEX` and
+    `--gateway-patch-after-phase PHASE:ADDR:HEX`; a live event-1 smoke test
+    used it to patch the helper string to `Glash` immediately after profile
+    tail entry.

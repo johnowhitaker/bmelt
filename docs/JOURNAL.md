@@ -1790,3 +1790,12 @@ Ready and stayed in the hooked `;D5C` view. The full recovery path returned to
 LD5M, but the marker was gone in normal `READ BUFFER`, so this is a strong
 currentboot volatile write primitive, not yet a trivial way to patch normal
 controller memory across recovery.
+
+I also added the missing workflow glue: the Linux persistence runner can now
+apply gateway patches after a specific event or after every event with a given
+phase. The smoke test used
+`--gateway-patch-after-event 1:0x018620:476c617368`, which means “after event
+1, write `Glash` at the helper-string address.” The runner logged the patch,
+and the next read showed `Glash Type Error`. That gives us a faster way to try
+helper-overlay changes at the exact point they matter, without regenerating a
+new profile-tail candidate for every tiny experiment.

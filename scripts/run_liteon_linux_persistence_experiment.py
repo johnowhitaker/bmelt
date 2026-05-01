@@ -47,6 +47,13 @@ def bytes_from_cdb(text: str) -> list[int]:
     return [int(part, 16) for part in text.split()]
 
 
+def bytes_from_hex_text(text: str) -> bytes:
+    compact = compact_hex(text)
+    if len(compact) % 2:
+        raise ValueError(f"hex payload has odd length: {text!r}")
+    return bytes.fromhex(compact)
+
+
 def cdb_text(cdb: list[int]) -> str:
     return " ".join(f"{byte:02X}" for byte in cdb)
 
@@ -117,6 +124,59 @@ def read_buffer_cdb(buffer_id: int, offset: int, length: int) -> list[int]:
         length & 0xFF,
         0x00,
     ]
+
+
+def gateway_write_cdb(address: int, value: int) -> list[int]:
+    if not 0 <= address <= 0xFFFFFF:
+        raise ValueError(f"controller gateway address out of range: 0x{address:x}")
+    if not 0 <= value <= 0xFF:
+        raise ValueError(f"gateway write value out of range: 0x{value:x}")
+    base = address & ~0x3F
+    selector = address & 0x3F
+    return [
+        0x12,
+        0x00,
+        0x00,
+        0x00,
+        0xF0,
+        0x40 | selector,
+        0x00,
+        (base >> 16) & 0xFF,
+        (base >> 8) & 0xFF,
+        base & 0xFF,
+        0x5A,
+        value,
+    ]
+
+
+def parse_gateway_patch_tail(spec: str) -> tuple[int, bytes]:
+    address_text, payload_text = spec.split(":", 1)
+    return int(address_text, 0), bytes_from_hex_text(payload_text)
+
+
+def parse_gateway_patch_after_event(spec: str) -> tuple[int, dict[str, Any]]:
+    event_text, tail = spec.split(":", 1)
+    address, payload = parse_gateway_patch_tail(tail)
+    return int(event_text, 0), {"address": address, "payload": payload, "spec": spec}
+
+
+def parse_gateway_patch_after_phase(spec: str) -> tuple[str, dict[str, Any]]:
+    phase, tail = spec.split(":", 1)
+    address, payload = parse_gateway_patch_tail(tail)
+    return phase, {"address": address, "payload": payload, "spec": spec}
+
+
+def index_gateway_patches(args: argparse.Namespace) -> None:
+    by_event: dict[int, list[dict[str, Any]]] = {}
+    by_phase: dict[str, list[dict[str, Any]]] = {}
+    for spec in args.gateway_patch_after_event:
+        key, patch = parse_gateway_patch_after_event(spec)
+        by_event.setdefault(key, []).append(patch)
+    for spec in args.gateway_patch_after_phase:
+        key, patch = parse_gateway_patch_after_phase(spec)
+        by_phase.setdefault(key, []).append(patch)
+    args.gateway_patches_by_event = by_event
+    args.gateway_patches_by_phase = by_phase
 
 
 def run_sg_raw(
@@ -398,7 +458,7 @@ def dump_f0(
 def payload_for_event(event: dict[str, Any]) -> bytes:
     model = event.get("payload_model") or {}
     if model.get("kind") == "inline_payload_hex":
-        return bytes.fromhex(compact_hex(model.get("payload_hex", "")))
+        return bytes_from_hex_text(model.get("payload_hex", ""))
     return b""
 
 
@@ -408,6 +468,74 @@ def phase_timeout(phase: str, args: argparse.Namespace, payload_len: int) -> int
     if phase in {"profile_tail_arg7f", "arg00_chunk_transfer"} or payload_len:
         return args.write_timeout
     return args.timeout
+
+
+def gateway_patches_for_event(args: argparse.Namespace, event: dict[str, Any]) -> list[dict[str, Any]]:
+    patches: list[dict[str, Any]] = []
+    try:
+        event_index = int(event["event_index"])
+    except (KeyError, TypeError, ValueError):
+        event_index = None
+    if event_index is not None:
+        patches.extend(args.gateway_patches_by_event.get(event_index, []))
+    patches.extend(args.gateway_patches_by_phase.get(str(event.get("phase")), []))
+    return patches
+
+
+def apply_gateway_patches_after_event(
+    args: argparse.Namespace,
+    event: dict[str, Any],
+) -> list[dict[str, Any]]:
+    records: list[dict[str, Any]] = []
+    for patch in gateway_patches_for_event(args, event):
+        base_address = int(patch["address"])
+        payload = bytes(patch["payload"])
+        patch_records: list[dict[str, Any]] = []
+        for offset, value in enumerate(payload):
+            address = base_address + offset
+            item = run_sg_raw(
+                args.sg_raw,
+                args.device,
+                gateway_write_cdb(address, value),
+                request_len=args.gateway_patch_request_len,
+                timeout=args.timeout,
+            )
+            response = bytes.fromhex(item.get("stdout_hex") or "")
+            readback = response[0x20] if len(response) > 0x20 else None
+            item.update(
+                {
+                    "address": address,
+                    "value": value,
+                    "readback": readback,
+                    "readback_matches": readback == value,
+                }
+            )
+            if item["returncode"] != 0:
+                raise RuntimeError(
+                    f"gateway patch after event {event.get('event_index')} failed at "
+                    f"0x{address:06x}: {item['stderr'].strip()}"
+                )
+            if readback != value:
+                raise RuntimeError(
+                    f"gateway patch after event {event.get('event_index')} readback mismatch "
+                    f"at 0x{address:06x}: got {readback!r}, expected 0x{value:02x}"
+                )
+            patch_records.append(item)
+        records.append(
+            {
+                "spec": patch["spec"],
+                "address": base_address,
+                "length": len(payload),
+                "payload_hex": payload.hex(),
+                "records": patch_records,
+            }
+        )
+        print(
+            f"gateway-patch-after event={event.get('event_index')} phase={event.get('phase')} "
+            f"address=0x{base_address:06x} len={len(payload)}",
+            flush=True,
+        )
+    return records
 
 
 def execute_events(args: argparse.Namespace, events: list[dict[str, Any]]) -> tuple[list[dict[str, Any]], dict[str, Any] | None]:
@@ -458,6 +586,9 @@ def execute_events(args: argparse.Namespace, events: list[dict[str, Any]]) -> tu
                 args.timeout,
                 args.finalizer_status_reads,
             )
+        gateway_patch_records = apply_gateway_patches_after_event(args, event)
+        if gateway_patch_records:
+            item["gateway_patches_after_event"] = gateway_patch_records
         if args.delay_ms:
             time.sleep(args.delay_ms / 1000)
         if item["returncode"] != 0 and not args.continue_after_failure:
@@ -572,6 +703,21 @@ def parse_args() -> argparse.Namespace:
         metavar="INDEX",
         help="capture corrected id01/id02 READ BUFFER 0x018xxx windows immediately after one event",
     )
+    parser.add_argument(
+        "--gateway-patch-after-event",
+        action="append",
+        default=[],
+        metavar="EVENT:ADDR:HEX",
+        help="after EVENT, write HEX bytes to controller gateway ADDR through the installed currentboot rw hook",
+    )
+    parser.add_argument(
+        "--gateway-patch-after-phase",
+        action="append",
+        default=[],
+        metavar="PHASE:ADDR:HEX",
+        help="after every matching PHASE, write HEX bytes to controller gateway ADDR through the installed currentboot rw hook",
+    )
+    parser.add_argument("--gateway-patch-request-len", type=int, default=176)
     return parser.parse_args()
 
 
@@ -580,6 +726,7 @@ def main() -> int:
     if not shutil.which(args.sg_raw):
         raise RuntimeError(f"sg_raw not found: {args.sg_raw}")
     args.device = choose_device(args.device)
+    index_gateway_patches(args)
     candidate = json.loads(args.candidate.read_text(encoding="utf-8"))
     args.finalizer_status_reads = candidate_finalizer_status_reads(candidate)
     expected_revision = expected_final_revision(candidate, args.expected_final_revision)
@@ -603,6 +750,8 @@ def main() -> int:
         "end_index": args.end_index,
         "expected_hashes": candidate.get("expected_hashes_for_live_execution"),
         "expected_final_revision": expected_revision,
+        "gateway_patch_after_event": args.gateway_patch_after_event,
+        "gateway_patch_after_phase": args.gateway_patch_after_phase,
         "recovery_baseline_revision": args.recovery_baseline_revision,
         "events_attempted": [],
         "stopped_on_failure": None,

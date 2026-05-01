@@ -91,3 +91,24 @@ This is still a useful primitive:
 It is not, by itself, a normal-runtime patch mechanism. The next normal-runtime
 path still needs either a gentler currentboot-to-normal transition that keeps a
 patched controller page alive, or a separate normal-mode write/patch foothold.
+
+## Runner Injection
+
+`scripts/run_liteon_linux_persistence_experiment.py` now accepts:
+
+```sh
+--gateway-patch-after-event EVENT:ADDR:HEX
+--gateway-patch-after-phase PHASE:ADDR:HEX
+```
+
+These options write bytes through the installed currentboot rw hook immediately
+after a selected event or phase. A live smoke test patched the helper string
+right after event 1:
+
+```sh
+--gateway-patch-after-event 1:0x018620:476c617368
+```
+
+The runner logged `gateway-patch-after event=1`, and a follow-up read showed
+`Glash Type Error`. That proves we can now inject small helper/controller RAM
+patches into a sequence without baking them into the profile-tail payload.

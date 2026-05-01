@@ -514,4 +514,7 @@ The blob writer repeated the same proof for the five-byte prefix. A harmless
 marker at controller `0x074030` also wrote/read in currentboot, but did not
 survive either bare `PLDSVUC` or the known full recovery path into normal mode.
 So this is a currentboot volatile controller-memory write primitive, not a
-trivial normal-runtime patch primitive.
+trivial normal-runtime patch primitive. The Linux persistence runner can now
+inject these writes mid-sequence with `--gateway-patch-after-event` and
+`--gateway-patch-after-phase`; the event-1 smoke test patched `Flash` to
+`Glash` immediately after profile-tail entry and read it back successfully.
