@@ -65,6 +65,20 @@ The likely interpretation is that `0x4814` is a packed status byte from the
 controller/front-panel block. Bit 4 is the button sense we observed. Bit 7 is an
 ack/ready bit for the `0x4821/0x4822` handshake.
 
+The normal hidden-runtime tile scan later gave a cleaner normal-mode
+corroboration. Chunk `5f416d4189c9` appears in every saved normal work-window
+capture, does not match F0/currentboot/helper bytes, and contains:
+
+```text
+90 48 14 e0 54 10 c4 54 0f 24 ff b3 92 2c
+e0 54 04 13 13 54 3f 24 ff 92 2a
+```
+
+In 8051 terms, this reads `xdata[0x4814]`, extracts bit 4 into an internal bit
+flag near `0x2c`, then extracts bit 2 into another bit flag near `0x2a`. That
+fits the Pico result exactly: `0x4814.4` is not merely a currentboot artifact;
+normal runtime code actively samples it as front-panel/status input.
+
 ### `0x482b/0x482c/0x482d` Look Like A Small Query/Timer Port
 
 Several helpers write a command to `0x482b` and immediately read a 16-bit result
@@ -141,3 +155,10 @@ The LED path probably needs one of these:
 
 The next static target should be the command vocabulary around `0x474d/0x474e`
 and `0x482b`, not more blind LED latch probing.
+
+Later normal-runtime chunk classification lives in:
+
+```text
+analysis/8051/normal-hidden-runtime-chunks-20260501.md
+analysis/8051/normal-hidden-runtime-chunks-20260501.json
+```

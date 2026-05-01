@@ -26,6 +26,20 @@ work-window captures:
 0x486a   94 observations, 1 unique chunk
 ```
 
+The later all-runs hidden-runtime classifier strengthened this with exact
+chunk identities:
+
+```text
+6d249b0b8b59  offsets +0x7500/+0x7580  initializes 0x4860..0x486a
+4a6f7bda07c9  offsets +0x8c00/+0x8c40  clears 0x5905/0x5a01 and 0x4864/0x4860 bits
+4a0015a859ee  offsets +0x9200/+0x9240/+0x92c0  sets paired 0x4860/0x4864 path
+fbb6be935285  offsets +0x9400/+0x9440/+0x94c0  toggles 0x4867.7 and 0x480b.4
+```
+
+None of these chunks appears byte-for-byte in F0, the visible 8051 prefix, the
+helper overlay, or the saved currentboot gateway dump. That makes them normal
+hidden-runtime evidence rather than static resident snippets.
+
 The recurring writes are more informative than the raw counts:
 
 ```text
