@@ -1304,8 +1304,9 @@ Immediate useful directions:
 10. The first broad READ BUFFER scan did not find that different mode. Modes
     `0x00..0x1f` were scanned at offset zero and only mode `0x01` produced any
     data. In mode `0x01`, IDs `0xe2` and `0xf1` are only aliases into the
-    public work window: `e2:0 == id01:0x074000`, and
-    `f1:0 == id01:0x075000`.
+    public work window: `e2:0 == id01:0x074000`, `e2:0x1000 == id01:0x075000`,
+    and `f1:0 == id01:0x075000`. `e2` rejects page-start offsets `0x2000` and
+    above, so it is a narrow profile/table alias, not a decoded CDD surface.
 11. Allocation length matters. Normal `READ BUFFER mode=1 id=f0/f2` respond to
     exact `0x80`-byte chunks even though broad 64-byte scans miss them. `id=f0`
     is encrypted F0 readback; issue EXTRAINQ immediately before dumping, then

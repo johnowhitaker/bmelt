@@ -115,6 +115,23 @@ responding mode: 0x01 only
 post-scan status: normal LD5M
 ```
 
+Follow-up `e2` mapping resolved that responder too. It is not decoded CDD; it
+is a narrow alias for the profile/string/table pages inside the normal work
+window:
+
+```text
+id=e2 offset 0x0000 == id=01 offset 0x074000
+id=e2 offset 0x1000 == id=01 offset 0x075000
+id=e2 offset 0x2000 and above at page starts: CHECK CONDITION
+```
+
+Report:
+
+```text
+analysis/8051/normal-read-buffer-e2-alias-20260501.md
+references/evidence/live/normal-read-buffer-e2-alias-20260501/
+```
+
 Evidence:
 
 ```text

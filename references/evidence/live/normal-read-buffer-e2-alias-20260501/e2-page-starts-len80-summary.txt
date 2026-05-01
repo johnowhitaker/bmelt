@@ -1,0 +1,18 @@
+rows 12
+mode 0x01 ids 1 offsets 12 length 128
+offset=0x000000 rc=0 timeout=False len=128 count=1 interesting=1 sha=d121b67c088e54ec ids=0xe2
+  ascii=LT............*Q.........n...:=%Il.g.o.....e.' .................
+  hex=4c540588049204930e1c1baa1b092a51870003b5038e0491046e0dea0d3a3d25496c0567046f04b80e021b6515272000ffffffffffffffffffffffffffffffff
+offset=0x001000 rc=0 timeout=False len=128 count=1 interesting=1 sha=1b448780ca721825 ids=0xe2
+  ascii=KEYPARA.........CDROM...........................................
+  hex=4b4559504152419700000000000000004344524f4d0000030c000000000000000000000000000000000000000000000000000000000000000000000000000000
+offset=0x002000 rc=5 timeout=False len=0 count=1 interesting=0 sha= ids=0xe2
+offset=0x003000 rc=5 timeout=False len=0 count=1 interesting=0 sha= ids=0xe2
+offset=0x004000 rc=5 timeout=False len=0 count=1 interesting=0 sha= ids=0xe2
+offset=0x005000 rc=5 timeout=False len=0 count=1 interesting=0 sha= ids=0xe2
+offset=0x006000 rc=5 timeout=False len=0 count=1 interesting=0 sha= ids=0xe2
+offset=0x007000 rc=5 timeout=False len=0 count=1 interesting=0 sha= ids=0xe2
+offset=0x008000 rc=5 timeout=False len=0 count=1 interesting=0 sha= ids=0xe2
+offset=0x009000 rc=5 timeout=False len=0 count=1 interesting=0 sha= ids=0xe2
+offset=0x00a000 rc=5 timeout=False len=0 count=1 interesting=0 sha= ids=0xe2
+offset=0x00b000 rc=5 timeout=False len=0 count=1 interesting=0 sha= ids=0xe2

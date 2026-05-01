@@ -1204,3 +1204,10 @@ area is alignment-sensitive, and some branches land in the middle of the
 obvious six-byte `MOV DPTR; LJMP` records. So the lesson is to trust the
 accept-list and CDB-shadow evidence, but not to over-explain the downstream
 branch targets from one linear disassembly.
+
+One small public-buffer mystery closed cleanly after that. `id=e2` was not a
+new decoder or a second controller image; it was a narrow alias into the same
+normal work window. `e2:0` is `id01:0x074000`, and `e2:0x1000` is
+`id01:0x075000`. Page-start reads from `e2:0x2000` upward reject. So `e2`
+reaches only the profile/table pages we already know how to read, not the
+decoded CDD or the code-heavy tail of the work window.
