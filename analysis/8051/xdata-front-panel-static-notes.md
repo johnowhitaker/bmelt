@@ -98,6 +98,19 @@ The cross-reference map reinforces the existing live negatives. `0x4860..0x486b`
 and the `0x59xx/0x5axx` helper-init shortlist are written as initialization
 clusters and do not look like front-panel output latches.
 
+Later normal-runtime work-window analysis sharpened this rather than overturning
+it:
+
+```text
+analysis/8051/normal-4860-cluster-20260501.md
+```
+
+The `0x4860` cluster now looks more hardware-control/mailbox-like than inert
+configuration. In particular, `0x4860.2`, `0x4864.0`, and `0x4867.7` are
+actively toggled by normal-mode code. That makes the cluster interesting for
+future mechanics/servo work, but it still argues against using it as the
+primary LED exfiltration path.
+
 ## Existing Pico Trace Review
 
 Existing GP26 traces also fit the controller-path interpretation. Most

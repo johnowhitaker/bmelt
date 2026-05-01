@@ -27,6 +27,24 @@ That makes `0x59xx` interesting for the end goal, but not safe to poke blindly.
 
 ## Strong Static Anchors
 
+### Normal Runtime Corroboration
+
+The later normal-runtime tile harvest independently pulled the same
+`0x4860..0x486a` cluster out of the public `READ BUFFER id=01 offset=0x070000`
+work window:
+
+```text
+analysis/8051/normal-4860-cluster-20260501.md
+```
+
+That matters because it links the currentboot/gateway mechanics hints to code
+that is live in ordinary `LD5M` mode. Normal runtime paths set and clear
+`0x4860.2` and `0x4864.0` as a pair, toggle `0x4867.7` together with
+`0x480b.4`, mirror `0x4863` through `xdata[0x8630]`, and initialize
+`0x4860..0x486a` immediately after a packet/controller command sequence. This
+strengthens the "hardware-control/mailbox cluster" interpretation. It still
+does not make these safe raw GPIO or actuator bits.
+
 ### `FUN_CODE_59f3` / gateway `0x6059`
 
 The LD5M resident function at F0 `0x59f3` appears exactly in the gateway dump at
