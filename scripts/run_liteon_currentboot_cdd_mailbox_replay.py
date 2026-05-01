@@ -342,15 +342,27 @@ def gateway_read_byte_range(
 
 
 def trigger_cdd_field_replay(args: argparse.Namespace) -> dict[str, Any]:
-    if args.trigger_mode == "cdb-fcdd02":
+    byte7 = 0xFC
+    if args.trigger_mode == "cdb-fcde00":
+        byte8 = 0xDE
+        byte9 = 0x00
+        expected = 0xD0
+        kind = "cdd_mapped_header_trigger"
+    elif args.trigger_mode == "cdb-fcdd02":
+        byte8 = 0xDD
         byte9 = 0x02
         expected = 0xCF
+        kind = "cdd_field_replay_trigger"
     elif args.trigger_mode == "cdb-fcdd01":
+        byte8 = 0xDD
         byte9 = 0x01
         expected = 0xCE
+        kind = "cdd_field_replay_trigger"
     else:
+        byte8 = 0xDD
         byte9 = 0x00
         expected = 0xCD
+        kind = "cdd_field_replay_trigger"
     cdb = [
         0x12,
         0x00,
@@ -359,8 +371,8 @@ def trigger_cdd_field_replay(args: argparse.Namespace) -> dict[str, Any]:
         0xF0,
         0x40,
         0x00,
-        0xFC,
-        0xDD,
+        byte7,
+        byte8,
         byte9,
         0x00,
         0x00,
@@ -376,8 +388,8 @@ def trigger_cdd_field_replay(args: argparse.Namespace) -> dict[str, Any]:
         raise RuntimeError("short INQUIRY response for CDD field-replay trigger")
     record.update(
         {
-            "kind": "cdd_field_replay_trigger",
-            "trigger": f"cdb_7_fc_cdb_8_dd_cdb_9_{byte9:02x}",
+            "kind": kind,
+            "trigger": f"cdb_7_{byte7:02x}_cdb_8_{byte8:02x}_cdb_9_{byte9:02x}",
             "response_byte": stdout[args.response_offset],
             "expected_response_byte": expected,
             "stdout_first64_hex": stdout[:64].hex(),
@@ -464,7 +476,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--chunk-size", type=parse_int, default=0x7F)
     parser.add_argument(
         "--trigger-mode",
-        choices=("xdata-writes", "cdb-fcdd00", "cdb-fcdd01", "cdb-fcdd02"),
+        choices=("xdata-writes", "cdb-fcdd00", "cdb-fcdd01", "cdb-fcdd02", "cdb-fcde00"),
         default="xdata-writes",
         help="how to replay fields: guarded XDATA writes, or special CDB[7:9]=fc/dd/NN trigger",
     )
@@ -487,7 +499,7 @@ def main() -> int:
     plan = json.loads(args.plan.read_text())
     level = load_level(plan, args.level)
     samples = list(level.get("suggested_samples_after", []))
-    if args.trigger_mode.startswith("cdb-fcdd") and not args.include_xdata_samples:
+    if args.trigger_mode.startswith("cdb-fc") and not args.include_xdata_samples:
         samples = [sample for sample in samples if sample["kind"] == "gateway"]
     if args.skip_gateway:
         samples = [sample for sample in samples if sample["kind"] != "gateway"]

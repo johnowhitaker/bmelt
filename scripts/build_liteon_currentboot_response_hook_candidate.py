@@ -398,6 +398,38 @@ def write_direct_byte(address: int, value: int) -> bytes:
     return bytes([0x75, address & 0xFF, value & 0xFF])  # MOV direct,#imm
 
 
+def write_direct_run(address: int, values: list[int]) -> bytes:
+    return b"".join(write_direct_byte(address + index, value) for index, value in enumerate(values))
+
+
+def copy_xdata_to_response_source(address: int, length: int, storage_offset: int) -> bytes:
+    if not 1 <= length <= 0xFF:
+        raise ValueError("copy length must be 1..255")
+    if not 0 <= address <= 0xFFFF:
+        raise ValueError("XDATA source address must fit in 16 bits")
+    if not 0 <= storage_offset <= 0xFFFF:
+        raise ValueError("response storage offset must fit in 16 bits")
+
+    init = b"".join(
+        [
+            mov_rn_imm(2, (address >> 8) & 0xFF),
+            mov_rn_imm(3, address & 0xFF),
+            mov_rn_imm(6, (storage_offset >> 8) & 0xFF),
+            mov_rn_imm(7, storage_offset & 0xFF),
+            mov_rn_imm(1, length),
+        ]
+    )
+    loop_start = len(init)
+    read_source = bytes([0x8A, 0x83, 0x8B, 0x82, 0xE0, 0xFD])  # DPH=R2; DPL=R3; MOVX; R5=A
+    write_response = lcall(0x6012)
+    increment_source = bytes([0x0B, 0xEB, 0x70, 0x01, 0x0A])  # INC R3; if zero INC R2
+    increment_response = bytes.fromhex("0fef70010e")  # INC R7; if zero INC R6
+    loop_body = read_source + write_response + increment_source + increment_response
+    djnz_pos = loop_start + len(loop_body)
+    djnz = bytes([0xD9, rel8(djnz_pos + 2, loop_start)])
+    return init + loop_body + djnz
+
+
 def source_cdd_field_replay() -> bytes:
     """Write the LD5M CDD field-only mailbox package derived statically."""
 
@@ -537,6 +569,57 @@ def source_gateway_cdb_bulk_with_cdd_descriptor_replay(
     return bytes(source)
 
 
+def source_mapped_cdd_header_replay(storage_offset: int) -> bytes:
+    """Call resident mapped-header helper and copy xdata[0xc000..0xc01f].
+
+    The resident parser sets 0x8256..0x8257 to 0xc000, prepares IRAM
+    0x30..0x33 as the source-end-minus-one value, then calls 0x1717 with the
+    CDD header flash address in R4..R7. This helper mirrors that minimum setup
+    and copies the mapped XDATA window into response storage + 1. build_payload
+    writes the 0xd0 marker at response[0x20] afterward.
+    """
+
+    return b"".join(
+        [
+            write_xdata_run(0x8256, [0xC0, 0x00]),
+            write_direct_run(0x30, [0x00, 0x07, 0xFF, 0xFF]),
+            mov_rn_imm(4, 0x00),
+            mov_rn_imm(5, 0x00),
+            mov_rn_imm(6, 0x70),
+            mov_rn_imm(7, 0x2C),
+            lcall(0x1717),
+            copy_xdata_to_response_source(0xC000, 0x20, storage_offset + 1),
+            mov_rn_imm(5, 0xD0),
+        ]
+    )
+
+
+def source_gateway_cdb_bulk_with_cdd_mapped_header(
+    selector_mask: int, storage_offset: int, bulk_len: int
+) -> bytes:
+    """Gateway bulk read with a special mapped-CDD-header trigger."""
+
+    source = bytearray()
+    jump_to_gateway_positions: list[int] = []
+    for cdb_addr, expected in ((0x8191, 0xFC), (0x8192, 0xDE)):
+        source.extend(mov_dptr(cdb_addr))
+        source.extend(bytes([0xE0, 0x64, expected, 0x70, 0x00]))  # MOVX; XRL; JNZ gateway
+        jump_to_gateway_positions.append(len(source) - 1)
+
+    source.extend(source_mapped_cdd_header_replay(storage_offset))
+    skip_after_replay_pos = len(source)
+    source.extend(bytes([0x80, 0x00]))  # SJMP end_source
+
+    gateway_start = len(source)
+    source.extend(source_gateway_cdb_bulk(selector_mask, storage_offset, bulk_len))
+    end_source = len(source)
+
+    for position in jump_to_gateway_positions:
+        source[position] = rel8(position + 1, gateway_start)
+    source[skip_after_replay_pos + 1] = rel8(skip_after_replay_pos + 2, end_source)
+    return bytes(source)
+
+
 def source_gateway_byte_with_cdd_prestage_replay(selector_mask: int) -> bytes:
     """One-byte gateway read with compact descriptor-prestate replay trigger.
 
@@ -580,6 +663,7 @@ def build_source(args: argparse.Namespace) -> tuple[str, bytes, dict[str, Any]]:
         args.gateway_cdb_bulk_with_xdata_rw,
         args.gateway_cdb_bulk_with_cdd_field_replay,
         args.gateway_cdb_bulk_with_cdd_descriptor_replay,
+        args.gateway_cdb_bulk_with_cdd_mapped_header,
         args.gateway_byte_with_cdd_prestage_replay,
     ]
     if sum(modes) != 1:
@@ -590,6 +674,7 @@ def build_source(args: argparse.Namespace) -> tuple[str, bytes, dict[str, Any]]:
             "--gateway-cdb-bulk-with-xdata-write/--gateway-cdb-bulk-with-xdata-rw, "
             "--gateway-cdb-bulk-with-cdd-field-replay, "
             "--gateway-cdb-bulk-with-cdd-descriptor-replay, or "
+            "--gateway-cdb-bulk-with-cdd-mapped-header, or "
             "--gateway-byte-with-cdd-prestage-replay"
         )
     if args.constant is not None:
@@ -676,6 +761,22 @@ def build_source(args: argparse.Namespace) -> tuple[str, bytes, dict[str, Any]]:
                 "address_source": "normal: cdb_bytes_7_8_9_plus_control_low_bits",
                 "trigger": "host cdb_7_fc_cdb_8_dd replays descriptor prestate plus CDD field package",
                 "trigger_response": "0xcf at response[0x20]",
+                "selector_mask": args.selector_mask,
+                "bulk_len": args.bulk_len,
+            },
+        )
+    if args.gateway_cdb_bulk_with_cdd_mapped_header:
+        return (
+            "gateway_cdb_bulk_with_cdd_mapped_header",
+            source_gateway_cdb_bulk_with_cdd_mapped_header(
+                args.selector_mask,
+                RESPONSE_STORAGE_BASE + args.response_offset,
+                args.bulk_len,
+            ),
+            {
+                "address_source": "normal: cdb_bytes_7_8_9_plus_control_low_bits",
+                "trigger": "host cdb_7_fc_cdb_8_de calls 0x1717 mapped-header helper and returns xdata[0xc000..0xc01f]",
+                "trigger_response": "0xd0 at response[0x20], mapped bytes at response[0x21..0x40]",
                 "selector_mask": args.selector_mask,
                 "bulk_len": args.bulk_len,
             },
@@ -882,6 +983,11 @@ def parse_args() -> argparse.Namespace:
         help="like --gateway-cdb-bulk, but CDB[7:9]=fc/dd/02 writes compact descriptor prestate plus the CDD field package",
     )
     parser.add_argument(
+        "--gateway-cdb-bulk-with-cdd-mapped-header",
+        action="store_true",
+        help="like --gateway-cdb-bulk, but CDB[7:8]=fc/de calls the resident mapped-header helper and returns xdata[0xc000..0xc01f]",
+    )
+    parser.add_argument(
         "--gateway-byte-with-cdd-prestage-replay",
         action="store_true",
         help="like --gateway-cdb-address, but CDB[7:8]=fc/dd writes compact descriptor prestate plus CDD field package",
@@ -918,6 +1024,7 @@ def main() -> int:
         or args.gateway_cdb_bulk_with_xdata_rw
         or args.gateway_cdb_bulk_with_cdd_field_replay
         or args.gateway_cdb_bulk_with_cdd_descriptor_replay
+        or args.gateway_cdb_bulk_with_cdd_mapped_header
         or args.gateway_byte_with_cdd_prestage_replay
         or args.xdata_cdb_address
         or args.xdata_cdb_bulk
