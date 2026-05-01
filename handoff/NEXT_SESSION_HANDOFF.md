@@ -414,3 +414,29 @@ make check
 ```
 
 At cleanup time, `make check` passed.
+
+## Latest Normal-Mode Mechanics State
+
+START STOP UNIT eject is now confirmed as a real normal-runtime mechanics
+trigger. See:
+
+```text
+analysis/8051/normal-start-stop-mechanics-path-20260501.md
+analysis/8051/normal-start-stop-eject-live-20260501.md
+analysis/8051/normal-start-stop-variant-matrix-20260501.md
+analysis/8051/normal-start-stop-hook-plan-20260501.md
+```
+
+The live matrix is clean: only `1B 00 00 00 02 00` caused visible motion and
+temporary `READ BUFFER id=01` timeouts. The `0x00`, `0x01`, and `0x03` variants
+returned quick CHECK status with no work-window trouble.
+
+Important next-step constraint: do not build a hook that depends on an
+immediate SCSI read during eject. The drive is legitimately busy for several
+seconds. Better plan: capture state into scratch, let/suppress the mechanism
+path, then expose the stored bytes through a later stable command.
+
+Also do not assume the `+0x8bxx` work-window offset is patchable in the visible
+F0 prefix. Prior F0 resident hooks persisted but did not alter normal command
+timing, and the START STOP snippet itself does not line up cleanly with visible
+prefix disassembly. First find a live, patchable normal response path.

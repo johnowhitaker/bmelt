@@ -1733,3 +1733,14 @@ Immediate useful directions:
     DID_TIME_OUT, and temporary `READ BUFFER id=01` timeouts. This strongly
     supports that the `+0x8bxx` branch is specifically the eject case, not
     generic START STOP handling.
+54. `analysis/8051/normal-start-stop-hook-plan-20260501.md` is the current
+    hook plan after the live eject confirmation. Main caution: START STOP eject
+    is a good trigger, but not a good immediate reply channel because the drive
+    is busy for several seconds. A useful hook should capture state first and
+    read it later through a boring command path, or eventually suppress the
+    actuator path after capture. The bigger blocker is patchability: the
+    `+0x8bxx` work-window bytes are normal-runtime overlay material, not proven
+    visible F0-prefix bytes. Prior visible-F0 hooks at `0x4ec6` and `0x5c72`
+    persisted but did not affect normal command timing. Next priority is a
+    normal-mode response hook that is live and patchable; only after that should
+    START STOP be used again for telemetry.

@@ -1721,3 +1721,21 @@ no medium. `load` returned quick CHECK/Illegal Request. All their post-command
 work-window captures succeeded. Only `eject` caused visible movement and the
 multi-second busy timeout. That lines up beautifully with the branch we found:
 opcode `0x1b`, then `(CDB[4] & 0x0f) == 0x02`.
+
+The hook plan after that is deliberately less dramatic than the sled movement.
+START STOP eject is now a real trigger, but it is a terrible moment to expect a
+clean host reply: the drive is busy doing the mechanical thing we asked it to
+do. The better hook shape is capture first, answer later. If we can patch the
+branch, it should copy a handful of state bytes such as `0x480e`, `0x4860`,
+`0x4864`, `0x5905`, and `0x5a01` into scratch XDATA, then either let the stock
+path run or eventually short-circuit it through a known return path. A later
+boring command can expose the stored bytes.
+
+The catch is still where to patch. The live work-window code looks like normal
+runtime overlay material, and our earlier persistent visible-F0 hooks did not
+affect normal INQUIRY or REQUEST SENSE timing after cold boot. Even a small
+detail in the START STOP chunk reinforces that: its `LCALL 0x0f8d` does not
+line up cleanly with the visible 8051 prefix disassembly. So the next real
+breakthrough is not another blind F0 hook. It is finding a normal-mode response
+path that is both live and patchable, or proving that the overlay has to be
+patched through a different route.
