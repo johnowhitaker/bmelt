@@ -115,6 +115,24 @@ responding mode: 0x01 only
 post-scan status: normal LD5M
 ```
 
+A small 12-byte-CDB tail probe checked whether the two trailing bytes ignored
+by the usual 10-byte `READ BUFFER` shape act as a hidden `f2` selector. They do
+not for the tested values. These CDBs all returned the same 128-byte page hash
+`251137803ea5f0fc4ab74077b16be77912d93a303b38989fedc604acedf36731`:
+
+```text
+3c 01 f2 00 00 00 00 00 80 00 00 00
+3c 01 f2 00 00 00 00 00 80 00 00 01
+3c 01 f2 00 00 00 00 00 80 00 00 02
+3c 01 f2 00 00 00 00 00 80 00 01 00
+3c 01 f2 00 00 00 00 00 80 00 5a a5
+3c 01 f2 00 00 00 00 00 80 00 a5 5a
+3c 01 f2 00 00 00 00 00 80 00 ff ff
+```
+
+The drive stayed normal `LD5M`. Treat the 12-byte form as an accepted wrapper
+around the same `f2` encoded-container view, not as a new bank/control surface.
+
 Follow-up `e2` mapping resolved that responder too. It is not decoded CDD; it
 is a narrow alias for the profile/string/table pages inside the normal work
 window:
@@ -154,6 +172,7 @@ references/evidence/live/normal-read-buffer-mode-exact80-scan-20260430/
 references/evidence/live/normal-read-buffer-length-scan-20260501/
 references/evidence/live/normal-read-buffer-f0-f2-map-20260501/
 references/evidence/live/normal-read-buffer-f0-f2-full-20260501/
+references/evidence/live/normal-read-buffer-f2-cdb-tail-selector-20260501/
 ```
 
 ## Next Uses

@@ -1331,3 +1331,8 @@ Immediate useful directions:
     `LD5M` afterwards. An exact-size mode sweep for those four IDs also found
     only mode `0x01`; modes `0x00..0x1f` otherwise rejected or returned no
     data.
+15. A 12-byte `READ BUFFER id=f2` tail-byte probe also closed a tempting hidden
+    selector theory. CDB tail values `0000`, `0001`, `0002`, `0100`, `5aa5`,
+    `a55a`, and `ffff` all returned the same 128-byte CDD2-header page hash.
+    The drive stayed normal `LD5M`. The extra bytes are not an obvious f2 bank
+    selector.

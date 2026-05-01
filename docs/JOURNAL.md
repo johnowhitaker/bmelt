@@ -1213,3 +1213,11 @@ the same pattern from the second page: `f1:0` is `id01:0x075000`, but only for
 `0x0b60` bytes. So `e2` and `f1` reach only the profile/table pages we already
 know how to read, not the decoded CDD or the code-heavy tail of the work
 window.
+
+One more read-only `f2` wrinkle got checked before closing this path. Because
+the drive accepts a 12-byte ATAPI-looking `READ BUFFER` CDB, we tried using the
+two trailing bytes as possible hidden selectors. Values like `0001`, `5aa5`,
+`a55a`, and `ffff` all returned the exact same 128-byte CDD2-header page as the
+plain `0000` CDB, and the drive stayed in normal `LD5M`. That makes the public
+`f2` surface less mysterious: it is an encoded-container view, not a selectable
+decoded-memory portal hiding in the unused CDB tail.

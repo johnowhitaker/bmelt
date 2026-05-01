@@ -1,0 +1,86 @@
+[
+  {
+    "b10": 0,
+    "b11": 0,
+    "cdb": "3C 01 F2 00 00 00 00 00 80 00 00 00",
+    "returncode": 0,
+    "stdout_len": 128,
+    "sha256": "251137803ea5f0fc4ab74077b16be77912d93a303b38989fedc604acedf36731",
+    "first32": "434444091016530d9000007dec030810870e80000070001840001b3fff1b3fff",
+    "stderr": "NVMe Result=0x0\nWriting 128 bytes of data to stdout\n",
+    "elapsed_s": 0.004771,
+    "good": false
+  },
+  {
+    "b10": 0,
+    "b11": 1,
+    "cdb": "3C 01 F2 00 00 00 00 00 80 00 00 01",
+    "returncode": 0,
+    "stdout_len": 128,
+    "sha256": "251137803ea5f0fc4ab74077b16be77912d93a303b38989fedc604acedf36731",
+    "first32": "434444091016530d9000007dec030810870e80000070001840001b3fff1b3fff",
+    "stderr": "NVMe Result=0x0\nWriting 128 bytes of data to stdout\n",
+    "elapsed_s": 0.006114,
+    "good": false
+  },
+  {
+    "b10": 0,
+    "b11": 2,
+    "cdb": "3C 01 F2 00 00 00 00 00 80 00 00 02",
+    "returncode": 0,
+    "stdout_len": 128,
+    "sha256": "251137803ea5f0fc4ab74077b16be77912d93a303b38989fedc604acedf36731",
+    "first32": "434444091016530d9000007dec030810870e80000070001840001b3fff1b3fff",
+    "stderr": "NVMe Result=0x0\nWriting 128 bytes of data to stdout\n",
+    "elapsed_s": 0.005879,
+    "good": false
+  },
+  {
+    "b10": 1,
+    "b11": 0,
+    "cdb": "3C 01 F2 00 00 00 00 00 80 00 01 00",
+    "returncode": 0,
+    "stdout_len": 128,
+    "sha256": "251137803ea5f0fc4ab74077b16be77912d93a303b38989fedc604acedf36731",
+    "first32": "434444091016530d9000007dec030810870e80000070001840001b3fff1b3fff",
+    "stderr": "NVMe Result=0x0\nWriting 128 bytes of data to stdout\n",
+    "elapsed_s": 0.00592,
+    "good": false
+  },
+  {
+    "b10": 90,
+    "b11": 165,
+    "cdb": "3C 01 F2 00 00 00 00 00 80 00 5A A5",
+    "returncode": 0,
+    "stdout_len": 128,
+    "sha256": "251137803ea5f0fc4ab74077b16be77912d93a303b38989fedc604acedf36731",
+    "first32": "434444091016530d9000007dec030810870e80000070001840001b3fff1b3fff",
+    "stderr": "NVMe Result=0x0\nWriting 128 bytes of data to stdout\n",
+    "elapsed_s": 0.00594,
+    "good": false
+  },
+  {
+    "b10": 165,
+    "b11": 90,
+    "cdb": "3C 01 F2 00 00 00 00 00 80 00 A5 5A",
+    "returncode": 0,
+    "stdout_len": 128,
+    "sha256": "251137803ea5f0fc4ab74077b16be77912d93a303b38989fedc604acedf36731",
+    "first32": "434444091016530d9000007dec030810870e80000070001840001b3fff1b3fff",
+    "stderr": "NVMe Result=0x0\nWriting 128 bytes of data to stdout\n",
+    "elapsed_s": 0.005934,
+    "good": false
+  },
+  {
+    "b10": 255,
+    "b11": 255,
+    "cdb": "3C 01 F2 00 00 00 00 00 80 00 FF FF",
+    "returncode": 0,
+    "stdout_len": 128,
+    "sha256": "251137803ea5f0fc4ab74077b16be77912d93a303b38989fedc604acedf36731",
+    "first32": "434444091016530d9000007dec030810870e80000070001840001b3fff1b3fff",
+    "stderr": "NVMe Result=0x0\nWriting 128 bytes of data to stdout\n",
+    "elapsed_s": 0.005904,
+    "good": false
+  }
+]
