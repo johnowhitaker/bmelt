@@ -1624,3 +1624,10 @@ Immediate useful directions:
     frequently near the `0x4099/0x409c=0x14` path and remains a good
     mechanics/servo-adjacent candidate, but do not treat it as confirmed LED
     or sled control yet.
+44. The first dedicated note on that cluster is
+    `analysis/8051/normal-4860-cluster-20260501.md`. Current interpretation:
+    `0x4860.2` and `0x4864.0` behave like paired enable/ack bits in normal
+    runtime paths; `0x4867.7` is toggled together with `0x480b.4`; `0x4863`
+    is mirrored through `xdata[0x8630]`; and `0x4862` is written or bit2-cleared
+    in a separate path. This looks hardware-control or mechanics-adjacent, but
+    it may be a controller mailbox rather than raw actuator GPIO.

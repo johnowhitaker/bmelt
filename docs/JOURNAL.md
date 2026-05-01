@@ -1583,3 +1583,11 @@ runtime": `0x47b1` feeds `0x8a49..0x8a54`, and that shadow feeds the
 controller register families above. A nearby `0x4860..0x486a` cluster keeps
 showing up around the same path, which makes it a good candidate for future
 mechanics/servo exploration once we are ready to poke more deliberately.
+
+I pulled that `0x4860` cluster into its own note before moving on. The short
+version: it looks real. `0x4860.2` and `0x4864.0` are set and cleared as a
+pair in multiple paths, `0x4867.7` toggles with a nearby `0x480b` status bit,
+and `0x4863` is mirrored through `0x8630`. The cautious read is
+"hardware-control/mailbox cluster", not "LED pin" or "sled motor" yet. But it
+is exactly the sort of small register island we wanted to identify before
+doing more visible-mechanics experiments.
