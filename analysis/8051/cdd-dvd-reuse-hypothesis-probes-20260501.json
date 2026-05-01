@@ -1,0 +1,835 @@
+{
+  "dvd_reference": {
+    "pi_code": "RS(182,172), 10 PI bytes per row",
+    "recording_frame_bytes": 2366,
+    "recording_frame_shape": "13 rows * 182 bytes",
+    "scrambler_presets": [
+      "0x0001",
+      "0x5500",
+      "0x0002",
+      "0x2a00",
+      "0x0004",
+      "0x5400",
+      "0x0008",
+      "0x2800",
+      "0x0010",
+      "0x5000",
+      "0x0020",
+      "0x2001",
+      "0x0040",
+      "0x4002",
+      "0x0080",
+      "0x0005"
+    ]
+  },
+  "known_dir": "/Users/johno/projects/boastermelt/analysis/8051/cdd-known-output-records-20260501",
+  "records": [
+    {
+      "best_direct_or_dvd_lfsr_ngram": [
+        {
+          "length": 0,
+          "shape": "frame+0x0",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0001"
+        },
+        {
+          "length": 0,
+          "shape": "frame+0x0",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0002"
+        },
+        {
+          "length": 0,
+          "shape": "frame+0x0",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0004"
+        },
+        {
+          "length": 0,
+          "shape": "frame+0x0",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0005"
+        },
+        {
+          "length": 0,
+          "shape": "frame+0x0",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0008"
+        },
+        {
+          "length": 0,
+          "shape": "frame+0x0",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0010"
+        },
+        {
+          "length": 0,
+          "shape": "frame+0x0",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0020"
+        },
+        {
+          "length": 0,
+          "shape": "frame+0x0",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0040"
+        }
+      ],
+      "best_dvd_pi_window": {
+        "valid_rows": 0,
+        "variant": "raw",
+        "window_offset": 0
+      },
+      "decoded_span": 496,
+      "distance_to_2366": 133,
+      "known_bytes": 432,
+      "record": 50,
+      "source_len": 2499
+    },
+    {
+      "best_direct_or_dvd_lfsr_ngram": [
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0001"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0002"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0004"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0005"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0008"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0010"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0020"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0040"
+        }
+      ],
+      "best_dvd_pi_window": {
+        "valid_rows": 0,
+        "variant": "source-shorter-than-2366",
+        "window_offset": null
+      },
+      "decoded_span": 816,
+      "distance_to_2366": -40,
+      "known_bytes": 800,
+      "record": 51,
+      "source_len": 2326
+    },
+    {
+      "best_direct_or_dvd_lfsr_ngram": [
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0001"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0002"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0004"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0005"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0008"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0010"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0020"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0040"
+        }
+      ],
+      "best_dvd_pi_window": {
+        "valid_rows": 0,
+        "variant": "source-shorter-than-2366",
+        "window_offset": null
+      },
+      "decoded_span": 896,
+      "distance_to_2366": -53,
+      "known_bytes": 768,
+      "record": 55,
+      "source_len": 2313
+    },
+    {
+      "best_direct_or_dvd_lfsr_ngram": [
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0001"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0002"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0004"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0005"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0008"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0010"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0020"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0040"
+        }
+      ],
+      "best_dvd_pi_window": {
+        "valid_rows": 0,
+        "variant": "source-shorter-than-2366",
+        "window_offset": null
+      },
+      "decoded_span": 544,
+      "distance_to_2366": -74,
+      "known_bytes": 496,
+      "record": 58,
+      "source_len": 2292
+    },
+    {
+      "best_direct_or_dvd_lfsr_ngram": [
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0001"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0002"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0004"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0005"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0008"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0010"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0020"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0040"
+        }
+      ],
+      "best_dvd_pi_window": {
+        "valid_rows": 0,
+        "variant": "source-shorter-than-2366",
+        "window_offset": null
+      },
+      "decoded_span": 848,
+      "distance_to_2366": -22,
+      "known_bytes": 624,
+      "record": 60,
+      "source_len": 2344
+    },
+    {
+      "best_direct_or_dvd_lfsr_ngram": [
+        {
+          "length": 0,
+          "shape": "frame+0x0",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0001"
+        },
+        {
+          "length": 0,
+          "shape": "frame+0x0",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0002"
+        },
+        {
+          "length": 0,
+          "shape": "frame+0x0",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0004"
+        },
+        {
+          "length": 0,
+          "shape": "frame+0x0",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0005"
+        },
+        {
+          "length": 0,
+          "shape": "frame+0x0",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0008"
+        },
+        {
+          "length": 0,
+          "shape": "frame+0x0",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0010"
+        },
+        {
+          "length": 0,
+          "shape": "frame+0x0",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0020"
+        },
+        {
+          "length": 0,
+          "shape": "frame+0x0",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0040"
+        }
+      ],
+      "best_dvd_pi_window": {
+        "valid_rows": 0,
+        "variant": "raw",
+        "window_offset": 0
+      },
+      "decoded_span": 464,
+      "distance_to_2366": 53,
+      "known_bytes": 224,
+      "record": 62,
+      "source_len": 2419
+    },
+    {
+      "best_direct_or_dvd_lfsr_ngram": [
+        {
+          "length": 0,
+          "shape": "frame+0x0",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0001"
+        },
+        {
+          "length": 0,
+          "shape": "frame+0x0",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0002"
+        },
+        {
+          "length": 0,
+          "shape": "frame+0x0",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0004"
+        },
+        {
+          "length": 0,
+          "shape": "frame+0x0",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0005"
+        },
+        {
+          "length": 0,
+          "shape": "frame+0x0",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0008"
+        },
+        {
+          "length": 0,
+          "shape": "frame+0x0",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0010"
+        },
+        {
+          "length": 0,
+          "shape": "frame+0x0",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0020"
+        },
+        {
+          "length": 0,
+          "shape": "frame+0x0",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0040"
+        }
+      ],
+      "best_dvd_pi_window": {
+        "valid_rows": 0,
+        "variant": "raw",
+        "window_offset": 0
+      },
+      "decoded_span": 720,
+      "distance_to_2366": 45,
+      "known_bytes": 704,
+      "record": 66,
+      "source_len": 2411
+    },
+    {
+      "best_direct_or_dvd_lfsr_ngram": [
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0001"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0002"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0004"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0005"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0008"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0010"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0020"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0040"
+        }
+      ],
+      "best_dvd_pi_window": {
+        "valid_rows": 0,
+        "variant": "source-shorter-than-2366",
+        "window_offset": null
+      },
+      "decoded_span": 656,
+      "distance_to_2366": -71,
+      "known_bytes": 272,
+      "record": 67,
+      "source_len": 2295
+    },
+    {
+      "best_direct_or_dvd_lfsr_ngram": [
+        {
+          "length": 4,
+          "shape": "frame+0x21:drop-pi-12x172",
+          "source_offset": 623,
+          "transform": "dvd-lfsr-seed-0x0040"
+        },
+        {
+          "length": 4,
+          "shape": "frame+0x21:drop-pi-13x172",
+          "source_offset": 623,
+          "transform": "dvd-lfsr-seed-0x0040"
+        },
+        {
+          "length": 4,
+          "shape": "frame+0x37:drop-pi-12x172",
+          "source_offset": 1444,
+          "transform": "dvd-lfsr-seed-0x2800"
+        },
+        {
+          "length": 4,
+          "shape": "frame+0x37:drop-pi-13x172",
+          "source_offset": 1444,
+          "transform": "dvd-lfsr-seed-0x2800"
+        },
+        {
+          "length": 0,
+          "shape": "frame+0x0",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0001"
+        },
+        {
+          "length": 0,
+          "shape": "frame+0x0",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0002"
+        },
+        {
+          "length": 0,
+          "shape": "frame+0x0",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0004"
+        },
+        {
+          "length": 0,
+          "shape": "frame+0x0",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0005"
+        }
+      ],
+      "best_dvd_pi_window": {
+        "valid_rows": 0,
+        "variant": "raw",
+        "window_offset": 0
+      },
+      "decoded_span": 640,
+      "distance_to_2366": 55,
+      "known_bytes": 528,
+      "record": 68,
+      "source_len": 2421
+    },
+    {
+      "best_direct_or_dvd_lfsr_ngram": [
+        {
+          "length": 4,
+          "shape": "frame+0x90:drop-pi-12x172",
+          "source_offset": 788,
+          "transform": "dvd-lfsr-seed-0x5400"
+        },
+        {
+          "length": 4,
+          "shape": "frame+0x90:drop-pi-13x172",
+          "source_offset": 788,
+          "transform": "dvd-lfsr-seed-0x5400"
+        },
+        {
+          "length": 0,
+          "shape": "frame+0x0",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0001"
+        },
+        {
+          "length": 0,
+          "shape": "frame+0x0",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0002"
+        },
+        {
+          "length": 0,
+          "shape": "frame+0x0",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0004"
+        },
+        {
+          "length": 0,
+          "shape": "frame+0x0",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0005"
+        },
+        {
+          "length": 0,
+          "shape": "frame+0x0",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0008"
+        },
+        {
+          "length": 0,
+          "shape": "frame+0x0",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0010"
+        }
+      ],
+      "best_dvd_pi_window": {
+        "valid_rows": 0,
+        "variant": "raw",
+        "window_offset": 0
+      },
+      "decoded_span": 560,
+      "distance_to_2366": 159,
+      "known_bytes": 448,
+      "record": 70,
+      "source_len": 2525
+    },
+    {
+      "best_direct_or_dvd_lfsr_ngram": [
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0001"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0002"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0004"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0005"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0008"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0010"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0020"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0040"
+        }
+      ],
+      "best_dvd_pi_window": {
+        "valid_rows": 0,
+        "variant": "source-shorter-than-2366",
+        "window_offset": null
+      },
+      "decoded_span": 400,
+      "distance_to_2366": -11,
+      "known_bytes": 192,
+      "record": 73,
+      "source_len": 2355
+    },
+    {
+      "best_direct_or_dvd_lfsr_ngram": [
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0001"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0002"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0004"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0005"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0008"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0010"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0020"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0040"
+        }
+      ],
+      "best_dvd_pi_window": {
+        "valid_rows": 0,
+        "variant": "source-shorter-than-2366",
+        "window_offset": null
+      },
+      "decoded_span": 224,
+      "distance_to_2366": -49,
+      "known_bytes": 224,
+      "record": 86,
+      "source_len": 2317
+    },
+    {
+      "best_direct_or_dvd_lfsr_ngram": [
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0001"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0002"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0004"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0005"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0008"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0010"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0020"
+        },
+        {
+          "length": 0,
+          "shape": "raw",
+          "source_offset": null,
+          "transform": "dvd-lfsr-seed-0x0040"
+        }
+      ],
+      "best_dvd_pi_window": {
+        "valid_rows": 0,
+        "variant": "source-shorter-than-2366",
+        "window_offset": null
+      },
+      "decoded_span": 1008,
+      "distance_to_2366": -419,
+      "known_bytes": 896,
+      "record": 87,
+      "source_len": 1947
+    }
+  ],
+  "schema": "liteon-cdd-dvd-reuse-hypotheses-v1"
+}

@@ -2030,3 +2030,13 @@ Immediate useful directions:
     datapath plausible. Record 87 is the cleanest no-variant hard-record
     transform target; records 51, 55, 60, 66, and 68 are better cross-checks
     for the 2366-byte DVD-size clue.
+94. `scripts/analyze_liteon_cdd_dvd_reuse_hypotheses.py` and
+    `analysis/8051/cdd-dvd-reuse-hypothesis-probes-20260501.md/json` test the
+    literal DVD-frame interpretation. Results are negative: DVD LFSR
+    descrambling plus simple 2366-byte frame/row extraction does not reveal
+    known decoded 8051 chunks, and no tested 2366-byte source window satisfies
+    even one DVD PI RS(182,172) row check.
+95. Refined CDD hard-record model: keep the DVD insight as a reused-dimension
+    or reused-controller-ECC clue, not a direct ECMA-267 pipeline. The hard
+    records are likely custom shortened/punctured/interleaved controller
+    codewords with DVD-ish sizes/cadence.

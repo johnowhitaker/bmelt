@@ -2156,3 +2156,19 @@ cross-checks because their source lengths sit closer to the 2366-byte recording
 frame size. Either way, the next static test should be targeted DVD-like
 scrambling/ECC/interleave experiments against masked known outputs, not more
 generic XOR/CRC guessing.
+
+I then ran that exact literal-DVD test, and it narrowed the theory in a useful
+way. The CDD hard records do not look like raw ECMA-267 DVD recording frames.
+Applying the 16 DVD LFSR scrambler presets, trying every 2366-byte frame window
+where possible, and dropping the normal 10-byte PI parity columns did not make
+the known decoded 8051 chunks appear directly. The stronger parity check was
+also negative: no tested 2366-byte CDD source window had even one valid DVD
+PI RS(182,172) row under raw, inverted, row-reversed, or frame-reversed views.
+
+So the idea has been refined. The wild-but-plausible clue is not that the CDD
+body is a hidden DVD sector stream. It is that the controller may be reusing
+DVD-ish dimensions, cadence, or ECC hardware as a convenient codeword layer for
+its own payload format. That still fits the source-length clustering and the
+12-record macro schedule, but it means a byte-exact decoder will probably have
+to model a custom shortened/punctured/interleaved code rather than import the
+ECMA pipeline wholesale.
