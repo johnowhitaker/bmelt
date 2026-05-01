@@ -348,6 +348,11 @@ def trigger_cdd_field_replay(args: argparse.Namespace) -> dict[str, Any]:
         byte9 = 0x00
         expected = 0xD0
         kind = "cdd_mapped_header_trigger"
+    elif args.trigger_mode == "cdb-fcdf00":
+        byte8 = 0xDF
+        byte9 = 0x00
+        expected = 0xD1
+        kind = "cdd_mapped_header_status_trigger"
     elif args.trigger_mode == "cdb-fcdd02":
         byte8 = 0xDD
         byte9 = 0x02
@@ -478,7 +483,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--chunk-size", type=parse_int, default=0x7F)
     parser.add_argument(
         "--trigger-mode",
-        choices=("xdata-writes", "cdb-fcdd00", "cdb-fcdd01", "cdb-fcdd02", "cdb-fcde00"),
+        choices=("xdata-writes", "cdb-fcdd00", "cdb-fcdd01", "cdb-fcdd02", "cdb-fcde00", "cdb-fcdf00"),
         default="xdata-writes",
         help="how to replay fields: guarded XDATA writes, or special CDB[7:9]=fc/dd/NN trigger",
     )
