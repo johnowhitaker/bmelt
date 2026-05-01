@@ -2084,13 +2084,20 @@ Immediate useful directions:
     captures. Do not assume a candidate record label means every source byte in
     that record controls the chosen contig.
 104. `analysis/8051/cdd-contig8-rec57-ownership-unrestored-20260501.md/json`
-    records a sharper but unresolved positive. Contig 8 is a 3-tile sequence
-    with common record label `57`; patching `0x27410` (`0x3a -> 0x32`) removed
-    only the middle tile in `24/24` mutated captures, while tile 0 and tile 2
-    remained visible. This is strong ownership evidence for record 57 over that
-    runtime neighborhood.
-105. Record 57 restore is unresolved. Stock/base replays and a helper with
-    explicit erase start sector `0x27` still leave contig 8's middle tile
-    absent after hardware cold boot, although the drive remains normal `LD5M`.
-    Treat further arbitrary CDD1 body mutations cautiously until there is a
-    better readback/restore path for bytes that require `0 -> 1` recovery.
+    recorded a sharper but initially confusing perturbation. Contig 8 is a
+    3-tile sequence with common record label `57`; patching `0x27410`
+    (`0x3a -> 0x32`) removed only the middle tile in `24/24` mutated captures,
+    while tile 0 and tile 2 remained visible.
+105. `analysis/8051/cdd-contig8-rec57-readback-resolution-20260501.md/json`
+    resolves the flash side of that result. CDD1 spot reads at `0x27400` are
+    not reliable restore oracles, even with `sg_raw --cmdset=1`; sequential F0
+    reads from offset `0` are. After restoring the lingering `0x4fc9 -> 0x6ee3`
+    response hook with `restore-4fc9-cave`, a full 1 MiB sequential F0 read
+    matched stock LD5M byte-for-byte (`sha256
+    488f49c7f5d8141186db6ca006a33cccefcc391b537d2a903f4ebaa7ea8f2e39`), and
+    `F0[0x27410]` was back to `0x3a`.
+106. The record-57 public tile still did not return after cold boot despite a
+    byte-stock F0 image. Treat record 57 as a warning about public work-window
+    instability or hidden controller/runtime state, not as a clean reversible
+    ownership proof. Record 59 / contig 4 remains the stronger reversible live
+    CDD ownership oracle.

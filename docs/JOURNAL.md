@@ -2243,13 +2243,23 @@ offsets, but the middle tile vanished in all 24 mutated captures. That is a
 very sharp ownership signal: this single source byte is tied to the middle
 tile or to the codeword material needed to materialize it.
 
-The catch is restoration. A normal stock replay, a helper-bypass stock replay,
-and a helper with explicit erase/program start around the `0x27000` sector all
-reported success and the drive stayed `LD5M`, but the middle tile did not come
-back. That makes record 57 more than a normal reversible oracle result. It may
-be exposing a bit-direction/erase limitation in our current restore method, a
-controller-side cached/derived state we are not resetting, or a CDD codeword
-path where a small source-byte change has a broader persistent effect than the
-one byte suggests. The drive is still alive and normal, but this is a point to
-slow down around direct CDD body mutations until we have a better readback or
-sector-restore story.
+The catch looked like restoration. A normal stock replay, a helper-bypass stock
+replay, and a helper with explicit erase/program start around the `0x27000`
+sector all reported success and the drive stayed `LD5M`, but the middle tile did
+not come back. That forced a cleanup pass on our readback assumptions.
+
+The answer was subtle. A spot `READ BUFFER F0` at `0x27400` is not a trustworthy
+CDD1 restore oracle; even with `sg_raw --cmdset=1`, the raw bytes were the same
+and the decrypted result did not match known LD5M. A sequential F0 read from
+offset zero is trustworthy. That sequential read showed `F0[0x27410] = 0x3a`:
+the record-57 byte was already restored. It also exposed a separate leftover
+from the currentboot response-hook era, the `0x4fc9 -> 0x6ee3` hook and cave
+payload. Running the existing `restore-4fc9-cave` candidate cleaned that too.
+
+After that, a full 1 MiB sequential F0 dump matched stock LD5M byte-for-byte.
+The missing middle tile still did not return in normal work-window captures.
+So record 57 is no longer evidence of a failed flash restore. It is evidence
+that the public tile surface can have statefulness or instability that outlives
+the obvious firmware byte experiment. The reversible record-59 test remains the
+cleaner CDD ownership proof; record 57 is a warning label for future live
+oracles.

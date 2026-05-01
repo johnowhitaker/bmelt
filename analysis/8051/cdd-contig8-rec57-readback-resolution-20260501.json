@@ -1,0 +1,34 @@
+{
+  "schema": "liteon-cdd-contig-readback-resolution-v1",
+  "date": "2026-05-01",
+  "target": {
+    "contig": "analysis/8051/cdd-runtime-chunk-contigs-20260501/contig-008-03chunks.bin",
+    "record": 57,
+    "f0_offset": "0x27410",
+    "stock_byte": "0x3a",
+    "mutated_byte": "0x32"
+  },
+  "readback": {
+    "spot_read_status": "invalid_oracle_for_cdd1",
+    "sequential_f0_status": "valid",
+    "full_f0_readback_path": "runs/contig8-rec57-ownership/prefix-restored-full-f0-read/f0-00000-100000-decrypted.bin",
+    "baseline_path": "references/firmware/extracted/ld5m-f0-window-0x00000-0x100000.bin",
+    "sha256": "488f49c7f5d8141186db6ca006a33cccefcc391b537d2a903f4ebaa7ea8f2e39",
+    "full_image_matches_stock": true,
+    "f0_0x27410_after_restore": "0x3a"
+  },
+  "prefix_hook": {
+    "lingering_hook_seen_after_base_replay": true,
+    "hook_addr": "0x4fc9",
+    "cave_addr": "0x6ee3",
+    "restore_candidate": "references/firmware/extracted/currentboot-response-hook-candidates/currentboot-response-hook-restore-4fc9-cave/currentboot-response-hook-restore-4fc9-cave/liteon-full-currentboot-ld5m-helper-bypass-currentboot-response-hook-restore-4fc9-cave-candidate.json",
+    "prefix_after_restore_matches_stock": true
+  },
+  "normal_work_window": {
+    "stock_full_sequence_hits": "24/24",
+    "mutated_full_sequence_hits": "0/24",
+    "post_full_f0_restore_full_sequence_hits": "0/12",
+    "interpretation": "tile_absence_is_not_unrestored_f0"
+  },
+  "verdict": "not_a_clean_reversible_ownership_proof; full_f0_is_restored"
+}
