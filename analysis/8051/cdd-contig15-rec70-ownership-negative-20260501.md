@@ -5,11 +5,11 @@ source byte to one normal-mode decoded-runtime contig.
 
 ## Target
 
-- Contig file: `analysis/8051/cdd-runtime-chunk-contigs-20260501/contig-004-03chunks.bin`
-- Contig bytes: `192`
-- Target record: `59`
-- Patched F0 offset: `0x28519`
-- Mutation: `68 -> 60`
+- Contig file: `analysis/8051/cdd-runtime-chunk-contigs-20260501/contig-015-02chunks.bin`
+- Contig bytes: `128`
+- Target record: `70`
+- Patched F0 offset: `0x2e59c`
+- Mutation: `ce -> c6`
 
 The test is intentionally about the public tile surface, not a flat
 decoded CDD address. A positive result means this source byte affects
@@ -19,39 +19,36 @@ the appearance/order of the chosen decoded-runtime contig.
 
 | State | Captures | Full contig sequence hits | Chunk-count histogram |
 |---|---:|---:|---|
-| stock | 16 | 7 | `{'3': 16}` |
-| mutated | 24 | 0 | `{'3': 24}` |
-| restored | 24 | 16 | `{'3': 24}` |
+| stock | 24 | 24 | `{'2': 24}` |
+| mutated | 24 | 24 | `{'2': 24}` |
+| restored | 8 | 3 | `{'1': 5, '2': 3}` |
 
 ## Verdict
 
-The contig sequence disappears under mutation and returns after restore. This is strong reversible ownership evidence.
+The contig sequence remains visible under mutation. This is a negative or insensitive-target result for this contig/source byte.
 
 ## Tile Offsets
 
 ### stock
-Full-sequence offsets: `0x7180` x7
-- chunk 0: `0x7140` x9, `0x7180` x7
-- chunk 1: `0x71c0` x16
-- chunk 2: `0x7200` x16
+Full-sequence offsets: `0x8840` x24
+- chunk 0: `0x8840` x24
+- chunk 1: `0x8880` x24
 
 ### mutated
-Full-sequence offsets: none
-- chunk 0: `0x7100` x12, `0x71c0` x12
-- chunk 1: `0x7140` x24
-- chunk 2: `0x7240` x24
+Full-sequence offsets: `0x8840` x24
+- chunk 0: `0x8840` x24
+- chunk 1: `0x8880` x24
 
 ### restored
-Full-sequence offsets: `0x7180` x16
-- chunk 0: `0x7180` x16, `0x7140` x8
-- chunk 1: `0x71c0` x24
-- chunk 2: `0x7200` x24
+Full-sequence offsets: `0x8840` x3
+- chunk 0: `0x8840` x8
+- chunk 1: `0x8880` x3
 
 ## Interpretation
 
-Stock sequence hits: `7/16`.
-Mutated sequence hits: `0/24`.
-Restored sequence hits: `16/24`.
+Stock sequence hits: `24/24`.
+Mutated sequence hits: `24/24`.
+Restored sequence hits: `3/8`.
 
 The component chunk offsets matter because the public work-window is
 a rotating tile surface, not a flat decoded CDD dump. A mutation may

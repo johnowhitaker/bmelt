@@ -2077,3 +2077,20 @@ Immediate useful directions:
     this as strong evidence that record 59 owns or controls this runtime
     contig/neighborhood, and use this before/after/restore pattern as the
     default live oracle for future CDD record ownership tests.
+103. `analysis/8051/cdd-contig15-rec70-ownership-negative-20260501.md/json`
+    records a useful negative. Contig 15 is a stable 2-tile sequence with
+    common record label `70`; patching CDD1 record 70 at `0x2e59c`
+    (`0xce -> 0xc6`) left the full sequence unchanged in `24/24` mutated
+    captures. Do not assume a candidate record label means every source byte in
+    that record controls the chosen contig.
+104. `analysis/8051/cdd-contig8-rec57-ownership-unrestored-20260501.md/json`
+    records a sharper but unresolved positive. Contig 8 is a 3-tile sequence
+    with common record label `57`; patching `0x27410` (`0x3a -> 0x32`) removed
+    only the middle tile in `24/24` mutated captures, while tile 0 and tile 2
+    remained visible. This is strong ownership evidence for record 57 over that
+    runtime neighborhood.
+105. Record 57 restore is unresolved. Stock/base replays and a helper with
+    explicit erase start sector `0x27` still leave contig 8's middle tile
+    absent after hardware cold boot, although the drive remains normal `LD5M`.
+    Treat further arbitrary CDD1 body mutations cautiously until there is a
+    better readback/restore path for bytes that require `0 -> 1` recovery.

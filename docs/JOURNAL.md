@@ -2223,3 +2223,33 @@ runtime neighborhood. This gives future CDD experiments a sharper loop:
 choose a contig, pick a plausible record owner, patch one reversible source
 bit, capture stock/mutated/restored windows, and look for reversible sequence
 or ordering changes.
+
+The second pass made that oracle more useful and more humbling. A record 70
+probe was a clean negative: changing one byte at `0x2e59c` did not move or
+break its stable two-tile contig at all. That is valuable because it tells us
+not every byte in a candidate owner record controls every public tile assigned
+to that record. We need to think in smaller neighborhoods, not just whole-record
+labels.
+
+Then record 57 gave a strong positive with a catch. The target was contig 8,
+a three-tile runtime sequence that was present in every stock capture:
+
+```text
+F0 offset 0x27410: 0x3a -> 0x32
+```
+
+After that one-bit clear, tile 0 and tile 2 stayed visible at the same public
+offsets, but the middle tile vanished in all 24 mutated captures. That is a
+very sharp ownership signal: this single source byte is tied to the middle
+tile or to the codeword material needed to materialize it.
+
+The catch is restoration. A normal stock replay, a helper-bypass stock replay,
+and a helper with explicit erase/program start around the `0x27000` sector all
+reported success and the drive stayed `LD5M`, but the middle tile did not come
+back. That makes record 57 more than a normal reversible oracle result. It may
+be exposing a bit-direction/erase limitation in our current restore method, a
+controller-side cached/derived state we are not resetting, or a CDD codeword
+path where a small source-byte change has a broader persistent effect than the
+one byte suggests. The drive is still alive and normal, but this is a point to
+slow down around direct CDD body mutations until we have a better readback or
+sector-restore story.

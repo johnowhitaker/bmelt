@@ -82,6 +82,34 @@ def analyze_capture_dir(root: Path, sequence: bytes, chunks: list[bytes]) -> dic
 
 
 def write_markdown(path: Path, report: dict) -> None:
+    stock_hits = len(report["states"]["stock"]["sequence_hits"])
+    mutated_hits = len(report["states"]["mutated"]["sequence_hits"])
+    restored_hits = len(report["states"]["restored"]["sequence_hits"])
+    stock_files = report["states"]["stock"]["files"]
+    mutated_files = report["states"]["mutated"]["files"]
+    restored_files = report["states"]["restored"]["files"]
+    if stock_hits and not mutated_hits and restored_hits:
+        verdict = (
+            "The contig sequence disappears under mutation and returns after "
+            "restore. This is strong reversible ownership evidence."
+        )
+    elif stock_hits and not mutated_hits and not restored_hits:
+        verdict = (
+            "The contig sequence disappears under mutation but did not return "
+            "in the supplied restored captures. This is strong ownership "
+            "evidence, but restore/state recovery remains unresolved."
+        )
+    elif stock_hits and mutated_hits == mutated_files:
+        verdict = (
+            "The contig sequence remains visible under mutation. This is a "
+            "negative or insensitive-target result for this contig/source byte."
+        )
+    else:
+        verdict = (
+            "The sequence-hit pattern is mixed. Inspect the per-file offsets in "
+            "the JSON before using this as ownership evidence."
+        )
+
     lines = [
         "# CDD Contig Ownership Perturbation",
         "",
@@ -112,7 +140,7 @@ def write_markdown(path: Path, report: dict) -> None:
             f"`{state['chunk_count_histogram']}` |"
         )
 
-    lines.extend(["", "## Tile Offsets", ""])
+    lines.extend(["", "## Verdict", "", verdict, "", "## Tile Offsets", ""])
     for label, state in report["states"].items():
         lines.append(f"### {label}")
         if state["sequence_hits"]:
@@ -142,13 +170,13 @@ def write_markdown(path: Path, report: dict) -> None:
         [
             "## Interpretation",
             "",
-            "The full three-chunk sequence is present in stock captures, disappears",
-            "after the single-bit CDD record-59 mutation, and returns after the",
-            "byte is restored. All three component chunks remain visible in the",
-            "mutated state, but their public-window offsets are rearranged, so the",
-            "effect is not a simple chunk disappearance. This is strong live",
-            "ownership evidence for candidate CDD record 59 over this decoded",
-            "runtime contig/neighborhood.",
+            f"Stock sequence hits: `{stock_hits}/{stock_files}`.",
+            f"Mutated sequence hits: `{mutated_hits}/{mutated_files}`.",
+            f"Restored sequence hits: `{restored_hits}/{restored_files}`.",
+            "",
+            "The component chunk offsets matter because the public work-window is",
+            "a rotating tile surface, not a flat decoded CDD dump. A mutation may",
+            "remove a tile, rearrange tiles, or leave the sequence unchanged.",
             "",
             "Use this as a better oracle pattern for future CDD work: choose a",
             "short contig with a plausible record owner, patch one low-risk",
