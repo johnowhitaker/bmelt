@@ -2172,3 +2172,30 @@ its own payload format. That still fits the source-length clustering and the
 12-record macro schedule, but it means a byte-exact decoder will probably have
 to model a custom shortened/punctured/interleaved code rather than import the
 ECMA pipeline wholesale.
+
+The next correction was just as important. The exported
+`record-XXX-known-output.bin` files are not reliable flat decoded records. They
+are public-slot consensus artifacts from a rotating work-window. An audit made
+this concrete: record 87 had 896 covered slot bytes, but only five unique
+0x40-byte top chunks, with three chunks repeated four times each and no
+record-exclusive singleton chunks. The same pattern shows up in the other
+high-coverage records. That means the right primitive is not "encoded CDD
+record to flat decoded record"; it is "encoded CDD record to decoded/runtime
+chunks to rotating public tile surface."
+
+I added a chunk-contig builder to work at that more honest level. It treats each
+0x40-byte normal work-window tile as a graph node and uses repeated host-visible
+adjacency as directed edges. With the current corpus it finds 96 known chunk
+nodes, 114 directed adjacency edges, 43 dominant edges, and 25 contigs. The best
+contig is a five-chunk / 320-byte decoded-runtime neighborhood around candidate
+records 68/69; several 128-192 byte contigs are record-local or nearly so. This
+is better evidence than the fake-flat exports: the contigs are actual runtime
+byte runs, while their CDD record labels are still provenance guesses.
+
+Radare2 disassembly of the strongest contigs again looks like real 8051 overlay
+code. The new contigs touch the familiar controller and packet machinery:
+`0x47b1`, `0x4000`, `0x4091`, `0x4095`, `0x4097`, `0x4011`, `0x8a4d`,
+`0x8a52`, `0x89a4`, and friends. This gives us a better next phase: use contigs
+as static code artifacts, then validate CDD ownership of a chosen contig with a
+small live perturbation oracle only when the static graph can no longer narrow
+it.

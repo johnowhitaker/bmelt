@@ -2040,3 +2040,24 @@ Immediate useful directions:
     or reused-controller-ECC clue, not a direct ECMA-267 pipeline. The hard
     records are likely custom shortened/punctured/interleaved controller
     codewords with DVD-ish sizes/cadence.
+96. `scripts/audit_liteon_cdd_known_output_exports.py` and
+    `analysis/8051/cdd-known-output-export-audit-20260501.md/json` audit the
+    per-record known-output exports. Important correction: those exports are
+    public-slot consensus artifacts, not flat decoded CDD records. Example:
+    record 87 has 896 covered slot bytes, but only five unique top chunks and
+    zero record-exclusive singleton chunks.
+97. `scripts/build_liteon_cdd_chunk_contigs.py` and
+    `analysis/8051/cdd-runtime-chunk-contigs-20260501.md/json` build contigs
+    from 0x40-byte normal work-window chunk adjacency. Current corpus: 96 known
+    nodes, 114 directed edges, 43 dominant edges, 25 contigs. The best contig
+    is 5 chunks / 320 bytes around candidate records 68/69.
+98. Treat chunk contigs as the current best decoded-runtime artifacts. They are
+    real adjacent tile runs, but their record labels are still candidate
+    provenance. Validate a contig's CDD ownership with a live perturbation
+    oracle before treating it as a decoded record span.
+99. Top contig disassemblies under
+    `analysis/8051/cdd-runtime-chunk-contigs-20260501/*-r2-8051.asm` look like
+    plausible 8051 overlays and touch `0x47b1`, `0x4000`, `0x4091`, `0x4095`,
+    `0x4097`, `0x4011`, `0x8a4d`, `0x8a52`, and related controller/packet
+    state. Use these contigs for static code reading before doing more CDD
+    decode brute force.

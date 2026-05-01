@@ -1,0 +1,1861 @@
+{
+  "chunk_size": 64,
+  "export_dir": "/Users/johno/projects/boastermelt/analysis/8051/cdd-known-output-records-20260501",
+  "pairs": "/Users/johno/projects/boastermelt/analysis/8051/cdd-known-plaintext-pairs-with-readonly-harvests-20260501.json",
+  "records": [
+    {
+      "candidate_records_seen": [
+        86,
+        87
+      ],
+      "decoded_span": 1008,
+      "duplicate_positions": [
+        {
+          "candidate_records": [
+            87
+          ],
+          "chunk": "183ec6fd07c7",
+          "record_relatives": [
+            160,
+            224,
+            288,
+            352
+          ],
+          "sha256": "183ec6fd07c708648d6c114f46f8ef00eff1019ee2fceadadd50bbb5e3383bfb",
+          "slot_count": 4
+        },
+        {
+          "candidate_records": [
+            87
+          ],
+          "chunk": "ba3aab1d5fd2",
+          "record_relatives": [
+            416,
+            480,
+            544,
+            608
+          ],
+          "sha256": "ba3aab1d5fd2e7d2e53a40dc6d30ee8e321d0d1d7d5c4a775562c56bb68b52ec",
+          "slot_count": 4
+        },
+        {
+          "candidate_records": [
+            87
+          ],
+          "chunk": "c2560553eb14",
+          "record_relatives": [
+            672,
+            736,
+            800,
+            864
+          ],
+          "sha256": "c2560553eb1419edcf9aa7f969449025cb496bddc680ead90ebe7ff1dff10be4",
+          "slot_count": 4
+        }
+      ],
+      "duplicate_slots": 9,
+      "exclusive_singleton_bytes_upper_bound": 0,
+      "known_bytes": 896,
+      "record": 87,
+      "record_exclusive_singleton_chunks": 0,
+      "record_exclusive_top_chunks": 3,
+      "repeated_top_chunks": 3,
+      "singleton_chunk_bytes_upper_bound": 128,
+      "singleton_top_chunks": 2,
+      "slot_count": 14,
+      "source_len": 1947,
+      "top_chunk_repeat_ratio": 0.6428571428571429,
+      "unique_chunk_bytes_upper_bound": 320,
+      "unique_top_chunks": 5,
+      "variant_slot_count": 0,
+      "variant_slots": []
+    },
+    {
+      "candidate_records_seen": [
+        51,
+        52
+      ],
+      "decoded_span": 816,
+      "duplicate_positions": [
+        {
+          "candidate_records": [
+            51
+          ],
+          "chunk": "056348c5dbbf",
+          "record_relatives": [
+            528,
+            592,
+            656,
+            720
+          ],
+          "sha256": "056348c5dbbfdbdea87221990a094765a69ea0466eaee2ff369e4da0d2239f1b",
+          "slot_count": 4
+        },
+        {
+          "candidate_records": [
+            51
+          ],
+          "chunk": "70221f447d35",
+          "record_relatives": [
+            336,
+            400,
+            464
+          ],
+          "sha256": "70221f447d35615c175a4984693201ef2dbd2e85f427a1ea5d842e0bacb10c37",
+          "slot_count": 3
+        },
+        {
+          "candidate_records": [
+            51
+          ],
+          "chunk": "0f031dd8ed37",
+          "record_relatives": [
+            16,
+            80
+          ],
+          "sha256": "0f031dd8ed37cbdb0c99726660d3d18f4a508045185cc3cbfb1eaa04a2e4efc2",
+          "slot_count": 2
+        },
+        {
+          "candidate_records": [
+            51
+          ],
+          "chunk": "fe95f1ed098a",
+          "record_relatives": [
+            144,
+            208
+          ],
+          "sha256": "fe95f1ed098af55f59669635358352d464c18116a401e1d548e4be8981b6364e",
+          "slot_count": 2
+        }
+      ],
+      "duplicate_slots": 7,
+      "exclusive_singleton_bytes_upper_bound": 64,
+      "known_bytes": 800,
+      "record": 51,
+      "record_exclusive_singleton_chunks": 1,
+      "record_exclusive_top_chunks": 5,
+      "repeated_top_chunks": 4,
+      "singleton_chunk_bytes_upper_bound": 128,
+      "singleton_top_chunks": 2,
+      "slot_count": 13,
+      "source_len": 2326,
+      "top_chunk_repeat_ratio": 0.5384615384615384,
+      "unique_chunk_bytes_upper_bound": 384,
+      "unique_top_chunks": 6,
+      "variant_slot_count": 7,
+      "variant_slots": [
+        {
+          "record_relative": 144,
+          "top_chunk": "fe95f1ed098a",
+          "top_count": 256,
+          "variant_count": 2
+        },
+        {
+          "record_relative": 272,
+          "top_chunk": "3065e119a794",
+          "top_count": 44,
+          "variant_count": 2
+        },
+        {
+          "record_relative": 336,
+          "top_chunk": "70221f447d35",
+          "top_count": 186,
+          "variant_count": 2
+        },
+        {
+          "record_relative": 400,
+          "top_chunk": "70221f447d35",
+          "top_count": 243,
+          "variant_count": 2
+        },
+        {
+          "record_relative": 528,
+          "top_chunk": "056348c5dbbf",
+          "top_count": 345,
+          "variant_count": 2
+        },
+        {
+          "record_relative": 656,
+          "top_chunk": "056348c5dbbf",
+          "top_count": 86,
+          "variant_count": 2
+        },
+        {
+          "record_relative": 720,
+          "top_chunk": "056348c5dbbf",
+          "top_count": 90,
+          "variant_count": 2
+        }
+      ]
+    },
+    {
+      "candidate_records_seen": [
+        55,
+        56
+      ],
+      "decoded_span": 896,
+      "duplicate_positions": [
+        {
+          "candidate_records": [
+            55
+          ],
+          "chunk": "8853b78ca23e",
+          "record_relatives": [
+            192,
+            256,
+            320,
+            384
+          ],
+          "sha256": "8853b78ca23e154f294154fbbed1f4f77dc41ef57afaa3ad5e5e698dae7f67d6",
+          "slot_count": 4
+        },
+        {
+          "candidate_records": [
+            55
+          ],
+          "chunk": "95caa55b881e",
+          "record_relatives": [
+            448,
+            576
+          ],
+          "sha256": "95caa55b881e4a03c00ebe93d832419d9a78df14262d6e983140861331a52a9a",
+          "slot_count": 2
+        },
+        {
+          "candidate_records": [
+            55
+          ],
+          "chunk": "a87d03db223d",
+          "record_relatives": [
+            512,
+            640
+          ],
+          "sha256": "a87d03db223d165c42a7dd48bb953a4bee0f4c549a8c5420a7f438fabb4f5039",
+          "slot_count": 2
+        },
+        {
+          "candidate_records": [
+            55,
+            56
+          ],
+          "chunk": "25956f88a30e",
+          "record_relatives": [
+            704,
+            832
+          ],
+          "sha256": "25956f88a30ed7006812fbaf61d6891e15c837aa8cf227964860689289ea2704",
+          "slot_count": 2
+        }
+      ],
+      "duplicate_slots": 6,
+      "exclusive_singleton_bytes_upper_bound": 64,
+      "known_bytes": 768,
+      "record": 55,
+      "record_exclusive_singleton_chunks": 1,
+      "record_exclusive_top_chunks": 4,
+      "repeated_top_chunks": 4,
+      "singleton_chunk_bytes_upper_bound": 128,
+      "singleton_top_chunks": 2,
+      "slot_count": 12,
+      "source_len": 2313,
+      "top_chunk_repeat_ratio": 0.5,
+      "unique_chunk_bytes_upper_bound": 384,
+      "unique_top_chunks": 6,
+      "variant_slot_count": 7,
+      "variant_slots": [
+        {
+          "record_relative": 448,
+          "top_chunk": "95caa55b881e",
+          "top_count": 143,
+          "variant_count": 5
+        },
+        {
+          "record_relative": 512,
+          "top_chunk": "a87d03db223d",
+          "top_count": 358,
+          "variant_count": 5
+        },
+        {
+          "record_relative": 576,
+          "top_chunk": "95caa55b881e",
+          "top_count": 268,
+          "variant_count": 5
+        },
+        {
+          "record_relative": 640,
+          "top_chunk": "a87d03db223d",
+          "top_count": 224,
+          "variant_count": 5
+        },
+        {
+          "record_relative": 704,
+          "top_chunk": "25956f88a30e",
+          "top_count": 188,
+          "variant_count": 2
+        },
+        {
+          "record_relative": 768,
+          "top_chunk": "4f29221f2e51",
+          "top_count": 125,
+          "variant_count": 2
+        },
+        {
+          "record_relative": 832,
+          "top_chunk": "25956f88a30e",
+          "top_count": 243,
+          "variant_count": 2
+        }
+      ]
+    },
+    {
+      "candidate_records_seen": [
+        66,
+        67
+      ],
+      "decoded_span": 720,
+      "duplicate_positions": [
+        {
+          "candidate_records": [
+            66
+          ],
+          "chunk": "404045e0e63c",
+          "record_relatives": [
+            336,
+            400,
+            528
+          ],
+          "sha256": "404045e0e63cf82b4059fa90c565251f0852c12e18630ada52118d2c75c7daf9",
+          "slot_count": 3
+        },
+        {
+          "candidate_records": [
+            66
+          ],
+          "chunk": "9aa0a39b4424",
+          "record_relatives": [
+            80,
+            208
+          ],
+          "sha256": "9aa0a39b4424ba82e4ddfc32359b6d7b4f21f77ecd387f2cf8884f068ea5b5c4",
+          "slot_count": 2
+        },
+        {
+          "candidate_records": [
+            66
+          ],
+          "chunk": "fe343ef73975",
+          "record_relatives": [
+            144,
+            272
+          ],
+          "sha256": "fe343ef73975d6766c236d664ff0f6b8c7cac30767666cf803d6fc7fce5de610",
+          "slot_count": 2
+        },
+        {
+          "candidate_records": [
+            66,
+            67
+          ],
+          "chunk": "bd4b736c6b8d",
+          "record_relatives": [
+            592,
+            656
+          ],
+          "sha256": "bd4b736c6b8d31052ccdcfca05d25645409e5461f7ab079d988397ce5c67ed3e",
+          "slot_count": 2
+        }
+      ],
+      "duplicate_slots": 5,
+      "exclusive_singleton_bytes_upper_bound": 128,
+      "known_bytes": 704,
+      "record": 66,
+      "record_exclusive_singleton_chunks": 2,
+      "record_exclusive_top_chunks": 5,
+      "repeated_top_chunks": 4,
+      "singleton_chunk_bytes_upper_bound": 128,
+      "singleton_top_chunks": 2,
+      "slot_count": 11,
+      "source_len": 2411,
+      "top_chunk_repeat_ratio": 0.45454545454545453,
+      "unique_chunk_bytes_upper_bound": 384,
+      "unique_top_chunks": 6,
+      "variant_slot_count": 5,
+      "variant_slots": [
+        {
+          "record_relative": 80,
+          "top_chunk": "9aa0a39b4424",
+          "top_count": 256,
+          "variant_count": 2
+        },
+        {
+          "record_relative": 208,
+          "top_chunk": "9aa0a39b4424",
+          "top_count": 413,
+          "variant_count": 2
+        },
+        {
+          "record_relative": 400,
+          "top_chunk": "404045e0e63c",
+          "top_count": 158,
+          "variant_count": 2
+        },
+        {
+          "record_relative": 464,
+          "top_chunk": "efcb6299a750",
+          "top_count": 185,
+          "variant_count": 2
+        },
+        {
+          "record_relative": 528,
+          "top_chunk": "404045e0e63c",
+          "top_count": 186,
+          "variant_count": 2
+        }
+      ]
+    },
+    {
+      "candidate_records_seen": [
+        59,
+        60
+      ],
+      "decoded_span": 848,
+      "duplicate_positions": [
+        {
+          "candidate_records": [
+            60
+          ],
+          "chunk": "4cfa6d151318",
+          "record_relatives": [
+            96,
+            160
+          ],
+          "sha256": "4cfa6d151318d9f9dc9c63b1885b0c02a58e6109b2b35fa4b81cc8280d925639",
+          "slot_count": 2
+        },
+        {
+          "candidate_records": [
+            60
+          ],
+          "chunk": "9b673c066ae4",
+          "record_relatives": [
+            480,
+            544
+          ],
+          "sha256": "9b673c066ae46057009d7f962320e5ff963e1c4f7437d95e328290edeb39a3b7",
+          "slot_count": 2
+        },
+        {
+          "candidate_records": [
+            60
+          ],
+          "chunk": "6d249b0b8b59",
+          "record_relatives": [
+            608,
+            736
+          ],
+          "sha256": "6d249b0b8b59758d63593ed3f8afb75886240f80b7693d9a9e93e2bd929438cf",
+          "slot_count": 2
+        },
+        {
+          "candidate_records": [
+            60
+          ],
+          "chunk": "b4bb17eb1656",
+          "record_relatives": [
+            672,
+            800
+          ],
+          "sha256": "b4bb17eb1656566e8a26a7975e07aa34235bae649444bb05b7f1c1b798c06294",
+          "slot_count": 2
+        }
+      ],
+      "duplicate_slots": 4,
+      "exclusive_singleton_bytes_upper_bound": 64,
+      "known_bytes": 624,
+      "record": 60,
+      "record_exclusive_singleton_chunks": 1,
+      "record_exclusive_top_chunks": 5,
+      "repeated_top_chunks": 4,
+      "singleton_chunk_bytes_upper_bound": 128,
+      "singleton_top_chunks": 2,
+      "slot_count": 10,
+      "source_len": 2344,
+      "top_chunk_repeat_ratio": 0.4,
+      "unique_chunk_bytes_upper_bound": 384,
+      "unique_top_chunks": 6,
+      "variant_slot_count": 2,
+      "variant_slots": [
+        {
+          "record_relative": 736,
+          "top_chunk": "6d249b0b8b59",
+          "top_count": 256,
+          "variant_count": 3
+        },
+        {
+          "record_relative": 800,
+          "top_chunk": "b4bb17eb1656",
+          "top_count": 196,
+          "variant_count": 2
+        }
+      ]
+    },
+    {
+      "candidate_records_seen": [
+        67,
+        68,
+        69
+      ],
+      "decoded_span": 640,
+      "duplicate_positions": [
+        {
+          "candidate_records": [
+            68
+          ],
+          "chunk": "c5c0741f5daa",
+          "record_relatives": [
+            240,
+            368,
+            432
+          ],
+          "sha256": "c5c0741f5daa580c2f3dd3ba451a6a7060426d388a5ba30ebcd09ea218fa8022",
+          "slot_count": 3
+        },
+        {
+          "candidate_records": [
+            68,
+            69
+          ],
+          "chunk": "7106a72e56d9",
+          "record_relatives": [
+            560,
+            624
+          ],
+          "sha256": "7106a72e56d99556fc3629abcd9453e242b8f0af0ebe256867b222364c74194c",
+          "slot_count": 2
+        }
+      ],
+      "duplicate_slots": 3,
+      "exclusive_singleton_bytes_upper_bound": 192,
+      "known_bytes": 528,
+      "record": 68,
+      "record_exclusive_singleton_chunks": 3,
+      "record_exclusive_top_chunks": 4,
+      "repeated_top_chunks": 2,
+      "singleton_chunk_bytes_upper_bound": 256,
+      "singleton_top_chunks": 4,
+      "slot_count": 9,
+      "source_len": 2421,
+      "top_chunk_repeat_ratio": 0.3333333333333333,
+      "unique_chunk_bytes_upper_bound": 384,
+      "unique_top_chunks": 6,
+      "variant_slot_count": 2,
+      "variant_slots": [
+        {
+          "record_relative": 368,
+          "top_chunk": "c5c0741f5daa",
+          "top_count": 330,
+          "variant_count": 2
+        },
+        {
+          "record_relative": 624,
+          "top_chunk": "7106a72e56d9",
+          "top_count": 260,
+          "variant_count": 2
+        }
+      ]
+    },
+    {
+      "candidate_records_seen": [
+        88
+      ],
+      "decoded_span": 688,
+      "duplicate_positions": [
+        {
+          "candidate_records": [
+            88
+          ],
+          "chunk": "03044422ea30",
+          "record_relatives": [
+            176,
+            240,
+            304,
+            368
+          ],
+          "sha256": "03044422ea303ce9de2d50de407f8131004956e5600e9b41bee8417878477656",
+          "slot_count": 4
+        },
+        {
+          "candidate_records": [
+            88
+          ],
+          "chunk": "7fabb1c7616c",
+          "record_relatives": [
+            432,
+            496,
+            560,
+            624
+          ],
+          "sha256": "7fabb1c7616cab1e613d0e8c4696c673b4f46a3561eeb1588d59aff3dcc87c1b",
+          "slot_count": 4
+        }
+      ],
+      "duplicate_slots": 6,
+      "exclusive_singleton_bytes_upper_bound": 0,
+      "known_bytes": 512,
+      "record": 88,
+      "record_exclusive_singleton_chunks": 0,
+      "record_exclusive_top_chunks": 2,
+      "repeated_top_chunks": 2,
+      "singleton_chunk_bytes_upper_bound": 0,
+      "singleton_top_chunks": 0,
+      "slot_count": 8,
+      "source_len": 1965,
+      "top_chunk_repeat_ratio": 0.75,
+      "unique_chunk_bytes_upper_bound": 128,
+      "unique_top_chunks": 2,
+      "variant_slot_count": 1,
+      "variant_slots": [
+        {
+          "record_relative": 560,
+          "top_chunk": "7fabb1c7616c",
+          "top_count": 261,
+          "variant_count": 2
+        }
+      ]
+    },
+    {
+      "candidate_records_seen": [
+        57,
+        58,
+        59
+      ],
+      "decoded_span": 544,
+      "duplicate_positions": [
+        {
+          "candidate_records": [
+            57,
+            58
+          ],
+          "chunk": "5fb5a8bf8f9a",
+          "record_relatives": [
+            48,
+            112
+          ],
+          "sha256": "5fb5a8bf8f9adbbb1a6aa7a9ddb9e8b9da149a3ca33c8eff02b0f5adac5395b7",
+          "slot_count": 2
+        },
+        {
+          "candidate_records": [
+            58
+          ],
+          "chunk": "7e15398acc97",
+          "record_relatives": [
+            176,
+            240
+          ],
+          "sha256": "7e15398acc979736ee51fc013e7058895d2a53d0a443b905ba24dcb9c55226ed",
+          "slot_count": 2
+        },
+        {
+          "candidate_records": [
+            58
+          ],
+          "chunk": "8f8e0add044c",
+          "record_relatives": [
+            304,
+            368
+          ],
+          "sha256": "8f8e0add044ccff60663762031117f5d99f27f090fbfb5d8a719dedbfeeb89b5",
+          "slot_count": 2
+        },
+        {
+          "candidate_records": [
+            58,
+            59
+          ],
+          "chunk": "20ea2ab16891",
+          "record_relatives": [
+            432,
+            496
+          ],
+          "sha256": "20ea2ab16891b5c70526dc35ea5187e6ab4d45b592920d95e255f52d34a09baa",
+          "slot_count": 2
+        }
+      ],
+      "duplicate_slots": 4,
+      "exclusive_singleton_bytes_upper_bound": 0,
+      "known_bytes": 496,
+      "record": 58,
+      "record_exclusive_singleton_chunks": 0,
+      "record_exclusive_top_chunks": 2,
+      "repeated_top_chunks": 4,
+      "singleton_chunk_bytes_upper_bound": 0,
+      "singleton_top_chunks": 0,
+      "slot_count": 8,
+      "source_len": 2292,
+      "top_chunk_repeat_ratio": 0.5,
+      "unique_chunk_bytes_upper_bound": 256,
+      "unique_top_chunks": 4,
+      "variant_slot_count": 5,
+      "variant_slots": [
+        {
+          "record_relative": 176,
+          "top_chunk": "7e15398acc97",
+          "top_count": 334,
+          "variant_count": 3
+        },
+        {
+          "record_relative": 304,
+          "top_chunk": "8f8e0add044c",
+          "top_count": 195,
+          "variant_count": 3
+        },
+        {
+          "record_relative": 368,
+          "top_chunk": "8f8e0add044c",
+          "top_count": 322,
+          "variant_count": 3
+        },
+        {
+          "record_relative": 432,
+          "top_chunk": "20ea2ab16891",
+          "top_count": 136,
+          "variant_count": 3
+        },
+        {
+          "record_relative": 496,
+          "top_chunk": "20ea2ab16891",
+          "top_count": 314,
+          "variant_count": 3
+        }
+      ]
+    },
+    {
+      "candidate_records_seen": [
+        70
+      ],
+      "decoded_span": 560,
+      "duplicate_positions": [
+        {
+          "candidate_records": [
+            70
+          ],
+          "chunk": "d21d30cf6e6b",
+          "record_relatives": [
+            0,
+            64,
+            192
+          ],
+          "sha256": "d21d30cf6e6b65b017cb29dd4b7ec71ab6afdf60f10155d8eb0b2fd5cfaf1490",
+          "slot_count": 3
+        },
+        {
+          "candidate_records": [
+            70
+          ],
+          "chunk": "70e7ea0193bb",
+          "record_relatives": [
+            256,
+            384
+          ],
+          "sha256": "70e7ea0193bb46087a581d0b17035207696350ffc4aa4f6f6e211afdeb4dace9",
+          "slot_count": 2
+        }
+      ],
+      "duplicate_slots": 3,
+      "exclusive_singleton_bytes_upper_bound": 128,
+      "known_bytes": 448,
+      "record": 70,
+      "record_exclusive_singleton_chunks": 2,
+      "record_exclusive_top_chunks": 4,
+      "repeated_top_chunks": 2,
+      "singleton_chunk_bytes_upper_bound": 128,
+      "singleton_top_chunks": 2,
+      "slot_count": 7,
+      "source_len": 2525,
+      "top_chunk_repeat_ratio": 0.42857142857142855,
+      "unique_chunk_bytes_upper_bound": 256,
+      "unique_top_chunks": 4,
+      "variant_slot_count": 5,
+      "variant_slots": [
+        {
+          "record_relative": 0,
+          "top_chunk": "d21d30cf6e6b",
+          "top_count": 209,
+          "variant_count": 3
+        },
+        {
+          "record_relative": 64,
+          "top_chunk": "d21d30cf6e6b",
+          "top_count": 195,
+          "variant_count": 3
+        },
+        {
+          "record_relative": 128,
+          "top_chunk": "fb00deab088b",
+          "top_count": 271,
+          "variant_count": 2
+        },
+        {
+          "record_relative": 192,
+          "top_chunk": "d21d30cf6e6b",
+          "top_count": 140,
+          "variant_count": 3
+        },
+        {
+          "record_relative": 384,
+          "top_chunk": "70e7ea0193bb",
+          "top_count": 413,
+          "variant_count": 2
+        }
+      ]
+    },
+    {
+      "candidate_records_seen": [
+        50
+      ],
+      "decoded_span": 496,
+      "duplicate_positions": [
+        {
+          "candidate_records": [
+            50
+          ],
+          "chunk": "6c4f90652e56",
+          "record_relatives": [
+            0,
+            64,
+            128,
+            192
+          ],
+          "sha256": "6c4f90652e56f0866c745d3b909f434bbc76a047260cbd54fa2bc4a52e743773",
+          "slot_count": 4
+        },
+        {
+          "candidate_records": [
+            50
+          ],
+          "chunk": "2598f9591a20",
+          "record_relatives": [
+            320,
+            384,
+            448
+          ],
+          "sha256": "2598f9591a207994caacea8a3d3a8b1d665f515de6ebdaba068e5aa4e7e206f1",
+          "slot_count": 3
+        }
+      ],
+      "duplicate_slots": 5,
+      "exclusive_singleton_bytes_upper_bound": 0,
+      "known_bytes": 432,
+      "record": 50,
+      "record_exclusive_singleton_chunks": 0,
+      "record_exclusive_top_chunks": 2,
+      "repeated_top_chunks": 2,
+      "singleton_chunk_bytes_upper_bound": 0,
+      "singleton_top_chunks": 0,
+      "slot_count": 7,
+      "source_len": 2499,
+      "top_chunk_repeat_ratio": 0.7142857142857143,
+      "unique_chunk_bytes_upper_bound": 128,
+      "unique_top_chunks": 2,
+      "variant_slot_count": 0,
+      "variant_slots": []
+    },
+    {
+      "candidate_records_seen": [
+        64
+      ],
+      "decoded_span": 688,
+      "duplicate_positions": [
+        {
+          "candidate_records": [
+            64
+          ],
+          "chunk": "c24221ec1018",
+          "record_relatives": [
+            32,
+            96
+          ],
+          "sha256": "c24221ec101890fcd324e45825dfdd6fcfa8bd7b5b4dd07fad9c0d016f64f6fe",
+          "slot_count": 2
+        },
+        {
+          "candidate_records": [
+            64
+          ],
+          "chunk": "24ebe8bb67f5",
+          "record_relatives": [
+            160,
+            224
+          ],
+          "sha256": "24ebe8bb67f56220818f78883fe477478f5db7febf2e5a4468f0f65615013664",
+          "slot_count": 2
+        },
+        {
+          "candidate_records": [
+            64
+          ],
+          "chunk": "b69f366c92b6",
+          "record_relatives": [
+            544,
+            672
+          ],
+          "sha256": "b69f366c92b68ce2ade4f064e1e296ae657e6a5b3331905e21148efbe7ac0155",
+          "slot_count": 2
+        }
+      ],
+      "duplicate_slots": 3,
+      "exclusive_singleton_bytes_upper_bound": 0,
+      "known_bytes": 336,
+      "record": 64,
+      "record_exclusive_singleton_chunks": 0,
+      "record_exclusive_top_chunks": 3,
+      "repeated_top_chunks": 3,
+      "singleton_chunk_bytes_upper_bound": 0,
+      "singleton_top_chunks": 0,
+      "slot_count": 6,
+      "source_len": 1604,
+      "top_chunk_repeat_ratio": 0.5,
+      "unique_chunk_bytes_upper_bound": 192,
+      "unique_top_chunks": 3,
+      "variant_slot_count": 1,
+      "variant_slots": [
+        {
+          "record_relative": 160,
+          "top_chunk": "24ebe8bb67f5",
+          "top_count": 413,
+          "variant_count": 2
+        }
+      ]
+    },
+    {
+      "candidate_records_seen": [
+        65
+      ],
+      "decoded_span": 544,
+      "duplicate_positions": [
+        {
+          "candidate_records": [
+            65
+          ],
+          "chunk": "9e474876a043",
+          "record_relatives": [
+            112,
+            176
+          ],
+          "sha256": "9e474876a043be20ef95890b9c75715015cd34c89b8b42ffc0b757f6c2614bb8",
+          "slot_count": 2
+        },
+        {
+          "candidate_records": [
+            65
+          ],
+          "chunk": "97d7a6c10602",
+          "record_relatives": [
+            368,
+            432
+          ],
+          "sha256": "97d7a6c1060257440525908f115e3fd66af44a31ff76f404733f9b3e376d0bd3",
+          "slot_count": 2
+        }
+      ],
+      "duplicate_slots": 2,
+      "exclusive_singleton_bytes_upper_bound": 64,
+      "known_bytes": 320,
+      "record": 65,
+      "record_exclusive_singleton_chunks": 1,
+      "record_exclusive_top_chunks": 3,
+      "repeated_top_chunks": 2,
+      "singleton_chunk_bytes_upper_bound": 64,
+      "singleton_top_chunks": 1,
+      "slot_count": 5,
+      "source_len": 1844,
+      "top_chunk_repeat_ratio": 0.4,
+      "unique_chunk_bytes_upper_bound": 192,
+      "unique_top_chunks": 3,
+      "variant_slot_count": 0,
+      "variant_slots": []
+    },
+    {
+      "candidate_records_seen": [
+        66,
+        67,
+        68
+      ],
+      "decoded_span": 656,
+      "duplicate_positions": [
+        {
+          "candidate_records": [
+            67
+          ],
+          "chunk": "037cda80b040",
+          "record_relatives": [
+            512,
+            576
+          ],
+          "sha256": "037cda80b040f2dd84508b16acfe89bf29a36f9506d1c63f9317111518b507cc",
+          "slot_count": 2
+        }
+      ],
+      "duplicate_slots": 1,
+      "exclusive_singleton_bytes_upper_bound": 64,
+      "known_bytes": 272,
+      "record": 67,
+      "record_exclusive_singleton_chunks": 1,
+      "record_exclusive_top_chunks": 2,
+      "repeated_top_chunks": 1,
+      "singleton_chunk_bytes_upper_bound": 192,
+      "singleton_top_chunks": 3,
+      "slot_count": 5,
+      "source_len": 2295,
+      "top_chunk_repeat_ratio": 0.2,
+      "unique_chunk_bytes_upper_bound": 256,
+      "unique_top_chunks": 4,
+      "variant_slot_count": 0,
+      "variant_slots": []
+    },
+    {
+      "candidate_records_seen": [
+        49
+      ],
+      "decoded_span": 448,
+      "duplicate_positions": [
+        {
+          "candidate_records": [
+            49
+          ],
+          "chunk": "0c705773105c",
+          "record_relatives": [
+            192,
+            256,
+            320,
+            384
+          ],
+          "sha256": "0c705773105c535a5186fb1554311925463dbe33f620a441096634659624a6d4",
+          "slot_count": 4
+        }
+      ],
+      "duplicate_slots": 3,
+      "exclusive_singleton_bytes_upper_bound": 0,
+      "known_bytes": 256,
+      "record": 49,
+      "record_exclusive_singleton_chunks": 0,
+      "record_exclusive_top_chunks": 1,
+      "repeated_top_chunks": 1,
+      "singleton_chunk_bytes_upper_bound": 0,
+      "singleton_top_chunks": 0,
+      "slot_count": 4,
+      "source_len": 2033,
+      "top_chunk_repeat_ratio": 0.75,
+      "unique_chunk_bytes_upper_bound": 64,
+      "unique_top_chunks": 1,
+      "variant_slot_count": 3,
+      "variant_slots": [
+        {
+          "record_relative": 192,
+          "top_chunk": "0c705773105c",
+          "top_count": 166,
+          "variant_count": 2
+        },
+        {
+          "record_relative": 256,
+          "top_chunk": "0c705773105c",
+          "top_count": 162,
+          "variant_count": 2
+        },
+        {
+          "record_relative": 320,
+          "top_chunk": "0c705773105c",
+          "top_count": 174,
+          "variant_count": 2
+        }
+      ]
+    },
+    {
+      "candidate_records_seen": [
+        84,
+        85,
+        86
+      ],
+      "decoded_span": 768,
+      "duplicate_positions": [
+        {
+          "candidate_records": [
+            84,
+            85
+          ],
+          "chunk": "2111cafaf69c",
+          "record_relatives": [
+            0,
+            64
+          ],
+          "sha256": "2111cafaf69c3db58c6a8fa9f9393e70e78b160c528ad2794f5d67c59a6ccf2e",
+          "slot_count": 2
+        },
+        {
+          "candidate_records": [
+            85,
+            86
+          ],
+          "chunk": "306eb529b363",
+          "record_relatives": [
+            640,
+            704
+          ],
+          "sha256": "306eb529b36312db5654267ccebce8d309fc041c78532d0b91d009ca1de25bcf",
+          "slot_count": 2
+        }
+      ],
+      "duplicate_slots": 2,
+      "exclusive_singleton_bytes_upper_bound": 0,
+      "known_bytes": 256,
+      "record": 85,
+      "record_exclusive_singleton_chunks": 0,
+      "record_exclusive_top_chunks": 0,
+      "repeated_top_chunks": 2,
+      "singleton_chunk_bytes_upper_bound": 0,
+      "singleton_top_chunks": 0,
+      "slot_count": 4,
+      "source_len": 2238,
+      "top_chunk_repeat_ratio": 0.5,
+      "unique_chunk_bytes_upper_bound": 128,
+      "unique_top_chunks": 2,
+      "variant_slot_count": 0,
+      "variant_slots": []
+    },
+    {
+      "candidate_records_seen": [
+        61,
+        62
+      ],
+      "decoded_span": 464,
+      "duplicate_positions": [
+        {
+          "candidate_records": [
+            62
+          ],
+          "chunk": "25333cae3674",
+          "record_relatives": [
+            368,
+            432
+          ],
+          "sha256": "25333cae3674959bfdd6161ddf2aa6c73b9d5761b8c93e5b9294f769b315677d",
+          "slot_count": 2
+        }
+      ],
+      "duplicate_slots": 1,
+      "exclusive_singleton_bytes_upper_bound": 64,
+      "known_bytes": 224,
+      "record": 62,
+      "record_exclusive_singleton_chunks": 1,
+      "record_exclusive_top_chunks": 2,
+      "repeated_top_chunks": 1,
+      "singleton_chunk_bytes_upper_bound": 128,
+      "singleton_top_chunks": 2,
+      "slot_count": 4,
+      "source_len": 2419,
+      "top_chunk_repeat_ratio": 0.25,
+      "unique_chunk_bytes_upper_bound": 192,
+      "unique_top_chunks": 3,
+      "variant_slot_count": 1,
+      "variant_slots": [
+        {
+          "record_relative": 48,
+          "top_chunk": "3465e4783c3d",
+          "top_count": 413,
+          "variant_count": 2
+        }
+      ]
+    },
+    {
+      "candidate_records_seen": [
+        85,
+        86,
+        87
+      ],
+      "decoded_span": 224,
+      "duplicate_positions": [
+        {
+          "candidate_records": [
+            85,
+            86
+          ],
+          "chunk": "306eb529b363",
+          "record_relatives": [
+            0,
+            64
+          ],
+          "sha256": "306eb529b36312db5654267ccebce8d309fc041c78532d0b91d009ca1de25bcf",
+          "slot_count": 2
+        }
+      ],
+      "duplicate_slots": 1,
+      "exclusive_singleton_bytes_upper_bound": 0,
+      "known_bytes": 224,
+      "record": 86,
+      "record_exclusive_singleton_chunks": 0,
+      "record_exclusive_top_chunks": 0,
+      "repeated_top_chunks": 1,
+      "singleton_chunk_bytes_upper_bound": 128,
+      "singleton_top_chunks": 2,
+      "slot_count": 4,
+      "source_len": 2317,
+      "top_chunk_repeat_ratio": 0.25,
+      "unique_chunk_bytes_upper_bound": 192,
+      "unique_top_chunks": 3,
+      "variant_slot_count": 2,
+      "variant_slots": [
+        {
+          "record_relative": 128,
+          "top_chunk": "0b045c0906d5",
+          "top_count": 419,
+          "variant_count": 2
+        },
+        {
+          "record_relative": 192,
+          "top_chunk": "71a589c84051",
+          "top_count": 256,
+          "variant_count": 2
+        }
+      ]
+    },
+    {
+      "candidate_records_seen": [
+        57,
+        58
+      ],
+      "decoded_span": 304,
+      "duplicate_positions": [
+        {
+          "candidate_records": [
+            57
+          ],
+          "chunk": "cfe0a1406283",
+          "record_relatives": [
+            96,
+            160
+          ],
+          "sha256": "cfe0a1406283027074d0b67e3eddab5c8642ad409bb9cd6520b0eb01a4f369db",
+          "slot_count": 2
+        },
+        {
+          "candidate_records": [
+            57,
+            58
+          ],
+          "chunk": "5fb5a8bf8f9a",
+          "record_relatives": [
+            224,
+            288
+          ],
+          "sha256": "5fb5a8bf8f9adbbb1a6aa7a9ddb9e8b9da149a3ca33c8eff02b0f5adac5395b7",
+          "slot_count": 2
+        }
+      ],
+      "duplicate_slots": 2,
+      "exclusive_singleton_bytes_upper_bound": 0,
+      "known_bytes": 208,
+      "record": 57,
+      "record_exclusive_singleton_chunks": 0,
+      "record_exclusive_top_chunks": 1,
+      "repeated_top_chunks": 2,
+      "singleton_chunk_bytes_upper_bound": 0,
+      "singleton_top_chunks": 0,
+      "slot_count": 4,
+      "source_len": 1968,
+      "top_chunk_repeat_ratio": 0.5,
+      "unique_chunk_bytes_upper_bound": 128,
+      "unique_top_chunks": 2,
+      "variant_slot_count": 1,
+      "variant_slots": [
+        {
+          "record_relative": 160,
+          "top_chunk": "cfe0a1406283",
+          "top_count": 256,
+          "variant_count": 3
+        }
+      ]
+    },
+    {
+      "candidate_records_seen": [
+        52
+      ],
+      "decoded_span": 224,
+      "duplicate_positions": [
+        {
+          "candidate_records": [
+            52
+          ],
+          "chunk": "80b60d722518",
+          "record_relatives": [
+            32,
+            96,
+            160
+          ],
+          "sha256": "80b60d72251889f9d5331ad5fa05b82080000454d8efbbfe7e125d5cf7e24463",
+          "slot_count": 3
+        }
+      ],
+      "duplicate_slots": 2,
+      "exclusive_singleton_bytes_upper_bound": 0,
+      "known_bytes": 192,
+      "record": 52,
+      "record_exclusive_singleton_chunks": 0,
+      "record_exclusive_top_chunks": 1,
+      "repeated_top_chunks": 1,
+      "singleton_chunk_bytes_upper_bound": 0,
+      "singleton_top_chunks": 0,
+      "slot_count": 3,
+      "source_len": 2188,
+      "top_chunk_repeat_ratio": 0.6666666666666666,
+      "unique_chunk_bytes_upper_bound": 64,
+      "unique_top_chunks": 1,
+      "variant_slot_count": 3,
+      "variant_slots": [
+        {
+          "record_relative": 32,
+          "top_chunk": "80b60d722518",
+          "top_count": 177,
+          "variant_count": 2
+        },
+        {
+          "record_relative": 96,
+          "top_chunk": "80b60d722518",
+          "top_count": 256,
+          "variant_count": 2
+        },
+        {
+          "record_relative": 160,
+          "top_chunk": "80b60d722518",
+          "top_count": 53,
+          "variant_count": 2
+        }
+      ]
+    },
+    {
+      "candidate_records_seen": [
+        73,
+        74
+      ],
+      "decoded_span": 400,
+      "duplicate_positions": [
+        {
+          "candidate_records": [
+            73,
+            74
+          ],
+          "chunk": "536f157a8567",
+          "record_relatives": [
+            208,
+            272,
+            336
+          ],
+          "sha256": "536f157a8567c76e60014b6ed2f78034c4feac738a6fb89309bfc821a9955180",
+          "slot_count": 3
+        }
+      ],
+      "duplicate_slots": 2,
+      "exclusive_singleton_bytes_upper_bound": 0,
+      "known_bytes": 192,
+      "record": 73,
+      "record_exclusive_singleton_chunks": 0,
+      "record_exclusive_top_chunks": 0,
+      "repeated_top_chunks": 1,
+      "singleton_chunk_bytes_upper_bound": 0,
+      "singleton_top_chunks": 0,
+      "slot_count": 3,
+      "source_len": 2355,
+      "top_chunk_repeat_ratio": 0.6666666666666666,
+      "unique_chunk_bytes_upper_bound": 64,
+      "unique_top_chunks": 1,
+      "variant_slot_count": 0,
+      "variant_slots": []
+    },
+    {
+      "candidate_records_seen": [
+        53
+      ],
+      "decoded_span": 304,
+      "duplicate_positions": [
+        {
+          "candidate_records": [
+            53
+          ],
+          "chunk": "c8c5359c53cb",
+          "record_relatives": [
+            0,
+            192
+          ],
+          "sha256": "c8c5359c53cb6afb02015a9a3d45e408b5fef387abc13b5ecc8c505a24ecf56f",
+          "slot_count": 2
+        }
+      ],
+      "duplicate_slots": 1,
+      "exclusive_singleton_bytes_upper_bound": 64,
+      "known_bytes": 192,
+      "record": 53,
+      "record_exclusive_singleton_chunks": 1,
+      "record_exclusive_top_chunks": 2,
+      "repeated_top_chunks": 1,
+      "singleton_chunk_bytes_upper_bound": 64,
+      "singleton_top_chunks": 1,
+      "slot_count": 3,
+      "source_len": 2174,
+      "top_chunk_repeat_ratio": 0.3333333333333333,
+      "unique_chunk_bytes_upper_bound": 128,
+      "unique_top_chunks": 2,
+      "variant_slot_count": 0,
+      "variant_slots": []
+    },
+    {
+      "candidate_records_seen": [
+        73,
+        74
+      ],
+      "decoded_span": 800,
+      "duplicate_positions": [
+        {
+          "candidate_records": [
+            74
+          ],
+          "chunk": "4a6f7bda07c9",
+          "record_relatives": [
+            64,
+            128
+          ],
+          "sha256": "4a6f7bda07c9478fb9493d049dedabb8b08d806c8182d1d2535620806ad3324c",
+          "slot_count": 2
+        }
+      ],
+      "duplicate_slots": 1,
+      "exclusive_singleton_bytes_upper_bound": 0,
+      "known_bytes": 192,
+      "record": 74,
+      "record_exclusive_singleton_chunks": 0,
+      "record_exclusive_top_chunks": 1,
+      "repeated_top_chunks": 1,
+      "singleton_chunk_bytes_upper_bound": 64,
+      "singleton_top_chunks": 1,
+      "slot_count": 3,
+      "source_len": 2840,
+      "top_chunk_repeat_ratio": 0.3333333333333333,
+      "unique_chunk_bytes_upper_bound": 128,
+      "unique_top_chunks": 2,
+      "variant_slot_count": 0,
+      "variant_slots": []
+    },
+    {
+      "candidate_records_seen": [
+        58,
+        59,
+        60
+      ],
+      "decoded_span": 304,
+      "duplicate_positions": [],
+      "duplicate_slots": 0,
+      "exclusive_singleton_bytes_upper_bound": 64,
+      "known_bytes": 192,
+      "record": 59,
+      "record_exclusive_singleton_chunks": 1,
+      "record_exclusive_top_chunks": 1,
+      "repeated_top_chunks": 0,
+      "singleton_chunk_bytes_upper_bound": 192,
+      "singleton_top_chunks": 3,
+      "slot_count": 3,
+      "source_len": 2462,
+      "top_chunk_repeat_ratio": 0.0,
+      "unique_chunk_bytes_upper_bound": 192,
+      "unique_top_chunks": 3,
+      "variant_slot_count": 1,
+      "variant_slots": [
+        {
+          "record_relative": 16,
+          "top_chunk": "20ea2ab16891",
+          "top_count": 219,
+          "variant_count": 3
+        }
+      ]
+    },
+    {
+      "candidate_records_seen": [
+        63
+      ],
+      "decoded_span": 256,
+      "duplicate_positions": [
+        {
+          "candidate_records": [
+            63
+          ],
+          "chunk": "2b9a017b9d81",
+          "record_relatives": [
+            96,
+            224
+          ],
+          "sha256": "2b9a017b9d81d4cf769e289a78958cbc1a8adebed456d9edd2a915b1bb1369a5",
+          "slot_count": 2
+        }
+      ],
+      "duplicate_slots": 1,
+      "exclusive_singleton_bytes_upper_bound": 64,
+      "known_bytes": 160,
+      "record": 63,
+      "record_exclusive_singleton_chunks": 1,
+      "record_exclusive_top_chunks": 2,
+      "repeated_top_chunks": 1,
+      "singleton_chunk_bytes_upper_bound": 64,
+      "singleton_top_chunks": 1,
+      "slot_count": 3,
+      "source_len": 2024,
+      "top_chunk_repeat_ratio": 0.3333333333333333,
+      "unique_chunk_bytes_upper_bound": 128,
+      "unique_top_chunks": 2,
+      "variant_slot_count": 1,
+      "variant_slots": [
+        {
+          "record_relative": 224,
+          "top_chunk": "2b9a017b9d81",
+          "top_count": 219,
+          "variant_count": 2
+        }
+      ]
+    },
+    {
+      "candidate_records_seen": [
+        80
+      ],
+      "decoded_span": 432,
+      "duplicate_positions": [
+        {
+          "candidate_records": [
+            80
+          ],
+          "chunk": "5a65b8a71db9",
+          "record_relatives": [
+            64,
+            128
+          ],
+          "sha256": "5a65b8a71db909429cd233edb78e4c51dc3db8d35d4ab6b8e23c7c980c935873",
+          "slot_count": 2
+        }
+      ],
+      "duplicate_slots": 1,
+      "exclusive_singleton_bytes_upper_bound": 0,
+      "known_bytes": 128,
+      "record": 80,
+      "record_exclusive_singleton_chunks": 0,
+      "record_exclusive_top_chunks": 1,
+      "repeated_top_chunks": 1,
+      "singleton_chunk_bytes_upper_bound": 0,
+      "singleton_top_chunks": 0,
+      "slot_count": 2,
+      "source_len": 1853,
+      "top_chunk_repeat_ratio": 0.5,
+      "unique_chunk_bytes_upper_bound": 64,
+      "unique_top_chunks": 1,
+      "variant_slot_count": 2,
+      "variant_slots": [
+        {
+          "record_relative": 64,
+          "top_chunk": "5a65b8a71db9",
+          "top_count": 100,
+          "variant_count": 2
+        },
+        {
+          "record_relative": 128,
+          "top_chunk": "5a65b8a71db9",
+          "top_count": 118,
+          "variant_count": 2
+        }
+      ]
+    },
+    {
+      "candidate_records_seen": [
+        84,
+        85
+      ],
+      "decoded_span": 160,
+      "duplicate_positions": [
+        {
+          "candidate_records": [
+            84,
+            85
+          ],
+          "chunk": "2111cafaf69c",
+          "record_relatives": [
+            32,
+            96
+          ],
+          "sha256": "2111cafaf69c3db58c6a8fa9f9393e70e78b160c528ad2794f5d67c59a6ccf2e",
+          "slot_count": 2
+        }
+      ],
+      "duplicate_slots": 1,
+      "exclusive_singleton_bytes_upper_bound": 0,
+      "known_bytes": 128,
+      "record": 84,
+      "record_exclusive_singleton_chunks": 0,
+      "record_exclusive_top_chunks": 0,
+      "repeated_top_chunks": 1,
+      "singleton_chunk_bytes_upper_bound": 0,
+      "singleton_top_chunks": 0,
+      "slot_count": 2,
+      "source_len": 2198,
+      "top_chunk_repeat_ratio": 0.5,
+      "unique_chunk_bytes_upper_bound": 64,
+      "unique_top_chunks": 1,
+      "variant_slot_count": 0,
+      "variant_slots": []
+    },
+    {
+      "candidate_records_seen": [
+        54
+      ],
+      "decoded_span": 272,
+      "duplicate_positions": [],
+      "duplicate_slots": 0,
+      "exclusive_singleton_bytes_upper_bound": 128,
+      "known_bytes": 128,
+      "record": 54,
+      "record_exclusive_singleton_chunks": 2,
+      "record_exclusive_top_chunks": 2,
+      "repeated_top_chunks": 0,
+      "singleton_chunk_bytes_upper_bound": 128,
+      "singleton_top_chunks": 2,
+      "slot_count": 2,
+      "source_len": 2353,
+      "top_chunk_repeat_ratio": 0.0,
+      "unique_chunk_bytes_upper_bound": 128,
+      "unique_top_chunks": 2,
+      "variant_slot_count": 0,
+      "variant_slots": []
+    },
+    {
+      "candidate_records_seen": [
+        55,
+        56
+      ],
+      "decoded_span": 352,
+      "duplicate_positions": [],
+      "duplicate_slots": 0,
+      "exclusive_singleton_bytes_upper_bound": 64,
+      "known_bytes": 128,
+      "record": 56,
+      "record_exclusive_singleton_chunks": 1,
+      "record_exclusive_top_chunks": 1,
+      "repeated_top_chunks": 0,
+      "singleton_chunk_bytes_upper_bound": 128,
+      "singleton_top_chunks": 2,
+      "slot_count": 2,
+      "source_len": 2290,
+      "top_chunk_repeat_ratio": 0.0,
+      "unique_chunk_bytes_upper_bound": 128,
+      "unique_top_chunks": 2,
+      "variant_slot_count": 1,
+      "variant_slots": [
+        {
+          "record_relative": 0,
+          "top_chunk": "25956f88a30e",
+          "top_count": 198,
+          "variant_count": 2
+        }
+      ]
+    },
+    {
+      "candidate_records_seen": [
+        81,
+        82,
+        83
+      ],
+      "decoded_span": 128,
+      "duplicate_positions": [],
+      "duplicate_slots": 0,
+      "exclusive_singleton_bytes_upper_bound": 0,
+      "known_bytes": 96,
+      "record": 83,
+      "record_exclusive_singleton_chunks": 0,
+      "record_exclusive_top_chunks": 0,
+      "repeated_top_chunks": 0,
+      "singleton_chunk_bytes_upper_bound": 128,
+      "singleton_top_chunks": 2,
+      "slot_count": 2,
+      "source_len": 2256,
+      "top_chunk_repeat_ratio": 0.0,
+      "unique_chunk_bytes_upper_bound": 128,
+      "unique_top_chunks": 2,
+      "variant_slot_count": 2,
+      "variant_slots": [
+        {
+          "record_relative": 32,
+          "top_chunk": "144315176c64",
+          "top_count": 372,
+          "variant_count": 2
+        },
+        {
+          "record_relative": 96,
+          "top_chunk": "fbb6be935285",
+          "top_count": 324,
+          "variant_count": 2
+        }
+      ]
+    },
+    {
+      "candidate_records_seen": [
+        69
+      ],
+      "decoded_span": 368,
+      "duplicate_positions": [],
+      "duplicate_slots": 0,
+      "exclusive_singleton_bytes_upper_bound": 64,
+      "known_bytes": 64,
+      "record": 69,
+      "record_exclusive_singleton_chunks": 1,
+      "record_exclusive_top_chunks": 1,
+      "repeated_top_chunks": 0,
+      "singleton_chunk_bytes_upper_bound": 64,
+      "singleton_top_chunks": 1,
+      "slot_count": 1,
+      "source_len": 2274,
+      "top_chunk_repeat_ratio": 0.0,
+      "unique_chunk_bytes_upper_bound": 64,
+      "unique_top_chunks": 1,
+      "variant_slot_count": 1,
+      "variant_slots": [
+        {
+          "record_relative": 48,
+          "top_chunk": "5a0c5fbcd38c",
+          "top_count": 163,
+          "variant_count": 3
+        }
+      ]
+    },
+    {
+      "candidate_records_seen": [
+        78,
+        80
+      ],
+      "decoded_span": 128,
+      "duplicate_positions": [],
+      "duplicate_slots": 0,
+      "exclusive_singleton_bytes_upper_bound": 0,
+      "known_bytes": 64,
+      "record": 78,
+      "record_exclusive_singleton_chunks": 0,
+      "record_exclusive_top_chunks": 0,
+      "repeated_top_chunks": 0,
+      "singleton_chunk_bytes_upper_bound": 64,
+      "singleton_top_chunks": 1,
+      "slot_count": 1,
+      "source_len": 1799,
+      "top_chunk_repeat_ratio": 0.0,
+      "unique_chunk_bytes_upper_bound": 64,
+      "unique_top_chunks": 1,
+      "variant_slot_count": 0,
+      "variant_slots": []
+    },
+    {
+      "candidate_records_seen": [
+        81,
+        83
+      ],
+      "decoded_span": 320,
+      "duplicate_positions": [],
+      "duplicate_slots": 0,
+      "exclusive_singleton_bytes_upper_bound": 0,
+      "known_bytes": 48,
+      "record": 81,
+      "record_exclusive_singleton_chunks": 0,
+      "record_exclusive_top_chunks": 0,
+      "repeated_top_chunks": 0,
+      "singleton_chunk_bytes_upper_bound": 64,
+      "singleton_top_chunks": 1,
+      "slot_count": 1,
+      "source_len": 2266,
+      "top_chunk_repeat_ratio": 0.0,
+      "unique_chunk_bytes_upper_bound": 64,
+      "unique_top_chunks": 1,
+      "variant_slot_count": 1,
+      "variant_slots": [
+        {
+          "record_relative": 272,
+          "top_chunk": "144315176c64",
+          "top_count": 82,
+          "variant_count": 2
+        }
+      ]
+    },
+    {
+      "candidate_records_seen": [
+        81,
+        82,
+        83
+      ],
+      "decoded_span": 48,
+      "duplicate_positions": [],
+      "duplicate_slots": 0,
+      "exclusive_singleton_bytes_upper_bound": 0,
+      "known_bytes": 32,
+      "record": 82,
+      "record_exclusive_singleton_chunks": 0,
+      "record_exclusive_top_chunks": 0,
+      "repeated_top_chunks": 0,
+      "singleton_chunk_bytes_upper_bound": 48,
+      "singleton_top_chunks": 1,
+      "slot_count": 1,
+      "source_len": 1917,
+      "top_chunk_repeat_ratio": 0.0,
+      "unique_chunk_bytes_upper_bound": 48,
+      "unique_top_chunks": 1,
+      "variant_slot_count": 0,
+      "variant_slots": []
+    },
+    {
+      "candidate_records_seen": [
+        61,
+        62
+      ],
+      "decoded_span": 32,
+      "duplicate_positions": [],
+      "duplicate_slots": 0,
+      "exclusive_singleton_bytes_upper_bound": 0,
+      "known_bytes": 16,
+      "record": 61,
+      "record_exclusive_singleton_chunks": 0,
+      "record_exclusive_top_chunks": 0,
+      "repeated_top_chunks": 0,
+      "singleton_chunk_bytes_upper_bound": 32,
+      "singleton_top_chunks": 1,
+      "slot_count": 1,
+      "source_len": 2402,
+      "top_chunk_repeat_ratio": 0.0,
+      "unique_chunk_bytes_upper_bound": 32,
+      "unique_top_chunks": 1,
+      "variant_slot_count": 0,
+      "variant_slots": []
+    },
+    {
+      "candidate_records_seen": [
+        75
+      ],
+      "decoded_span": 48,
+      "duplicate_positions": [],
+      "duplicate_slots": 0,
+      "exclusive_singleton_bytes_upper_bound": 48,
+      "known_bytes": 16,
+      "record": 75,
+      "record_exclusive_singleton_chunks": 1,
+      "record_exclusive_top_chunks": 1,
+      "repeated_top_chunks": 0,
+      "singleton_chunk_bytes_upper_bound": 48,
+      "singleton_top_chunks": 1,
+      "slot_count": 1,
+      "source_len": 1423,
+      "top_chunk_repeat_ratio": 0.0,
+      "unique_chunk_bytes_upper_bound": 48,
+      "unique_top_chunks": 1,
+      "variant_slot_count": 0,
+      "variant_slots": []
+    }
+  ],
+  "schema": "liteon-cdd-known-output-export-audit-v1"
+}
