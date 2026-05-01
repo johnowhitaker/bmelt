@@ -1336,3 +1336,6 @@ Immediate useful directions:
     `a55a`, and `ffff` all returned the same 128-byte CDD2-header page hash.
     The drive stayed normal `LD5M`. The extra bytes are not an obvious f2 bank
     selector.
+16. The ordinary 10-byte CDB control byte is not an obvious f2 selector either.
+    Control values `00`, `01`, `02`, `5a`, `a5`, and `ff` all returned the
+    same page hash and left the drive normal.

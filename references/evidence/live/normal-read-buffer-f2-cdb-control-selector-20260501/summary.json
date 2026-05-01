@@ -1,0 +1,62 @@
+[
+  {
+    "control": 0,
+    "cdb": "3C 01 F2 00 00 00 00 00 80 00",
+    "returncode": 0,
+    "stdout_len": 128,
+    "sha256": "251137803ea5f0fc4ab74077b16be77912d93a303b38989fedc604acedf36731",
+    "first32": "434444091016530d9000007dec030810870e80000070001840001b3fff1b3fff",
+    "stderr": "SCSI Status: Good \n\nWriting 128 bytes of data to stdout\n",
+    "elapsed_s": 0.00488
+  },
+  {
+    "control": 1,
+    "cdb": "3C 01 F2 00 00 00 00 00 80 01",
+    "returncode": 0,
+    "stdout_len": 128,
+    "sha256": "251137803ea5f0fc4ab74077b16be77912d93a303b38989fedc604acedf36731",
+    "first32": "434444091016530d9000007dec030810870e80000070001840001b3fff1b3fff",
+    "stderr": "SCSI Status: Good \n\nWriting 128 bytes of data to stdout\n",
+    "elapsed_s": 0.00606
+  },
+  {
+    "control": 2,
+    "cdb": "3C 01 F2 00 00 00 00 00 80 02",
+    "returncode": 0,
+    "stdout_len": 128,
+    "sha256": "251137803ea5f0fc4ab74077b16be77912d93a303b38989fedc604acedf36731",
+    "first32": "434444091016530d9000007dec030810870e80000070001840001b3fff1b3fff",
+    "stderr": "SCSI Status: Good \n\nWriting 128 bytes of data to stdout\n",
+    "elapsed_s": 0.005916
+  },
+  {
+    "control": 90,
+    "cdb": "3C 01 F2 00 00 00 00 00 80 5A",
+    "returncode": 0,
+    "stdout_len": 128,
+    "sha256": "251137803ea5f0fc4ab74077b16be77912d93a303b38989fedc604acedf36731",
+    "first32": "434444091016530d9000007dec030810870e80000070001840001b3fff1b3fff",
+    "stderr": "SCSI Status: Good \n\nWriting 128 bytes of data to stdout\n",
+    "elapsed_s": 0.005982
+  },
+  {
+    "control": 165,
+    "cdb": "3C 01 F2 00 00 00 00 00 80 A5",
+    "returncode": 0,
+    "stdout_len": 128,
+    "sha256": "251137803ea5f0fc4ab74077b16be77912d93a303b38989fedc604acedf36731",
+    "first32": "434444091016530d9000007dec030810870e80000070001840001b3fff1b3fff",
+    "stderr": "SCSI Status: Good \n\nWriting 128 bytes of data to stdout\n",
+    "elapsed_s": 0.005963
+  },
+  {
+    "control": 255,
+    "cdb": "3C 01 F2 00 00 00 00 00 80 FF",
+    "returncode": 0,
+    "stdout_len": 128,
+    "sha256": "251137803ea5f0fc4ab74077b16be77912d93a303b38989fedc604acedf36731",
+    "first32": "434444091016530d9000007dec030810870e80000070001840001b3fff1b3fff",
+    "stderr": "SCSI Status: Good \n\nWriting 128 bytes of data to stdout\n",
+    "elapsed_s": 0.005797
+  }
+]

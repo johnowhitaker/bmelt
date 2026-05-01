@@ -1221,3 +1221,8 @@ two trailing bytes as possible hidden selectors. Values like `0001`, `5aa5`,
 plain `0000` CDB, and the drive stayed in normal `LD5M`. That makes the public
 `f2` surface less mysterious: it is an encoded-container view, not a selectable
 decoded-memory portal hiding in the unused CDB tail.
+
+The standard READ BUFFER control byte got the same treatment immediately after.
+Changing `CDB[9]` to `01`, `02`, `5a`, `a5`, or `ff` also produced the same
+`f2` page. So the easy selector-hunting on this public command is now pretty
+well exhausted.

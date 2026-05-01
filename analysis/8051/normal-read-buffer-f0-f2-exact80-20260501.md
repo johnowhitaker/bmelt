@@ -133,6 +133,11 @@ not for the tested values. These CDBs all returned the same 128-byte page hash
 The drive stayed normal `LD5M`. Treat the 12-byte form as an accepted wrapper
 around the same `f2` encoded-container view, not as a new bank/control surface.
 
+The normal 10-byte CDB control byte at `CDB[9]` was checked the same way.
+Values `00`, `01`, `02`, `5a`, `a5`, and `ff` also returned the same page hash
+and left the drive normal. So neither the standard control byte nor the two
+trailing ATAPI-style bytes are obvious `f2` selectors.
+
 Follow-up `e2` mapping resolved that responder too. It is not decoded CDD; it
 is a narrow alias for the profile/string/table pages inside the normal work
 window:
@@ -173,6 +178,7 @@ references/evidence/live/normal-read-buffer-length-scan-20260501/
 references/evidence/live/normal-read-buffer-f0-f2-map-20260501/
 references/evidence/live/normal-read-buffer-f0-f2-full-20260501/
 references/evidence/live/normal-read-buffer-f2-cdb-tail-selector-20260501/
+references/evidence/live/normal-read-buffer-f2-cdb-control-selector-20260501/
 ```
 
 ## Next Uses
