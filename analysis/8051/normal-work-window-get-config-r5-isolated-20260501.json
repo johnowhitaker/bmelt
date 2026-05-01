@@ -1,0 +1,161 @@
+{
+  "chunk_size": 64,
+  "runs": [
+    {
+      "baseline_captures": 16,
+      "baseline_only_chunks": 7,
+      "baseline_unique_chunks": 752,
+      "path": "references/evidence/live/normal-work-window-get-config-r5-01-isolated-20260501",
+      "recurring_stimulus_only_chunks": 3,
+      "run": "normal-work-window-get-config-r5-01-isolated-20260501",
+      "shared_chunks": 745,
+      "stimulus_captures": 16,
+      "stimulus_names": {
+        "r5-01-current-sf0000": 16
+      },
+      "stimulus_only_chunks": 4,
+      "stimulus_unique_chunks": 749,
+      "target_stimulus_only_chunks": 4,
+      "top_stimulus_only_chunks": [
+        {
+          "offsets": [
+            38144,
+            38208,
+            38272,
+            38336
+          ],
+          "sample_hex": "7ff9123d89e4fd7f40123d89e4908a33",
+          "sha256": "cd1041a057e9566c2d56c43bb27e27a777627d29e52de05ef970467f1ae2b305",
+          "stimuli": {
+            "r5-01-current-sf0000": 6
+          },
+          "stimulus_observations": 6,
+          "target_refs": [
+            35404
+          ]
+        },
+        {
+          "offsets": [
+            28928,
+            28992
+          ],
+          "sample_hex": "8a4df0904099e0908a4ef0904099e090",
+          "sha256": "8d8c3b0a22a0fe85416ac5c659e610b6100fe9052009142cc97f1903545156af",
+          "stimuli": {
+            "r5-01-current-sf0000": 3
+          },
+          "stimulus_observations": 3,
+          "target_refs": [
+            16537,
+            35403,
+            35405,
+            35406,
+            35411,
+            35412
+          ]
+        },
+        {
+          "offsets": [
+            28672,
+            28864
+          ],
+          "sample_hex": "08eff6904000e020e7f9908ac6e09040",
+          "sha256": "4037c8574920413d30329489b03ad575a6b0eb5e0a6fb3452ccbf4acb39ecd55",
+          "stimuli": {
+            "r5-01-current-sf0000": 3
+          },
+          "stimulus_observations": 3,
+          "target_refs": [
+            16384,
+            16529,
+            16531,
+            16537
+          ]
+        },
+        {
+          "offsets": [
+            24704
+          ],
+          "sample_hex": "540f9047b1f0d378aae6940418e69400",
+          "sha256": "ac6243637e2d318af3fb3b6595814d05999c8dcb056bb614c2c679a55a0c0ae1",
+          "stimuli": {
+            "r5-01-current-sf0000": 1
+          },
+          "stimulus_observations": 1,
+          "target_refs": [
+            18353,
+            35405
+          ]
+        }
+      ]
+    },
+    {
+      "baseline_captures": 16,
+      "baseline_only_chunks": 0,
+      "baseline_unique_chunks": 745,
+      "path": "references/evidence/live/normal-work-window-get-config-r5-f0-isolated-20260501",
+      "recurring_stimulus_only_chunks": 2,
+      "run": "normal-work-window-get-config-r5-f0-isolated-20260501",
+      "shared_chunks": 745,
+      "stimulus_captures": 16,
+      "stimulus_names": {
+        "r5-f0-current-sf0000": 16
+      },
+      "stimulus_only_chunks": 3,
+      "stimulus_unique_chunks": 748,
+      "target_stimulus_only_chunks": 2,
+      "top_stimulus_only_chunks": [
+        {
+          "offsets": [
+            28928,
+            28992
+          ],
+          "sample_hex": "8a4df0904099e0908a4ef0904099e090",
+          "sha256": "8d8c3b0a22a0fe85416ac5c659e610b6100fe9052009142cc97f1903545156af",
+          "stimuli": {
+            "r5-f0-current-sf0000": 6
+          },
+          "stimulus_observations": 6,
+          "target_refs": [
+            16537,
+            35403,
+            35405,
+            35406,
+            35411,
+            35412
+          ]
+        },
+        {
+          "offsets": [
+            28672,
+            28864
+          ],
+          "sample_hex": "08eff6904000e020e7f9908ac6e09040",
+          "sha256": "4037c8574920413d30329489b03ad575a6b0eb5e0a6fb3452ccbf4acb39ecd55",
+          "stimuli": {
+            "r5-f0-current-sf0000": 6
+          },
+          "stimulus_observations": 6,
+          "target_refs": [
+            16384,
+            16529,
+            16531,
+            16537
+          ]
+        },
+        {
+          "offsets": [
+            40640
+          ],
+          "sample_hex": "f09090d6e0fca3e0fdd3ef9dee9c404a",
+          "sha256": "9b687f59bb161e23d93ebe78f781ed00047d654e632d48c5721f6aef6c9cb536",
+          "stimuli": {
+            "r5-f0-current-sf0000": 1
+          },
+          "stimulus_observations": 1,
+          "target_refs": []
+        }
+      ]
+    }
+  ]
+}

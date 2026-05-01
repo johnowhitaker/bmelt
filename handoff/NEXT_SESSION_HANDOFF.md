@@ -518,3 +518,34 @@ trivial normal-runtime patch primitive. The Linux persistence runner can now
 inject these writes mid-sequence with `--gateway-patch-after-event` and
 `--gateway-patch-after-phase`; the event-1 smoke test patched `Flash` to
 `Glash` immediately after profile-tail entry and read it back successfully.
+
+## Latest GET CONFIG Normal-Bridge Probe
+
+New helper:
+
+```text
+scripts/capture_liteon_normal_get_config_field_variants.py
+```
+
+It varies reserved GET CONFIGURATION CDB bytes while capturing
+`READ BUFFER id=01 offset=0x070000` work-window snapshots. Evidence:
+
+```text
+references/evidence/live/normal-work-window-get-config-field-variants-20260501/
+references/evidence/live/normal-work-window-get-config-field-variants-r5-long-20260501/
+references/evidence/live/normal-work-window-get-config-r5-01-isolated-20260501/
+references/evidence/live/normal-work-window-get-config-r5-f0-isolated-20260501/
+
+analysis/8051/normal-get-config-field-variant-findings-20260501.md
+analysis/8051/normal-work-window-get-config-field-variants-20260501.md/json
+analysis/8051/normal-work-window-get-config-field-variants-r5-long-20260501.md/json
+analysis/8051/normal-work-window-get-config-r5-isolated-20260501.md/json
+```
+
+Result: all reserved-field variants returned GOOD and the drive stayed normal
+`LD5M`. Host-visible GET CONFIG responses did not change. The familiar
+`0x4091/0x4093/0x4099` bridge chunks recur, but the longer isolated runs do not
+prove that CDB byte 5 steers the bridge; public-window rotation is still a big
+confounder. Treat this as a useful negative: GET CONFIG is safe for tagging the
+normal bridge, but reserved GET CONFIG bytes are not the fast normal runtime
+read oracle by themselves.

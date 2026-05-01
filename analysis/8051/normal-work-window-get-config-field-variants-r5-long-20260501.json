@@ -1,0 +1,83 @@
+{
+  "chunk_size": 64,
+  "runs": [
+    {
+      "baseline_captures": 8,
+      "baseline_only_chunks": 5,
+      "baseline_unique_chunks": 750,
+      "path": "references/evidence/live/normal-work-window-get-config-field-variants-r5-long-20260501",
+      "recurring_stimulus_only_chunks": 3,
+      "run": "normal-work-window-get-config-field-variants-r5-long-20260501",
+      "shared_chunks": 745,
+      "stimulus_captures": 40,
+      "stimulus_names": {
+        "r5-01-current-sf0000": 8,
+        "r5-0f-current-sf0000": 8,
+        "r5-f0-current-sf0000": 8,
+        "std-current-sf0000-len00fc": 8,
+        "std-current-sf0020-len00fc": 8
+      },
+      "stimulus_only_chunks": 3,
+      "stimulus_unique_chunks": 748,
+      "target_stimulus_only_chunks": 2,
+      "top_stimulus_only_chunks": [
+        {
+          "offsets": [
+            28928,
+            28992
+          ],
+          "sample_hex": "8a4df0904099e0908a4ef0904099e090",
+          "sha256": "8d8c3b0a22a0fe85416ac5c659e610b6100fe9052009142cc97f1903545156af",
+          "stimuli": {
+            "r5-0f-current-sf0000": 2,
+            "r5-f0-current-sf0000": 4,
+            "std-current-sf0000-len00fc": 3,
+            "std-current-sf0020-len00fc": 2
+          },
+          "stimulus_observations": 11,
+          "target_refs": [
+            16537,
+            35403,
+            35405,
+            35406,
+            35411,
+            35412
+          ]
+        },
+        {
+          "offsets": [
+            28672,
+            28864
+          ],
+          "sample_hex": "08eff6904000e020e7f9908ac6e09040",
+          "sha256": "4037c8574920413d30329489b03ad575a6b0eb5e0a6fb3452ccbf4acb39ecd55",
+          "stimuli": {
+            "r5-0f-current-sf0000": 2,
+            "r5-f0-current-sf0000": 4,
+            "std-current-sf0000-len00fc": 3,
+            "std-current-sf0020-len00fc": 2
+          },
+          "stimulus_observations": 11,
+          "target_refs": [
+            16384,
+            16529,
+            16531,
+            16537
+          ]
+        },
+        {
+          "offsets": [
+            40448
+          ],
+          "sample_hex": "f09090d6e0fca3e0fdd3ef9dee9c404a",
+          "sha256": "9b687f59bb161e23d93ebe78f781ed00047d654e632d48c5721f6aef6c9cb536",
+          "stimuli": {
+            "std-current-sf0020-len00fc": 2
+          },
+          "stimulus_observations": 2,
+          "target_refs": []
+        }
+      ]
+    }
+  ]
+}

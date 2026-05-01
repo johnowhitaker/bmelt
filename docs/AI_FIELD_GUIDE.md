@@ -1773,3 +1773,18 @@ Immediate useful directions:
     `--gateway-patch-after-phase PHASE:ADDR:HEX`; a live event-1 smoke test
     used it to patch the helper string to `Glash` immediately after profile
     tail entry.
+57. `scripts/capture_liteon_normal_get_config_field_variants.py` probes the
+    GET CONFIGURATION bridge without data-out or mechanics. Evidence is in
+    `references/evidence/live/normal-work-window-get-config-field-variants-20260501`,
+    `normal-work-window-get-config-field-variants-r5-long-20260501`,
+    `normal-work-window-get-config-r5-01-isolated-20260501`, and
+    `normal-work-window-get-config-r5-f0-isolated-20260501`; the summary is
+    `analysis/8051/normal-get-config-field-variant-findings-20260501.md`.
+    Varying reserved GET CONFIG CDB bytes 4, 5, 6, and 9 was tolerated: every
+    variant returned GOOD and the drive stayed `LD5M`. The host-visible response
+    was unchanged for reserved-field variants. Bridge chunks touching
+    `0x4091`, `0x4093`, `0x4099`, and `0x8a4d/0x8a4e` recurred, but longer
+    isolated byte-5 runs show this is still mostly "GET CONFIG tags the bridge"
+    evidence, not proof that those reserved bytes control the bridge address or
+    returned data. Use plain GET CONFIG/current as a safe bridge tagger; do not
+    treat reserved-byte fuzzing as a solved normal read oracle.

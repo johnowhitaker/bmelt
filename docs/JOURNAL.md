@@ -1799,3 +1799,25 @@ phase. The smoke test used
 and the next read showed `Glash Type Error`. That gives us a faster way to try
 helper-overlay changes at the exact point they matter, without regenerating a
 new profile-tail candidate for every tiny experiment.
+
+After the sled/eject excitement, I deliberately shifted back to boring
+normal-mode read-only commands. The best candidate for a quiet fast oracle was
+GET CONFIGURATION, because the work-window captures keep showing a controller
+bridge near `0x4091..0x4099` when that command runs. The tempting theory was:
+maybe the reserved GET CONFIG CDB bytes that land in the packet shadow at
+`0x8a4d` and `0x8a4e` can steer the bridge.
+
+That was worth testing because it was low drama: no data-out payloads, no
+WRITE BUFFER, no START STOP, no mechanics. I added a small capture helper and
+ran variants with nonzero CDB bytes 4, 5, 6, and 9. The drive accepted all of
+them and stayed normal `LD5M`, but the host-visible GET CONFIG response did
+not change. Longer isolated runs for CDB byte 5 (`0x01` and `0xf0`) showed the
+same bridge chunks as plain GET CONFIG, but not a clean controllable address
+field. The useful conclusion is negative: GET CONFIG is safe and good for
+tagging the normal bridge, but these reserved bytes are not the fast read
+oracle by themselves.
+
+That still helps. It keeps the normal-mode plan honest. The bridge is real, but
+we probably need either a different command family whose CDB fields naturally
+feed the bridge, or a live patch/hook around the bridge path before it becomes
+an arbitrary controller-memory readout.
