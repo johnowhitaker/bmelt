@@ -393,6 +393,8 @@ def trigger_cdd_field_replay(args: argparse.Namespace) -> dict[str, Any]:
             "response_byte": stdout[args.response_offset],
             "expected_response_byte": expected,
             "stdout_first64_hex": stdout[:64].hex(),
+            "stdout_first96_hex": stdout[:96].hex(),
+            "stdout_hex": stdout.hex(),
         }
     )
     return record
