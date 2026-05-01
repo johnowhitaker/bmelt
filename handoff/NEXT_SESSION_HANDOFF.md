@@ -992,3 +992,62 @@ now a strong detector set for future normal-mode marker/carryover tests.
 Operational note: `dump_liteon_linux_f0_window.py --prime-extrainq` now treats
 the Linux `sg_raw` EXTRAINQ prime as successful even when the output contains
 `NVMe Result=0x0` instead of a literal `SCSI Status: Good`.
+
+## Live CDD Affine Group 27 Differential
+
+This third affine edit is complete and restored.
+
+New artifacts:
+
+```text
+analysis/8051/cdd-affine-g27-live-diff-20260501.md/json
+analysis/8051/cdd-affine-triple-correlation-20260501.md
+```
+
+Live test summary:
+
+```text
+CDD stream 1 affine group: 27
+stock semantic byte:       0xe4
+mutation tested:           0xe4 -> 0xe5
+patch style:               all 12 observed affine lead cells rewritten
+restore:                   stock restore sequence completed successfully
+```
+
+The mutation and restore both cold-booted as normal `LD5M`. The group-27
+normal-mode response report found:
+
+```text
+common stable offsets:                  1011
+clean stock-consistent mutation offsets: 78
+noisy mutation-sensitive offsets:        0
+```
+
+Readback caution: CDD1 F0 spot verification around `0x43800..0x43a00` is less
+clean than group99/group105 in CDD2. Some single aligned `0x80` reads decrypt
+correctly, while adjacent/multi-chunk reads can decrypt as nonsense. Do not
+interpret one bad multi-chunk CDD1 read as zeroed flash.
+
+Triple overlap across group27/group99/group105:
+
+```text
+g27 clean offsets:  78
+g99 clean offsets:  107
+g105 clean offsets: 62
+triple overlap:     21
+```
+
+Best general normal-mode detector offsets:
+
+```text
+0x01c0
+0x0280
+0x8f40
+0x8fc0
+0x9d80
+0x9dc0
+```
+
+Bridge-specific note: `0x7140/0x7180` reacts to group99 and group105 but not
+group27, so it remains useful for response-bridge work but is not the universal
+CDD-affine detector.

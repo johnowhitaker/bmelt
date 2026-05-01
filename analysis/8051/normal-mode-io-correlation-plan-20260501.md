@@ -10,13 +10,17 @@ this note.
 The second reversible CDD affine edit gives us a cleaner target set for normal
 mode I/O work.
 
+- Group 27: decoded CDD affine byte `0xe4` in CDD1 was changed to `0xe5`,
+  then restored. The group-27 report found `78` clean stock-consistent
+  public-window chunk offsets.
 - Group 105: decoded CDD affine byte `0x84` was changed to `0x85` and `0x8b`,
   then restored. The group-105 report found `62` clean reversible public-window
   chunk offsets.
 - Group 99: decoded CDD affine byte `0x0a` was changed to `0x0b`, then
   restored. The group-99 report found `107` clean stock-consistent public-window
   chunk offsets.
-- Cross-group overlap: `31` offsets react to both independent CDD leaf edits.
+- Cross-group overlap: `21` offsets react to all three independent CDD leaf
+  edits. The late CDD2 pair (`g99`/`g105`) has `31` overlapping offsets.
 
 These are not decoded CDD bytes. The normal `READ BUFFER id=01/02
 offset=0x070000` surface still rotates whole `0x40`-byte tiles. The useful
@@ -25,31 +29,33 @@ runtime state is sensitive to two different CDD leaf edits.
 
 ## Best Overlap Targets
 
-The full overlap is in:
+The triple-overlap note is:
+
+```text
+analysis/8051/cdd-affine-triple-correlation-20260501.md
+```
+
+The group99/group105 pairwise overlap is in:
 
 ```text
 analysis/8051/cdd-affine-cross-group-correlation-20260501.md/json
 ```
 
-The most useful starting offsets are:
+The most useful general starting offsets are:
 
 ```text
 0x01c0  low compact controller/status-looking row
 0x0280  low compact controller/status-looking row
-0x7140  response-bridge-adjacent tile
-0x7180  response-bridge-adjacent tile
 0x8f40  repeated exact stock/mutation tile participant
 0x8fc0  paired with 0x8f40
-0x9b00  three-way tile-rotation participant
-0x9b40  three-way tile-rotation participant
-0x9b80  three-way tile-rotation participant
+0x9d80  repeated tile participant
+0x9dc0  paired with 0x9d80
 ```
 
 The `0x7140/0x7180` pair remains attractive because it overlaps the earlier
-response-bridge story. The `0x9b00/0x9b40/0x9b80` trio is attractive for a
-different reason: both CDD edits perturb a compact rotation among the same few
-code-looking chunks, which may be easier to recognize after a hook changes one
-byte or one phase bit.
+response-bridge story, but it is not universal: it reacts to the two late CDD2
+edits and not to the early CDD1 group-27 edit under the same clean-offset rule.
+Treat it as a response-bridge-specific probe, not the first general detector.
 
 ## How To Use This
 

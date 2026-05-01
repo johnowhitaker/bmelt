@@ -2051,3 +2051,22 @@ does the per-state stable-tile comparison for new CDD edits, and
 small operational fix landed too: EXTRAINQ priming can succeed through this
 Linux path without printing the normal `SCSI Status: Good` string, so the F0
 dump helper no longer treats that successful prime as a hard failure.
+
+I then tried a third affine point in a different part of the CDD: group 27,
+an early CDD1 full-row leaf whose stock decoded byte is `0xe4`. Changing all
+12 observed lead cells to decode as `0xe5` still booted as normal `LD5M`, and
+the stock restore sequence also completed cleanly. This one exposed a new
+readback caveat: CDD1 F0 spot reads around `0x43800` can decrypt correctly for
+some single aligned `0x80` reads and badly for adjacent/multi-chunk reads, so
+CDD1 F0 verification is less pleasant than the late CDD2 pages. The important
+behavioral result survived that nuisance: group 27 produced 78 clean
+normal-window offsets.
+
+With three independent affine edits in hand, the overlap picture got sharper.
+Group 27 and group 99 overlap at 64 clean offsets; group 27 and group 105 at
+24; group 99 and group 105 at 31. The triple overlap is 21 offsets, including
+`+0x01c0`, `+0x0280`, `+0x8f40`, `+0x8fc0`, `+0x9d80`, and `+0x9dc0`. The old
+response-bridge pair `+0x7140/+0x7180` is still useful, but it is specific to
+the two late CDD2 edits and did not show up in the group-27 clean set. That is
+actually helpful: we now have a general detector set and a more specific
+response-bridge probe for future normal-mode hook work.

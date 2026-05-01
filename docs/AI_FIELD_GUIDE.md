@@ -1948,3 +1948,22 @@ Immediate useful directions:
     successful EXTRAINQ prime even when `sg_raw` prints `NVMe Result=0x0`
     rather than `SCSI Status: Good`. This matters on the Linux bridge path
     after finalizer transitions.
+79. A third live CDD affine edit targeted CDD stream 1 group 27. Stock group
+    27 decodes as `0xe4`; the live test rewrote all 12 observed full-row lead
+    cells so it decoded as `0xe5`, then restored them. The drive cold-booted as
+    `LD5M` after mutation and restore, and the group-27 normal-mode report
+    found 78 clean stock-consistent offsets:
+    `analysis/8051/cdd-affine-g27-live-diff-20260501.md/json`.
+80. CDD1 F0 spot readback is more awkward than the late CDD2 pages. Around
+    `0x43800..0x43a00`, some single aligned `0x80` reads decrypt correctly
+    while adjacent/multi-chunk reads can decrypt as nonsense. Do not treat one
+    bad CDD1 multi-chunk decrypt as proof of zeroed flash; use the runner's
+    staged readbacks, normal boot, and repeated single aligned reads.
+81. `analysis/8051/cdd-affine-triple-correlation-20260501.md` intersects the
+    group-27, group-99, and group-105 reports. Counts: `g27=78`, `g99=107`,
+    `g105=62`; pairwise overlaps `g27/g99=64`, `g27/g105=24`,
+    `g99/g105=31`; triple overlap `21`. General normal-mode hook detector
+    offsets should start with `+0x01c0`, `+0x0280`, `+0x8f40`, `+0x8fc0`,
+    `+0x9d80`, and `+0x9dc0`. The response bridge pair `+0x7140/+0x7180`
+    reacts to the two late CDD2 edits but not to group 27, so treat it as a
+    specific bridge probe rather than a universal CDD detector.
