@@ -380,15 +380,22 @@ def source_gateway_cdb_bulk_with_xdata_rw(selector_mask: int, storage_offset: in
 
 def write_xdata_run(address: int, values: list[int]) -> bytes:
     source = bytearray(mov_dptr(address))
+    accumulator: int | None = None
     for index, value in enumerate(values):
-        if value == 0:
-            source.append(0xE4)  # CLR A
-        else:
-            source.extend(bytes([0x74, value & 0xFF]))  # MOV A,#value
+        if accumulator != value:
+            if value == 0:
+                source.append(0xE4)  # CLR A
+            else:
+                source.extend(bytes([0x74, value & 0xFF]))  # MOV A,#value
+            accumulator = value
         source.append(0xF0)  # MOVX @DPTR,A
         if index != len(values) - 1:
             source.append(0xA3)  # INC DPTR
     return bytes(source)
+
+
+def write_direct_byte(address: int, value: int) -> bytes:
+    return bytes([0x75, address & 0xFF, value & 0xFF])  # MOV direct,#imm
 
 
 def source_cdd_field_replay() -> bytes:
@@ -402,6 +409,39 @@ def source_cdd_field_replay() -> bytes:
             write_xdata_run(0x8258, [0x00, 0x0D, 0x90, 0x00]),
             write_xdata_run(0x4A00, [0x01]),
             mov_rn_imm(5, 0xCD),
+        ]
+    )
+
+
+def source_cdd_prestage_field_replay_compact() -> bytes:
+    """Write compact descriptor-prestate plus CDD field package.
+
+    This intentionally writes the nonzero descriptor/status fields, clears the
+    doorbell first, writes the full CDD2 start field, then rings the doorbell.
+    It omits zero descriptor fields to keep the payload within the 0x6ee3 cave
+    when paired with the one-byte gateway reader.
+    """
+
+    return b"".join(
+        [
+            write_xdata_run(0x8246, [0x70]),
+            write_xdata_run(0x824A, [0x40]),
+            write_xdata_run(0x824D, [0x08]),
+            write_xdata_run(0x8252, [0x50]),
+            write_xdata_run(0x8254, [0x40]),
+            write_xdata_run(0x4E0D, [0x40]),
+            write_xdata_run(0x4E1A, [0x14]),
+            write_xdata_run(0x4E1C, [0x01]),
+            write_direct_byte(0x60, 0x01),
+            write_direct_byte(0x61, 0xFF),
+            write_xdata_run(0x4A00, [0x00]),
+            write_xdata_run(0x4A01, [0x03]),
+            write_xdata_run(0x4A03, [0x03]),
+            write_xdata_run(0x4A05, [0x14, 0x07]),
+            write_xdata_run(0x4A20, [0x03, 0x08, 0x10]),
+            write_xdata_run(0x8258, [0x00, 0x0D, 0x90, 0x00]),
+            write_xdata_run(0x4A00, [0x01]),
+            mov_rn_imm(5, 0xCE),
         ]
     )
 
@@ -438,6 +478,35 @@ def source_gateway_cdb_bulk_with_cdd_field_replay(
     return bytes(source)
 
 
+def source_gateway_byte_with_cdd_prestage_replay(selector_mask: int) -> bytes:
+    """One-byte gateway read with compact descriptor-prestate replay trigger.
+
+    Normal mode matches source_gateway_cdb_address(). Any command with
+    CDB[7:8] == fc dd writes compact descriptor prestate plus the field-only
+    CDD package and returns 0xce at response[0x20].
+    """
+
+    source = bytearray()
+    jump_to_gateway_positions: list[int] = []
+    for cdb_addr, expected in ((0x8191, 0xFC), (0x8192, 0xDD)):
+        source.extend(mov_dptr(cdb_addr))
+        source.extend(bytes([0xE0, 0x64, expected, 0x70, 0x00]))  # MOVX; XRL; JNZ gateway
+        jump_to_gateway_positions.append(len(source) - 1)
+
+    source.extend(source_cdd_prestage_field_replay_compact())
+    skip_after_replay_pos = len(source)
+    source.extend(bytes([0x80, 0x00]))  # SJMP end_source
+
+    gateway_start = len(source)
+    source.extend(source_gateway_cdb_address(selector_mask))
+    end_source = len(source)
+
+    for position in jump_to_gateway_positions:
+        source[position] = rel8(position + 1, gateway_start)
+    source[skip_after_replay_pos + 1] = rel8(skip_after_replay_pos + 2, end_source)
+    return bytes(source)
+
+
 def build_source(args: argparse.Namespace) -> tuple[str, bytes, dict[str, Any]]:
     modes = [
         args.constant is not None,
@@ -451,6 +520,7 @@ def build_source(args: argparse.Namespace) -> tuple[str, bytes, dict[str, Any]]:
         args.gateway_cdb_bulk_with_xdata_write,
         args.gateway_cdb_bulk_with_xdata_rw,
         args.gateway_cdb_bulk_with_cdd_field_replay,
+        args.gateway_byte_with_cdd_prestage_replay,
     ]
     if sum(modes) != 1:
         raise ValueError(
@@ -458,7 +528,8 @@ def build_source(args: argparse.Namespace) -> tuple[str, bytes, dict[str, Any]]:
             "--xdata-cdb-address, --xdata-cdb-bulk, --xdata-cdb-rw, "
             "--gateway-cdb-address, --gateway-cdb-bulk, "
             "--gateway-cdb-bulk-with-xdata-write/--gateway-cdb-bulk-with-xdata-rw, "
-            "or --gateway-cdb-bulk-with-cdd-field-replay"
+            "--gateway-cdb-bulk-with-cdd-field-replay, or "
+            "--gateway-byte-with-cdd-prestage-replay"
         )
     if args.constant is not None:
         return "constant", source_constant(args.constant), {"constant": args.constant}
@@ -530,6 +601,18 @@ def build_source(args: argparse.Namespace) -> tuple[str, bytes, dict[str, Any]]:
                 "trigger_response": "0xcd at response[0x20]",
                 "selector_mask": args.selector_mask,
                 "bulk_len": args.bulk_len,
+            },
+        )
+    if args.gateway_byte_with_cdd_prestage_replay:
+        return (
+            "gateway_byte_with_cdd_prestage_replay",
+            source_gateway_byte_with_cdd_prestage_replay(args.selector_mask),
+            {
+                "address_source": "normal: cdb_bytes_7_8_9_plus_control_low_bits",
+                "trigger": "host cdb_7_fc_cdb_8_dd replays compact descriptor prestate plus CDD field package",
+                "trigger_response": "0xce at response[0x20]",
+                "selector_mask": args.selector_mask,
+                "gateway_mode": "one_byte",
             },
         )
     if args.xdata_cdb_address:
@@ -717,6 +800,11 @@ def parse_args() -> argparse.Namespace:
         help="like --gateway-cdb-bulk, but CDB[7:9]=fc/dd/00 writes the LD5M CDD field-only mailbox package",
     )
     parser.add_argument(
+        "--gateway-byte-with-cdd-prestage-replay",
+        action="store_true",
+        help="like --gateway-cdb-address, but CDB[7:8]=fc/dd writes compact descriptor prestate plus CDD field package",
+    )
+    parser.add_argument(
         "--xdata-cdb-address",
         action="store_true",
         help="read XDATA address CDB[7:8] + (CDB[5] & --selector-mask)",
@@ -747,6 +835,7 @@ def main() -> int:
         or args.gateway_cdb_bulk_with_xdata_write
         or args.gateway_cdb_bulk_with_xdata_rw
         or args.gateway_cdb_bulk_with_cdd_field_replay
+        or args.gateway_byte_with_cdd_prestage_replay
         or args.xdata_cdb_address
         or args.xdata_cdb_bulk
         or args.xdata_cdb_rw

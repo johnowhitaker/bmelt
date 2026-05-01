@@ -1281,3 +1281,22 @@ while the known live `0x070000` gateway window remained nonzero. So the field
 package plus `0x4a00` doorbell is not sufficient in currentboot. The missing
 state is now more likely in the descriptor prestate, the `0xc000` mapped-header
 setup, or the higher-risk `0x4e8c` controller command path.
+
+The next rung is ready but, at this point in the notes, not yet live-proven.
+It is a deliberately compact "descriptor prestate plus field package" trigger.
+The hook gives up the fast bulk gateway reader and falls back to one-byte
+gateway reads, because the `0x6ee3` cave only has `0xdd` bytes. That buys room
+to preload the nonzero descriptor-derived bytes around `xdata[0x8246]`,
+`0x824a`, `0x824d`, `0x8252`, `0x8254`, status/config bytes at `0x4e0d`,
+`0x4e1a`, and `0x4e1c`, direct bytes `0x60=1` and `0x61=ff`, then the same
+`0x4a` CDD field package. The fake gateway address trigger is still
+`CDB[7:8] = fc dd`, and the planned response marker is `0xce`.
+
+The dry run matters because this path is tight: the payload is 215 bytes in a
+221-byte cave. The runner now has a sample-length cap, so the first live shot
+can read only a few dozen bytes around each decoded target instead of spending
+minutes on byte-at-a-time 256-byte windows. If this still leaves the decoded
+targets zero, the likely missing ingredient is no longer passive descriptor
+prestate; it is either the real mapped-header setup through the
+`0x4e80/84/88/8c` path or a later normal-runtime phase where the controller CDD
+engine is actually awake.

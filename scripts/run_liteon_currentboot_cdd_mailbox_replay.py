@@ -287,7 +287,67 @@ def gateway_read_range(
     return bytes(data), records
 
 
+def gateway_read_byte_range(
+    *,
+    sg_raw: str,
+    device: str,
+    address: int,
+    length: int,
+    timeout: int,
+    request_len: int,
+    response_offset: int,
+) -> tuple[bytes, list[dict[str, Any]]]:
+    data = bytearray()
+    records: list[dict[str, Any]] = []
+    for offset in range(length):
+        cursor = address + offset
+        base = cursor & ~0x3F
+        selector = cursor & 0x3F
+        cdb = [
+            0x12,
+            0x00,
+            0x00,
+            0x00,
+            0xF0,
+            0x40 | selector,
+            0x00,
+            (base >> 16) & 0xFF,
+            (base >> 8) & 0xFF,
+            base & 0xFF,
+            0x00,
+            0x00,
+        ]
+        stdout, record = sg_raw_inquiry(
+            sg_raw=sg_raw,
+            device=device,
+            cdb=cdb,
+            timeout=timeout,
+            request_len=request_len,
+        )
+        if len(stdout) <= response_offset:
+            raise RuntimeError(f"short INQUIRY response for gateway-byte read 0x{cursor:06x}")
+        value = stdout[response_offset]
+        data.append(value)
+        record.update(
+            {
+                "kind": "gateway_byte_read",
+                "address": cursor,
+                "base": base,
+                "selector": selector,
+                "value": value,
+            }
+        )
+        records.append(record)
+    return bytes(data), records
+
+
 def trigger_cdd_field_replay(args: argparse.Namespace) -> dict[str, Any]:
+    if args.trigger_mode == "cdb-fcdd01":
+        byte9 = 0x01
+        expected = 0xCE
+    else:
+        byte9 = 0x00
+        expected = 0xCD
     cdb = [
         0x12,
         0x00,
@@ -298,7 +358,7 @@ def trigger_cdd_field_replay(args: argparse.Namespace) -> dict[str, Any]:
         0x00,
         0xFC,
         0xDD,
-        0x00,
+        byte9,
         0x00,
         0x00,
     ]
@@ -314,9 +374,9 @@ def trigger_cdd_field_replay(args: argparse.Namespace) -> dict[str, Any]:
     record.update(
         {
             "kind": "cdd_field_replay_trigger",
-            "trigger": "cdb_7_fc_cdb_8_dd_cdb_9_00",
+            "trigger": f"cdb_7_fc_cdb_8_dd_cdb_9_{byte9:02x}",
             "response_byte": stdout[args.response_offset],
-            "expected_response_byte": 0xCD,
+            "expected_response_byte": expected,
             "stdout_first64_hex": stdout[:64].hex(),
         }
     )
@@ -338,16 +398,27 @@ def sample_one(args: argparse.Namespace, sample: dict[str, Any], out_dir: Path, 
             response_offset=args.response_offset,
         )
     elif kind == "gateway":
-        data, records = gateway_read_range(
-            sg_raw=args.sg_raw,
-            device=args.device,
-            address=address,
-            length=length,
-            chunk_size=args.chunk_size,
-            timeout=args.timeout,
-            request_len=args.request_len,
-            response_offset=args.response_offset,
-        )
+        if args.gateway_read_mode == "byte":
+            data, records = gateway_read_byte_range(
+                sg_raw=args.sg_raw,
+                device=args.device,
+                address=address,
+                length=length,
+                timeout=args.timeout,
+                request_len=args.request_len,
+                response_offset=args.response_offset,
+            )
+        else:
+            data, records = gateway_read_range(
+                sg_raw=args.sg_raw,
+                device=args.device,
+                address=address,
+                length=length,
+                chunk_size=args.chunk_size,
+                timeout=args.timeout,
+                request_len=args.request_len,
+                response_offset=args.response_offset,
+            )
     else:
         raise ValueError(f"unknown sample kind: {kind}")
 
@@ -390,9 +461,15 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--chunk-size", type=parse_int, default=0x7F)
     parser.add_argument(
         "--trigger-mode",
-        choices=("xdata-writes", "cdb-fcdd00"),
+        choices=("xdata-writes", "cdb-fcdd00", "cdb-fcdd01"),
         default="xdata-writes",
         help="how to replay fields: guarded XDATA writes, or special CDB[7:9]=fc/dd/00 trigger",
+    )
+    parser.add_argument("--gateway-read-mode", choices=("bulk", "byte"), default="bulk")
+    parser.add_argument(
+        "--max-sample-length",
+        type=parse_int,
+        help="cap each suggested sample length; useful for slow one-byte gateway hooks",
     )
     parser.add_argument("--skip-before", action="store_true")
     parser.add_argument("--skip-gateway", action="store_true")
@@ -407,10 +484,18 @@ def main() -> int:
     plan = json.loads(args.plan.read_text())
     level = load_level(plan, args.level)
     samples = list(level.get("suggested_samples_after", []))
-    if args.trigger_mode == "cdb-fcdd00" and not args.include_xdata_samples:
+    if args.trigger_mode.startswith("cdb-fcdd") and not args.include_xdata_samples:
         samples = [sample for sample in samples if sample["kind"] == "gateway"]
     if args.skip_gateway:
         samples = [sample for sample in samples if sample["kind"] != "gateway"]
+    if args.max_sample_length is not None:
+        capped = []
+        for sample in samples:
+            sample = dict(sample)
+            sample["original_length"] = int(sample["length"])
+            sample["length"] = min(int(sample["length"]), args.max_sample_length)
+            capped.append(sample)
+        samples = capped
 
     stamp = dt.datetime.now(dt.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     out_dir = args.out_dir or (ROOT / "runs/currentboot-cdd-mailbox-replay" / stamp)
@@ -423,6 +508,8 @@ def main() -> int:
         "risk": level.get("risk"),
         "dry_run": args.dry_run,
         "trigger_mode": args.trigger_mode,
+        "gateway_read_mode": args.gateway_read_mode,
+        "max_sample_length": args.max_sample_length,
         "writes": level["ordered_byte_writes"],
         "samples": samples,
         "results": {},
@@ -440,7 +527,7 @@ def main() -> int:
             before.append(sample_one(args, sample, out_dir, "before"))
         record["results"]["before_samples"] = before
 
-    if args.trigger_mode == "cdb-fcdd00":
+    if args.trigger_mode.startswith("cdb-fcdd"):
         record["results"]["trigger_record"] = trigger_cdd_field_replay(args)
     else:
         write_records = []

@@ -1415,3 +1415,12 @@ Immediate useful directions:
 16. The ordinary 10-byte CDB control byte is not an obvious f2 selector either.
     Control values `00`, `01`, `02`, `5a`, `a5`, and `ff` all returned the
     same page hash and left the drive normal.
+17. The next currentboot CDD mailbox candidate is
+    `--gateway-byte-with-cdd-prestage-replay`. It uses only proven-preserved
+    `CDB[7:8] == fc dd` as the trigger, returns `0xce`, and falls back to a
+    one-byte gateway reader to fit in the `0x6ee3` cave. It preloads compact
+    descriptor/status state (`0x8246/4a/4d/52/54`, `0x4e0d/1a/1c`, direct
+    `0x60/0x61`) before writing the `0x4a` CDD field package and ringing
+    `0x4a00`. Use `run_liteon_currentboot_cdd_mailbox_replay.py` with
+    `--trigger-mode cdb-fcdd01 --gateway-read-mode byte --max-sample-length
+    0x20` for the first live pass; without the length cap this path is slow.
