@@ -197,3 +197,35 @@ bytes are dominated by one-bit XOR deltas. Most contiguous diff runs are also
 short: about 60% length 1, 88% length <=2, and 98% length <=4 in every lane.
 So the hard lanes still look localized and deterministic; they just are not
 exposing the lane-0 edge motif.
+
+## Operation-Key Follow-Up
+
+The operation-key analyzer:
+
+```sh
+python3 scripts/analyze_liteon_cdd_operation_keys.py
+```
+
+writes:
+
+```text
+references/firmware/extracted/liteon-cdd-operation-key-analysis.md
+references/firmware/extracted/liteon-cdd-operation-key-analysis.json
+```
+
+Key points:
+
+- 2,616 records across six sibling images produce 2,135 unique operation keys.
+- No observed operation key maps to more than one encoded source length.
+- The decoded-span field remains the simple one:
+  `(operation_key[3] & 0x3f) << 4`.
+- The encoded source length is not a simple linear bitfield in the raw key. A
+  GF(2) affine probe recovers only the low parity relation:
+  `source_len.bit0 = key[0].0 ^ key[1].3 ^ key[2].6 ^ key[4].1`.
+- `key[4] / 2` is a valid unit-size hint for the known affine lane-0 records,
+  but it is not a universal unit size for hard-lane records.
+
+The lane-schedule analyzer now also runs a complete-row scan where the
+carry-less affine multiplier is not fixed. That still finds only lane `0` and
+only multiplier `0x19`, which reduces the chance that lanes `1` and `2` are a
+simple variant of the same repeated-tail code.

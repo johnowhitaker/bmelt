@@ -16,6 +16,18 @@ Broad edge scan over unit sizes 4..40 and k=2..4. Counts include overlapping sub
 
 Result: the broadened edge scan still finds the repeated-tail affine unit grammar only in macro lane 0. Lanes 1 and 2 either use a different grammar or carry their useful data inside the high-entropy body, not as prefix/suffix affine leaves.
 
+## Full-Row Any-Multiplier Scan
+
+Full-row prefix/suffix scan allowing any nonzero carry-less multiplier. This checks whether macro lanes 1/2 use the same repeated-tail shape with a different mask.
+
+- Total full-row affine hits: `208`.
+- Hits by macro lane: `{0: 208}`.
+- Hits by multiplier: `{'0x19': 208}`.
+- Hits by unit size: `{12: 68, 13: 140}`.
+- Macro lane 1/2 hits: `0`.
+
+Result: even when the multiplier is allowed to vary, the only complete repeated-tail affine rows are lane-0 rows using multiplier `0x19`. That makes it unlikely that lanes 1 and 2 are simply hiding the same grammar under a different affine mask.
+
 ## Per-Lane Shape
 
 Lane 0 has the repeated short-operation class; lanes 1 and 2 have almost entirely unique operation keys and higher-entropy bulk records.
@@ -67,9 +79,47 @@ The changed bytes are also spatially local. Most contiguous diff runs are four b
 | 1 | 41387 | 0.607 | 0.885 | 0.983 | 1:25120, 2:11491, 3:3125, 4:940, 5:427, 6:133, 7:60, 8:25 |
 | 2 | 41835 | 0.611 | 0.886 | 0.983 | 1:25581, 2:11474, 3:3047, 4:1024, 5:448, 6:131, 7:46, 8:21 |
 
+## Lane-0 Macro Byte Feature Probe
+
+Cheap macro-feature probe. For every full 12-record macro with a recovered lane-0 byte, test whether that byte equals or equals-XOR-constant simple byte summaries of the macro. This is a negative-control probe, not a full decoder.
+
+- Full-macro cases with recovered lane-0 byte: `134`.
+- One-byte features tested: `120`.
+- Direct-match threshold: `16` matches.
+- XOR-constant threshold: `16` matches.
+
+Result: no cheap sum/xor/CRC/length/control-field feature came close to explaining the recovered lane-0 macro byte. This argues against treating the lane-0 byte as a trivial checksum or length/status byte over the obvious 12-record macro material.
+
+Best direct matches:
+
+| feature | matches | cases |
+|---|---:|---:|
+| `decoded_total_hi` | 6 | 134 |
+| `op_byte5:sum8` | 4 | 134 |
+| `source_hard_lanes:crc32_b1` | 3 | 134 |
+| `op_lane1:sum8` | 3 | 134 |
+| `op_lane0:crc32_b3` | 3 | 134 |
+| `source_lengths:crc32_b3` | 2 | 134 |
+| `source_lane2:xor8` | 2 | 134 |
+| `source_lane2:crc32_b2` | 2 | 134 |
+
+Best XOR-constant matches:
+
+| feature | xor constant | matches | cases |
+|---|---:|---:|---:|
+| `op_byte5:crc32_b3` | `0xd8` | 9 | 134 |
+| `op_byte5:crc32_b0` | `0xdb` | 9 | 134 |
+| `op_byte5:crc32_b2` | `0x0a` | 7 | 134 |
+| `op_byte5:crc32_b1` | `0xe7` | 7 | 134 |
+| `macro_index` | `0x0d` | 7 | 134 |
+| `source_total_hi` | `0x17` | 6 | 134 |
+| `op_hard_lanes:crc32_b0` | `0xee` | 6 | 134 |
+| `op_byte5:xor8` | `0x11` | 6 | 134 |
+
 ## Interpretation
 
 - The lane-0 affine leaf is real, but it is probably one visible lane of a larger CDD/controller codeword schedule.
 - Lanes 1 and 2 did not reveal an analogous repeated-tail edge grammar under a wider unit-size scan.
 - The close-sibling byte locality keeps arguing against ordinary encryption/compression as the whole story. The hard lanes look like controller-specific packed/ECC-like records.
+- The recovered lane-0 macro byte is not explained by cheap one-byte summaries of the obvious macro material, so it is more likely semantic/controller data or a nontrivial codeword component than a simple checksum.
 - A useful next static step is to classify lane 1/2 operation-key fields and body-diff locality, rather than keep searching for the lane-0 tail pattern there.

@@ -237,6 +237,21 @@ Key CDD facts:
   like deterministic localized controller codewords, not encryption avalanche
   and not the lane-0 tail grammar. Report:
   `references/firmware/extracted/liteon-cdd-lane-schedule-analysis.md`.
+- The lane-schedule scan now also allows any nonzero carry-less affine
+  multiplier for complete four-unit edge rows. It still finds only lane `0`,
+  only multiplier `0x19`, and only unit sizes `12`/`13`. This reduces the
+  chance that lanes `1`/`2` are hiding the same repeated-tail grammar under a
+  different affine mask.
+- Operation-key analysis is now split out into
+  `references/firmware/extracted/liteon-cdd-operation-key-analysis.md`. Across
+  2,616 records and 2,135 unique operation keys, no observed key maps to two
+  different source lengths, so the key is a real packet/codeword selector. But
+  source length is not a simple visible bitfield: a GF(2) linear probe only
+  recovers the parity relation
+  `source_len.bit0 = key[0].0 ^ key[1].3 ^ key[2].6 ^ key[4].1`. Bits 1..11
+  are not affine functions of the raw key bits. `key[4] / 2` remains a valid
+  unit-size hint for the lane-0 affine class, but it fails as a universal unit
+  size on lanes `1`/`2`.
 - Treat the affine byte as proven structure but not yet proven runtime payload.
   It may be semantic data, parity/control material, or one lane of a larger
   controller codeword. A runtime oracle for one known short record would settle

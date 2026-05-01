@@ -1036,3 +1036,34 @@ So the CDD picture has narrowed again: lane 0 exposes a real affine leaf layer,
 while lanes 1 and 2 are the harder packed/ECC-like body. The next static work
 should classify those lane 1/2 operation-key fields and diff locality, not keep
 searching for more copies of the lane-0 motif.
+
+## Operation Keys Are Real Selectors
+
+The follow-up operation-key pass made that last sentence more concrete. The
+six-byte key derived from each directory entry is not just decorative metadata:
+across the six sibling images, all 2,135 unique operation keys map to exactly
+one encoded source length. So the controller likely has a real per-key packet
+grammar, even though the directory also stores source starts.
+
+There were useful negatives too. Letting the lane-schedule scanner choose any
+carry-less affine multiplier did not uncover a hidden lane-1 or lane-2 version
+of the repeated-tail grammar. The only complete affine rows are still lane 0,
+still multiplier `0x19`, and still 12- or 13-byte units.
+
+The operation key also does not expose source length as a simple bitfield. A
+linear GF(2) probe found only the parity relation:
+
+```text
+source_len.bit0 = key[0].0 ^ key[1].3 ^ key[2].6 ^ key[4].1
+```
+
+Bits 1 through 11 of the encoded source length are not affine functions of the
+raw key bits. And while `key[4] / 2` is exactly the unit-size hint for the
+lane-0 affine records, it fails badly as a universal unit size in the hard
+lanes.
+
+That keeps the static CDD story in a narrower place: lane 0 gives us a proven
+affine leaf, but the dense lanes are using a proprietary packet/codeword grammar
+that is not just a disguised copy of the easy motif. The next likely unlock is
+either a runtime oracle for one decoded record, or a deeper classification of
+the hard-lane operation keys.

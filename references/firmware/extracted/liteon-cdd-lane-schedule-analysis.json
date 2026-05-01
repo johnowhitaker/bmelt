@@ -623,6 +623,22 @@
     "note": "Broad edge scan over unit sizes 4..40 and k=2..4. Counts include overlapping subruns; use lane presence/absence rather than exact run counts.",
     "total_hits": 718
   },
+  "full_row_any_affine_scan": {
+    "by_macro_lane": {
+      "0": 208
+    },
+    "by_multiplier": {
+      "0x19": 208
+    },
+    "by_unit_size": {
+      "12": 68,
+      "13": 140
+    },
+    "lane_1_2_examples": [],
+    "lane_1_2_hits": 0,
+    "note": "Full-row prefix/suffix scan allowing any nonzero carry-less multiplier. This checks whether macro lanes 1/2 use the same repeated-tail shape with a different mask.",
+    "total_hits": 208
+  },
   "images": [
     "LD5M",
     "AD12",
@@ -631,6 +647,151 @@
     "CHS7",
     "CHS9"
   ],
+  "lane0_macro_feature_probe": {
+    "best_direct_matches": [
+      {
+        "cases": 134,
+        "feature": "decoded_total_hi",
+        "matches": 6
+      },
+      {
+        "cases": 134,
+        "feature": "op_byte5:sum8",
+        "matches": 4
+      },
+      {
+        "cases": 134,
+        "feature": "source_hard_lanes:crc32_b1",
+        "matches": 3
+      },
+      {
+        "cases": 134,
+        "feature": "op_lane1:sum8",
+        "matches": 3
+      },
+      {
+        "cases": 134,
+        "feature": "op_lane0:crc32_b3",
+        "matches": 3
+      },
+      {
+        "cases": 134,
+        "feature": "source_lengths:crc32_b3",
+        "matches": 2
+      },
+      {
+        "cases": 134,
+        "feature": "source_lane2:xor8",
+        "matches": 2
+      },
+      {
+        "cases": 134,
+        "feature": "source_lane2:crc32_b2",
+        "matches": 2
+      },
+      {
+        "cases": 134,
+        "feature": "source_lane1:crc32_b2",
+        "matches": 2
+      },
+      {
+        "cases": 134,
+        "feature": "op_lane2:crc32_b3",
+        "matches": 2
+      },
+      {
+        "cases": 134,
+        "feature": "op_lane1:crc32_b2",
+        "matches": 2
+      },
+      {
+        "cases": 134,
+        "feature": "op_hard_lanes:crc32_b2",
+        "matches": 2
+      }
+    ],
+    "best_xor_constant_matches": [
+      {
+        "cases": 134,
+        "constant": 216,
+        "feature": "op_byte5:crc32_b3",
+        "matches": 9
+      },
+      {
+        "cases": 134,
+        "constant": 219,
+        "feature": "op_byte5:crc32_b0",
+        "matches": 9
+      },
+      {
+        "cases": 134,
+        "constant": 10,
+        "feature": "op_byte5:crc32_b2",
+        "matches": 7
+      },
+      {
+        "cases": 134,
+        "constant": 231,
+        "feature": "op_byte5:crc32_b1",
+        "matches": 7
+      },
+      {
+        "cases": 134,
+        "constant": 13,
+        "feature": "macro_index",
+        "matches": 7
+      },
+      {
+        "cases": 134,
+        "constant": 23,
+        "feature": "source_total_hi",
+        "matches": 6
+      },
+      {
+        "cases": 134,
+        "constant": 238,
+        "feature": "op_hard_lanes:crc32_b0",
+        "matches": 6
+      },
+      {
+        "cases": 134,
+        "constant": 17,
+        "feature": "op_byte5:xor8",
+        "matches": 6
+      },
+      {
+        "cases": 134,
+        "constant": 5,
+        "feature": "op_byte5:sum8",
+        "matches": 6
+      },
+      {
+        "cases": 134,
+        "constant": 209,
+        "feature": "macro_index_x3",
+        "matches": 6
+      },
+      {
+        "cases": 134,
+        "constant": 191,
+        "feature": "entry_lane2:crc32_b0",
+        "matches": 6
+      },
+      {
+        "cases": 134,
+        "constant": 181,
+        "feature": "entry_all:sum8",
+        "matches": 6
+      }
+    ],
+    "case_count": 134,
+    "direct_match_threshold": 16,
+    "direct_threshold_hits": [],
+    "feature_count": 120,
+    "note": "Cheap macro-feature probe. For every full 12-record macro with a recovered lane-0 byte, test whether that byte equals or equals-XOR-constant simple byte summaries of the macro. This is a negative-control probe, not a full decoder.",
+    "xor_match_threshold": 16,
+    "xor_threshold_hits": []
+  },
   "lane_summary": {
     "AD12": {
       "0": {

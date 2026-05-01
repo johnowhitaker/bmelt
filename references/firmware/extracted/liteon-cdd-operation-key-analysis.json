@@ -1,0 +1,1088 @@
+{
+  "close_sibling_key_diff": {
+    "by_macro_lane": {
+      "0": {
+        "changed_byte_positions": {
+          "0": 17,
+          "1": 11,
+          "2": 14,
+          "3": 9,
+          "4": 10,
+          "5": 2
+        },
+        "changed_records": 20,
+        "examples": [
+          {
+            "left_decoded_span": 912,
+            "left_key": "f30a57b9a805",
+            "left_source_len": 2957,
+            "record": 0,
+            "right_decoded_span": 896,
+            "right_key": "eff256b8a605",
+            "right_source_len": 2945
+          },
+          {
+            "left_decoded_span": 832,
+            "left_key": "e3cad6b4b005",
+            "left_source_len": 2919,
+            "record": 1,
+            "right_decoded_span": 848,
+            "right_key": "ded296b5b205",
+            "right_source_len": 2919
+          },
+          {
+            "left_decoded_span": 224,
+            "left_key": "bee214ce8406",
+            "left_source_len": 3028,
+            "record": 2,
+            "right_decoded_span": 208,
+            "right_key": "bcfad4cd8406",
+            "right_source_len": 3028
+          },
+          {
+            "left_decoded_span": 784,
+            "left_key": "deaa53b17e05",
+            "left_source_len": 2775,
+            "record": 12,
+            "right_decoded_span": 784,
+            "right_key": "e0aa13b17e05",
+            "right_source_len": 2776
+          },
+          {
+            "left_decoded_span": 240,
+            "left_key": "d84ad58f1a00",
+            "left_source_len": 1997,
+            "record": 13,
+            "right_decoded_span": 240,
+            "right_key": "db4ad58f1a00",
+            "right_source_len": 2000
+          },
+          {
+            "left_decoded_span": 704,
+            "left_key": "d16a17acaa03",
+            "left_source_len": 2627,
+            "record": 50,
+            "right_decoded_span": 704,
+            "right_key": "d16a17acae03",
+            "right_source_len": 2629
+          },
+          {
+            "left_decoded_span": 128,
+            "left_key": "4462cb884a05",
+            "left_source_len": 2168,
+            "record": 85,
+            "right_decoded_span": 128,
+            "right_key": "4662cb884a05",
+            "right_source_len": 2170
+          },
+          {
+            "left_decoded_span": 48,
+            "left_key": "906940031a00",
+            "left_source_len": 439,
+            "record": 108,
+            "right_decoded_span": 48,
+            "right_key": "da6940031a00",
+            "right_source_len": 513
+          },
+          {
+            "left_decoded_span": 800,
+            "left_key": "c16255b20405",
+            "left_source_len": 2744,
+            "record": 120,
+            "right_decoded_span": 800,
+            "right_key": "8e1215b2e004",
+            "right_source_len": 2664
+          },
+          {
+            "left_decoded_span": 464,
+            "left_key": "962ad79d9e05",
+            "left_source_len": 2753,
+            "record": 121,
+            "right_decoded_span": 528,
+            "right_key": "948ad6a18a05",
+            "right_source_len": 2737
+          },
+          {
+            "left_decoded_span": 848,
+            "left_key": "3e0215b58405",
+            "left_source_len": 2676,
+            "record": 122,
+            "right_decoded_span": 944,
+            "right_key": "3d2a54bb7405",
+            "right_source_len": 2665
+          },
+          {
+            "left_decoded_span": 48,
+            "left_key": "51ba49031a00",
+            "left_source_len": 930,
+            "record": 123,
+            "right_decoded_span": 48,
+            "right_key": "570a4b031a00",
+            "right_source_len": 978
+          }
+        ]
+      },
+      "1": {
+        "changed_byte_positions": {
+          "0": 7,
+          "1": 7,
+          "2": 11,
+          "3": 3,
+          "4": 7,
+          "5": 1
+        },
+        "changed_records": 14,
+        "examples": [
+          {
+            "left_decoded_span": 672,
+            "left_key": "82aa50aa6605",
+            "left_source_len": 2547,
+            "record": 6,
+            "right_decoded_span": 672,
+            "right_key": "79c250aa6805",
+            "right_source_len": 2542
+          },
+          {
+            "left_decoded_span": 576,
+            "left_key": "aa1ad5648604",
+            "left_source_len": 2339,
+            "record": 7,
+            "right_decoded_span": 576,
+            "right_key": "a91295648a04",
+            "right_source_len": 2338
+          },
+          {
+            "left_decoded_span": 640,
+            "left_key": "5f32d1a89e05",
+            "left_source_len": 2551,
+            "record": 19,
+            "right_decoded_span": 640,
+            "right_key": "5f2a91a89e05",
+            "right_source_len": 2549
+          },
+          {
+            "left_decoded_span": 464,
+            "left_key": "f212949df204",
+            "left_source_len": 2659,
+            "record": 100,
+            "right_decoded_span": 464,
+            "right_key": "f112549df204",
+            "right_source_len": 2657
+          },
+          {
+            "left_decoded_span": 608,
+            "left_key": "da8216a6b404",
+            "left_source_len": 2716,
+            "record": 101,
+            "right_decoded_span": 800,
+            "right_key": "dc5ad5b2d004",
+            "right_source_len": 2746
+          },
+          {
+            "left_decoded_span": 784,
+            "left_key": "b7510d717403",
+            "left_source_len": 1759,
+            "record": 102,
+            "right_decoded_span": 784,
+            "right_key": "b1a9cd712c03",
+            "right_source_len": 1731
+          },
+          {
+            "left_decoded_span": 32,
+            "left_key": "56a10682d603",
+            "left_source_len": 1565,
+            "record": 103,
+            "right_decoded_span": 816,
+            "right_key": "9c3987735804",
+            "right_source_len": 1661
+          },
+          {
+            "left_decoded_span": 304,
+            "left_key": "a6694453fa01",
+            "left_source_len": 1149,
+            "record": 124,
+            "right_decoded_span": 304,
+            "right_key": "a6698453fa01",
+            "right_source_len": 1150
+          },
+          {
+            "left_decoded_span": 880,
+            "left_key": "cac994b76405",
+            "left_source_len": 2547,
+            "record": 127,
+            "right_decoded_span": 880,
+            "right_key": "cac954b76405",
+            "right_source_len": 2546
+          },
+          {
+            "left_decoded_span": 320,
+            "left_key": "b8590d94b205",
+            "left_source_len": 2188,
+            "record": 246,
+            "right_decoded_span": 304,
+            "right_key": "b859cd93b205",
+            "right_source_len": 2187
+          },
+          {
+            "left_decoded_span": 224,
+            "left_key": "b6e2928e2205",
+            "left_source_len": 2525,
+            "record": 247,
+            "right_decoded_span": 224,
+            "right_key": "b5e2928e2205",
+            "right_source_len": 2524
+          },
+          {
+            "left_decoded_span": 208,
+            "left_key": "df59d14dc403",
+            "left_source_len": 1827,
+            "record": 376,
+            "right_decoded_span": 208,
+            "right_key": "df51d14dc603",
+            "right_source_len": 1827
+          }
+        ]
+      },
+      "2": {
+        "changed_byte_positions": {
+          "0": 10,
+          "1": 12,
+          "2": 10,
+          "3": 8,
+          "4": 16
+        },
+        "changed_records": 22,
+        "examples": [
+          {
+            "left_decoded_span": 480,
+            "left_key": "27b2129e2a04",
+            "left_source_len": 2314,
+            "record": 8,
+            "right_decoded_span": 464,
+            "right_key": "2792529d2c04",
+            "right_source_len": 2308
+          },
+          {
+            "left_decoded_span": 608,
+            "left_key": "5caa52a6ca04",
+            "left_source_len": 2479,
+            "record": 9,
+            "right_decoded_span": 608,
+            "right_key": "5d9252a6d004",
+            "right_source_len": 2480
+          },
+          {
+            "left_decoded_span": 816,
+            "left_key": "ecb113b32205",
+            "left_source_len": 2495,
+            "record": 10,
+            "right_decoded_span": 816,
+            "right_key": "e9b913b31805",
+            "right_source_len": 2488
+          },
+          {
+            "left_decoded_span": 720,
+            "left_key": "6f3a15ad0a04",
+            "left_source_len": 2511,
+            "record": 11,
+            "right_decoded_span": 720,
+            "right_key": "711255ad0e04",
+            "right_source_len": 2511
+          },
+          {
+            "left_decoded_span": 304,
+            "left_key": "1ca29793ea04",
+            "left_source_len": 2515,
+            "record": 104,
+            "right_decoded_span": 432,
+            "right_key": "1932179b7204",
+            "right_source_len": 2468
+          },
+          {
+            "left_decoded_span": 800,
+            "left_key": "1d4acf72b204",
+            "left_source_len": 2090,
+            "record": 105,
+            "right_decoded_span": 704,
+            "right_key": "4b32506c0004",
+            "right_source_len": 2050
+          },
+          {
+            "left_decoded_span": 944,
+            "left_key": "3bba157b7005",
+            "left_source_len": 2454,
+            "record": 106,
+            "right_decoded_span": 32,
+            "right_key": "186a56825405",
+            "right_source_len": 2456
+          },
+          {
+            "left_decoded_span": 656,
+            "left_key": "d312d3a90c05",
+            "left_source_len": 2658,
+            "record": 107,
+            "right_decoded_span": 480,
+            "right_key": "ceda949e1a05",
+            "right_source_len": 2672
+          },
+          {
+            "left_decoded_span": 752,
+            "left_key": "4be291af6405",
+            "left_source_len": 2551,
+            "record": 116,
+            "right_decoded_span": 752,
+            "right_key": "4be2d1af6405",
+            "right_source_len": 2552
+          },
+          {
+            "left_decoded_span": 192,
+            "left_key": "803a118c4005",
+            "left_source_len": 2423,
+            "record": 119,
+            "right_decoded_span": 192,
+            "right_key": "803a118c8005",
+            "right_source_len": 2455
+          },
+          {
+            "left_decoded_span": 352,
+            "left_key": "51ca0c964c05",
+            "left_source_len": 2280,
+            "record": 129,
+            "right_decoded_span": 352,
+            "right_key": "51ca4c964c05",
+            "right_source_len": 2281
+          },
+          {
+            "left_decoded_span": 752,
+            "left_key": "435a53afae04",
+            "left_source_len": 2498,
+            "record": 130,
+            "right_decoded_span": 752,
+            "right_key": "435a53afb004",
+            "right_source_len": 2499
+          }
+        ]
+      }
+    },
+    "pair": "CHS7_vs_CHS9"
+  },
+  "fixed_bits": [
+    {
+      "bit": "key[1].2",
+      "value": 0
+    },
+    {
+      "bit": "key[2].5",
+      "value": 0
+    },
+    {
+      "bit": "key[4].0",
+      "value": 0
+    },
+    {
+      "bit": "key[5].3",
+      "value": 0
+    },
+    {
+      "bit": "key[5].4",
+      "value": 0
+    },
+    {
+      "bit": "key[5].5",
+      "value": 0
+    },
+    {
+      "bit": "key[5].6",
+      "value": 0
+    },
+    {
+      "bit": "key[5].7",
+      "value": 0
+    }
+  ],
+  "images": [
+    "LD5M",
+    "AD12",
+    "AHS9",
+    "CD12",
+    "CHS7",
+    "CHS9"
+  ],
+  "lane_unit_size_summary": [
+    {
+      "macro_lane": 0,
+      "records": 888,
+      "records_with_nonzero_key4_half": 884,
+      "source_len_divisible_by_key4_half": 151,
+      "source_len_near_divisible_by_key4_half": 203,
+      "top_quotients": [
+        [
+          4,
+          104
+        ],
+        [
+          20,
+          26
+        ],
+        [
+          22,
+          26
+        ],
+        [
+          24,
+          24
+        ],
+        [
+          23,
+          23
+        ],
+        [
+          21,
+          23
+        ],
+        [
+          39,
+          19
+        ],
+        [
+          38,
+          17
+        ],
+        [
+          30,
+          17
+        ],
+        [
+          33,
+          16
+        ],
+        [
+          19,
+          13
+        ],
+        [
+          27,
+          13
+        ]
+      ],
+      "top_remainders": [
+        [
+          0,
+          151
+        ],
+        [
+          2,
+          29
+        ],
+        [
+          11,
+          29
+        ],
+        [
+          1,
+          28
+        ],
+        [
+          9,
+          28
+        ],
+        [
+          6,
+          28
+        ],
+        [
+          3,
+          28
+        ],
+        [
+          8,
+          24
+        ],
+        [
+          7,
+          22
+        ],
+        [
+          10,
+          22
+        ],
+        [
+          4,
+          20
+        ],
+        [
+          5,
+          20
+        ]
+      ]
+    },
+    {
+      "macro_lane": 1,
+      "records": 864,
+      "records_with_nonzero_key4_half": 859,
+      "source_len_divisible_by_key4_half": 42,
+      "source_len_near_divisible_by_key4_half": 103,
+      "top_quotients": [
+        [
+          20,
+          36
+        ],
+        [
+          21,
+          35
+        ],
+        [
+          19,
+          32
+        ],
+        [
+          18,
+          30
+        ],
+        [
+          25,
+          27
+        ],
+        [
+          12,
+          25
+        ],
+        [
+          29,
+          23
+        ],
+        [
+          32,
+          22
+        ],
+        [
+          23,
+          21
+        ],
+        [
+          22,
+          20
+        ],
+        [
+          11,
+          19
+        ],
+        [
+          15,
+          18
+        ]
+      ],
+      "top_remainders": [
+        [
+          0,
+          42
+        ],
+        [
+          1,
+          32
+        ],
+        [
+          2,
+          28
+        ],
+        [
+          12,
+          24
+        ],
+        [
+          8,
+          23
+        ],
+        [
+          7,
+          22
+        ],
+        [
+          10,
+          21
+        ],
+        [
+          5,
+          20
+        ],
+        [
+          19,
+          20
+        ],
+        [
+          6,
+          19
+        ],
+        [
+          3,
+          18
+        ],
+        [
+          9,
+          18
+        ]
+      ]
+    },
+    {
+      "macro_lane": 2,
+      "records": 864,
+      "records_with_nonzero_key4_half": 855,
+      "source_len_divisible_by_key4_half": 51,
+      "source_len_near_divisible_by_key4_half": 109,
+      "top_quotients": [
+        [
+          30,
+          38
+        ],
+        [
+          20,
+          35
+        ],
+        [
+          25,
+          29
+        ],
+        [
+          15,
+          29
+        ],
+        [
+          24,
+          28
+        ],
+        [
+          26,
+          26
+        ],
+        [
+          28,
+          26
+        ],
+        [
+          27,
+          25
+        ],
+        [
+          23,
+          25
+        ],
+        [
+          21,
+          25
+        ],
+        [
+          29,
+          24
+        ],
+        [
+          19,
+          20
+        ]
+      ],
+      "top_remainders": [
+        [
+          0,
+          51
+        ],
+        [
+          3,
+          35
+        ],
+        [
+          1,
+          28
+        ],
+        [
+          4,
+          26
+        ],
+        [
+          5,
+          25
+        ],
+        [
+          2,
+          22
+        ],
+        [
+          8,
+          22
+        ],
+        [
+          13,
+          20
+        ],
+        [
+          7,
+          19
+        ],
+        [
+          18,
+          19
+        ],
+        [
+          6,
+          19
+        ],
+        [
+          10,
+          18
+        ]
+      ]
+    }
+  ],
+  "linear_field_probe": {
+    "note": "Affine GF(2) probe over constant + 48 operation-key bits.",
+    "source_len_bits": [
+      {
+        "bit": 0,
+        "linear": true,
+        "rank": 41,
+        "terms": [
+          "key[0].0",
+          "key[1].3",
+          "key[2].6",
+          "key[4].1"
+        ]
+      },
+      {
+        "bit": 1,
+        "linear": false,
+        "rank": 41,
+        "terms": []
+      },
+      {
+        "bit": 2,
+        "linear": false,
+        "rank": 41,
+        "terms": []
+      },
+      {
+        "bit": 3,
+        "linear": false,
+        "rank": 41,
+        "terms": []
+      },
+      {
+        "bit": 4,
+        "linear": false,
+        "rank": 41,
+        "terms": []
+      },
+      {
+        "bit": 5,
+        "linear": false,
+        "rank": 41,
+        "terms": []
+      },
+      {
+        "bit": 6,
+        "linear": false,
+        "rank": 41,
+        "terms": []
+      },
+      {
+        "bit": 7,
+        "linear": false,
+        "rank": 41,
+        "terms": []
+      },
+      {
+        "bit": 8,
+        "linear": false,
+        "rank": 41,
+        "terms": []
+      },
+      {
+        "bit": 9,
+        "linear": false,
+        "rank": 41,
+        "terms": []
+      },
+      {
+        "bit": 10,
+        "linear": false,
+        "rank": 41,
+        "terms": []
+      },
+      {
+        "bit": 11,
+        "linear": false,
+        "rank": 41,
+        "terms": []
+      },
+      {
+        "bit": 12,
+        "linear": true,
+        "rank": 41,
+        "terms": []
+      },
+      {
+        "bit": 13,
+        "linear": true,
+        "rank": 41,
+        "terms": []
+      },
+      {
+        "bit": 14,
+        "linear": true,
+        "rank": 41,
+        "terms": []
+      },
+      {
+        "bit": 15,
+        "linear": true,
+        "rank": 41,
+        "terms": []
+      }
+    ],
+    "source_minus_decoded_bits": [
+      {
+        "bit": 0,
+        "linear": true,
+        "rank": 41,
+        "terms": [
+          "key[0].0",
+          "key[1].3",
+          "key[2].6",
+          "key[4].1"
+        ]
+      },
+      {
+        "bit": 1,
+        "linear": false,
+        "rank": 41,
+        "terms": []
+      },
+      {
+        "bit": 2,
+        "linear": false,
+        "rank": 41,
+        "terms": []
+      },
+      {
+        "bit": 3,
+        "linear": false,
+        "rank": 41,
+        "terms": []
+      },
+      {
+        "bit": 4,
+        "linear": false,
+        "rank": 41,
+        "terms": []
+      },
+      {
+        "bit": 5,
+        "linear": false,
+        "rank": 41,
+        "terms": []
+      },
+      {
+        "bit": 6,
+        "linear": false,
+        "rank": 41,
+        "terms": []
+      },
+      {
+        "bit": 7,
+        "linear": false,
+        "rank": 41,
+        "terms": []
+      },
+      {
+        "bit": 8,
+        "linear": false,
+        "rank": 41,
+        "terms": []
+      },
+      {
+        "bit": 9,
+        "linear": false,
+        "rank": 41,
+        "terms": []
+      },
+      {
+        "bit": 10,
+        "linear": false,
+        "rank": 41,
+        "terms": []
+      },
+      {
+        "bit": 11,
+        "linear": false,
+        "rank": 41,
+        "terms": []
+      },
+      {
+        "bit": 12,
+        "linear": false,
+        "rank": 41,
+        "terms": []
+      },
+      {
+        "bit": 13,
+        "linear": false,
+        "rank": 41,
+        "terms": []
+      },
+      {
+        "bit": 14,
+        "linear": false,
+        "rank": 41,
+        "terms": []
+      },
+      {
+        "bit": 15,
+        "linear": false,
+        "rank": 41,
+        "terms": []
+      }
+    ]
+  },
+  "mode_summary": [
+    {
+      "decoded_span_total": 80592,
+      "mode": 0,
+      "records": 272,
+      "source_to_decoded_ratio": 1.97736748064324,
+      "source_total": 159360,
+      "top_key5": [
+        [
+          0,
+          211
+        ],
+        [
+          1,
+          32
+        ],
+        [
+          2,
+          24
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          5,
+          1
+        ]
+      ],
+      "zero_decoded_span_records": 0
+    },
+    {
+      "decoded_span_total": 473104,
+      "mode": 64,
+      "records": 812,
+      "source_to_decoded_ratio": 3.054474280496466,
+      "source_total": 1445084,
+      "top_key5": [
+        [
+          4,
+          255
+        ],
+        [
+          3,
+          225
+        ],
+        [
+          2,
+          191
+        ],
+        [
+          5,
+          61
+        ],
+        [
+          1,
+          50
+        ],
+        [
+          0,
+          27
+        ],
+        [
+          6,
+          3
+        ]
+      ],
+      "zero_decoded_span_records": 13
+    },
+    {
+      "decoded_span_total": 617552,
+      "mode": 128,
+      "records": 1510,
+      "source_to_decoded_ratio": 5.742862139544524,
+      "source_total": 3546516,
+      "top_key5": [
+        [
+          4,
+          737
+        ],
+        [
+          5,
+          463
+        ],
+        [
+          3,
+          177
+        ],
+        [
+          2,
+          79
+        ],
+        [
+          0,
+          22
+        ],
+        [
+          1,
+          22
+        ],
+        [
+          6,
+          10
+        ]
+      ],
+      "zero_decoded_span_records": 21
+    },
+    {
+      "decoded_span_total": 2352,
+      "mode": 192,
+      "records": 22,
+      "source_to_decoded_ratio": 26.672619047619047,
+      "source_total": 62734,
+      "top_key5": [
+        [
+          6,
+          10
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          3,
+          3
+        ]
+      ],
+      "zero_decoded_span_records": 3
+    }
+  ],
+  "note": "Offline CDD operation-key field analysis. No drive commands were sent.",
+  "schema": "liteon-cdd-operation-key-analysis-v1",
+  "unique_key_length_summary": {
+    "keys_with_multiple_source_lengths": [],
+    "records": 2616,
+    "unique_operation_keys": 2135
+  }
+}
