@@ -1666,3 +1666,21 @@ window is sampling a longer shared error/status path rather than a tidy
 command-bounded handler. More host-command snapshots may have diminishing
 returns here; the better next step is probably a narrow one-command capture or
 a hook around the `0x8bxx`/`0x9cxx` snippets.
+
+I did that pass offline first, and the `+0x8bxx` clue got a little more useful.
+The START STOP check is close to the `0x4860` cluster we had already marked as
+mechanics-adjacent. The nearby code gates on `0x480e`, clears bits in
+`0x48a5` and `0x4762`, and prepares `0x4860.2` handling. A complete paired
+setter for `0x4860.2` and `0x4864.0` appears in a separate `+0x92xx` family,
+while the cleanup side clears `0x4864.0`, `0x5905`, `0x5a01`, and `0x4860.2`
+again. That makes a much more concrete story than "maybe `0x4860` does
+something": the path now looks like host CDB, packet shadow, START STOP/eject
+control check, state gates, then a controller-facing mechanics register family.
+
+That still does not make `0x4860.2` an eject button or a sled bit. It is more
+likely one piece of a valid controller transaction. The next good live pass is
+not a blind write into those registers; it is telemetry around the branch:
+confirm when the START STOP path is reached, read the handful of state bytes
+around it, and only then think about replaying or modifying a whole mechanics
+sequence. I wrote this up in
+`analysis/8051/normal-start-stop-mechanics-path-20260501.md`.

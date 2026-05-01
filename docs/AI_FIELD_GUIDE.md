@@ -1690,3 +1690,19 @@ Immediate useful directions:
     versus after-sense split; recurring chunks touched `0x4098` and `0x8a23`
     in both phases. Treat it as evidence that this public window is sampling a
     longer shared error/status path rather than a neatly command-bounded one.
+50. `analysis/8051/normal-start-stop-mechanics-path-20260501.md` pulls the
+    `+0x8bxx` START STOP clue together with the `0x4860` cluster. The branch
+    checks `0x8a49 == 0x1b` and `(0x8a4d & 0x0f) == 0x02`, then nearby code
+    gates on `0x480e`, clears `0x48a5.4` and `0x4762.4`, and prepares
+    `0x4860.2` handling. A complete paired setter appears separately in the
+    `+0x92xx` family as `0x4860.2` plus `0x4864.0`, while the cleanup side
+    clears `0x4864.0`, `0x5905` bits, `0x5a01` bits, and `0x4860.2`.
+    Current working model: host CDB -> `0x8a49..` packet shadow -> START
+    STOP/control check -> `0x480e/0x48a5/0x4762` state gates ->
+    `0x4860/0x4864` controller-facing mechanics state -> `0x5905/0x5a01`
+    mechanics/servo family. Do not write those registers blindly; the next
+    useful live step is branch/state telemetry around a natural or deliberate
+    START STOP event. `scripts/capture_liteon_normal_start_stop_path.py` is the
+    gated capture tool for that pass; it prints CDBs and captures baseline by
+    default, and requires `--allow-start-stop` before sending any START STOP
+    command.

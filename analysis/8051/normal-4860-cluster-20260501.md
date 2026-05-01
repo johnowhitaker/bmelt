@@ -74,10 +74,16 @@ block or hardware register bank being primed after a controller transaction.
 Two separate paths treat `0x4860.2` and `0x4864.0` like paired enable bits:
 
 ```text
-+0x8bba:  if xdata[0x480e] & 0x03 == 0x03, set 0x4860.2, then call 0x305d
++0x8bxx:  xdata[0x480e] gates a nearby state path and prepares 0x4860.2 handling
 +0x8c56:  clear 0x4864.0, clear 0x4860.2, then call short delay helpers
 +0x926c:  set 0x4860.2 and set 0x4864.0 in a broader 0x480e/0x480c/0x41b0 path
 ```
+
+The original rough note called the `+0x8bxx` path a direct set, but the raw
+public window only shows a partial `90 48 60 e0 44 04 ...` island there, not
+the full `... f0` store. The complete paired set is the `+0x92xx` family. The
+mechanics interpretation still holds, but the exact local control flow should
+be treated cautiously.
 
 The surrounding code references `0x480e`, `0x480c`, `0x4806`, `0x48a5`,
 `0x4762`, `0x5905`, and `0x5a01`, plus short delay-like calls. That pattern
