@@ -1962,3 +1962,15 @@ bridge-aligned offsets have only 244. So the bridge has a real local phase,
 but it is not a universal scroll key for the window. The normal work-window is
 more like a set of independently rotating or overlaid code tiles than one
 global ring buffer.
+
+There was also a nicer patchability clue hiding on the write side. The normal
+chunks at `+0xdbc0`, `+0xdc00`, and `+0xdc40` save controller command
+registers, write through the `0x4095..0x4098` command/FIFO path, and restore
+the old state. Those exact chunks are present in every normal capture and also
+match the saved currentboot gateway dump. That makes them a much more
+interesting future state-carryover test than the response bridge: unlike
+`+0x7140`, this region is visibly shared between currentboot and normal. It is
+not a safe thing to poke casually, because it is a real controller command
+helper, but it is the first clean-looking overlap region where a reversible
+currentboot gateway marker might tell us whether normal runtime patching is
+possible without a true normal-mode write primitive.

@@ -802,3 +802,26 @@ Recommended next directions:
   state carryover before attempting a response hook;
 - avoid START STOP/eject/mechanics paths for now because the latest live test
   did an eject/sled dance.
+
+## Shared Currentboot/Normal Write-Side Island
+
+New note:
+
+```text
+analysis/8051/normal-controller-write-side-overlap-20260501.md
+```
+
+The best current state-carryover candidate is not the response bridge. It is
+the normal controller write-side island:
+
+```text
+e2488fa3edce  +0xdbc0  saves 0x4095..0x4097 into 0x8ade/0x8aec/0x8aeb
+cf3469eae7d0  +0xdc00  writes 0x89a5/0x8a5b/0x8a5c into 0x4095..0x4097, then 0x4098
+ebaf1ca1d57c  +0xdc40  restores 0x4095..0x4097 from 0x8ade/0x8aec/0x8aeb
+```
+
+All three chunks appear in every saved normal work-window capture and exactly
+match the saved currentboot gateway. This makes `controller[0x07dbc0..0x07dc7f]`
+the best future marker-carryover test region. It is still controller-command
+code, so only patch a behavior-neutral byte first and only when the live drive
+is recoverable.

@@ -1869,3 +1869,12 @@ Immediate useful directions:
     (`746` raw positions >=95% stable versus `244` bridge-aligned), so the
     bridge is only a local anchor, not a universal window scroll key. Use this
     corpus as hidden-runtime code evidence, not as a linear decoded CDD dump.
+67. `analysis/8051/normal-controller-write-side-overlap-20260501.md` identifies
+    a better currentboot-to-normal patchability candidate than the response
+    bridge. Normal chunks `e2488fa3edce` (`+0xdbc0`), `cf3469eae7d0`
+    (`+0xdc00`), and `ebaf1ca1d57c` (`+0xdc40`) appear in every normal capture
+    and exactly match the saved currentboot gateway dump. They save
+    `0x4095..0x4097` into `0x8ade/0x8aec/0x8aeb`, write a temporary controller
+    command through `0x4095..0x4098`, then restore the old state. This is not a
+    safe casual patch site, but it is the best current marker-carryover test
+    region because it is genuinely shared between currentboot and normal.
