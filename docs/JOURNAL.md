@@ -1087,3 +1087,38 @@ surface. It does not decode CDD by itself, but it gives us better words for the
 next runtime-oracle attempts: the advertised decoded CDD range
 `0x184000..0x1b3fff` sits inside bank 0, and the same command family may expose
 other banked views of the controller once we can call it in the right phase.
+
+## Currentboot Gateway Is Only 20-Bit Here
+
+The obvious live follow-up was to try those bank ideas through the currentboot
+response hook's direct controller-gateway reader. The hook was still installed:
+after sending only event 1, `controller[0x018620]` again returned `Flash Type
+Error`, so no rewrite was needed.
+
+The banked reads were cleanly negative for decoded CDD. `0x184000` stayed zero,
+and so did `0x284000`, `0x384000`, `0x484000`, `0x584000`, plus the better CDD
+oracle targets around `0x191010`, `0x198900`, and `0x1a0000` with the same bank
+offsets. A broader 24-bit sparse scan explained why: this direct gateway path
+mirrors every `0x100000` bytes in currentboot. It is not the same 2 MiB-banked
+view used by the `0x4e80` command wrapper.
+
+The scan still found useful live surfaces. A finer first-MiB pass showed:
+
+```text
+0x000000..0x006fff  high-entropy/live staging buffer
+0x018000            active plain profile-tail helper overlay
+0x06b000            low-entropy profile/serial-looking table
+0x070000..0x07ffff  known mixed currentboot work/code/profile window
+```
+
+The new `0x018000` dump matches the official plain `ef130045` helper overlay
+byte-for-byte. The new `0x000000` dump has an exact encoded-F0 overlap:
+
+```text
+gateway[0x002c..0x5554] == LD5M F0[0xe002c..0xe5554]
+```
+
+That range is encoded CDD stream 2, so this is not the decoded payload we want.
+But it sharpens the map: currentboot already exposes the active helper and some
+staging buffers quickly through SCSI, while decoded CDD likely requires either
+a normal-runtime hook or a deliberate `0x4e80/84/88/8c` mailbox interaction.

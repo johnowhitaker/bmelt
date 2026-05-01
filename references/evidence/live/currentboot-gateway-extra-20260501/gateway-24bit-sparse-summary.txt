@@ -1,0 +1,57 @@
+unique sample shapes 6
+sha=f5a5fd42d16a2030 count=192 first=0x030000 uniq=  1 zero=64 ff= 0 printable= 0 entropy=0.00 ascii=................................ addrs=0x030000 0x040000 0x050000 0x060000 0x080000 0x090000 0x0a0000 0x0b0000 0x0c0000 0x0d0000 0x0e0000 0x0f0000 0x130000 0x140000 0x150000 0x160000 0x180000 0x190000 0x1a0000 0x1b0000 0x1c0000 0x1d0000 0x1e0000 0x1f0000 ...
+sha=3224bdf52c456fdf count= 16 first=0x010000 uniq= 18 zero=47 ff= 0 printable= 5 entropy=1.92 ascii=................................ addrs=0x010000 0x110000 0x210000 0x310000 0x410000 0x510000 0x610000 0x710000 0x810000 0x910000 0xa10000 0xb10000 0xc10000 0xd10000 0xe10000 0xf10000
+sha=8667e718294e9e0d count= 16 first=0x020000 uniq=  1 zero= 0 ff=64 printable= 0 entropy=0.00 ascii=................................ addrs=0x020000 0x120000 0x220000 0x320000 0x420000 0x520000 0x620000 0x720000 0x820000 0x920000 0xa20000 0xb20000 0xc20000 0xd20000 0xe20000 0xf20000
+sha=720a73f330f1a7f5 count= 16 first=0x070000 uniq= 20 zero=10 ff= 2 printable= 0 entropy=3.85 ascii=................................ addrs=0x070000 0x170000 0x270000 0x370000 0x470000 0x570000 0x670000 0x770000 0x870000 0x970000 0xa70000 0xb70000 0xc70000 0xd70000 0xe70000 0xf70000
+sha=78b443214266364a count= 15 first=0x100000 uniq= 42 zero= 6 ff= 0 printable=38 entropy=5.05 ascii=;...........0D5C1D50-1  LD5MDVD+ addrs=0x100000 0x200000 0x300000 0x400000 0x500000 0x600000 0x700000 0x800000 0x900000 0xa00000 0xb00000 0xc00000 0xd00000 0xe00000 0xf00000
+sha=b1d647f3a1deaff1 count=  1 first=0x000000 uniq= 42 zero= 6 ff= 0 printable=37 entropy=5.05 ascii=............0D5C1D50-1  LD5MDVD+ addrs=0x000000
+
+interesting nonuniform samples:
+0x000000 sha=b1d647f3a1deaff1 uniq= 42 zero= 6 ff= 0 printable=37 ent=5.05 ascii=............0D5C1D50-1  LD5MDVD+ hex=8f0501000000000bd07f000030443543314435302d3120204c44354d4456442b
+0x010000 sha=3224bdf52c456fdf uniq= 18 zero=47 ff= 0 printable= 5 ent=1.92 ascii=................................ hex=0000000000000000000000000000000000000000000000000000000000000000
+0x070000 sha=720a73f330f1a7f5 uniq= 20 zero=10 ff= 2 printable= 0 ent=3.85 ascii=................................ hex=aff39a19cffcbc0405020000aff39a15cffcbc0405140000cffcbc040515ff00
+0x100000 sha=78b443214266364a uniq= 42 zero= 6 ff= 0 printable=38 ent=5.05 ascii=;...........0D5C1D50-1  LD5MDVD+ hex=3b0501000000000bd07f000030443543314435302d3120204c44354d4456442b
+0x110000 sha=3224bdf52c456fdf uniq= 18 zero=47 ff= 0 printable= 5 ent=1.92 ascii=................................ hex=0000000000000000000000000000000000000000000000000000000000000000
+0x170000 sha=720a73f330f1a7f5 uniq= 20 zero=10 ff= 2 printable= 0 ent=3.85 ascii=................................ hex=aff39a19cffcbc0405020000aff39a15cffcbc0405140000cffcbc040515ff00
+0x200000 sha=78b443214266364a uniq= 42 zero= 6 ff= 0 printable=38 ent=5.05 ascii=;...........0D5C1D50-1  LD5MDVD+ hex=3b0501000000000bd07f000030443543314435302d3120204c44354d4456442b
+0x210000 sha=3224bdf52c456fdf uniq= 18 zero=47 ff= 0 printable= 5 ent=1.92 ascii=................................ hex=0000000000000000000000000000000000000000000000000000000000000000
+0x270000 sha=720a73f330f1a7f5 uniq= 20 zero=10 ff= 2 printable= 0 ent=3.85 ascii=................................ hex=aff39a19cffcbc0405020000aff39a15cffcbc0405140000cffcbc040515ff00
+0x300000 sha=78b443214266364a uniq= 42 zero= 6 ff= 0 printable=38 ent=5.05 ascii=;...........0D5C1D50-1  LD5MDVD+ hex=3b0501000000000bd07f000030443543314435302d3120204c44354d4456442b
+0x310000 sha=3224bdf52c456fdf uniq= 18 zero=47 ff= 0 printable= 5 ent=1.92 ascii=................................ hex=0000000000000000000000000000000000000000000000000000000000000000
+0x370000 sha=720a73f330f1a7f5 uniq= 20 zero=10 ff= 2 printable= 0 ent=3.85 ascii=................................ hex=aff39a19cffcbc0405020000aff39a15cffcbc0405140000cffcbc040515ff00
+0x400000 sha=78b443214266364a uniq= 42 zero= 6 ff= 0 printable=38 ent=5.05 ascii=;...........0D5C1D50-1  LD5MDVD+ hex=3b0501000000000bd07f000030443543314435302d3120204c44354d4456442b
+0x410000 sha=3224bdf52c456fdf uniq= 18 zero=47 ff= 0 printable= 5 ent=1.92 ascii=................................ hex=0000000000000000000000000000000000000000000000000000000000000000
+0x470000 sha=720a73f330f1a7f5 uniq= 20 zero=10 ff= 2 printable= 0 ent=3.85 ascii=................................ hex=aff39a19cffcbc0405020000aff39a15cffcbc0405140000cffcbc040515ff00
+0x500000 sha=78b443214266364a uniq= 42 zero= 6 ff= 0 printable=38 ent=5.05 ascii=;...........0D5C1D50-1  LD5MDVD+ hex=3b0501000000000bd07f000030443543314435302d3120204c44354d4456442b
+0x510000 sha=3224bdf52c456fdf uniq= 18 zero=47 ff= 0 printable= 5 ent=1.92 ascii=................................ hex=0000000000000000000000000000000000000000000000000000000000000000
+0x570000 sha=720a73f330f1a7f5 uniq= 20 zero=10 ff= 2 printable= 0 ent=3.85 ascii=................................ hex=aff39a19cffcbc0405020000aff39a15cffcbc0405140000cffcbc040515ff00
+0x600000 sha=78b443214266364a uniq= 42 zero= 6 ff= 0 printable=38 ent=5.05 ascii=;...........0D5C1D50-1  LD5MDVD+ hex=3b0501000000000bd07f000030443543314435302d3120204c44354d4456442b
+0x610000 sha=3224bdf52c456fdf uniq= 18 zero=47 ff= 0 printable= 5 ent=1.92 ascii=................................ hex=0000000000000000000000000000000000000000000000000000000000000000
+0x670000 sha=720a73f330f1a7f5 uniq= 20 zero=10 ff= 2 printable= 0 ent=3.85 ascii=................................ hex=aff39a19cffcbc0405020000aff39a15cffcbc0405140000cffcbc040515ff00
+0x700000 sha=78b443214266364a uniq= 42 zero= 6 ff= 0 printable=38 ent=5.05 ascii=;...........0D5C1D50-1  LD5MDVD+ hex=3b0501000000000bd07f000030443543314435302d3120204c44354d4456442b
+0x710000 sha=3224bdf52c456fdf uniq= 18 zero=47 ff= 0 printable= 5 ent=1.92 ascii=................................ hex=0000000000000000000000000000000000000000000000000000000000000000
+0x770000 sha=720a73f330f1a7f5 uniq= 20 zero=10 ff= 2 printable= 0 ent=3.85 ascii=................................ hex=aff39a19cffcbc0405020000aff39a15cffcbc0405140000cffcbc040515ff00
+0x800000 sha=78b443214266364a uniq= 42 zero= 6 ff= 0 printable=38 ent=5.05 ascii=;...........0D5C1D50-1  LD5MDVD+ hex=3b0501000000000bd07f000030443543314435302d3120204c44354d4456442b
+0x810000 sha=3224bdf52c456fdf uniq= 18 zero=47 ff= 0 printable= 5 ent=1.92 ascii=................................ hex=0000000000000000000000000000000000000000000000000000000000000000
+0x870000 sha=720a73f330f1a7f5 uniq= 20 zero=10 ff= 2 printable= 0 ent=3.85 ascii=................................ hex=aff39a19cffcbc0405020000aff39a15cffcbc0405140000cffcbc040515ff00
+0x900000 sha=78b443214266364a uniq= 42 zero= 6 ff= 0 printable=38 ent=5.05 ascii=;...........0D5C1D50-1  LD5MDVD+ hex=3b0501000000000bd07f000030443543314435302d3120204c44354d4456442b
+0x910000 sha=3224bdf52c456fdf uniq= 18 zero=47 ff= 0 printable= 5 ent=1.92 ascii=................................ hex=0000000000000000000000000000000000000000000000000000000000000000
+0x970000 sha=720a73f330f1a7f5 uniq= 20 zero=10 ff= 2 printable= 0 ent=3.85 ascii=................................ hex=aff39a19cffcbc0405020000aff39a15cffcbc0405140000cffcbc040515ff00
+0xa00000 sha=78b443214266364a uniq= 42 zero= 6 ff= 0 printable=38 ent=5.05 ascii=;...........0D5C1D50-1  LD5MDVD+ hex=3b0501000000000bd07f000030443543314435302d3120204c44354d4456442b
+0xa10000 sha=3224bdf52c456fdf uniq= 18 zero=47 ff= 0 printable= 5 ent=1.92 ascii=................................ hex=0000000000000000000000000000000000000000000000000000000000000000
+0xa70000 sha=720a73f330f1a7f5 uniq= 20 zero=10 ff= 2 printable= 0 ent=3.85 ascii=................................ hex=aff39a19cffcbc0405020000aff39a15cffcbc0405140000cffcbc040515ff00
+0xb00000 sha=78b443214266364a uniq= 42 zero= 6 ff= 0 printable=38 ent=5.05 ascii=;...........0D5C1D50-1  LD5MDVD+ hex=3b0501000000000bd07f000030443543314435302d3120204c44354d4456442b
+0xb10000 sha=3224bdf52c456fdf uniq= 18 zero=47 ff= 0 printable= 5 ent=1.92 ascii=................................ hex=0000000000000000000000000000000000000000000000000000000000000000
+0xb70000 sha=720a73f330f1a7f5 uniq= 20 zero=10 ff= 2 printable= 0 ent=3.85 ascii=................................ hex=aff39a19cffcbc0405020000aff39a15cffcbc0405140000cffcbc040515ff00
+0xc00000 sha=78b443214266364a uniq= 42 zero= 6 ff= 0 printable=38 ent=5.05 ascii=;...........0D5C1D50-1  LD5MDVD+ hex=3b0501000000000bd07f000030443543314435302d3120204c44354d4456442b
+0xc10000 sha=3224bdf52c456fdf uniq= 18 zero=47 ff= 0 printable= 5 ent=1.92 ascii=................................ hex=0000000000000000000000000000000000000000000000000000000000000000
+0xc70000 sha=720a73f330f1a7f5 uniq= 20 zero=10 ff= 2 printable= 0 ent=3.85 ascii=................................ hex=aff39a19cffcbc0405020000aff39a15cffcbc0405140000cffcbc040515ff00
+0xd00000 sha=78b443214266364a uniq= 42 zero= 6 ff= 0 printable=38 ent=5.05 ascii=;...........0D5C1D50-1  LD5MDVD+ hex=3b0501000000000bd07f000030443543314435302d3120204c44354d4456442b
+0xd10000 sha=3224bdf52c456fdf uniq= 18 zero=47 ff= 0 printable= 5 ent=1.92 ascii=................................ hex=0000000000000000000000000000000000000000000000000000000000000000
+0xd70000 sha=720a73f330f1a7f5 uniq= 20 zero=10 ff= 2 printable= 0 ent=3.85 ascii=................................ hex=aff39a19cffcbc0405020000aff39a15cffcbc0405140000cffcbc040515ff00
+0xe00000 sha=78b443214266364a uniq= 42 zero= 6 ff= 0 printable=38 ent=5.05 ascii=;...........0D5C1D50-1  LD5MDVD+ hex=3b0501000000000bd07f000030443543314435302d3120204c44354d4456442b
+0xe10000 sha=3224bdf52c456fdf uniq= 18 zero=47 ff= 0 printable= 5 ent=1.92 ascii=................................ hex=0000000000000000000000000000000000000000000000000000000000000000
+0xe70000 sha=720a73f330f1a7f5 uniq= 20 zero=10 ff= 2 printable= 0 ent=3.85 ascii=................................ hex=aff39a19cffcbc0405020000aff39a15cffcbc0405140000cffcbc040515ff00
+0xf00000 sha=78b443214266364a uniq= 42 zero= 6 ff= 0 printable=38 ent=5.05 ascii=;...........0D5C1D50-1  LD5MDVD+ hex=3b0501000000000bd07f000030443543314435302d3120204c44354d4456442b
+0xf10000 sha=3224bdf52c456fdf uniq= 18 zero=47 ff= 0 printable= 5 ent=1.92 ascii=................................ hex=0000000000000000000000000000000000000000000000000000000000000000
+0xf70000 sha=720a73f330f1a7f5 uniq= 20 zero=10 ff= 2 printable= 0 ent=3.85 ascii=................................ hex=aff39a19cffcbc0405020000aff39a15cffcbc0405140000cffcbc040515ff00

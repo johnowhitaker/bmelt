@@ -1,0 +1,51 @@
+unique sample shapes 25
+sha=f5a5fd42d16a2030 count=223 first=0x011000 uniq=  1 zero=64 ff= 0 printable= 0 ent=0.00 ascii=................................................ addrs=0x011000 0x012000 0x013000 0x014000 0x015000 0x016000 0x017000 0x019000 0x01a000 0x01b000 0x01c000 0x01d000 0x01e000 0x01f000 0x021000 0x022000 0x023000 0x024000 0x025000 0x026000 0x027000 0x028000 0x029000 0x02a000 0x02b000 0x02c000 0x02d000 0x02e000 0x02f000 0x030000 0x031000 0x032000 ...
+sha=8667e718294e9e0d count= 10 first=0x007000 uniq=  1 zero= 0 ff=64 printable= 0 ent=0.00 ascii=................................................ addrs=0x007000 0x008000 0x009000 0x00a000 0x00b000 0x00c000 0x00d000 0x00e000 0x00f000 0x020000
+sha=b1d647f3a1deaff1 count=  1 first=0x000000 uniq= 42 zero= 6 ff= 0 printable=37 ent=5.05 ascii=............0D5C1D50-1  LD5MDVD+-RW DS-8ABSH.... addrs=0x000000
+sha=2ca1aa500ac7db49 count=  1 first=0x001000 uniq= 57 zero= 0 ff= 0 printable=25 ent=5.78 ascii=.b...._.H.E..".e.uq..Ea...MX.v..o..c....6`.j.1._ addrs=0x001000
+sha=a68e2637d4972117 count=  1 first=0x002000 uniq= 57 zero= 0 ff= 0 printable=28 ent=5.78 ascii=._.%B..............".....P...j..kGD..~..]+]E.q.9 addrs=0x002000
+sha=df38f1e130cf268e count=  1 first=0x003000 uniq= 56 zero= 0 ff= 1 printable=17 ent=5.74 ascii=........i.iT...}.../.h...s{..j...BY...........ap addrs=0x003000
+sha=25cb9cdf36201f9b count=  1 first=0x004000 uniq= 50 zero= 1 ff= 0 printable=15 ent=5.52 ascii=.-..=)......u..~4..]....#........K...D.....S?..E addrs=0x004000
+sha=52a88f6e3dc46c17 count=  1 first=0x005000 uniq= 56 zero= 1 ff= 0 printable=20 ent=5.75 ascii=d...7?..9.c...`.......`..1..c...C..bI.e....+.<.. addrs=0x005000
+sha=9d76a0d91fdd1deb count=  1 first=0x006000 uniq= 53 zero= 1 ff= 0 printable=28 ent=5.64 ascii=..|..6[..J%o5..B.a|....Q.........[..TM".''$V..., addrs=0x006000
+sha=3224bdf52c456fdf count=  1 first=0x010000 uniq= 18 zero=47 ff= 0 printable= 5 ent=1.92 ascii=................................................ addrs=0x010000
+sha=cf5ce51e0f00b226 count=  1 first=0x018000 uniq= 24 zero=26 ff= 0 printable=12 ent=3.54 ascii=...E...0....0@.........G..D...N..D...0."........ addrs=0x018000
+sha=e954125759ae3b41 count=  1 first=0x06b000 uniq= 15 zero=40 ff= 2 printable= 3 ent=2.21 ascii=...K...........................................d addrs=0x06b000
+sha=720a73f330f1a7f5 count=  1 first=0x070000 uniq= 20 zero=10 ff= 2 printable= 0 ent=3.85 ascii=................................................ addrs=0x070000
+sha=d8e8db55d62b2e19 count=  1 first=0x074000 uniq= 37 zero= 2 ff=16 printable=15 ent=4.53 ascii=LT............*Q.........n...:=%Il.g.o.....e.' . addrs=0x074000
+sha=6c1c4ce2f308971c count=  1 first=0x075000 uniq= 14 zero=49 ff= 0 printable=12 ent=1.64 ascii=KEYPARA.........CDROM........................... addrs=0x075000
+sha=96aef9083c3c706e count=  1 first=0x076000 uniq= 37 zero= 2 ff= 0 printable=18 ent=4.97 ascii=.|N}.~......~..........D..~.......Z..T...XSt.... addrs=0x076000
+sha=2460de0e3d6256b9 count=  1 first=0x077000 uniq= 40 zero= 1 ff= 0 printable=23 ent=5.05 ascii=}.~..../V{.z.y...U0u..A...:........t0..YK.T.O... addrs=0x077000
+sha=ea9d62fa7d5e2810 count=  1 first=0x078000 uniq= 31 zero= 0 ff= 0 printable=13 ent=4.53 ascii=...W.......W.......W..0..0.........m....V..W,... addrs=0x078000
+sha=0096f7aec93c11ac count=  1 first=0x079000 uniq= 35 zero= 2 ff= 0 printable=32 ent=4.92 ascii=9.c.b.a.`.b.o..c..a.`uw.ux...r...c.b.a.`uw.ux... addrs=0x079000
+sha=02aaa1a06d240440 count=  1 first=0x07a000 uniq= 28 zero=19 ff= 0 printable=15 ent=3.96 ascii=.;...6......>V......7..<.=}....=..=.<.=.....>;.. addrs=0x07a000
+sha=19c8b0011bdfdb65 count=  1 first=0x07b000 uniq= 31 zero= 1 ff= 0 printable= 3 ent=4.17 ascii=...........................................O.... addrs=0x07b000
+sha=d8feb7aa81f3ed15 count=  1 first=0x07c000 uniq= 29 zero= 0 ff= 1 printable= 8 ent=4.04 ascii=.........d.....e................qP.............. addrs=0x07c000
+sha=ec77efaebd54262c count=  1 first=0x07d000 uniq= 31 zero= 0 ff= 0 printable=16 ent=4.63 ascii=".....)..%.."..%.....("........"P.."...."......) addrs=0x07d000
+sha=ad1fc500fe97aae6 count=  1 first=0x07e000 uniq= 23 zero=14 ff= 0 printable=18 ent=3.79 ascii=....p...@.......P.@...p..@..p..@..p..@..p..@..p. addrs=0x07e000
+sha=3f5ddbe348359c41 count=  1 first=0x07f000 uniq= 53 zero= 0 ff= 0 printable=14 ent=5.66 ascii=.z...........%...R...6..1.....E..r......N:.~.... addrs=0x07f000
+
+interesting pages:
+0x000000 sha=b1d647f3a1deaff1 uniq= 42 zero= 6 ff= 0 printable=37 ent=5.05 ascii=............0D5C1D50-1  LD5MDVD+-RW DS-8ABSH.... hex=8f0501000000000bd07f000030443543314435302d3120204c44354d4456442b2d52572044532d3841425348af0a90fc
+0x001000 sha=2ca1aa500ac7db49 uniq= 57 zero= 0 ff= 0 printable=25 ent=5.78 ascii=.b...._.H.E..".e.uq..Ea...MX.v..o..c....6`.j.1._ hex=1162c2d0f0fa5f0648a945f3f822fe65aa757196ac4561e1c0b64d58fd76051a6fcc8463ed8cd2f83660b16a9c31955f
+0x002000 sha=a68e2637d4972117 uniq= 57 zero= 0 ff= 0 printable=28 ent=5.78 ascii=._.%B..............".....P...j..kGD..~..]+]E.q.9 hex=dc5fd62542a9ee2e12c6cb0a12c689edab1fab22feb6efeb11508b16b46abeb16b4744e97f7ee8f65d2b5d4591711939
+0x003000 sha=df38f1e130cf268e uniq= 56 zero= 0 ff= 1 printable=17 ent=5.74 ascii=........i.iT...}.../.h...s{..j...BY...........ap hex=fdbde9ff1bdec1ef69ef6954e48fe87d09fe8d2fa76897bd87737bded76ac6a9fa4259b4b8051dd27f0d13c301e16170
+0x004000 sha=25cb9cdf36201f9b uniq= 50 zero= 1 ff= 0 printable=15 ent=5.52 ascii=.-..=)......u..~4..]....#........K...D.....S?..E hex=872dfb873d2993ae899f85c375c2a67e34abea5d8e8bfdd823f0cf87e0ebe0e1cf4bc1dbc344cfc2e1bae1533f1bc145
+0x005000 sha=52a88f6e3dc46c17 uniq= 56 zero= 1 ff= 0 printable=20 ent=5.75 ascii=d...7?..9.c...`.......`..1..c...C..bI.e....+.<.. hex=64b102f8373f03b1399763d495f760f1c90c08b500c860161c31bd056317f10443c2b76249cb65da82cfe12b963cea08
+0x006000 sha=9d76a0d91fdd1deb uniq= 53 zero= 1 ff= 0 printable=28 ent=5.64 ascii=..|..6[..J%o5..B.a|....Q.........[..TM".''$V..., hex=04817cd78f365bb4844a256f359b0542b3617cd5a405f351c2f9b8f4c2f8e5f8d35b97f8544d221f272724561e2e2e2c
+0x010000 sha=3224bdf52c456fdf uniq= 18 zero=47 ff= 0 printable= 5 ent=1.92 ascii=................................................ hex=00000000000000000000000000000000000000000000000000000000000000000f000000000000000000000000000000
+0x018000 sha=cf5ce51e0f00b226 uniq= 24 zero=26 ff= 0 printable=12 ent=3.54 ascii=...E...0....0@.........G..D...N..D...0."........ hex=ef1300450bba023003c2af02304000000000000000009047cde04401f0904e04e04401f0023000220000000000000000
+0x06b000 sha=e954125759ae3b41 uniq= 15 zero=40 ff= 2 printable= 3 ent=2.21 ascii=...K...........................................d hex=0000004b01ff02ff00000000181a00010001000000000001000100000000000000000001000100001a0a000300000064
+0x070000 sha=720a73f330f1a7f5 uniq= 20 zero=10 ff= 2 printable= 0 ent=3.85 ascii=................................................ hex=aff39a19cffcbc0405020000aff39a15cffcbc0405140000cffcbc040515ff00cffcbc0405178000cffcbc0405188000
+0x074000 sha=d8e8db55d62b2e19 uniq= 37 zero= 2 ff=16 printable=15 ent=4.53 ascii=LT............*Q.........n...:=%Il.g.o.....e.' . hex=4c540588049204930e1c1baa1b092a51870003b5038e0491046e0dea0d3a3d25496c0567046f04b80e021b6515272000
+0x075000 sha=6c1c4ce2f308971c uniq= 14 zero=49 ff= 0 printable=12 ent=1.64 ascii=KEYPARA.........CDROM........................... hex=4b4559504152419700000000000000004344524f4d0000030c0000000000000000000000000000000000000000000000
+0x076000 sha=96aef9083c3c706e uniq= 37 zero= 2 ff= 0 printable=18 ent=4.97 ascii=.|N}.~......~..........D..~.......Z..T...XSt.... hex=bb7c4e7dc47e007fb81208bb7e017f8b1209abcceeccef4418fd7e017f8b1208bb905a00e054f8f0905853741ff01217
+0x077000 sha=2460de0e3d6256b9 uniq= 40 zero= 1 ff= 0 printable=23 ent=5.05 ascii=}.~..../V{.z.y...U0u..A...:........t0..YK.T.O... hex=7d017e007f02122f567b017a8779a7120b553075047f4180027f3a908d0feff0908d077430f090594be054804ff09084
+0x078000 sha=ea9d62fa7d5e2810 uniq= 31 zero= 0 ff= 0 printable=13 ent=4.53 ascii=...W.......W.......W..0..0.........m....V..W,... hex=dde090571df0908219e090571ef090821ae090571ff0301f0d301c05120f09801812086d8013908356e090572cf09083
+0x079000 sha=0096f7aec93c11ac uniq= 35 zero= 2 ff= 0 printable=32 ent=4.92 ascii=9.c.b.a.`.b.o..c..a.`uw.ux...r...c.b.a.`uw.ux... hex=39f563f562f561f560e562b46f12af63fead61ac607577007578f012e272801aaf63ae62ad61ac6075770175780012e2
+0x07a000 sha=02aaa1a06d240440 uniq= 28 zero=19 ff= 0 printable=15 ent=3.96 ascii=.;...6......>V......7..<.=}....=..=.<.=.....>;.. hex=023b0b0200360000000000023e5600000000000237a08f3c8d3d7d9a7ff9123d89ad3daf3c023d89000000023e3b0000
+0x07b000 sha=19c8b0011bdfdb65 uniq= 31 zero= 1 ff= 0 printable= 3 ent=4.17 ascii=...........................................O.... hex=c48c0201a790c3960201a790e3f30201b190ee0a0201b190eb9d02018490c8ab0201a290a1000201b690f94f0201bb90
+0x07c000 sha=d8feb7aa81f3ed15 uniq= 29 zero= 0 ff= 1 printable= 8 ent=4.04 ascii=.........d.....e................qP.............. hex=cf9087b90201cf909c640201cf90c6650201cf90efa70201ac90c7ff0201cf90715002017f90d28f02020690a9e70201
+0x07d000 sha=ec77efaebd54262c uniq= 31 zero= 0 ff= 0 printable=16 ent=4.63 ascii=".....)..%.."..%.....("........"P.."...."......) hex=22bbfe09c58229f8e22582f222f8ea2583f583e9932822bb010689828a83f0225002f722bbfe01f322f8bb010de58229
+0x07e000 sha=ad1fc500fe97aae6 uniq= 23 zero=14 ff= 0 printable=18 ent=3.79 ascii=....p...@.......P.@...p..@..p..@..p..@..p..@..p. hex=0014000070000000400000080000000050004000ef1470030240be1470030240c51470030240cc1470030240d3147003
+0x07f000 sha=3f5ddbe348359c41 uniq= 53 zero= 0 ff= 0 printable=14 ent=5.66 ascii=.z...........%...R...6..1.....E..r......N:.~.... hex=ef7a96b5bc051c08ddd2d6b79625d308b85215c986368909319317c5f4c3450ab07295a1f0d4f80a4e3ad47ecc949e0b

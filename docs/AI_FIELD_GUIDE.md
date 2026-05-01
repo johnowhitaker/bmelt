@@ -962,6 +962,28 @@ decoded CDD range around controller `0x184000` remains all zero here, so a
 decoded CDD dump still needs either a later controller phase or a normal-runtime
 hook.
 
+2026-05-01 update: the passive gateway path used by
+`gateway-cdb-bulk-xdata-write-v2` appears to mirror every `0x100000` bytes in
+currentboot. Simple banked reads at `0x184000 + 0x100000*n` and
+`0x184000 + 0x200000*n` are still all zero, as are the CDD table oracle targets
+around `0x191010`, `0x198900`, and `0x1a0000`.
+
+Useful currentboot gateway windows now known:
+
+```text
+0x000000..0x006fff  live staging buffer; exact F0 CDD2 overlap at +0x2c
+0x018000..0x018bbf  active plain ef130045 helper overlay
+0x06b000..0x06bfff  low-entropy serial/profile-looking table
+0x070000..0x07ffff  mixed currentboot work/code/profile window
+```
+
+New evidence/report:
+
+```text
+analysis/8051/currentboot-gateway-extra-20260501.md
+references/evidence/live/currentboot-gateway-extra-20260501/
+```
+
 Evidence:
 
 ```text
