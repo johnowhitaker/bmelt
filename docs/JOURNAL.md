@@ -1337,3 +1337,20 @@ so `0x1717` alone looks like a source-header mapping/copy primitive rather
 than the full CDD expansion. Still, the difference matters: we now have a live
 way to exercise and observe one piece of the controller-side CDD path, instead
 of only guessing from static structure.
+
+I immediately widened that foothold by making a status-return variant on fake
+gateway prefix `fc df`. It does the same `0x1717` mapped-header call, then
+copies both `xdata[0xc000..0xc01f]` and `xdata[0x4e80..0x4e9f]` into the
+host response. The CDD header came back again, and the status window after the
+call was:
+
+```text
+000000000000000000000000010000000040704c0008001f0000000000000000
+```
+
+In address form, that means `0x4e8c = 01` and a compact nonzero cluster at
+`0x4e91..0x4e97 = 40 70 4c 00 08 00 1f`. The decoded targets were still zero,
+but now the question is sharper. We are no longer just asking "what wakes the
+CDD engine?" We have a working currentboot call into the mapped-header path
+and a small status/control snapshot to line up against the resident code around
+`0x16ef`, `0x1717`, and `0x17bb`.

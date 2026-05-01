@@ -1446,3 +1446,11 @@ Immediate useful directions:
     trigger, but it proves the currentboot hook can safely call `0x1717` and
     observe the mapped `0xc000` window. Evidence:
     `references/evidence/live/currentboot-cdd-mapped-header-trigger-v1.md`.
+20. `--gateway-cdb-bulk-with-cdd-mapped-header-status` extends that foothold.
+    It uses `CDB[7:8] == fc df`, returns `0xd1`, copies the mapped CDD header
+    from `xdata[0xc000..0xc01f]`, and also copies
+    `xdata[0x4e80..0x4e9f]` after the `0x1717` call. Live result:
+    `0x4e80..0x4e9f` was
+    `000000000000000000000000010000000040704c0008001f0000000000000000`;
+    decoded CDD target addresses still stayed zero. Evidence:
+    `references/evidence/live/currentboot-cdd-mapped-header-status-trigger-v1.md`.
