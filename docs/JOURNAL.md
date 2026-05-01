@@ -1869,3 +1869,29 @@ stitch the harvested packet-shadow code offline, find a different harmless
 command family that exercises new handlers, or solve normal-mode patchability
 so we can redirect the already-known READ BUFFER machinery instead of merely
 watching it rotate past.
+
+I then reran the packet-shadow analysis across every saved normal work-window
+directory, not just the latest six-run corpus. That broadened the sample to
+509 captures and made one thing clearer: the packet shadow is real, but the
+later bytes are reused. `0x8a49` is still the opcode-like selector, with
+compares against ordinary SCSI/MMC commands and LiteOn vendor-looking values.
+But bytes like `0x8a4d`, `0x8a4e`, `0x8a53`, and `0x8a54` are not permanently
+just CDB bytes. Some paths refill them from controller response FIFO state.
+
+That matters for GET CONFIG. Across the all-runs scan, a GET CONFIG-specific
+slice shows `0x4099` feeding `0x8a4d/0x8a4e/0x8a53/0x8a54`, followed by a
+branch on `0x8a4d == 0xfe`. This pattern only appears in GET CONFIG-oriented
+capture directories. The generic `0x8a4c..0x8a4e -> 0x4011..0x4013` bridge, by
+contrast, appears everywhere and belongs to the public READ BUFFER response
+plumbing. So the better read is that GET CONFIG has a small controller-backed
+feature-list builder with an internal `0xfe` sentinel, not an exposed arbitrary
+read primitive.
+
+This is still progress. The response-builder path gives us a more concrete
+normal-runtime island to reverse: `+0x70c0/+0x7100/+0x7140/+0x7180` for the
+read-side and `0x4011..0x4013` setup, `+0x7480/+0x74c0` for the `0x4099`
+burst, `+0x7600/+0x7640` for `0x4091..0x4093` setup, and
+`+0xdbc0/+0xdc00/+0xdc40` for the write/FIFO save-restore path. The next
+breakthrough probably requires either normal-mode patchability around one of
+these islands or a command family whose stock response builder exposes richer
+controller bytes without requiring a patch.

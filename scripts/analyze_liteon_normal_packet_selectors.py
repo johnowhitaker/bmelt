@@ -56,14 +56,14 @@ SHADOW_BYTES = {
     0x8A4A: "CDB byte 1 / op-specific field",
     0x8A4B: "CDB byte 2 / op-specific field",
     0x8A4C: "CDB byte 3 / controller setup byte",
-    0x8A4D: "CDB byte 4 / command-specific control",
-    0x8A4E: "CDB byte 5 / subselector or control byte",
+    0x8A4D: "CDB byte 4 or reused controller/status byte",
+    0x8A4E: "CDB byte 5 or reused controller/status byte",
     0x8A4F: "CDB byte 6 / payload field",
     0x8A50: "CDB byte 7 / payload field",
     0x8A51: "CDB byte 8 / payload field",
     0x8A52: "CDB byte 9 / payload field",
-    0x8A53: "CDB byte 10 or controller data shadow",
-    0x8A54: "CDB byte 11 or controller data shadow",
+    0x8A53: "CDB byte 10 or reused controller/status byte",
+    0x8A54: "CDB byte 11 or reused controller/status byte",
 }
 
 

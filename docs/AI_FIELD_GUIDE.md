@@ -1824,3 +1824,18 @@ Immediate useful directions:
     START STOP eject condition: opcode `0x1b` and low nibble `0x02`. This is
     an overlay tile made visible during the capture sequence, not evidence
     that GET PERFORMANCE executes the eject path.
+62. `analysis/8051/normal-packet-shadow-all-runs-findings-20260501.md`
+    updates the packet-shadow view using every saved normal work-window
+    directory: 19 dirs, 509 captures. Reports are
+    `analysis/8051/normal-packet-shadow-all-runs-20260501.md/json` and
+    `analysis/8051/normal-packet-selector-map-all-runs-20260501.md/json`.
+    Main correction: `0x8a49` remains the opcode-like selector, but later
+    bytes such as `0x8a4d`, `0x8a4e`, `0x8a53`, and `0x8a54` are reused as
+    controller/status scratch, not permanently just CDB bytes.
+63. The GET CONFIG-specific slice is now sharper:
+    `0x4099 -> 0x8a4d/0x8a4e/0x8a53/0x8a54`, followed by
+    `0x8a4d == 0xfe`. That pattern appears 39 times and only in
+    GET CONFIG-oriented capture directories. Treat it as a controller-backed
+    feature-list/response-builder sentinel, not as an arbitrary memory oracle.
+    The generic `0x8a4c..0x8a4e -> 0x4011..0x4013` pattern appears in all
+    captures and belongs to public READ BUFFER response plumbing.

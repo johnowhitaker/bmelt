@@ -639,3 +639,56 @@ Recommended next directions:
   GET PERFORMANCE again.
 - Continue normal-mode patchability work so the public READ BUFFER machinery
   can be redirected rather than merely sampled.
+
+## Latest Packet-Shadow Offline Stitching
+
+New all-runs reports:
+
+```text
+analysis/8051/normal-packet-shadow-all-runs-findings-20260501.md
+analysis/8051/normal-packet-shadow-all-runs-20260501.md/json
+analysis/8051/normal-packet-selector-map-all-runs-20260501.md/json
+```
+
+Also generated six-directory corpus-specific reports:
+
+```text
+analysis/8051/normal-packet-shadow-full-corpus-20260501.md/json
+analysis/8051/normal-packet-selector-map-full-corpus-20260501.md/json
+```
+
+The all-runs scan covers 19 normal work-window dirs and 509 captures. It
+confirms:
+
+```text
+0x47b1 -> 0x8a4a..0x8a54 packet/FIFO intake
+0x8a49 is still the opcode-like selector
+0x8a4d/0x8a4e/0x8a53/0x8a54 are reused later as controller/status scratch
+```
+
+GET CONFIG now has a cleaner local shape:
+
+```text
+0x4099 -> 0x8a4d/0x8a4e/0x8a53/0x8a54
+0x8a4d == 0xfe
+0x8a4c/0x8a4d/0x8a4e -> 0x4011/0x4012/0x4013
+```
+
+The `0x4099 -> shadow` burst plus `0x8a4d == 0xfe` appears 39 times and only
+in GET CONFIG-oriented dirs. The generic `0x8a4c..0x8a4e -> 0x4011..0x4013`
+bridge appears everywhere and should be treated as public READ BUFFER response
+plumbing.
+
+Practical interpretation: GET CONFIG likely has a controller-backed feature
+list/response builder with an internal `0xfe` sentinel. It is a better
+normal-runtime island to reverse, but it is still not an arbitrary memory
+oracle by itself.
+
+Static islands worth stitching next:
+
+```text
++0x70c0/+0x7100/+0x7140/+0x7180   read-side / 4011..4013 / 4099 path
++0x7480/+0x74c0                   4099 burst command
++0x7600/+0x7640                   4091..4093 setup and 409c kicks
++0xdbc0/+0xdc00/+0xdc40           4095..4097 save/restore/FIFO writer
+```
