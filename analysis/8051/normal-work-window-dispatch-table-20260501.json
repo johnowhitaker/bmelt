@@ -1,4 +1,24 @@
 {
+  "cdd_correlation": {
+    "cdd_map": "references/firmware/extracted/liteon-cdd-record-map.json",
+    "exact_entry_op_key_matches": 0,
+    "operation_keys": 2135,
+    "records": 2616,
+    "target_pair_hits": [
+      {
+        "operation_key_pair_offset": 1,
+        "record_hits": 1,
+        "top": [
+          {
+            "dispatch_count": 132,
+            "record_hits": 1,
+            "value": 533
+          }
+        ],
+        "unique_target_values": 1
+      }
+    ]
+  },
   "entries": [
     {
       "bytes": "7400020162",

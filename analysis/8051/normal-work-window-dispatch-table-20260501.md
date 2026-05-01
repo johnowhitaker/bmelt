@@ -168,3 +168,17 @@ artifact until the code-window mapping is pinned down.
 - The `MOV DPTR,#param; LJMP handler` entries look like a second-stage
   threaded-code table with a per-entry parameter. This is a better
   analysis target than treating the `+0xa180..` island as linear code.
+
+## CDD Correlation Check
+
+CDD map: `references/firmware/extracted/liteon-cdd-record-map.json`
+CDD operation keys: 2135 unique / 2616 records
+Exact six-byte entry/op-key matches: 0
+
+The exact intersection is zero, so the dispatch entries should not be
+treated as raw CDD directory operation keys. Adjacent two-byte target
+pair overlaps are also negligible:
+
+| op-key pair offset | unique target values | record hits | top overlap |
+|---:|---:|---:|---|
+| 1 | 1 | 1 | `0x0215` records 1 dispatch 132 |

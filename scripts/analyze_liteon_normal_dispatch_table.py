@@ -58,6 +58,45 @@ def parse_entries(data: bytes, start: int, limit: int) -> list[dict[str, Any]]:
     return entries
 
 
+def correlate_cdd(entries: list[dict[str, Any]], cdd_map: Path) -> dict[str, Any] | None:
+    if not cdd_map.exists():
+        return None
+    data = json.loads(cdd_map.read_text())
+    records = [record for image in data.get("images", []) for record in image.get("records", [])]
+    op_keys = {bytes.fromhex(record["operation_key"]) for record in records}
+    entry_bytes = [bytes.fromhex(row["bytes"]) for row in entries]
+    exact_op_key_matches = sum(1 for item in entry_bytes if item in op_keys)
+
+    targets = Counter(row["target"] for row in entries if row["kind"] == "mov_dptr_ljmp")
+    target_pair_hits = []
+    for offset in range(5):
+        hits = Counter()
+        for key in op_keys:
+            value = (key[offset] << 8) | key[offset + 1]
+            if value in targets:
+                hits[value] += 1
+        if hits:
+            target_pair_hits.append(
+                {
+                    "operation_key_pair_offset": offset,
+                    "unique_target_values": len(hits),
+                    "record_hits": sum(hits.values()),
+                    "top": [
+                        {"value": value, "record_hits": count, "dispatch_count": targets[value]}
+                        for value, count in hits.most_common(8)
+                    ],
+                }
+            )
+
+    return {
+        "cdd_map": str(cdd_map),
+        "operation_keys": len(op_keys),
+        "records": len(records),
+        "exact_entry_op_key_matches": exact_op_key_matches,
+        "target_pair_hits": target_pair_hits,
+    }
+
+
 def render_md(report: dict[str, Any]) -> str:
     lines = [
         "# Normal Work-Window Dispatch Stub Table",
@@ -124,6 +163,32 @@ def render_md(report: dict[str, Any]) -> str:
         "  threaded-code table with a per-entry parameter. This is a better",
         "  analysis target than treating the `+0xa180..` island as linear code.",
     ]
+    if report.get("cdd_correlation"):
+        cdd = report["cdd_correlation"]
+        lines += [
+            "",
+            "## CDD Correlation Check",
+            "",
+            f"CDD map: `{cdd['cdd_map']}`",
+            f"CDD operation keys: {cdd['operation_keys']} unique / {cdd['records']} records",
+            f"Exact six-byte entry/op-key matches: {cdd['exact_entry_op_key_matches']}",
+            "",
+            "The exact intersection is zero, so the dispatch entries should not be",
+            "treated as raw CDD directory operation keys. Adjacent two-byte target",
+            "pair overlaps are also negligible:",
+            "",
+            "| op-key pair offset | unique target values | record hits | top overlap |",
+            "|---:|---:|---:|---|",
+        ]
+        for row in cdd["target_pair_hits"]:
+            top = ", ".join(
+                f"`0x{item['value']:04x}` records {item['record_hits']} dispatch {item['dispatch_count']}"
+                for item in row["top"]
+            )
+            lines.append(
+                f"| {row['operation_key_pair_offset']} | {row['unique_target_values']} | "
+                f"{row['record_hits']} | {top} |"
+            )
     return "\n".join(lines) + "\n"
 
 
@@ -133,6 +198,11 @@ def main() -> None:
     parser.add_argument("--resident", type=Path, default=Path("analysis/8051/ldm58051.bin"))
     parser.add_argument("--start", type=parse_int, default=0xA17F)
     parser.add_argument("--limit", type=parse_int, default=0x8000)
+    parser.add_argument(
+        "--cdd-map",
+        type=Path,
+        default=Path("references/firmware/extracted/liteon-cdd-record-map.json"),
+    )
     parser.add_argument("--out-json", type=Path, required=True)
     parser.add_argument("--out-md", type=Path, required=True)
     args = parser.parse_args()
@@ -162,6 +232,7 @@ def main() -> None:
         "stop": stop,
         "entries": entries,
         "target_counts": target_counts,
+        "cdd_correlation": correlate_cdd(entries, args.cdd_map),
     }
     args.out_json.parent.mkdir(parents=True, exist_ok=True)
     args.out_json.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
