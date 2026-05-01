@@ -1563,3 +1563,23 @@ stores successive `0x4099` reads into the `0x8a` packet shadow, including
 a command shadow" into something more concrete: we have a tagged, repeatable
 path where a normal host command becomes controller register traffic and then
 controller response bytes are copied back into the shadow.
+
+The last static pass made that bridge less hand-wavy. I broadened the
+packet-shadow analyzer so it no longer only sees direct `MOV DPTR; MOVX`
+copies. It now follows short local DPTR/A streams well enough to catch the
+`INC DPTR` writes and repeated command-register writes that were obvious by
+eye but missing from the table.
+
+That gives the normal-mode controller path a compact shape. There is a
+read-side setup family that loads `0x4091..0x4093` and kicks `0x409c`; a
+write/FIFO setup family that loads `0x4095..0x4097`; a data/FIFO port at
+`0x4099`; a FIFO writer through `0x4098`; and a packet-shadow command sequence
+that pushes bytes through `0x4099`, then writes `0x409a=0`, `0x409b=1`, and
+`0x409c=0x14` before polling.
+
+This is not yet the LED or sled map, but it is the kind of small protocol
+sketch we need. The host packet path is no longer just "somewhere in normal
+runtime": `0x47b1` feeds `0x8a49..0x8a54`, and that shadow feeds the
+controller register families above. A nearby `0x4860..0x486a` cluster keeps
+showing up around the same path, which makes it a good candidate for future
+mechanics/servo exploration once we are ready to poke more deliberately.

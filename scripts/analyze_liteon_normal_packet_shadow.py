@@ -15,8 +15,20 @@ DEFAULT_TARGETS = [
     0x47B1,
     0x8A23,
     *range(0x8A49, 0x8A55),
+    0x891B,
+    0x8960,
+    0x8961,
+    0x89A5,
     0x8ADF,
+    0x8ADE,
+    0x8AEB,
+    0x8AEC,
+    0x8A5B,
+    0x8A5C,
     0x4000,
+    0x4011,
+    0x4012,
+    0x4013,
     0x4091,
     0x4092,
     0x4093,
@@ -24,6 +36,14 @@ DEFAULT_TARGETS = [
     0x4096,
     0x4097,
     0x4098,
+    0x4099,
+    0x409A,
+    0x409B,
+    0x409C,
+    0x40B5,
+    0x40B6,
+    0x40B7,
+    *range(0x4860, 0x486B),
 ]
 
 CONTROLLER_REGS = {
@@ -31,8 +51,10 @@ CONTROLLER_REGS = {
     0x4011,
     0x4012,
     0x4013,
+    0x40B5,
+    0x40B6,
     0x40B7,
-    *range(0x4091, 0x409A),
+    *range(0x4091, 0x409D),
 }
 
 
@@ -129,6 +151,201 @@ def scan_writes(data: bytes) -> list[dict[str, int | str]]:
                 }
             )
     return writes
+
+
+def scan_linear_dptr_ops(data: bytes) -> list[dict[str, int | str | None]]:
+    """Heuristically follow linear DPTR/A state to find stream MOVX ops.
+
+    This is intentionally not a full 8051 emulator. It is meant to catch short
+    local idioms that direct pattern scans miss, especially sequences like:
+
+        MOV DPTR,#4099 ; MOVX @DPTR,A ; INC DPTR ; CLR A ; MOVX @DPTR,A
+
+    Values are only reported when the accumulator value is locally obvious.
+    """
+
+    ops: list[dict[str, int | str | None]] = []
+    dptr: int | None = None
+    a_value: int | None = None
+    a_source: str | None = None
+    i = 0
+    while i < len(data):
+        opcode = data[i]
+        if opcode == 0x90 and i + 2 < len(data):  # MOV DPTR,#imm16
+            dptr = u16be(data, i + 1)
+            i += 3
+            continue
+        if opcode == 0xA3 and dptr is not None:  # INC DPTR
+            dptr = (dptr + 1) & 0xFFFF
+            i += 1
+            continue
+        if opcode == 0x74 and i + 1 < len(data):  # MOV A,#imm8
+            a_value = data[i + 1]
+            a_source = f"imm_0x{a_value:02x}"
+            i += 2
+            continue
+        if opcode == 0xE4:  # CLR A
+            a_value = 0
+            a_source = "zero"
+            i += 1
+            continue
+        if opcode == 0x04 and a_value is not None:  # INC A
+            a_value = (a_value + 1) & 0xFF
+            a_source = f"local_0x{a_value:02x}"
+            i += 1
+            continue
+        if opcode == 0x14 and a_value is not None:  # DEC A
+            a_value = (a_value - 1) & 0xFF
+            a_source = f"local_0x{a_value:02x}"
+            i += 1
+            continue
+        if opcode == 0xE0 and dptr is not None:  # MOVX A,@DPTR
+            ops.append({"offset": i, "op": "read", "addr": dptr, "value": None, "source": None})
+            a_value = None
+            a_source = f"xdata_0x{dptr:04x}"
+            i += 1
+            continue
+        if opcode == 0xF0 and dptr is not None:  # MOVX @DPTR,A
+            ops.append({"offset": i, "op": "write", "addr": dptr, "value": a_value, "source": a_source})
+            i += 1
+            continue
+
+        # Common one-byte instructions that do not change A/DPTR in the cases
+        # we care about. Keeping state through these lets us track F0/A3/E4
+        # streams without becoming a broad disassembler.
+        if opcode in {
+            0x08,  # INC R0
+            0x09,  # INC R1
+            0x0A,  # INC R2
+            0x0B,  # INC R3
+            0x0C,  # INC R4
+            0x0D,  # INC R5
+            0x0E,  # INC R6
+            0x0F,  # INC R7
+            0x22,  # RET
+            0xC3,  # CLR C
+            0xD3,  # SETB C
+        }:
+            i += 1
+            continue
+
+        # Common two-byte immediates/branches that do not directly clobber A.
+        if 0x78 <= opcode <= 0x7F and i + 1 < len(data):  # MOV Rn,#imm
+            i += 2
+            continue
+        if opcode in {0x80, 0x40, 0x50, 0x60, 0x70, 0xB4} and i + 1 < len(data):
+            # Branch/control flow means our linear state is no longer reliable.
+            dptr = None
+            a_value = None
+            a_source = None
+            i += 2 if opcode != 0xB4 else 3
+            continue
+
+        # Unknown ALU/move/call instructions may clobber A or make linear
+        # state invalid. Reset enough state to avoid overclaiming.
+        a_value = None
+        a_source = None
+        if opcode in {0x02, 0x12}:
+            dptr = None
+            i += 3
+        else:
+            i += 1
+    return ops
+
+
+def short_op_summary(op: dict[str, int | str | None]) -> str:
+    value = op["value"]
+    source = op["source"]
+    if value is not None:
+        return f"0x{int(op['addr']):04x}=0x{int(value):02x}"
+    if source:
+        return f"0x{int(op['addr']):04x}<={source}"
+    return f"{op['op']} 0x{int(op['addr']):04x}"
+
+
+def nearby_ops(
+    stream_ops: list[dict[str, int | str | None]],
+    offset: int,
+    before: int = 80,
+    after: int = 24,
+) -> list[dict[str, int | str | None]]:
+    return [
+        op
+        for op in stream_ops
+        if offset - before <= int(op["offset"]) <= offset + after
+        and (int(op["addr"]) in CONTROLLER_REGS or 0x8A49 <= int(op["addr"]) <= 0x8AFF)
+    ]
+
+
+def has_write(
+    ops: list[dict[str, int | str | None]],
+    addr: int,
+    value: int | None = None,
+    source: str | None = None,
+) -> bool:
+    for op in ops:
+        if op["op"] != "write" or int(op["addr"]) != addr:
+            continue
+        if value is not None and op["value"] != value:
+            continue
+        if source is not None and op["source"] != source:
+            continue
+        return True
+    return False
+
+
+def scan_controller_sequences(
+    data: bytes,
+    stream_ops: list[dict[str, int | str | None]],
+) -> list[dict[str, Any]]:
+    sequences: list[dict[str, Any]] = []
+    for op in stream_ops:
+        if op["op"] != "write":
+            continue
+        addr = int(op["addr"])
+        value = op["value"]
+        ops = nearby_ops(stream_ops, int(op["offset"]))
+        labels: list[str] = []
+
+        if addr == 0x409C and value == 0x14:
+            if (
+                has_write(ops, 0x4099)
+                and has_write(ops, 0x409A, 0x00)
+                and has_write(ops, 0x409B, 0x01)
+            ):
+                labels.append("packet-shadow command: 4099 burst, 409a=0, 409b=1, 409c=0x14")
+        if addr == 0x409C and value == 0x40:
+            if has_write(ops, 0x4095) and has_write(ops, 0x4096) and has_write(ops, 0x4097):
+                labels.append("write-side setup: 4095..4097 then 409c=0x40")
+            if has_write(ops, 0x4091) and has_write(ops, 0x4092) and has_write(ops, 0x4093):
+                labels.append("read-side setup: 4091..4093 then 409c=0x40")
+        if addr == 0x409C and value == 0x24:
+            if has_write(ops, 0x409C, 0x40):
+                labels.append("read-side kick: 409c=0x40 then 0x24")
+        if addr == 0x4098:
+            if has_write(ops, 0x4095) and has_write(ops, 0x4096) and has_write(ops, 0x4097):
+                labels.append("controller FIFO writer: setup 4095..4097 then data to 4098")
+        if addr == 0x4097:
+            if (
+                has_write(ops, 0x4095, source="xdata_0x8ade")
+                and has_write(ops, 0x4096, source="xdata_0x8aec")
+                and has_write(ops, 0x4097, source="xdata_0x8aeb")
+            ):
+                labels.append("restore mirrored controller setup: 8ade/8aec/8aeb -> 4095..4097")
+
+        for label in labels:
+            context = nearby_ops(stream_ops, int(op["offset"]), before=96, after=40)
+            start, text = snippet(data, int(op["offset"]), before=32, after=80)
+            sequences.append(
+                {
+                    "label": label,
+                    "offset": int(op["offset"]),
+                    "ops": [short_op_summary(ctx) for ctx in context[:18]],
+                    "snippet_offset": start,
+                    "hex": text,
+                }
+            )
+    return sequences
 
 
 def scan_compares(data: bytes) -> list[dict[str, int | str]]:
@@ -237,6 +454,7 @@ def render_md(report: dict[str, Any]) -> str:
         f"- write idioms touching target addresses: {len(report['target_writes'])}",
         f"- compare idioms touching target addresses: {len(report['target_compares'])}",
         f"- FIFO bursts from `0x47b1`: {len(report['fifo_bursts'])}",
+        f"- controller command/FIFO sequence classes: {len(report['controller_sequences'])}",
         "",
         "## Target DPTR References",
         "",
@@ -288,6 +506,24 @@ def render_md(report: dict[str, Any]) -> str:
         lines.append(
             f"| `0x{row['src']:04x}` | `0x{row['dst']:04x}` | {row['kind']} | "
             f"{row['count']} | {offsets} |"
+        )
+
+    lines += [
+        "",
+        "## Controller Command/FIFO Sequences",
+        "",
+        "These are heuristic linear-DPTR decodes of short local idioms. They catch",
+        "stream writes through `INC DPTR` and repeated writes to a command register",
+        "that the direct copy scan cannot name by destination address.",
+        "",
+        "| sequence | observations | sample | local MOVX stream |",
+        "|---|---:|---|---|",
+    ]
+    for row in report["controller_sequences"][:40]:
+        ops = "; ".join(f"`{op}`" for op in row["sample_ops"][:12])
+        lines.append(
+            f"| {row['label']} | {row['count']} | `{row['sample_capture']}` "
+            f"`+0x{row['sample_offset']:04x}` | {ops} |"
         )
 
     lines += [
@@ -346,6 +582,11 @@ def render_md(report: dict[str, Any]) -> str:
         "  shadow bytes feed `0x4011..0x4013`, `0x4091`, `0x4095`, `0x4099`,",
         "  and `0x40b7`, while controller setup bytes are mirrored back into",
         "  `0x8ade/0x8aeb/0x8aec`. That is the next static path to reverse.",
+        "- The command/FIFO sequences sharpen that bridge: `0x4091..0x4093`",
+        "  feed read-side commands kicked by `0x409c=0x40/0x24`; `0x4095..0x4097`",
+        "  feed write-side/FIFO commands; and the GET CONFIG-tagged path writes",
+        "  packet-shadow bytes through `0x4099`, then streams command bytes into",
+        "  `0x409a..0x409c` before polling `0x409c`.",
     ]
     return "\n".join(lines) + "\n"
 
@@ -363,6 +604,8 @@ def aggregate(run_dirs: list[Path], targets: set[int]) -> dict[str, Any]:
     compare_offsets: dict[tuple[int, str, int, str], set[int]] = defaultdict(set)
     burst_counter: Counter[tuple[int, int, int]] = Counter()
     burst_samples: dict[tuple[int, int, int], dict[str, Any]] = {}
+    sequence_counter: Counter[str] = Counter()
+    sequence_samples: dict[str, dict[str, Any]] = {}
     snippets: dict[str, dict[str, Any]] = {}
 
     for win in windows:
@@ -372,6 +615,7 @@ def aggregate(run_dirs: list[Path], targets: set[int]) -> dict[str, Any]:
         copies = scan_direct_movx_copies(data) + scan_reg_movx_copies(data)
         writes = scan_writes(data)
         compares = scan_compares(data)
+        stream_ops = scan_linear_dptr_ops(data)
         for ref in refs:
             addr = ref["addr"]
             if addr not in targets:
@@ -447,6 +691,18 @@ def aggregate(run_dirs: list[Path], targets: set[int]) -> dict[str, Any]:
                     "sample_offset": burst["offset"],
                 },
             )
+        for seq in scan_controller_sequences(data, stream_ops):
+            sequence_counter[seq["label"]] += 1
+            sequence_samples.setdefault(
+                seq["label"],
+                {
+                    "sample_capture": capture_label,
+                    "sample_offset": seq["offset"],
+                    "sample_ops": seq["ops"],
+                    "sample_snippet_offset": seq["snippet_offset"],
+                    "sample_hex": seq["hex"],
+                },
+            )
 
     target_rows = [
         {
@@ -520,6 +776,11 @@ def aggregate(run_dirs: list[Path], targets: set[int]) -> dict[str, Any]:
     ]
     controller_rows.sort(key=lambda row: (-row["count"], row["src"], row["dst"], row["kind"]))
 
+    sequence_rows = []
+    for label, count in sequence_counter.items():
+        sequence_rows.append({"label": label, "count": count, **sequence_samples[label]})
+    sequence_rows.sort(key=lambda row: (-row["count"], row["label"]))
+
     return {
         "capture_count": len(windows),
         "targets": sorted(targets),
@@ -531,6 +792,7 @@ def aggregate(run_dirs: list[Path], targets: set[int]) -> dict[str, Any]:
         "target_writes": write_rows,
         "target_compares": compare_rows,
         "fifo_bursts": burst_rows,
+        "controller_sequences": sequence_rows,
         "snippets": list(snippets.values()),
     }
 

@@ -56,6 +56,28 @@
     },
     {
       "count": 94,
+      "dst": 16401,
+      "kind": "direct",
+      "sample_offsets": [
+        28672,
+        28800,
+        28864
+      ],
+      "src": 34302
+    },
+    {
+      "count": 94,
+      "dst": 16402,
+      "kind": "direct",
+      "sample_offsets": [
+        28672,
+        28800,
+        28864
+      ],
+      "src": 34303
+    },
+    {
+      "count": 94,
       "dst": 16529,
       "kind": "direct",
       "sample_offsets": [
@@ -261,6 +283,15 @@
       "src": 16537
     },
     {
+      "count": 4,
+      "dst": 16401,
+      "kind": "direct",
+      "sample_offsets": [
+        39360
+      ],
+      "src": 35099
+    },
+    {
       "count": 1,
       "dst": 16529,
       "kind": "direct",
@@ -268,6 +299,142 @@
         29056
       ],
       "src": 35237
+    }
+  ],
+  "controller_sequences": [
+    {
+      "count": 188,
+      "label": "controller FIFO writer: setup 4095..4097 then data to 4098",
+      "sample_capture": "normal-work-window-capture-only-20260501/00-capture-only",
+      "sample_hex": "4000e020e7f99089a5e0904095f0908a5be0904096f0908a5ce0904097f0a3eff0904000e020e7f9904098edf0908a5ce02402f0908a5be03400f0e0b44013a3e0b4000e908a2de04402f0e4908a5bf0a3f0904000e020e7f9908adee0904095f0908aece0904096f0908aebe0904097",
+      "sample_offset": 56367,
+      "sample_ops": [
+        "read 0x8a5d",
+        "read 0x8a5e",
+        "write 0x8a5e",
+        "read 0x8a5d",
+        "write 0x8a5d",
+        "read 0x4095",
+        "0x8ade<=xdata_0x4095",
+        "read 0x4096",
+        "0x8aec<=xdata_0x4096",
+        "read 0x4097",
+        "0x8aeb<=xdata_0x4097",
+        "read 0x4000",
+        "0x4095<=xdata_0x89a5",
+        "read 0x8a5b",
+        "0x4096<=xdata_0x8a5b",
+        "read 0x8a5c",
+        "0x4097<=xdata_0x8a5c",
+        "write 0x4098"
+      ],
+      "sample_snippet_offset": 56335
+    },
+    {
+      "count": 188,
+      "label": "restore mirrored controller setup: 8ade/8aec/8aeb -> 4095..4097",
+      "sample_capture": "normal-work-window-capture-only-20260501/00-capture-only",
+      "sample_hex": "a3f0904000e020e7f9908adee0904095f0908aece0904096f0908aebe0904097f0d0d092af22c0e0c0f0c083c082c0d075d0187b437d587f45123e1ae4ff120279908565eff0603ba37401f0908566e0ff120279cbefcb908566e0fd7f53123e1a908565e0c313fff0a3e004f0ef70dc",
+      "sample_offset": 56447,
+      "sample_ops": [
+        "read 0x8a5b",
+        "0x4096<=xdata_0x8a5b",
+        "read 0x8a5c",
+        "0x4097<=xdata_0x8a5c",
+        "write 0x4098",
+        "read 0x4000",
+        "write 0x4098",
+        "read 0x8a5c",
+        "write 0x8a5b",
+        "write 0x8a5c",
+        "read 0x4000",
+        "read 0x8ade",
+        "0x4095<=xdata_0x8ade",
+        "read 0x8aec",
+        "0x4096<=xdata_0x8aec",
+        "read 0x8aeb",
+        "0x4097<=xdata_0x8aeb",
+        "read 0x4097"
+      ],
+      "sample_snippet_offset": 56415
+    },
+    {
+      "count": 186,
+      "label": "packet-shadow command: 4099 burst, 409a=0, 409b=1, 409c=0x14",
+      "sample_capture": "normal-work-window-capture-only-20260501/00-capture-only",
+      "sample_hex": "8a4ee0904099f0908a53e0904099f0908a54e0904099f0a3e4f0a304f0a37414f090409ce020e4f978aa740426f618e436f6908a4de070027cf0904864e030e004e054fef0904860e4f0a37460f0301c09302306a374cff0800690486274fff0904863742ff0a374bef004f0a374eff0",
+      "sample_offset": 29928,
+      "sample_ops": [
+        "write 0x4099",
+        "read 0x8a4e",
+        "0x4099<=xdata_0x8a4e",
+        "read 0x8a53",
+        "0x4099<=xdata_0x8a53",
+        "read 0x8a54",
+        "0x4099<=xdata_0x8a54",
+        "0x409a=0x00",
+        "0x409b=0x01",
+        "0x409c=0x14",
+        "read 0x409c",
+        "read 0x8a4d"
+      ],
+      "sample_snippet_offset": 29896
+    },
+    {
+      "count": 98,
+      "label": "read-side setup: 4091..4093 then 409c=0x40",
+      "sample_capture": "normal-work-window-capture-only-20260501/00-capture-only",
+      "sample_hex": "91f0a87c0808e6a3f07b00a97c09097a00900001122fb7904093f090409c7440f07420f090409ce020e5f9908a4ee0540f24a0f582e43440f583e03090891ce0fea3e0a87c08080826f618ee36f67b00a97c09097a00900001122fb7904093f0a87c0808e6904092f090891be0904091",
+      "sample_offset": 30245,
+      "sample_ops": [
+        "read 0x8a4d",
+        "read 0x8a4d",
+        "read 0x8a4d",
+        "read 0x8a4d",
+        "0x4091<=xdata_0x898a",
+        "write 0x4092",
+        "write 0x4093",
+        "0x409c=0x40",
+        "0x409c=0x20",
+        "read 0x409c",
+        "read 0x8a4e"
+      ],
+      "sample_snippet_offset": 30213
+    },
+    {
+      "count": 94,
+      "label": "write-side setup: 4095..4097 then 409c=0x40",
+      "sample_capture": "normal-work-window-capture-only-20260501/00-capture-only",
+      "sample_hex": "95f0a87c0808e6a3f07b00a97c09097a00900001122fb7904097f090409c7440f090512278b5e6600302a54920397c908a23e0ff131313541f30e008ef54f7f07f0180027f00ef600e78b5760678ab7628e478b0f68012301b0f908e88e030e40878c2ad303e0302b6f3204f06203f03",
+      "sample_offset": 29630,
+      "sample_ops": [
+        "read 0x4000",
+        "read 0x8ac6",
+        "0x4095<=xdata_0x8ac6",
+        "write 0x4096",
+        "write 0x4097",
+        "0x409c=0x40"
+      ],
+      "sample_snippet_offset": 29598
+    },
+    {
+      "count": 4,
+      "label": "read-side kick: 409c=0x40 then 0x24",
+      "sample_capture": "normal-work-window-stimuli-focused-20260501/03-cycle00-get-configuration-all",
+      "sample_hex": "7c0808e6a3f07b00a97c09097a00900001122fb7904093f090409c7440f07424f090409ce020e5f9904099e090fd123d89908988e0ffa3e0fd123d897f0012050d908988eef0a3eff0908a3ae0547ff0e04440f022cdefcd908a23e0fe1313543f30e008e054fbf07f0180027f8a29e0",
+      "sample_offset": 28915,
+      "sample_ops": [
+        "read 0x4000",
+        "read 0x8ac6",
+        "0x4091<=xdata_0x8ac6",
+        "write 0x4092",
+        "write 0x4093",
+        "0x409c=0x40",
+        "0x409c=0x24",
+        "read 0x409c",
+        "read 0x4099"
+      ],
+      "sample_snippet_offset": 28883
     }
   ],
   "copy_edges": [
@@ -429,6 +596,46 @@
         38336
       ],
       "src": 18353
+    },
+    {
+      "count": 94,
+      "dst": 34352,
+      "kind": "direct",
+      "sample_offsets": [
+        33920
+      ],
+      "src": 18531
+    },
+    {
+      "count": 94,
+      "dst": 16401,
+      "kind": "direct",
+      "sample_offsets": [
+        28672,
+        28800,
+        28864
+      ],
+      "src": 34302
+    },
+    {
+      "count": 94,
+      "dst": 16402,
+      "kind": "direct",
+      "sample_offsets": [
+        28672,
+        28800,
+        28864
+      ],
+      "src": 34303
+    },
+    {
+      "count": 94,
+      "dst": 18531,
+      "kind": "direct",
+      "sample_offsets": [
+        34944
+      ],
+      "src": 34352
     },
     {
       "count": 94,
@@ -741,6 +948,15 @@
       "src": 35169
     },
     {
+      "count": 5,
+      "dst": 16638,
+      "kind": "direct",
+      "sample_offsets": [
+        39360
+      ],
+      "src": 35099
+    },
+    {
       "count": 4,
       "dst": 35406,
       "kind": "direct",
@@ -749,6 +965,15 @@
         29056
       ],
       "src": 16537
+    },
+    {
+      "count": 4,
+      "dst": 16401,
+      "kind": "direct",
+      "sample_offsets": [
+        39360
+      ],
+      "src": 35099
     },
     {
       "count": 2,
@@ -838,6 +1063,18 @@
     }
   ],
   "snippets": [
+    {
+      "capture": "normal-work-window-capture-only-20260501/00-capture-only",
+      "hex": "8a4ce0c3940e4008904011740ef080089085fee0904011f09085ffe0904012f0908600802e90cbefcbd0e0ffd0e0fed0e0fdd0e0fcc3ef9bffee9afeed99fdec",
+      "label": "copy 0x85fe->0x4011",
+      "offset": 28826
+    },
+    {
+      "capture": "normal-work-window-capture-only-20260501/00-capture-only",
+      "hex": "904011740ef080089085fee0904011f09085ffe0904012f0908600802e90cbefcbd0e0ffd0e0fed0e0fdd0e0fcc3ef9bffee9afeed99fdec98fc9090d8123430",
+      "label": "copy 0x85ff->0x4012",
+      "offset": 28834
+    },
     {
       "capture": "normal-work-window-capture-only-20260501/00-capture-only",
       "hex": "8a4ce0c3940e4008904011740ef08008908a4ce0904011f0908a4de0904012f0908a4ee0904013f0908a50e0ffa3e078a9cff608eff6f608760112efb6057c05",
@@ -1307,22 +1544,22 @@
       "offset": 38311
     },
     {
-      "capture": "normal-work-window-capture-only-20260501/07-capture-only",
-      "hex": "fd7f40123d89e4908a33f0d0d092af22908a4ce0ff6401601cef64026017ef64046012ef6405600d78b5760578ab7624e478b0f6227f0112bb183ae0c4131354",
-      "label": "compare 0x8a4c with 0x01",
-      "offset": 38278
-    },
-    {
-      "capture": "normal-work-window-capture-only-20260501/11-capture-only",
-      "hex": "fd7f40123d89e4908a33f0d0d092af22908a4ce0ff6401601cef64026017ef64046012ef6405600d78b5760578ab7624e478b0f6227f0112bb1847b1e0908a4c",
-      "label": "compare 0x8a4c with 0x01",
-      "offset": 38150
-    },
-    {
       "capture": "normal-work-window-capture-only-20260501/13-capture-only",
       "hex": "22d310af01c3c0d08f518e508d4f8c4e9047b1e0908a4cf09047b1e0908a4df09047b1e0908a4ef09047b1e0908a4ff09047b1e0908a50f09047b1e0908a51f0",
       "label": "copy 0x47b1->0x8a4c",
       "offset": 38319
+    },
+    {
+      "capture": "normal-work-window-stimuli-full-20260501/00-baseline-no-stimulus",
+      "hex": "8a4ce0c3940e4008904011740ef080089085fee0904011f09085ffe0904012f0908600802e90fd123d89908988e0ffa3e0fd123d897f0012050d908988eef0a3",
+      "label": "copy 0x85fe->0x4011",
+      "offset": 28890
+    },
+    {
+      "capture": "normal-work-window-stimuli-full-20260501/00-baseline-no-stimulus",
+      "hex": "904011740ef080089085fee0904011f09085ffe0904012f0908600802e90fd123d89908988e0ffa3e0fd123d897f0012050d908988eef0a3eff0908a3ae0547f",
+      "label": "copy 0x85ff->0x4012",
+      "offset": 28898
     },
     {
       "capture": "normal-work-window-stimuli-full-20260501/00-baseline-no-stimulus",
@@ -1512,6 +1749,18 @@
     },
     {
       "capture": "normal-work-window-stimuli-focused-20260501/03-cycle00-get-configuration-all",
+      "hex": "8a4ce0c3940e4008904011740ef080089085fee0904011f09085ffe0904012f0908600802e90f6a87ce6fc08e6fdceecce7805cec313ce13d8f9fbcaeecaecc3",
+      "label": "copy 0x85fe->0x4011",
+      "offset": 28698
+    },
+    {
+      "capture": "normal-work-window-stimuli-focused-20260501/03-cycle00-get-configuration-all",
+      "hex": "904011740ef080089085fee0904011f09085ffe0904012f0908600802e90f6a87ce6fc08e6fdceecce7805cec313ce13d8f9fbcaeecaecc313feed132bfdee3a",
+      "label": "copy 0x85ff->0x4012",
+      "offset": 28706
+    },
+    {
+      "capture": "normal-work-window-stimuli-focused-20260501/03-cycle00-get-configuration-all",
       "hex": "abe6ff78b0e608eff6904000e020e7f9908ac6e0904091f0a87c0808e6a3f07b00a97c09097a00900001122fb7904093f090409c7440f07424f090409ce020e5",
       "label": "copy 0x8ac6->0x4091",
       "offset": 28858
@@ -1533,30 +1782,6 @@
       "hex": "904099e0908a4ef0904099e0908a53f0904099e0908a54f0a87c08740426f618e436f6908a4de0b4fe028014908a4be0fea3e0ffa3e0fca3e0fdc39fecf60876",
       "label": "copy 0x4099->0x8a54",
       "offset": 29059
-    },
-    {
-      "capture": "normal-work-window-stimuli-focused-20260501/05-cycle01-inquiry-extrainq",
-      "hex": "e04480f0229047b0e4f0a3e0908a49f09047b1e0908a4af09047b1e0908a4bf0909ff090480be054eff0904867e04480f0804fef6404704a90480be020e41990",
-      "label": "copy 0x47b1->0x8a4a",
-      "offset": 38047
-    },
-    {
-      "capture": "normal-work-window-stimuli-focused-20260501/05-cycle01-inquiry-extrainq",
-      "hex": "e4f0a3e0908a49f09047b1e0908a4af09047b1e0908a4bf0909ff090480be054eff0904867e04480f0804fef6404704a90480be020e419904867e0547ff09048",
-      "label": "copy 0x47b1->0x8a4b",
-      "offset": 38055
-    },
-    {
-      "capture": "normal-work-window-stimuli-focused-20260501/07-cycle01-get-configuration-current",
-      "hex": "90409c7440f07422f090409ce020e5f9904099e0908a53f0904099e0908a54f078a1e66003303907e4908a54f08060301f5d20b404077d007f04120543904823",
-      "label": "copy 0x4099->0x8a53",
-      "offset": 32653
-    },
-    {
-      "capture": "normal-work-window-stimuli-focused-20260501/07-cycle01-get-configuration-current",
-      "hex": "f090409ce020e5f9904099e0908a53f0904099e0908a54f078a1e66003303907e4908a54f08060301f5d20b404077d007f041205439048237480f0a3740af090",
-      "label": "copy 0x4099->0x8a54",
-      "offset": 32661
     }
   ],
   "target_compares": [
@@ -1920,7 +2145,7 @@
       "value": 124
     }
   ],
-  "target_dptr_observations": 28070,
+  "target_dptr_observations": 34186,
   "target_dptr_refs": [
     {
       "addr": 18353,
@@ -2441,6 +2666,44 @@
       ]
     },
     {
+      "addr": 16537,
+      "chunk_count": 6,
+      "observations": 828,
+      "sample_offsets": [
+        28672,
+        28800,
+        28864,
+        28992,
+        29056,
+        29824,
+        29888,
+        30720,
+        31104,
+        32576,
+        32640
+      ]
+    },
+    {
+      "addr": 16540,
+      "chunk_count": 9,
+      "observations": 826,
+      "sample_offsets": [
+        28672,
+        28800,
+        28864,
+        29568,
+        29824,
+        29888,
+        30208,
+        30720,
+        31104,
+        32576,
+        32640,
+        58880,
+        58944
+      ]
+    },
+    {
       "addr": 35402,
       "chunk_count": 11,
       "observations": 790,
@@ -2564,6 +2827,73 @@
       ]
     },
     {
+      "addr": 16401,
+      "chunk_count": 3,
+      "observations": 380,
+      "sample_offsets": [
+        28672,
+        28800,
+        28864,
+        28992,
+        29056,
+        39360
+      ]
+    },
+    {
+      "addr": 18528,
+      "chunk_count": 4,
+      "observations": 376,
+      "sample_offsets": [
+        29952,
+        35712,
+        35776,
+        35904,
+        37376,
+        37440,
+        37504,
+        37568
+      ]
+    },
+    {
+      "addr": 18532,
+      "chunk_count": 4,
+      "observations": 376,
+      "sample_offsets": [
+        29952,
+        30528,
+        35904,
+        37376,
+        37440,
+        37504,
+        37568
+      ]
+    },
+    {
+      "addr": 18535,
+      "chunk_count": 3,
+      "observations": 376,
+      "sample_offsets": [
+        26816,
+        37888,
+        37952,
+        38016,
+        38080,
+        42560
+      ]
+    },
+    {
+      "addr": 18531,
+      "chunk_count": 4,
+      "observations": 352,
+      "sample_offsets": [
+        29952,
+        33920,
+        34176,
+        34240,
+        34944
+      ]
+    },
+    {
       "addr": 35410,
       "chunk_count": 6,
       "observations": 331,
@@ -2594,6 +2924,31 @@
       ]
     },
     {
+      "addr": 35419,
+      "chunk_count": 2,
+      "observations": 282,
+      "sample_offsets": [
+        56320,
+        56384
+      ]
+    },
+    {
+      "addr": 16402,
+      "chunk_count": 3,
+      "observations": 228,
+      "sample_offsets": [
+        28672,
+        28800,
+        28864,
+        28992,
+        29056,
+        39424,
+        39488,
+        39552,
+        39616
+      ]
+    },
+    {
       "addr": 16530,
       "chunk_count": 4,
       "observations": 213,
@@ -2603,6 +2958,147 @@
         30272,
         32896,
         34240
+      ]
+    },
+    {
+      "addr": 16538,
+      "chunk_count": 2,
+      "observations": 188,
+      "sample_offsets": [
+        58880,
+        58944
+      ]
+    },
+    {
+      "addr": 35420,
+      "chunk_count": 1,
+      "observations": 188,
+      "sample_offsets": [
+        56320
+      ]
+    },
+    {
+      "addr": 35550,
+      "chunk_count": 2,
+      "observations": 188,
+      "sample_offsets": [
+        56256,
+        56384
+      ]
+    },
+    {
+      "addr": 35563,
+      "chunk_count": 2,
+      "observations": 188,
+      "sample_offsets": [
+        56320,
+        56384
+      ]
+    },
+    {
+      "addr": 35564,
+      "chunk_count": 2,
+      "observations": 188,
+      "sample_offsets": [
+        56320,
+        56384
+      ]
+    },
+    {
+      "addr": 16565,
+      "chunk_count": 1,
+      "observations": 186,
+      "sample_offsets": [
+        32192
+      ]
+    },
+    {
+      "addr": 35099,
+      "chunk_count": 2,
+      "observations": 172,
+      "sample_offsets": [
+        30272,
+        39168,
+        39232,
+        39360
+      ]
+    },
+    {
+      "addr": 18530,
+      "chunk_count": 2,
+      "observations": 159,
+      "sample_offsets": [
+        25152,
+        25216,
+        29952
+      ]
+    },
+    {
+      "addr": 16403,
+      "chunk_count": 2,
+      "observations": 134,
+      "sample_offsets": [
+        28992,
+        29056,
+        39424,
+        39488,
+        39552,
+        39616
+      ]
+    },
+    {
+      "addr": 35237,
+      "chunk_count": 2,
+      "observations": 95,
+      "sample_offsets": [
+        29056,
+        56320
+      ]
+    },
+    {
+      "addr": 18538,
+      "chunk_count": 1,
+      "observations": 94,
+      "sample_offsets": [
+        29952
+      ]
+    },
+    {
+      "addr": 16566,
+      "chunk_count": 1,
+      "observations": 93,
+      "sample_offsets": [
+        32192
+      ]
+    },
+    {
+      "addr": 16567,
+      "chunk_count": 1,
+      "observations": 93,
+      "sample_offsets": [
+        32192
+      ]
+    },
+    {
+      "addr": 35168,
+      "chunk_count": 3,
+      "observations": 63,
+      "sample_offsets": [
+        28352,
+        30080,
+        30144,
+        32896
+      ]
+    },
+    {
+      "addr": 35169,
+      "chunk_count": 3,
+      "observations": 63,
+      "sample_offsets": [
+        28352,
+        30080,
+        30144,
+        32896
       ]
     }
   ],
@@ -2627,6 +3123,22 @@
         40128
       ],
       "value": 2
+    },
+    {
+      "addr": 16540,
+      "count": 320,
+      "kind": "write_imm",
+      "sample_offsets": [
+        28672,
+        28800,
+        28864,
+        29568,
+        30208,
+        30720,
+        32576,
+        32640
+      ],
+      "value": 64
     },
     {
       "addr": 35363,
@@ -2665,6 +3177,29 @@
         35392
       ],
       "value": 247
+    },
+    {
+      "addr": 16401,
+      "count": 188,
+      "kind": "write_imm",
+      "sample_offsets": [
+        28672,
+        28800,
+        28864,
+        28992,
+        29056
+      ],
+      "value": 14
+    },
+    {
+      "addr": 16538,
+      "count": 188,
+      "kind": "write_zero",
+      "sample_offsets": [
+        58880,
+        58944
+      ],
+      "value": 0
     },
     {
       "addr": 35363,
@@ -2729,6 +3264,108 @@
       "value": 241
     },
     {
+      "addr": 18528,
+      "count": 94,
+      "kind": "and_mask",
+      "sample_offsets": [
+        35904
+      ],
+      "value": 251
+    },
+    {
+      "addr": 18528,
+      "count": 94,
+      "kind": "or_mask",
+      "sample_offsets": [
+        37376,
+        37440,
+        37504,
+        37568
+      ],
+      "value": 4
+    },
+    {
+      "addr": 18528,
+      "count": 94,
+      "kind": "write_zero",
+      "sample_offsets": [
+        29952
+      ],
+      "value": 0
+    },
+    {
+      "addr": 18530,
+      "count": 94,
+      "kind": "write_imm",
+      "sample_offsets": [
+        29952
+      ],
+      "value": 255
+    },
+    {
+      "addr": 18531,
+      "count": 94,
+      "kind": "write_imm",
+      "sample_offsets": [
+        29952
+      ],
+      "value": 47
+    },
+    {
+      "addr": 18532,
+      "count": 94,
+      "kind": "and_mask",
+      "sample_offsets": [
+        35904
+      ],
+      "value": 254
+    },
+    {
+      "addr": 18532,
+      "count": 94,
+      "kind": "or_mask",
+      "sample_offsets": [
+        37376,
+        37440,
+        37504,
+        37568
+      ],
+      "value": 1
+    },
+    {
+      "addr": 18535,
+      "count": 94,
+      "kind": "and_mask",
+      "sample_offsets": [
+        37888,
+        37952,
+        38016,
+        38080
+      ],
+      "value": 127
+    },
+    {
+      "addr": 18535,
+      "count": 94,
+      "kind": "or_mask",
+      "sample_offsets": [
+        37888,
+        37952,
+        38016,
+        38080
+      ],
+      "value": 128
+    },
+    {
+      "addr": 18538,
+      "count": 94,
+      "kind": "or_mask",
+      "sample_offsets": [
+        29952
+      ],
+      "value": 240
+    },
+    {
       "addr": 35412,
       "count": 94,
       "kind": "write_imm",
@@ -2754,6 +3391,33 @@
         26496
       ],
       "value": 113
+    },
+    {
+      "addr": 16565,
+      "count": 93,
+      "kind": "write_imm",
+      "sample_offsets": [
+        32192
+      ],
+      "value": 16
+    },
+    {
+      "addr": 16565,
+      "count": 93,
+      "kind": "write_imm",
+      "sample_offsets": [
+        32192
+      ],
+      "value": 20
+    },
+    {
+      "addr": 16566,
+      "count": 93,
+      "kind": "write_zero",
+      "sample_offsets": [
+        32192
+      ],
+      "value": 0
     },
     {
       "addr": 18353,
@@ -2821,6 +3485,16 @@
         26304
       ],
       "value": 2
+    },
+    {
+      "addr": 18530,
+      "count": 65,
+      "kind": "and_mask",
+      "sample_offsets": [
+        25152,
+        25216
+      ],
+      "value": 251
     },
     {
       "addr": 35410,
@@ -2923,6 +3597,9 @@
   ],
   "targets": [
     16384,
+    16401,
+    16402,
+    16403,
     16529,
     16530,
     16531,
@@ -2930,7 +3607,29 @@
     16534,
     16535,
     16536,
+    16537,
+    16538,
+    16539,
+    16540,
+    16565,
+    16566,
+    16567,
     18353,
+    18528,
+    18529,
+    18530,
+    18531,
+    18532,
+    18533,
+    18534,
+    18535,
+    18536,
+    18537,
+    18538,
+    35099,
+    35168,
+    35169,
+    35237,
     35363,
     35401,
     35402,
@@ -2944,7 +3643,12 @@
     35410,
     35411,
     35412,
-    35551
+    35419,
+    35420,
+    35550,
+    35551,
+    35563,
+    35564
   ],
-  "unique_target_chunks": 167
+  "unique_target_chunks": 181
 }

@@ -419,3 +419,35 @@ This strengthens the model that `0x8a4b..0x8a54` is not just a passive CDB
 copy. It is a live packet/controller shadow used while the normal runtime
 turns host commands into controller register traffic and then captures the
 controller response bytes.
+
+Controller sequence follow-up:
+
+```text
+analysis/8051/normal-packet-shadow-analysis-20260501.md
+analysis/8051/normal-packet-shadow-analysis-20260501.json
+```
+
+The packet-shadow analyzer now has a small linear-DPTR stream pass. It is not a
+full 8051 emulator, but it recognizes short local `MOVX` streams that direct
+copy scans miss, including `INC DPTR` writes and repeated writes to the same
+command register. That turns the packet/controller bridge into six recurring
+transaction classes:
+
+```text
+controller FIFO writer: setup 4095..4097 then data to 4098
+restore mirrored controller setup: 8ade/8aec/8aeb -> 4095..4097
+packet-shadow command: 4099 burst, 409a=0, 409b=1, 409c=0x14
+read-side setup: 4091..4093 then 409c=0x40
+write-side setup: 4095..4097 then 409c=0x40
+read-side kick: 409c=0x40 then 0x24
+```
+
+The practical model is now tighter. Normal host packets enter through
+`0x47b1`, land in the `0x8a49..0x8a54` shadow, and then get translated into
+controller operations. `0x4091..0x4093` are the read-side setup family,
+`0x4095..0x4097` are the write/FIFO setup family, `0x4099` is a data/FIFO
+port, and `0x409c` is the command/kick/poll register. The same report also
+pulls the `0x4860..0x486a` cluster into view near the packet-shadow
+`0x4099/0x409c=0x14` path; that cluster is worth revisiting for
+servo/mechanics work, but it is not yet a confirmed LED or sled-control
+register set.

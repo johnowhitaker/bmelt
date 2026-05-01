@@ -1605,3 +1605,22 @@ Immediate useful directions:
     chunk reads `0x4099` back into `xdata[0x8a4e]`, `0x8a53`, and `0x8a54`.
     This confirms `0x8a4b..0x8a54` is an active packet/controller shadow, not
     merely a passive CDB copy.
+42. `scripts/analyze_liteon_normal_packet_shadow.py` now has a small
+    linear-DPTR stream pass for local `MOVX` idioms. It is deliberately
+    heuristic, but it catches the important `INC DPTR` and repeated-command
+    patterns that direct `MOV DPTR; MOVX` copy scans miss. The current report
+    names six recurring controller transaction classes: read-side setup
+    through `0x4091..0x4093`, write-side setup through `0x4095..0x4097`,
+    `0x409c=0x40/0x24` read kicks, packet-shadow commands that stream bytes
+    through `0x4099` and then write `0x409a=0`, `0x409b=1`, `0x409c=0x14`,
+    a controller FIFO writer through `0x4098`, and restoration of the mirrored
+    controller setup from `0x8ade/0x8aec/0x8aeb`.
+43. That matters because it turns the normal-mode bridge into a small protocol
+    sketch. The host packet stream enters through `0x47b1`, is shadowed around
+    `0x8a49..0x8a54`, then gets translated into two controller register
+    families: `0x4091..0x4093` for read-like setup and `0x4095..0x4097` for
+    write/FIFO setup. `0x4099` is a data/FIFO port, while `0x409c` is the
+    command/kick/poll register. The `0x4860..0x486a` cluster also appears
+    frequently near the `0x4099/0x409c=0x14` path and remains a good
+    mechanics/servo-adjacent candidate, but do not treat it as confirmed LED
+    or sled control yet.
