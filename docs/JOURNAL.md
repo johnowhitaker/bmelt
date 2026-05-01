@@ -998,3 +998,41 @@ prefix run; it decodes cleanly to `0xd8`. All confident affine observations so
 far land in one lane of a 12-record macro schedule, with 624 cell observations
 and zero conflicts. That still is not a full CDD decompressor, but it is real
 structure and a better map for future oracle reads.
+
+## Lane 0 Is Special
+
+The next static pass asked whether we were just being too conservative about
+that affine leaf. Maybe lanes 1 and 2 had the same repeated-tail unit grammar,
+but with a different unit size or a different prefix/suffix placement. I wrote
+a broader lane-schedule scan for that: for every source record, try unit sizes
+from 4 to 40 bytes, look at prefix and suffix edge runs of two to four units,
+and ask whether the unit lead bytes satisfy the same 16-cell affine masks.
+
+The answer was cleanly negative in a useful way. The scan found 718
+edge-affine hits, all in macro lane 0:
+
+```text
+hits by macro lane: {0: 718}
+hits by unit size:  {12: 231, 13: 487}
+lane 1/2 hits:      0
+```
+
+The repeated-tail grammar really is a lane-0 surface. Lanes 1 and 2 are not
+hiding the same trick at their record edges. They likely carry their useful
+content in the high-entropy body, or use a different controller-side codeword
+grammar entirely.
+
+The close-sibling comparison is still encouraging. CHS7 and CHS9 keep the same
+operation key and source length for most records in all three lanes. In those
+same-operation records, about 72% of source bytes are identical, and the bytes
+that change are dominated by one-bit XOR deltas like `0x80`, `0x01`, `0x02`,
+and `0x40`. The changes are spatially local too: about 60% of contiguous diff
+runs are a single byte, about 88% are one or two bytes, and about 98% are four
+bytes or fewer in every lane. That is a very poor fit for encryption
+avalanche. It looks more like a deterministic, localized codeword stream where
+version changes perturb nearby coded bytes.
+
+So the CDD picture has narrowed again: lane 0 exposes a real affine leaf layer,
+while lanes 1 and 2 are the harder packed/ECC-like body. The next static work
+should classify those lane 1/2 operation-key fields and diff locality, not keep
+searching for more copies of the lane-0 motif.

@@ -169,3 +169,31 @@ still the cleanest way to decide which parts become runtime bytes.
 Next static target: use the suffix-key correlations to search for analogous
 canonical tails in other unit classes, then test any candidate against sibling
 shifted matches before promoting it to the decoder.
+
+## Lane-Schedule Follow-Up
+
+That next target is now a useful negative. The broader scanner:
+
+```sh
+python3 scripts/analyze_liteon_cdd_lane_schedule.py
+```
+
+writes:
+
+```text
+references/firmware/extracted/liteon-cdd-lane-schedule-analysis.md
+references/firmware/extracted/liteon-cdd-lane-schedule-analysis.json
+```
+
+It scans prefix and suffix edge runs over unit sizes `4..40`, not just the
+known canonical tail. All `718` affine edge hits still land in macro lane `0`;
+macro lanes `1` and `2` have zero hits. That makes the lane-0 affine leaf a
+specific surface layer, not a repeated-tail grammar that trivially extends to
+the whole CDD body.
+
+The same report confirms that close siblings CHS7/CHS9 keep about 72% equal
+source bytes in same-operation records across all three lanes, and changed
+bytes are dominated by one-bit XOR deltas. Most contiguous diff runs are also
+short: about 60% length 1, 88% length <=2, and 98% length <=4 in every lane.
+So the hard lanes still look localized and deterministic; they just are not
+exposing the lane-0 edge motif.

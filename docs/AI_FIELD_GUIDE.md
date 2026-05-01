@@ -228,6 +228,15 @@ Key CDD facts:
   `references/firmware/extracted/liteon-cdd-affine-unit-analysis.md`,
   `references/firmware/extracted/liteon-cdd-affine-oracle-targets.md`, and
   `analysis/cdd-affine-codeword-notes.md`.
+- A broader lane-schedule scan over edge affine units with unit sizes `4..40`
+  found `718` repeated-tail affine hits, all in macro lane `0`; macro lanes
+  `1` and `2` had zero hits. CHS7/CHS9 same-op same-length records still keep
+  about 72% equal bytes in all lanes, with changed bytes dominated by one-bit
+  XOR deltas. Contiguous diff runs are usually tiny: about 60% length 1, 88%
+  length <=2, and 98% length <=4 in every lane. This makes lanes `1`/`2` look
+  like deterministic localized controller codewords, not encryption avalanche
+  and not the lane-0 tail grammar. Report:
+  `references/firmware/extracted/liteon-cdd-lane-schedule-analysis.md`.
 - Treat the affine byte as proven structure but not yet proven runtime payload.
   It may be semantic data, parity/control material, or one lane of a larger
   controller codeword. A runtime oracle for one known short record would settle
