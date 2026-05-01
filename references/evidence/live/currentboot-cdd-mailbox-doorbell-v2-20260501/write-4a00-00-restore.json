@@ -1,0 +1,11 @@
+{
+  "addr": 18944,
+  "first64": "05800032ab000000504c4453202020204456442b2d52572044532d384142534800aff01e051225aff01e061225aff01e070523aff01e081225aff01e091225af",
+  "kind": "xdata_write",
+  "label": "write-4a00-00-restore",
+  "rc": 0,
+  "readback": 0,
+  "stderr": "SCSI Status: Good \n\nWriting 176 bytes of data to stdout\n",
+  "stdout_len": 176,
+  "val": 0
+}

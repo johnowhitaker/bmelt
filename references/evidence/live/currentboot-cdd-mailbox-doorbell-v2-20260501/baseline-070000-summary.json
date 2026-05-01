@@ -1,0 +1,15 @@
+{
+  "addr": 458752,
+  "ff_count": 0,
+  "first64": "aff39a1acffcbc0401a40000cffcbc0401a50000cffcbc0401a60000cffcbc0401a70000b704ef14b939b005aff04b0baff04b1faff04b1eaff01e010410aff0",
+  "kind": "gateway_read",
+  "label": "baseline-070000",
+  "length": 256,
+  "rc": 0,
+  "sha256": "f39c92ad923718cbbfcf91443da79b9579444f770373e5d09400c299b8e143d9",
+  "size": 256,
+  "stderr": "",
+  "stdout": "read 256 bytes from controller[0x070000..0x0700ff]\n",
+  "unique": 48,
+  "zero_count": 25
+}

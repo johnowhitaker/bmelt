@@ -3,7 +3,7 @@
 
 This is a partial static decoder. It does not decode the full CDD payload.
 It extracts the 16-cell affine byte code visible in the short records and in
-canonical-tail suffixes of longer records.
+canonical-tail prefix/suffix cells of longer records.
 """
 
 from __future__ import annotations
@@ -50,6 +50,8 @@ class CanonicalUnit:
 class AffineEvidence:
     image: str
     group: int
+    macro: int
+    macro_lane: int
     record: int
     record_mod4: int
     source_offset_in_record: int
@@ -140,9 +142,14 @@ def decode_image(image: cdd.CddImage) -> tuple[CanonicalUnit | None, list[Affine
             if full_short:
                 cells = [4 * row + unit for unit in range(4)]
                 kind = "full-row"
-            else:
+            elif run[0] == 0:
+                cells = [4 * row + unit for unit in range(len(run))]
+                kind = "prefix"
+            elif run[-1] + canonical.unit_size == end - start:
                 cells = [4 * row + (4 - len(run) + unit) for unit in range(len(run))]
                 kind = "suffix"
+            else:
+                continue
 
             for offset, cell in zip(run, cells):
                 raw = source[offset]
@@ -151,6 +158,8 @@ def decode_image(image: cdd.CddImage) -> tuple[CanonicalUnit | None, list[Affine
                     AffineEvidence(
                         image=image.name,
                         group=index // 4,
+                        macro=(index // 4) // 3,
+                        macro_lane=(index // 4) % 3,
                         record=index,
                         record_mod4=row,
                         source_offset_in_record=offset,
@@ -202,6 +211,8 @@ def suffix_key_summary(image_results: list[dict[str, Any]]) -> dict[str, Any]:
                 "image": image_name,
                 "record": record,
                 "group": record // 4,
+                "macro": (record // 4) // 3,
+                "macro_lane": (record // 4) % 3,
                 "row": record & 3,
                 "k": len(items),
                 "cells": [item["cell"] for item in items],
@@ -241,6 +252,28 @@ def suffix_key_summary(image_results: list[dict[str, Any]]) -> dict[str, Any]:
     }
 
 
+def leaf_summary(image_results: list[dict[str, Any]]) -> dict[str, Any]:
+    evidence = [item for image in image_results for item in image["evidence"]]
+    by_image = {}
+    for image in image_results:
+        groups = [group for group in image["groups"] if group["status"] == "ok"]
+        by_image[image["image"]] = {
+            "decoded_groups": len(groups),
+            "cell_observations": len(image["evidence"]),
+            "conflicts": len([group for group in image["groups"] if group["status"] != "ok"]),
+            "kind_counts": dict(sorted(Counter(item["kind"] for item in image["evidence"]).items())),
+            "macro_lane_counts": dict(sorted(Counter(item["macro_lane"] for item in image["evidence"]).items())),
+        }
+
+    return {
+        "total_cell_observations": len(evidence),
+        "kind_counts": dict(sorted(Counter(item["kind"] for item in evidence).items())),
+        "macro_lane_counts": dict(sorted(Counter(item["macro_lane"] for item in evidence).items())),
+        "all_macro_lane_zero": all(item["macro_lane"] == 0 for item in evidence),
+        "by_image": by_image,
+    }
+
+
 def serializable_results(images: list[cdd.CddImage]) -> dict[str, Any]:
     image_results = []
     for image in images:
@@ -274,6 +307,8 @@ def serializable_results(images: list[cdd.CddImage]) -> dict[str, Any]:
                 "evidence": [
                     {
                         "group": item.group,
+                        "macro": item.macro,
+                        "macro_lane": item.macro_lane,
                         "record": item.record,
                         "record_mod4": item.record_mod4,
                         "source_offset_in_record": item.source_offset_in_record,
@@ -295,6 +330,7 @@ def serializable_results(images: list[cdd.CddImage]) -> dict[str, Any]:
         "mask_generator": "mask[cell] = carryless_mul8(0x19, cell)",
         "masks": list(AFFINE_MASKS),
         "suffix_key_summary": suffix_key_summary(image_results),
+        "leaf_summary": leaf_summary(image_results),
         "images": image_results,
     }
 
@@ -322,6 +358,36 @@ def write_report(results: dict[str, Any]) -> str:
     lines.append("plain_group_byte = raw_cell_byte ^ mask[cell]")
     lines.append("cell = 4 * (record_index & 3) + unit_index")
     lines.append("```")
+    lines.append("")
+
+    leaf = results["leaf_summary"]
+    lines.append("## Leaf Schedule")
+    lines.append("")
+    lines.append("The same affine unit tail is now treated in three positions: full rows, prefix runs starting at record offset `0`, and suffix runs ending at the record end. The prior boundary conflict at group `96` was a prefix run, not a suffix run.")
+    lines.append("")
+    lines.append("The observed affine leaves all land in one lane of a 12-record macro schedule:")
+    lines.append("")
+    lines.append("```text")
+    lines.append("record_group = record_index // 4")
+    lines.append("macro        = record_group // 3")
+    lines.append("macro_lane   = record_group % 3")
+    lines.append("observed lane = 0")
+    lines.append("```")
+    lines.append("")
+    lines.append(f"- Total affine-cell observations: `{leaf['total_cell_observations']}`.")
+    lines.append("- Kind counts: " + ", ".join(f"`{kind}`: {count}" for kind, count in leaf["kind_counts"].items()) + ".")
+    lines.append("- Macro lane counts: " + ", ".join(f"`{lane}`: {count}" for lane, count in leaf["macro_lane_counts"].items()) + ".")
+    lines.append(f"- All observations in macro lane 0: `{leaf['all_macro_lane_zero']}`.")
+    lines.append("")
+    lines.append("| image | decoded groups | cell observations | conflicts | kind counts | macro-lane counts |")
+    lines.append("|---|---:|---:|---:|---|---|")
+    for image_name, item in leaf["by_image"].items():
+        kinds = ", ".join(f"`{kind}`:{count}" for kind, count in item["kind_counts"].items())
+        lanes = ", ".join(f"`{lane}`:{count}" for lane, count in item["macro_lane_counts"].items())
+        lines.append(
+            f"| {image_name} | {item['decoded_groups']} | {item['cell_observations']} | "
+            f"{item['conflicts']} | {kinds} | {lanes} |"
+        )
     lines.append("")
 
     lines.append("## Canonical Unit Tails")
@@ -399,7 +465,7 @@ def write_report(results: dict[str, Any]) -> str:
 
     lines.append("## Conflicts")
     lines.append("")
-    lines.append("Group `96` is expected to be noisy because it crosses the CDD1/CDD2 boundary area around record 387; exclude it from grammar inference for now.")
+    lines.append("The previous group `96` conflict is resolved by treating record 387 as a prefix run. Any remaining conflicts should be treated as decoder bugs or unsupported record forms until proven otherwise.")
     lines.append("")
     lines.append("| image | group | plains | records |")
     lines.append("|---|---:|---|---|")

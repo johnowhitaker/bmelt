@@ -1,0 +1,15 @@
+{
+  "addr": 1729440,
+  "ff_count": 0,
+  "first64": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "kind": "gateway_read",
+  "label": "after-group78",
+  "length": 192,
+  "rc": 0,
+  "sha256": "5d89f056865052bcb89c910d2d62872e029fb273c3db03f8968a52a41593c1b5",
+  "size": 192,
+  "stderr": "",
+  "stdout": "read 192 bytes from controller[0x1a63a0..0x1a645f]\n",
+  "unique": 1,
+  "zero_count": 192
+}

@@ -49,6 +49,13 @@ def parse_byte(value: str) -> int:
     return parsed
 
 
+def parse_positive_int(value: str) -> int:
+    parsed = int(value, 0)
+    if parsed <= 0:
+        raise argparse.ArgumentTypeError("value must be positive")
+    return parsed
+
+
 def patch_arg(offset: int, data: bytes) -> str:
     return f"0x{offset:x}:{data.hex()}"
 
@@ -251,6 +258,50 @@ def source_gateway_cdb_bulk(selector_mask: int, storage_offset: int, bulk_len: i
     return compute + init + loop_body + djnz
 
 
+def source_gateway_cdb_bulk_with_xdata_write(selector_mask: int, storage_offset: int, bulk_len: int) -> bytes:
+    """Gateway bulk read with an optional guarded XDATA write mode.
+
+    Normal mode matches source_gateway_cdb_bulk(): CDB[7:9] is a 24-bit
+    controller address. If CDB[10:11] are 5a/a5, the hook instead writes CDB[9]
+    to XDATA address CDB[7:8] + selector and returns the readback byte in R5.
+    build_payload's standard response-byte write exposes that readback at
+    response[0x20].
+    """
+
+    checks = bytearray()
+    jump_to_gateway_positions: list[int] = []
+    for cdb_addr, expected in ((0x8194, 0x5A), (0x8195, 0xA5)):
+        checks.extend(mov_dptr(cdb_addr))
+        checks.extend(bytes([0xE0, 0x64, expected, 0x70, 0x00]))  # MOVX; XRL; JNZ gateway
+        jump_to_gateway_positions.append(len(checks) - 1)
+
+    write_block = b"".join(
+        [
+            xdata_cdb_address_to_r6_r7(selector_mask),
+            mov_dptr(0x8193),  # CDB byte 9: write value.
+            bytes([0xE0, 0xFD]),  # MOVX A,@DPTR ; MOV R5,A
+            bytes([0x8E, 0x83, 0x8F, 0x82]),  # MOV DPH,R6 ; MOV DPL,R7
+            bytes([0xED, 0xF0]),  # MOV A,R5 ; MOVX @DPTR,A
+            bytes([0x8E, 0x83, 0x8F, 0x82]),  # MOV DPH,R6 ; MOV DPL,R7
+            bytes([0xE0, 0xFD]),  # MOVX A,@DPTR ; MOV R5,A
+        ]
+    )
+
+    source = bytearray(checks)
+    source.extend(write_block)
+    skip_gateway_pos = len(source)
+    source.extend(bytes([0x80, 0x00]))  # SJMP end_source
+
+    gateway_start = len(source)
+    source.extend(source_gateway_cdb_bulk(selector_mask, storage_offset, bulk_len))
+    end_source = len(source)
+
+    for position in jump_to_gateway_positions:
+        source[position] = rel8(position + 1, gateway_start)
+    source[skip_gateway_pos + 1] = rel8(skip_gateway_pos + 2, end_source)
+    return bytes(source)
+
+
 def build_source(args: argparse.Namespace) -> tuple[str, bytes, dict[str, Any]]:
     modes = [
         args.constant is not None,
@@ -261,12 +312,14 @@ def build_source(args: argparse.Namespace) -> tuple[str, bytes, dict[str, Any]]:
         args.xdata_cdb_rw,
         args.gateway_cdb_address,
         args.gateway_cdb_bulk,
+        args.gateway_cdb_bulk_with_xdata_write,
     ]
     if sum(modes) != 1:
         raise ValueError(
             "choose exactly one of --constant, --xdata-direct, --xdata-window, "
             "--xdata-cdb-address, --xdata-cdb-bulk, --xdata-cdb-rw, "
-            "--gateway-cdb-address, or --gateway-cdb-bulk"
+            "--gateway-cdb-address, --gateway-cdb-bulk, or "
+            "--gateway-cdb-bulk-with-xdata-write"
         )
     if args.constant is not None:
         return "constant", source_constant(args.constant), {"constant": args.constant}
@@ -288,6 +341,21 @@ def build_source(args: argparse.Namespace) -> tuple[str, bytes, dict[str, Any]]:
             ),
             {
                 "address_source": "cdb_bytes_7_8_9_plus_control_low_bits",
+                "selector_mask": args.selector_mask,
+                "bulk_len": args.bulk_len,
+            },
+        )
+    if args.gateway_cdb_bulk_with_xdata_write:
+        return (
+            "gateway_cdb_bulk_with_xdata_write",
+            source_gateway_cdb_bulk_with_xdata_write(
+                args.selector_mask,
+                RESPONSE_STORAGE_BASE + args.response_offset,
+                args.bulk_len,
+            ),
+            {
+                "address_source": "normal: cdb_bytes_7_8_9_plus_control_low_bits",
+                "write_mode": "if cdb_10_5a_cdb_11_a5, write cdb_byte_9 to xdata[cdb_7_8_plus_control_low_bits]",
                 "selector_mask": args.selector_mask,
                 "bulk_len": args.bulk_len,
             },
@@ -446,7 +514,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--hook-addr", type=parse_addr, default=DEFAULT_HOOK_ADDR)
     parser.add_argument("--resume-addr", type=parse_addr, default=0x4FCC)
     parser.add_argument("--cave-addr", type=parse_addr, default=DEFAULT_CAVE_ADDR)
-    parser.add_argument("--cave-len", type=int, default=0x80)
+    parser.add_argument("--cave-len", type=parse_positive_int, default=0x80)
     parser.add_argument("--response-offset", type=parse_byte, default=0x20)
     parser.add_argument("--constant", type=parse_byte)
     parser.add_argument("--xdata-direct", type=parse_addr)
@@ -460,6 +528,11 @@ def parse_args() -> argparse.Namespace:
         "--gateway-cdb-bulk",
         action="store_true",
         help="copy --bulk-len bytes from controller gateway address CDB[7:9] + selector into the INQUIRY response",
+    )
+    parser.add_argument(
+        "--gateway-cdb-bulk-with-xdata-write",
+        action="store_true",
+        help="like --gateway-cdb-bulk, but CDB[10:11]=5a/a5 writes CDB[9] to XDATA CDB[7:8]+selector instead",
     )
     parser.add_argument(
         "--xdata-cdb-address",
@@ -489,6 +562,7 @@ def main() -> int:
         any(value is not None for value in (args.constant, args.xdata_direct, args.xdata_window))
         or args.gateway_cdb_address
         or args.gateway_cdb_bulk
+        or args.gateway_cdb_bulk_with_xdata_write
         or args.xdata_cdb_address
         or args.xdata_cdb_bulk
         or args.xdata_cdb_rw

@@ -209,14 +209,25 @@ Key CDD facts:
   The old row-local `m` value was the raw coded byte, not the final semantic
   byte. Decode with
   `plain_group_byte = raw_cell_byte ^ mask[4 * (record_index & 3) + unit]`.
-- Matching canonical unit tails also appear as suffix cells inside longer
-  records, recovering additional group bytes without a runtime oracle. See
-  `references/firmware/extracted/liteon-cdd-affine-unit-analysis.md` and
+- Matching canonical unit tails also appear in longer records. The current
+  partial decoder accepts three positions: full rows, prefix runs starting at
+  record offset `0`, and suffix runs ending at the record end. That resolved
+  the old group-96 boundary conflict: record 387 is a prefix run and decodes
+  group 96 to `0xd8`.
+- All currently confident affine leaves land in one lane of a 12-record macro
+  schedule:
+  `record_group = record_index // 4`, `macro_lane = record_group % 3`,
+  observed lane `0`. The regenerated report has 624 cell observations, zero
+  conflicts, and macro lane counts of `0:624`.
+- Prefix/suffix records are still decoded from literal canonical-tail evidence,
+  not from a solved op-key formula. Current constraints: `op_key[5] == 0`;
+  non-boundary suffix records keep `op_key[4] == 0x18/0x1a` as
+  `2 * unit_size`; and every non-boundary `k=2`/`k=3` suffix has decoded-span
+  field `0x30`.
+- Current reports:
+  `references/firmware/extracted/liteon-cdd-affine-unit-analysis.md`,
+  `references/firmware/extracted/liteon-cdd-affine-oracle-targets.md`, and
   `analysis/cdd-affine-codeword-notes.md`.
-- Suffix records are still decoded from literal tail evidence, not from a
-  solved op-key formula. Current constraints: `op_key[5] == 0`; non-boundary
-  suffix records keep `op_key[4] == 0x18/0x1a` as `2 * unit_size`; and every
-  non-boundary `k=2`/`k=3` suffix has decoded-span field `0x30`.
 - Treat the affine byte as proven structure but not yet proven runtime payload.
   It may be semantic data, parity/control material, or one lane of a larger
   controller codeword. A runtime oracle for one known short record would settle
@@ -697,6 +708,13 @@ python3 scripts/build_liteon_currentboot_response_hook_candidate.py \
   --name gateway-cdb-bulk \
   --gateway-cdb-bulk
 
+# combined gateway bulk read plus guarded XDATA write:
+# normal mode is gateway bulk; CDB[10:11]=5a a5 writes CDB[9] to XDATA
+python3 scripts/build_liteon_currentboot_response_hook_candidate.py \
+  --name gateway-cdb-bulk-xdata-write-v2 \
+  --cave-len 0xdd \
+  --gateway-cdb-bulk-with-xdata-write
+
 # XDATA read: CDB[7:8] + (CDB[5] & 0x3f)
 python3 scripts/build_liteon_currentboot_response_hook_candidate.py \
   --name xdata-cdb-byte \
@@ -769,6 +787,27 @@ Known settled output:
 ```text
 Flash Type Error
 ```
+
+The live-proven combined hook is currently the most ergonomic currentboot
+instrument when both controller reads and small XDATA writes are needed:
+
+```text
+references/firmware/extracted/currentboot-response-hook-candidates/currentboot-response-hook-gateway-cdb-bulk-xdata-write-v2/currentboot-response-hook-gateway-cdb-bulk-xdata-write-v2/liteon-full-currentboot-ld5m-helper-bypass-currentboot-response-hook-gateway-cdb-bulk-xdata-write-v2-candidate.json
+```
+
+Write mode uses:
+
+```text
+CDB[5] low six bits = selector
+CDB[7:8]            = 16-bit XDATA base
+CDB[9]              = write value
+CDB[10:11]          = write magic 5a a5
+response[0x20]      = readback byte
+```
+
+Do not reuse the failed v1 idea of guarding on CDB byte `6`; that byte was not
+reliably preserved by this currentboot handler. Bytes `7..11` are the proven
+parameter window for this hook.
 
 The currentboot-phase decoded CDD candidate range is still blank when sampled
 in bulk:
@@ -896,6 +935,7 @@ Evidence:
 
 ```text
 references/evidence/live/linux-drive1-currentboot-response-hook.md
+references/evidence/live/currentboot-cdd-mailbox-doorbell-v2.md
 ```
 
 ## Pico Front-Panel Probe

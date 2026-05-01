@@ -20,6 +20,33 @@ plain_group_byte = raw_cell_byte ^ mask[cell]
 cell = 4 * (record_index & 3) + unit_index
 ```
 
+## Leaf Schedule
+
+The same affine unit tail is now treated in three positions: full rows, prefix runs starting at record offset `0`, and suffix runs ending at the record end. The prior boundary conflict at group `96` was a prefix run, not a suffix run.
+
+The observed affine leaves all land in one lane of a 12-record macro schedule:
+
+```text
+record_group = record_index // 4
+macro        = record_group // 3
+macro_lane   = record_group % 3
+observed lane = 0
+```
+
+- Total affine-cell observations: `624`.
+- Kind counts: `full-row`: 416, `prefix`: 15, `suffix`: 193.
+- Macro lane counts: `0`: 624.
+- All observations in macro lane 0: `True`.
+
+| image | decoded groups | cell observations | conflicts | kind counts | macro-lane counts |
+|---|---:|---:|---:|---|---|
+| LD5M | 22 | 97 | 0 | `full-row`:64, `suffix`:33 | `0`:97 |
+| AD12 | 22 | 100 | 0 | `full-row`:72, `prefix`:3, `suffix`:25 | `0`:100 |
+| AHS9 | 21 | 98 | 0 | `full-row`:64, `prefix`:3, `suffix`:31 | `0`:98 |
+| CD12 | 25 | 109 | 0 | `full-row`:72, `prefix`:3, `suffix`:34 | `0`:109 |
+| CHS7 | 25 | 110 | 0 | `full-row`:72, `prefix`:3, `suffix`:35 | `0`:110 |
+| CHS9 | 25 | 110 | 0 | `full-row`:72, `prefix`:3, `suffix`:35 | `0`:110 |
+
 ## Canonical Unit Tails
 
 | image | canonical op key | unit size | matching short records | unit tail |
@@ -63,6 +90,7 @@ These groups decode to the same byte wherever evidence exists. Full-row short re
 | 87 | `0x80` |  | `15` | `15` | `15` | `15` | `15` |
 | 90 | `0x3a` | `13,14,15` | `15` | `15` | `15` | `15` | `15` |
 | 93 | `0x0e` |  |  |  | `14,15` | `14,15` | `14,15` |
+| 96 | `0xd8` |  | `12,13,14` | `12,13,14` | `12,13,14` | `12,13,14` | `12,13,14` |
 | 99 | `0x0a` | `4,5,6,7,8,9,10,11,12,13,14,15` | `4,5,6,7,8,9,10,11,12,13,14,15` | `4,5,6,7,8,9,10,11,12,13,14,15` | `4,5,6,7,8,9,10,11,12,13,14,15` | `4,5,6,7,8,9,10,11,12,13,14,15` | `4,5,6,7,8,9,10,11,12,13,14,15` |
 | 105 | `0x84` | `4,5,6,7,8,9,10,11,12,13,14,15` | `4,5,6,7,8,9,10,11,12,13,14,15` | `4,5,6,7,8,9,10,11,12,13,14,15` | `4,5,6,7,8,9,10,11,12,13,14,15` | `4,5,6,7,8,9,10,11,12,13,14,15` | `4,5,6,7,8,9,10,11,12,13,14,15` |
 | 108 | `0xc3` | `14,15` | `14,15` | `14,15` | `14,15` | `14,15` | `14,15` |
@@ -71,8 +99,8 @@ These groups decode to the same byte wherever evidence exists. Full-row short re
 
 The current suffix decoder is still evidence-driven: it finds literal canonical unit tails at the ends of source records. The operation key has strong correlations, but it does not yet predict every suffix count by itself.
 
-- Suffix records found: 115.
-- Suffix unit counts: `k=1`: 49, `k=2`: 37, `k=3`: 29.
+- Suffix records found: 109.
+- Suffix unit counts: `k=1`: 49, `k=2`: 36, `k=3`: 24.
 - `op_key[5] == 0` for every suffix record: `True`.
 - Excluding boundary group 96, `op_key[4]` is always the canonical doubled unit size: `0x18`, `0x1a`.
 - Excluding boundary group 96, every `k=2`/`k=3` suffix record has decoded-span field `0x30`: `True`.
@@ -80,21 +108,15 @@ The current suffix decoder is still evidence-driven: it finds literal canonical 
 | k | records | rows | op_key[3] values | op_key[4] values | decoded-span fields |
 |---:|---:|---|---|---|---|
 | 1 | 49 | `1`:2, `3`:47 | `0x10`:1, `0x21`:2, `0x25`:1, `0x27`:1, `0x28`:1, `0x29`:2, `0x2b`:1, `0x3a`:2, `0x41`:1, `0x49`:1, `0x4a`:2, `0x4b`:3, `0x4e`:1, `0x53`:1, `0x5a`:1, `0x5b`:1, `0x5f`:1, `0x61`:2, `0x67`:1, `0x68`:3, `0x69`:2, `0x6d`:1, `0x79`:1, `0x83`:2, `0x88`:1, `0x8b`:1, `0x8f`:2, `0x90`:1, `0x94`:2, `0xa1`:1, `0xa3`:2, `0xa9`:1, `0xb7`:3 | `0x18`:18, `0x1a`:31 | `0x010`:1, `0x030`:2, `0x080`:1, `0x090`:1, `0x0a0`:2, `0x0b0`:4, `0x0e0`:1, `0x0f0`:2, `0x100`:2, `0x130`:1, `0x140`:2, `0x1a0`:1, `0x1b0`:1, `0x1f0`:1, `0x210`:5, `0x230`:2, `0x250`:1, `0x270`:2, `0x280`:4, `0x290`:5, `0x2b0`:1, `0x2d0`:1, `0x370`:3, `0x390`:1, `0x3a0`:2 |
-| 2 | 37 | `0`:5, `1`:1, `3`:31 | `0x03`:37 | `0x18`:7, `0x1a`:29, `0x34`:1 | `0x030`:37 |
-| 3 | 29 | `0`:9, `3`:20 | `0x03`:29 | `0x18`:8, `0x1a`:16, `0x32`:4, `0x34`:1 | `0x030`:29 |
+| 2 | 36 | `0`:5, `1`:1, `3`:30 | `0x03`:36 | `0x18`:7, `0x1a`:29 | `0x030`:36 |
+| 3 | 24 | `0`:9, `3`:15 | `0x03`:24 | `0x18`:8, `0x1a`:16 | `0x030`:24 |
 
 ## Conflicts
 
-Group `96` is expected to be noisy because it crosses the CDD1/CDD2 boundary area around record 387; exclude it from grammar inference for now.
+The previous group `96` conflict is resolved by treating record 387 as a prefix run. Any remaining conflicts should be treated as decoder bugs or unsupported record forms until proven otherwise.
 
 | image | group | plains | records |
 |---|---:|---|---|
-| LD5M | 96 | `0xc1`, `0xf3` | 387 |
-| AD12 | 96 | `0xc1`, `0xf3` | 387 |
-| AHS9 | 96 | `0xc1`, `0xf3` | 387 |
-| CD12 | 96 | `0xc1`, `0xf3` | 387 |
-| CHS7 | 96 | `0xc1`, `0xf3` | 387 |
-| CHS9 | 96 | `0xc1`, `0xf3` | 387 |
 
 ## Interpretation
 

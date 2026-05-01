@@ -227,6 +227,46 @@ This proves guarded currentboot XDATA mutation through the response hook. It is
 not a flash writer and should not be used on hardware/control registers without
 a specific reason.
 
+## Combined Gateway Bulk Plus XDATA Write
+
+Candidate:
+
+```text
+references/firmware/extracted/currentboot-response-hook-candidates/currentboot-response-hook-gateway-cdb-bulk-xdata-write-v2/currentboot-response-hook-gateway-cdb-bulk-xdata-write-v2/liteon-full-currentboot-ld5m-helper-bypass-currentboot-response-hook-gateway-cdb-bulk-xdata-write-v2-candidate.json
+```
+
+This combines the useful controller-gateway bulk reader with a guarded XDATA
+byte write mode. Build it with `--cave-len 0xdd`; the combined payload does not
+fit in the older `0x80`-byte cave budget. Normal CDBs still bulk-read 128 bytes
+from a 24-bit controller gateway address in CDB bytes `7..9`. If CDB bytes
+`10..11` are `5a a5`, the same hook instead writes CDB byte `9` to XDATA
+address CDB bytes `7..8` plus the low selector bits, then returns the readback
+byte at response offset `0x20`.
+
+The first combined candidate used an extra guard in CDB byte `6`; live testing
+showed that byte is not reliable in this currentboot path. The v2 candidate
+uses only bytes `10..11` for the write guard and is live-proven:
+
+```text
+controller[0x018620..] -> "Flash Type Error"
+xdata[0x8000] <- 0xa6 -> readback 0xa6
+xdata[0x8000] <- 0x00 -> readback 0x00
+```
+
+The CDD mailbox doorbell test through this hook was a negative. Writing
+`xdata[0x4a00] = 0x01` succeeded and read back as `0x01`, but the candidate
+decoded CDD ranges at `0x184000`, `0x184060`, and the affine-oracle targets
+for groups 27/78/99 remained all zero. The live `0x070000` gateway window was
+unchanged, and `xdata[0x4a00]` was restored to `0x00`. So the single mailbox
+doorbell byte is not sufficient to make currentboot expose decoded CDD memory.
+
+Evidence:
+
+```text
+references/evidence/live/currentboot-cdd-mailbox-doorbell-v2.md
+references/evidence/live/currentboot-cdd-mailbox-doorbell-v2-20260501/
+```
+
 ## Bulk XDATA Read
 
 Candidate:

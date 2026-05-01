@@ -956,3 +956,45 @@ the hardware setup routine at F0 `0x59f3` reappearing at gateway offset
 `0x5a31` is now the main static target for movement/focus/laser control. The
 next move there should be reverse-engineering the state machine around those
 routines, not poking them live one bit at a time.
+
+## A Combined Hook And A Doorbell Negative
+
+The latest currentboot hook folds two tools into one. Instead of installing one
+F0 image to read the controller gateway and another to write XDATA, the v2 hook
+does both. Ordinary parameterized INQUIRY commands bulk-read 128 bytes from the
+controller gateway. If the same command carries guard bytes `5a a5`, the hook
+writes one chosen byte into XDATA and returns the readback byte.
+
+That sounds like a small convenience, but it changes the shape of experiments:
+we can now set a currentboot control byte, immediately read the controller-side
+effect, and then restore the byte without reflashing a different helper. The
+first version tried to use CDB byte `6` as part of the guard; live testing
+showed that byte is not reliable in this handler. Bytes `7..11` are the useful
+parameter window.
+
+The first target was the CDD mailbox. Static 8051 analysis says the resident
+CDD parser writes header/control fields into `xdata[0x4a00..0x4a29]`, with
+`0x4a00` looking like a controller doorbell. The v2 hook successfully wrote
+`xdata[0x4a00] = 1` and read it back. Then it sampled the decoded CDD base and
+the better affine-derived oracle targets: group 27 at `0x190690`, group 78 at
+`0x1a63a0`, and group 99 at `0x1aeb80`.
+
+Everything in the decoded range stayed zero. The known live `0x070000` gateway
+window stayed nonzero and unchanged, so this was not a broken reader. The
+single doorbell byte is just not enough. Either the controller needs a fuller
+CDD command sequence, the currentboot phase is missing state that normal boot
+sets up, or the actual body expansion lives behind a different hidden
+transition.
+
+This is a good negative. It rules out a tempting "poke the obvious mailbox bit"
+shortcut and leaves the next decoded-CDD route clearer: find a later runtime
+hook, model the complete CDD parser/controller handoff, or keep digging into
+the static record grammar until we can predict a more exact control sequence.
+
+On the static side, that grammar got sharper too. The affine-unit decoder now
+handles full rows, prefix runs, and suffix runs of the canonical unit tail. The
+old conflict around group 96 disappeared once record 387 was treated as a
+prefix run; it decodes cleanly to `0xd8`. All confident affine observations so
+far land in one lane of a 12-record macro schedule, with 624 cell observations
+and zero conflicts. That still is not a full CDD decompressor, but it is real
+structure and a better map for future oracle reads.
