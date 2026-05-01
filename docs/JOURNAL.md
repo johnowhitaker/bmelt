@@ -1591,3 +1591,12 @@ and `0x4863` is mirrored through `0x8630`. The cautious read is
 "hardware-control/mailbox cluster", not "LED pin" or "sled motor" yet. But it
 is exactly the sort of small register island we wanted to identify before
 doing more visible-mechanics experiments.
+
+There may also be a bigger prize hiding in the same neighborhood. The normal
+runtime has a stock-looking controller read path: wait on `0x4000`, load
+`0x4091..0x4093`, kick `0x409c`, poll it, then read back through `0x4098` or
+`0x4099`. GET CONFIGURATION current cleanly tags one version of that path, and
+the surrounding handler uses packet-shadow bytes like `0x8a4d` and `0x8a4e`
+as count/selector fields. If those bytes are controllable through a legal host
+command, this could become the fast normal-mode oracle we wanted: a way to ask
+the live controller for bytes without waiting seconds per bit.

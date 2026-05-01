@@ -1631,3 +1631,13 @@ Immediate useful directions:
     is mirrored through `xdata[0x8630]`; and `0x4862` is written or bit2-cleared
     in a separate path. This looks hardware-control or mechanics-adjacent, but
     it may be a controller mailbox rather than raw actuator GPIO.
+45. The normal controller bridge may also be a future fast read oracle. See
+    `analysis/8051/normal-controller-read-primitive-hypothesis-20260501.md`.
+    The candidate path waits on `0x4000.7`, writes setup bytes into
+    `0x4091..0x4093`, writes `0x409c=0x40` and then `0x20` or `0x24`, polls
+    `0x409c.5`, and reads from `0x4098` or `0x4099`. Packet-shadow bytes
+    `0x8a4d` and `0x8a4e` look especially relevant: `0x8a4d` is capped at
+    `0x12`, rounded if odd, and copied to `0x47d6`; `0x8a4e & 0x0f` selects
+    a subpath/status slot. If legal host commands control those fields, this
+    could become a much faster decoded/controller-memory oracle than the
+    currentboot bit channel.
