@@ -1192,7 +1192,8 @@ The next pass tightened that conclusion rather than opening a new public door.
 An exact-`0x80` scan across high vendor IDs `e0..ff` found only the already
 known responders: `e2`, `f0`, `f1`, and `f2`. The drive remained in normal
 `LD5M`, so this is a safe read-only check we can repeat, but it does not reveal
-another decoded-memory buffer.
+another decoded-memory buffer. A second exact-size sweep over READ BUFFER modes
+`0x00..0x1f`, limited to those four IDs, also found only mode `0x01`.
 
 The static picture of the normal work window also got more honest. The
 `0x070000` window is partly live work RAM: comparing six captures shows stable

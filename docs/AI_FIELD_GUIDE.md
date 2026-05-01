@@ -1326,4 +1326,6 @@ Immediate useful directions:
     branch targets.
 14. A follow-up exact-`0x80` high-ID scan at offset zero found no hidden
     siblings beyond the known `e2/f0/f1/f2` responders. The drive stayed normal
-    `LD5M` afterwards.
+    `LD5M` afterwards. An exact-size mode sweep for those four IDs also found
+    only mode `0x01`; modes `0x00..0x1f` otherwise rejected or returned no
+    data.

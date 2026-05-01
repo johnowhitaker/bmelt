@@ -106,10 +106,20 @@ all other high IDs: CHECK CONDITION / no data
 post-scan status: normal LD5M
 ```
 
+The matching exact-size mode sweep for just `e2/f0/f1/f2` also stayed narrow:
+
+```text
+modes scanned: 0x00..0x1f
+length:        0x80
+responding mode: 0x01 only
+post-scan status: normal LD5M
+```
+
 Evidence:
 
 ```text
 references/evidence/live/normal-read-buffer-exact80-scan-20260430/
+references/evidence/live/normal-read-buffer-mode-exact80-scan-20260430/
 ```
 
 ## Evidence
