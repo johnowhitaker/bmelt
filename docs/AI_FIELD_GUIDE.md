@@ -1435,3 +1435,14 @@ Immediate useful directions:
     worked, but decoded CDD targets `0x184000`, `0x184060`, and `0x190690`
     stayed all zero. Evidence:
     `references/evidence/live/currentboot-cdd-descriptor-trigger-v1.md`.
+19. `--gateway-cdb-bulk-with-cdd-mapped-header` is the first positive
+    controller-CDD foothold. It keeps the proven bulk gateway reader and uses
+    `CDB[7:8] == fc de` as a compact trigger returning `0xd0`. The trigger sets
+    the `0x1717` mapped-header call up for source `0x0000702c` and destination
+    `xdata[0xc000]`, then copies `xdata[0xc000..0xc01f]` into the response.
+    Live result: response byte `0x20` was `0xd0`, and response `0x21..0x40`
+    contained the LD5M CDD header beginning `43 44 44 09 10 16`. Decoded CDD
+    target addresses still stayed zero, so this is not the full expansion
+    trigger, but it proves the currentboot hook can safely call `0x1717` and
+    observe the mapped `0xc000` window. Evidence:
+    `references/evidence/live/currentboot-cdd-mapped-header-trigger-v1.md`.

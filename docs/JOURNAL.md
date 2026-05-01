@@ -1318,3 +1318,22 @@ remaining live mailbox route probably has to exercise the real
 `0x4e80/84/88/8c` mapped-header path, include more internal parser state in a
 different hook shape, or move the readout into normal runtime after the CDD
 engine has already been brought up.
+
+The mapped-header shot was a real step forward. I added a new compact trigger
+on fake gateway prefix `fc de` that mirrors the resident parser's setup for
+`0x1717`: target `xdata[0xc000]`, source `0x0000702c`, and a 32-byte copy. It
+returned a new `0xd0` marker and the response payload contained the actual
+LD5M CDD header:
+
+```text
+43 44 44 09 10 16 53 0d 90 00 00 7d ec 03 08 10
+87 0e 80 00 00 70 00 18 40 00 1b 3f ff 1b 3f ff
+```
+
+That proves the currentboot hook can call the real mapped-header helper and
+read back the `0xc000` mapped window without wedging the drive. The decoded
+target windows at `0x184000`, `0x184060`, and `0x190690` still stayed zero,
+so `0x1717` alone looks like a source-header mapping/copy primitive rather
+than the full CDD expansion. Still, the difference matters: we now have a live
+way to exercise and observe one piece of the controller-side CDD path, instead
+of only guessing from static structure.
