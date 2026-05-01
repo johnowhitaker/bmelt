@@ -1524,3 +1524,10 @@ Immediate useful directions:
     So most harvested chunks are not verbatim 64-byte slices of the known F0 or
     visible 8051 prefix. Evidence:
     `analysis/8051/normal-work-window-chunk-static-matches-20260501.md`.
+31. A crude 8051 `MOV DPTR,#xxxx` scan of the harvested chunks finds expected
+    anchors like `0x47b1`, `0x4000`, `0x4091`, `0x4098`, and `0x825b`, plus a
+    high-frequency runtime-only cluster around `0x8a23` and
+    `0x8a4a..0x8a54`. This supports the earlier interpretation that normal
+    runtime keeps CDB/packet shadow state around `xdata[0x8a49..]` and that the
+    public window is exposing overlay/runtime code that touches it. Evidence:
+    `analysis/8051/normal-work-window-dptr-refs-20260501.md`.

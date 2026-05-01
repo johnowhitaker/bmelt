@@ -188,3 +188,33 @@ That does not prove every unmatched chunk is decoded executable code, because
 the public window also contains live tables, profile strings, and work state.
 But it strongly argues that the harvest is not just a fancy way of rereading
 static flash. A large part of the window is runtime material.
+
+The DPTR-immediate scan is a useful first correlation pass:
+
+```text
+analysis/8051/normal-work-window-dptr-refs-20260501.md
+analysis/8051/normal-work-window-dptr-refs-20260501.json
+```
+
+It simply scans harvested chunks for the 8051 `MOV DPTR,#xxxx` opcode
+sequence. This is not a complete disassembler, but it is a good way to find
+runtime XDATA/mailbox addresses. The top references include familiar anchors:
+`0x47b1`, `0x4000`, `0x4091`, `0x4098`, and `0x825b`. More interestingly,
+many high-frequency references are not present as DPTR immediates in the known
+F0/visible-8051 references:
+
+```text
+0x8a23
+0x8a4a..0x8a54
+0x8adf
+0x88f1
+0x8988
+0x8353
+```
+
+This fits the live normal-window interpretation. The earlier static
+`+0x6747` READ BUFFER accept-list analysis implied a normal-runtime packet
+shadow around `xdata[0x8a49..]`; the harvested chunks now show lots of runtime
+code touching that region. Those references are mostly absent from the visible
+F0 prefix, which is exactly what we would expect if normal-mode overlays are
+being paged into the public window.

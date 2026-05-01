@@ -1466,3 +1466,13 @@ public window also includes profile tables, strings, and live work state. But
 the important bit is that most of this corpus is not simply present verbatim in
 the static F0 image. Normal runtime is exposing material we did not otherwise
 have byte-for-byte.
+
+One quick disassembly-adjacent pass made that more concrete. I scanned the
+harvested chunks for the 8051 `MOV DPTR,#xxxx` opcode pattern. It immediately
+found the expected old friends: `0x47b1`, `0x4000`, `0x4091`, `0x4098`, and
+`0x825b`. But it also found high-frequency references that are not present as
+DPTR immediates in the known F0/visible-8051 references, especially the
+`0x8a23` and `0x8a4a..0x8a54` cluster. That lines up with the earlier
+normal-window static read: the live normal READ BUFFER handler seems to use a
+packet/CDB shadow around `xdata[0x8a49..]`. Now we have runtime chunks touching
+that shadow directly.
