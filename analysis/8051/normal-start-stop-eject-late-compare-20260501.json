@@ -1,0 +1,1723 @@
+{
+  "chunk_size": 64,
+  "reference": {
+    "capture_count": 1,
+    "capture_dir": "references/evidence/live/normal-start-stop-eject-20260501"
+  },
+  "reference_only": {
+    "by_capture": [
+      {
+        "index": 0,
+        "name": "00-baseline-before-start-stop",
+        "new_chunk_observations": 52
+      }
+    ],
+    "by_page": [
+      {
+        "count": 3,
+        "page_start": 26368
+      },
+      {
+        "count": 2,
+        "page_start": 26112
+      },
+      {
+        "count": 2,
+        "page_start": 26624
+      },
+      {
+        "count": 2,
+        "page_start": 26880
+      },
+      {
+        "count": 2,
+        "page_start": 27904
+      },
+      {
+        "count": 2,
+        "page_start": 30208
+      },
+      {
+        "count": 2,
+        "page_start": 30464
+      },
+      {
+        "count": 2,
+        "page_start": 30976
+      },
+      {
+        "count": 2,
+        "page_start": 31232
+      },
+      {
+        "count": 2,
+        "page_start": 32000
+      },
+      {
+        "count": 2,
+        "page_start": 35328
+      },
+      {
+        "count": 2,
+        "page_start": 36096
+      },
+      {
+        "count": 1,
+        "page_start": 768
+      },
+      {
+        "count": 1,
+        "page_start": 16896
+      },
+      {
+        "count": 1,
+        "page_start": 24064
+      },
+      {
+        "count": 1,
+        "page_start": 24320
+      },
+      {
+        "count": 1,
+        "page_start": 24576
+      },
+      {
+        "count": 1,
+        "page_start": 27136
+      },
+      {
+        "count": 1,
+        "page_start": 28160
+      },
+      {
+        "count": 1,
+        "page_start": 29440
+      },
+      {
+        "count": 1,
+        "page_start": 29696
+      },
+      {
+        "count": 1,
+        "page_start": 29952
+      },
+      {
+        "count": 1,
+        "page_start": 30720
+      },
+      {
+        "count": 1,
+        "page_start": 31488
+      },
+      {
+        "count": 1,
+        "page_start": 31744
+      },
+      {
+        "count": 1,
+        "page_start": 32256
+      },
+      {
+        "count": 1,
+        "page_start": 32512
+      },
+      {
+        "count": 1,
+        "page_start": 33280
+      },
+      {
+        "count": 1,
+        "page_start": 33536
+      },
+      {
+        "count": 1,
+        "page_start": 33792
+      },
+      {
+        "count": 1,
+        "page_start": 34816
+      },
+      {
+        "count": 1,
+        "page_start": 35072
+      },
+      {
+        "count": 1,
+        "page_start": 36352
+      },
+      {
+        "count": 1,
+        "page_start": 36864
+      },
+      {
+        "count": 1,
+        "page_start": 38400
+      },
+      {
+        "count": 1,
+        "page_start": 38656
+      },
+      {
+        "count": 1,
+        "page_start": 39168
+      },
+      {
+        "count": 1,
+        "page_start": 39424
+      },
+      {
+        "count": 1,
+        "page_start": 40448
+      }
+    ],
+    "new_chunk_count": 52,
+    "new_chunks": [
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          40640
+        ],
+        "sample_hex": "78aae69047d6f09047afe4f09047b1f0",
+        "sha256": "03044422ea303ce9de2d50de407f8131004956e5600e9b41bee8417878477656"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          30208
+        ],
+        "sample_hex": "8ac6e0904091f0a87c0808e6a3f07b00",
+        "sha256": "0c9a360d26b83e035c169dd98abb00961fb76184388d3ad0940c3e8a389544b2"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          27904
+        ],
+        "sample_hex": "10af01c3c0d0157c157ca87cecf608ed",
+        "sha256": "133ada6f8b73d2641e2e040e40c5857e7b5e47d21f9b256182a9f5267f90f87f"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          26240
+        ],
+        "sample_hex": "8058301b09bf02067e0c7ffc804c301c",
+        "sha256": "18777a598722877a2b92e22a37ec5f6d2df8e3fe12f75478f1e9c80e77960500"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          26624
+        ],
+        "sample_hex": "0808e6ffe57c2403f8eff6e5247004e5",
+        "sha256": "1bc32a6d0209ce4219161fbca404895baa0bc46437fd8ac6ebbaa241fdebd7f3"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          32704
+        ],
+        "sample_hex": "a3e06018800a908a51e07004a3e0600c",
+        "sha256": "1ef0fc53c3f1a4101eea2f80c25ca4f82bb84c18fa79b9ae593090d0b3afed1f"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          30720
+        ],
+        "sample_hex": "097a00900001122fb7904097f090409c",
+        "sha256": "204291444868911fc1664f7105d2999cd02d987f1762771e851df97eaf219566"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          31104
+        ],
+        "sample_hex": "e43440f583e0904099f074a32ff582e4",
+        "sha256": "24ebe8bb67f56220818f78883fe477478f5db7febf2e5a4468f0f65615013664"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          30592
+        ],
+        "sample_hex": "64fe700302767b90891fe02438ff9089",
+        "sha256": "25333cae3674959bfdd6161ddf2aa6c73b9d5761b8c93e5b9294f769b315677d"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          38720
+        ],
+        "sample_hex": "7ea5027ea2204f03027ea5908a49e0b4",
+        "sha256": "25cb9ceedba8e8f9872211f65f93c7ecbb279f58a3e80acae8385912befda249"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          29568
+        ],
+        "sample_hex": "feef78aa26ffee1836a87c0808f608ef",
+        "sha256": "28583441dfa8a17c7789580205a507d45cf44d71dacddd583a7f3b51cc4cf4c2"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          28032
+        ],
+        "sample_hex": "7c76060876840273d8a87c760608768c",
+        "sha256": "29be30dd4ce6b407cc4b9afa4c4ee436251d75e343c8911e99ebf709a6406e40"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          38592
+        ],
+        "sample_hex": "3b78abe66404703478b0e66401602d90",
+        "sha256": "2a26e7f23baab281f9d01a72303335cf5c2c895698c8e6e4d4c6c43c6c958c41"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          27072
+        ],
+        "sample_hex": "3373b6ff5273bfff5373c8ffdf000072",
+        "sha256": "2b010a5d10600716d62e6cab4f1cdf6f6c68b1bf097ffb99cbc9d27721d5ec4b"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          36224
+        ],
+        "sample_hex": "ef600f78b5760678ab7628e478b0f602",
+        "sha256": "2be29302ba302c71ea7e3159871bb9f59bfc8bf02d87bb0992d71ee07b10e739"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          26880
+        ],
+        "sample_hex": "e030e30302a30302a2fe908353e030e3",
+        "sha256": "2ce3033c8c725f861b37dc748b2666ba79997fedde8b7750918f89b002e9f13f"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          26816
+        ],
+        "sample_hex": "3473210037732b003a7335003b733f01",
+        "sha256": "2fbfd540a85e2536ff0dde4af902df0b79fa6e1e9703d6f3a6cb9a102abbe1b5"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          30272
+        ],
+        "sample_hex": "3090891ce0fea3e0a87c08080826f618",
+        "sha256": "3465e4783c3d2178b8439a55b79c258e659faf0083af3898129a7a79250fb5f4"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          32320
+        ],
+        "sample_hex": "303e0e78b5e6b4020878abe6b4040280",
+        "sha256": "4285e54e661c23e845b026b7aaad6d15c17ee59a69789679fb2fbfc42eec309c"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          39360
+        ],
+        "sample_hex": "7c7a0090000212313fffe57c2404f8e5",
+        "sha256": "49af4ab75bce5c377daa642e38f8339d7235b8388c383cd462f2a5bc8a3390b6"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          26496
+        ],
+        "sample_hex": "1d728a001e7294001f729e002072a800",
+        "sha256": "4b871b3b7ee4e866b24ff907334c30008cdcc4903c6c162c73bb338db5efd289"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          24064
+        ],
+        "sample_hex": "ffffffffffffffff01ffffffffffffff",
+        "sha256": "4fb0bb629f9b2e098371937432385292c9f1e86812c432e112da87a2ebf7b704"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          39616
+        ],
+        "sample_hex": "600302b0959052a3e054076403700302",
+        "sha256": "504cd1c6a4cc461d17fb623d52c35fb7b690d0da0c75def0a81a3f791f9d53c1"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          33792
+        ],
+        "sample_hex": "a9e6fe08e6ffef2404ffe43efee433fd",
+        "sha256": "58ff801d203925de310d17f846b9f72683f860791bfc7a6d5c96905b508891a3"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          33344
+        ],
+        "sample_hex": "ce70010614ff908a4ee0fd12039f301f",
+        "sha256": "66bbba48126cd1c7e361eae1dbff35e665cb2676c61d3f7ebcad824a25670da7"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          26304
+        ],
+        "sample_hex": "3903120309908a4be0a87cf6a3e07b00",
+        "sha256": "739add77d5266e19cbd314ac088a0770aa1750c436c79d11206d004c804ae396"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          32192
+        ],
+        "sample_hex": "f478a90806e618cee6ce70010614ff7d",
+        "sha256": "77f654ba6e65d3654f29dbd54b6b9807d19553354c33bf991b5c9f0d7310cdf7"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          35392
+        ],
+        "sample_hex": "01908a23f0027d5a908a23e0ff131354",
+        "sha256": "7dd7391f0ae4cd09ba0cee04f019319407cadb750969fb2683ac5395791942bb"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          26560
+        ],
+        "sample_hex": "7c2404f87604e57c2404f8e6ff904000",
+        "sha256": "7f3cb66d81b404bb9907f659356e5f899fb9cd5a042808e472da09e4a1306a17"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          36928
+        ],
+        "sample_hex": "02d1b878a1e6700302dc80301e057f23",
+        "sha256": "82221cbd2fbd1ec14ea3a53e2c108dc16d4527a53faa23b4f456840fd579f31c"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          31360
+        ],
+        "sample_hex": "26f618e436f6908a4ee02404f0908a4d",
+        "sha256": "83125549fc8aaa4a038e048c3fada96df0a6560ff590a65dd4e6ae2949b0c65c"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          24576
+        ],
+        "sample_hex": "809840351207235030908124e030e029",
+        "sha256": "8abb923850ed71bb6029daed037703e07f2c86f7d65ed0cd426a5915ad9d247a"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          32000
+        ],
+        "sample_hex": "f090401be070fa904023e07b00a97c7a",
+        "sha256": "97d7a6c1060257440525908f115e3fd66af44a31ff76f404733f9b3e376d0bd3"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          30976
+        ],
+        "sample_hex": "00500302c6f67e1d7f381203c3cceecc",
+        "sha256": "9b1a124a7a545546f13a39d0bfd6c8e6fcc371be30eeab0c8d5f8038ccdddfef"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          29888
+        ],
+        "sample_hex": "8a4de0904099f0908a4ee0904099f090",
+        "sha256": "9b673c066ae46057009d7f962320e5ff963e1c4f7437d95e328290edeb39a3b7"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          31808
+        ],
+        "sample_hex": "4000e020e7f990891fe02438ff90891e",
+        "sha256": "9e474876a043be20ef95890b9c75715015cd34c89b8b42ffc0b757f6c2614bb8"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          24512
+        ],
+        "sample_hex": "ff7f009898f4020408c54f4b00000000",
+        "sha256": "9f7233a18d22a67d94a8feecacfcd4d80e6e67a20a00b15a3b32a430cef98c83"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          33664
+        ],
+        "sample_hex": "0614ffe4fd12039f78a90806e618cee6",
+        "sha256": "9ff3d3a8d8e30ef346bbea16c624c636641ba46cd2066278a634851c738bfb1a"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          35072
+        ],
+        "sample_hex": "064b02f5b102065102ecee020657908a",
+        "sha256": "a6250c35aa83deae53939d5cb07297f89fbaa0351e3b9acbca16dbd47770d8bf"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          36288
+        ],
+        "sample_hex": "3400f0e0fea3e0ff12cdeee57c2405f5",
+        "sha256": "b27f4f8bca477683c25dbd2ae7552e68b48fbb8e187f80e96715374a85c53ac9"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          31488
+        ],
+        "sample_hex": "fe08e6ff90891fe02fff90891ee03ea8",
+        "sha256": "b69f366c92b68ce2ade4f064e1e296ae657e6a5b3331905e21148efbe7ac0155"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          36544
+        ],
+        "sample_hex": "abf6908971e002714c908a49e024dd60",
+        "sha256": "b849181e688a123dcfb2bd08973960e8dd6f2a53aa75a108dc3268e7633414cc"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          768
+        ],
+        "sample_hex": "0000aff0490000180000aff049000018",
+        "sha256": "be704fe59363d021949108c4c7e3bec34496850a5e9037e3e04de03ba2873dd5"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          30080
+        ],
+        "sample_hex": "a3e060030276b4908a4ff0a87ce6fe08",
+        "sha256": "c131c55f490925a8914126feb7b33d026b6b556b606a193366fa6562fcd19b0b"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          31232
+        ],
+        "sample_hex": "8a4fe0bf01054410f0800354eff0908a",
+        "sha256": "c5e359120f976e18bbb347aca0cfab9d3deaefb59cad1234063f22eb449905d7"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          26368
+        ],
+        "sample_hex": "25e075f00a84fd7c00ef75f0b0a42dff",
+        "sha256": "c8c5359c53cb6afb02015a9a3d45e408b5fef387abc13b5ecc8c505a24ecf56f"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          34816
+        ],
+        "sample_hex": "8f25027d5a127150027d5a908a49e0ff",
+        "sha256": "cc51f24576840ade5a8eeea4b01fd05129f7d0fdc005cc9d59e636b6a1a54ffb"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          30656
+        ],
+        "sample_hex": "e020e7f9904098e0a87cf6904000e020",
+        "sha256": "ce6cf745404c32dba4c097f71b47570f37954bfac3c1ead48b1a766ce59134f3"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          17024
+        ],
+        "sample_hex": "ffffffffffffffff060704ffffffffff",
+        "sha256": "d9c08f2181d45eaad54b6d6484015ffb4fe3f86bef6a9889d145011fb9f8bcfd"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          27328
+        ],
+        "sample_hex": "0273d8a87c760502737ba87c76050876",
+        "sha256": "e7c28c6a3943a691597ea8c8c24c383582454607d6f13cc271ce3074e7bd84d2"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          35328
+        ],
+        "sample_hex": "8937e0547f600b78b5760478ab764202",
+        "sha256": "ea8c4661a09834554f24154a57fa52bcef4f287a844f2866a87950fea9ac1890"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          28352
+        ],
+        "sample_hex": "a3e0f9a3e0faa3e02fffea3efeed39fd",
+        "sha256": "ee30d1b5dacac4fc4145b020e110b67308dd5636cae98ae3fe83e092f8dcd477"
+      }
+    ]
+  },
+  "reference_unique_chunks": 701,
+  "shared_chunks": 649,
+  "target": {
+    "capture_count": 1,
+    "capture_dir": "references/evidence/live/normal-start-stop-eject-late-20260501"
+  },
+  "target_only": {
+    "by_capture": [
+      {
+        "index": 0,
+        "name": "00-baseline-before-start-stop",
+        "new_chunk_observations": 71
+      }
+    ],
+    "by_page": [
+      {
+        "count": 4,
+        "page_start": 768
+      },
+      {
+        "count": 4,
+        "page_start": 1024
+      },
+      {
+        "count": 4,
+        "page_start": 1280
+      },
+      {
+        "count": 4,
+        "page_start": 1536
+      },
+      {
+        "count": 4,
+        "page_start": 1792
+      },
+      {
+        "count": 3,
+        "page_start": 26368
+      },
+      {
+        "count": 2,
+        "page_start": 26112
+      },
+      {
+        "count": 2,
+        "page_start": 26624
+      },
+      {
+        "count": 2,
+        "page_start": 26880
+      },
+      {
+        "count": 2,
+        "page_start": 27904
+      },
+      {
+        "count": 2,
+        "page_start": 30208
+      },
+      {
+        "count": 2,
+        "page_start": 30464
+      },
+      {
+        "count": 2,
+        "page_start": 30976
+      },
+      {
+        "count": 2,
+        "page_start": 31232
+      },
+      {
+        "count": 2,
+        "page_start": 32000
+      },
+      {
+        "count": 2,
+        "page_start": 35328
+      },
+      {
+        "count": 2,
+        "page_start": 36096
+      },
+      {
+        "count": 1,
+        "page_start": 16896
+      },
+      {
+        "count": 1,
+        "page_start": 24064
+      },
+      {
+        "count": 1,
+        "page_start": 24320
+      },
+      {
+        "count": 1,
+        "page_start": 24576
+      },
+      {
+        "count": 1,
+        "page_start": 27136
+      },
+      {
+        "count": 1,
+        "page_start": 28160
+      },
+      {
+        "count": 1,
+        "page_start": 29440
+      },
+      {
+        "count": 1,
+        "page_start": 29696
+      },
+      {
+        "count": 1,
+        "page_start": 29952
+      },
+      {
+        "count": 1,
+        "page_start": 30720
+      },
+      {
+        "count": 1,
+        "page_start": 31488
+      },
+      {
+        "count": 1,
+        "page_start": 31744
+      },
+      {
+        "count": 1,
+        "page_start": 32256
+      },
+      {
+        "count": 1,
+        "page_start": 32512
+      },
+      {
+        "count": 1,
+        "page_start": 33280
+      },
+      {
+        "count": 1,
+        "page_start": 33536
+      },
+      {
+        "count": 1,
+        "page_start": 33792
+      },
+      {
+        "count": 1,
+        "page_start": 34816
+      },
+      {
+        "count": 1,
+        "page_start": 35072
+      },
+      {
+        "count": 1,
+        "page_start": 36352
+      },
+      {
+        "count": 1,
+        "page_start": 36864
+      },
+      {
+        "count": 1,
+        "page_start": 38400
+      },
+      {
+        "count": 1,
+        "page_start": 38656
+      },
+      {
+        "count": 1,
+        "page_start": 39168
+      },
+      {
+        "count": 1,
+        "page_start": 39424
+      },
+      {
+        "count": 1,
+        "page_start": 40448
+      }
+    ],
+    "new_chunk_count": 71,
+    "new_chunks": [
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          34816
+        ],
+        "sample_hex": "d0d092af22e49085edf0908c847483f0",
+        "sha256": "00fb8d6fa31387f01a49e8b0ef6c8c631b083a9e9ce22eca3a364f5383a1928b"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          38720
+        ],
+        "sample_hex": "500b7402f0905005e0540f4480f09050",
+        "sha256": "02789b68ac4921932ee6ace3ddd6d567e3758ac45661fa9f5050ec481fbaa880"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          36864
+        ],
+        "sample_hex": "9055c6e04430f0908243e0c4540f30e0",
+        "sha256": "0745cd5069d58a07beeea477c8602517b9536abec25a202ae6c4ae853b4b2c96"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          26624
+        ],
+        "sample_hex": "9059f074def0a374c0f0905a00e04407",
+        "sha256": "121190698133004086d72dff07051379524e40b37895eca8ba539a1433fbf192"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          960
+        ],
+        "sample_hex": "aff20803aff02401aff004030000dff0",
+        "sha256": "1655b3de91661ac4e94f4f0bf6cbb0f873cabce9c7c3a21164e9f276bcb73e53"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          24512
+        ],
+        "sample_hex": "ff7f009898f4020408c54f4b00000000",
+        "sha256": "16793a375a0fa7e9ce7e2d44d8bc1c15aefe383cebbee399b055026e187064bc"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          26688
+        ],
+        "sample_hex": "6003029464905a31e0540ff022ee707b",
+        "sha256": "1a8df790ad5009964160faa2233c1278348e2400c259684c7b0703588f8501d2"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          27072
+        ],
+        "sample_hex": "7f0412efbfa87c0874fb26f61874ff36",
+        "sha256": "1b21552af517aac2311bc7ff4a822ca7277765921736658c42d0e49afde5cf0c"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          33344
+        ],
+        "sample_hex": "007f531208b57c007d007fc31208b57c",
+        "sha256": "2710cd950fbe54daab5bad65bd068fc21a58df7a338d43bba04486ea09048b4d"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          35136
+        ],
+        "sample_hex": "a07f2d12f33aef54f3440cfd7f2d12f2",
+        "sha256": "28f0bbb1abca1f716d5f54886ca07f6368ae97f448295566bb816f62e3af4032"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          30208
+        ],
+        "sample_hex": "e54db40e13e5512401ffe43550fee435",
+        "sha256": "2e96fc468ed71d879bf1126ff0624c6d1045f7e8c4179b4155abe5e2af0f39bd"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          24064
+        ],
+        "sample_hex": "44425547100e0e0e01ffffff00000000",
+        "sha256": "30e740d7aa853d5f5d1496f7831541b47bf54c5648f701e6f35c300a2b2455d1"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          1920
+        ],
+        "sample_hex": "aff00e030100aff02501aff003020100",
+        "sha256": "33338d9c692c0d083547884a5731aec4b7315895406e9acdc0e784c41ac2cbc7"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          1280
+        ],
+        "sample_hex": "1225aff01e061225aff01e070523aff0",
+        "sha256": "3a5c02fa61d7357ae76cbd8489074ee6c30676e24340409a2fefc4c44717cfee"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          26944
+        ],
+        "sample_hex": "c0f0904864e04401f07e007f64120a71",
+        "sha256": "3cadb45e52ef6ea101742356c22c579a74a85f88695c0217c8b093f5790d48d7"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          26368
+        ],
+        "sample_hex": "783f122ab2122e0512173d2212046550",
+        "sha256": "42054da29e9ab4a51f9ec12a8857818d1f032383fa6ff8aeddce4b87104dc30b"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          26496
+        ],
+        "sample_hex": "02f1d802f1d802f1d80215e10215e702",
+        "sha256": "42a63b2f9a3f62f69a91b9ffdbd1d88fd2f7007e53085532fbeb6706a826ebaa"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          28032
+        ],
+        "sample_hex": "f25fa87c08e6fc08e6fd7e017f8012e9",
+        "sha256": "436c84fa2abf6b965b12c039366704679e5fdfdc6d403248b69849a642a451aa"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          24640
+        ],
+        "sample_hex": "8f5f8d60859067904e05e054fef07f05",
+        "sha256": "486eefd5d1b741b6b455315d21bf2b7ad313efa837152cdc258f071ba38a888a"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          39360
+        ],
+        "sample_hex": "5f2f90892de0fea3e0ffc3908947e09f",
+        "sha256": "4a155a9f2458285cef14bc72f902787b17c248385b7f2203b614ed682ecf59b7"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          1344
+        ],
+        "sample_hex": "0200aff04b00ae62aff03001aff04b0b",
+        "sha256": "506310269b5924baff5f12a802b6fd2cedfe180547447c5755f5df1a58fe0ad0"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          30464
+        ],
+        "sample_hex": "e5632438f563e562341df562e43561f5",
+        "sha256": "51bd3a00627d374c887155ce7a7a9ffe60a00e1f8f2604f981bc3e6e68c8fff0"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          1536
+        ],
+        "sample_hex": "0f000036aff00300aff115082d05aff1",
+        "sha256": "55dfc3526975a5248d7373fb1600868bc6221fa2cd95c7adea1ee1bfe8d8e400"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          29824
+        ],
+        "sample_hex": "f0905498e05411f09087aee0908224f0",
+        "sha256": "56f399d8381ff70b2942cb1efcb33242a32249628b53ce061936ed6a298c189e"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          1728
+        ],
+        "sample_hex": "1e041000cffcbc041e050e00cffcbc04",
+        "sha256": "57147a9e36e3f8df1585795ab797e4bbd066bd10d4fbf37c3d6314981a73105f"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          26560
+        ],
+        "sample_hex": "01e054faf07e007f64120a71904864e0",
+        "sha256": "593d3704fc52c46912dfecab57ca781fb8598d874217996a45cbc166308018a3"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          33920
+        ],
+        "sample_hex": "90824ee064017058908133e0c4135407",
+        "sha256": "5badff03bdb8d6398695b8ce49b0334c65795b7ed703e2f107aef7d50e236691"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          36416
+        ],
+        "sample_hex": "a3e0fea3e0ff78041233499088291234",
+        "sha256": "5e04b1d3a5d94c9096e31f4ca1c956cc06883978614057177afbd0f5be25ccfc"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          1600
+        ],
+        "sample_hex": "0803aff02401aff115082d05aff1608c",
+        "sha256": "616efd839d6e8faebaf04f8cf7d5ce544e9fd03bd7b27edafaf33c9af57c5d8c"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          28160
+        ],
+        "sample_hex": "fc08e6fdc3ef9dffee9cfec3ef9402ee",
+        "sha256": "67339c2acffbe2017e0687320ed355f6fbaa888d97c94ea9d962b9319c4ff2b5"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          32512
+        ],
+        "sample_hex": "a3e0ff02cdee9048f8e020e10a30aa07",
+        "sha256": "69db5ec92ba82af904adbc7102cf4748c1b8ba3b805ecd5da7b804c4e7f7160f"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          17024
+        ],
+        "sample_hex": "ffffffffffffffff070804ffffffffff",
+        "sha256": "70d7e608f163a00a91ff16c3af229a73368889dd369930eb6e376578fb6453af"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          31872
+        ],
+        "sample_hex": "7563007562ac756106756000e5632448",
+        "sha256": "70fef75fbf1cc98657b219d8ad6cfa9872f312c42a589e2661bcc2cf77041056"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          1216
+        ],
+        "sample_hex": "510c0104aff4fe00aff40000aff40100",
+        "sha256": "719cb019850c9c61a5ff9e767bd261edba399fb9cf305db0d00f07ac8e3376c7"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          32192
+        ],
+        "sample_hex": "e4fb7d4bff7e01120b0790885de523f0",
+        "sha256": "71b1d0b2bc09b13bbca7c3b2ceedffd664a2e53cb03fad3a62de4259a40bf752"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          31488
+        ],
+        "sample_hex": "cae04480f0908133e04480f022e49086",
+        "sha256": "73897af0cc76ef611a6c2889cea92d26a817788848f3740f2271fc27372b5425"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          36288
+        ],
+        "sample_hex": "1aef7f02b4010812f33aef54df800612",
+        "sha256": "7ecfa5d59c310c299de441f431139e85e98ad0d94c9607ad1b81e85f9b8835ce"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          832
+        ],
+        "sample_hex": "0e010300aff04b11aff04b0caff04b1d",
+        "sha256": "7fce36618bc9cf2aa36ff580c8dcae26743c9de6bd301626e71a2d27c3b2a78d"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          39552
+        ],
+        "sample_hex": "8988e0fca3e0fdc3ef9dffee9cfed3ef",
+        "sha256": "82706242069810215e01465ffacb63b50bbe9daf3e5a7137db9f0a959e22f4bc"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          30272
+        ],
+        "sample_hex": "4a1de070fa904a40e0fea3e078a86670",
+        "sha256": "8a15ca9c1bbb2b14a4f804a9d294d7325154557afc4dfd222f7b82358c421a52"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          1664
+        ],
+        "sample_hex": "0000026caff60102aff4fe00aff40000",
+        "sha256": "8bce1e85e416eaeb62e0efae2e95d558940f7b2c215b08054586ae60fa4e3708"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          32064
+        ],
+        "sample_hex": "e4f09051e6e04410f09051e8740ff090",
+        "sha256": "8c34f4190a646006f2c00b804b67aef0249f6604399107aa03e0b9264e030323"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          32448
+        ],
+        "sample_hex": "eff09048d9e04420f0904852e020e503",
+        "sha256": "9777a6d718a26edb9daae9c759fdc1e9c04c23ad0209f1b4f376bd84bfac1277"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          30656
+        ],
+        "sample_hex": "7405f0905495e04444f090807ce0ff90",
+        "sha256": "9931c7ec98bf41d7526af9a277137ccf7107326d48a7801f236777970d7d11f3"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          40576
+        ],
+        "sample_hex": "f09090d6e0fca3e0fdd3ef9dee9c404a",
+        "sha256": "9b687f59bb161e23d93ebe78f781ed00047d654e632d48c5721f6aef6c9cb536"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          27136
+        ],
+        "sample_hex": "547ff0905a01e04418f022ee64016003",
+        "sha256": "a471caac736fdc80e5ef8cd3d4f66ef09bc051a4f6ed99b9e4669594d890080b"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          26304
+        ],
+        "sample_hex": "d322ef603a24c060252441604324fe70",
+        "sha256": "a5d82dbfda0d41d5a90d40162cb29318c4f62be43cea67bddf3c2d7a88175c78"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          38464
+        ],
+        "sample_hex": "7e037f2312efc07c007d087e037f2412",
+        "sha256": "a72af0097c079ebb0f9cf5071a9e0cbf7161bed8f3931ab1690cc89c515130b0"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          30720
+        ],
+        "sample_hex": "1d80209089297401f022121623801412",
+        "sha256": "a85dbc735d70c3f1bfaf89db041391a0ae7bf65f1cc571ec37c597cd835ad704"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          896
+        ],
+        "sample_hex": "df0001000100aff00300aff115082d05",
+        "sha256": "a8e3274321569fb9627a1e8be3f8cf8d6f43d2ee2426c3449919a90dd47a2470"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          28096
+        ],
+        "sample_hex": "d0157ca87ceff6157c157c90825be020",
+        "sha256": "a8e568319cd08b31ab1953381a7e819e41b765745f06e7d88cfb2480c50ce347"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          31424
+        ],
+        "sample_hex": "78047ff07e6f7d007c0012e272756300",
+        "sha256": "ab6b066470224b3a9922dbdb69bf1cbf4998cd0095e05340b97c8cf90273ab83"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          31168
+        ],
+        "sample_hex": "94064009908a23e04402f0807390412f",
+        "sha256": "ba1ab77962c262896d3ab2101977142850573a637ed23056b5c78f676c2f0340"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          1408
+        ],
+        "sample_hex": "0523aff01e081225aff01e091225aff0",
+        "sha256": "bc467e7803f8fdbd23fe2722e709ef38d2b13586c6a1cc9db31a399d10dbe5b6"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          1984
+        ],
+        "sample_hex": "2d05aff1510c0104dff0000000060000",
+        "sha256": "c77b1d0b16e12f322bb9a06c0cd58bc2d5e572024d5dbbd7ac766ac566c4d10c"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          35456
+        ],
+        "sample_hex": "8b7e007f6412efc02290825be030e61d",
+        "sha256": "c92a83860db4ec5eebc62eceec2a9f40c2478f9a512b4769622c8b05122315f5"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          1856
+        ],
+        "sample_hex": "1e180000cffcbc041e190000cffcbc04",
+        "sha256": "ca88c45bcc32ee817d4ce5fa42b18d89154c61037c47d3bb46a9e9e2ba92d65a"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          768
+        ],
+        "sample_hex": "0000aff0490000180000aff049000018",
+        "sha256": "cf7136afb15e2ae417c523b44c786939b82c4f886b11cec24e411210ec82f11f"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          33664
+        ],
+        "sample_hex": "7fca1208b57c007d007fcc1208b57c00",
+        "sha256": "d4bc18a836355a7834d879be68e579df598ef46c6fda2024d0455d999ca55906"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          36224
+        ],
+        "sample_hex": "908da7e0240c800d12f33aef54e0ff90",
+        "sha256": "d61bd1f9634846d0cc19ed8c5a4706b60bd152db2bf79c6b2902258a09ec9553"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          31232
+        ],
+        "sample_hex": "15d25e755f027560e575610112cc0dad",
+        "sha256": "d7cd6860a12da5d44cf7f6e6b477de4b621a4866d34983d1a08b90303a2ca6f2"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          1472
+        ],
+        "sample_hex": "aff04b13aff20c000000aff04b23aff1",
+        "sha256": "dbd1f4a4f2324ec021736e0e5dd4e8260ff04ab4ff8e91abbfb2c625f57aa0f5"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          1152
+        ],
+        "sample_hex": "2d058003e688aff3820002d0aff11508",
+        "sha256": "dd46fefe3f8df8d1e27bc18015ef960fe861c03880fdc280068e90b13715db4a"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          1088
+        ],
+        "sample_hex": "a2f7aff382021838aff1a2f8cffcbc04",
+        "sha256": "dd98b2d9c09b7e31da319f7036e4e811bba5d2d7a5d45e02bfd4b3f379752fc6"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          30144
+        ],
+        "sample_hex": "5485f0905474e054cff0a374bef0a3e0",
+        "sha256": "ddbb5065c62d46709eb89067ab50f426a0360e9b9db5ddc6290ec26cf8ac4a14"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          1024
+        ],
+        "sample_hex": "82121860aff1a2f6aff382031892aff1",
+        "sha256": "e1e2ae0473fb79dcc6cf4ac20b2164a4d42b76b533d680b82e3077bb55053c72"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          31040
+        ],
+        "sample_hex": "e27275633a7562c975610675600012e2",
+        "sha256": "e857a87f01298df40262a85ac3df7af4268dad142d88ccd2b18a091f9d6bd82b"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          26176
+        ],
+        "sample_hex": "d17b307a4c798a7840122ba37bdb7af9",
+        "sha256": "ea8e7a737914897c6fd9476def0daf92429a2f67d762c0e2db067fae95d2d92f"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          29568
+        ],
+        "sample_hex": "e020e703120dbf908243e0ffc4131313",
+        "sha256": "ec61db38f9231458b6a547a0b6342c34bb7dcedeb48731e8448aea7b71392444"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          1792
+        ],
+        "sample_hex": "1e100600cffcbc041e110400cffcbc04",
+        "sha256": "f91b284460546f0e3fb4fc24bb05d8b944ed882f27a2df5465fa6270bbda7aea"
+      },
+      {
+        "capture_names": [
+          "00-baseline-before-start-stop"
+        ],
+        "observations": 1,
+        "offsets": [
+          35328
+        ],
+        "sample_hex": "f080cceeccef4401fd7e007f9312efc0",
+        "sha256": "fa9445519c60c52831bf06c298920d354ca59a1e53ed2af1d4d9834208ce530e"
+      }
+    ]
+  },
+  "target_unique_chunks": 720
+}

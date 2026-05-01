@@ -1713,3 +1713,15 @@ Immediate useful directions:
     planned `1B 00 00 00 02 00` (`eject`) but did not send it, captured a
     baseline `READ BUFFER id=01 offset=0x070000` window, and the drive stayed
     normal `LD5M`.
+52. The first deliberate START STOP eject run is summarized in
+    `analysis/8051/normal-start-stop-eject-live-20260501.md` with evidence in
+    `references/evidence/live/normal-start-stop-eject-20260501` and
+    `normal-start-stop-eject-late-20260501`, plus a repeated delayed capture
+    in `normal-start-stop-eject-delayed-20260501`. Sent CDB:
+    `1B 00 00 00 02 00`. The user saw the sled/eject dance, so the static
+    `0x8a49 == 0x1b` / `(0x8a4d & 0x0f) == 0x02` branch is a real mechanics
+    route. Immediate post-command `READ BUFFER id=01` timed out during the
+    transition. A repeated run with one-second post-command delays still timed
+    out on the first two after-windows, then recovered; `REQUEST SENSE`,
+    `MECHANISM STATUS`, and `/dev/sg0` all ended normal `LD5M`. The capture
+    script now records failures and saves summaries incrementally.

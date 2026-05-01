@@ -1691,3 +1691,25 @@ It planned the eject-style START STOP CDB, `1B 00 00 00 02 00`, but because
 normal work-window baseline and then checked that `/dev/sg0` was still normal
 `LD5M`. So the tool is ready for the real test without having already moved
 anything.
+
+Then I ran the real one. The command was still just ordinary START STOP UNIT,
+not updater traffic: `1B 00 00 00 02 00`, the exact eject-style low-nibble
+case from the static branch. The drive visibly did the eject dance. That is a
+very satisfying anchor: the CDB shadow check we found is not a curiosity in an
+error path, it is on a real route to mechanism movement.
+
+The capture side taught us something too. The immediate post-command
+`READ BUFFER` work-window capture timed out while the mechanism was doing its
+thing, and `sg_raw` returned after about five seconds with no response payload.
+But a delayed follow-up succeeded, `MECHANISM STATUS` returned eight zero
+bytes, and `/dev/sg0` still identified as normal `LD5M`. So this was not a
+currentboot-style loss; it was a busy transition window. I hardened the capture
+tool so future mechanical runs keep their summaries even when the first
+post-command window times out.
+
+I repeated the same eject command with the hardened tool and longer delays.
+The first two post-command work-window reads still timed out, then later
+windows succeeded. REQUEST SENSE came back clean, MECHANISM STATUS before and
+after was eight zero bytes, and the optical LUN stayed normal. So the practical
+rule is now: START STOP can leave the public work-window path unavailable for
+several seconds after visible motion, but it recovers by itself.

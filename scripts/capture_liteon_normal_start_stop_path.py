@@ -112,12 +112,29 @@ def command_record(
     }
 
 
+def save_report(args: argparse.Namespace, report: dict[str, Any]) -> None:
+    (args.out_dir / "summary.json").write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
+
+
 def capture_named(args: argparse.Namespace, name: str, report: dict[str, Any]) -> None:
     path = args.out_dir / f"{len(report['captures']):02d}-{name}.window.bin"
-    item = capture_window(args, path)
-    item["name"] = name
-    report["captures"].append(item)
-    print(f"{name}: window sha256={item['sha256']}", flush=True)
+    try:
+        item = capture_window(args, path)
+        item["name"] = name
+        item["ok"] = True
+        report["captures"].append(item)
+        print(f"{name}: window sha256={item['sha256']}", flush=True)
+    except Exception as exc:  # noqa: BLE001 - preserve mechanics-run evidence.
+        item = {
+            "name": name,
+            "ok": False,
+            "path": str(path),
+            "error": str(exc),
+        }
+        report["captures"].append(item)
+        print(f"{name}: window capture failed: {exc}", flush=True)
+    finally:
+        save_report(args, report)
 
 
 def main() -> int:
@@ -144,6 +161,7 @@ def main() -> int:
         "commands": [],
         "captures": [],
     }
+    save_report(args, report)
 
     if not selected:
         print("no --variant selected; capturing baseline only", flush=True)
@@ -168,6 +186,7 @@ def main() -> int:
             f"mechanism-status-before: rc={rec['returncode']} good={rec['good']} len={rec['stdout_len']}",
             flush=True,
         )
+        save_report(args, report)
 
     if args.allow_start_stop:
         for variant in selected:
@@ -184,6 +203,7 @@ def main() -> int:
                 f"elapsed={rec['elapsed_s']}s",
                 flush=True,
             )
+            save_report(args, report)
             for index in range(args.capture_after_count):
                 if args.after_delay:
                     time.sleep(args.after_delay)
@@ -202,6 +222,7 @@ def main() -> int:
                     f"good={sense['good']} len={sense['stdout_len']}",
                     flush=True,
                 )
+                save_report(args, report)
                 capture_named(args, f"after-sense-{variant.name}", report)
             if args.mechanism_status_after:
                 mech = command_record(
@@ -217,8 +238,9 @@ def main() -> int:
                     f"good={mech['good']} len={mech['stdout_len']}",
                     flush=True,
                 )
+                save_report(args, report)
 
-    (args.out_dir / "summary.json").write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
+    save_report(args, report)
     return 0
 
 
