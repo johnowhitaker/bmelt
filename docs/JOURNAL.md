@@ -1684,3 +1684,10 @@ confirm when the START STOP path is reached, read the handful of state bytes
 around it, and only then think about replaying or modifying a whole mechanics
 sequence. I wrote this up in
 `analysis/8051/normal-start-stop-mechanics-path-20260501.md`.
+
+I also sanity-checked the new capture tool on the Linux host in dry-run mode.
+It planned the eject-style START STOP CDB, `1B 00 00 00 02 00`, but because
+`--allow-start-stop` was not present it did not send it. It only captured the
+normal work-window baseline and then checked that `/dev/sg0` was still normal
+`LD5M`. So the tool is ready for the real test without having already moved
+anything.

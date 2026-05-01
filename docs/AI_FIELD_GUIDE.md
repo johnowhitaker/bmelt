@@ -1706,3 +1706,10 @@ Immediate useful directions:
     gated capture tool for that pass; it prints CDBs and captures baseline by
     default, and requires `--allow-start-stop` before sending any START STOP
     command.
+51. The START STOP capture tool was sanity-checked on
+    `jonathan-thinkpad-t480s` without `--allow-start-stop`; see
+    `analysis/8051/normal-start-stop-path-dryrun-20260501.md` and
+    `references/evidence/live/normal-start-stop-path-dryrun-20260501`. It
+    planned `1B 00 00 00 02 00` (`eject`) but did not send it, captured a
+    baseline `READ BUFFER id=01 offset=0x070000` window, and the drive stayed
+    normal `LD5M`.
