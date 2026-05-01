@@ -1487,3 +1487,40 @@ Immediate useful directions:
     serious readout route probably needs a normal-runtime hook, a hardware
     side-channel, or a deeper controller state transition than `0x002e` plus
     the `0x4a` doorbells.
+25. Normal-runtime `READ BUFFER mode=1 id=01 offset=0x070000` now looks like a
+    page-frame/cache surface, not just a fixed code/table dump. Repeated
+    capture-only reads rotate a small set of informative `0x40` chunks around
+    pages like `+0x6000`, `+0x8600`, and `+0x9500`.
+26. Safe read-only/no-data-out normal SCSI/MMC stimuli pull additional tiles
+    into that same public window. The capture-only control had 704 informative
+    unique chunks; the safe-stimulus run had 752, sharing all 704 control
+    chunks plus 48 stimulus-only chunks. Evidence:
+    `analysis/8051/normal-work-window-tile-harvest-20260501.md`,
+    `analysis/8051/normal-work-window-capture-only-20260501.md`,
+    `analysis/8051/normal-work-window-stimuli-full-20260501.md`, and
+    `analysis/8051/normal-work-window-stimuli-vs-capture-only-20260501.md`.
+27. Treat this as a third decoded-material extraction path alongside static CDD
+    decoding and slow currentboot gateway readout. Public offsets are probably
+    frame slots rather than stable logical addresses, because the same tile can
+    appear at multiple offsets. Next useful work is to run broader repeated
+    safe-stimulus corpora and correlate unique chunks with known 8051 code and
+    command handlers.
+28. A focused eight-cycle repeat of EXTRAINQ, `MODE SENSE(10)`,
+    `GET CONFIGURATION` current/all, and `GET EVENT STATUS NOTIFICATION`
+    produced 751 informative chunks, 15 of them new relative to the first
+    full-stimulus run. The aggregate corpus across capture-only, full-stimulus,
+    and focused-stimulus runs is now 68 captures and 767 unique informative
+    `0x40` chunks. Evidence:
+    `analysis/8051/normal-work-window-chunk-corpus-20260501.md`.
+29. An expanded safe-command pass added read capacity, read format capacities,
+    individual mode-sense pages, additional event classes, TOC/DVD-structure
+    variants, and get-performance. The drive stayed normal `LD5M`; some
+    commands returned expected CHECK CONDITION/ILLEGAL REQUEST with no disc.
+    This added 18 aggregate chunks. The corpus is now 94 captures and 785
+    unique informative `0x40` chunks.
+30. Static exact-match correlation against
+    `references/firmware/extracted/ld5m-f0-window-0x00000-0x100000.bin` finds
+    only 63 exact chunk matches; against `analysis/8051/ldm58051.bin`, only 8.
+    So most harvested chunks are not verbatim 64-byte slices of the known F0 or
+    visible 8051 prefix. Evidence:
+    `analysis/8051/normal-work-window-chunk-static-matches-20260501.md`.

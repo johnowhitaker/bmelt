@@ -1,0 +1,1008 @@
+{
+  "chunk_size": 64,
+  "reference": {
+    "capture_count": 14,
+    "capture_dir": "references/evidence/live/normal-work-window-capture-only-20260501"
+  },
+  "reference_only": {
+    "by_capture": [
+      {
+        "index": 0,
+        "name": "00-capture-only",
+        "new_chunk_observations": 0
+      },
+      {
+        "index": 1,
+        "name": "01-capture-only",
+        "new_chunk_observations": 0
+      },
+      {
+        "index": 2,
+        "name": "02-capture-only",
+        "new_chunk_observations": 0
+      },
+      {
+        "index": 3,
+        "name": "03-capture-only",
+        "new_chunk_observations": 0
+      },
+      {
+        "index": 4,
+        "name": "04-capture-only",
+        "new_chunk_observations": 0
+      },
+      {
+        "index": 5,
+        "name": "05-capture-only",
+        "new_chunk_observations": 0
+      },
+      {
+        "index": 6,
+        "name": "06-capture-only",
+        "new_chunk_observations": 0
+      },
+      {
+        "index": 7,
+        "name": "07-capture-only",
+        "new_chunk_observations": 0
+      },
+      {
+        "index": 8,
+        "name": "08-capture-only",
+        "new_chunk_observations": 0
+      },
+      {
+        "index": 9,
+        "name": "09-capture-only",
+        "new_chunk_observations": 0
+      },
+      {
+        "index": 10,
+        "name": "10-capture-only",
+        "new_chunk_observations": 0
+      },
+      {
+        "index": 11,
+        "name": "11-capture-only",
+        "new_chunk_observations": 0
+      },
+      {
+        "index": 12,
+        "name": "12-capture-only",
+        "new_chunk_observations": 0
+      },
+      {
+        "index": 13,
+        "name": "13-capture-only",
+        "new_chunk_observations": 0
+      }
+    ],
+    "by_page": [],
+    "new_chunk_count": 0,
+    "new_chunks": []
+  },
+  "reference_unique_chunks": 704,
+  "shared_chunks": 704,
+  "target": {
+    "capture_count": 14,
+    "capture_dir": "references/evidence/live/normal-work-window-stimuli-full-20260501"
+  },
+  "target_only": {
+    "by_capture": [
+      {
+        "index": 0,
+        "name": "00-baseline-no-stimulus",
+        "new_chunk_observations": 10
+      },
+      {
+        "index": 1,
+        "name": "01-test-unit-ready",
+        "new_chunk_observations": 15
+      },
+      {
+        "index": 2,
+        "name": "02-request-sense",
+        "new_chunk_observations": 12
+      },
+      {
+        "index": 3,
+        "name": "03-inquiry-standard-96",
+        "new_chunk_observations": 15
+      },
+      {
+        "index": 4,
+        "name": "04-inquiry-extrainq",
+        "new_chunk_observations": 23
+      },
+      {
+        "index": 5,
+        "name": "05-mode-sense10-all",
+        "new_chunk_observations": 28
+      },
+      {
+        "index": 6,
+        "name": "06-get-configuration-current",
+        "new_chunk_observations": 21
+      },
+      {
+        "index": 7,
+        "name": "07-get-configuration-all",
+        "new_chunk_observations": 24
+      },
+      {
+        "index": 8,
+        "name": "08-get-event-status-media",
+        "new_chunk_observations": 20
+      },
+      {
+        "index": 9,
+        "name": "09-read-toc-format-0",
+        "new_chunk_observations": 11
+      },
+      {
+        "index": 10,
+        "name": "10-read-disc-information",
+        "new_chunk_observations": 11
+      },
+      {
+        "index": 11,
+        "name": "11-read-track-information-lba0",
+        "new_chunk_observations": 10
+      },
+      {
+        "index": 12,
+        "name": "12-mechanism-status",
+        "new_chunk_observations": 7
+      },
+      {
+        "index": 13,
+        "name": "13-read-dvd-structure-format0",
+        "new_chunk_observations": 9
+      }
+    ],
+    "by_page": [
+      {
+        "count": 14,
+        "page_start": 33536
+      },
+      {
+        "count": 13,
+        "page_start": 32256
+      },
+      {
+        "count": 12,
+        "page_start": 33792
+      },
+      {
+        "count": 12,
+        "page_start": 36864
+      },
+      {
+        "count": 10,
+        "page_start": 25088
+      },
+      {
+        "count": 10,
+        "page_start": 26112
+      },
+      {
+        "count": 10,
+        "page_start": 35584
+      },
+      {
+        "count": 10,
+        "page_start": 40704
+      },
+      {
+        "count": 9,
+        "page_start": 32512
+      },
+      {
+        "count": 9,
+        "page_start": 39424
+      },
+      {
+        "count": 8,
+        "page_start": 40192
+      },
+      {
+        "count": 7,
+        "page_start": 25600
+      },
+      {
+        "count": 7,
+        "page_start": 28416
+      },
+      {
+        "count": 6,
+        "page_start": 25856
+      },
+      {
+        "count": 6,
+        "page_start": 26880
+      },
+      {
+        "count": 6,
+        "page_start": 29184
+      },
+      {
+        "count": 6,
+        "page_start": 29696
+      },
+      {
+        "count": 6,
+        "page_start": 33280
+      },
+      {
+        "count": 6,
+        "page_start": 34048
+      },
+      {
+        "count": 6,
+        "page_start": 37120
+      },
+      {
+        "count": 6,
+        "page_start": 39680
+      },
+      {
+        "count": 5,
+        "page_start": 512
+      },
+      {
+        "count": 5,
+        "page_start": 27648
+      },
+      {
+        "count": 5,
+        "page_start": 29952
+      },
+      {
+        "count": 4,
+        "page_start": 25344
+      },
+      {
+        "count": 4,
+        "page_start": 35840
+      },
+      {
+        "count": 4,
+        "page_start": 39936
+      },
+      {
+        "count": 4,
+        "page_start": 40448
+      },
+      {
+        "count": 1,
+        "page_start": 27392
+      },
+      {
+        "count": 1,
+        "page_start": 28160
+      },
+      {
+        "count": 1,
+        "page_start": 28672
+      },
+      {
+        "count": 1,
+        "page_start": 28928
+      },
+      {
+        "count": 1,
+        "page_start": 32768
+      },
+      {
+        "count": 1,
+        "page_start": 39168
+      }
+    ],
+    "new_chunk_count": 48,
+    "new_chunks": [
+      {
+        "capture_names": [
+          "05-mode-sense10-all",
+          "06-get-configuration-current",
+          "07-get-configuration-all",
+          "08-get-event-status-media"
+        ],
+        "observations": 4,
+        "offsets": [
+          36032
+        ],
+        "sample_hex": "047f621202fd7d8a7e047f631202fd90",
+        "sha256": "00581718383d99afca1f375f580141f171d30c210af410bd013fccea2e0c3cb4"
+      },
+      {
+        "capture_names": [
+          "05-mode-sense10-all",
+          "06-get-configuration-current",
+          "07-get-configuration-all",
+          "08-get-event-status-media"
+        ],
+        "observations": 4,
+        "offsets": [
+          25344
+        ],
+        "sample_hex": "516000005920001b5580001b5d40001b",
+        "sha256": "06130683184aef5503711da76752dfab57fc220fa7690abdbdb347da0655bf9e"
+      },
+      {
+        "capture_names": [
+          "00-baseline-no-stimulus",
+          "01-test-unit-ready",
+          "02-request-sense",
+          "03-inquiry-standard-96",
+          "04-inquiry-extrainq",
+          "05-mode-sense10-all",
+          "06-get-configuration-current",
+          "07-get-configuration-all",
+          "08-get-event-status-media",
+          "09-read-toc-format-0",
+          "10-read-disc-information",
+          "11-read-track-information-lba0"
+        ],
+        "observations": 12,
+        "offsets": [
+          36928
+        ],
+        "sample_hex": "9055c6e04430f0908243e0c4540f30e0",
+        "sha256": "0745cd5069d58a07beeea477c8602517b9536abec25a202ae6c4ae853b4b2c96"
+      },
+      {
+        "capture_names": [
+          "05-mode-sense10-all",
+          "06-get-configuration-current",
+          "07-get-configuration-all",
+          "08-get-event-status-media"
+        ],
+        "observations": 4,
+        "offsets": [
+          32640
+        ],
+        "sample_hex": "0512133522afa8c2adc2aac2a822afa8",
+        "sha256": "1591d13743eb4b75b85a1ad12c1c83d5cf2089ac765e54765f21dcbd756171f8"
+      },
+      {
+        "capture_names": [
+          "04-inquiry-extrainq"
+        ],
+        "observations": 1,
+        "offsets": [
+          32896
+        ],
+        "sample_hex": "e02fffea3efeed39fdec38fc90895e12",
+        "sha256": "17da5fed883a4145a08ea5d1b739487651ce90ff3dd4a464dd9fda717907ba7e"
+      },
+      {
+        "capture_names": [
+          "00-baseline-no-stimulus",
+          "01-test-unit-ready",
+          "02-request-sense",
+          "03-inquiry-standard-96",
+          "04-inquiry-extrainq",
+          "05-mode-sense10-all",
+          "06-get-configuration-current",
+          "07-get-configuration-all",
+          "08-get-event-status-media"
+        ],
+        "observations": 9,
+        "offsets": [
+          26240,
+          26304
+        ],
+        "sample_hex": "8058301b09bf02067e0c7ffc804c301c",
+        "sha256": "18777a598722877a2b92e22a37ec5f6d2df8e3fe12f75478f1e9c80e77960500"
+      },
+      {
+        "capture_names": [
+          "06-get-configuration-current",
+          "07-get-configuration-all"
+        ],
+        "observations": 2,
+        "offsets": [
+          28416
+        ],
+        "sample_hex": "7c76070876208010a87c760708762880",
+        "sha256": "1de3123ce8f82786f39a7fd5fe6ac992de9d48271332988aff8a02f2dda8f49c"
+      },
+      {
+        "capture_names": [
+          "00-baseline-no-stimulus"
+        ],
+        "observations": 1,
+        "offsets": [
+          37248
+        ],
+        "sample_hex": "4093f0908661e0f5a8904098e0ff9040",
+        "sha256": "1fc002817f62a80cedd76394df2c04c077e1c490138b986ac2df606590dbeae3"
+      },
+      {
+        "capture_names": [
+          "05-mode-sense10-all",
+          "06-get-configuration-current",
+          "07-get-configuration-all",
+          "08-get-event-status-media"
+        ],
+        "observations": 4,
+        "offsets": [
+          27712
+        ],
+        "sample_hex": "080816a87c0808e6ffe57c2403f8e6fe",
+        "sha256": "26f4536528b7d525a8980f8e9b5343507f650e6c84c482119dfc33f6e2c62ab0"
+      },
+      {
+        "capture_names": [
+          "03-inquiry-standard-96",
+          "04-inquiry-extrainq",
+          "05-mode-sense10-all",
+          "07-get-configuration-all",
+          "08-get-event-status-media"
+        ],
+        "observations": 5,
+        "offsets": [
+          39424,
+          39488,
+          39616
+        ],
+        "sample_hex": "11f0e57c2404f8e6904012f07b00e57c",
+        "sha256": "29e7ab54af3468601324b34e74300e76059e83c99893747178c6a12d6ddfb5e6"
+      },
+      {
+        "capture_names": [
+          "00-baseline-no-stimulus",
+          "01-test-unit-ready",
+          "02-request-sense",
+          "03-inquiry-standard-96",
+          "04-inquiry-extrainq",
+          "05-mode-sense10-all",
+          "06-get-configuration-current",
+          "07-get-configuration-all",
+          "08-get-event-status-media",
+          "09-read-toc-format-0",
+          "10-read-disc-information",
+          "11-read-track-information-lba0"
+        ],
+        "observations": 12,
+        "offsets": [
+          33792
+        ],
+        "sample_hex": "8a4df0908a4de0ffc3941250157d00ef",
+        "sha256": "36ba8efee79536b9b3d4a1e7f99a3f2eb84b8e95092cdbfba37287bdb82b1caf"
+      },
+      {
+        "capture_names": [
+          "05-mode-sense10-all"
+        ],
+        "observations": 1,
+        "offsets": [
+          26240
+        ],
+        "sample_hex": "e4f0a37414f08047908a527403f0a374",
+        "sha256": "39ab42ddd82a825a0e1b929e4aa270edc0ecacb6886e9102faa6978c81d15b9a"
+      },
+      {
+        "capture_names": [
+          "06-get-configuration-current",
+          "07-get-configuration-all",
+          "08-get-event-status-media",
+          "09-read-toc-format-0",
+          "10-read-disc-information",
+          "11-read-track-information-lba0",
+          "12-mechanism-status",
+          "13-read-dvd-structure-format0"
+        ],
+        "observations": 8,
+        "offsets": [
+          33664
+        ],
+        "sample_hex": "51e09408908a50e094005006e4f608f6",
+        "sha256": "3d299423d28f65a7933b96e90153d0eec1887025bf636bd378893f58bcc801ec"
+      },
+      {
+        "capture_names": [
+          "00-baseline-no-stimulus",
+          "01-test-unit-ready",
+          "02-request-sense",
+          "03-inquiry-standard-96",
+          "04-inquiry-extrainq",
+          "05-mode-sense10-all"
+        ],
+        "observations": 6,
+        "offsets": [
+          27072
+        ],
+        "sample_hex": "e03018054420f080034410f09081fde0",
+        "sha256": "48f0fc6574113b3fec4123c0cf8832de1053c6f91084e15df1c64171dd541ba2"
+      },
+      {
+        "capture_names": [
+          "04-inquiry-extrainq"
+        ],
+        "observations": 1,
+        "offsets": [
+          28416
+        ],
+        "sample_hex": "c9123430d0d092af22d310af01c3c0d0",
+        "sha256": "569dea1ed606bdd9d6639bff793b0837bff802981e30f6ddb4e205417fe5dc07"
+      },
+      {
+        "capture_names": [
+          "05-mode-sense10-all",
+          "06-get-configuration-current",
+          "07-get-configuration-all",
+          "08-get-event-status-media"
+        ],
+        "observations": 4,
+        "offsets": [
+          34240
+        ],
+        "sample_hex": "e0fea3e02486ffee3403fee43dfde43c",
+        "sha256": "5a0c5fbcd38cf67ca571c761c785d6da2a1b342214879a5fea210c2be3280c29"
+      },
+      {
+        "capture_names": [
+          "04-inquiry-extrainq",
+          "05-mode-sense10-all",
+          "06-get-configuration-current",
+          "07-get-configuration-all",
+          "08-get-event-status-media"
+        ],
+        "observations": 5,
+        "offsets": [
+          37248
+        ],
+        "sample_hex": "90401ee0908784f090401f800b904022",
+        "sha256": "5a65b8a71db909429cd233edb78e4c51dc3db8d35d4ab6b8e23c7c980c935873"
+      },
+      {
+        "capture_names": [
+          "12-mechanism-status",
+          "13-read-dvd-structure-format0"
+        ],
+        "observations": 2,
+        "offsets": [
+          34176
+        ],
+        "sample_hex": "9047b1e4f080069047b17410f0908a4e",
+        "sha256": "5a92e83e04a8bbd5b4bff84dd5bfcb3e206de740a1bf0b791ab8368bcffd7038"
+      },
+      {
+        "capture_names": [
+          "05-mode-sense10-all",
+          "06-get-configuration-current",
+          "07-get-configuration-all",
+          "08-get-event-status-media"
+        ],
+        "observations": 4,
+        "offsets": [
+          25664
+        ],
+        "sample_hex": "70031205fd908627e0ffa3e0fd1207c5",
+        "sha256": "5fd06abdd6c585d138d15c2bd111e3b60d480c1bd780a67f39d75a01e9831a64"
+      },
+      {
+        "capture_names": [
+          "04-inquiry-extrainq"
+        ],
+        "observations": 1,
+        "offsets": [
+          27712
+        ],
+        "sample_hex": "fad3eb9400ea648094804006ed2f29fd",
+        "sha256": "6329fea4e8a8dc2238de928236685108d46f22b49ed52434b8da67312766c9e8"
+      },
+      {
+        "capture_names": [
+          "09-read-toc-format-0",
+          "10-read-disc-information",
+          "11-read-track-information-lba0",
+          "13-read-dvd-structure-format0"
+        ],
+        "observations": 4,
+        "offsets": [
+          28416
+        ],
+        "sample_hex": "78b0f612b09212f846908a23e0ffc454",
+        "sha256": "63ade08676a04436f555eb076a78f7926187d8a96e3ddca24ef12c9354fbaa5c"
+      },
+      {
+        "capture_names": [
+          "00-baseline-no-stimulus",
+          "01-test-unit-ready",
+          "02-request-sense",
+          "03-inquiry-standard-96",
+          "04-inquiry-extrainq"
+        ],
+        "observations": 5,
+        "offsets": [
+          640
+        ],
+        "sample_hex": "006baff1760700d700c8aff115082d05",
+        "sha256": "6a54a908c3ffa4a78560f3e5427d8f05e8d18d92fe2c3613dcc88a2d8ed114e7"
+      },
+      {
+        "capture_names": [
+          "09-read-toc-format-0",
+          "10-read-disc-information",
+          "11-read-track-information-lba0",
+          "13-read-dvd-structure-format0"
+        ],
+        "observations": 4,
+        "offsets": [
+          40128
+        ],
+        "sample_hex": "78a9cff608eff62290f0b0e493fd7e00",
+        "sha256": "6c198885fad1b4f1fb53eac35e1069804b2d0e1df2065107a045abbaa95a9295"
+      },
+      {
+        "capture_names": [
+          "01-test-unit-ready",
+          "02-request-sense",
+          "03-inquiry-standard-96",
+          "04-inquiry-extrainq",
+          "09-read-toc-format-0",
+          "10-read-disc-information",
+          "11-read-track-information-lba0",
+          "13-read-dvd-structure-format0"
+        ],
+        "observations": 8,
+        "offsets": [
+          35584,
+          35648,
+          35776
+        ],
+        "sample_hex": "8a34e04404f0908a29e020e042105202",
+        "sha256": "707389d4505f57b2502258ccd486d86b54b82e8f0840bae2c4e7b58bb286b8e5"
+      },
+      {
+        "capture_names": [
+          "04-inquiry-extrainq",
+          "05-mode-sense10-all",
+          "06-get-configuration-current",
+          "07-get-configuration-all",
+          "08-get-event-status-media"
+        ],
+        "observations": 5,
+        "offsets": [
+          32448
+        ],
+        "sample_hex": "5d7401f0a37470f07b0c7df37f007e08",
+        "sha256": "7e0774d2c5591c17a647aaa7e819c24d0fe6daf55ada6e57890fef1f1f4f1dec"
+      },
+      {
+        "capture_names": [
+          "05-mode-sense10-all",
+          "06-get-configuration-current",
+          "07-get-configuration-all"
+        ],
+        "observations": 3,
+        "offsets": [
+          25728
+        ],
+        "sample_hex": "413d0841480d415d0e41681a41731d41",
+        "sha256": "82c6f496d7c4a64a40c189c0a8afdfb64b27c4802bd6a2c9751b0de75421a195"
+      },
+      {
+        "capture_names": [
+          "01-test-unit-ready"
+        ],
+        "observations": 1,
+        "offsets": [
+          27392
+        ],
+        "sample_hex": "908988e0ffa3e0fd123d899047d07410",
+        "sha256": "878984a494b8a3a22a21ecc75063d521fb210913d9562a2f87095c41a81323e2"
+      },
+      {
+        "capture_names": [
+          "01-test-unit-ready"
+        ],
+        "observations": 1,
+        "offsets": [
+          29056
+        ],
+        "sample_hex": "36f6904762e030e409e054eff0a87c08",
+        "sha256": "8b2115cd509fb860937c94264f922fec9b9bdfd7f462a5cb34d6b8ea7c3dc31d"
+      },
+      {
+        "capture_names": [
+          "01-test-unit-ready",
+          "02-request-sense",
+          "09-read-toc-format-0",
+          "10-read-disc-information"
+        ],
+        "observations": 4,
+        "offsets": [
+          39488
+        ],
+        "sample_hex": "dfe054f0f04404f0908a177401f08012",
+        "sha256": "8d3ce5504635b161b3c9be91a8099b68819e58649ae152204d130cca83868340"
+      },
+      {
+        "capture_names": [
+          "01-test-unit-ready",
+          "02-request-sense",
+          "03-inquiry-standard-96",
+          "04-inquiry-extrainq",
+          "05-mode-sense10-all",
+          "09-read-toc-format-0",
+          "10-read-disc-information",
+          "11-read-track-information-lba0",
+          "12-mechanism-status",
+          "13-read-dvd-structure-format0"
+        ],
+        "observations": 10,
+        "offsets": [
+          25152
+        ],
+        "sample_hex": "65e0ffe48f68f567f566f5657f211203",
+        "sha256": "9671ef47fbfece4a0a54b2868a68b03dc1dcc377850c3f8377f87710c6a29090"
+      },
+      {
+        "capture_names": [
+          "00-baseline-no-stimulus",
+          "01-test-unit-ready",
+          "02-request-sense",
+          "03-inquiry-standard-96",
+          "04-inquiry-extrainq",
+          "05-mode-sense10-all"
+        ],
+        "observations": 6,
+        "offsets": [
+          29312
+        ],
+        "sample_hex": "28908627e0f8a3e0f9a3e0faa3e0fb90",
+        "sha256": "989fc7d7854ab2f7643d2e0d4812ab5a04ea34e367b81a25483840fa8ddc7936"
+      },
+      {
+        "capture_names": [
+          "03-inquiry-standard-96",
+          "04-inquiry-extrainq",
+          "05-mode-sense10-all",
+          "07-get-configuration-all"
+        ],
+        "observations": 4,
+        "offsets": [
+          40512,
+          40576
+        ],
+        "sample_hex": "cf9a7d0b7e077f2e12cf9a7d077e077f",
+        "sha256": "ac2d53c50f9e667a1a8ba27716c76abb80b095ea333af710a9713c9aafa93e77"
+      },
+      {
+        "capture_names": [
+          "03-inquiry-standard-96",
+          "04-inquiry-extrainq",
+          "05-mode-sense10-all",
+          "06-get-configuration-current",
+          "07-get-configuration-all",
+          "08-get-event-status-media"
+        ],
+        "observations": 6,
+        "offsets": [
+          39744
+        ],
+        "sample_hex": "a9e6a3f008e6a3f0d251e57c2406f57c",
+        "sha256": "ba3aab1d5fd2e7d2e53a40dc6d30ee8e321d0d1d7d5c4a775562c56bb68b52ec"
+      },
+      {
+        "capture_names": [
+          "04-inquiry-extrainq",
+          "05-mode-sense10-all"
+        ],
+        "observations": 2,
+        "offsets": [
+          32576
+        ],
+        "sample_hex": "7c157ca87ceef608eff6157c904000e0",
+        "sha256": "c27a8a262dcd2e4c1efe282c12f1d0eadbd0e7730169a9c8e543ea0038373c32"
+      },
+      {
+        "capture_names": [
+          "04-inquiry-extrainq",
+          "05-mode-sense10-all",
+          "06-get-configuration-current",
+          "07-get-configuration-all",
+          "08-get-event-status-media"
+        ],
+        "observations": 5,
+        "offsets": [
+          30144
+        ],
+        "sample_hex": "503fa87c0808e6fe08e6ffe4fcfd908a",
+        "sha256": "c684e99453191d071cc9c0c70d0a54414538fa3017e8fbfc20b65360e522c235"
+      },
+      {
+        "capture_names": [
+          "03-inquiry-standard-96",
+          "04-inquiry-extrainq",
+          "05-mode-sense10-all",
+          "07-get-configuration-all",
+          "08-get-event-status-media",
+          "09-read-toc-format-0",
+          "10-read-disc-information",
+          "11-read-track-information-lba0",
+          "12-mechanism-status",
+          "13-read-dvd-structure-format0"
+        ],
+        "observations": 10,
+        "offsets": [
+          40896
+        ],
+        "sample_hex": "fcfdfb7a80f9f8d31232fb5046a87c08",
+        "sha256": "c8f852122b07334bbc2b1c1e49fa68683d4a19edad7637d1c2464cfbda91c9e9"
+      },
+      {
+        "capture_names": [
+          "00-baseline-no-stimulus",
+          "01-test-unit-ready",
+          "02-request-sense",
+          "03-inquiry-standard-96",
+          "04-inquiry-extrainq",
+          "05-mode-sense10-all"
+        ],
+        "observations": 6,
+        "offsets": [
+          33536
+        ],
+        "sample_hex": "908a4ee0fd7e047f551202fd908acfe0",
+        "sha256": "cfdc22531f0891f05ad72ccbdf62857c9591b5b55662733e7001b956f5fb7a4d"
+      },
+      {
+        "capture_names": [
+          "00-baseline-no-stimulus",
+          "01-test-unit-ready",
+          "02-request-sense",
+          "03-inquiry-standard-96",
+          "04-inquiry-extrainq",
+          "05-mode-sense10-all"
+        ],
+        "observations": 6,
+        "offsets": [
+          33344
+        ],
+        "sample_hex": "908a4de0fd7e047f4e1202fd908a4ee0",
+        "sha256": "d55474aa452cf3d30cbf87544b83bd0532b2e627febcd60f21a33dadda400fdf"
+      },
+      {
+        "capture_names": [
+          "06-get-configuration-current",
+          "07-get-configuration-all",
+          "08-get-event-status-media",
+          "09-read-toc-format-0",
+          "10-read-disc-information",
+          "11-read-track-information-lba0",
+          "12-mechanism-status",
+          "13-read-dvd-structure-format0"
+        ],
+        "observations": 8,
+        "offsets": [
+          40192
+        ],
+        "sample_hex": "fe12d50e22ef2438ffee3407fe02cf9a",
+        "sha256": "d6adfe6a1a503c03aa57d079c07d8e545a10aa9a54fb49354d5e4b63698aa416"
+      },
+      {
+        "capture_names": [
+          "05-mode-sense10-all",
+          "06-get-configuration-current",
+          "07-get-configuration-all"
+        ],
+        "observations": 3,
+        "offsets": [
+          26048
+        ],
+        "sample_hex": "a87cf6800aa87c76058004a87c7601a8",
+        "sha256": "dcc9e0458c04dcf5b978f66650e45d6bb432637e157d64ec7021ac7378307e47"
+      },
+      {
+        "capture_names": [
+          "04-inquiry-extrainq"
+        ],
+        "observations": 1,
+        "offsets": [
+          28352
+        ],
+        "sample_hex": "a3e0f9a3e0faa3e02fffea3efeed39fd",
+        "sha256": "ee30d1b5dacac4fc4145b020e110b67308dd5636cae98ae3fe83e092f8dcd477"
+      },
+      {
+        "capture_names": [
+          "01-test-unit-ready"
+        ],
+        "observations": 1,
+        "offsets": [
+          28864
+        ],
+        "sample_hex": "10af01c3c0d0157c157ca87ceef608ef",
+        "sha256": "eec973076bacae1446519f0a369cd7b1d941f4b7128c00f5eef0d00ec1c45406"
+      },
+      {
+        "capture_names": [
+          "05-mode-sense10-all",
+          "12-mechanism-status"
+        ],
+        "observations": 2,
+        "offsets": [
+          35648
+        ],
+        "sample_hex": "e04410f078b5760678ab76288054204d",
+        "sha256": "eef7607e33437128ad030d62719949efafa60d85f45273ee21157987d4ec6f7b"
+      },
+      {
+        "capture_names": [
+          "05-mode-sense10-all"
+        ],
+        "observations": 1,
+        "offsets": [
+          39360
+        ],
+        "sample_hex": "e47003ee64b0a87c7007762108760280",
+        "sha256": "ef8be9d51017aa184b194fe1edcf770ab23b29b271e926eaf07d2af47d6998ec"
+      },
+      {
+        "capture_names": [
+          "06-get-configuration-current",
+          "07-get-configuration-all",
+          "08-get-event-status-media"
+        ],
+        "observations": 3,
+        "offsets": [
+          32576
+        ],
+        "sample_hex": "097a00900001122fb7904093f090409c",
+        "sha256": "efcb6299a750931625bb1dc282eaf2f64f65e32d8dc12038f61794a77835d98c"
+      },
+      {
+        "capture_names": [
+          "00-baseline-no-stimulus",
+          "01-test-unit-ready",
+          "02-request-sense",
+          "03-inquiry-standard-96",
+          "04-inquiry-extrainq",
+          "05-mode-sense10-all"
+        ],
+        "observations": 6,
+        "offsets": [
+          29888
+        ],
+        "sample_hex": "e93dfde83cfc800e9090dce0fca3e0fd",
+        "sha256": "f35484065b55ae1c261157a4b0fda1e0fec18b7d87d49108ea098ea41b4acb94"
+      },
+      {
+        "capture_names": [
+          "06-get-configuration-current",
+          "07-get-configuration-all",
+          "08-get-event-status-media"
+        ],
+        "observations": 3,
+        "offsets": [
+          25856
+        ],
+        "sample_hex": "02070578b5760578ab7620e478b0f622",
+        "sha256": "f62174382fadfe1b3f16527df595fdc09243b4f4399479b917ad6e981141cb3e"
+      },
+      {
+        "capture_names": [
+          "06-get-configuration-current",
+          "07-get-configuration-all",
+          "08-get-event-status-media",
+          "09-read-toc-format-0",
+          "10-read-disc-information",
+          "11-read-track-information-lba0",
+          "12-mechanism-status",
+          "13-read-dvd-structure-format0"
+        ],
+        "observations": 8,
+        "offsets": [
+          32256
+        ],
+        "sample_hex": "f618ee36f6908a4ae0640260030273de",
+        "sha256": "fe343ef73975d6766c236d664ff0f6b8c7cac30767666cf803d6fc7fce5de610"
+      }
+    ]
+  },
+  "target_unique_chunks": 752
+}

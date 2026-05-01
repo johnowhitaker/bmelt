@@ -1,0 +1,2121 @@
+{
+  "chunk_size": 64,
+  "reference": {
+    "capture_count": 14,
+    "capture_dir": "references/evidence/live/normal-work-window-capture-only-20260501"
+  },
+  "reference_only": {
+    "by_capture": [
+      {
+        "index": 0,
+        "name": "00-capture-only",
+        "new_chunk_observations": 5
+      },
+      {
+        "index": 1,
+        "name": "01-capture-only",
+        "new_chunk_observations": 5
+      },
+      {
+        "index": 2,
+        "name": "02-capture-only",
+        "new_chunk_observations": 5
+      },
+      {
+        "index": 3,
+        "name": "03-capture-only",
+        "new_chunk_observations": 5
+      },
+      {
+        "index": 4,
+        "name": "04-capture-only",
+        "new_chunk_observations": 5
+      },
+      {
+        "index": 5,
+        "name": "05-capture-only",
+        "new_chunk_observations": 5
+      },
+      {
+        "index": 6,
+        "name": "06-capture-only",
+        "new_chunk_observations": 5
+      },
+      {
+        "index": 7,
+        "name": "07-capture-only",
+        "new_chunk_observations": 5
+      },
+      {
+        "index": 8,
+        "name": "08-capture-only",
+        "new_chunk_observations": 5
+      },
+      {
+        "index": 9,
+        "name": "09-capture-only",
+        "new_chunk_observations": 5
+      },
+      {
+        "index": 10,
+        "name": "10-capture-only",
+        "new_chunk_observations": 5
+      },
+      {
+        "index": 11,
+        "name": "11-capture-only",
+        "new_chunk_observations": 5
+      },
+      {
+        "index": 12,
+        "name": "12-capture-only",
+        "new_chunk_observations": 5
+      },
+      {
+        "index": 13,
+        "name": "13-capture-only",
+        "new_chunk_observations": 5
+      }
+    ],
+    "by_page": [
+      {
+        "count": 14,
+        "page_start": 27648
+      },
+      {
+        "count": 14,
+        "page_start": 32256
+      },
+      {
+        "count": 14,
+        "page_start": 32512
+      },
+      {
+        "count": 14,
+        "page_start": 37120
+      },
+      {
+        "count": 14,
+        "page_start": 39680
+      }
+    ],
+    "new_chunk_count": 5,
+    "new_chunks": [
+      {
+        "capture_names": [
+          "00-capture-only",
+          "01-capture-only",
+          "02-capture-only",
+          "03-capture-only",
+          "04-capture-only",
+          "05-capture-only",
+          "06-capture-only",
+          "07-capture-only",
+          "08-capture-only",
+          "09-capture-only",
+          "10-capture-only",
+          "11-capture-only",
+          "12-capture-only",
+          "13-capture-only"
+        ],
+        "observations": 14,
+        "offsets": [
+          32640
+        ],
+        "sample_hex": "f078a9e69047b1f008e6f0d25178b5e6",
+        "sha256": "0b41e4ce22c5621b3c11d180782c3798df1a1d01bf1d8ba2d0447e29fff27e1a"
+      },
+      {
+        "capture_names": [
+          "00-capture-only",
+          "01-capture-only",
+          "02-capture-only",
+          "03-capture-only",
+          "04-capture-only",
+          "05-capture-only",
+          "06-capture-only",
+          "07-capture-only",
+          "08-capture-only",
+          "09-capture-only",
+          "10-capture-only",
+          "11-capture-only",
+          "12-capture-only",
+          "13-capture-only"
+        ],
+        "observations": 14,
+        "offsets": [
+          27712
+        ],
+        "sample_hex": "8a38e054eff0908a3ae0547ff0e04440",
+        "sha256": "4f29221f2e5100fcccc9b01a0d3af780e5a62be1ccc98af115717a7d4952fb05"
+      },
+      {
+        "capture_names": [
+          "00-capture-only",
+          "01-capture-only",
+          "02-capture-only",
+          "03-capture-only",
+          "04-capture-only",
+          "05-capture-only",
+          "06-capture-only",
+          "07-capture-only",
+          "08-capture-only",
+          "09-capture-only",
+          "10-capture-only",
+          "11-capture-only",
+          "12-capture-only",
+          "13-capture-only"
+        ],
+        "observations": 14,
+        "offsets": [
+          37248
+        ],
+        "sample_hex": "0675908a49e0b4a40d908a53e0543fff",
+        "sha256": "506ab0f9ed3795e53fc0d3c57d42b2aca16725b468585e59cc8de9b2c4b569d3"
+      },
+      {
+        "capture_names": [
+          "00-capture-only",
+          "01-capture-only",
+          "02-capture-only",
+          "03-capture-only",
+          "04-capture-only",
+          "05-capture-only",
+          "06-capture-only",
+          "07-capture-only",
+          "08-capture-only",
+          "09-capture-only",
+          "10-capture-only",
+          "11-capture-only",
+          "12-capture-only",
+          "13-capture-only"
+        ],
+        "observations": 14,
+        "offsets": [
+          32448
+        ],
+        "sample_hex": "908a53e0fea3e0fbcaeecae4f9f8908a",
+        "sha256": "715666d47b610f41c95eefdc100cffca1baad1c7433d3e6f563d9926fa8c5eea"
+      },
+      {
+        "capture_names": [
+          "00-capture-only",
+          "01-capture-only",
+          "02-capture-only",
+          "03-capture-only",
+          "04-capture-only",
+          "05-capture-only",
+          "06-capture-only",
+          "07-capture-only",
+          "08-capture-only",
+          "09-capture-only",
+          "10-capture-only",
+          "11-capture-only",
+          "12-capture-only",
+          "13-capture-only"
+        ],
+        "observations": 14,
+        "offsets": [
+          39808
+        ],
+        "sample_hex": "e008cff608eff690897ce0ffa3e0789d",
+        "sha256": "da8c52872ce4c62499298bc6596078587273af92b394d6ac99b18016c9f7ce95"
+      }
+    ]
+  },
+  "reference_unique_chunks": 704,
+  "shared_chunks": 699,
+  "target": {
+    "capture_count": 40,
+    "capture_dir": "references/evidence/live/normal-work-window-stimuli-focused-20260501"
+  },
+  "target_only": {
+    "by_capture": [
+      {
+        "index": 0,
+        "name": "00-cycle00-inquiry-extrainq",
+        "new_chunk_observations": 14
+      },
+      {
+        "index": 1,
+        "name": "01-cycle00-mode-sense10-all",
+        "new_chunk_observations": 25
+      },
+      {
+        "index": 2,
+        "name": "02-cycle00-get-configuration-current",
+        "new_chunk_observations": 24
+      },
+      {
+        "index": 3,
+        "name": "03-cycle00-get-configuration-all",
+        "new_chunk_observations": 24
+      },
+      {
+        "index": 4,
+        "name": "04-cycle00-get-event-status-media",
+        "new_chunk_observations": 19
+      },
+      {
+        "index": 5,
+        "name": "05-cycle01-inquiry-extrainq",
+        "new_chunk_observations": 24
+      },
+      {
+        "index": 6,
+        "name": "06-cycle01-mode-sense10-all",
+        "new_chunk_observations": 29
+      },
+      {
+        "index": 7,
+        "name": "07-cycle01-get-configuration-current",
+        "new_chunk_observations": 24
+      },
+      {
+        "index": 8,
+        "name": "08-cycle01-get-configuration-all",
+        "new_chunk_observations": 24
+      },
+      {
+        "index": 9,
+        "name": "09-cycle01-get-event-status-media",
+        "new_chunk_observations": 22
+      },
+      {
+        "index": 10,
+        "name": "10-cycle02-inquiry-extrainq",
+        "new_chunk_observations": 26
+      },
+      {
+        "index": 11,
+        "name": "11-cycle02-mode-sense10-all",
+        "new_chunk_observations": 29
+      },
+      {
+        "index": 12,
+        "name": "12-cycle02-get-configuration-current",
+        "new_chunk_observations": 26
+      },
+      {
+        "index": 13,
+        "name": "13-cycle02-get-configuration-all",
+        "new_chunk_observations": 27
+      },
+      {
+        "index": 14,
+        "name": "14-cycle02-get-event-status-media",
+        "new_chunk_observations": 23
+      },
+      {
+        "index": 15,
+        "name": "15-cycle03-inquiry-extrainq",
+        "new_chunk_observations": 21
+      },
+      {
+        "index": 16,
+        "name": "16-cycle03-mode-sense10-all",
+        "new_chunk_observations": 28
+      },
+      {
+        "index": 17,
+        "name": "17-cycle03-get-configuration-current",
+        "new_chunk_observations": 25
+      },
+      {
+        "index": 18,
+        "name": "18-cycle03-get-configuration-all",
+        "new_chunk_observations": 25
+      },
+      {
+        "index": 19,
+        "name": "19-cycle03-get-event-status-media",
+        "new_chunk_observations": 23
+      },
+      {
+        "index": 20,
+        "name": "20-cycle04-inquiry-extrainq",
+        "new_chunk_observations": 27
+      },
+      {
+        "index": 21,
+        "name": "21-cycle04-mode-sense10-all",
+        "new_chunk_observations": 27
+      },
+      {
+        "index": 22,
+        "name": "22-cycle04-get-configuration-current",
+        "new_chunk_observations": 26
+      },
+      {
+        "index": 23,
+        "name": "23-cycle04-get-configuration-all",
+        "new_chunk_observations": 26
+      },
+      {
+        "index": 24,
+        "name": "24-cycle04-get-event-status-media",
+        "new_chunk_observations": 24
+      },
+      {
+        "index": 25,
+        "name": "25-cycle05-inquiry-extrainq",
+        "new_chunk_observations": 28
+      },
+      {
+        "index": 26,
+        "name": "26-cycle05-mode-sense10-all",
+        "new_chunk_observations": 30
+      },
+      {
+        "index": 27,
+        "name": "27-cycle05-get-configuration-current",
+        "new_chunk_observations": 26
+      },
+      {
+        "index": 28,
+        "name": "28-cycle05-get-configuration-all",
+        "new_chunk_observations": 23
+      },
+      {
+        "index": 29,
+        "name": "29-cycle05-get-event-status-media",
+        "new_chunk_observations": 20
+      },
+      {
+        "index": 30,
+        "name": "30-cycle06-inquiry-extrainq",
+        "new_chunk_observations": 24
+      },
+      {
+        "index": 31,
+        "name": "31-cycle06-mode-sense10-all",
+        "new_chunk_observations": 29
+      },
+      {
+        "index": 32,
+        "name": "32-cycle06-get-configuration-current",
+        "new_chunk_observations": 24
+      },
+      {
+        "index": 33,
+        "name": "33-cycle06-get-configuration-all",
+        "new_chunk_observations": 25
+      },
+      {
+        "index": 34,
+        "name": "34-cycle06-get-event-status-media",
+        "new_chunk_observations": 23
+      },
+      {
+        "index": 35,
+        "name": "35-cycle07-inquiry-extrainq",
+        "new_chunk_observations": 25
+      },
+      {
+        "index": 36,
+        "name": "36-cycle07-mode-sense10-all",
+        "new_chunk_observations": 30
+      },
+      {
+        "index": 37,
+        "name": "37-cycle07-get-configuration-current",
+        "new_chunk_observations": 30
+      },
+      {
+        "index": 38,
+        "name": "38-cycle07-get-configuration-all",
+        "new_chunk_observations": 27
+      },
+      {
+        "index": 39,
+        "name": "39-cycle07-get-event-status-media",
+        "new_chunk_observations": 20
+      }
+    ],
+    "by_page": [
+      {
+        "count": 79,
+        "page_start": 32512
+      },
+      {
+        "count": 78,
+        "page_start": 32256
+      },
+      {
+        "count": 73,
+        "page_start": 512
+      },
+      {
+        "count": 66,
+        "page_start": 33536
+      },
+      {
+        "count": 53,
+        "page_start": 25600
+      },
+      {
+        "count": 47,
+        "page_start": 26112
+      },
+      {
+        "count": 46,
+        "page_start": 25856
+      },
+      {
+        "count": 40,
+        "page_start": 27648
+      },
+      {
+        "count": 40,
+        "page_start": 29952
+      },
+      {
+        "count": 40,
+        "page_start": 37120
+      },
+      {
+        "count": 40,
+        "page_start": 39680
+      },
+      {
+        "count": 39,
+        "page_start": 25344
+      },
+      {
+        "count": 39,
+        "page_start": 33792
+      },
+      {
+        "count": 39,
+        "page_start": 34048
+      },
+      {
+        "count": 39,
+        "page_start": 35840
+      },
+      {
+        "count": 37,
+        "page_start": 40704
+      },
+      {
+        "count": 35,
+        "page_start": 40192
+      },
+      {
+        "count": 29,
+        "page_start": 35584
+      },
+      {
+        "count": 27,
+        "page_start": 39424
+      },
+      {
+        "count": 26,
+        "page_start": 28416
+      },
+      {
+        "count": 23,
+        "page_start": 40448
+      },
+      {
+        "count": 11,
+        "page_start": 39168
+      },
+      {
+        "count": 8,
+        "page_start": 26880
+      },
+      {
+        "count": 8,
+        "page_start": 28160
+      },
+      {
+        "count": 8,
+        "page_start": 32768
+      },
+      {
+        "count": 8,
+        "page_start": 33280
+      },
+      {
+        "count": 6,
+        "page_start": 28672
+      },
+      {
+        "count": 6,
+        "page_start": 28928
+      },
+      {
+        "count": 2,
+        "page_start": 27392
+      },
+      {
+        "count": 1,
+        "page_start": 29184
+      },
+      {
+        "count": 1,
+        "page_start": 29696
+      },
+      {
+        "count": 1,
+        "page_start": 34304
+      },
+      {
+        "count": 1,
+        "page_start": 34560
+      }
+    ],
+    "new_chunk_count": 52,
+    "new_chunks": [
+      {
+        "capture_names": [
+          "01-cycle00-mode-sense10-all",
+          "02-cycle00-get-configuration-current",
+          "03-cycle00-get-configuration-all",
+          "04-cycle00-get-event-status-media",
+          "05-cycle01-inquiry-extrainq",
+          "06-cycle01-mode-sense10-all",
+          "07-cycle01-get-configuration-current",
+          "08-cycle01-get-configuration-all",
+          "09-cycle01-get-event-status-media",
+          "10-cycle02-inquiry-extrainq",
+          "11-cycle02-mode-sense10-all",
+          "12-cycle02-get-configuration-current",
+          "13-cycle02-get-configuration-all",
+          "14-cycle02-get-event-status-media",
+          "15-cycle03-inquiry-extrainq",
+          "16-cycle03-mode-sense10-all",
+          "17-cycle03-get-configuration-current",
+          "18-cycle03-get-configuration-all",
+          "19-cycle03-get-event-status-media",
+          "20-cycle04-inquiry-extrainq",
+          "21-cycle04-mode-sense10-all",
+          "22-cycle04-get-configuration-current",
+          "23-cycle04-get-configuration-all",
+          "24-cycle04-get-event-status-media",
+          "25-cycle05-inquiry-extrainq",
+          "26-cycle05-mode-sense10-all",
+          "27-cycle05-get-configuration-current",
+          "28-cycle05-get-configuration-all",
+          "29-cycle05-get-event-status-media",
+          "30-cycle06-inquiry-extrainq",
+          "31-cycle06-mode-sense10-all",
+          "32-cycle06-get-configuration-current",
+          "33-cycle06-get-configuration-all",
+          "34-cycle06-get-event-status-media",
+          "35-cycle07-inquiry-extrainq",
+          "36-cycle07-mode-sense10-all",
+          "37-cycle07-get-configuration-current",
+          "38-cycle07-get-configuration-all",
+          "39-cycle07-get-event-status-media"
+        ],
+        "observations": 39,
+        "offsets": [
+          36032
+        ],
+        "sample_hex": "047f621202fd7d8a7e047f631202fd90",
+        "sha256": "00581718383d99afca1f375f580141f171d30c210af410bd013fccea2e0c3cb4"
+      },
+      {
+        "capture_names": [
+          "01-cycle00-mode-sense10-all",
+          "02-cycle00-get-configuration-current",
+          "03-cycle00-get-configuration-all",
+          "04-cycle00-get-event-status-media",
+          "05-cycle01-inquiry-extrainq",
+          "06-cycle01-mode-sense10-all",
+          "07-cycle01-get-configuration-current",
+          "08-cycle01-get-configuration-all",
+          "09-cycle01-get-event-status-media",
+          "10-cycle02-inquiry-extrainq",
+          "11-cycle02-mode-sense10-all",
+          "12-cycle02-get-configuration-current",
+          "13-cycle02-get-configuration-all",
+          "14-cycle02-get-event-status-media",
+          "15-cycle03-inquiry-extrainq",
+          "16-cycle03-mode-sense10-all",
+          "17-cycle03-get-configuration-current",
+          "18-cycle03-get-configuration-all",
+          "19-cycle03-get-event-status-media",
+          "20-cycle04-inquiry-extrainq",
+          "21-cycle04-mode-sense10-all",
+          "22-cycle04-get-configuration-current",
+          "23-cycle04-get-configuration-all",
+          "24-cycle04-get-event-status-media",
+          "25-cycle05-inquiry-extrainq",
+          "26-cycle05-mode-sense10-all",
+          "27-cycle05-get-configuration-current",
+          "28-cycle05-get-configuration-all",
+          "29-cycle05-get-event-status-media",
+          "30-cycle06-inquiry-extrainq",
+          "31-cycle06-mode-sense10-all",
+          "32-cycle06-get-configuration-current",
+          "33-cycle06-get-configuration-all",
+          "34-cycle06-get-event-status-media",
+          "35-cycle07-inquiry-extrainq",
+          "36-cycle07-mode-sense10-all",
+          "37-cycle07-get-configuration-current",
+          "38-cycle07-get-configuration-all",
+          "39-cycle07-get-event-status-media"
+        ],
+        "observations": 39,
+        "offsets": [
+          25344
+        ],
+        "sample_hex": "516000005920001b5580001b5d40001b",
+        "sha256": "06130683184aef5503711da76752dfab57fc220fa7690abdbdb347da0655bf9e"
+      },
+      {
+        "capture_names": [
+          "27-cycle05-get-configuration-current"
+        ],
+        "observations": 1,
+        "offsets": [
+          34560
+        ],
+        "sample_hex": "8634f0e0fea3e07806cec313ce13d8f9",
+        "sha256": "0e790c42bd72ca024aa1ef26e09dbc126799324d7d1083de60e8a0e40be0df24"
+      },
+      {
+        "capture_names": [
+          "26-cycle05-mode-sense10-all",
+          "27-cycle05-get-configuration-current",
+          "28-cycle05-get-configuration-all",
+          "29-cycle05-get-event-status-media",
+          "30-cycle06-inquiry-extrainq"
+        ],
+        "observations": 5,
+        "offsets": [
+          704
+        ],
+        "sample_hex": "0000aff0490000180000aff049000018",
+        "sha256": "1258bf4e28986abb3c562ec21b3f2553881fb6de45d39595d5b8949d94d531d1"
+      },
+      {
+        "capture_names": [
+          "01-cycle00-mode-sense10-all",
+          "02-cycle00-get-configuration-current",
+          "03-cycle00-get-configuration-all",
+          "04-cycle00-get-event-status-media",
+          "06-cycle01-mode-sense10-all",
+          "07-cycle01-get-configuration-current",
+          "08-cycle01-get-configuration-all",
+          "09-cycle01-get-event-status-media",
+          "11-cycle02-mode-sense10-all",
+          "12-cycle02-get-configuration-current",
+          "13-cycle02-get-configuration-all",
+          "14-cycle02-get-event-status-media",
+          "16-cycle03-mode-sense10-all",
+          "17-cycle03-get-configuration-current",
+          "18-cycle03-get-configuration-all",
+          "19-cycle03-get-event-status-media",
+          "21-cycle04-mode-sense10-all",
+          "22-cycle04-get-configuration-current",
+          "23-cycle04-get-configuration-all",
+          "24-cycle04-get-event-status-media",
+          "26-cycle05-mode-sense10-all",
+          "27-cycle05-get-configuration-current",
+          "28-cycle05-get-configuration-all",
+          "29-cycle05-get-event-status-media",
+          "31-cycle06-mode-sense10-all",
+          "32-cycle06-get-configuration-current",
+          "33-cycle06-get-configuration-all",
+          "34-cycle06-get-event-status-media",
+          "36-cycle07-mode-sense10-all",
+          "37-cycle07-get-configuration-current",
+          "38-cycle07-get-configuration-all",
+          "39-cycle07-get-event-status-media"
+        ],
+        "observations": 32,
+        "offsets": [
+          32576,
+          32640
+        ],
+        "sample_hex": "0512133522afa8c2adc2aac2a822afa8",
+        "sha256": "1591d13743eb4b75b85a1ad12c1c83d5cf2089ac765e54765f21dcbd756171f8"
+      },
+      {
+        "capture_names": [
+          "00-cycle00-inquiry-extrainq",
+          "10-cycle02-inquiry-extrainq"
+        ],
+        "observations": 2,
+        "offsets": [
+          28672,
+          28800
+        ],
+        "sample_hex": "e0f9a3e0faa3e02fffea3efeed39fdec",
+        "sha256": "167b6d557116552aa8670fbb75e63c3977652afd9cb46c4d9af3314b356e6253"
+      },
+      {
+        "capture_names": [
+          "00-cycle00-inquiry-extrainq",
+          "05-cycle01-inquiry-extrainq",
+          "10-cycle02-inquiry-extrainq",
+          "15-cycle03-inquiry-extrainq",
+          "20-cycle04-inquiry-extrainq",
+          "25-cycle05-inquiry-extrainq",
+          "30-cycle06-inquiry-extrainq",
+          "35-cycle07-inquiry-extrainq"
+        ],
+        "observations": 8,
+        "offsets": [
+          32896
+        ],
+        "sample_hex": "e02fffea3efeed39fdec38fc90895e12",
+        "sha256": "17da5fed883a4145a08ea5d1b739487651ce90ff3dd4a464dd9fda717907ba7e"
+      },
+      {
+        "capture_names": [
+          "01-cycle00-mode-sense10-all",
+          "02-cycle00-get-configuration-current",
+          "03-cycle00-get-configuration-all",
+          "04-cycle00-get-event-status-media",
+          "05-cycle01-inquiry-extrainq",
+          "06-cycle01-mode-sense10-all",
+          "07-cycle01-get-configuration-current",
+          "08-cycle01-get-configuration-all",
+          "09-cycle01-get-event-status-media",
+          "10-cycle02-inquiry-extrainq",
+          "11-cycle02-mode-sense10-all",
+          "12-cycle02-get-configuration-current",
+          "13-cycle02-get-configuration-all",
+          "14-cycle02-get-event-status-media",
+          "15-cycle03-inquiry-extrainq",
+          "16-cycle03-mode-sense10-all",
+          "17-cycle03-get-configuration-current",
+          "18-cycle03-get-configuration-all",
+          "19-cycle03-get-event-status-media",
+          "20-cycle04-inquiry-extrainq",
+          "21-cycle04-mode-sense10-all",
+          "22-cycle04-get-configuration-current",
+          "23-cycle04-get-configuration-all",
+          "24-cycle04-get-event-status-media",
+          "25-cycle05-inquiry-extrainq",
+          "26-cycle05-mode-sense10-all",
+          "27-cycle05-get-configuration-current",
+          "28-cycle05-get-configuration-all",
+          "29-cycle05-get-event-status-media",
+          "30-cycle06-inquiry-extrainq",
+          "31-cycle06-mode-sense10-all",
+          "32-cycle06-get-configuration-current",
+          "33-cycle06-get-configuration-all",
+          "34-cycle06-get-event-status-media",
+          "35-cycle07-inquiry-extrainq",
+          "36-cycle07-mode-sense10-all",
+          "37-cycle07-get-configuration-current",
+          "38-cycle07-get-configuration-all",
+          "39-cycle07-get-event-status-media"
+        ],
+        "observations": 39,
+        "offsets": [
+          26176,
+          26240,
+          26304
+        ],
+        "sample_hex": "8058301b09bf02067e0c7ffc804c301c",
+        "sha256": "18777a598722877a2b92e22a37ec5f6d2df8e3fe12f75478f1e9c80e77960500"
+      },
+      {
+        "capture_names": [
+          "02-cycle00-get-configuration-current",
+          "03-cycle00-get-configuration-all",
+          "07-cycle01-get-configuration-current",
+          "08-cycle01-get-configuration-all",
+          "12-cycle02-get-configuration-current",
+          "13-cycle02-get-configuration-all",
+          "17-cycle03-get-configuration-current",
+          "18-cycle03-get-configuration-all",
+          "22-cycle04-get-configuration-current",
+          "23-cycle04-get-configuration-all",
+          "27-cycle05-get-configuration-current",
+          "32-cycle06-get-configuration-current",
+          "33-cycle06-get-configuration-all",
+          "37-cycle07-get-configuration-current",
+          "38-cycle07-get-configuration-all"
+        ],
+        "observations": 15,
+        "offsets": [
+          28416,
+          28480,
+          28544,
+          28608
+        ],
+        "sample_hex": "7c76070876208010a87c760708762880",
+        "sha256": "1de3123ce8f82786f39a7fd5fe6ac992de9d48271332988aff8a02f2dda8f49c"
+      },
+      {
+        "capture_names": [
+          "39-cycle07-get-event-status-media"
+        ],
+        "observations": 1,
+        "offsets": [
+          37248
+        ],
+        "sample_hex": "4093f0908661e0f5a8904098e0ff9040",
+        "sha256": "1fc002817f62a80cedd76394df2c04c077e1c490138b986ac2df606590dbeae3"
+      },
+      {
+        "capture_names": [
+          "01-cycle00-mode-sense10-all",
+          "02-cycle00-get-configuration-current",
+          "03-cycle00-get-configuration-all",
+          "04-cycle00-get-event-status-media",
+          "06-cycle01-mode-sense10-all",
+          "07-cycle01-get-configuration-current",
+          "08-cycle01-get-configuration-all",
+          "09-cycle01-get-event-status-media",
+          "11-cycle02-mode-sense10-all",
+          "12-cycle02-get-configuration-current",
+          "13-cycle02-get-configuration-all",
+          "14-cycle02-get-event-status-media",
+          "16-cycle03-mode-sense10-all",
+          "17-cycle03-get-configuration-current",
+          "18-cycle03-get-configuration-all",
+          "19-cycle03-get-event-status-media",
+          "21-cycle04-mode-sense10-all",
+          "22-cycle04-get-configuration-current",
+          "23-cycle04-get-configuration-all",
+          "24-cycle04-get-event-status-media",
+          "26-cycle05-mode-sense10-all",
+          "27-cycle05-get-configuration-current",
+          "28-cycle05-get-configuration-all",
+          "29-cycle05-get-event-status-media",
+          "31-cycle06-mode-sense10-all",
+          "32-cycle06-get-configuration-current",
+          "33-cycle06-get-configuration-all",
+          "34-cycle06-get-event-status-media",
+          "36-cycle07-mode-sense10-all",
+          "37-cycle07-get-configuration-current",
+          "38-cycle07-get-configuration-all",
+          "39-cycle07-get-event-status-media"
+        ],
+        "observations": 32,
+        "offsets": [
+          27776
+        ],
+        "sample_hex": "080816a87c0808e6ffe57c2403f8e6fe",
+        "sha256": "26f4536528b7d525a8980f8e9b5343507f650e6c84c482119dfc33f6e2c62ab0"
+      },
+      {
+        "capture_names": [
+          "00-cycle00-inquiry-extrainq",
+          "01-cycle00-mode-sense10-all",
+          "02-cycle00-get-configuration-current",
+          "03-cycle00-get-configuration-all",
+          "05-cycle01-inquiry-extrainq",
+          "06-cycle01-mode-sense10-all",
+          "11-cycle02-mode-sense10-all",
+          "13-cycle02-get-configuration-all",
+          "14-cycle02-get-event-status-media",
+          "16-cycle03-mode-sense10-all",
+          "18-cycle03-get-configuration-all",
+          "19-cycle03-get-event-status-media",
+          "20-cycle04-inquiry-extrainq",
+          "21-cycle04-mode-sense10-all",
+          "22-cycle04-get-configuration-current",
+          "23-cycle04-get-configuration-all",
+          "24-cycle04-get-event-status-media",
+          "25-cycle05-inquiry-extrainq",
+          "26-cycle05-mode-sense10-all",
+          "28-cycle05-get-configuration-all",
+          "31-cycle06-mode-sense10-all",
+          "33-cycle06-get-configuration-all",
+          "34-cycle06-get-event-status-media",
+          "35-cycle07-inquiry-extrainq",
+          "36-cycle07-mode-sense10-all",
+          "37-cycle07-get-configuration-current",
+          "38-cycle07-get-configuration-all"
+        ],
+        "observations": 27,
+        "offsets": [
+          39424,
+          39488,
+          39616
+        ],
+        "sample_hex": "11f0e57c2404f8e6904012f07b00e57c",
+        "sha256": "29e7ab54af3468601324b34e74300e76059e83c99893747178c6a12d6ddfb5e6"
+      },
+      {
+        "capture_names": [
+          "01-cycle00-mode-sense10-all",
+          "02-cycle00-get-configuration-current",
+          "03-cycle00-get-configuration-all",
+          "04-cycle00-get-event-status-media",
+          "05-cycle01-inquiry-extrainq",
+          "06-cycle01-mode-sense10-all",
+          "07-cycle01-get-configuration-current",
+          "08-cycle01-get-configuration-all",
+          "09-cycle01-get-event-status-media",
+          "10-cycle02-inquiry-extrainq",
+          "11-cycle02-mode-sense10-all",
+          "12-cycle02-get-configuration-current",
+          "13-cycle02-get-configuration-all",
+          "14-cycle02-get-event-status-media",
+          "15-cycle03-inquiry-extrainq",
+          "16-cycle03-mode-sense10-all",
+          "17-cycle03-get-configuration-current",
+          "18-cycle03-get-configuration-all",
+          "19-cycle03-get-event-status-media",
+          "20-cycle04-inquiry-extrainq",
+          "21-cycle04-mode-sense10-all",
+          "22-cycle04-get-configuration-current",
+          "23-cycle04-get-configuration-all",
+          "24-cycle04-get-event-status-media",
+          "25-cycle05-inquiry-extrainq",
+          "26-cycle05-mode-sense10-all",
+          "27-cycle05-get-configuration-current",
+          "28-cycle05-get-configuration-all",
+          "29-cycle05-get-event-status-media",
+          "30-cycle06-inquiry-extrainq",
+          "31-cycle06-mode-sense10-all",
+          "32-cycle06-get-configuration-current",
+          "33-cycle06-get-configuration-all",
+          "34-cycle06-get-event-status-media",
+          "35-cycle07-inquiry-extrainq",
+          "36-cycle07-mode-sense10-all",
+          "37-cycle07-get-configuration-current",
+          "38-cycle07-get-configuration-all",
+          "39-cycle07-get-event-status-media"
+        ],
+        "observations": 39,
+        "offsets": [
+          33792
+        ],
+        "sample_hex": "8a4df0908a4de0ffc3941250157d00ef",
+        "sha256": "36ba8efee79536b9b3d4a1e7f99a3f2eb84b8e95092cdbfba37287bdb82b1caf"
+      },
+      {
+        "capture_names": [
+          "01-cycle00-mode-sense10-all",
+          "06-cycle01-mode-sense10-all",
+          "11-cycle02-mode-sense10-all",
+          "16-cycle03-mode-sense10-all",
+          "21-cycle04-mode-sense10-all",
+          "26-cycle05-mode-sense10-all",
+          "31-cycle06-mode-sense10-all",
+          "36-cycle07-mode-sense10-all"
+        ],
+        "observations": 8,
+        "offsets": [
+          26176,
+          26240,
+          26304
+        ],
+        "sample_hex": "e4f0a37414f08047908a527403f0a374",
+        "sha256": "39ab42ddd82a825a0e1b929e4aa270edc0ecacb6886e9102faa6978c81d15b9a"
+      },
+      {
+        "capture_names": [
+          "02-cycle00-get-configuration-current",
+          "03-cycle00-get-configuration-all",
+          "04-cycle00-get-event-status-media",
+          "05-cycle01-inquiry-extrainq",
+          "06-cycle01-mode-sense10-all",
+          "07-cycle01-get-configuration-current",
+          "08-cycle01-get-configuration-all",
+          "09-cycle01-get-event-status-media",
+          "10-cycle02-inquiry-extrainq",
+          "11-cycle02-mode-sense10-all",
+          "12-cycle02-get-configuration-current",
+          "13-cycle02-get-configuration-all",
+          "14-cycle02-get-event-status-media",
+          "15-cycle03-inquiry-extrainq",
+          "17-cycle03-get-configuration-current",
+          "18-cycle03-get-configuration-all",
+          "19-cycle03-get-event-status-media",
+          "20-cycle04-inquiry-extrainq",
+          "21-cycle04-mode-sense10-all",
+          "22-cycle04-get-configuration-current",
+          "23-cycle04-get-configuration-all",
+          "24-cycle04-get-event-status-media",
+          "25-cycle05-inquiry-extrainq",
+          "26-cycle05-mode-sense10-all",
+          "27-cycle05-get-configuration-current",
+          "28-cycle05-get-configuration-all",
+          "29-cycle05-get-event-status-media",
+          "30-cycle06-inquiry-extrainq",
+          "31-cycle06-mode-sense10-all",
+          "32-cycle06-get-configuration-current",
+          "33-cycle06-get-configuration-all",
+          "34-cycle06-get-event-status-media",
+          "35-cycle07-inquiry-extrainq",
+          "36-cycle07-mode-sense10-all",
+          "37-cycle07-get-configuration-current",
+          "38-cycle07-get-configuration-all",
+          "39-cycle07-get-event-status-media"
+        ],
+        "observations": 37,
+        "offsets": [
+          33536,
+          33664
+        ],
+        "sample_hex": "51e09408908a50e094005006e4f608f6",
+        "sha256": "3d299423d28f65a7933b96e90153d0eec1887025bf636bd378893f58bcc801ec"
+      },
+      {
+        "capture_names": [
+          "03-cycle00-get-configuration-all",
+          "27-cycle05-get-configuration-current",
+          "28-cycle05-get-configuration-all",
+          "37-cycle07-get-configuration-current"
+        ],
+        "observations": 4,
+        "offsets": [
+          28672,
+          28800,
+          28864
+        ],
+        "sample_hex": "08eff6904000e020e7f9908ac6e09040",
+        "sha256": "4037c8574920413d30329489b03ad575a6b0eb5e0a6fb3452ccbf4acb39ecd55"
+      },
+      {
+        "capture_names": [
+          "01-cycle00-mode-sense10-all",
+          "06-cycle01-mode-sense10-all",
+          "11-cycle02-mode-sense10-all",
+          "16-cycle03-mode-sense10-all",
+          "21-cycle04-mode-sense10-all",
+          "26-cycle05-mode-sense10-all",
+          "31-cycle06-mode-sense10-all",
+          "36-cycle07-mode-sense10-all"
+        ],
+        "observations": 8,
+        "offsets": [
+          26880,
+          27072
+        ],
+        "sample_hex": "e03018054420f080034410f09081fde0",
+        "sha256": "48f0fc6574113b3fec4123c0cf8832de1053c6f91084e15df1c64171dd541ba2"
+      },
+      {
+        "capture_names": [
+          "31-cycle06-mode-sense10-all",
+          "32-cycle06-get-configuration-current",
+          "33-cycle06-get-configuration-all",
+          "34-cycle06-get-event-status-media",
+          "35-cycle07-inquiry-extrainq"
+        ],
+        "observations": 5,
+        "offsets": [
+          704
+        ],
+        "sample_hex": "0000aff0490000180000aff049000018",
+        "sha256": "4d5cb1339d20b6a84f3f147695e7a4b95f6cc6efc00dda72ed07968961dcd451"
+      },
+      {
+        "capture_names": [
+          "00-cycle00-inquiry-extrainq",
+          "01-cycle00-mode-sense10-all",
+          "05-cycle01-inquiry-extrainq",
+          "06-cycle01-mode-sense10-all",
+          "15-cycle03-inquiry-extrainq",
+          "16-cycle03-mode-sense10-all",
+          "20-cycle04-inquiry-extrainq",
+          "25-cycle05-inquiry-extrainq",
+          "26-cycle05-mode-sense10-all",
+          "30-cycle06-inquiry-extrainq",
+          "31-cycle06-mode-sense10-all"
+        ],
+        "observations": 11,
+        "offsets": [
+          28416,
+          28480,
+          28544,
+          28608
+        ],
+        "sample_hex": "c9123430d0d092af22d310af01c3c0d0",
+        "sha256": "569dea1ed606bdd9d6639bff793b0837bff802981e30f6ddb4e205417fe5dc07"
+      },
+      {
+        "capture_names": [
+          "01-cycle00-mode-sense10-all",
+          "02-cycle00-get-configuration-current",
+          "03-cycle00-get-configuration-all",
+          "04-cycle00-get-event-status-media",
+          "05-cycle01-inquiry-extrainq",
+          "06-cycle01-mode-sense10-all",
+          "07-cycle01-get-configuration-current",
+          "08-cycle01-get-configuration-all",
+          "09-cycle01-get-event-status-media",
+          "10-cycle02-inquiry-extrainq",
+          "11-cycle02-mode-sense10-all",
+          "12-cycle02-get-configuration-current",
+          "13-cycle02-get-configuration-all",
+          "14-cycle02-get-event-status-media",
+          "15-cycle03-inquiry-extrainq",
+          "16-cycle03-mode-sense10-all",
+          "17-cycle03-get-configuration-current",
+          "18-cycle03-get-configuration-all",
+          "19-cycle03-get-event-status-media",
+          "20-cycle04-inquiry-extrainq",
+          "21-cycle04-mode-sense10-all",
+          "22-cycle04-get-configuration-current",
+          "23-cycle04-get-configuration-all",
+          "24-cycle04-get-event-status-media",
+          "25-cycle05-inquiry-extrainq",
+          "26-cycle05-mode-sense10-all",
+          "27-cycle05-get-configuration-current",
+          "28-cycle05-get-configuration-all",
+          "29-cycle05-get-event-status-media",
+          "30-cycle06-inquiry-extrainq",
+          "31-cycle06-mode-sense10-all",
+          "32-cycle06-get-configuration-current",
+          "33-cycle06-get-configuration-all",
+          "34-cycle06-get-event-status-media",
+          "35-cycle07-inquiry-extrainq",
+          "36-cycle07-mode-sense10-all",
+          "37-cycle07-get-configuration-current",
+          "38-cycle07-get-configuration-all",
+          "39-cycle07-get-event-status-media"
+        ],
+        "observations": 39,
+        "offsets": [
+          34240
+        ],
+        "sample_hex": "e0fea3e02486ffee3403fee43dfde43c",
+        "sha256": "5a0c5fbcd38cf67ca571c761c785d6da2a1b342214879a5fea210c2be3280c29"
+      },
+      {
+        "capture_names": [
+          "00-cycle00-inquiry-extrainq",
+          "01-cycle00-mode-sense10-all",
+          "02-cycle00-get-configuration-current",
+          "03-cycle00-get-configuration-all",
+          "04-cycle00-get-event-status-media",
+          "05-cycle01-inquiry-extrainq",
+          "06-cycle01-mode-sense10-all",
+          "07-cycle01-get-configuration-current",
+          "08-cycle01-get-configuration-all",
+          "09-cycle01-get-event-status-media",
+          "10-cycle02-inquiry-extrainq",
+          "11-cycle02-mode-sense10-all",
+          "12-cycle02-get-configuration-current",
+          "13-cycle02-get-configuration-all",
+          "14-cycle02-get-event-status-media",
+          "15-cycle03-inquiry-extrainq",
+          "16-cycle03-mode-sense10-all",
+          "17-cycle03-get-configuration-current",
+          "18-cycle03-get-configuration-all",
+          "19-cycle03-get-event-status-media",
+          "20-cycle04-inquiry-extrainq",
+          "21-cycle04-mode-sense10-all",
+          "22-cycle04-get-configuration-current",
+          "23-cycle04-get-configuration-all",
+          "24-cycle04-get-event-status-media",
+          "25-cycle05-inquiry-extrainq",
+          "26-cycle05-mode-sense10-all",
+          "27-cycle05-get-configuration-current",
+          "28-cycle05-get-configuration-all",
+          "29-cycle05-get-event-status-media",
+          "30-cycle06-inquiry-extrainq",
+          "31-cycle06-mode-sense10-all",
+          "32-cycle06-get-configuration-current",
+          "33-cycle06-get-configuration-all",
+          "34-cycle06-get-event-status-media",
+          "35-cycle07-inquiry-extrainq",
+          "36-cycle07-mode-sense10-all",
+          "37-cycle07-get-configuration-current",
+          "38-cycle07-get-configuration-all"
+        ],
+        "observations": 39,
+        "offsets": [
+          37248
+        ],
+        "sample_hex": "90401ee0908784f090401f800b904022",
+        "sha256": "5a65b8a71db909429cd233edb78e4c51dc3db8d35d4ab6b8e23c7c980c935873"
+      },
+      {
+        "capture_names": [
+          "01-cycle00-mode-sense10-all",
+          "02-cycle00-get-configuration-current",
+          "03-cycle00-get-configuration-all",
+          "04-cycle00-get-event-status-media",
+          "05-cycle01-inquiry-extrainq",
+          "06-cycle01-mode-sense10-all",
+          "07-cycle01-get-configuration-current",
+          "08-cycle01-get-configuration-all",
+          "09-cycle01-get-event-status-media",
+          "10-cycle02-inquiry-extrainq",
+          "11-cycle02-mode-sense10-all",
+          "12-cycle02-get-configuration-current",
+          "13-cycle02-get-configuration-all",
+          "14-cycle02-get-event-status-media",
+          "15-cycle03-inquiry-extrainq",
+          "16-cycle03-mode-sense10-all",
+          "17-cycle03-get-configuration-current",
+          "18-cycle03-get-configuration-all",
+          "19-cycle03-get-event-status-media",
+          "20-cycle04-inquiry-extrainq",
+          "21-cycle04-mode-sense10-all",
+          "22-cycle04-get-configuration-current",
+          "23-cycle04-get-configuration-all",
+          "24-cycle04-get-event-status-media",
+          "25-cycle05-inquiry-extrainq",
+          "26-cycle05-mode-sense10-all",
+          "27-cycle05-get-configuration-current",
+          "28-cycle05-get-configuration-all",
+          "29-cycle05-get-event-status-media",
+          "30-cycle06-inquiry-extrainq",
+          "31-cycle06-mode-sense10-all",
+          "32-cycle06-get-configuration-current",
+          "33-cycle06-get-configuration-all",
+          "34-cycle06-get-event-status-media",
+          "35-cycle07-inquiry-extrainq",
+          "36-cycle07-mode-sense10-all",
+          "37-cycle07-get-configuration-current",
+          "38-cycle07-get-configuration-all",
+          "39-cycle07-get-event-status-media"
+        ],
+        "observations": 39,
+        "offsets": [
+          25664,
+          25728
+        ],
+        "sample_hex": "70031205fd908627e0ffa3e0fd1207c5",
+        "sha256": "5fd06abdd6c585d138d15c2bd111e3b60d480c1bd780a67f39d75a01e9831a64"
+      },
+      {
+        "capture_names": [
+          "00-cycle00-inquiry-extrainq",
+          "05-cycle01-inquiry-extrainq",
+          "10-cycle02-inquiry-extrainq",
+          "15-cycle03-inquiry-extrainq",
+          "20-cycle04-inquiry-extrainq",
+          "25-cycle05-inquiry-extrainq",
+          "30-cycle06-inquiry-extrainq",
+          "35-cycle07-inquiry-extrainq"
+        ],
+        "observations": 8,
+        "offsets": [
+          27776
+        ],
+        "sample_hex": "fad3eb9400ea648094804006ed2f29fd",
+        "sha256": "6329fea4e8a8dc2238de928236685108d46f22b49ed52434b8da67312766c9e8"
+      },
+      {
+        "capture_names": [
+          "00-cycle00-inquiry-extrainq",
+          "01-cycle00-mode-sense10-all",
+          "02-cycle00-get-configuration-current",
+          "03-cycle00-get-configuration-all",
+          "04-cycle00-get-event-status-media",
+          "05-cycle01-inquiry-extrainq",
+          "06-cycle01-mode-sense10-all",
+          "07-cycle01-get-configuration-current",
+          "08-cycle01-get-configuration-all",
+          "09-cycle01-get-event-status-media",
+          "10-cycle02-inquiry-extrainq",
+          "11-cycle02-mode-sense10-all",
+          "12-cycle02-get-configuration-current",
+          "13-cycle02-get-configuration-all",
+          "14-cycle02-get-event-status-media",
+          "15-cycle03-inquiry-extrainq",
+          "16-cycle03-mode-sense10-all",
+          "17-cycle03-get-configuration-current",
+          "18-cycle03-get-configuration-all",
+          "19-cycle03-get-event-status-media",
+          "20-cycle04-inquiry-extrainq",
+          "21-cycle04-mode-sense10-all",
+          "22-cycle04-get-configuration-current",
+          "23-cycle04-get-configuration-all",
+          "24-cycle04-get-event-status-media",
+          "25-cycle05-inquiry-extrainq",
+          "26-cycle05-mode-sense10-all",
+          "27-cycle05-get-configuration-current",
+          "28-cycle05-get-configuration-all",
+          "29-cycle05-get-event-status-media",
+          "30-cycle06-inquiry-extrainq",
+          "31-cycle06-mode-sense10-all",
+          "32-cycle06-get-configuration-current",
+          "33-cycle06-get-configuration-all",
+          "34-cycle06-get-event-status-media",
+          "35-cycle07-inquiry-extrainq",
+          "36-cycle07-mode-sense10-all",
+          "37-cycle07-get-configuration-current",
+          "38-cycle07-get-configuration-all",
+          "39-cycle07-get-event-status-media"
+        ],
+        "observations": 40,
+        "offsets": [
+          32256
+        ],
+        "sample_hex": "5d7401f0a37470f07b0c7df37f007e08",
+        "sha256": "7e0774d2c5591c17a647aaa7e819c24d0fe6daf55ada6e57890fef1f1f4f1dec"
+      },
+      {
+        "capture_names": [
+          "01-cycle00-mode-sense10-all",
+          "02-cycle00-get-configuration-current",
+          "06-cycle01-mode-sense10-all",
+          "11-cycle02-mode-sense10-all",
+          "12-cycle02-get-configuration-current",
+          "13-cycle02-get-configuration-all",
+          "16-cycle03-mode-sense10-all",
+          "17-cycle03-get-configuration-current",
+          "26-cycle05-mode-sense10-all",
+          "27-cycle05-get-configuration-current",
+          "31-cycle06-mode-sense10-all",
+          "36-cycle07-mode-sense10-all",
+          "37-cycle07-get-configuration-current",
+          "38-cycle07-get-configuration-all"
+        ],
+        "observations": 14,
+        "offsets": [
+          25664,
+          25728
+        ],
+        "sample_hex": "413d0841480d415d0e41681a41731d41",
+        "sha256": "82c6f496d7c4a64a40c189c0a8afdfb64b27c4802bd6a2c9751b0de75421a195"
+      },
+      {
+        "capture_names": [
+          "21-cycle04-mode-sense10-all",
+          "22-cycle04-get-configuration-current",
+          "23-cycle04-get-configuration-all",
+          "24-cycle04-get-event-status-media",
+          "25-cycle05-inquiry-extrainq"
+        ],
+        "observations": 5,
+        "offsets": [
+          704
+        ],
+        "sample_hex": "0000aff0490000180000aff049000018",
+        "sha256": "837e1e3070152a7e6b61267a6ca43fd9f70e8c8710c36124d157d3fb6b1e633e"
+      },
+      {
+        "capture_names": [
+          "03-cycle00-get-configuration-all",
+          "27-cycle05-get-configuration-current",
+          "28-cycle05-get-configuration-all",
+          "37-cycle07-get-configuration-current"
+        ],
+        "observations": 4,
+        "offsets": [
+          28992,
+          29056
+        ],
+        "sample_hex": "8a4df0904099e0908a4ef0904099e090",
+        "sha256": "8d8c3b0a22a0fe85416ac5c659e610b6100fe9052009142cc97f1903545156af"
+      },
+      {
+        "capture_names": [
+          "00-cycle00-inquiry-extrainq",
+          "10-cycle02-inquiry-extrainq"
+        ],
+        "observations": 2,
+        "offsets": [
+          28992,
+          29056
+        ],
+        "sample_hex": "12dfc0057c057cd0d092af2290881312",
+        "sha256": "957d82183ebfa51713fab7848b8bce549a92981c18b3688cbe714c36f5c869e2"
+      },
+      {
+        "capture_names": [
+          "39-cycle07-get-event-status-media"
+        ],
+        "observations": 1,
+        "offsets": [
+          29376
+        ],
+        "sample_hex": "28908627e0f8a3e0f9a3e0faa3e0fb90",
+        "sha256": "989fc7d7854ab2f7643d2e0d4812ab5a04ea34e367b81a25483840fa8ddc7936"
+      },
+      {
+        "capture_names": [
+          "06-cycle01-mode-sense10-all",
+          "07-cycle01-get-configuration-current",
+          "08-cycle01-get-configuration-all",
+          "09-cycle01-get-event-status-media",
+          "10-cycle02-inquiry-extrainq"
+        ],
+        "observations": 5,
+        "offsets": [
+          704
+        ],
+        "sample_hex": "0000aff0490000180000000000000000",
+        "sha256": "a413e6656d612af35d52c7a719ee076c1df8f5d9b417339369756e94ecd12bdc"
+      },
+      {
+        "capture_names": [
+          "00-cycle00-inquiry-extrainq",
+          "01-cycle00-mode-sense10-all",
+          "02-cycle00-get-configuration-current",
+          "03-cycle00-get-configuration-all",
+          "05-cycle01-inquiry-extrainq",
+          "07-cycle01-get-configuration-current",
+          "08-cycle01-get-configuration-all",
+          "11-cycle02-mode-sense10-all",
+          "12-cycle02-get-configuration-current",
+          "13-cycle02-get-configuration-all",
+          "16-cycle03-mode-sense10-all",
+          "18-cycle03-get-configuration-all",
+          "20-cycle04-inquiry-extrainq",
+          "22-cycle04-get-configuration-current",
+          "23-cycle04-get-configuration-all",
+          "25-cycle05-inquiry-extrainq",
+          "26-cycle05-mode-sense10-all",
+          "30-cycle06-inquiry-extrainq",
+          "31-cycle06-mode-sense10-all",
+          "32-cycle06-get-configuration-current",
+          "33-cycle06-get-configuration-all",
+          "36-cycle07-mode-sense10-all",
+          "37-cycle07-get-configuration-current"
+        ],
+        "observations": 23,
+        "offsets": [
+          40448,
+          40576
+        ],
+        "sample_hex": "cf9a7d0b7e077f2e12cf9a7d077e077f",
+        "sha256": "ac2d53c50f9e667a1a8ba27716c76abb80b095ea333af710a9713c9aafa93e77"
+      },
+      {
+        "capture_names": [
+          "00-cycle00-inquiry-extrainq",
+          "01-cycle00-mode-sense10-all",
+          "02-cycle00-get-configuration-current",
+          "03-cycle00-get-configuration-all",
+          "04-cycle00-get-event-status-media",
+          "05-cycle01-inquiry-extrainq",
+          "06-cycle01-mode-sense10-all",
+          "07-cycle01-get-configuration-current",
+          "08-cycle01-get-configuration-all",
+          "09-cycle01-get-event-status-media",
+          "10-cycle02-inquiry-extrainq",
+          "11-cycle02-mode-sense10-all",
+          "12-cycle02-get-configuration-current",
+          "13-cycle02-get-configuration-all",
+          "14-cycle02-get-event-status-media",
+          "15-cycle03-inquiry-extrainq",
+          "16-cycle03-mode-sense10-all",
+          "17-cycle03-get-configuration-current",
+          "18-cycle03-get-configuration-all",
+          "19-cycle03-get-event-status-media",
+          "20-cycle04-inquiry-extrainq",
+          "21-cycle04-mode-sense10-all",
+          "22-cycle04-get-configuration-current",
+          "23-cycle04-get-configuration-all",
+          "24-cycle04-get-event-status-media",
+          "25-cycle05-inquiry-extrainq",
+          "26-cycle05-mode-sense10-all",
+          "27-cycle05-get-configuration-current",
+          "28-cycle05-get-configuration-all",
+          "29-cycle05-get-event-status-media",
+          "30-cycle06-inquiry-extrainq",
+          "31-cycle06-mode-sense10-all",
+          "32-cycle06-get-configuration-current",
+          "33-cycle06-get-configuration-all",
+          "34-cycle06-get-event-status-media",
+          "35-cycle07-inquiry-extrainq",
+          "36-cycle07-mode-sense10-all",
+          "37-cycle07-get-configuration-current",
+          "38-cycle07-get-configuration-all",
+          "39-cycle07-get-event-status-media"
+        ],
+        "observations": 40,
+        "offsets": [
+          39680
+        ],
+        "sample_hex": "a9e6a3f008e6a3f0d251e57c2406f57c",
+        "sha256": "ba3aab1d5fd2e7d2e53a40dc6d30ee8e321d0d1d7d5c4a775562c56bb68b52ec"
+      },
+      {
+        "capture_names": [
+          "36-cycle07-mode-sense10-all",
+          "37-cycle07-get-configuration-current",
+          "38-cycle07-get-configuration-all",
+          "39-cycle07-get-event-status-media"
+        ],
+        "observations": 4,
+        "offsets": [
+          704
+        ],
+        "sample_hex": "0000aff0490000180000aff049000018",
+        "sha256": "be704fe59363d021949108c4c7e3bec34496850a5e9037e3e04de03ba2873dd5"
+      },
+      {
+        "capture_names": [
+          "00-cycle00-inquiry-extrainq",
+          "01-cycle00-mode-sense10-all",
+          "05-cycle01-inquiry-extrainq",
+          "06-cycle01-mode-sense10-all",
+          "10-cycle02-inquiry-extrainq",
+          "11-cycle02-mode-sense10-all",
+          "15-cycle03-inquiry-extrainq",
+          "16-cycle03-mode-sense10-all",
+          "20-cycle04-inquiry-extrainq",
+          "21-cycle04-mode-sense10-all",
+          "25-cycle05-inquiry-extrainq",
+          "26-cycle05-mode-sense10-all",
+          "30-cycle06-inquiry-extrainq",
+          "31-cycle06-mode-sense10-all",
+          "35-cycle07-inquiry-extrainq",
+          "36-cycle07-mode-sense10-all"
+        ],
+        "observations": 16,
+        "offsets": [
+          32576,
+          32640
+        ],
+        "sample_hex": "7c157ca87ceef608eff6157c904000e0",
+        "sha256": "c27a8a262dcd2e4c1efe282c12f1d0eadbd0e7730169a9c8e543ea0038373c32"
+      },
+      {
+        "capture_names": [
+          "00-cycle00-inquiry-extrainq",
+          "01-cycle00-mode-sense10-all",
+          "02-cycle00-get-configuration-current",
+          "03-cycle00-get-configuration-all",
+          "04-cycle00-get-event-status-media",
+          "05-cycle01-inquiry-extrainq",
+          "06-cycle01-mode-sense10-all",
+          "07-cycle01-get-configuration-current",
+          "08-cycle01-get-configuration-all",
+          "09-cycle01-get-event-status-media",
+          "10-cycle02-inquiry-extrainq",
+          "11-cycle02-mode-sense10-all",
+          "12-cycle02-get-configuration-current",
+          "13-cycle02-get-configuration-all",
+          "14-cycle02-get-event-status-media",
+          "15-cycle03-inquiry-extrainq",
+          "16-cycle03-mode-sense10-all",
+          "17-cycle03-get-configuration-current",
+          "18-cycle03-get-configuration-all",
+          "19-cycle03-get-event-status-media",
+          "20-cycle04-inquiry-extrainq",
+          "21-cycle04-mode-sense10-all",
+          "22-cycle04-get-configuration-current",
+          "23-cycle04-get-configuration-all",
+          "24-cycle04-get-event-status-media",
+          "25-cycle05-inquiry-extrainq",
+          "26-cycle05-mode-sense10-all",
+          "27-cycle05-get-configuration-current",
+          "28-cycle05-get-configuration-all",
+          "29-cycle05-get-event-status-media",
+          "30-cycle06-inquiry-extrainq",
+          "31-cycle06-mode-sense10-all",
+          "32-cycle06-get-configuration-current",
+          "33-cycle06-get-configuration-all",
+          "34-cycle06-get-event-status-media",
+          "35-cycle07-inquiry-extrainq",
+          "36-cycle07-mode-sense10-all",
+          "37-cycle07-get-configuration-current",
+          "38-cycle07-get-configuration-all",
+          "39-cycle07-get-event-status-media"
+        ],
+        "observations": 40,
+        "offsets": [
+          30080
+        ],
+        "sample_hex": "503fa87c0808e6fe08e6ffe4fcfd908a",
+        "sha256": "c684e99453191d071cc9c0c70d0a54414538fa3017e8fbfc20b65360e522c235"
+      },
+      {
+        "capture_names": [
+          "00-cycle00-inquiry-extrainq",
+          "01-cycle00-mode-sense10-all",
+          "02-cycle00-get-configuration-current",
+          "03-cycle00-get-configuration-all",
+          "04-cycle00-get-event-status-media",
+          "05-cycle01-inquiry-extrainq",
+          "06-cycle01-mode-sense10-all",
+          "07-cycle01-get-configuration-current",
+          "08-cycle01-get-configuration-all",
+          "09-cycle01-get-event-status-media",
+          "10-cycle02-inquiry-extrainq",
+          "11-cycle02-mode-sense10-all",
+          "12-cycle02-get-configuration-current",
+          "13-cycle02-get-configuration-all",
+          "14-cycle02-get-event-status-media",
+          "16-cycle03-mode-sense10-all",
+          "17-cycle03-get-configuration-current",
+          "18-cycle03-get-configuration-all",
+          "19-cycle03-get-event-status-media",
+          "20-cycle04-inquiry-extrainq",
+          "21-cycle04-mode-sense10-all",
+          "22-cycle04-get-configuration-current",
+          "23-cycle04-get-configuration-all",
+          "24-cycle04-get-event-status-media",
+          "25-cycle05-inquiry-extrainq",
+          "26-cycle05-mode-sense10-all",
+          "28-cycle05-get-configuration-all",
+          "29-cycle05-get-event-status-media",
+          "30-cycle06-inquiry-extrainq",
+          "31-cycle06-mode-sense10-all",
+          "32-cycle06-get-configuration-current",
+          "33-cycle06-get-configuration-all",
+          "34-cycle06-get-event-status-media",
+          "35-cycle07-inquiry-extrainq",
+          "36-cycle07-mode-sense10-all",
+          "37-cycle07-get-configuration-current",
+          "38-cycle07-get-configuration-all"
+        ],
+        "observations": 37,
+        "offsets": [
+          40896
+        ],
+        "sample_hex": "fcfdfb7a80f9f8d31232fb5046a87c08",
+        "sha256": "c8f852122b07334bbc2b1c1e49fa68683d4a19edad7637d1c2464cfbda91c9e9"
+      },
+      {
+        "capture_names": [
+          "16-cycle03-mode-sense10-all",
+          "17-cycle03-get-configuration-current",
+          "18-cycle03-get-configuration-all",
+          "19-cycle03-get-event-status-media",
+          "20-cycle04-inquiry-extrainq"
+        ],
+        "observations": 5,
+        "offsets": [
+          704
+        ],
+        "sample_hex": "0000aff0490000180000aff049000018",
+        "sha256": "ce90f56fac302c4f3681d50c24123f4f2a9a3f494c6963c2833383417c4edc52"
+      },
+      {
+        "capture_names": [
+          "01-cycle00-mode-sense10-all",
+          "06-cycle01-mode-sense10-all",
+          "07-cycle01-get-configuration-current",
+          "08-cycle01-get-configuration-all",
+          "09-cycle01-get-event-status-media",
+          "10-cycle02-inquiry-extrainq",
+          "11-cycle02-mode-sense10-all",
+          "12-cycle02-get-configuration-current",
+          "13-cycle02-get-configuration-all",
+          "14-cycle02-get-event-status-media",
+          "16-cycle03-mode-sense10-all",
+          "17-cycle03-get-configuration-current",
+          "18-cycle03-get-configuration-all",
+          "19-cycle03-get-event-status-media",
+          "20-cycle04-inquiry-extrainq",
+          "21-cycle04-mode-sense10-all",
+          "22-cycle04-get-configuration-current",
+          "23-cycle04-get-configuration-all",
+          "24-cycle04-get-event-status-media",
+          "25-cycle05-inquiry-extrainq",
+          "26-cycle05-mode-sense10-all",
+          "31-cycle06-mode-sense10-all",
+          "32-cycle06-get-configuration-current",
+          "33-cycle06-get-configuration-all",
+          "34-cycle06-get-event-status-media",
+          "35-cycle07-inquiry-extrainq",
+          "36-cycle07-mode-sense10-all",
+          "37-cycle07-get-configuration-current",
+          "38-cycle07-get-configuration-all"
+        ],
+        "observations": 29,
+        "offsets": [
+          33536,
+          33664
+        ],
+        "sample_hex": "908a4ee0fd7e047f551202fd908acfe0",
+        "sha256": "cfdc22531f0891f05ad72ccbdf62857c9591b5b55662733e7001b956f5fb7a4d"
+      },
+      {
+        "capture_names": [
+          "01-cycle00-mode-sense10-all",
+          "06-cycle01-mode-sense10-all",
+          "11-cycle02-mode-sense10-all",
+          "16-cycle03-mode-sense10-all",
+          "21-cycle04-mode-sense10-all",
+          "26-cycle05-mode-sense10-all",
+          "31-cycle06-mode-sense10-all",
+          "36-cycle07-mode-sense10-all"
+        ],
+        "observations": 8,
+        "offsets": [
+          33344
+        ],
+        "sample_hex": "908a4de0fd7e047f4e1202fd908a4ee0",
+        "sha256": "d55474aa452cf3d30cbf87544b83bd0532b2e627febcd60f21a33dadda400fdf"
+      },
+      {
+        "capture_names": [
+          "02-cycle00-get-configuration-current",
+          "03-cycle00-get-configuration-all",
+          "04-cycle00-get-event-status-media",
+          "05-cycle01-inquiry-extrainq",
+          "06-cycle01-mode-sense10-all",
+          "07-cycle01-get-configuration-current",
+          "08-cycle01-get-configuration-all",
+          "09-cycle01-get-event-status-media",
+          "10-cycle02-inquiry-extrainq",
+          "11-cycle02-mode-sense10-all",
+          "12-cycle02-get-configuration-current",
+          "13-cycle02-get-configuration-all",
+          "14-cycle02-get-event-status-media",
+          "17-cycle03-get-configuration-current",
+          "18-cycle03-get-configuration-all",
+          "19-cycle03-get-event-status-media",
+          "20-cycle04-inquiry-extrainq",
+          "21-cycle04-mode-sense10-all",
+          "22-cycle04-get-configuration-current",
+          "23-cycle04-get-configuration-all",
+          "24-cycle04-get-event-status-media",
+          "25-cycle05-inquiry-extrainq",
+          "26-cycle05-mode-sense10-all",
+          "27-cycle05-get-configuration-current",
+          "28-cycle05-get-configuration-all",
+          "29-cycle05-get-event-status-media",
+          "30-cycle06-inquiry-extrainq",
+          "31-cycle06-mode-sense10-all",
+          "32-cycle06-get-configuration-current",
+          "33-cycle06-get-configuration-all",
+          "34-cycle06-get-event-status-media",
+          "35-cycle07-inquiry-extrainq",
+          "36-cycle07-mode-sense10-all",
+          "37-cycle07-get-configuration-current",
+          "38-cycle07-get-configuration-all"
+        ],
+        "observations": 35,
+        "offsets": [
+          40192,
+          40384
+        ],
+        "sample_hex": "fe12d50e22ef2438ffee3407fe02cf9a",
+        "sha256": "d6adfe6a1a503c03aa57d079c07d8e545a10aa9a54fb49354d5e4b63698aa416"
+      },
+      {
+        "capture_names": [
+          "11-cycle02-mode-sense10-all",
+          "12-cycle02-get-configuration-current",
+          "13-cycle02-get-configuration-all",
+          "14-cycle02-get-event-status-media",
+          "15-cycle03-inquiry-extrainq"
+        ],
+        "observations": 5,
+        "offsets": [
+          704
+        ],
+        "sample_hex": "0000aff0490000180000aff049000018",
+        "sha256": "d6f9e03fad2236721a5e8bbf6f026e06c88cef066a03616dc3ca996322d7514b"
+      },
+      {
+        "capture_names": [
+          "01-cycle00-mode-sense10-all",
+          "02-cycle00-get-configuration-current",
+          "03-cycle00-get-configuration-all",
+          "04-cycle00-get-event-status-media",
+          "05-cycle01-inquiry-extrainq",
+          "06-cycle01-mode-sense10-all",
+          "07-cycle01-get-configuration-current",
+          "08-cycle01-get-configuration-all",
+          "09-cycle01-get-event-status-media",
+          "10-cycle02-inquiry-extrainq",
+          "11-cycle02-mode-sense10-all",
+          "12-cycle02-get-configuration-current",
+          "13-cycle02-get-configuration-all",
+          "14-cycle02-get-event-status-media",
+          "15-cycle03-inquiry-extrainq",
+          "16-cycle03-mode-sense10-all",
+          "17-cycle03-get-configuration-current",
+          "18-cycle03-get-configuration-all",
+          "19-cycle03-get-event-status-media",
+          "20-cycle04-inquiry-extrainq",
+          "21-cycle04-mode-sense10-all",
+          "22-cycle04-get-configuration-current",
+          "23-cycle04-get-configuration-all",
+          "24-cycle04-get-event-status-media",
+          "25-cycle05-inquiry-extrainq",
+          "26-cycle05-mode-sense10-all",
+          "27-cycle05-get-configuration-current",
+          "28-cycle05-get-configuration-all",
+          "29-cycle05-get-event-status-media",
+          "30-cycle06-inquiry-extrainq",
+          "31-cycle06-mode-sense10-all",
+          "32-cycle06-get-configuration-current",
+          "33-cycle06-get-configuration-all",
+          "34-cycle06-get-event-status-media",
+          "35-cycle07-inquiry-extrainq",
+          "36-cycle07-mode-sense10-all",
+          "37-cycle07-get-configuration-current",
+          "38-cycle07-get-configuration-all",
+          "39-cycle07-get-event-status-media"
+        ],
+        "observations": 39,
+        "offsets": [
+          640
+        ],
+        "sample_hex": "006baff1760700d700c8aff115082d05",
+        "sha256": "d788ecf091a6f8b3c1e66d4edc994e29257e6a17de455dcd292ab305cb7cea3a"
+      },
+      {
+        "capture_names": [
+          "26-cycle05-mode-sense10-all",
+          "36-cycle07-mode-sense10-all"
+        ],
+        "observations": 2,
+        "offsets": [
+          27456,
+          27520
+        ],
+        "sample_hex": "0808161616803c908353e020e735802e",
+        "sha256": "dbf01786a7ed72d519f51d096b03d3bff60d2dfa0da63789c965563e47e79590"
+      },
+      {
+        "capture_names": [
+          "01-cycle00-mode-sense10-all",
+          "02-cycle00-get-configuration-current",
+          "06-cycle01-mode-sense10-all",
+          "11-cycle02-mode-sense10-all",
+          "12-cycle02-get-configuration-current",
+          "13-cycle02-get-configuration-all",
+          "16-cycle03-mode-sense10-all",
+          "17-cycle03-get-configuration-current",
+          "21-cycle04-mode-sense10-all",
+          "26-cycle05-mode-sense10-all",
+          "27-cycle05-get-configuration-current",
+          "31-cycle06-mode-sense10-all",
+          "36-cycle07-mode-sense10-all",
+          "37-cycle07-get-configuration-current",
+          "38-cycle07-get-configuration-all"
+        ],
+        "observations": 15,
+        "offsets": [
+          25856,
+          26048
+        ],
+        "sample_hex": "a87cf6800aa87c76058004a87c7601a8",
+        "sha256": "dcc9e0458c04dcf5b978f66650e45d6bb432637e157d64ec7021ac7378307e47"
+      },
+      {
+        "capture_names": [
+          "27-cycle05-get-configuration-current"
+        ],
+        "observations": 1,
+        "offsets": [
+          34368
+        ],
+        "sample_hex": "55e0740bf0ef7e0030e3047ffa80027f",
+        "sha256": "e3d27d74290722d0935fc4d74994e20061e35af5c4037814171499fa837c1a71"
+      },
+      {
+        "capture_names": [
+          "00-cycle00-inquiry-extrainq",
+          "05-cycle01-inquiry-extrainq",
+          "10-cycle02-inquiry-extrainq",
+          "15-cycle03-inquiry-extrainq",
+          "20-cycle04-inquiry-extrainq",
+          "25-cycle05-inquiry-extrainq",
+          "30-cycle06-inquiry-extrainq",
+          "35-cycle07-inquiry-extrainq"
+        ],
+        "observations": 8,
+        "offsets": [
+          28352
+        ],
+        "sample_hex": "a3e0f9a3e0faa3e02fffea3efeed39fd",
+        "sha256": "ee30d1b5dacac4fc4145b020e110b67308dd5636cae98ae3fe83e092f8dcd477"
+      },
+      {
+        "capture_names": [
+          "01-cycle00-mode-sense10-all",
+          "06-cycle01-mode-sense10-all",
+          "07-cycle01-get-configuration-current",
+          "08-cycle01-get-configuration-all",
+          "09-cycle01-get-event-status-media",
+          "10-cycle02-inquiry-extrainq",
+          "11-cycle02-mode-sense10-all",
+          "12-cycle02-get-configuration-current",
+          "13-cycle02-get-configuration-all",
+          "14-cycle02-get-event-status-media",
+          "16-cycle03-mode-sense10-all",
+          "17-cycle03-get-configuration-current",
+          "18-cycle03-get-configuration-all",
+          "19-cycle03-get-event-status-media",
+          "20-cycle04-inquiry-extrainq",
+          "21-cycle04-mode-sense10-all",
+          "22-cycle04-get-configuration-current",
+          "23-cycle04-get-configuration-all",
+          "24-cycle04-get-event-status-media",
+          "25-cycle05-inquiry-extrainq",
+          "26-cycle05-mode-sense10-all",
+          "31-cycle06-mode-sense10-all",
+          "32-cycle06-get-configuration-current",
+          "33-cycle06-get-configuration-all",
+          "34-cycle06-get-event-status-media",
+          "35-cycle07-inquiry-extrainq",
+          "36-cycle07-mode-sense10-all",
+          "37-cycle07-get-configuration-current",
+          "38-cycle07-get-configuration-all"
+        ],
+        "observations": 29,
+        "offsets": [
+          35584
+        ],
+        "sample_hex": "e04410f078b5760678ab76288054204d",
+        "sha256": "eef7607e33437128ad030d62719949efafa60d85f45273ee21157987d4ec6f7b"
+      },
+      {
+        "capture_names": [
+          "06-cycle01-mode-sense10-all",
+          "11-cycle02-mode-sense10-all",
+          "16-cycle03-mode-sense10-all",
+          "21-cycle04-mode-sense10-all",
+          "22-cycle04-get-configuration-current",
+          "23-cycle04-get-configuration-all",
+          "24-cycle04-get-event-status-media",
+          "25-cycle05-inquiry-extrainq",
+          "36-cycle07-mode-sense10-all",
+          "37-cycle07-get-configuration-current",
+          "38-cycle07-get-configuration-all"
+        ],
+        "observations": 11,
+        "offsets": [
+          39168,
+          39360
+        ],
+        "sample_hex": "e47003ee64b0a87c7007762108760280",
+        "sha256": "ef8be9d51017aa184b194fe1edcf770ab23b29b271e926eaf07d2af47d6998ec"
+      },
+      {
+        "capture_names": [
+          "02-cycle00-get-configuration-current",
+          "03-cycle00-get-configuration-all",
+          "04-cycle00-get-event-status-media",
+          "05-cycle01-inquiry-extrainq",
+          "07-cycle01-get-configuration-current",
+          "08-cycle01-get-configuration-all",
+          "09-cycle01-get-event-status-media",
+          "10-cycle02-inquiry-extrainq",
+          "12-cycle02-get-configuration-current",
+          "13-cycle02-get-configuration-all",
+          "14-cycle02-get-event-status-media",
+          "15-cycle03-inquiry-extrainq",
+          "17-cycle03-get-configuration-current",
+          "18-cycle03-get-configuration-all",
+          "19-cycle03-get-event-status-media",
+          "20-cycle04-inquiry-extrainq",
+          "22-cycle04-get-configuration-current",
+          "23-cycle04-get-configuration-all",
+          "24-cycle04-get-event-status-media",
+          "25-cycle05-inquiry-extrainq",
+          "27-cycle05-get-configuration-current",
+          "28-cycle05-get-configuration-all",
+          "29-cycle05-get-event-status-media",
+          "30-cycle06-inquiry-extrainq",
+          "32-cycle06-get-configuration-current",
+          "33-cycle06-get-configuration-all",
+          "34-cycle06-get-event-status-media",
+          "35-cycle07-inquiry-extrainq",
+          "37-cycle07-get-configuration-current",
+          "38-cycle07-get-configuration-all",
+          "39-cycle07-get-event-status-media"
+        ],
+        "observations": 31,
+        "offsets": [
+          32576,
+          32640
+        ],
+        "sample_hex": "097a00900001122fb7904093f090409c",
+        "sha256": "efcb6299a750931625bb1dc282eaf2f64f65e32d8dc12038f61794a77835d98c"
+      },
+      {
+        "capture_names": [
+          "39-cycle07-get-event-status-media"
+        ],
+        "observations": 1,
+        "offsets": [
+          29760
+        ],
+        "sample_hex": "e93dfde83cfc800e9090dce0fca3e0fd",
+        "sha256": "f35484065b55ae1c261157a4b0fda1e0fec18b7d87d49108ea098ea41b4acb94"
+      },
+      {
+        "capture_names": [
+          "02-cycle00-get-configuration-current",
+          "03-cycle00-get-configuration-all",
+          "04-cycle00-get-event-status-media",
+          "05-cycle01-inquiry-extrainq",
+          "07-cycle01-get-configuration-current",
+          "08-cycle01-get-configuration-all",
+          "09-cycle01-get-event-status-media",
+          "10-cycle02-inquiry-extrainq",
+          "12-cycle02-get-configuration-current",
+          "13-cycle02-get-configuration-all",
+          "14-cycle02-get-event-status-media",
+          "15-cycle03-inquiry-extrainq",
+          "17-cycle03-get-configuration-current",
+          "18-cycle03-get-configuration-all",
+          "19-cycle03-get-event-status-media",
+          "20-cycle04-inquiry-extrainq",
+          "22-cycle04-get-configuration-current",
+          "23-cycle04-get-configuration-all",
+          "24-cycle04-get-event-status-media",
+          "25-cycle05-inquiry-extrainq",
+          "27-cycle05-get-configuration-current",
+          "28-cycle05-get-configuration-all",
+          "29-cycle05-get-event-status-media",
+          "30-cycle06-inquiry-extrainq",
+          "32-cycle06-get-configuration-current",
+          "33-cycle06-get-configuration-all",
+          "34-cycle06-get-event-status-media",
+          "35-cycle07-inquiry-extrainq",
+          "37-cycle07-get-configuration-current",
+          "38-cycle07-get-configuration-all",
+          "39-cycle07-get-event-status-media"
+        ],
+        "observations": 31,
+        "offsets": [
+          25856,
+          26048
+        ],
+        "sample_hex": "02070578b5760578ab7620e478b0f622",
+        "sha256": "f62174382fadfe1b3f16527df595fdc09243b4f4399479b917ad6e981141cb3e"
+      },
+      {
+        "capture_names": [
+          "02-cycle00-get-configuration-current",
+          "03-cycle00-get-configuration-all",
+          "04-cycle00-get-event-status-media",
+          "05-cycle01-inquiry-extrainq",
+          "06-cycle01-mode-sense10-all",
+          "07-cycle01-get-configuration-current",
+          "08-cycle01-get-configuration-all",
+          "09-cycle01-get-event-status-media",
+          "10-cycle02-inquiry-extrainq",
+          "11-cycle02-mode-sense10-all",
+          "12-cycle02-get-configuration-current",
+          "13-cycle02-get-configuration-all",
+          "14-cycle02-get-event-status-media",
+          "15-cycle03-inquiry-extrainq",
+          "16-cycle03-mode-sense10-all",
+          "17-cycle03-get-configuration-current",
+          "18-cycle03-get-configuration-all",
+          "19-cycle03-get-event-status-media",
+          "20-cycle04-inquiry-extrainq",
+          "21-cycle04-mode-sense10-all",
+          "22-cycle04-get-configuration-current",
+          "23-cycle04-get-configuration-all",
+          "24-cycle04-get-event-status-media",
+          "25-cycle05-inquiry-extrainq",
+          "26-cycle05-mode-sense10-all",
+          "27-cycle05-get-configuration-current",
+          "28-cycle05-get-configuration-all",
+          "29-cycle05-get-event-status-media",
+          "30-cycle06-inquiry-extrainq",
+          "31-cycle06-mode-sense10-all",
+          "32-cycle06-get-configuration-current",
+          "33-cycle06-get-configuration-all",
+          "34-cycle06-get-event-status-media",
+          "35-cycle07-inquiry-extrainq",
+          "36-cycle07-mode-sense10-all",
+          "37-cycle07-get-configuration-current",
+          "38-cycle07-get-configuration-all",
+          "39-cycle07-get-event-status-media"
+        ],
+        "observations": 38,
+        "offsets": [
+          32320
+        ],
+        "sample_hex": "f618ee36f6908a4ae0640260030273de",
+        "sha256": "fe343ef73975d6766c236d664ff0f6b8c7cac30767666cf803d6fc7fce5de610"
+      }
+    ]
+  },
+  "target_unique_chunks": 751
+}

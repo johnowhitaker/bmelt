@@ -1405,3 +1405,64 @@ the decoded controller range. The likely explanation is that the CDD expansion
 engine is not actually active in currentboot; it is a normal-runtime facility,
 or it needs additional controller state that this boot personality never
 establishes.
+
+That negative result pointed back at normal runtime. One surprise hiding in
+plain sight is that normal `LD5M` exposes the same public
+`READ BUFFER mode=1 id=01 offset=0x070000` work window without entering
+currentboot. Earlier we had treated it mostly as a mixed table/code dump, with
+some live bytes. A more deliberate stimulus pass showed it is livelier than
+that: it behaves like a small rotating/pageable cache of 64-byte work/code
+tiles.
+
+I added a capture script that stays in read-only/no-data-out territory and
+records that `0x070000` window after safe normal SCSI/MMC commands: ordinary
+inquiry, EXTRAINQ, mode sense, get configuration, event status, TOC/disc/track
+information, mechanism status, and DVD structure reads. A capture-only control
+run then repeated the same `id=01` window dump fourteen times with no
+intervening stimulus.
+
+The comparison was clean. Repeated reads alone produced 704 informative unique
+`0x40` chunks and showed the expected small rotation around pages like
+`+0x6000`, `+0x8600`, and `+0x9500`. The safe-stimulus run produced 752
+informative chunks. Every chunk from the capture-only control was present, plus
+48 more chunks that only appeared after normal command stimuli. That means the
+commands are not merely shuffling the same ring; they can pull additional
+already-decoded runtime material into the public work window.
+
+This gives the project a third readout route. We still have the static CDD
+decoder work, and we still have the slow currentboot gateway/bit-channel path.
+Now we also have a normal-runtime tile-harvesting path that may expose decoded
+8051 overlays without asking the controller CDD format to give up all its
+secrets at once. Public offsets are probably page-frame positions rather than
+stable logical addresses, since the same chunk can appear in multiple slots,
+but the corpus is real and reproducible. The immediate next step is to expand
+the stimulus set carefully, repeat each command family enough times to build a
+larger unique-tile corpus, and start correlating harvested chunks with the
+known static disassembly.
+
+The first expansion run was encouraging but also sobering in the right way. I
+repeated the highest-yield safe stimuli for eight cycles: EXTRAINQ, mode sense,
+get configuration, and event status. The drive stayed normal. The focused run
+produced 751 informative chunks, 15 of which were new relative to the earlier
+full-stimulus pass. Taken together, the capture-only, full-stimulus, and
+focused-stimulus runs give 68 captures and 767 unique informative 64-byte
+chunks. So this is a real harvest path, but it probably saturates by command
+family. More progress will come from broader stimulus coverage and better
+correlation/disassembly, not just looping the same few commands forever.
+
+The broader one-cycle expansion was worth doing. I added more safe information
+commands: read capacity, format capacities, individual mode-sense pages, more
+event-status classes, TOC/DVD-structure variants, and get-performance. Several
+of these quite reasonably came back as CHECK CONDITION or ILLEGAL REQUEST with
+no disc, but the drive stayed in normal `LD5M`, and the follow-up window
+captures completed. This added another 18 aggregate chunks. The normal-window
+corpus now stands at 94 captures and 785 unique informative `0x40` chunks.
+
+The first static correlation makes the result feel less like a bookkeeping
+trick. Exact 64-byte matching against the known 1 MiB LD5M F0 image finds only
+63 matching chunks, and exact matching against the extracted visible 8051 prefix
+finds only 8. The rest is not automatically "decoded servo firmware"; the
+public window also includes profile tables, strings, and live work state. But
+the important bit is that most of this corpus is not simply present verbatim in
+the static F0 image. Normal runtime is exposing material we did not otherwise
+have byte-for-byte.
