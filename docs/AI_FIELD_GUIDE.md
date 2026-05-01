@@ -2013,3 +2013,20 @@ Immediate useful directions:
     or 8051-executable code. Do not assume the CDDs are only ARM/DSP/servo
     payloads. The high-coverage known-output records are now a cleaner static
     route than blind whole-stream CDD decoding.
+91. `scripts/analyze_liteon_cdd_hard_record_hypotheses.py` and
+    `analysis/8051/cdd-hard-record-hypothesis-probes-20260501.md/json` test
+    hard-record transform ideas against the known-output exports. Results:
+    sparse byte projections are random-like, and the source bitstreams do not
+    satisfy RLL/EFMPlus post-modulation constraints.
+92. The same hard-record probe found a useful size clue. Many CDD hard-record
+    source lengths cluster near DVD-format sizes, especially the 2366-byte
+    recording-frame size (`13 * 182`) from ECMA-267. `key5` correlates strongly
+    with source-length class, which makes it look like part of a code-rate or
+    block-layout selector.
+93. The DVD-like clue lines up with the existing 12-record affine schedule:
+    LD5M positions 0, 1, and 2 modulo 12 have the strongest near-2366 source
+    clustering, while position 3 is much shorter/control-heavy. This is not a
+    vanilla DVD ECC block mapping, but it makes a reused optical ECC/frame
+    datapath plausible. Record 87 is the cleanest no-variant hard-record
+    transform target; records 51, 55, 60, 66, and 68 are better cross-checks
+    for the 2366-byte DVD-size clue.

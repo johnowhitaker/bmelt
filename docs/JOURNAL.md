@@ -2131,3 +2131,28 @@ exact encoded CDD record that produced it. That gives the next static attack a
 much smaller target: explain one high-coverage record transform at a time,
 starting with records 87, 51, 66, 58, and 70, rather than trying to solve the
 whole CDD format in one leap.
+
+The next crack was not a decoder, but it produced a better hypothesis. I tested
+the high-coverage hard records against a few concrete formats instead of
+another open-ended scan. The obvious byte-level ideas stayed dead: sparse
+monotonic projections from encoded source to known output behave at random
+rates, and the encoded source does not satisfy DVD RLL/EFMPlus-style
+post-modulation constraints.
+
+But the source lengths are suspicious. A lot of hard records cluster near DVD
+formatting sizes, especially the 2366-byte recording-frame size from ECMA-267
+(`13 * 182` bytes). Even more interesting, the CDD affine layer already had a
+12-record macro cadence, and the LD5M hard-record lengths have their strongest
+near-2366 clustering in positions 0, 1, and 2 of that 12-record cycle, while
+position 3 is much more control/short-record-heavy. This is not proof that CDD
+is vanilla DVD sector data, but it makes a reused optical ECC/frame datapath
+look plausible. The CDD hard records may be pre-modulation, scrambled/ECC-ish
+codewords rather than a conventional compressor or cipher.
+
+The practical consequence: record 87 is still the cleanest high-coverage target
+for generic hard-record transform work because it has no slot variants. For the
+DVD-size clue specifically, records 51, 55, 60, 66, and 68 are better
+cross-checks because their source lengths sit closer to the 2366-byte recording
+frame size. Either way, the next static test should be targeted DVD-like
+scrambling/ECC/interleave experiments against masked known outputs, not more
+generic XOR/CRC guessing.

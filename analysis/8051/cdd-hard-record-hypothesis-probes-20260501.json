@@ -1,0 +1,2267 @@
+{
+  "dvd_reference_sizes": {
+    "data_frame": 2064,
+    "main_data": 2048,
+    "recording_frame": 2366
+  },
+  "known_dir": "/Users/johno/projects/boastermelt/analysis/8051/cdd-known-output-records-20260501",
+  "known_record_probes": [
+    {
+      "best_rll_view": {
+        "bit_order": "msb",
+        "histogram_0_to_12": {
+          "0": 3655,
+          "1": 1910,
+          "10": 4,
+          "11": 1,
+          "12": 0,
+          "2": 1116,
+          "3": 517,
+          "4": 253,
+          "5": 98,
+          "6": 48,
+          "7": 32,
+          "8": 11,
+          "9": 7
+        },
+        "invert": true,
+        "max_run": 13,
+        "min_run": 0,
+        "runs": 7653,
+        "view": "raw",
+        "violation_fraction": 0.7274271527505554,
+        "violations": 5567
+      },
+      "decoded_span": 1008,
+      "distance_to_dvd_sizes": {
+        "data_frame": -117,
+        "main_data": -101,
+        "recording_frame": -419
+      },
+      "known_bytes": 896,
+      "known_entropy": 5.609564561722538,
+      "known_range": [
+        32,
+        928
+      ],
+      "record": 87,
+      "source_entropy": 7.883722372706498,
+      "source_len": 1947,
+      "sparse_projection": {
+        "bit_equal_fraction": 0.50390625,
+        "byte_equal_fraction": 0.012276785714285714,
+        "denominator": 1008,
+        "high_nibble_equal_fraction": 0.06138392857142857,
+        "low_nibble_equal_fraction": 0.06919642857142858,
+        "numerator": 649,
+        "phase": -10,
+        "total": 896,
+        "transform": "bitrev"
+      }
+    },
+    {
+      "best_rll_view": {
+        "bit_order": "msb",
+        "histogram_0_to_12": {
+          "0": 4282,
+          "1": 2252,
+          "10": 5,
+          "11": 3,
+          "12": 0,
+          "2": 1194,
+          "3": 652,
+          "4": 280,
+          "5": 147,
+          "6": 68,
+          "7": 51,
+          "8": 26,
+          "9": 14
+        },
+        "invert": true,
+        "max_run": 11,
+        "min_run": 0,
+        "runs": 8974,
+        "view": "raw",
+        "violation_fraction": 0.7284377089369289,
+        "violations": 6537
+      },
+      "decoded_span": 816,
+      "distance_to_dvd_sizes": {
+        "data_frame": 262,
+        "main_data": 278,
+        "recording_frame": -40
+      },
+      "known_bytes": 800,
+      "known_entropy": 5.633046387710227,
+      "known_range": [
+        16,
+        816
+      ],
+      "record": 51,
+      "source_entropy": 7.906853732136656,
+      "source_len": 2326,
+      "sparse_projection": {
+        "bit_equal_fraction": 0.5115625,
+        "byte_equal_fraction": 0.01375,
+        "denominator": 816,
+        "high_nibble_equal_fraction": 0.0775,
+        "low_nibble_equal_fraction": 0.0575,
+        "numerator": 1163,
+        "phase": -12,
+        "total": 800,
+        "transform": "bitrev"
+      }
+    },
+    {
+      "best_rll_view": {
+        "bit_order": "msb",
+        "histogram_0_to_12": {
+          "0": 4299,
+          "1": 2239,
+          "10": 2,
+          "11": 1,
+          "12": 1,
+          "2": 1171,
+          "3": 632,
+          "4": 291,
+          "5": 170,
+          "6": 80,
+          "7": 38,
+          "8": 23,
+          "9": 9
+        },
+        "invert": true,
+        "max_run": 12,
+        "min_run": 0,
+        "runs": 8956,
+        "view": "raw",
+        "violation_fraction": 0.7302367128182224,
+        "violations": 6540
+      },
+      "decoded_span": 896,
+      "distance_to_dvd_sizes": {
+        "data_frame": 249,
+        "main_data": 265,
+        "recording_frame": -53
+      },
+      "known_bytes": 768,
+      "known_entropy": 5.640934656909743,
+      "known_range": [
+        128,
+        896
+      ],
+      "record": 55,
+      "source_entropy": 7.91750061725466,
+      "source_len": 2313,
+      "sparse_projection": {
+        "bit_equal_fraction": 0.5117084432717678,
+        "byte_equal_fraction": 0.013192612137203167,
+        "denominator": 896,
+        "high_nibble_equal_fraction": 0.06596306068601583,
+        "low_nibble_equal_fraction": 0.079155672823219,
+        "numerator": 2314,
+        "phase": 27,
+        "total": 758,
+        "transform": "bitrev_not"
+      }
+    },
+    {
+      "best_rll_view": {
+        "bit_order": "msb",
+        "histogram_0_to_12": {
+          "0": 4619,
+          "1": 2281,
+          "10": 6,
+          "11": 1,
+          "12": 1,
+          "2": 1248,
+          "3": 610,
+          "4": 290,
+          "5": 149,
+          "6": 73,
+          "7": 70,
+          "8": 26,
+          "9": 18
+        },
+        "invert": true,
+        "max_run": 12,
+        "min_run": 0,
+        "runs": 9392,
+        "view": "raw",
+        "violation_fraction": 0.7348807495741057,
+        "violations": 6902
+      },
+      "decoded_span": 720,
+      "distance_to_dvd_sizes": {
+        "data_frame": 347,
+        "main_data": 363,
+        "recording_frame": 45
+      },
+      "known_bytes": 704,
+      "known_entropy": 5.861900803713512,
+      "known_range": [
+        16,
+        720
+      ],
+      "record": 66,
+      "source_entropy": 7.9081364774740655,
+      "source_len": 2411,
+      "sparse_projection": {
+        "bit_equal_fraction": 0.5147372159090909,
+        "byte_equal_fraction": 0.014204545454545454,
+        "denominator": 720,
+        "high_nibble_equal_fraction": 0.08522727272727272,
+        "low_nibble_equal_fraction": 0.0625,
+        "numerator": 1607,
+        "phase": 61,
+        "total": 704,
+        "transform": "bitrev_not"
+      }
+    },
+    {
+      "best_rll_view": {
+        "bit_order": "msb",
+        "histogram_0_to_12": {
+          "0": 4435,
+          "1": 2282,
+          "10": 2,
+          "11": 3,
+          "12": 1,
+          "2": 1161,
+          "3": 658,
+          "4": 283,
+          "5": 139,
+          "6": 87,
+          "7": 50,
+          "8": 22,
+          "9": 11
+        },
+        "invert": true,
+        "max_run": 12,
+        "min_run": 0,
+        "runs": 9134,
+        "view": "raw",
+        "violation_fraction": 0.7358222027589227,
+        "violations": 6721
+      },
+      "decoded_span": 848,
+      "distance_to_dvd_sizes": {
+        "data_frame": 280,
+        "main_data": 296,
+        "recording_frame": -22
+      },
+      "known_bytes": 624,
+      "known_entropy": 5.109271030465034,
+      "known_range": [
+        480,
+        848
+      ],
+      "record": 60,
+      "source_entropy": 7.905170365187971,
+      "source_len": 2344,
+      "sparse_projection": {
+        "bit_equal_fraction": 0.5146059782608695,
+        "byte_equal_fraction": 0.021739130434782608,
+        "denominator": 848,
+        "high_nibble_equal_fraction": 0.07880434782608696,
+        "low_nibble_equal_fraction": 0.07065217391304347,
+        "numerator": 781,
+        "phase": -39,
+        "total": 368,
+        "transform": "not"
+      }
+    },
+    {
+      "best_rll_view": {
+        "bit_order": "msb",
+        "histogram_0_to_12": {
+          "0": 4663,
+          "1": 2290,
+          "10": 3,
+          "11": 2,
+          "12": 0,
+          "2": 1298,
+          "3": 574,
+          "4": 303,
+          "5": 173,
+          "6": 92,
+          "7": 50,
+          "8": 20,
+          "9": 10
+        },
+        "invert": true,
+        "max_run": 11,
+        "min_run": 0,
+        "runs": 9478,
+        "view": "raw",
+        "violation_fraction": 0.733804600126609,
+        "violations": 6955
+      },
+      "decoded_span": 640,
+      "distance_to_dvd_sizes": {
+        "data_frame": 357,
+        "main_data": 373,
+        "recording_frame": 55
+      },
+      "known_bytes": 528,
+      "known_entropy": 5.09005764632792,
+      "known_range": [
+        112,
+        640
+      ],
+      "record": 68,
+      "source_entropy": 7.905081526670297,
+      "source_len": 2421,
+      "sparse_projection": {
+        "bit_equal_fraction": 0.5066287878787878,
+        "byte_equal_fraction": 0.017045454545454544,
+        "denominator": 640,
+        "high_nibble_equal_fraction": 0.07386363636363637,
+        "low_nibble_equal_fraction": 0.07765151515151515,
+        "numerator": 1210,
+        "phase": -60,
+        "total": 528,
+        "transform": "not"
+      }
+    },
+    {
+      "best_rll_view": {
+        "bit_order": "msb",
+        "histogram_0_to_12": {
+          "0": 3698,
+          "1": 1861,
+          "10": 1,
+          "11": 2,
+          "12": 0,
+          "2": 978,
+          "3": 598,
+          "4": 227,
+          "5": 144,
+          "6": 62,
+          "7": 40,
+          "8": 16,
+          "9": 4
+        },
+        "invert": true,
+        "max_run": 11,
+        "min_run": 0,
+        "runs": 7631,
+        "view": "raw",
+        "violation_fraction": 0.7287380421963046,
+        "violations": 5561
+      },
+      "decoded_span": 688,
+      "distance_to_dvd_sizes": {
+        "data_frame": -99,
+        "main_data": -83,
+        "recording_frame": -401
+      },
+      "known_bytes": 512,
+      "known_entropy": 5.1408709730738575,
+      "known_range": [
+        176,
+        688
+      ],
+      "record": 88,
+      "source_entropy": 7.876574251221364,
+      "source_len": 1965,
+      "sparse_projection": {
+        "bit_equal_fraction": 0.4931237721021611,
+        "byte_equal_fraction": 0.0137524557956778,
+        "denominator": 688,
+        "high_nibble_equal_fraction": 0.068762278978389,
+        "low_nibble_equal_fraction": 0.06483300589390963,
+        "numerator": 1964,
+        "phase": 11,
+        "total": 509,
+        "transform": "bitrev_not"
+      }
+    },
+    {
+      "best_rll_view": {
+        "bit_order": "msb",
+        "histogram_0_to_12": {
+          "0": 4443,
+          "1": 2319,
+          "10": 1,
+          "11": 1,
+          "12": 0,
+          "2": 1172,
+          "3": 576,
+          "4": 275,
+          "5": 139,
+          "6": 72,
+          "7": 41,
+          "8": 17,
+          "9": 20
+        },
+        "invert": true,
+        "max_run": 13,
+        "min_run": 0,
+        "runs": 9077,
+        "view": "raw",
+        "violation_fraction": 0.745180125592156,
+        "violations": 6764
+      },
+      "decoded_span": 544,
+      "distance_to_dvd_sizes": {
+        "data_frame": 228,
+        "main_data": 244,
+        "recording_frame": -74
+      },
+      "known_bytes": 496,
+      "known_entropy": 5.536354893327111,
+      "known_range": [
+        48,
+        544
+      ],
+      "record": 58,
+      "source_entropy": 7.919942983265344,
+      "source_len": 2292,
+      "sparse_projection": {
+        "bit_equal_fraction": 0.5083165322580645,
+        "byte_equal_fraction": 0.018145161290322582,
+        "denominator": 544,
+        "high_nibble_equal_fraction": 0.0846774193548387,
+        "low_nibble_equal_fraction": 0.06451612903225806,
+        "numerator": 2291,
+        "phase": -41,
+        "total": 496,
+        "transform": "not"
+      }
+    },
+    {
+      "best_rll_view": {
+        "bit_order": "msb",
+        "histogram_0_to_12": {
+          "0": 4946,
+          "1": 2327,
+          "10": 1,
+          "11": 0,
+          "12": 1,
+          "2": 1359,
+          "3": 634,
+          "4": 312,
+          "5": 185,
+          "6": 91,
+          "7": 45,
+          "8": 25,
+          "9": 7
+        },
+        "invert": true,
+        "max_run": 12,
+        "min_run": 0,
+        "runs": 9933,
+        "view": "raw",
+        "violation_fraction": 0.7323064532366858,
+        "violations": 7274
+      },
+      "decoded_span": 560,
+      "distance_to_dvd_sizes": {
+        "data_frame": 461,
+        "main_data": 477,
+        "recording_frame": 159
+      },
+      "known_bytes": 448,
+      "known_entropy": 5.685584593351401,
+      "known_range": [
+        0,
+        448
+      ],
+      "record": 70,
+      "source_entropy": 7.919482690504679,
+      "source_len": 2525,
+      "sparse_projection": {
+        "bit_equal_fraction": 0.5030691964285714,
+        "byte_equal_fraction": 0.017857142857142856,
+        "denominator": 560,
+        "high_nibble_equal_fraction": 0.08705357142857142,
+        "low_nibble_equal_fraction": 0.06473214285714286,
+        "numerator": 841,
+        "phase": 26,
+        "total": 448,
+        "transform": "id"
+      }
+    },
+    {
+      "best_rll_view": {
+        "bit_order": "lsb",
+        "histogram_0_to_12": {
+          "0": 4636,
+          "1": 2520,
+          "10": 6,
+          "11": 4,
+          "12": 1,
+          "2": 1252,
+          "3": 659,
+          "4": 329,
+          "5": 163,
+          "6": 87,
+          "7": 38,
+          "8": 19,
+          "9": 6
+        },
+        "invert": true,
+        "max_run": 14,
+        "min_run": 0,
+        "runs": 9722,
+        "view": "raw",
+        "violation_fraction": 0.7367825550298293,
+        "violations": 7163
+      },
+      "decoded_span": 496,
+      "distance_to_dvd_sizes": {
+        "data_frame": 435,
+        "main_data": 451,
+        "recording_frame": 133
+      },
+      "known_bytes": 432,
+      "known_entropy": 4.545009133144316,
+      "known_range": [
+        0,
+        256
+      ],
+      "record": 50,
+      "source_entropy": 7.898472426649278,
+      "source_len": 2499,
+      "sparse_projection": {
+        "bit_equal_fraction": 0.51416015625,
+        "byte_equal_fraction": 0.0234375,
+        "denominator": 496,
+        "high_nibble_equal_fraction": 0.0859375,
+        "low_nibble_equal_fraction": 0.0703125,
+        "numerator": 2499,
+        "phase": 30,
+        "total": 256,
+        "transform": "bitrev_not"
+      }
+    },
+    {
+      "best_rll_view": {
+        "bit_order": "msb",
+        "histogram_0_to_12": {
+          "0": 3470,
+          "1": 1347,
+          "10": 4,
+          "11": 0,
+          "12": 0,
+          "2": 979,
+          "3": 331,
+          "4": 192,
+          "5": 112,
+          "6": 52,
+          "7": 24,
+          "8": 16,
+          "9": 3
+        },
+        "invert": true,
+        "max_run": 10,
+        "min_run": 0,
+        "runs": 6530,
+        "view": "raw",
+        "violation_fraction": 0.7376722817764165,
+        "violations": 4817
+      },
+      "decoded_span": 688,
+      "distance_to_dvd_sizes": {
+        "data_frame": -460,
+        "main_data": -444,
+        "recording_frame": -762
+      },
+      "known_bytes": 336,
+      "known_entropy": 4.853189073895137,
+      "known_range": [
+        32,
+        288
+      ],
+      "record": 64,
+      "source_entropy": 7.785742887983714,
+      "source_len": 1604,
+      "sparse_projection": {
+        "bit_equal_fraction": 0.51123046875,
+        "byte_equal_fraction": 0.01953125,
+        "denominator": 688,
+        "high_nibble_equal_fraction": 0.07421875,
+        "low_nibble_equal_fraction": 0.10546875,
+        "numerator": 1604,
+        "phase": 18,
+        "total": 256,
+        "transform": "bitrev_not"
+      }
+    },
+    {
+      "best_rll_view": {
+        "bit_order": "msb",
+        "histogram_0_to_12": {
+          "0": 3432,
+          "1": 1897,
+          "10": 1,
+          "11": 1,
+          "12": 0,
+          "2": 867,
+          "3": 397,
+          "4": 213,
+          "5": 175,
+          "6": 95,
+          "7": 33,
+          "8": 16,
+          "9": 12
+        },
+        "invert": false,
+        "max_run": 11,
+        "min_run": 0,
+        "runs": 7139,
+        "view": "nrzi_derivative",
+        "violation_fraction": 0.7466031657094832,
+        "violations": 5330
+      },
+      "decoded_span": 544,
+      "distance_to_dvd_sizes": {
+        "data_frame": -220,
+        "main_data": -204,
+        "recording_frame": -522
+      },
+      "known_bytes": 320,
+      "known_entropy": 5.647131482244003,
+      "known_range": [
+        48,
+        240
+      ],
+      "record": 65,
+      "source_entropy": 7.850279150685713,
+      "source_len": 1844,
+      "sparse_projection": {
+        "bit_equal_fraction": 0.5234375,
+        "byte_equal_fraction": 0.026041666666666668,
+        "denominator": 544,
+        "high_nibble_equal_fraction": 0.08333333333333333,
+        "low_nibble_equal_fraction": 0.109375,
+        "numerator": 1845,
+        "phase": -61,
+        "total": 192,
+        "transform": "bitrev_not"
+      }
+    },
+    {
+      "best_rll_view": {
+        "bit_order": "msb",
+        "histogram_0_to_12": {
+          "0": 4155,
+          "1": 2229,
+          "10": 7,
+          "11": 1,
+          "12": 1,
+          "2": 1115,
+          "3": 624,
+          "4": 302,
+          "5": 163,
+          "6": 87,
+          "7": 51,
+          "8": 20,
+          "9": 9
+        },
+        "invert": true,
+        "max_run": 13,
+        "min_run": 0,
+        "runs": 8766,
+        "view": "raw",
+        "violation_fraction": 0.728724617841661,
+        "violations": 6388
+      },
+      "decoded_span": 656,
+      "distance_to_dvd_sizes": {
+        "data_frame": 231,
+        "main_data": 247,
+        "recording_frame": -71
+      },
+      "known_bytes": 272,
+      "known_entropy": 4.866860128155198,
+      "known_range": [
+        448,
+        656
+      ],
+      "record": 67,
+      "source_entropy": 7.902598573618902,
+      "source_len": 2295,
+      "sparse_projection": {
+        "bit_equal_fraction": 0.515625,
+        "byte_equal_fraction": 0.028846153846153848,
+        "denominator": 656,
+        "high_nibble_equal_fraction": 0.09134615384615384,
+        "low_nibble_equal_fraction": 0.08173076923076923,
+        "numerator": 1530,
+        "phase": 4,
+        "total": 208,
+        "transform": "bitrev_not"
+      }
+    },
+    {
+      "best_rll_view": {
+        "bit_order": "msb",
+        "histogram_0_to_12": {
+          "0": 3826,
+          "1": 2053,
+          "10": 1,
+          "11": 2,
+          "12": 0,
+          "2": 1030,
+          "3": 523,
+          "4": 278,
+          "5": 126,
+          "6": 61,
+          "7": 41,
+          "8": 17,
+          "9": 6
+        },
+        "invert": true,
+        "max_run": 11,
+        "min_run": 0,
+        "runs": 7964,
+        "view": "raw",
+        "violation_fraction": 0.7384480160723255,
+        "violations": 5881
+      },
+      "decoded_span": 448,
+      "distance_to_dvd_sizes": {
+        "data_frame": -31,
+        "main_data": -15,
+        "recording_frame": -333
+      },
+      "known_bytes": 256,
+      "known_entropy": 4.531403423718116,
+      "known_range": [
+        192,
+        448
+      ],
+      "record": 49,
+      "source_entropy": 7.893996477315746,
+      "source_len": 2033,
+      "sparse_projection": {
+        "bit_equal_fraction": 0.5120481927710844,
+        "byte_equal_fraction": 0.020080321285140562,
+        "denominator": 448,
+        "high_nibble_equal_fraction": 0.0963855421686747,
+        "low_nibble_equal_fraction": 0.060240963855421686,
+        "numerator": 2033,
+        "phase": 33,
+        "total": 249,
+        "transform": "bitrev"
+      }
+    },
+    {
+      "best_rll_view": {
+        "bit_order": "msb",
+        "histogram_0_to_12": {
+          "0": 4157,
+          "1": 2218,
+          "10": 4,
+          "11": 0,
+          "12": 1,
+          "2": 1099,
+          "3": 557,
+          "4": 291,
+          "5": 157,
+          "6": 84,
+          "7": 41,
+          "8": 27,
+          "9": 17
+        },
+        "invert": true,
+        "max_run": 12,
+        "min_run": 0,
+        "runs": 8653,
+        "view": "raw",
+        "violation_fraction": 0.736854270195308,
+        "violations": 6376
+      },
+      "decoded_span": 768,
+      "distance_to_dvd_sizes": {
+        "data_frame": 174,
+        "main_data": 190,
+        "recording_frame": -128
+      },
+      "known_bytes": 256,
+      "known_entropy": 3.125,
+      "known_range": [
+        0,
+        128
+      ],
+      "record": 85,
+      "source_entropy": 7.902617134115831,
+      "source_len": 2238,
+      "sparse_projection": {
+        "bit_equal_fraction": 0.5063131313131313,
+        "byte_equal_fraction": 0.030303030303030304,
+        "denominator": 768,
+        "high_nibble_equal_fraction": 0.050505050505050504,
+        "low_nibble_equal_fraction": 0.1111111111111111,
+        "numerator": 746,
+        "phase": -28,
+        "total": 99,
+        "transform": "bitrev"
+      }
+    },
+    {
+      "best_rll_view": {
+        "bit_order": "msb",
+        "histogram_0_to_12": {
+          "0": 4487,
+          "1": 2319,
+          "10": 6,
+          "11": 0,
+          "12": 1,
+          "2": 1233,
+          "3": 632,
+          "4": 328,
+          "5": 158,
+          "6": 98,
+          "7": 42,
+          "8": 22,
+          "9": 11
+        },
+        "invert": true,
+        "max_run": 12,
+        "min_run": 0,
+        "runs": 9337,
+        "view": "raw",
+        "violation_fraction": 0.7290350219556603,
+        "violations": 6807
+      },
+      "decoded_span": 464,
+      "distance_to_dvd_sizes": {
+        "data_frame": 355,
+        "main_data": 371,
+        "recording_frame": 53
+      },
+      "known_bytes": 224,
+      "known_entropy": 5.1377156572883695,
+      "known_range": [
+        368,
+        464
+      ],
+      "record": 62,
+      "source_entropy": 7.887755197037631,
+      "source_len": 2419,
+      "sparse_projection": {
+        "bit_equal_fraction": 0.5325520833333334,
+        "byte_equal_fraction": 0.03125,
+        "denominator": 464,
+        "high_nibble_equal_fraction": 0.052083333333333336,
+        "low_nibble_equal_fraction": 0.125,
+        "numerator": 806,
+        "phase": -5,
+        "total": 96,
+        "transform": "bitrev_not"
+      }
+    },
+    {
+      "best_rll_view": {
+        "bit_order": "lsb",
+        "histogram_0_to_12": {
+          "0": 4293,
+          "1": 2309,
+          "10": 3,
+          "11": 2,
+          "12": 0,
+          "2": 1266,
+          "3": 642,
+          "4": 258,
+          "5": 143,
+          "6": 79,
+          "7": 33,
+          "8": 16,
+          "9": 9
+        },
+        "invert": true,
+        "max_run": 11,
+        "min_run": 0,
+        "runs": 9053,
+        "view": "raw",
+        "violation_fraction": 0.7294819396885011,
+        "violations": 6604
+      },
+      "decoded_span": 224,
+      "distance_to_dvd_sizes": {
+        "data_frame": 253,
+        "main_data": 269,
+        "recording_frame": -49
+      },
+      "known_bytes": 224,
+      "known_entropy": 5.383344461563652,
+      "known_range": [
+        0,
+        224
+      ],
+      "record": 86,
+      "source_entropy": 7.902341529600939,
+      "source_len": 2317,
+      "sparse_projection": {
+        "bit_equal_fraction": 0.5154109589041096,
+        "byte_equal_fraction": 0.0228310502283105,
+        "denominator": 224,
+        "high_nibble_equal_fraction": 0.0867579908675799,
+        "low_nibble_equal_fraction": 0.0821917808219178,
+        "numerator": 2318,
+        "phase": 59,
+        "total": 219,
+        "transform": "id"
+      }
+    },
+    {
+      "best_rll_view": {
+        "bit_order": "msb",
+        "histogram_0_to_12": {
+          "0": 3857,
+          "1": 1973,
+          "10": 1,
+          "11": 2,
+          "12": 1,
+          "2": 1036,
+          "3": 469,
+          "4": 251,
+          "5": 127,
+          "6": 71,
+          "7": 26,
+          "8": 12,
+          "9": 6
+        },
+        "invert": true,
+        "max_run": 13,
+        "min_run": 0,
+        "runs": 7833,
+        "view": "raw",
+        "violation_fraction": 0.7447976509638708,
+        "violations": 5834
+      },
+      "decoded_span": 304,
+      "distance_to_dvd_sizes": {
+        "data_frame": -96,
+        "main_data": -80,
+        "recording_frame": -398
+      },
+      "known_bytes": 208,
+      "known_entropy": 5.09361912977228,
+      "known_range": [
+        96,
+        304
+      ],
+      "record": 57,
+      "source_entropy": 7.899741729660881,
+      "source_len": 1968,
+      "sparse_projection": {
+        "bit_equal_fraction": 0.4969951923076923,
+        "byte_equal_fraction": 0.03365384615384615,
+        "denominator": 304,
+        "high_nibble_equal_fraction": 0.10096153846153846,
+        "low_nibble_equal_fraction": 0.07211538461538461,
+        "numerator": 984,
+        "phase": 40,
+        "total": 208,
+        "transform": "bitrev"
+      }
+    },
+    {
+      "best_rll_view": {
+        "bit_order": "msb",
+        "histogram_0_to_12": {
+          "0": 4143,
+          "1": 2113,
+          "10": 2,
+          "11": 0,
+          "12": 0,
+          "2": 1100,
+          "3": 564,
+          "4": 275,
+          "5": 174,
+          "6": 74,
+          "7": 48,
+          "8": 15,
+          "9": 10
+        },
+        "invert": true,
+        "max_run": 10,
+        "min_run": 0,
+        "runs": 8518,
+        "view": "raw",
+        "violation_fraction": 0.7344447053298896,
+        "violations": 6256
+      },
+      "decoded_span": 224,
+      "distance_to_dvd_sizes": {
+        "data_frame": 124,
+        "main_data": 140,
+        "recording_frame": -178
+      },
+      "known_bytes": 192,
+      "known_entropy": 4.614515086514733,
+      "known_range": [
+        32,
+        224
+      ],
+      "record": 52,
+      "source_entropy": 7.905859721578153,
+      "source_len": 2188,
+      "sparse_projection": {
+        "bit_equal_fraction": 0.513671875,
+        "byte_equal_fraction": 0.026041666666666668,
+        "denominator": 224,
+        "high_nibble_equal_fraction": 0.07291666666666667,
+        "low_nibble_equal_fraction": 0.08854166666666667,
+        "numerator": 1458,
+        "phase": -14,
+        "total": 192,
+        "transform": "not"
+      }
+    },
+    {
+      "best_rll_view": {
+        "bit_order": "msb",
+        "histogram_0_to_12": {
+          "0": 4104,
+          "1": 2080,
+          "10": 0,
+          "11": 1,
+          "12": 0,
+          "2": 1194,
+          "3": 601,
+          "4": 254,
+          "5": 144,
+          "6": 71,
+          "7": 40,
+          "8": 14,
+          "9": 5
+        },
+        "invert": true,
+        "max_run": 11,
+        "min_run": 0,
+        "runs": 8508,
+        "view": "raw",
+        "violation_fraction": 0.7269628584861307,
+        "violations": 6185
+      },
+      "decoded_span": 304,
+      "distance_to_dvd_sizes": {
+        "data_frame": 110,
+        "main_data": 126,
+        "recording_frame": -192
+      },
+      "known_bytes": 192,
+      "known_entropy": 5.246901930948381,
+      "known_range": [
+        0,
+        128
+      ],
+      "record": 53,
+      "source_entropy": 7.894052643581672,
+      "source_len": 2174,
+      "sparse_projection": {
+        "bit_equal_fraction": 0.5113636363636364,
+        "byte_equal_fraction": 0.03305785123966942,
+        "denominator": 304,
+        "high_nibble_equal_fraction": 0.049586776859504134,
+        "low_nibble_equal_fraction": 0.12396694214876033,
+        "numerator": 1087,
+        "phase": -25,
+        "total": 121,
+        "transform": "bitrev_not"
+      }
+    },
+    {
+      "best_rll_view": {
+        "bit_order": "msb",
+        "histogram_0_to_12": {
+          "0": 4634,
+          "1": 2449,
+          "10": 6,
+          "11": 1,
+          "12": 0,
+          "2": 1261,
+          "3": 654,
+          "4": 299,
+          "5": 146,
+          "6": 85,
+          "7": 53,
+          "8": 20,
+          "9": 10
+        },
+        "invert": true,
+        "max_run": 13,
+        "min_run": 0,
+        "runs": 9619,
+        "view": "raw",
+        "violation_fraction": 0.7365630522923381,
+        "violations": 7085
+      },
+      "decoded_span": 304,
+      "distance_to_dvd_sizes": {
+        "data_frame": 398,
+        "main_data": 414,
+        "recording_frame": 96
+      },
+      "known_bytes": 192,
+      "known_entropy": 5.207977705324505,
+      "known_range": [
+        16,
+        208
+      ],
+      "record": 59,
+      "source_entropy": 7.913652767092014,
+      "source_len": 2462,
+      "sparse_projection": {
+        "bit_equal_fraction": 0.4921875,
+        "byte_equal_fraction": 0.026041666666666668,
+        "denominator": 304,
+        "high_nibble_equal_fraction": 0.08854166666666667,
+        "low_nibble_equal_fraction": 0.057291666666666664,
+        "numerator": 2463,
+        "phase": -34,
+        "total": 192,
+        "transform": "bitrev_not"
+      }
+    },
+    {
+      "best_rll_view": {
+        "bit_order": "msb",
+        "histogram_0_to_12": {
+          "0": 4482,
+          "1": 2259,
+          "10": 2,
+          "11": 1,
+          "12": 0,
+          "2": 1185,
+          "3": 599,
+          "4": 332,
+          "5": 170,
+          "6": 85,
+          "7": 41,
+          "8": 17,
+          "9": 8
+        },
+        "invert": true,
+        "max_run": 14,
+        "min_run": 0,
+        "runs": 9182,
+        "view": "raw",
+        "violation_fraction": 0.7343715966020475,
+        "violations": 6743
+      },
+      "decoded_span": 400,
+      "distance_to_dvd_sizes": {
+        "data_frame": 291,
+        "main_data": 307,
+        "recording_frame": -11
+      },
+      "known_bytes": 192,
+      "known_entropy": 4.820563383509937,
+      "known_range": [
+        208,
+        400
+      ],
+      "record": 73,
+      "source_entropy": 7.908947306936706,
+      "source_len": 2355,
+      "sparse_projection": {
+        "bit_equal_fraction": 0.5110677083333334,
+        "byte_equal_fraction": 0.026041666666666668,
+        "denominator": 400,
+        "high_nibble_equal_fraction": 0.109375,
+        "low_nibble_equal_fraction": 0.08854166666666667,
+        "numerator": 785,
+        "phase": -36,
+        "total": 192,
+        "transform": "id"
+      }
+    },
+    {
+      "best_rll_view": {
+        "bit_order": "msb",
+        "histogram_0_to_12": {
+          "0": 5418,
+          "1": 2718,
+          "10": 4,
+          "11": 1,
+          "12": 1,
+          "2": 1453,
+          "3": 727,
+          "4": 400,
+          "5": 189,
+          "6": 110,
+          "7": 44,
+          "8": 19,
+          "9": 10
+        },
+        "invert": true,
+        "max_run": 12,
+        "min_run": 0,
+        "runs": 11094,
+        "view": "raw",
+        "violation_fraction": 0.7335496664863891,
+        "violations": 8138
+      },
+      "decoded_span": 800,
+      "distance_to_dvd_sizes": {
+        "data_frame": 776,
+        "main_data": 792,
+        "recording_frame": 474
+      },
+      "known_bytes": 192,
+      "known_entropy": 4.954872990549817,
+      "known_range": [
+        0,
+        192
+      ],
+      "record": 74,
+      "source_entropy": 7.931972477228681,
+      "source_len": 2840,
+      "sparse_projection": {
+        "bit_equal_fraction": 0.5234375,
+        "byte_equal_fraction": 0.026041666666666668,
+        "denominator": 800,
+        "high_nibble_equal_fraction": 0.09895833333333333,
+        "low_nibble_equal_fraction": 0.08333333333333333,
+        "numerator": 2840,
+        "phase": 52,
+        "total": 192,
+        "transform": "not"
+      }
+    },
+    {
+      "best_rll_view": {
+        "bit_order": "msb",
+        "histogram_0_to_12": {
+          "0": 3745,
+          "1": 1921,
+          "10": 0,
+          "11": 0,
+          "12": 1,
+          "2": 1051,
+          "3": 593,
+          "4": 256,
+          "5": 112,
+          "6": 94,
+          "7": 29,
+          "8": 16,
+          "9": 8
+        },
+        "invert": true,
+        "max_run": 12,
+        "min_run": 0,
+        "runs": 7826,
+        "view": "raw",
+        "violation_fraction": 0.7241247124968055,
+        "violations": 5667
+      },
+      "decoded_span": 256,
+      "distance_to_dvd_sizes": {
+        "data_frame": -40,
+        "main_data": -24,
+        "recording_frame": -342
+      },
+      "known_bytes": 160,
+      "known_entropy": 5.36747177167504,
+      "known_range": [
+        32,
+        160
+      ],
+      "record": 63,
+      "source_entropy": 7.8738820766404904,
+      "source_len": 2024,
+      "sparse_projection": {
+        "bit_equal_fraction": 0.49609375,
+        "byte_equal_fraction": 0.03125,
+        "denominator": 256,
+        "high_nibble_equal_fraction": 0.09375,
+        "low_nibble_equal_fraction": 0.078125,
+        "numerator": 1349,
+        "phase": -34,
+        "total": 128,
+        "transform": "bitrev_not"
+      }
+    },
+    {
+      "best_rll_view": {
+        "bit_order": "msb",
+        "histogram_0_to_12": {
+          "0": 4480,
+          "1": 2193,
+          "10": 4,
+          "11": 1,
+          "12": 0,
+          "2": 1268,
+          "3": 571,
+          "4": 313,
+          "5": 159,
+          "6": 87,
+          "7": 50,
+          "8": 19,
+          "9": 10
+        },
+        "invert": true,
+        "max_run": 13,
+        "min_run": 0,
+        "runs": 9156,
+        "view": "raw",
+        "violation_fraction": 0.7290301441677588,
+        "violations": 6675
+      },
+      "decoded_span": 272,
+      "distance_to_dvd_sizes": {
+        "data_frame": 289,
+        "main_data": 305,
+        "recording_frame": -13
+      },
+      "known_bytes": 128,
+      "known_entropy": 4.685642284756374,
+      "known_range": [
+        80,
+        208
+      ],
+      "record": 54,
+      "source_entropy": 7.912409769420494,
+      "source_len": 2353,
+      "sparse_projection": {
+        "bit_equal_fraction": 0.5224609375,
+        "byte_equal_fraction": 0.03125,
+        "denominator": 272,
+        "high_nibble_equal_fraction": 0.0625,
+        "low_nibble_equal_fraction": 0.109375,
+        "numerator": 784,
+        "phase": -10,
+        "total": 128,
+        "transform": "bitrev"
+      }
+    },
+    {
+      "best_rll_view": {
+        "bit_order": "lsb",
+        "histogram_0_to_12": {
+          "0": 4277,
+          "1": 2143,
+          "10": 5,
+          "11": 3,
+          "12": 0,
+          "2": 1150,
+          "3": 648,
+          "4": 302,
+          "5": 139,
+          "6": 80,
+          "7": 54,
+          "8": 16,
+          "9": 11
+        },
+        "invert": true,
+        "max_run": 15,
+        "min_run": 0,
+        "runs": 8830,
+        "view": "raw",
+        "violation_fraction": 0.7276330690826727,
+        "violations": 6425
+      },
+      "decoded_span": 352,
+      "distance_to_dvd_sizes": {
+        "data_frame": 226,
+        "main_data": 242,
+        "recording_frame": -76
+      },
+      "known_bytes": 128,
+      "known_entropy": 4.888759133144316,
+      "known_range": [
+        0,
+        64
+      ],
+      "record": 56,
+      "source_entropy": 7.8854876523313076,
+      "source_len": 2290,
+      "sparse_projection": {
+        "bit_equal_fraction": 0.533203125,
+        "byte_equal_fraction": 0.046875,
+        "denominator": 352,
+        "high_nibble_equal_fraction": 0.09375,
+        "low_nibble_equal_fraction": 0.109375,
+        "numerator": 2291,
+        "phase": 16,
+        "total": 64,
+        "transform": "bitrev"
+      }
+    },
+    {
+      "best_rll_view": {
+        "bit_order": "lsb",
+        "histogram_0_to_12": {
+          "0": 3508,
+          "1": 1810,
+          "10": 2,
+          "11": 1,
+          "12": 1,
+          "2": 985,
+          "3": 475,
+          "4": 219,
+          "5": 113,
+          "6": 64,
+          "7": 41,
+          "8": 12,
+          "9": 12
+        },
+        "invert": true,
+        "max_run": 14,
+        "min_run": 0,
+        "runs": 7244,
+        "view": "raw",
+        "violation_fraction": 0.7345389287686361,
+        "violations": 5321
+      },
+      "decoded_span": 432,
+      "distance_to_dvd_sizes": {
+        "data_frame": -211,
+        "main_data": -195,
+        "recording_frame": -513
+      },
+      "known_bytes": 128,
+      "known_entropy": 4.663298827786958,
+      "known_range": [
+        64,
+        192
+      ],
+      "record": 80,
+      "source_entropy": 7.889821346308013,
+      "source_len": 1853,
+      "sparse_projection": {
+        "bit_equal_fraction": 0.505859375,
+        "byte_equal_fraction": 0.0390625,
+        "denominator": 432,
+        "high_nibble_equal_fraction": 0.1171875,
+        "low_nibble_equal_fraction": 0.0703125,
+        "numerator": 1854,
+        "phase": -62,
+        "total": 128,
+        "transform": "id"
+      }
+    },
+    {
+      "best_rll_view": {
+        "bit_order": "msb",
+        "histogram_0_to_12": {
+          "0": 4080,
+          "1": 2100,
+          "10": 1,
+          "11": 0,
+          "12": 0,
+          "2": 1147,
+          "3": 598,
+          "4": 286,
+          "5": 132,
+          "6": 88,
+          "7": 45,
+          "8": 19,
+          "9": 9
+        },
+        "invert": true,
+        "max_run": 10,
+        "min_run": 0,
+        "runs": 8505,
+        "view": "raw",
+        "violation_fraction": 0.7266313932980599,
+        "violations": 6180
+      },
+      "decoded_span": 160,
+      "distance_to_dvd_sizes": {
+        "data_frame": 134,
+        "main_data": 150,
+        "recording_frame": -168
+      },
+      "known_bytes": 128,
+      "known_entropy": 3.125,
+      "known_range": [
+        32,
+        160
+      ],
+      "record": 84,
+      "source_entropy": 7.878621161140708,
+      "source_len": 2198,
+      "sparse_projection": {
+        "bit_equal_fraction": 0.49702380952380953,
+        "byte_equal_fraction": 0.031746031746031744,
+        "denominator": 160,
+        "high_nibble_equal_fraction": 0.07936507936507936,
+        "low_nibble_equal_fraction": 0.09523809523809523,
+        "numerator": 2199,
+        "phase": 30,
+        "total": 126,
+        "transform": "bitrev"
+      }
+    },
+    {
+      "best_rll_view": {
+        "bit_order": "msb",
+        "histogram_0_to_12": {
+          "0": 4385,
+          "1": 2303,
+          "10": 5,
+          "11": 1,
+          "12": 0,
+          "2": 1182,
+          "3": 573,
+          "4": 257,
+          "5": 148,
+          "6": 58,
+          "7": 47,
+          "8": 15,
+          "9": 6
+        },
+        "invert": true,
+        "max_run": 11,
+        "min_run": 0,
+        "runs": 8980,
+        "view": "raw",
+        "violation_fraction": 0.7448775055679288,
+        "violations": 6689
+      },
+      "decoded_span": 128,
+      "distance_to_dvd_sizes": {
+        "data_frame": 192,
+        "main_data": 208,
+        "recording_frame": -110
+      },
+      "known_bytes": 96,
+      "known_entropy": 4.72203895729219,
+      "known_range": [
+        32,
+        128
+      ],
+      "record": 83,
+      "source_entropy": 7.896049235476551,
+      "source_len": 2256,
+      "sparse_projection": {
+        "bit_equal_fraction": 0.5091145833333334,
+        "byte_equal_fraction": 0.041666666666666664,
+        "denominator": 128,
+        "high_nibble_equal_fraction": 0.16666666666666666,
+        "low_nibble_equal_fraction": 0.09375,
+        "numerator": 752,
+        "phase": -50,
+        "total": 96,
+        "transform": "bitrev_not"
+      }
+    },
+    {
+      "best_rll_view": {
+        "bit_order": "lsb",
+        "histogram_0_to_12": {
+          "0": 4164,
+          "1": 2122,
+          "10": 5,
+          "11": 3,
+          "12": 2,
+          "2": 1164,
+          "3": 585,
+          "4": 326,
+          "5": 147,
+          "6": 98,
+          "7": 39,
+          "8": 23,
+          "9": 10
+        },
+        "invert": true,
+        "max_run": 16,
+        "min_run": 0,
+        "runs": 8689,
+        "view": "raw",
+        "violation_fraction": 0.7241339624812982,
+        "violations": 6292
+      },
+      "decoded_span": 368,
+      "distance_to_dvd_sizes": {
+        "data_frame": 210,
+        "main_data": 226,
+        "recording_frame": -92
+      },
+      "known_bytes": 64,
+      "known_entropy": 4.758969969293428,
+      "known_range": [
+        48,
+        112
+      ],
+      "record": 69,
+      "source_entropy": 7.890118131980324,
+      "source_len": 2274,
+      "sparse_projection": {
+        "bit_equal_fraction": 0.53515625,
+        "byte_equal_fraction": 0.046875,
+        "denominator": 368,
+        "high_nibble_equal_fraction": 0.125,
+        "low_nibble_equal_fraction": 0.140625,
+        "numerator": 2275,
+        "phase": -40,
+        "total": 64,
+        "transform": "bitrev_not"
+      }
+    },
+    {
+      "best_rll_view": {
+        "bit_order": "lsb",
+        "histogram_0_to_12": {
+          "0": 3339,
+          "1": 1702,
+          "10": 1,
+          "11": 3,
+          "12": 1,
+          "2": 896,
+          "3": 524,
+          "4": 231,
+          "5": 127,
+          "6": 65,
+          "7": 28,
+          "8": 8,
+          "9": 12
+        },
+        "invert": true,
+        "max_run": 13,
+        "min_run": 0,
+        "runs": 6938,
+        "view": "raw",
+        "violation_fraction": 0.7272989334102047,
+        "violations": 5046
+      },
+      "decoded_span": 128,
+      "distance_to_dvd_sizes": {
+        "data_frame": -265,
+        "main_data": -249,
+        "recording_frame": -567
+      },
+      "known_bytes": 64,
+      "known_entropy": 4.6018133835099375,
+      "known_range": [
+        64,
+        128
+      ],
+      "record": 78,
+      "source_entropy": 7.864739185048006,
+      "source_len": 1799,
+      "sparse_projection": {
+        "bit_equal_fraction": 0.54296875,
+        "byte_equal_fraction": 0.0625,
+        "denominator": 128,
+        "high_nibble_equal_fraction": 0.15625,
+        "low_nibble_equal_fraction": 0.09375,
+        "numerator": 599,
+        "phase": 55,
+        "total": 64,
+        "transform": "id"
+      }
+    },
+    {
+      "best_rll_view": {
+        "bit_order": "msb",
+        "histogram_0_to_12": {
+          "0": 4148,
+          "1": 2198,
+          "10": 7,
+          "11": 1,
+          "12": 1,
+          "2": 1173,
+          "3": 648,
+          "4": 247,
+          "5": 138,
+          "6": 83,
+          "7": 48,
+          "8": 28,
+          "9": 9
+        },
+        "invert": true,
+        "max_run": 12,
+        "min_run": 0,
+        "runs": 8729,
+        "view": "raw",
+        "violation_fraction": 0.7272310688509566,
+        "violations": 6348
+      },
+      "decoded_span": 320,
+      "distance_to_dvd_sizes": {
+        "data_frame": 202,
+        "main_data": 218,
+        "recording_frame": -100
+      },
+      "known_bytes": 48,
+      "known_entropy": 4.389460876028361,
+      "known_range": [
+        272,
+        320
+      ],
+      "record": 81,
+      "source_entropy": 7.917648187070542,
+      "source_len": 2266,
+      "sparse_projection": {
+        "bit_equal_fraction": 0.0,
+        "byte_equal_fraction": 0.0,
+        "high_nibble_equal_fraction": 0.0,
+        "low_nibble_equal_fraction": 0.0
+      }
+    },
+    {
+      "best_rll_view": {
+        "bit_order": "lsb",
+        "histogram_0_to_12": {
+          "0": 3616,
+          "1": 1916,
+          "10": 2,
+          "11": 1,
+          "12": 0,
+          "2": 970,
+          "3": 505,
+          "4": 255,
+          "5": 122,
+          "6": 64,
+          "7": 24,
+          "8": 15,
+          "9": 11
+        },
+        "invert": true,
+        "max_run": 14,
+        "min_run": 0,
+        "runs": 7503,
+        "view": "raw",
+        "violation_fraction": 0.7377049180327869,
+        "violations": 5535
+      },
+      "decoded_span": 48,
+      "distance_to_dvd_sizes": {
+        "data_frame": -147,
+        "main_data": -131,
+        "recording_frame": -449
+      },
+      "known_bytes": 32,
+      "known_entropy": 4.015319531114783,
+      "known_range": [
+        16,
+        48
+      ],
+      "record": 82,
+      "source_entropy": 7.88061274004545,
+      "source_len": 1917,
+      "sparse_projection": {
+        "bit_equal_fraction": 0.0,
+        "byte_equal_fraction": 0.0,
+        "high_nibble_equal_fraction": 0.0,
+        "low_nibble_equal_fraction": 0.0
+      }
+    },
+    {
+      "best_rll_view": {
+        "bit_order": "msb",
+        "histogram_0_to_12": {
+          "0": 4586,
+          "1": 2303,
+          "10": 4,
+          "11": 0,
+          "12": 0,
+          "2": 1258,
+          "3": 669,
+          "4": 271,
+          "5": 148,
+          "6": 79,
+          "7": 47,
+          "8": 23,
+          "9": 13
+        },
+        "invert": true,
+        "max_run": 13,
+        "min_run": 0,
+        "runs": 9402,
+        "view": "raw",
+        "violation_fraction": 0.732822803658796,
+        "violations": 6890
+      },
+      "decoded_span": 32,
+      "distance_to_dvd_sizes": {
+        "data_frame": 338,
+        "main_data": 354,
+        "recording_frame": 36
+      },
+      "known_bytes": 16,
+      "known_entropy": 3.75,
+      "known_range": [
+        16,
+        32
+      ],
+      "record": 61,
+      "source_entropy": 7.895965373284321,
+      "source_len": 2402,
+      "sparse_projection": {
+        "bit_equal_fraction": 0.0,
+        "byte_equal_fraction": 0.0,
+        "high_nibble_equal_fraction": 0.0,
+        "low_nibble_equal_fraction": 0.0
+      }
+    },
+    {
+      "best_rll_view": {
+        "bit_order": "msb",
+        "histogram_0_to_12": {
+          "0": 2704,
+          "1": 1307,
+          "10": 2,
+          "11": 0,
+          "12": 1,
+          "2": 702,
+          "3": 387,
+          "4": 202,
+          "5": 81,
+          "6": 59,
+          "7": 30,
+          "8": 18,
+          "9": 5
+        },
+        "invert": true,
+        "max_run": 13,
+        "min_run": 0,
+        "runs": 5499,
+        "view": "raw",
+        "violation_fraction": 0.7297690489179851,
+        "violations": 4013
+      },
+      "decoded_span": 48,
+      "distance_to_dvd_sizes": {
+        "data_frame": -641,
+        "main_data": -625,
+        "recording_frame": -943
+      },
+      "known_bytes": 16,
+      "known_entropy": 3.375,
+      "known_range": [
+        32,
+        48
+      ],
+      "record": 75,
+      "source_entropy": 7.8562532774868545,
+      "source_len": 1423,
+      "sparse_projection": {
+        "bit_equal_fraction": 0.0,
+        "byte_equal_fraction": 0.0,
+        "high_nibble_equal_fraction": 0.0,
+        "low_nibble_equal_fraction": 0.0
+      }
+    }
+  ],
+  "ld5m_macro_position_summary": [
+    {
+      "key5": {
+        "0x0": 1,
+        "0x1": 1,
+        "0x2": 1,
+        "0x3": 8,
+        "0x4": 15,
+        "0x5": 11
+      },
+      "macro_position": 0,
+      "modes": {
+        "0x00": 2,
+        "0x40": 11,
+        "0x80": 24
+      },
+      "near_2366_plus_minus_80": 13,
+      "records": 37,
+      "source_mean": 2138.6216216216217,
+      "source_median": 2291.0
+    },
+    {
+      "key5": {
+        "0x0": 5,
+        "0x3": 4,
+        "0x4": 15,
+        "0x5": 13
+      },
+      "macro_position": 1,
+      "modes": {
+        "0x00": 5,
+        "0x40": 5,
+        "0x80": 27
+      },
+      "near_2366_plus_minus_80": 13,
+      "records": 37,
+      "source_mean": 2051.945945945946,
+      "source_median": 2355.0
+    },
+    {
+      "key5": {
+        "0x0": 5,
+        "0x2": 2,
+        "0x3": 1,
+        "0x4": 13,
+        "0x5": 15,
+        "0x6": 1
+      },
+      "macro_position": 2,
+      "modes": {
+        "0x00": 5,
+        "0x40": 5,
+        "0x80": 26,
+        "0xc0": 1
+      },
+      "near_2366_plus_minus_80": 11,
+      "records": 37,
+      "source_mean": 2127.864864864865,
+      "source_median": 2422.0
+    },
+    {
+      "key5": {
+        "0x0": 23,
+        "0x1": 5,
+        "0x2": 3,
+        "0x3": 3,
+        "0x4": 2,
+        "0x5": 1
+      },
+      "macro_position": 3,
+      "modes": {
+        "0x00": 20,
+        "0x40": 4,
+        "0x80": 12,
+        "0xc0": 1
+      },
+      "near_2366_plus_minus_80": 3,
+      "records": 37,
+      "source_mean": 1341.5405405405406,
+      "source_median": 1327.0
+    },
+    {
+      "key5": {
+        "0x0": 2,
+        "0x1": 3,
+        "0x2": 7,
+        "0x3": 12,
+        "0x4": 9,
+        "0x5": 3
+      },
+      "macro_position": 4,
+      "modes": {
+        "0x00": 2,
+        "0x40": 17,
+        "0x80": 16,
+        "0xc0": 1
+      },
+      "near_2366_plus_minus_80": 4,
+      "records": 36,
+      "source_mean": 1946.138888888889,
+      "source_median": 1982.5
+    },
+    {
+      "key5": {
+        "0x0": 2,
+        "0x1": 2,
+        "0x2": 5,
+        "0x3": 7,
+        "0x4": 16,
+        "0x5": 3,
+        "0x6": 1
+      },
+      "macro_position": 5,
+      "modes": {
+        "0x00": 4,
+        "0x40": 18,
+        "0x80": 13,
+        "0xc0": 1
+      },
+      "near_2366_plus_minus_80": 5,
+      "records": 36,
+      "source_mean": 1836.638888888889,
+      "source_median": 1944.0
+    },
+    {
+      "key5": {
+        "0x1": 2,
+        "0x2": 4,
+        "0x3": 7,
+        "0x4": 14,
+        "0x5": 9
+      },
+      "macro_position": 6,
+      "modes": {
+        "0x00": 2,
+        "0x40": 20,
+        "0x80": 14
+      },
+      "near_2366_plus_minus_80": 4,
+      "records": 36,
+      "source_mean": 1920.888888888889,
+      "source_median": 1967.5
+    },
+    {
+      "key5": {
+        "0x0": 1,
+        "0x1": 1,
+        "0x2": 5,
+        "0x3": 4,
+        "0x4": 21,
+        "0x5": 4
+      },
+      "macro_position": 7,
+      "modes": {
+        "0x00": 2,
+        "0x40": 15,
+        "0x80": 19
+      },
+      "near_2366_plus_minus_80": 9,
+      "records": 36,
+      "source_mean": 2049.1111111111113,
+      "source_median": 2155.5
+    },
+    {
+      "key5": {
+        "0x1": 1,
+        "0x2": 6,
+        "0x3": 9,
+        "0x4": 16,
+        "0x5": 4
+      },
+      "macro_position": 8,
+      "modes": {
+        "0x00": 2,
+        "0x40": 14,
+        "0x80": 20
+      },
+      "near_2366_plus_minus_80": 5,
+      "records": 36,
+      "source_mean": 2041.4722222222222,
+      "source_median": 2104.0
+    },
+    {
+      "key5": {
+        "0x2": 6,
+        "0x3": 6,
+        "0x4": 18,
+        "0x5": 6
+      },
+      "macro_position": 9,
+      "modes": {
+        "0x00": 2,
+        "0x40": 11,
+        "0x80": 23
+      },
+      "near_2366_plus_minus_80": 6,
+      "records": 36,
+      "source_mean": 2050.1944444444443,
+      "source_median": 2150.5
+    },
+    {
+      "key5": {
+        "0x2": 5,
+        "0x3": 6,
+        "0x4": 17,
+        "0x5": 8
+      },
+      "macro_position": 10,
+      "modes": {
+        "0x40": 11,
+        "0x80": 25
+      },
+      "near_2366_plus_minus_80": 9,
+      "records": 36,
+      "source_mean": 2149.1944444444443,
+      "source_median": 2211.0
+    },
+    {
+      "key5": {
+        "0x1": 1,
+        "0x2": 3,
+        "0x3": 4,
+        "0x4": 18,
+        "0x5": 9,
+        "0x6": 1
+      },
+      "macro_position": 11,
+      "modes": {
+        "0x40": 7,
+        "0x80": 28,
+        "0xc0": 1
+      },
+      "near_2366_plus_minus_80": 5,
+      "records": 36,
+      "source_mean": 2231.1944444444443,
+      "source_median": 2247.5
+    }
+  ],
+  "record_map": "/Users/johno/projects/boastermelt/references/firmware/extracted/liteon-cdd-record-map.json",
+  "schema": "liteon-cdd-hard-record-hypothesis-probes-v1",
+  "source_length_by_mode_key5": [
+    {
+      "key5": 0,
+      "mode": 0,
+      "near_2048_plus_minus_80": 0,
+      "near_2064_plus_minus_80": 0,
+      "near_2366_plus_minus_80": 0,
+      "records": 211,
+      "source_mean": 445.38862559241704,
+      "source_median": 61.0
+    },
+    {
+      "key5": 1,
+      "mode": 0,
+      "near_2048_plus_minus_80": 0,
+      "near_2064_plus_minus_80": 0,
+      "near_2366_plus_minus_80": 0,
+      "records": 32,
+      "source_mean": 981.25,
+      "source_median": 908.5
+    },
+    {
+      "key5": 2,
+      "mode": 0,
+      "near_2048_plus_minus_80": 0,
+      "near_2064_plus_minus_80": 0,
+      "near_2366_plus_minus_80": 0,
+      "records": 24,
+      "source_mean": 1102.0833333333333,
+      "source_median": 1099.0
+    },
+    {
+      "key5": 0,
+      "mode": 64,
+      "near_2048_plus_minus_80": 0,
+      "near_2064_plus_minus_80": 0,
+      "near_2366_plus_minus_80": 0,
+      "records": 27,
+      "source_mean": 1572.2222222222222,
+      "source_median": 1673.0
+    },
+    {
+      "key5": 1,
+      "mode": 64,
+      "near_2048_plus_minus_80": 0,
+      "near_2064_plus_minus_80": 0,
+      "near_2366_plus_minus_80": 0,
+      "records": 50,
+      "source_mean": 1348.58,
+      "source_median": 1259.5
+    },
+    {
+      "key5": 2,
+      "mode": 64,
+      "near_2048_plus_minus_80": 6,
+      "near_2064_plus_minus_80": 6,
+      "near_2366_plus_minus_80": 0,
+      "records": 191,
+      "source_mean": 1463.9005235602094,
+      "source_median": 1418.0
+    },
+    {
+      "key5": 3,
+      "mode": 64,
+      "near_2048_plus_minus_80": 38,
+      "near_2064_plus_minus_80": 26,
+      "near_2366_plus_minus_80": 14,
+      "records": 225,
+      "source_mean": 1835.1066666666666,
+      "source_median": 1827.0
+    },
+    {
+      "key5": 4,
+      "mode": 64,
+      "near_2048_plus_minus_80": 88,
+      "near_2064_plus_minus_80": 98,
+      "near_2366_plus_minus_80": 27,
+      "records": 255,
+      "source_mean": 1975.4156862745099,
+      "source_median": 2034.0
+    },
+    {
+      "key5": 5,
+      "mode": 64,
+      "near_2048_plus_minus_80": 19,
+      "near_2064_plus_minus_80": 16,
+      "near_2366_plus_minus_80": 27,
+      "records": 61,
+      "source_mean": 2192.3934426229507,
+      "source_median": 2267.0
+    },
+    {
+      "key5": 0,
+      "mode": 128,
+      "near_2048_plus_minus_80": 13,
+      "near_2064_plus_minus_80": 15,
+      "near_2366_plus_minus_80": 1,
+      "records": 22,
+      "source_mean": 2055.181818181818,
+      "source_median": 2092.0
+    },
+    {
+      "key5": 1,
+      "mode": 128,
+      "near_2048_plus_minus_80": 7,
+      "near_2064_plus_minus_80": 8,
+      "near_2366_plus_minus_80": 3,
+      "records": 22,
+      "source_mean": 2146.181818181818,
+      "source_median": 2152.0
+    },
+    {
+      "key5": 2,
+      "mode": 128,
+      "near_2048_plus_minus_80": 12,
+      "near_2064_plus_minus_80": 18,
+      "near_2366_plus_minus_80": 13,
+      "records": 79,
+      "source_mean": 2140.8987341772154,
+      "source_median": 2156.0
+    },
+    {
+      "key5": 3,
+      "mode": 128,
+      "near_2048_plus_minus_80": 54,
+      "near_2064_plus_minus_80": 53,
+      "near_2366_plus_minus_80": 42,
+      "records": 177,
+      "source_mean": 2150.5254237288136,
+      "source_median": 2143.0
+    },
+    {
+      "key5": 4,
+      "mode": 128,
+      "near_2048_plus_minus_80": 64,
+      "near_2064_plus_minus_80": 80,
+      "near_2366_plus_minus_80": 241,
+      "records": 737,
+      "source_mean": 2314.8276797829035,
+      "source_median": 2338.0
+    },
+    {
+      "key5": 5,
+      "mode": 128,
+      "near_2048_plus_minus_80": 10,
+      "near_2064_plus_minus_80": 10,
+      "near_2366_plus_minus_80": 88,
+      "records": 463,
+      "source_mean": 2529.179265658747,
+      "source_median": 2529.0
+    },
+    {
+      "key5": 6,
+      "mode": 128,
+      "near_2048_plus_minus_80": 0,
+      "near_2064_plus_minus_80": 0,
+      "near_2366_plus_minus_80": 0,
+      "records": 10,
+      "source_mean": 2727.4,
+      "source_median": 2732.0
+    },
+    {
+      "key5": 4,
+      "mode": 192,
+      "near_2048_plus_minus_80": 0,
+      "near_2064_plus_minus_80": 0,
+      "near_2366_plus_minus_80": 0,
+      "records": 5,
+      "source_mean": 2871.8,
+      "source_median": 2880.0
+    },
+    {
+      "key5": 6,
+      "mode": 192,
+      "near_2048_plus_minus_80": 0,
+      "near_2064_plus_minus_80": 0,
+      "near_2366_plus_minus_80": 0,
+      "records": 10,
+      "source_mean": 2908.9,
+      "source_median": 3019.5
+    }
+  ]
+}
