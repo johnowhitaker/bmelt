@@ -2199,3 +2199,27 @@ code. The new contigs touch the familiar controller and packet machinery:
 as static code artifacts, then validate CDD ownership of a chosen contig with a
 small live perturbation oracle only when the static graph can no longer narrow
 it.
+
+The first ownership oracle worked. I picked a short three-chunk contig whose
+best common record label was CDD record 59, then changed one source byte in the
+middle of that record:
+
+```text
+F0 offset 0x28519: 0x68 -> 0x60
+```
+
+The helper bypass persisted the bit-clear patch and the drive still cold-booted
+as normal `LD5M`. In stock captures, that three-chunk runtime contig appeared
+as a full adjacent sequence in 7 of 16 normal work-window captures. With the
+single-byte CDD mutation installed, the full sequence appeared in 0 of 24
+captures. The three component chunks were still present, but their public tile
+offsets were rearranged. After restoring the byte, the sequence came back in 16
+of 24 captures.
+
+That is a clean new kind of evidence. We still do not have a flat decoded CDD
+image, and the public work-window is still a rotating tile surface, but we can
+now connect at least one encoded CDD source byte to one normal-mode decoded
+runtime neighborhood. This gives future CDD experiments a sharper loop:
+choose a contig, pick a plausible record owner, patch one reversible source
+bit, capture stock/mutated/restored windows, and look for reversible sequence
+or ordering changes.

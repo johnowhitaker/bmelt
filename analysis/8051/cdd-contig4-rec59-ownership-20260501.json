@@ -1,0 +1,1844 @@
+{
+  "chunk_count": 3,
+  "chunk_prefixes": [
+    "8a29e0c4540f",
+    "f608760112ef",
+    "e054884efeef"
+  ],
+  "contig_bytes": 192,
+  "contig_file": "analysis/8051/cdd-runtime-chunk-contigs-20260501/contig-004-03chunks.bin",
+  "schema": "liteon-cdd-contig-ownership-experiment-v1",
+  "states": {
+    "mutated": {
+      "capture_dir": "runs/contig68-ownership/mutated-captures",
+      "chunk_count_histogram": {
+        "3": 24
+      },
+      "chunk_offsets": {
+        "0": [
+          {
+            "count": 12,
+            "offset": 28928
+          },
+          {
+            "count": 12,
+            "offset": 29120
+          }
+        ],
+        "1": [
+          {
+            "count": 24,
+            "offset": 28992
+          }
+        ],
+        "2": [
+          {
+            "count": 24,
+            "offset": 29248
+          }
+        ]
+      },
+      "files": 24,
+      "per_file": [
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                28928
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                28992
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29248
+              ]
+            }
+          ],
+          "file": "00-cycle00-baseline-no-stimulus.window.bin",
+          "sequence_offsets": []
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                28928
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                28992
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29248
+              ]
+            }
+          ],
+          "file": "01-cycle00-get-performance-type00.window.bin",
+          "sequence_offsets": []
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                28928
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                28992
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29248
+              ]
+            }
+          ],
+          "file": "02-cycle01-baseline-no-stimulus.window.bin",
+          "sequence_offsets": []
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                28992
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29248
+              ]
+            }
+          ],
+          "file": "03-cycle01-get-performance-type00.window.bin",
+          "sequence_offsets": []
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                28992
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29248
+              ]
+            }
+          ],
+          "file": "04-cycle02-baseline-no-stimulus.window.bin",
+          "sequence_offsets": []
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                28928
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                28992
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29248
+              ]
+            }
+          ],
+          "file": "05-cycle02-get-performance-type00.window.bin",
+          "sequence_offsets": []
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                28928
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                28992
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29248
+              ]
+            }
+          ],
+          "file": "06-cycle03-baseline-no-stimulus.window.bin",
+          "sequence_offsets": []
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                28992
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29248
+              ]
+            }
+          ],
+          "file": "07-cycle03-get-performance-type00.window.bin",
+          "sequence_offsets": []
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                28992
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29248
+              ]
+            }
+          ],
+          "file": "08-cycle04-baseline-no-stimulus.window.bin",
+          "sequence_offsets": []
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                28992
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29248
+              ]
+            }
+          ],
+          "file": "09-cycle04-get-performance-type00.window.bin",
+          "sequence_offsets": []
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                28992
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29248
+              ]
+            }
+          ],
+          "file": "10-cycle05-baseline-no-stimulus.window.bin",
+          "sequence_offsets": []
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                28928
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                28992
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29248
+              ]
+            }
+          ],
+          "file": "11-cycle05-get-performance-type00.window.bin",
+          "sequence_offsets": []
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                28928
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                28992
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29248
+              ]
+            }
+          ],
+          "file": "12-cycle06-baseline-no-stimulus.window.bin",
+          "sequence_offsets": []
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                28992
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29248
+              ]
+            }
+          ],
+          "file": "13-cycle06-get-performance-type00.window.bin",
+          "sequence_offsets": []
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                28992
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29248
+              ]
+            }
+          ],
+          "file": "14-cycle07-baseline-no-stimulus.window.bin",
+          "sequence_offsets": []
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                28928
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                28992
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29248
+              ]
+            }
+          ],
+          "file": "15-cycle07-get-performance-type00.window.bin",
+          "sequence_offsets": []
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                28928
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                28992
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29248
+              ]
+            }
+          ],
+          "file": "16-cycle08-baseline-no-stimulus.window.bin",
+          "sequence_offsets": []
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                28992
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29248
+              ]
+            }
+          ],
+          "file": "17-cycle08-get-performance-type00.window.bin",
+          "sequence_offsets": []
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                28992
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29248
+              ]
+            }
+          ],
+          "file": "18-cycle09-baseline-no-stimulus.window.bin",
+          "sequence_offsets": []
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                28928
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                28992
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29248
+              ]
+            }
+          ],
+          "file": "19-cycle09-get-performance-type00.window.bin",
+          "sequence_offsets": []
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                28928
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                28992
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29248
+              ]
+            }
+          ],
+          "file": "20-cycle10-baseline-no-stimulus.window.bin",
+          "sequence_offsets": []
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                28992
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29248
+              ]
+            }
+          ],
+          "file": "21-cycle10-get-performance-type00.window.bin",
+          "sequence_offsets": []
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                28992
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29248
+              ]
+            }
+          ],
+          "file": "22-cycle11-baseline-no-stimulus.window.bin",
+          "sequence_offsets": []
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                28928
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                28992
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29248
+              ]
+            }
+          ],
+          "file": "23-cycle11-get-performance-type00.window.bin",
+          "sequence_offsets": []
+        }
+      ],
+      "sequence_hits": []
+    },
+    "restored": {
+      "capture_dir": "runs/contig68-ownership/restored-captures",
+      "chunk_count_histogram": {
+        "3": 24
+      },
+      "chunk_offsets": {
+        "0": [
+          {
+            "count": 16,
+            "offset": 29056
+          },
+          {
+            "count": 8,
+            "offset": 28992
+          }
+        ],
+        "1": [
+          {
+            "count": 24,
+            "offset": 29120
+          }
+        ],
+        "2": [
+          {
+            "count": 24,
+            "offset": 29184
+          }
+        ]
+      },
+      "files": 24,
+      "per_file": [
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                29056
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29184
+              ]
+            }
+          ],
+          "file": "00-cycle00-baseline-no-stimulus.window.bin",
+          "sequence_offsets": [
+            29056
+          ]
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                29056
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29184
+              ]
+            }
+          ],
+          "file": "01-cycle00-get-performance-type00.window.bin",
+          "sequence_offsets": [
+            29056
+          ]
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                29056
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29184
+              ]
+            }
+          ],
+          "file": "02-cycle01-baseline-no-stimulus.window.bin",
+          "sequence_offsets": [
+            29056
+          ]
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                29056
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29184
+              ]
+            }
+          ],
+          "file": "03-cycle01-get-performance-type00.window.bin",
+          "sequence_offsets": [
+            29056
+          ]
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                29056
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29184
+              ]
+            }
+          ],
+          "file": "04-cycle02-baseline-no-stimulus.window.bin",
+          "sequence_offsets": [
+            29056
+          ]
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                29056
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29184
+              ]
+            }
+          ],
+          "file": "05-cycle02-get-performance-type00.window.bin",
+          "sequence_offsets": [
+            29056
+          ]
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                29056
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29184
+              ]
+            }
+          ],
+          "file": "06-cycle03-baseline-no-stimulus.window.bin",
+          "sequence_offsets": [
+            29056
+          ]
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                28992
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29184
+              ]
+            }
+          ],
+          "file": "07-cycle03-get-performance-type00.window.bin",
+          "sequence_offsets": []
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                28992
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29184
+              ]
+            }
+          ],
+          "file": "08-cycle04-baseline-no-stimulus.window.bin",
+          "sequence_offsets": []
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                29056
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29184
+              ]
+            }
+          ],
+          "file": "09-cycle04-get-performance-type00.window.bin",
+          "sequence_offsets": [
+            29056
+          ]
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                29056
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29184
+              ]
+            }
+          ],
+          "file": "10-cycle05-baseline-no-stimulus.window.bin",
+          "sequence_offsets": [
+            29056
+          ]
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                28992
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29184
+              ]
+            }
+          ],
+          "file": "11-cycle05-get-performance-type00.window.bin",
+          "sequence_offsets": []
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                28992
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29184
+              ]
+            }
+          ],
+          "file": "12-cycle06-baseline-no-stimulus.window.bin",
+          "sequence_offsets": []
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                29056
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29184
+              ]
+            }
+          ],
+          "file": "13-cycle06-get-performance-type00.window.bin",
+          "sequence_offsets": [
+            29056
+          ]
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                29056
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29184
+              ]
+            }
+          ],
+          "file": "14-cycle07-baseline-no-stimulus.window.bin",
+          "sequence_offsets": [
+            29056
+          ]
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                28992
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29184
+              ]
+            }
+          ],
+          "file": "15-cycle07-get-performance-type00.window.bin",
+          "sequence_offsets": []
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                28992
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29184
+              ]
+            }
+          ],
+          "file": "16-cycle08-baseline-no-stimulus.window.bin",
+          "sequence_offsets": []
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                29056
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29184
+              ]
+            }
+          ],
+          "file": "17-cycle08-get-performance-type00.window.bin",
+          "sequence_offsets": [
+            29056
+          ]
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                29056
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29184
+              ]
+            }
+          ],
+          "file": "18-cycle09-baseline-no-stimulus.window.bin",
+          "sequence_offsets": [
+            29056
+          ]
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                28992
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29184
+              ]
+            }
+          ],
+          "file": "19-cycle09-get-performance-type00.window.bin",
+          "sequence_offsets": []
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                28992
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29184
+              ]
+            }
+          ],
+          "file": "20-cycle10-baseline-no-stimulus.window.bin",
+          "sequence_offsets": []
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                29056
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29184
+              ]
+            }
+          ],
+          "file": "21-cycle10-get-performance-type00.window.bin",
+          "sequence_offsets": [
+            29056
+          ]
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                29056
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29184
+              ]
+            }
+          ],
+          "file": "22-cycle11-baseline-no-stimulus.window.bin",
+          "sequence_offsets": [
+            29056
+          ]
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                29056
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29184
+              ]
+            }
+          ],
+          "file": "23-cycle11-get-performance-type00.window.bin",
+          "sequence_offsets": [
+            29056
+          ]
+        }
+      ],
+      "sequence_hits": [
+        {
+          "file": "00-cycle00-baseline-no-stimulus.window.bin",
+          "offsets": [
+            29056
+          ]
+        },
+        {
+          "file": "01-cycle00-get-performance-type00.window.bin",
+          "offsets": [
+            29056
+          ]
+        },
+        {
+          "file": "02-cycle01-baseline-no-stimulus.window.bin",
+          "offsets": [
+            29056
+          ]
+        },
+        {
+          "file": "03-cycle01-get-performance-type00.window.bin",
+          "offsets": [
+            29056
+          ]
+        },
+        {
+          "file": "04-cycle02-baseline-no-stimulus.window.bin",
+          "offsets": [
+            29056
+          ]
+        },
+        {
+          "file": "05-cycle02-get-performance-type00.window.bin",
+          "offsets": [
+            29056
+          ]
+        },
+        {
+          "file": "06-cycle03-baseline-no-stimulus.window.bin",
+          "offsets": [
+            29056
+          ]
+        },
+        {
+          "file": "09-cycle04-get-performance-type00.window.bin",
+          "offsets": [
+            29056
+          ]
+        },
+        {
+          "file": "10-cycle05-baseline-no-stimulus.window.bin",
+          "offsets": [
+            29056
+          ]
+        },
+        {
+          "file": "13-cycle06-get-performance-type00.window.bin",
+          "offsets": [
+            29056
+          ]
+        },
+        {
+          "file": "14-cycle07-baseline-no-stimulus.window.bin",
+          "offsets": [
+            29056
+          ]
+        },
+        {
+          "file": "17-cycle08-get-performance-type00.window.bin",
+          "offsets": [
+            29056
+          ]
+        },
+        {
+          "file": "18-cycle09-baseline-no-stimulus.window.bin",
+          "offsets": [
+            29056
+          ]
+        },
+        {
+          "file": "21-cycle10-get-performance-type00.window.bin",
+          "offsets": [
+            29056
+          ]
+        },
+        {
+          "file": "22-cycle11-baseline-no-stimulus.window.bin",
+          "offsets": [
+            29056
+          ]
+        },
+        {
+          "file": "23-cycle11-get-performance-type00.window.bin",
+          "offsets": [
+            29056
+          ]
+        }
+      ]
+    },
+    "stock": {
+      "capture_dir": "runs/contig68-ownership/stock-before",
+      "chunk_count_histogram": {
+        "3": 16
+      },
+      "chunk_offsets": {
+        "0": [
+          {
+            "count": 9,
+            "offset": 28992
+          },
+          {
+            "count": 7,
+            "offset": 29056
+          }
+        ],
+        "1": [
+          {
+            "count": 16,
+            "offset": 29120
+          }
+        ],
+        "2": [
+          {
+            "count": 16,
+            "offset": 29184
+          }
+        ]
+      },
+      "files": 16,
+      "per_file": [
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                29056
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29184
+              ]
+            }
+          ],
+          "file": "00-cycle00-baseline-no-stimulus.window.bin",
+          "sequence_offsets": [
+            29056
+          ]
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                29056
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29184
+              ]
+            }
+          ],
+          "file": "01-cycle00-get-performance-type00.window.bin",
+          "sequence_offsets": [
+            29056
+          ]
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                29056
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29184
+              ]
+            }
+          ],
+          "file": "02-cycle01-baseline-no-stimulus.window.bin",
+          "sequence_offsets": [
+            29056
+          ]
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                28992
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29184
+              ]
+            }
+          ],
+          "file": "03-cycle01-get-performance-type00.window.bin",
+          "sequence_offsets": []
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                28992
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29184
+              ]
+            }
+          ],
+          "file": "04-cycle02-baseline-no-stimulus.window.bin",
+          "sequence_offsets": []
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                28992
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29184
+              ]
+            }
+          ],
+          "file": "05-cycle02-get-performance-type00.window.bin",
+          "sequence_offsets": []
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                28992
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29184
+              ]
+            }
+          ],
+          "file": "06-cycle03-baseline-no-stimulus.window.bin",
+          "sequence_offsets": []
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                28992
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29184
+              ]
+            }
+          ],
+          "file": "07-cycle03-get-performance-type00.window.bin",
+          "sequence_offsets": []
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                28992
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29184
+              ]
+            }
+          ],
+          "file": "08-cycle04-baseline-no-stimulus.window.bin",
+          "sequence_offsets": []
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                29056
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29184
+              ]
+            }
+          ],
+          "file": "09-cycle04-get-performance-type00.window.bin",
+          "sequence_offsets": [
+            29056
+          ]
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                29056
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29184
+              ]
+            }
+          ],
+          "file": "10-cycle05-baseline-no-stimulus.window.bin",
+          "sequence_offsets": [
+            29056
+          ]
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                28992
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29184
+              ]
+            }
+          ],
+          "file": "11-cycle05-get-performance-type00.window.bin",
+          "sequence_offsets": []
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                28992
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29184
+              ]
+            }
+          ],
+          "file": "12-cycle06-baseline-no-stimulus.window.bin",
+          "sequence_offsets": []
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                29056
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29184
+              ]
+            }
+          ],
+          "file": "13-cycle06-get-performance-type00.window.bin",
+          "sequence_offsets": [
+            29056
+          ]
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                29056
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29184
+              ]
+            }
+          ],
+          "file": "14-cycle07-baseline-no-stimulus.window.bin",
+          "sequence_offsets": [
+            29056
+          ]
+        },
+        {
+          "chunk_hits": [
+            {
+              "chunk": 0,
+              "offsets": [
+                28992
+              ]
+            },
+            {
+              "chunk": 1,
+              "offsets": [
+                29120
+              ]
+            },
+            {
+              "chunk": 2,
+              "offsets": [
+                29184
+              ]
+            }
+          ],
+          "file": "15-cycle07-get-performance-type00.window.bin",
+          "sequence_offsets": []
+        }
+      ],
+      "sequence_hits": [
+        {
+          "file": "00-cycle00-baseline-no-stimulus.window.bin",
+          "offsets": [
+            29056
+          ]
+        },
+        {
+          "file": "01-cycle00-get-performance-type00.window.bin",
+          "offsets": [
+            29056
+          ]
+        },
+        {
+          "file": "02-cycle01-baseline-no-stimulus.window.bin",
+          "offsets": [
+            29056
+          ]
+        },
+        {
+          "file": "09-cycle04-get-performance-type00.window.bin",
+          "offsets": [
+            29056
+          ]
+        },
+        {
+          "file": "10-cycle05-baseline-no-stimulus.window.bin",
+          "offsets": [
+            29056
+          ]
+        },
+        {
+          "file": "13-cycle06-get-performance-type00.window.bin",
+          "offsets": [
+            29056
+          ]
+        },
+        {
+          "file": "14-cycle07-baseline-no-stimulus.window.bin",
+          "offsets": [
+            29056
+          ]
+        }
+      ]
+    }
+  },
+  "target": {
+    "after_hex": "60",
+    "before_hex": "68",
+    "offset": 165145,
+    "offset_hex": "0x28519",
+    "record": 59
+  }
+}

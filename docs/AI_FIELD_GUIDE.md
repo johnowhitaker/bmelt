@@ -2061,3 +2061,19 @@ Immediate useful directions:
     `0x4097`, `0x4011`, `0x8a4d`, `0x8a52`, and related controller/packet
     state. Use these contigs for static code reading before doing more CDD
     decode brute force.
+100. `scripts/analyze_liteon_cdd_contig_ownership_experiment.py` and
+    `analysis/8051/cdd-contig4-rec59-ownership-20260501.md/json` summarize the
+    first reversible contig ownership oracle. The target was
+    `analysis/8051/cdd-runtime-chunk-contigs-20260501/contig-004-03chunks.bin`,
+    a 192-byte / 3-tile decoded-runtime contig with candidate common CDD record
+    `59`.
+101. Live patch: F0 offset `0x28519` inside CDD stream 1 record 59 changed
+    `0x68 -> 0x60`, then was restored to `0x68`. The mutation persisted through
+    the helper bypass and the drive stayed/cold-booted as normal `LD5M`.
+102. Ownership result: stock captures had the full 3-tile contig sequence in
+    `7/16` windows at public offset `+0x7180`; mutated captures had `0/24`
+    full-sequence hits, while all three component tiles remained visible at
+    rearranged offsets; restored captures had `16/24` full-sequence hits. Treat
+    this as strong evidence that record 59 owns or controls this runtime
+    contig/neighborhood, and use this before/after/restore pattern as the
+    default live oracle for future CDD record ownership tests.
