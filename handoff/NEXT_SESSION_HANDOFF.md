@@ -922,3 +922,73 @@ Recommended next directions:
   plan and use the reversible CDD offsets as correlation targets;
 - keep using live EXTRAINQ priming before any F0 verification after
   finalizer/currentboot transitions.
+
+## Live CDD Affine Group 99 Differential
+
+This second affine edit is complete and restored.
+
+New artifacts:
+
+```text
+scripts/plan_liteon_cdd_affine_group_patch.py
+scripts/analyze_liteon_cdd_affine_experiment.py
+scripts/compare_liteon_cdd_affine_live_reports.py
+analysis/8051/cdd-affine-g99-live-diff-20260501.md/json
+analysis/8051/cdd-affine-cross-group-correlation-20260501.md/json
+analysis/8051/normal-mode-io-correlation-plan-20260501.md
+```
+
+Live test summary:
+
+```text
+CDD stream 2 affine group: 99
+stock semantic byte:       0x0a
+mutation tested:           0x0a -> 0x0b
+patch style:               all 12 observed affine lead cells rewritten
+restore:                   all 12 lead cells restored to stock
+```
+
+Mutated bytes after cold boot:
+
+```text
+6f 76 5d 44 c3 da f1 e8 a7 be 95 8c
+```
+
+Restored bytes after cold boot:
+
+```text
+6e 77 5c 45 c2 db f0 e9 a6 bf 94 8d
+```
+
+The restore verified `restore_diffs 0` against stock LD5M after a hardware
+cold boot, so the live drive is back to stock for this edit.
+
+Normal-mode response summary:
+
+```text
+group 99 clean stock-consistent offsets: 107
+group 105 clean reversible offsets:      62
+cross-group overlap offsets:             31
+```
+
+The most useful overlap offsets for future normal-mode hook detection are:
+
+```text
+0x01c0
+0x0280
+0x7140
+0x7180
+0x8f40
+0x8fc0
+0x9b00
+0x9b40
+0x9b80
+```
+
+Interpretation: two independent CDD affine leaf edits perturb the same public
+work-window offsets. This is still not a direct decoded CDD oracle, but it is
+now a strong detector set for future normal-mode marker/carryover tests.
+
+Operational note: `dump_liteon_linux_f0_window.py --prime-extrainq` now treats
+the Linux `sg_raw` EXTRAINQ prime as successful even when the output contains
+`NVMe Result=0x0` instead of a literal `SCSI Status: Good`.

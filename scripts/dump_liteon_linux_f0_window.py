@@ -58,6 +58,7 @@ def run_read(
     cdb: list[int],
     length: int,
     timeout: int,
+    require_good_status: bool = True,
 ) -> bytes:
     cmd = [sg_raw, "-b", "--request", str(length), "--timeout", str(timeout)]
     cmd.extend([device, *[f"{byte:02x}" for byte in cdb]])
@@ -69,7 +70,7 @@ def run_read(
             f"READ BUFFER failed rc={proc.returncode} got={len(proc.stdout)} "
             f"expected={length} cdb={cdb_text}\n{stderr}"
         )
-    if "SCSI Status: Good" not in stderr:
+    if require_good_status and "SCSI Status: Good" not in stderr:
         cdb_text = " ".join(f"{byte:02X}" for byte in cdb)
         raise RuntimeError(f"READ BUFFER missing GOOD status cdb={cdb_text}\n{stderr}")
     return proc.stdout
@@ -115,6 +116,7 @@ def maybe_prime_extrainq(args: argparse.Namespace) -> None:
         cdb=EXTRAINQ_CDB,
         length=0xB0,
         timeout=args.timeout,
+        require_good_status=False,
     )
     print(f"primed EXTRAINQ len={len(live)} sha256={hashlib.sha256(live).hexdigest()}")
     if args.prime_extrainq_out:

@@ -2022,3 +2022,32 @@ been sent. The key material is not changing; the live EXTRAINQ appears to
 prime or reset the readback transform/state. I added `--prime-extrainq` to
 `scripts/dump_liteon_linux_f0_window.py` so future post-mutation F0
 verification can explicitly perform that handshake before reading F0.
+
+The follow-up did the obvious "why not both" move: mutate another clean CDD
+affine leaf and compare it to the first one. Group 99 is also in CDD stream 2,
+with stock decoded lane-0 byte `0x0a`. We rewrote all 12 observed affine lead
+cells so it decoded as `0x0b`, cold-booted the drive, and verified the exact
+12 flash bytes had changed. Then we staged a stock restore, cold-booted again,
+and verified the page was byte-for-byte back to LD5M. This second CDD leaf is
+therefore not a one-off curiosity: the helper bypass can make repeatable,
+structured CDD affine edits and cleanly undo them.
+
+The normal-mode captures from group 99 were more useful than the raw tile
+chaos suggests. `analysis/8051/cdd-affine-g99-live-diff-20260501.md` found
+107 clean stock-consistent public-window offsets. Intersecting those with the
+group-105 result gives 31 offsets that react to two independent decoded CDD
+leaf edits. The overlap includes the old response-bridge pair
+`+0x7140/+0x7180`, some compact low-window rows like `+0x01c0/+0x0280`, and
+several code-looking tile rotations. This still is not a decoded CDD oracle,
+but it is now a practical detector set for future normal-mode hooks: if a
+normal-mode marker or response tweak runs, compare these overlap offsets first
+instead of staring at the whole unstable 64 KiB window.
+
+I also made the tooling a little less bespoke. `plan_liteon_cdd_affine_group_patch.py`
+turns a decoded affine group and target byte into the exact F0 patch/restore
+arguments needed for the helper-bypass renderer. `analyze_liteon_cdd_affine_experiment.py`
+does the per-state stable-tile comparison for new CDD edits, and
+`compare_liteon_cdd_affine_live_reports.py` intersects two such reports. One
+small operational fix landed too: EXTRAINQ priming can succeed through this
+Linux path without printing the normal `SCSI Status: Good` string, so the F0
+dump helper no longer treats that successful prime as a hard failure.

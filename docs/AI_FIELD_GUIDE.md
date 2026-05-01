@@ -1916,3 +1916,35 @@ Immediate useful directions:
     decrypted as nonsense until a live EXTRAINQ primed the readback state; the
     same static LD5M key then produced the normal `BOOT` prefix again. Use
     `scripts/dump_liteon_linux_f0_window.py --prime-extrainq` for this case.
+73. `scripts/plan_liteon_cdd_affine_group_patch.py` plans structured CDD
+    affine leaf edits. Given an image, group, and target decoded byte, it emits
+    exact `--patch offset:byte` arguments plus matching restore arguments for
+    every observed affine lead cell. This keeps live CDD edits consistent with
+    the affine mask model instead of flipping one arbitrary encoded byte.
+74. The second live CDD affine edit targeted CDD stream 2 group 99. Stock
+    group 99 decodes as `0x0a`; the live test rewrote all 12 observed lead
+    cells so it decoded as `0x0b`, then restored them. Both mutation and
+    restore were verified after hardware cold boot with live EXTRAINQ-primed
+    F0 dumps. Target bytes changed to
+    `6f 76 5d 44 c3 da f1 e8 a7 be 95 8c`, then restored to
+    `6e 77 5c 45 c2 db f0 e9 a6 bf 94 8d`.
+75. `scripts/analyze_liteon_cdd_affine_experiment.py` and
+    `analysis/8051/cdd-affine-g99-live-diff-20260501.md/json` compare the
+    group-99 normal-mode captures. The analyzer found 1013 common stable
+    offsets and 107 clean stock-consistent mutation offsets. As with group 105,
+    treat these as public-window correlation targets, not decoded CDD memory.
+76. `scripts/compare_liteon_cdd_affine_live_reports.py` and
+    `analysis/8051/cdd-affine-cross-group-correlation-20260501.md/json`
+    intersect the group-105 and group-99 reports. There are 31 overlapping
+    clean offsets. The useful ones to try first for normal-mode hook detection
+    are `+0x01c0`, `+0x0280`, `+0x7140`, `+0x7180`, and the
+    `+0x9b00/+0x9b40/+0x9b80` tile-rotation trio.
+77. `analysis/8051/normal-mode-io-correlation-plan-20260501.md` summarizes how
+    to use the CDD affine overlap set. The important shift is to use overlap
+    offsets as a detector for future normal-mode hooks or state-carryover
+    tests. Do not patch the public work-window by offset; it is a viewing
+    surface with rotating 0x40-byte tiles.
+78. `scripts/dump_liteon_linux_f0_window.py --prime-extrainq` now accepts a
+    successful EXTRAINQ prime even when `sg_raw` prints `NVMe Result=0x0`
+    rather than `SCSI Status: Good`. This matters on the Linux bridge path
+    after finalizer transitions.
