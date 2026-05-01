@@ -106,6 +106,12 @@ LD5M field package internally and returns `0xcd` at `response[0x20]`. Use the
 runner with `--trigger-mode cdb-fcdd00`; by default that mode samples only
 gateway windows so it does not depend on fragile CDB[10]/CDB[11] selectors.
 
+Live result: the trigger executed, but decoded CDD targets remained zero:
+
+```text
+references/evidence/live/currentboot-cdd-field-trigger-v1.md
+```
+
 Code-execution evidence:
 
 ```text

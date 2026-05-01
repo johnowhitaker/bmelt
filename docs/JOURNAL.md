@@ -1273,3 +1273,11 @@ that end of the CDB entirely. It keeps the proven `CDB[7:9]` gateway-address
 path, and reserves the fake address `0xfcdd00` as a trigger that writes the CDD
 field package inside the hook itself. It is less general, but it uses only
 bytes already proven to reach the hook.
+
+That special trigger did execute: it returned the planned `0xcd` marker. But
+the result was still negative. The decoded target windows at `0x184000`,
+`0x184060`, and affine group 27 at `0x190690` were all zero before and after,
+while the known live `0x070000` gateway window remained nonzero. So the field
+package plus `0x4a00` doorbell is not sufficient in currentboot. The missing
+state is now more likely in the descriptor prestate, the `0xc000` mapped-header
+setup, or the higher-risk `0x4e8c` controller command path.
