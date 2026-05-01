@@ -378,6 +378,66 @@ def source_gateway_cdb_bulk_with_xdata_rw(selector_mask: int, storage_offset: in
     return bytes(source)
 
 
+def write_xdata_run(address: int, values: list[int]) -> bytes:
+    source = bytearray(mov_dptr(address))
+    for index, value in enumerate(values):
+        if value == 0:
+            source.append(0xE4)  # CLR A
+        else:
+            source.extend(bytes([0x74, value & 0xFF]))  # MOV A,#value
+        source.append(0xF0)  # MOVX @DPTR,A
+        if index != len(values) - 1:
+            source.append(0xA3)  # INC DPTR
+    return bytes(source)
+
+
+def source_cdd_field_replay() -> bytes:
+    """Write the LD5M CDD field-only mailbox package derived statically."""
+
+    return b"".join(
+        [
+            write_xdata_run(0x4A00, [0x00, 0x03, 0x00, 0x03]),
+            write_xdata_run(0x4A05, [0x14, 0x07]),
+            write_xdata_run(0x4A20, [0x03, 0x08, 0x10]),
+            write_xdata_run(0x8258, [0x00, 0x0D, 0x90, 0x00]),
+            write_xdata_run(0x4A00, [0x01]),
+            mov_rn_imm(5, 0xCD),
+        ]
+    )
+
+
+def source_gateway_cdb_bulk_with_cdd_field_replay(
+    selector_mask: int, storage_offset: int, bulk_len: int
+) -> bytes:
+    """Gateway bulk read with a special CDD-field replay trigger.
+
+    Normal mode matches source_gateway_cdb_bulk(): CDB[7:9] is a 24-bit
+    controller address. The special preserved address 0xfcdd00 does not read
+    the gateway; it writes the static LD5M CDD field-only mailbox package and
+    returns 0xcd at response[0x20].
+    """
+
+    source = bytearray()
+    jump_to_gateway_positions: list[int] = []
+    for cdb_addr, expected in ((0x8191, 0xFC), (0x8192, 0xDD), (0x8193, 0x00)):
+        source.extend(mov_dptr(cdb_addr))
+        source.extend(bytes([0xE0, 0x64, expected, 0x70, 0x00]))  # MOVX; XRL; JNZ gateway
+        jump_to_gateway_positions.append(len(source) - 1)
+
+    source.extend(source_cdd_field_replay())
+    skip_after_replay_pos = len(source)
+    source.extend(bytes([0x80, 0x00]))  # SJMP end_source
+
+    gateway_start = len(source)
+    source.extend(source_gateway_cdb_bulk(selector_mask, storage_offset, bulk_len))
+    end_source = len(source)
+
+    for position in jump_to_gateway_positions:
+        source[position] = rel8(position + 1, gateway_start)
+    source[skip_after_replay_pos + 1] = rel8(skip_after_replay_pos + 2, end_source)
+    return bytes(source)
+
+
 def build_source(args: argparse.Namespace) -> tuple[str, bytes, dict[str, Any]]:
     modes = [
         args.constant is not None,
@@ -390,13 +450,15 @@ def build_source(args: argparse.Namespace) -> tuple[str, bytes, dict[str, Any]]:
         args.gateway_cdb_bulk,
         args.gateway_cdb_bulk_with_xdata_write,
         args.gateway_cdb_bulk_with_xdata_rw,
+        args.gateway_cdb_bulk_with_cdd_field_replay,
     ]
     if sum(modes) != 1:
         raise ValueError(
             "choose exactly one of --constant, --xdata-direct, --xdata-window, "
             "--xdata-cdb-address, --xdata-cdb-bulk, --xdata-cdb-rw, "
-            "--gateway-cdb-address, --gateway-cdb-bulk, or "
-            "--gateway-cdb-bulk-with-xdata-write/--gateway-cdb-bulk-with-xdata-rw"
+            "--gateway-cdb-address, --gateway-cdb-bulk, "
+            "--gateway-cdb-bulk-with-xdata-write/--gateway-cdb-bulk-with-xdata-rw, "
+            "or --gateway-cdb-bulk-with-cdd-field-replay"
         )
     if args.constant is not None:
         return "constant", source_constant(args.constant), {"constant": args.constant}
@@ -450,6 +512,22 @@ def build_source(args: argparse.Namespace) -> tuple[str, bytes, dict[str, Any]]:
                 "read_mode": "if host cdb_10_5a, read xdata[cdb_7_8_plus_control_low_bits]",
                 "write_mode": "if host cdb_10_a5, write cdb_byte_9 to xdata[cdb_7_8_plus_control_low_bits]",
                 "unknown_mode": "nonzero cdb_10/cdb_11 values outside read/write selectors return 0xee",
+                "selector_mask": args.selector_mask,
+                "bulk_len": args.bulk_len,
+            },
+        )
+    if args.gateway_cdb_bulk_with_cdd_field_replay:
+        return (
+            "gateway_cdb_bulk_with_cdd_field_replay",
+            source_gateway_cdb_bulk_with_cdd_field_replay(
+                args.selector_mask,
+                RESPONSE_STORAGE_BASE + args.response_offset,
+                args.bulk_len,
+            ),
+            {
+                "address_source": "normal: cdb_bytes_7_8_9_plus_control_low_bits",
+                "trigger": "host cdb_7_fc_cdb_8_dd_cdb_9_00 replays LD5M CDD field-only mailbox package",
+                "trigger_response": "0xcd at response[0x20]",
                 "selector_mask": args.selector_mask,
                 "bulk_len": args.bulk_len,
             },
@@ -634,6 +712,11 @@ def parse_args() -> argparse.Namespace:
         help="like --gateway-cdb-bulk, plus host CDB[10]=a5 XDATA write and CDB[10]=5a XDATA read modes",
     )
     parser.add_argument(
+        "--gateway-cdb-bulk-with-cdd-field-replay",
+        action="store_true",
+        help="like --gateway-cdb-bulk, but CDB[7:9]=fc/dd/00 writes the LD5M CDD field-only mailbox package",
+    )
+    parser.add_argument(
         "--xdata-cdb-address",
         action="store_true",
         help="read XDATA address CDB[7:8] + (CDB[5] & --selector-mask)",
@@ -663,6 +746,7 @@ def main() -> int:
         or args.gateway_cdb_bulk
         or args.gateway_cdb_bulk_with_xdata_write
         or args.gateway_cdb_bulk_with_xdata_rw
+        or args.gateway_cdb_bulk_with_cdd_field_replay
         or args.xdata_cdb_address
         or args.xdata_cdb_bulk
         or args.xdata_cdb_rw

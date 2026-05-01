@@ -99,6 +99,13 @@ installed. It samples baseline windows, writes the generated ordered field
 package, samples the same windows afterward, and restores `xdata[0x4a00]` to
 zero unless told otherwise.
 
+Newer special-trigger variant: build with
+`--gateway-cdb-bulk-with-cdd-field-replay`. Normal commands still read the
+controller gateway. The preserved CDB address `fc dd 00` instead replays the
+LD5M field package internally and returns `0xcd` at `response[0x20]`. Use the
+runner with `--trigger-mode cdb-fcdd00`; by default that mode samples only
+gateway windows so it does not depend on fragile CDB[10]/CDB[11] selectors.
+
 Code-execution evidence:
 
 ```text

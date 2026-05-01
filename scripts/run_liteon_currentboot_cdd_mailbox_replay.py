@@ -287,6 +287,42 @@ def gateway_read_range(
     return bytes(data), records
 
 
+def trigger_cdd_field_replay(args: argparse.Namespace) -> dict[str, Any]:
+    cdb = [
+        0x12,
+        0x00,
+        0x00,
+        0x00,
+        0xF0,
+        0x40,
+        0x00,
+        0xFC,
+        0xDD,
+        0x00,
+        0x00,
+        0x00,
+    ]
+    stdout, record = sg_raw_inquiry(
+        sg_raw=args.sg_raw,
+        device=args.device,
+        cdb=cdb,
+        timeout=args.timeout,
+        request_len=args.request_len,
+    )
+    if len(stdout) <= args.response_offset:
+        raise RuntimeError("short INQUIRY response for CDD field-replay trigger")
+    record.update(
+        {
+            "kind": "cdd_field_replay_trigger",
+            "trigger": "cdb_7_fc_cdb_8_dd_cdb_9_00",
+            "response_byte": stdout[args.response_offset],
+            "expected_response_byte": 0xCD,
+            "stdout_first64_hex": stdout[:64].hex(),
+        }
+    )
+    return record
+
+
 def sample_one(args: argparse.Namespace, sample: dict[str, Any], out_dir: Path, phase: str) -> dict[str, Any]:
     kind = sample["kind"]
     address = int(sample["address"])
@@ -352,8 +388,15 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--request-len", type=int, default=176)
     parser.add_argument("--response-offset", type=parse_int, default=0x20)
     parser.add_argument("--chunk-size", type=parse_int, default=0x7F)
+    parser.add_argument(
+        "--trigger-mode",
+        choices=("xdata-writes", "cdb-fcdd00"),
+        default="xdata-writes",
+        help="how to replay fields: guarded XDATA writes, or special CDB[7:9]=fc/dd/00 trigger",
+    )
     parser.add_argument("--skip-before", action="store_true")
     parser.add_argument("--skip-gateway", action="store_true")
+    parser.add_argument("--include-xdata-samples", action="store_true")
     parser.add_argument("--no-restore-doorbell", action="store_true")
     parser.add_argument("--dry-run", action="store_true")
     return parser.parse_args()
@@ -364,6 +407,8 @@ def main() -> int:
     plan = json.loads(args.plan.read_text())
     level = load_level(plan, args.level)
     samples = list(level.get("suggested_samples_after", []))
+    if args.trigger_mode == "cdb-fcdd00" and not args.include_xdata_samples:
+        samples = [sample for sample in samples if sample["kind"] == "gateway"]
     if args.skip_gateway:
         samples = [sample for sample in samples if sample["kind"] != "gateway"]
 
@@ -377,6 +422,7 @@ def main() -> int:
         "description": level.get("description"),
         "risk": level.get("risk"),
         "dry_run": args.dry_run,
+        "trigger_mode": args.trigger_mode,
         "writes": level["ordered_byte_writes"],
         "samples": samples,
         "results": {},
@@ -394,29 +440,32 @@ def main() -> int:
             before.append(sample_one(args, sample, out_dir, "before"))
         record["results"]["before_samples"] = before
 
-    write_records = []
-    for item in level["ordered_byte_writes"]:
-        address = int(item["address"])
-        value = int(item["value"])
-        write_records.append(
-            xdata_write(
-                sg_raw=args.sg_raw,
-                device=args.device,
-                address=address,
-                value=value,
-                timeout=args.timeout,
-                request_len=args.request_len,
-                response_offset=args.response_offset,
+    if args.trigger_mode == "cdb-fcdd00":
+        record["results"]["trigger_record"] = trigger_cdd_field_replay(args)
+    else:
+        write_records = []
+        for item in level["ordered_byte_writes"]:
+            address = int(item["address"])
+            value = int(item["value"])
+            write_records.append(
+                xdata_write(
+                    sg_raw=args.sg_raw,
+                    device=args.device,
+                    address=address,
+                    value=value,
+                    timeout=args.timeout,
+                    request_len=args.request_len,
+                    response_offset=args.response_offset,
+                )
             )
-        )
-    record["results"]["write_records"] = write_records
+        record["results"]["write_records"] = write_records
 
     after = []
     for sample in samples:
         after.append(sample_one(args, sample, out_dir, "after"))
     record["results"]["after_samples"] = after
 
-    if not args.no_restore_doorbell:
+    if args.trigger_mode == "xdata-writes" and not args.no_restore_doorbell:
         record["results"]["restore_4a00"] = xdata_write(
             sg_raw=args.sg_raw,
             device=args.device,

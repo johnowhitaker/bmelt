@@ -1266,3 +1266,10 @@ replacement is deliberately simpler. Gateway mode only happens when both bytes
 are zero; `CDB[10]=0xa5` means XDATA write; `CDB[10]=0x5a` means XDATA read;
 other nonzero selector values return `0xee` instead of accidentally turning
 into a controller-gateway read at some unlucky address.
+
+That still was not enough: the smoke test showed the combined currentboot path
+does not reliably carry CDB bytes `10` and `11` at all. So the next hook avoids
+that end of the CDB entirely. It keeps the proven `CDB[7:9]` gateway-address
+path, and reserves the fake address `0xfcdd00` as a trigger that writes the CDD
+field package inside the hook itself. It is less general, but it uses only
+bytes already proven to reach the hook.
