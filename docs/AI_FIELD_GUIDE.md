@@ -1756,3 +1756,14 @@ Immediate useful directions:
     The START STOP `+0x8bxx` branch still does not localize to F0/helper or an
     obvious currentboot gateway chunk, while the `+0x92xx/+0x93xx/+0x95xx`
     mechanics cluster has several small shifted currentboot overlaps.
+56. `analysis/8051/currentboot-gateway-write-hook-plan-20260501.md` adds the
+    next volatile primitive: `--gateway-cdb-rw` in
+    `scripts/build_liteon_currentboot_response_hook_candidate.py`, plus
+    `scripts/write_liteon_currentboot_gateway.py`. The hook reads the controller
+    gateway normally, but if CDB[6] is `a6` and CDB[10] is `5a`, it writes
+    CDB[11] through `0x4095..0x4098` and returns readback. It needs
+    `--cave-len 0xdd` because the payload is 0xc0 bytes. First smoke test should
+    be a reversible write to currentboot helper text around controller
+    `0x018620`; if that works, this becomes the candidate route for testing
+    volatile controller/gateway page patches before attempting more sealed-flash
+    edits.

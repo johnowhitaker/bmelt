@@ -1755,3 +1755,23 @@ START STOP `+0x8bxx` branch still does not localize to F0, the helper, or an
 obvious currentboot gateway chunk. The nearby mechanics cluster around
 `+0x92xx/+0x93xx/+0x95xx` does have a few small shifted currentboot overlaps,
 so it may give us cross-mode landmarks even if it is not a direct patch map.
+
+One tempting lead needed a correction before it turned into another blind
+hook. A lot of normal-window chunks contain `LCALL 0x3d89`, and at first glance
+that looked like a shared visible-F0 routine. But the callers load byte pairs
+into registers before calling it, while visible F0 `0x3d89` is the tail of a
+CMAC-ish controller write helper and does not fit those arguments. Public
+offset `+0x3d89` in the normal window is also all zero. The better read is that
+we are seeing banked/controller code snippets, not a simple linear 8051 code
+image.
+
+That pushed the next idea sideways: if the normal window is mostly
+controller/gateway memory, make the currentboot hook write that memory
+directly. I added a guarded `gateway-cdb-rw` hook mode. In ordinary use it is
+the same one-byte controller-gateway reader we already trust. If CDB[6] is
+`a6` and CDB[10] is `5a`, it writes CDB[11] through `0x4095..0x4098`, then
+reads the same address back and returns the byte at response offset `0x20`.
+The first intended smoke test is reversible and currentboot-local: change the
+helper string at controller `0x018620` from `Flash...` to `Glash...`, read it
+back, then restore it. If that works, we have a volatile controller-memory
+patch primitive to test before committing anything to sealed flash.

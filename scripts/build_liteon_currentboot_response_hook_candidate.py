@@ -211,6 +211,86 @@ def source_gateway_cdb_address(selector_mask: int) -> bytes:
     )
 
 
+def gateway_cdb_address_to_r5_r6_r7(selector_mask: int) -> bytes:
+    return b"".join(
+        [
+            mov_dptr(0x818F),  # CDB byte 5: selector in low bits.
+            bytes([0xE0, 0x54, selector_mask & 0xFF, 0xFC]),  # MOVX; ANL; MOV R4,A
+            mov_dptr(0x8193),  # CDB byte 9: low address byte.
+            bytes([0xE0, 0x2C, 0xFF]),  # MOVX; ADD A,R4; MOV R7,A
+            mov_dptr(0x8192),  # CDB byte 8: middle address byte.
+            bytes([0xE0, 0x34, 0x00, 0xFE]),  # MOVX; ADDC A,#0; MOV R6,A
+            mov_dptr(0x8191),  # CDB byte 7: high address byte.
+            bytes([0xE0, 0x34, 0x00, 0xFD]),  # MOVX; ADDC A,#0; MOV R5,A
+        ]
+    )
+
+
+def gateway_read_r5_r6_r7_to_r5() -> bytes:
+    wait_ready = bytes.fromhex("904000e020e7f9")
+    return b"".join(
+        [
+            wait_ready,
+            mov_dptr(0x4091),
+            bytes([0xED, 0xF0, 0xA3, 0xEE, 0xF0, 0xA3, 0xEF, 0xF0]),
+            mov_dptr(0x4098),
+            bytes([0xE0]),  # throwaway read, matching the stock gateway read quirk.
+            wait_ready,
+            mov_dptr(0x4098),
+            bytes([0xE0, 0xFD]),  # MOVX A,@DPTR ; MOV R5,A
+        ]
+    )
+
+
+def gateway_write_r5_r6_r7_value_r3() -> bytes:
+    wait_ready = bytes.fromhex("904000e020e7f9")
+    return b"".join(
+        [
+            wait_ready,
+            mov_dptr(0x4095),
+            bytes([0xED, 0xF0, 0xA3, 0xEE, 0xF0, 0xA3, 0xEF, 0xF0]),
+            mov_dptr(0x4098),
+            bytes([0xEB, 0xF0]),  # MOV A,R3 ; MOVX @DPTR,A
+            wait_ready,
+        ]
+    )
+
+
+def source_gateway_cdb_rw(selector_mask: int) -> bytes:
+    """Read controller gateway, with guarded one-byte write mode.
+
+    Normal mode is the proven one-byte gateway read. Write mode requires
+    CDB[6] == 0xa6 and CDB[10] == 0x5a, writes CDB[11] to the gateway address
+    selected by CDB[7:9] plus CDB[5]'s selector bits, then returns readback.
+    """
+
+    source = bytearray()
+    source.extend(mov_dptr(0x8190))  # CDB byte 6: first write guard.
+    source.extend(bytes([0xE0, 0x64, 0xA6, 0x70, 0x00]))  # MOVX; XRL; JNZ read
+    jump_to_read_pos_1 = len(source) - 1
+    source.extend(mov_dptr(0x8194))  # CDB byte 10: second write guard.
+    source.extend(bytes([0xE0, 0x64, 0x5A, 0x70, 0x00]))  # MOVX; XRL; JNZ read
+    jump_to_read_pos_2 = len(source) - 1
+
+    source.extend(gateway_cdb_address_to_r5_r6_r7(selector_mask))
+    source.extend(mov_dptr(0x8195))  # CDB byte 11: write value.
+    source.extend(bytes([0xE0, 0xFB]))  # MOVX A,@DPTR ; MOV R3,A
+    source.extend(gateway_write_r5_r6_r7_value_r3())
+    source.extend(gateway_read_r5_r6_r7_to_r5())
+    skip_read_pos = len(source)
+    source.extend(bytes([0x80, 0x00]))  # SJMP end_source
+
+    read_start = len(source)
+    source.extend(gateway_cdb_address_to_r5_r6_r7(selector_mask))
+    source.extend(gateway_read_r5_r6_r7_to_r5())
+    end_source = len(source)
+
+    source[jump_to_read_pos_1] = rel8(jump_to_read_pos_1 + 1, read_start)
+    source[jump_to_read_pos_2] = rel8(jump_to_read_pos_2 + 1, read_start)
+    source[skip_read_pos + 1] = rel8(skip_read_pos + 2, end_source)
+    return bytes(source)
+
+
 def source_gateway_cdb_bulk(selector_mask: int, storage_offset: int, bulk_len: int) -> bytes:
     if not 1 <= bulk_len <= 0xFF:
         raise ValueError("--bulk-len must be 1..255")
@@ -895,6 +975,7 @@ def build_source(args: argparse.Namespace) -> tuple[str, bytes, dict[str, Any]]:
         args.xdata_cdb_bulk,
         args.xdata_cdb_rw,
         args.gateway_cdb_address,
+        args.gateway_cdb_rw,
         args.gateway_cdb_bulk,
         args.gateway_cdb_bulk_with_xdata_write,
         args.gateway_cdb_bulk_with_xdata_rw,
@@ -911,7 +992,7 @@ def build_source(args: argparse.Namespace) -> tuple[str, bytes, dict[str, Any]]:
         raise ValueError(
             "choose exactly one of --constant, --xdata-direct, --xdata-window, "
             "--xdata-cdb-address, --xdata-cdb-bulk, --xdata-cdb-rw, "
-            "--gateway-cdb-address, --gateway-cdb-bulk, "
+            "--gateway-cdb-address, --gateway-cdb-rw, --gateway-cdb-bulk, "
             "--gateway-cdb-bulk-with-xdata-write/--gateway-cdb-bulk-with-xdata-rw, "
             "--gateway-cdb-bulk-with-cdd-field-replay, "
             "--gateway-cdb-bulk-with-cdd-descriptor-replay, or "
@@ -931,6 +1012,18 @@ def build_source(args: argparse.Namespace) -> tuple[str, bytes, dict[str, Any]]:
             "gateway_cdb_address",
             source_gateway_cdb_address(args.selector_mask),
             {"address_source": "cdb_bytes_7_8_9_plus_control_low_bits", "selector_mask": args.selector_mask},
+        )
+    if args.gateway_cdb_rw:
+        return (
+            "gateway_cdb_rw",
+            source_gateway_cdb_rw(args.selector_mask),
+            {
+                "address_source": "cdb_bytes_7_8_9_plus_control_low_bits",
+                "write_value_source": "cdb_byte_11",
+                "write_magic": "cdb_6_a6_cdb_10_5a",
+                "selector_mask": args.selector_mask,
+                "gateway_mode": "one_byte",
+            },
         )
     if args.gateway_cdb_bulk:
         return (
@@ -1267,6 +1360,11 @@ def parse_args() -> argparse.Namespace:
         help="read controller gateway address CDB[7:9] + (CDB[5] & --selector-mask)",
     )
     parser.add_argument(
+        "--gateway-cdb-rw",
+        action="store_true",
+        help="read controller gateway address CDB[7:9] + selector, and write CDB[11] first if CDB[6]=a6 and CDB[10]=5a",
+    )
+    parser.add_argument(
         "--gateway-cdb-bulk",
         action="store_true",
         help="copy --bulk-len bytes from controller gateway address CDB[7:9] + selector into the INQUIRY response",
@@ -1348,6 +1446,7 @@ def main() -> int:
     if args.restore and (
         any(value is not None for value in (args.constant, args.xdata_direct, args.xdata_window))
         or args.gateway_cdb_address
+        or args.gateway_cdb_rw
         or args.gateway_cdb_bulk
         or args.gateway_cdb_bulk_with_xdata_write
         or args.gateway_cdb_bulk_with_xdata_rw

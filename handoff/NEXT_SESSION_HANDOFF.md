@@ -459,3 +459,50 @@ currentboot/normal pages are strongest at `+0xa000..+0xde80`,
 `+0xe000..+0xfd80`, and `+0x4000..+0x4500`; use those as the first candidates
 if testing any currentboot-to-normal controller-memory patch carryover. The
 guarded currentboot XDATA writer is probably not enough by itself.
+
+## Currentboot Gateway Write Primitive
+
+New files:
+
+```text
+analysis/8051/currentboot-gateway-write-hook-plan-20260501.md
+scripts/write_liteon_currentboot_gateway.py
+```
+
+`scripts/build_liteon_currentboot_response_hook_candidate.py` now has
+`--gateway-cdb-rw`. It is a one-byte controller gateway reader by default. If
+host CDB[6] is `a6` and CDB[10] is `5a`, it writes CDB[11] through
+`0x4095..0x4098`, reads the same controller address back through
+`0x4091..0x4098`, and returns the readback byte at response offset `0x20`.
+
+Build with the larger proven FF cave:
+
+```sh
+python3 scripts/build_liteon_currentboot_response_hook_candidate.py \
+  --name gateway-cdb-rw-v1 \
+  --gateway-cdb-rw \
+  --cave-len 0xdd
+```
+
+The dry-run payload is `0xc0` bytes, so the old `0x80` cave default is too
+small. The `0x6ee3` cave is all-FF through `0x6fbf`, so `0xdd` bytes is still
+below `0x6ff0`.
+
+First live smoke test should be reversible:
+
+```sh
+# read first to confirm "Flash Type Error"
+python3 scripts/read_liteon_currentboot_gateway.py --device /dev/sg0 \
+  --address 0x018620 --length 0x10
+
+# write F -> G, read back, then restore G -> F
+python3 scripts/write_liteon_currentboot_gateway.py --device /dev/sg0 \
+  --address 0x018620 --value 0x47
+python3 scripts/write_liteon_currentboot_gateway.py --device /dev/sg0 \
+  --address 0x018620 --value 0x46
+```
+
+If that works, the next high-value test is a volatile patch to a
+currentboot/normal-overlap controller page, followed by recovery into normal
+mode to see whether the patch carries over long enough to affect a safe command
+path. Do not test this first on the START STOP branch.
