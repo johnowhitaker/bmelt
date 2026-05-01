@@ -1788,3 +1788,13 @@ Immediate useful directions:
     evidence, not proof that those reserved bytes control the bridge address or
     returned data. Use plain GET CONFIG/current as a safe bridge tagger; do not
     treat reserved-byte fuzzing as a solved normal read oracle.
+58. `analysis/8051/normal-read-buffer-capture-bridge-correction-20260501.md`
+    corrects the bridge interpretation. The normal stimulus captures always
+    end with a `READ BUFFER id=01 offset=0x070000` work-window read. The
+    strongest bridge edge, `0x8a4c..0x8a4e -> 0x4011..0x4013`, lines up exactly
+    with READ BUFFER CDB bytes 3..5, the 24-bit buffer offset. So this bridge
+    is most likely the normal READ BUFFER handler's public offset path, not a
+    GET CONFIG hidden-address path. Practical consequence: we already control
+    this stock oracle, but its mapped surface is constrained to the public
+    work-window/mirror space. It still does not reach decoded CDD memory at
+    `0x184000..0x1b3fff`.

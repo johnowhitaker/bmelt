@@ -1821,3 +1821,14 @@ That still helps. It keeps the normal-mode plan honest. The bridge is real, but
 we probably need either a different command family whose CDB fields naturally
 feed the bridge, or a live patch/hook around the bridge path before it becomes
 an arbitrary controller-memory readout.
+
+There was also a useful self-correction hiding in that result. The recurring
+`0x8a4c..0x8a4e -> 0x4011..0x4013` bridge looks less like a secret GET CONFIG
+address path and more like the follow-up `READ BUFFER` capture command itself:
+in a normal READ BUFFER CDB, bytes 3, 4, and 5 are exactly the 24-bit buffer
+offset. That means the normal bridge we kept seeing is probably the public
+work-window reader we already control. It is a good oracle, but a constrained
+one: it reaches the `0x070000` work window and its mirrors, not decoded CDD
+memory. The next question is therefore sharper: can we find another legal
+READ BUFFER selector, or patch that normal READ BUFFER overlay, so the same
+machinery points somewhere more interesting?

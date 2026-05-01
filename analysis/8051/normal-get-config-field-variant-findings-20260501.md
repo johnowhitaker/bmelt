@@ -8,6 +8,19 @@ work-window corridor that writes `0x4091..0x4093`, kicks `0x409c`, and reads
 `0x4099`. Earlier packet-shadow work made CDB bytes 4 and 5 interesting because
 they line up with `xdata[0x8a4d]` and `xdata[0x8a4e]`.
 
+Important correction after this run:
+
+```text
+analysis/8051/normal-read-buffer-capture-bridge-correction-20260501.md
+```
+
+The recurring `0x8a4c..0x8a4e -> 0x4011..0x4013` bridge is most cleanly
+explained as the follow-up `READ BUFFER` capture command's own 24-bit offset
+path, not as a hidden GET CONFIG address field. The GET CONFIG variants are
+still useful safe stimuli, but the bridge snippets in `*.window.bin` must be
+interpreted through the `READ BUFFER id=01 offset=0x070000` command used to
+capture the window.
+
 Live evidence:
 
 ```text
@@ -106,11 +119,13 @@ but it did not become the fast normal runtime oracle we wanted.
 
 The current read is:
 
-- GET CONFIGURATION is a safe, repeatable, non-mechanical bridge tagger.
+- GET CONFIGURATION is a safe, repeatable, non-mechanical stimulus around the
+  public work-window reader.
 - Reserved CDB bytes 4, 5, 6, and 9 are tolerated by this drive.
 - Those bytes do not alter the ordinary GET CONFIG response.
 - Public-window chunk presence is too phase-sensitive to infer control from
-  mixed-order captures.
+  mixed-order captures, and the recurring bridge snippets likely belong to the
+  follow-up READ BUFFER capture path itself.
 - If a normal bridge oracle exists here, it probably needs either a deeper
   patch/hook around the bridge path or a field family that the stock handler
   actually copies into the controller address registers and then exposes in the

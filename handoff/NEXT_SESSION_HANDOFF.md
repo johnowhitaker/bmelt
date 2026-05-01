@@ -549,3 +549,17 @@ prove that CDB byte 5 steers the bridge; public-window rotation is still a big
 confounder. Treat this as a useful negative: GET CONFIG is safe for tagging the
 normal bridge, but reserved GET CONFIG bytes are not the fast normal runtime
 read oracle by themselves.
+
+Follow-up correction:
+
+```text
+analysis/8051/normal-read-buffer-capture-bridge-correction-20260501.md
+```
+
+The strongest `0x8a4c..0x8a4e -> 0x4011..0x4013` bridge edge now looks like
+the follow-up `READ BUFFER` capture command's own 24-bit offset path. In a
+READ BUFFER CDB, bytes 3..5 are the buffer offset, exactly matching those
+shadow bytes. So do not treat the GET CONFIG field run as evidence for a hidden
+GET CONFIG address register. The stock normal READ BUFFER oracle is real and
+controlled, but it is the already-mapped public work-window/mirror surface; it
+does not reach decoded CDD memory.
