@@ -1651,3 +1651,14 @@ Immediate useful directions:
     two-cycle run did not cleanly separate them by GET CONFIG field value; treat
     it as "GET CONFIG tags the bridge" evidence, not yet as proof of address
     control.
+47. The selector compare map is now separated into
+    `scripts/analyze_liteon_normal_packet_selectors.py` and
+    `analysis/8051/normal-packet-selector-map-20260501.md/json`. It condenses
+    the `0x8a49..0x8a54` shadow checks and copy edges. `0x8a49` is compared
+    against opcode-like values including `0x03`, `0x1b`, `0x28`, `0x2a`,
+    `0x55`, `0xa3`, `0xa4`, and LiteOn/vendor `0xe3/0xe6/0xe7`; adjacent
+    fields show `0x8a4d` as length/count-ish and `0x8a4e/0x8a53/0x8a54` as
+    controller data/status-shadow bytes. A plain `0x8a49 == 0x46` GET
+    CONFIGURATION compare is still absent even though GET CONFIG tags the
+    bridge dynamically, so that path is likely table-driven, handled through an
+    unharvested slice, or dispatched before this compare cluster.

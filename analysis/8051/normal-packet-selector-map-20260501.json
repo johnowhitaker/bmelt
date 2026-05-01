@@ -1,0 +1,3261 @@
+{
+  "by_addr": [
+    {
+      "addr": 35401,
+      "role": "opcode/selector candidate",
+      "total": 1748,
+      "unique_values": 17,
+      "values": [
+        {
+          "count": 846,
+          "value": 40
+        },
+        {
+          "count": 282,
+          "value": 3
+        },
+        {
+          "count": 94,
+          "value": 230
+        },
+        {
+          "count": 94,
+          "value": 231
+        },
+        {
+          "count": 94,
+          "value": 227
+        },
+        {
+          "count": 85,
+          "value": 42
+        },
+        {
+          "count": 58,
+          "value": 19
+        },
+        {
+          "count": 49,
+          "value": 85
+        },
+        {
+          "count": 46,
+          "value": 164
+        },
+        {
+          "count": 46,
+          "value": 163
+        },
+        {
+          "count": 18,
+          "value": 27
+        },
+        {
+          "count": 15,
+          "value": 180
+        },
+        {
+          "count": 12,
+          "value": 107
+        },
+        {
+          "count": 4,
+          "value": 120
+        },
+        {
+          "count": 2,
+          "value": 207
+        },
+        {
+          "count": 2,
+          "value": 161
+        },
+        {
+          "count": 1,
+          "value": 124
+        }
+      ]
+    },
+    {
+      "addr": 35402,
+      "role": "CDB byte 1 / op-specific field",
+      "total": 328,
+      "unique_values": 4,
+      "values": [
+        {
+          "count": 94,
+          "value": 6
+        },
+        {
+          "count": 94,
+          "value": 1
+        },
+        {
+          "count": 94,
+          "value": 14
+        },
+        {
+          "count": 46,
+          "value": 2
+        }
+      ]
+    },
+    {
+      "addr": 35403,
+      "role": "CDB byte 2 / op-specific field",
+      "total": 188,
+      "unique_values": 2,
+      "values": [
+        {
+          "count": 94,
+          "value": 226
+        },
+        {
+          "count": 94,
+          "value": 34
+        }
+      ]
+    },
+    {
+      "addr": 35404,
+      "role": "controller setup high-ish byte",
+      "total": 15,
+      "unique_values": 1,
+      "values": [
+        {
+          "count": 15,
+          "value": 1
+        }
+      ]
+    },
+    {
+      "addr": 35405,
+      "role": "length/count-ish byte",
+      "total": 192,
+      "unique_values": 3,
+      "values": [
+        {
+          "count": 94,
+          "value": 240
+        },
+        {
+          "count": 94,
+          "value": 1
+        },
+        {
+          "count": 4,
+          "value": 254
+        }
+      ]
+    },
+    {
+      "addr": 35406,
+      "role": "subselector/status byte; low nibble tested",
+      "total": 0,
+      "unique_values": 0,
+      "values": []
+    },
+    {
+      "addr": 35407,
+      "role": "payload/field byte",
+      "total": 0,
+      "unique_values": 0,
+      "values": []
+    },
+    {
+      "addr": 35408,
+      "role": "payload/field byte",
+      "total": 0,
+      "unique_values": 0,
+      "values": []
+    },
+    {
+      "addr": 35409,
+      "role": "payload/field byte",
+      "total": 0,
+      "unique_values": 0,
+      "values": []
+    },
+    {
+      "addr": 35410,
+      "role": "payload/field byte",
+      "total": 0,
+      "unique_values": 0,
+      "values": []
+    },
+    {
+      "addr": 35411,
+      "role": "controller response/data shadow byte",
+      "total": 82,
+      "unique_values": 1,
+      "values": [
+        {
+          "count": 82,
+          "value": 1
+        }
+      ]
+    },
+    {
+      "addr": 35412,
+      "role": "controller response/data shadow byte",
+      "total": 0,
+      "unique_values": 0,
+      "values": []
+    }
+  ],
+  "capture_count": 94,
+  "compare_rows": [
+    {
+      "addr": 35401,
+      "branch": "jz",
+      "count": 376,
+      "kind": "xrl_a_imm",
+      "offsets": {
+        "34560": 26,
+        "34624": 16,
+        "34688": 30,
+        "34752": 22,
+        "38400": 94,
+        "38784": 94,
+        "40000": 94
+      },
+      "role": "opcode/selector candidate",
+      "samples": [
+        {
+          "capture": "normal-work-window-capture-only-20260501/00-capture-only",
+          "hex": "78abf678b0f6908a44e0601a908a49e064286012e0644a600de0600ae064466005e4e0904091f0a3e55ef0a3e55ff090",
+          "offset": 34590
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/00-capture-only",
+          "hex": "04efb4be07908243e04480f0908a49e064286003029e319089f7e0ffd39402507cef14602a146027240270606f603a7d",
+          "offset": 38420
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/00-capture-only",
+          "hex": "e090892dcff0a3eff0025f2f908a49e064286008e064a86003025e7a301f10908a123455000000407f211241f48017e4",
+          "offset": 38815
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/00-capture-only",
+          "hex": "e0ffa3e090892dcff0a3eff0908a49e06428600302a016908a69e0fca3e0fda3e0fea3e0ff908a4be0f8a3e0f9a3e0fa",
+          "offset": 40002
+        }
+      ],
+      "stimuli": {
+        "baseline-no-stimulus": 4,
+        "capture-only": 56,
+        "cycle00-get-configuration-all": 4,
+        "cycle00-get-configuration-current": 4,
+        "cycle00-get-event-status-media": 4,
+        "cycle00-inquiry-extrainq": 4,
+        "cycle00-mode-sense10-all": 4,
+        "cycle01-get-configuration-all": 4,
+        "cycle01-get-configuration-current": 4,
+        "cycle01-get-event-status-media": 4,
+        "cycle01-inquiry-extrainq": 4,
+        "cycle01-mode-sense10-all": 4,
+        "cycle02-get-configuration-all": 4,
+        "cycle02-get-configuration-current": 4,
+        "cycle02-get-event-status-media": 4,
+        "cycle02-inquiry-extrainq": 4,
+        "cycle02-mode-sense10-all": 4,
+        "cycle03-get-configuration-all": 4,
+        "cycle03-get-configuration-current": 4,
+        "cycle03-get-event-status-media": 4,
+        "cycle03-inquiry-extrainq": 4,
+        "cycle03-mode-sense10-all": 4,
+        "cycle04-get-configuration-all": 4,
+        "cycle04-get-configuration-current": 4,
+        "cycle04-get-event-status-media": 4,
+        "cycle04-inquiry-extrainq": 4,
+        "cycle04-mode-sense10-all": 4,
+        "cycle05-get-configuration-all": 4,
+        "cycle05-get-configuration-current": 4,
+        "cycle05-get-event-status-media": 4,
+        "cycle05-inquiry-extrainq": 4,
+        "cycle05-mode-sense10-all": 4,
+        "cycle06-get-configuration-all": 4,
+        "cycle06-get-configuration-current": 4,
+        "cycle06-get-event-status-media": 4,
+        "cycle06-inquiry-extrainq": 4,
+        "cycle06-mode-sense10-all": 4,
+        "cycle07-get-configuration-all": 4,
+        "cycle07-get-configuration-current": 4,
+        "cycle07-get-event-status-media": 4,
+        "cycle07-inquiry-extrainq": 4,
+        "cycle07-mode-sense10-all": 4,
+        "get-configuration-all": 4,
+        "get-configuration-current": 4,
+        "get-event-status-busy": 4,
+        "get-event-status-external": 4,
+        "get-event-status-media": 8,
+        "get-event-status-multihost": 4,
+        "get-event-status-operational": 4,
+        "get-event-status-power": 4,
+        "get-performance-type00": 4,
+        "get-performance-type03": 4,
+        "inquiry-extrainq": 4,
+        "inquiry-standard-96": 4,
+        "mechanism-status": 4,
+        "mode-sense10-all": 8,
+        "mode-sense10-caching": 4,
+        "mode-sense10-capabilities": 4,
+        "mode-sense10-cd-audio": 4,
+        "mode-sense10-cd-device": 4,
+        "mode-sense10-fault-failure": 4,
+        "mode-sense10-power-condition": 4,
+        "mode-sense10-read-error-recovery": 4,
+        "read-capacity10": 4,
+        "read-disc-information": 4,
+        "read-dvd-structure-format0": 8,
+        "read-dvd-structure-format1": 4,
+        "read-dvd-structure-format2": 4,
+        "read-dvd-structure-formatff": 4,
+        "read-format-capacities": 4,
+        "read-toc-format-0": 8,
+        "read-toc-format-1": 4,
+        "read-toc-format-2": 4,
+        "read-toc-format-4": 4,
+        "read-track-information-lba0": 4,
+        "request-sense": 4,
+        "test-unit-ready": 4
+      },
+      "value": 40
+    },
+    {
+      "addr": 35401,
+      "branch": "jz",
+      "count": 282,
+      "kind": "mov_r7_xrl_imm",
+      "offsets": {
+        "24832": 33,
+        "24896": 9,
+        "24960": 20,
+        "25024": 32,
+        "38400": 94,
+        "39872": 94
+      },
+      "role": "opcode/selector candidate",
+      "samples": [
+        {
+          "capture": "normal-work-window-capture-only-20260501/00-capture-only",
+          "hex": "9089c8f09047c4e09089c9f0908a49e0ff64286013ef64be600eef64a86009ef64d56004efb4b9099047c5e4f09047c4",
+          "offset": 25027
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/00-capture-only",
+          "hex": "908a53f09047b1e0908a54f0908a49e0ff64286009ef64a86004efb4be07908243e04480f0908a49e064286003029e31",
+          "offset": 38395
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/00-capture-only",
+          "hex": "0012050d908988eef0a3eff0908a49e0ff64286004efb4a80f90c3123d8990855ce0fd7f02123d89908355e0ff307705",
+          "offset": 39910
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/01-capture-only",
+          "hex": "9089c8f09047c4e09089c9f0908a49e0ff64286013ef64be600eef64a86009ef64d56004efb4b9099047c5e4f09047c4",
+          "offset": 25027
+        }
+      ],
+      "stimuli": {
+        "baseline-no-stimulus": 3,
+        "capture-only": 42,
+        "cycle00-get-configuration-all": 3,
+        "cycle00-get-configuration-current": 3,
+        "cycle00-get-event-status-media": 3,
+        "cycle00-inquiry-extrainq": 3,
+        "cycle00-mode-sense10-all": 3,
+        "cycle01-get-configuration-all": 3,
+        "cycle01-get-configuration-current": 3,
+        "cycle01-get-event-status-media": 3,
+        "cycle01-inquiry-extrainq": 3,
+        "cycle01-mode-sense10-all": 3,
+        "cycle02-get-configuration-all": 3,
+        "cycle02-get-configuration-current": 3,
+        "cycle02-get-event-status-media": 3,
+        "cycle02-inquiry-extrainq": 3,
+        "cycle02-mode-sense10-all": 3,
+        "cycle03-get-configuration-all": 3,
+        "cycle03-get-configuration-current": 3,
+        "cycle03-get-event-status-media": 3,
+        "cycle03-inquiry-extrainq": 3,
+        "cycle03-mode-sense10-all": 3,
+        "cycle04-get-configuration-all": 3,
+        "cycle04-get-configuration-current": 3,
+        "cycle04-get-event-status-media": 3,
+        "cycle04-inquiry-extrainq": 3,
+        "cycle04-mode-sense10-all": 3,
+        "cycle05-get-configuration-all": 3,
+        "cycle05-get-configuration-current": 3,
+        "cycle05-get-event-status-media": 3,
+        "cycle05-inquiry-extrainq": 3,
+        "cycle05-mode-sense10-all": 3,
+        "cycle06-get-configuration-all": 3,
+        "cycle06-get-configuration-current": 3,
+        "cycle06-get-event-status-media": 3,
+        "cycle06-inquiry-extrainq": 3,
+        "cycle06-mode-sense10-all": 3,
+        "cycle07-get-configuration-all": 3,
+        "cycle07-get-configuration-current": 3,
+        "cycle07-get-event-status-media": 3,
+        "cycle07-inquiry-extrainq": 3,
+        "cycle07-mode-sense10-all": 3,
+        "get-configuration-all": 3,
+        "get-configuration-current": 3,
+        "get-event-status-busy": 3,
+        "get-event-status-external": 3,
+        "get-event-status-media": 6,
+        "get-event-status-multihost": 3,
+        "get-event-status-operational": 3,
+        "get-event-status-power": 3,
+        "get-performance-type00": 3,
+        "get-performance-type03": 3,
+        "inquiry-extrainq": 3,
+        "inquiry-standard-96": 3,
+        "mechanism-status": 3,
+        "mode-sense10-all": 6,
+        "mode-sense10-caching": 3,
+        "mode-sense10-capabilities": 3,
+        "mode-sense10-cd-audio": 3,
+        "mode-sense10-cd-device": 3,
+        "mode-sense10-fault-failure": 3,
+        "mode-sense10-power-condition": 3,
+        "mode-sense10-read-error-recovery": 3,
+        "read-capacity10": 3,
+        "read-disc-information": 3,
+        "read-dvd-structure-format0": 6,
+        "read-dvd-structure-format1": 3,
+        "read-dvd-structure-format2": 3,
+        "read-dvd-structure-formatff": 3,
+        "read-format-capacities": 3,
+        "read-toc-format-0": 6,
+        "read-toc-format-1": 3,
+        "read-toc-format-2": 3,
+        "read-toc-format-4": 3,
+        "read-track-information-lba0": 3,
+        "request-sense": 3,
+        "test-unit-ready": 3
+      },
+      "value": 40
+    },
+    {
+      "addr": 35401,
+      "branch": "cjne",
+      "count": 188,
+      "kind": "cjne_a_imm",
+      "offsets": {
+        "34560": 26,
+        "34624": 16,
+        "34688": 30,
+        "34752": 22,
+        "40704": 39,
+        "40768": 5,
+        "40832": 24,
+        "40896": 26
+      },
+      "role": "opcode/selector candidate",
+      "samples": [
+        {
+          "capture": "normal-work-window-capture-only-20260501/00-capture-only",
+          "hex": "063978a976eb08761402711d908a49e0b4030302a4c2e478b5f678abf678b0f6908a44e0601a908a49e064286012e064",
+          "offset": 34564
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/00-capture-only",
+          "hex": "e4f0801fc23f9047c97450f0908a49e0b4030a9047cf7401f0a3f080069047d07401f0908a38e054eff09040187403f0",
+          "offset": 40715
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/01-capture-only",
+          "hex": "063978a976eb08761402711d908a49e0b4030302a4c2e478b5f678abf678b0f6908a44e0601a908a49e064286012e064",
+          "offset": 34564
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/01-capture-only",
+          "hex": "e4f0801fc23f9047c97450f0908a49e0b4030a9047cf7401f0a3f080069047d07401f0908a38e054eff09040187403f0",
+          "offset": 40715
+        }
+      ],
+      "stimuli": {
+        "baseline-no-stimulus": 2,
+        "capture-only": 28,
+        "cycle00-get-configuration-all": 2,
+        "cycle00-get-configuration-current": 2,
+        "cycle00-get-event-status-media": 2,
+        "cycle00-inquiry-extrainq": 2,
+        "cycle00-mode-sense10-all": 2,
+        "cycle01-get-configuration-all": 2,
+        "cycle01-get-configuration-current": 2,
+        "cycle01-get-event-status-media": 2,
+        "cycle01-inquiry-extrainq": 2,
+        "cycle01-mode-sense10-all": 2,
+        "cycle02-get-configuration-all": 2,
+        "cycle02-get-configuration-current": 2,
+        "cycle02-get-event-status-media": 2,
+        "cycle02-inquiry-extrainq": 2,
+        "cycle02-mode-sense10-all": 2,
+        "cycle03-get-configuration-all": 2,
+        "cycle03-get-configuration-current": 2,
+        "cycle03-get-event-status-media": 2,
+        "cycle03-inquiry-extrainq": 2,
+        "cycle03-mode-sense10-all": 2,
+        "cycle04-get-configuration-all": 2,
+        "cycle04-get-configuration-current": 2,
+        "cycle04-get-event-status-media": 2,
+        "cycle04-inquiry-extrainq": 2,
+        "cycle04-mode-sense10-all": 2,
+        "cycle05-get-configuration-all": 2,
+        "cycle05-get-configuration-current": 2,
+        "cycle05-get-event-status-media": 2,
+        "cycle05-inquiry-extrainq": 2,
+        "cycle05-mode-sense10-all": 2,
+        "cycle06-get-configuration-all": 2,
+        "cycle06-get-configuration-current": 2,
+        "cycle06-get-event-status-media": 2,
+        "cycle06-inquiry-extrainq": 2,
+        "cycle06-mode-sense10-all": 2,
+        "cycle07-get-configuration-all": 2,
+        "cycle07-get-configuration-current": 2,
+        "cycle07-get-event-status-media": 2,
+        "cycle07-inquiry-extrainq": 2,
+        "cycle07-mode-sense10-all": 2,
+        "get-configuration-all": 2,
+        "get-configuration-current": 2,
+        "get-event-status-busy": 2,
+        "get-event-status-external": 2,
+        "get-event-status-media": 4,
+        "get-event-status-multihost": 2,
+        "get-event-status-operational": 2,
+        "get-event-status-power": 2,
+        "get-performance-type00": 2,
+        "get-performance-type03": 2,
+        "inquiry-extrainq": 2,
+        "inquiry-standard-96": 2,
+        "mechanism-status": 2,
+        "mode-sense10-all": 4,
+        "mode-sense10-caching": 2,
+        "mode-sense10-capabilities": 2,
+        "mode-sense10-cd-audio": 2,
+        "mode-sense10-cd-device": 2,
+        "mode-sense10-fault-failure": 2,
+        "mode-sense10-power-condition": 2,
+        "mode-sense10-read-error-recovery": 2,
+        "read-capacity10": 2,
+        "read-disc-information": 2,
+        "read-dvd-structure-format0": 4,
+        "read-dvd-structure-format1": 2,
+        "read-dvd-structure-format2": 2,
+        "read-dvd-structure-formatff": 2,
+        "read-format-capacities": 2,
+        "read-toc-format-0": 4,
+        "read-toc-format-1": 2,
+        "read-toc-format-2": 2,
+        "read-toc-format-4": 2,
+        "read-track-information-lba0": 2,
+        "request-sense": 2,
+        "test-unit-ready": 2
+      },
+      "value": 3
+    },
+    {
+      "addr": 35401,
+      "branch": "cjne",
+      "count": 188,
+      "kind": "cjne_a_imm",
+      "offsets": {
+        "27392": 30,
+        "27456": 24,
+        "27520": 17,
+        "27584": 23,
+        "39168": 29,
+        "39232": 55,
+        "39360": 10
+      },
+      "role": "opcode/selector candidate",
+      "samples": [
+        {
+          "capture": "normal-work-window-capture-only-20260501/00-capture-only",
+          "hex": "7f00020513e478a6f612b092908a49e0b42839908a50e07004a3e06401b1e04402f022908db1e04404f022908db1e044",
+          "offset": 27427
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/00-capture-only",
+          "hex": "e69dffee9c908988f0a3eff0908a49e0b42829c3908989e09464908988e09400401ae47f01fefdfc78a21233b2c31233",
+          "offset": 39167
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/01-capture-only",
+          "hex": "7f00020513e478a6f612b092908a49e0b42839908a50e07004a3e06401b1e04402f022908db1e04404f022908db1e044",
+          "offset": 27427
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/01-capture-only",
+          "hex": "e69dffee9c908988f0a3eff0908a49e0b42829c3908989e09464908988e09400401ae47f01fefdfc78a21233b2c31233",
+          "offset": 39167
+        }
+      ],
+      "stimuli": {
+        "baseline-no-stimulus": 2,
+        "capture-only": 28,
+        "cycle00-get-configuration-all": 2,
+        "cycle00-get-configuration-current": 2,
+        "cycle00-get-event-status-media": 2,
+        "cycle00-inquiry-extrainq": 2,
+        "cycle00-mode-sense10-all": 2,
+        "cycle01-get-configuration-all": 2,
+        "cycle01-get-configuration-current": 2,
+        "cycle01-get-event-status-media": 2,
+        "cycle01-inquiry-extrainq": 2,
+        "cycle01-mode-sense10-all": 2,
+        "cycle02-get-configuration-all": 2,
+        "cycle02-get-configuration-current": 2,
+        "cycle02-get-event-status-media": 2,
+        "cycle02-inquiry-extrainq": 2,
+        "cycle02-mode-sense10-all": 2,
+        "cycle03-get-configuration-all": 2,
+        "cycle03-get-configuration-current": 2,
+        "cycle03-get-event-status-media": 2,
+        "cycle03-inquiry-extrainq": 2,
+        "cycle03-mode-sense10-all": 2,
+        "cycle04-get-configuration-all": 2,
+        "cycle04-get-configuration-current": 2,
+        "cycle04-get-event-status-media": 2,
+        "cycle04-inquiry-extrainq": 2,
+        "cycle04-mode-sense10-all": 2,
+        "cycle05-get-configuration-all": 2,
+        "cycle05-get-configuration-current": 2,
+        "cycle05-get-event-status-media": 2,
+        "cycle05-inquiry-extrainq": 2,
+        "cycle05-mode-sense10-all": 2,
+        "cycle06-get-configuration-all": 2,
+        "cycle06-get-configuration-current": 2,
+        "cycle06-get-event-status-media": 2,
+        "cycle06-inquiry-extrainq": 2,
+        "cycle06-mode-sense10-all": 2,
+        "cycle07-get-configuration-all": 2,
+        "cycle07-get-configuration-current": 2,
+        "cycle07-get-event-status-media": 2,
+        "cycle07-inquiry-extrainq": 2,
+        "cycle07-mode-sense10-all": 2,
+        "get-configuration-all": 2,
+        "get-configuration-current": 2,
+        "get-event-status-busy": 2,
+        "get-event-status-external": 2,
+        "get-event-status-media": 4,
+        "get-event-status-multihost": 2,
+        "get-event-status-operational": 2,
+        "get-event-status-power": 2,
+        "get-performance-type00": 2,
+        "get-performance-type03": 2,
+        "inquiry-extrainq": 2,
+        "inquiry-standard-96": 2,
+        "mechanism-status": 2,
+        "mode-sense10-all": 4,
+        "mode-sense10-caching": 2,
+        "mode-sense10-capabilities": 2,
+        "mode-sense10-cd-audio": 2,
+        "mode-sense10-cd-device": 2,
+        "mode-sense10-fault-failure": 2,
+        "mode-sense10-power-condition": 2,
+        "mode-sense10-read-error-recovery": 2,
+        "read-capacity10": 2,
+        "read-disc-information": 2,
+        "read-dvd-structure-format0": 4,
+        "read-dvd-structure-format1": 2,
+        "read-dvd-structure-format2": 2,
+        "read-dvd-structure-formatff": 2,
+        "read-format-capacities": 2,
+        "read-toc-format-0": 4,
+        "read-toc-format-1": 2,
+        "read-toc-format-2": 2,
+        "read-toc-format-4": 2,
+        "read-track-information-lba0": 2,
+        "request-sense": 2,
+        "test-unit-ready": 2
+      },
+      "value": 40
+    },
+    {
+      "addr": 35401,
+      "branch": "jz",
+      "count": 94,
+      "kind": "xrl_a_imm",
+      "offsets": {
+        "25536": 94
+      },
+      "role": "opcode/selector candidate",
+      "samples": [
+        {
+          "capture": "normal-work-window-capture-only-20260501/00-capture-only",
+          "hex": "6404604720470578b5e66008908a49e064036037908a23e0ff1313543f30e008908a49e07002802390892ce0ffc41354",
+          "offset": 25566
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/01-capture-only",
+          "hex": "6404604720470578b5e66008908a49e064036037908a23e0ff1313543f30e008908a49e07002802390892ce0ffc41354",
+          "offset": 25566
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/02-capture-only",
+          "hex": "6404604720470578b5e66008908a49e064036037908a23e0ff1313543f30e008908a49e07002802390892ce0ffc41354",
+          "offset": 25566
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/03-capture-only",
+          "hex": "6404604720470578b5e66008908a49e064036037908a23e0ff1313543f30e008908a49e07002802390892ce0ffc41354",
+          "offset": 25566
+        }
+      ],
+      "stimuli": {
+        "baseline-no-stimulus": 1,
+        "capture-only": 14,
+        "cycle00-get-configuration-all": 1,
+        "cycle00-get-configuration-current": 1,
+        "cycle00-get-event-status-media": 1,
+        "cycle00-inquiry-extrainq": 1,
+        "cycle00-mode-sense10-all": 1,
+        "cycle01-get-configuration-all": 1,
+        "cycle01-get-configuration-current": 1,
+        "cycle01-get-event-status-media": 1,
+        "cycle01-inquiry-extrainq": 1,
+        "cycle01-mode-sense10-all": 1,
+        "cycle02-get-configuration-all": 1,
+        "cycle02-get-configuration-current": 1,
+        "cycle02-get-event-status-media": 1,
+        "cycle02-inquiry-extrainq": 1,
+        "cycle02-mode-sense10-all": 1,
+        "cycle03-get-configuration-all": 1,
+        "cycle03-get-configuration-current": 1,
+        "cycle03-get-event-status-media": 1,
+        "cycle03-inquiry-extrainq": 1,
+        "cycle03-mode-sense10-all": 1,
+        "cycle04-get-configuration-all": 1,
+        "cycle04-get-configuration-current": 1,
+        "cycle04-get-event-status-media": 1,
+        "cycle04-inquiry-extrainq": 1,
+        "cycle04-mode-sense10-all": 1,
+        "cycle05-get-configuration-all": 1,
+        "cycle05-get-configuration-current": 1,
+        "cycle05-get-event-status-media": 1,
+        "cycle05-inquiry-extrainq": 1,
+        "cycle05-mode-sense10-all": 1,
+        "cycle06-get-configuration-all": 1,
+        "cycle06-get-configuration-current": 1,
+        "cycle06-get-event-status-media": 1,
+        "cycle06-inquiry-extrainq": 1,
+        "cycle06-mode-sense10-all": 1,
+        "cycle07-get-configuration-all": 1,
+        "cycle07-get-configuration-current": 1,
+        "cycle07-get-event-status-media": 1,
+        "cycle07-inquiry-extrainq": 1,
+        "cycle07-mode-sense10-all": 1,
+        "get-configuration-all": 1,
+        "get-configuration-current": 1,
+        "get-event-status-busy": 1,
+        "get-event-status-external": 1,
+        "get-event-status-media": 2,
+        "get-event-status-multihost": 1,
+        "get-event-status-operational": 1,
+        "get-event-status-power": 1,
+        "get-performance-type00": 1,
+        "get-performance-type03": 1,
+        "inquiry-extrainq": 1,
+        "inquiry-standard-96": 1,
+        "mechanism-status": 1,
+        "mode-sense10-all": 2,
+        "mode-sense10-caching": 1,
+        "mode-sense10-capabilities": 1,
+        "mode-sense10-cd-audio": 1,
+        "mode-sense10-cd-device": 1,
+        "mode-sense10-fault-failure": 1,
+        "mode-sense10-power-condition": 1,
+        "mode-sense10-read-error-recovery": 1,
+        "read-capacity10": 1,
+        "read-disc-information": 1,
+        "read-dvd-structure-format0": 2,
+        "read-dvd-structure-format1": 1,
+        "read-dvd-structure-format2": 1,
+        "read-dvd-structure-formatff": 1,
+        "read-format-capacities": 1,
+        "read-toc-format-0": 2,
+        "read-toc-format-1": 1,
+        "read-toc-format-2": 1,
+        "read-toc-format-4": 1,
+        "read-track-information-lba0": 1,
+        "request-sense": 1,
+        "test-unit-ready": 1
+      },
+      "value": 3
+    },
+    {
+      "addr": 35401,
+      "branch": "jz",
+      "count": 94,
+      "kind": "mov_r7_xrl_imm",
+      "offsets": {
+        "38720": 94
+      },
+      "role": "opcode/selector candidate",
+      "samples": [
+        {
+          "capture": "normal-work-window-capture-only-20260501/00-capture-only",
+          "hex": "49e0b4e707c24fd23e027ea2908a49e0ff64e36005ef64e1702c908adfe0540f64037003027f07c24fd23e908a1a7401",
+          "offset": 38733
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/01-capture-only",
+          "hex": "49e0b4e707c24fd23e027ea2908a49e0ff64e36005ef64e1702c908adfe0540f64037003027f07c24fd23e908a1a7401",
+          "offset": 38733
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/02-capture-only",
+          "hex": "49e0b4e707c24fd23e027ea2908a49e0ff64e36005ef64e1702c908adfe0540f64037003027f07c24fd23e908a1a7401",
+          "offset": 38733
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/03-capture-only",
+          "hex": "49e0b4e707c24fd23e027ea2908a49e0ff64e36005ef64e1702c908adfe0540f64037003027f07c24fd23e908a1a7401",
+          "offset": 38733
+        }
+      ],
+      "stimuli": {
+        "baseline-no-stimulus": 1,
+        "capture-only": 14,
+        "cycle00-get-configuration-all": 1,
+        "cycle00-get-configuration-current": 1,
+        "cycle00-get-event-status-media": 1,
+        "cycle00-inquiry-extrainq": 1,
+        "cycle00-mode-sense10-all": 1,
+        "cycle01-get-configuration-all": 1,
+        "cycle01-get-configuration-current": 1,
+        "cycle01-get-event-status-media": 1,
+        "cycle01-inquiry-extrainq": 1,
+        "cycle01-mode-sense10-all": 1,
+        "cycle02-get-configuration-all": 1,
+        "cycle02-get-configuration-current": 1,
+        "cycle02-get-event-status-media": 1,
+        "cycle02-inquiry-extrainq": 1,
+        "cycle02-mode-sense10-all": 1,
+        "cycle03-get-configuration-all": 1,
+        "cycle03-get-configuration-current": 1,
+        "cycle03-get-event-status-media": 1,
+        "cycle03-inquiry-extrainq": 1,
+        "cycle03-mode-sense10-all": 1,
+        "cycle04-get-configuration-all": 1,
+        "cycle04-get-configuration-current": 1,
+        "cycle04-get-event-status-media": 1,
+        "cycle04-inquiry-extrainq": 1,
+        "cycle04-mode-sense10-all": 1,
+        "cycle05-get-configuration-all": 1,
+        "cycle05-get-configuration-current": 1,
+        "cycle05-get-event-status-media": 1,
+        "cycle05-inquiry-extrainq": 1,
+        "cycle05-mode-sense10-all": 1,
+        "cycle06-get-configuration-all": 1,
+        "cycle06-get-configuration-current": 1,
+        "cycle06-get-event-status-media": 1,
+        "cycle06-inquiry-extrainq": 1,
+        "cycle06-mode-sense10-all": 1,
+        "cycle07-get-configuration-all": 1,
+        "cycle07-get-configuration-current": 1,
+        "cycle07-get-event-status-media": 1,
+        "cycle07-inquiry-extrainq": 1,
+        "cycle07-mode-sense10-all": 1,
+        "get-configuration-all": 1,
+        "get-configuration-current": 1,
+        "get-event-status-busy": 1,
+        "get-event-status-external": 1,
+        "get-event-status-media": 2,
+        "get-event-status-multihost": 1,
+        "get-event-status-operational": 1,
+        "get-event-status-power": 1,
+        "get-performance-type00": 1,
+        "get-performance-type03": 1,
+        "inquiry-extrainq": 1,
+        "inquiry-standard-96": 1,
+        "mechanism-status": 1,
+        "mode-sense10-all": 2,
+        "mode-sense10-caching": 1,
+        "mode-sense10-capabilities": 1,
+        "mode-sense10-cd-audio": 1,
+        "mode-sense10-cd-device": 1,
+        "mode-sense10-fault-failure": 1,
+        "mode-sense10-power-condition": 1,
+        "mode-sense10-read-error-recovery": 1,
+        "read-capacity10": 1,
+        "read-disc-information": 1,
+        "read-dvd-structure-format0": 2,
+        "read-dvd-structure-format1": 1,
+        "read-dvd-structure-format2": 1,
+        "read-dvd-structure-formatff": 1,
+        "read-format-capacities": 1,
+        "read-toc-format-0": 2,
+        "read-toc-format-1": 1,
+        "read-toc-format-2": 1,
+        "read-toc-format-4": 1,
+        "read-track-information-lba0": 1,
+        "request-sense": 1,
+        "test-unit-ready": 1
+      },
+      "value": 227
+    },
+    {
+      "addr": 35401,
+      "branch": "cjne",
+      "count": 94,
+      "kind": "mov_r7_cjne_imm",
+      "offsets": {
+        "34816": 94
+      },
+      "role": "opcode/selector candidate",
+      "samples": [
+        {
+          "capture": "normal-work-window-capture-only-20260501/00-capture-only",
+          "hex": "e08f25027d5a127150027d5a908a49e0ffb4e605c23e027ea5204115efb4f311908a4ae0b40e0aa3e0b40205c23e027e",
+          "offset": 34815
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/01-capture-only",
+          "hex": "e08f25027d5a127150027d5a908a49e0ffb4e605c23e027ea5204115efb4f311908a4ae0b40e0aa3e0b40205c23e027e",
+          "offset": 34815
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/02-capture-only",
+          "hex": "f38f25027d5a127150027d5a908a49e0ffb4e605c23e027ea5204115efb4f311908a4ae0b40e0aa3e0b40205c23e027e",
+          "offset": 34815
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/03-capture-only",
+          "hex": "f38f25027d5a127150027d5a908a49e0ffb4e605c23e027ea5204115efb4f311908a4ae0b40e0aa3e0b40205c23e027e",
+          "offset": 34815
+        }
+      ],
+      "stimuli": {
+        "baseline-no-stimulus": 1,
+        "capture-only": 14,
+        "cycle00-get-configuration-all": 1,
+        "cycle00-get-configuration-current": 1,
+        "cycle00-get-event-status-media": 1,
+        "cycle00-inquiry-extrainq": 1,
+        "cycle00-mode-sense10-all": 1,
+        "cycle01-get-configuration-all": 1,
+        "cycle01-get-configuration-current": 1,
+        "cycle01-get-event-status-media": 1,
+        "cycle01-inquiry-extrainq": 1,
+        "cycle01-mode-sense10-all": 1,
+        "cycle02-get-configuration-all": 1,
+        "cycle02-get-configuration-current": 1,
+        "cycle02-get-event-status-media": 1,
+        "cycle02-inquiry-extrainq": 1,
+        "cycle02-mode-sense10-all": 1,
+        "cycle03-get-configuration-all": 1,
+        "cycle03-get-configuration-current": 1,
+        "cycle03-get-event-status-media": 1,
+        "cycle03-inquiry-extrainq": 1,
+        "cycle03-mode-sense10-all": 1,
+        "cycle04-get-configuration-all": 1,
+        "cycle04-get-configuration-current": 1,
+        "cycle04-get-event-status-media": 1,
+        "cycle04-inquiry-extrainq": 1,
+        "cycle04-mode-sense10-all": 1,
+        "cycle05-get-configuration-all": 1,
+        "cycle05-get-configuration-current": 1,
+        "cycle05-get-event-status-media": 1,
+        "cycle05-inquiry-extrainq": 1,
+        "cycle05-mode-sense10-all": 1,
+        "cycle06-get-configuration-all": 1,
+        "cycle06-get-configuration-current": 1,
+        "cycle06-get-event-status-media": 1,
+        "cycle06-inquiry-extrainq": 1,
+        "cycle06-mode-sense10-all": 1,
+        "cycle07-get-configuration-all": 1,
+        "cycle07-get-configuration-current": 1,
+        "cycle07-get-event-status-media": 1,
+        "cycle07-inquiry-extrainq": 1,
+        "cycle07-mode-sense10-all": 1,
+        "get-configuration-all": 1,
+        "get-configuration-current": 1,
+        "get-event-status-busy": 1,
+        "get-event-status-external": 1,
+        "get-event-status-media": 2,
+        "get-event-status-multihost": 1,
+        "get-event-status-operational": 1,
+        "get-event-status-power": 1,
+        "get-performance-type00": 1,
+        "get-performance-type03": 1,
+        "inquiry-extrainq": 1,
+        "inquiry-standard-96": 1,
+        "mechanism-status": 1,
+        "mode-sense10-all": 2,
+        "mode-sense10-caching": 1,
+        "mode-sense10-capabilities": 1,
+        "mode-sense10-cd-audio": 1,
+        "mode-sense10-cd-device": 1,
+        "mode-sense10-fault-failure": 1,
+        "mode-sense10-power-condition": 1,
+        "mode-sense10-read-error-recovery": 1,
+        "read-capacity10": 1,
+        "read-disc-information": 1,
+        "read-dvd-structure-format0": 2,
+        "read-dvd-structure-format1": 1,
+        "read-dvd-structure-format2": 1,
+        "read-dvd-structure-formatff": 1,
+        "read-format-capacities": 1,
+        "read-toc-format-0": 2,
+        "read-toc-format-1": 1,
+        "read-toc-format-2": 1,
+        "read-toc-format-4": 1,
+        "read-track-information-lba0": 1,
+        "request-sense": 1,
+        "test-unit-ready": 1
+      },
+      "value": 230
+    },
+    {
+      "addr": 35401,
+      "branch": "cjne",
+      "count": 94,
+      "kind": "cjne_a_imm",
+      "offsets": {
+        "38720": 94
+      },
+      "role": "opcode/selector candidate",
+      "samples": [
+        {
+          "capture": "normal-work-window-capture-only-20260501/00-capture-only",
+          "hex": "947ea5027ea2204f03027ea5908a49e0b4e707c24fd23e027ea2908a49e0ff64e36005ef64e1702c908adfe0540f6403",
+          "offset": 38719
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/01-capture-only",
+          "hex": "947ea5027ea2204f03027ea5908a49e0b4e707c24fd23e027ea2908a49e0ff64e36005ef64e1702c908adfe0540f6403",
+          "offset": 38719
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/02-capture-only",
+          "hex": "947ea5027ea2204f03027ea5908a49e0b4e707c24fd23e027ea2908a49e0ff64e36005ef64e1702c908adfe0540f6403",
+          "offset": 38719
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/03-capture-only",
+          "hex": "947ea5027ea2204f03027ea5908a49e0b4e707c24fd23e027ea2908a49e0ff64e36005ef64e1702c908adfe0540f6403",
+          "offset": 38719
+        }
+      ],
+      "stimuli": {
+        "baseline-no-stimulus": 1,
+        "capture-only": 14,
+        "cycle00-get-configuration-all": 1,
+        "cycle00-get-configuration-current": 1,
+        "cycle00-get-event-status-media": 1,
+        "cycle00-inquiry-extrainq": 1,
+        "cycle00-mode-sense10-all": 1,
+        "cycle01-get-configuration-all": 1,
+        "cycle01-get-configuration-current": 1,
+        "cycle01-get-event-status-media": 1,
+        "cycle01-inquiry-extrainq": 1,
+        "cycle01-mode-sense10-all": 1,
+        "cycle02-get-configuration-all": 1,
+        "cycle02-get-configuration-current": 1,
+        "cycle02-get-event-status-media": 1,
+        "cycle02-inquiry-extrainq": 1,
+        "cycle02-mode-sense10-all": 1,
+        "cycle03-get-configuration-all": 1,
+        "cycle03-get-configuration-current": 1,
+        "cycle03-get-event-status-media": 1,
+        "cycle03-inquiry-extrainq": 1,
+        "cycle03-mode-sense10-all": 1,
+        "cycle04-get-configuration-all": 1,
+        "cycle04-get-configuration-current": 1,
+        "cycle04-get-event-status-media": 1,
+        "cycle04-inquiry-extrainq": 1,
+        "cycle04-mode-sense10-all": 1,
+        "cycle05-get-configuration-all": 1,
+        "cycle05-get-configuration-current": 1,
+        "cycle05-get-event-status-media": 1,
+        "cycle05-inquiry-extrainq": 1,
+        "cycle05-mode-sense10-all": 1,
+        "cycle06-get-configuration-all": 1,
+        "cycle06-get-configuration-current": 1,
+        "cycle06-get-event-status-media": 1,
+        "cycle06-inquiry-extrainq": 1,
+        "cycle06-mode-sense10-all": 1,
+        "cycle07-get-configuration-all": 1,
+        "cycle07-get-configuration-current": 1,
+        "cycle07-get-event-status-media": 1,
+        "cycle07-inquiry-extrainq": 1,
+        "cycle07-mode-sense10-all": 1,
+        "get-configuration-all": 1,
+        "get-configuration-current": 1,
+        "get-event-status-busy": 1,
+        "get-event-status-external": 1,
+        "get-event-status-media": 2,
+        "get-event-status-multihost": 1,
+        "get-event-status-operational": 1,
+        "get-event-status-power": 1,
+        "get-performance-type00": 1,
+        "get-performance-type03": 1,
+        "inquiry-extrainq": 1,
+        "inquiry-standard-96": 1,
+        "mechanism-status": 1,
+        "mode-sense10-all": 2,
+        "mode-sense10-caching": 1,
+        "mode-sense10-capabilities": 1,
+        "mode-sense10-cd-audio": 1,
+        "mode-sense10-cd-device": 1,
+        "mode-sense10-fault-failure": 1,
+        "mode-sense10-power-condition": 1,
+        "mode-sense10-read-error-recovery": 1,
+        "read-capacity10": 1,
+        "read-disc-information": 1,
+        "read-dvd-structure-format0": 2,
+        "read-dvd-structure-format1": 1,
+        "read-dvd-structure-format2": 1,
+        "read-dvd-structure-formatff": 1,
+        "read-format-capacities": 1,
+        "read-toc-format-0": 2,
+        "read-toc-format-1": 1,
+        "read-toc-format-2": 1,
+        "read-toc-format-4": 1,
+        "read-track-information-lba0": 1,
+        "request-sense": 1,
+        "test-unit-ready": 1
+      },
+      "value": 231
+    },
+    {
+      "addr": 35401,
+      "branch": "cjne",
+      "count": 58,
+      "kind": "cjne_a_imm",
+      "offsets": {
+        "40448": 27,
+        "40512": 21,
+        "40576": 10
+      },
+      "role": "opcode/selector candidate",
+      "samples": [
+        {
+          "capture": "normal-work-window-capture-only-20260501/00-capture-only",
+          "hex": "908a37e04408f09047cbe4f0908a49e0b413d2787df07faf123d89a278e433fd7faa123d89302e11302c0e90896be0c3",
+          "offset": 40495
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/01-capture-only",
+          "hex": "908a37e04408f09047cbe4f0908a49e0b413d2787df07faf123d89a278e433fd7faa123d89302e11302c0e90896be0c3",
+          "offset": 40495
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/02-capture-only",
+          "hex": "908a37e04408f09047cbe4f0908a49e0b413d2787df07faf123d89a278e433fd7faa123d89302e11302c0e90896be0c3",
+          "offset": 40495
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/03-capture-only",
+          "hex": "908a37e04408f09047cbe4f0908a49e0b413d2787df07faf123d89a278e433fd7faa123d89302e11302c0e90896be0c3",
+          "offset": 40495
+        }
+      ],
+      "stimuli": {
+        "capture-only": 14,
+        "cycle01-get-configuration-all": 1,
+        "cycle01-get-configuration-current": 1,
+        "cycle01-get-event-status-media": 1,
+        "cycle01-mode-sense10-all": 1,
+        "cycle02-inquiry-extrainq": 1,
+        "cycle03-get-configuration-all": 1,
+        "cycle03-get-configuration-current": 1,
+        "cycle03-get-event-status-media": 1,
+        "cycle03-mode-sense10-all": 1,
+        "cycle04-get-configuration-all": 1,
+        "cycle04-get-configuration-current": 1,
+        "cycle04-get-event-status-media": 1,
+        "cycle04-inquiry-extrainq": 1,
+        "cycle04-mode-sense10-all": 1,
+        "cycle05-inquiry-extrainq": 1,
+        "cycle06-get-configuration-all": 1,
+        "cycle06-get-configuration-current": 1,
+        "cycle06-get-event-status-media": 1,
+        "cycle06-mode-sense10-all": 1,
+        "cycle07-get-configuration-all": 1,
+        "cycle07-get-configuration-current": 1,
+        "cycle07-get-event-status-media": 1,
+        "cycle07-mode-sense10-all": 1,
+        "get-configuration-all": 1,
+        "get-configuration-current": 1,
+        "get-event-status-media": 2,
+        "mechanism-status": 1,
+        "mode-sense10-all": 2,
+        "mode-sense10-caching": 1,
+        "mode-sense10-cd-audio": 1,
+        "mode-sense10-cd-device": 1,
+        "mode-sense10-fault-failure": 1,
+        "mode-sense10-power-condition": 1,
+        "mode-sense10-read-error-recovery": 1,
+        "read-capacity10": 1,
+        "read-disc-information": 1,
+        "read-dvd-structure-format0": 2,
+        "read-format-capacities": 1,
+        "read-toc-format-0": 2,
+        "read-track-information-lba0": 1
+      },
+      "value": 19
+    },
+    {
+      "addr": 35401,
+      "branch": "cjne",
+      "count": 51,
+      "kind": "cjne_a_imm",
+      "offsets": {
+        "32320": 47,
+        "32448": 4
+      },
+      "role": "opcode/selector candidate",
+      "samples": [
+        {
+          "capture": "normal-work-window-capture-only-20260501/00-capture-only",
+          "hex": "a3f0303e33c24578b5e67029908a49e0b42a0c908a50e070108571e5a8f075a890203e06204f03303f07908a29e030e0",
+          "offset": 32359
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/01-capture-only",
+          "hex": "a3f0303e33c24578b5e67029908a49e0b42a0c908a50e070108571e5a8f075a890203e06204f03303f07908a29e030e0",
+          "offset": 32359
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/02-capture-only",
+          "hex": "a3f0303e33c24578b5e67029908a49e0b42a0c908a50e070108571e5a8f075a890203e06204f03303f07908a29e030e0",
+          "offset": 32359
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/03-capture-only",
+          "hex": "a3f0303e33c24578b5e67029908a49e0b42a0c908a50e070108571e5a8f075a890203e06204f03303f07908a29e030e0",
+          "offset": 32359
+        }
+      ],
+      "stimuli": {
+        "baseline-no-stimulus": 1,
+        "capture-only": 14,
+        "cycle00-inquiry-extrainq": 1,
+        "cycle00-mode-sense10-all": 1,
+        "get-event-status-busy": 1,
+        "get-event-status-external": 1,
+        "get-event-status-media": 1,
+        "get-event-status-multihost": 1,
+        "get-event-status-operational": 1,
+        "get-event-status-power": 1,
+        "get-performance-type00": 1,
+        "get-performance-type03": 1,
+        "inquiry-standard-96": 1,
+        "mechanism-status": 1,
+        "mode-sense10-all": 1,
+        "mode-sense10-caching": 1,
+        "mode-sense10-capabilities": 1,
+        "mode-sense10-cd-audio": 1,
+        "mode-sense10-cd-device": 1,
+        "mode-sense10-fault-failure": 1,
+        "mode-sense10-power-condition": 1,
+        "mode-sense10-read-error-recovery": 1,
+        "read-capacity10": 1,
+        "read-disc-information": 1,
+        "read-dvd-structure-format0": 2,
+        "read-dvd-structure-format1": 1,
+        "read-dvd-structure-format2": 1,
+        "read-dvd-structure-formatff": 1,
+        "read-format-capacities": 1,
+        "read-toc-format-0": 2,
+        "read-toc-format-1": 1,
+        "read-toc-format-2": 1,
+        "read-toc-format-4": 1,
+        "read-track-information-lba0": 1,
+        "request-sense": 1,
+        "test-unit-ready": 1
+      },
+      "value": 42
+    },
+    {
+      "addr": 35401,
+      "branch": "cjne",
+      "count": 49,
+      "kind": "cjne_a_imm",
+      "offsets": {
+        "32576": 29,
+        "32640": 10,
+        "32704": 10
+      },
+      "role": "opcode/selector candidate",
+      "samples": [
+        {
+          "capture": "normal-work-window-capture-only-20260501/00-capture-only",
+          "hex": "0278ab760478b07608020453908a49e0b45506204103304703121497203f03304f09203e067e097fc480047ec3f078a9",
+          "offset": 32595
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/01-capture-only",
+          "hex": "0278ab760478b07608020453908a49e0b45506204103304703121497203f03304f09203e067e097fc480047ec3f078a9",
+          "offset": 32595
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/02-capture-only",
+          "hex": "0278ab760478b07608020453908a49e0b45506204103304703121497203f03304f09203e067e097fc480047ec3f078a9",
+          "offset": 32595
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/03-capture-only",
+          "hex": "0278ab760478b07608020453908a49e0b45506204103304703121497203f03304f09203e067e097fc480047ec3f078a9",
+          "offset": 32595
+        }
+      ],
+      "stimuli": {
+        "baseline-no-stimulus": 1,
+        "capture-only": 14,
+        "cycle00-inquiry-extrainq": 1,
+        "get-event-status-busy": 1,
+        "get-event-status-external": 1,
+        "get-event-status-media": 1,
+        "get-event-status-multihost": 1,
+        "get-event-status-operational": 1,
+        "get-event-status-power": 1,
+        "get-performance-type00": 1,
+        "get-performance-type03": 1,
+        "inquiry-standard-96": 1,
+        "mechanism-status": 1,
+        "mode-sense10-all": 1,
+        "mode-sense10-caching": 1,
+        "mode-sense10-capabilities": 1,
+        "mode-sense10-cd-audio": 1,
+        "mode-sense10-cd-device": 1,
+        "mode-sense10-fault-failure": 1,
+        "mode-sense10-power-condition": 1,
+        "mode-sense10-read-error-recovery": 1,
+        "read-capacity10": 1,
+        "read-disc-information": 1,
+        "read-dvd-structure-format0": 1,
+        "read-dvd-structure-format1": 1,
+        "read-dvd-structure-format2": 1,
+        "read-dvd-structure-formatff": 1,
+        "read-format-capacities": 1,
+        "read-toc-format-0": 2,
+        "read-toc-format-1": 1,
+        "read-toc-format-2": 1,
+        "read-toc-format-4": 1,
+        "read-track-information-lba0": 1,
+        "request-sense": 1,
+        "test-unit-ready": 1
+      },
+      "value": 85
+    },
+    {
+      "addr": 35401,
+      "branch": "cjne",
+      "count": 46,
+      "kind": "cjne_a_imm",
+      "offsets": {
+        "37248": 46
+      },
+      "role": "opcode/selector candidate",
+      "samples": [
+        {
+          "capture": "normal-work-window-capture-only-20260501/00-capture-only",
+          "hex": "8a53e0543fffbf0803026f62908a49e0b4a30d908a53e0543fffbf0603026f73908937e030e70c78b5760278ab763ae4",
+          "offset": 37258
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/01-capture-only",
+          "hex": "8a53e0543fffbf0803026f62908a49e0b4a30d908a53e0543fffbf0603026f73908937e030e70c78b5760278ab763ae4",
+          "offset": 37258
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/02-capture-only",
+          "hex": "8a53e0543fffbf0803026f62908a49e0b4a30d908a53e0543fffbf0603026f73908937e030e70c78b5760278ab763ae4",
+          "offset": 37258
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/03-capture-only",
+          "hex": "8a53e0543fffbf0803026f62908a49e0b4a30d908a53e0543fffbf0603026f73908937e030e70c78b5760278ab763ae4",
+          "offset": 37258
+        }
+      ],
+      "stimuli": {
+        "capture-only": 14,
+        "get-event-status-busy": 1,
+        "get-event-status-external": 1,
+        "get-event-status-multihost": 1,
+        "get-event-status-operational": 1,
+        "get-event-status-power": 1,
+        "get-performance-type00": 1,
+        "get-performance-type03": 1,
+        "inquiry-standard-96": 1,
+        "mechanism-status": 1,
+        "mode-sense10-caching": 1,
+        "mode-sense10-capabilities": 1,
+        "mode-sense10-cd-audio": 1,
+        "mode-sense10-cd-device": 1,
+        "mode-sense10-fault-failure": 1,
+        "mode-sense10-power-condition": 1,
+        "mode-sense10-read-error-recovery": 1,
+        "read-capacity10": 1,
+        "read-disc-information": 1,
+        "read-dvd-structure-format0": 2,
+        "read-dvd-structure-format1": 1,
+        "read-dvd-structure-format2": 1,
+        "read-dvd-structure-formatff": 1,
+        "read-format-capacities": 1,
+        "read-toc-format-0": 2,
+        "read-toc-format-1": 1,
+        "read-toc-format-2": 1,
+        "read-toc-format-4": 1,
+        "read-track-information-lba0": 1,
+        "request-sense": 1,
+        "test-unit-ready": 1
+      },
+      "value": 163
+    },
+    {
+      "addr": 35401,
+      "branch": "cjne",
+      "count": 46,
+      "kind": "cjne_a_imm",
+      "offsets": {
+        "37248": 46
+      },
+      "role": "opcode/selector candidate",
+      "samples": [
+        {
+          "capture": "normal-work-window-capture-only-20260501/00-capture-only",
+          "hex": "7029a87c08e654c0fe600675908a49e0b4a40d908a53e0543fffbf0803026f62908a49e0b4a30d908a53e0543fffbf06",
+          "offset": 37238
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/01-capture-only",
+          "hex": "7029a87c08e654c0fe600675908a49e0b4a40d908a53e0543fffbf0803026f62908a49e0b4a30d908a53e0543fffbf06",
+          "offset": 37238
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/02-capture-only",
+          "hex": "7029a87c08e654c0fe600675908a49e0b4a40d908a53e0543fffbf0803026f62908a49e0b4a30d908a53e0543fffbf06",
+          "offset": 37238
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/03-capture-only",
+          "hex": "7029a87c08e654c0fe600675908a49e0b4a40d908a53e0543fffbf0803026f62908a49e0b4a30d908a53e0543fffbf06",
+          "offset": 37238
+        }
+      ],
+      "stimuli": {
+        "capture-only": 14,
+        "get-event-status-busy": 1,
+        "get-event-status-external": 1,
+        "get-event-status-multihost": 1,
+        "get-event-status-operational": 1,
+        "get-event-status-power": 1,
+        "get-performance-type00": 1,
+        "get-performance-type03": 1,
+        "inquiry-standard-96": 1,
+        "mechanism-status": 1,
+        "mode-sense10-caching": 1,
+        "mode-sense10-capabilities": 1,
+        "mode-sense10-cd-audio": 1,
+        "mode-sense10-cd-device": 1,
+        "mode-sense10-fault-failure": 1,
+        "mode-sense10-power-condition": 1,
+        "mode-sense10-read-error-recovery": 1,
+        "read-capacity10": 1,
+        "read-disc-information": 1,
+        "read-dvd-structure-format0": 2,
+        "read-dvd-structure-format1": 1,
+        "read-dvd-structure-format2": 1,
+        "read-dvd-structure-formatff": 1,
+        "read-format-capacities": 1,
+        "read-toc-format-0": 2,
+        "read-toc-format-1": 1,
+        "read-toc-format-2": 1,
+        "read-toc-format-4": 1,
+        "read-track-information-lba0": 1,
+        "request-sense": 1,
+        "test-unit-ready": 1
+      },
+      "value": 164
+    },
+    {
+      "addr": 35401,
+      "branch": "jz",
+      "count": 34,
+      "kind": "xrl_a_imm",
+      "offsets": {
+        "25152": 19,
+        "25216": 15
+      },
+      "role": "opcode/selector candidate",
+      "samples": [
+        {
+          "capture": "normal-work-window-stimuli-full-20260501/01-test-unit-ready",
+          "hex": "10af01c3c0d0203e0302b319908a49e0642a6004e0b4aa0de4908a18f0a3f0c252c245c24f103f0302b209908a908a4d",
+          "offset": 25171
+        },
+        {
+          "capture": "normal-work-window-stimuli-full-20260501/02-request-sense",
+          "hex": "10af01c3c0d0203e0302b319908a49e0642a6004e0b4aa0de4908a18f0a3f0c252c245c24f103f0302b209908a908a4d",
+          "offset": 25171
+        },
+        {
+          "capture": "normal-work-window-stimuli-full-20260501/03-inquiry-standard-96",
+          "hex": "10af01c3c0d0203e0302b319908a49e0642a6004e0b4aa0de4908a18f0a3f0c252c245c24f103f0302b209908a908a4d",
+          "offset": 25171
+        },
+        {
+          "capture": "normal-work-window-stimuli-full-20260501/04-inquiry-extrainq",
+          "hex": "10af01c3c0d0203e0302b319908a49e0642a6004e0b4aa0de4908a18f0a3f0c252c245c24f103f0302b209908a908a4d",
+          "offset": 25171
+        }
+      ],
+      "stimuli": {
+        "get-event-status-busy": 1,
+        "get-event-status-external": 1,
+        "get-event-status-multihost": 1,
+        "get-event-status-operational": 1,
+        "get-event-status-power": 1,
+        "get-performance-type00": 1,
+        "get-performance-type03": 1,
+        "inquiry-extrainq": 1,
+        "inquiry-standard-96": 1,
+        "mechanism-status": 1,
+        "mode-sense10-all": 1,
+        "mode-sense10-caching": 1,
+        "mode-sense10-capabilities": 1,
+        "mode-sense10-cd-audio": 1,
+        "mode-sense10-cd-device": 1,
+        "mode-sense10-fault-failure": 1,
+        "mode-sense10-power-condition": 1,
+        "mode-sense10-read-error-recovery": 1,
+        "read-capacity10": 1,
+        "read-disc-information": 1,
+        "read-dvd-structure-format0": 2,
+        "read-dvd-structure-format1": 1,
+        "read-dvd-structure-format2": 1,
+        "read-dvd-structure-formatff": 1,
+        "read-format-capacities": 1,
+        "read-toc-format-0": 2,
+        "read-toc-format-1": 1,
+        "read-toc-format-2": 1,
+        "read-toc-format-4": 1,
+        "read-track-information-lba0": 1,
+        "request-sense": 1,
+        "test-unit-ready": 1
+      },
+      "value": 42
+    },
+    {
+      "addr": 35401,
+      "branch": "jnz",
+      "count": 18,
+      "kind": "xrl_a_imm",
+      "offsets": {
+        "35584": 5,
+        "35648": 9,
+        "35712": 2,
+        "35776": 2
+      },
+      "role": "opcode/selector candidate",
+      "samples": [
+        {
+          "capture": "normal-work-window-stimuli-full-20260501/01-test-unit-ready",
+          "hex": "40e0ffc4540f30e03212b092908a49e0641b7027908a4de0540fffbf021d20431a908a2de0ffc4131354032002f0a87c",
+          "offset": 35668
+        },
+        {
+          "capture": "normal-work-window-stimuli-full-20260501/02-request-sense",
+          "hex": "40e0ffc4540f30e03212b092908a49e0641b7027908a4de0540fffbf021d20431a908a2de0ffc4131354032002f0a87c",
+          "offset": 35668
+        },
+        {
+          "capture": "normal-work-window-stimuli-full-20260501/03-inquiry-standard-96",
+          "hex": "40e0ffc4540f30e03212b092908a49e0641b7027908a4de0540fffbf021d20431a908a2de0ffc4131354032002f0a87c",
+          "offset": 35668
+        },
+        {
+          "capture": "normal-work-window-stimuli-full-20260501/04-inquiry-extrainq",
+          "hex": "40e0ffc4540f30e03212b092908a49e0641b7027908a4de0540fffbf021d20431a908a2de0ffc4131354032002f0a87c",
+          "offset": 35668
+        }
+      ],
+      "stimuli": {
+        "get-performance-type00": 1,
+        "inquiry-extrainq": 1,
+        "inquiry-standard-96": 1,
+        "mode-sense10-fault-failure": 1,
+        "read-capacity10": 1,
+        "read-disc-information": 1,
+        "read-dvd-structure-format0": 2,
+        "read-dvd-structure-format1": 1,
+        "read-dvd-structure-format2": 1,
+        "read-toc-format-0": 2,
+        "read-toc-format-1": 1,
+        "read-toc-format-2": 1,
+        "read-toc-format-4": 1,
+        "read-track-information-lba0": 1,
+        "request-sense": 1,
+        "test-unit-ready": 1
+      },
+      "value": 27
+    },
+    {
+      "addr": 35401,
+      "branch": "cjne",
+      "count": 15,
+      "kind": "cjne_a_imm",
+      "offsets": {
+        "40576": 15
+      },
+      "role": "opcode/selector candidate",
+      "samples": [
+        {
+          "capture": "normal-work-window-stimuli-focused-20260501/00-cycle00-inquiry-extrainq",
+          "hex": "908a37e04408f09047cbe4f0908a49e0b4b406067c077d32801fe538b403067c087dc28014e538b404067c097d8a8009",
+          "offset": 40623
+        },
+        {
+          "capture": "normal-work-window-stimuli-expanded-20260501/12-mode-sense10-capabilities",
+          "hex": "908a37e04408f09047cbe4f0908a49e0b4b406067c077d32801fe538b403067c087dc28014e538b404067c097d8a8009",
+          "offset": 40623
+        },
+        {
+          "capture": "normal-work-window-stimuli-expanded-20260501/13-get-event-status-operational",
+          "hex": "908a37e04408f09047cbe4f0908a49e0b4b406067c077d32801fe538b403067c087dc28014e538b404067c097d8a8009",
+          "offset": 40623
+        },
+        {
+          "capture": "normal-work-window-stimuli-expanded-20260501/14-get-event-status-power",
+          "hex": "908a37e04408f09047cbe4f0908a49e0b4b406067c077d32801fe538b403067c087dc28014e538b404067c097d8a8009",
+          "offset": 40623
+        }
+      ],
+      "stimuli": {
+        "cycle00-inquiry-extrainq": 1,
+        "get-event-status-busy": 1,
+        "get-event-status-external": 1,
+        "get-event-status-multihost": 1,
+        "get-event-status-operational": 1,
+        "get-event-status-power": 1,
+        "get-performance-type00": 1,
+        "get-performance-type03": 1,
+        "mode-sense10-capabilities": 1,
+        "read-dvd-structure-format1": 1,
+        "read-dvd-structure-format2": 1,
+        "read-dvd-structure-formatff": 1,
+        "read-toc-format-1": 1,
+        "read-toc-format-2": 1,
+        "read-toc-format-4": 1
+      },
+      "value": 180
+    },
+    {
+      "addr": 35401,
+      "branch": "cjne",
+      "count": 12,
+      "kind": "cjne_a_imm",
+      "offsets": {
+        "40640": 12
+      },
+      "role": "opcode/selector candidate",
+      "samples": [
+        {
+          "capture": "normal-work-window-stimuli-focused-20260501/01-cycle00-mode-sense10-all",
+          "hex": "908a37e04408f09047cbe4f0908a49e0b46bf0302e11302c0e908ac7e0c394ff506de004f08068302e65202c627e027f",
+          "offset": 40687
+        },
+        {
+          "capture": "normal-work-window-stimuli-focused-20260501/02-cycle00-get-configuration-current",
+          "hex": "908a37e04408f09047cbe4f0908a49e0b46bf0302e11302c0e908ac7e0c394ff506de004f08068302e65202c627e027f",
+          "offset": 40687
+        },
+        {
+          "capture": "normal-work-window-stimuli-focused-20260501/03-cycle00-get-configuration-all",
+          "hex": "908a37e04408f09047cbe4f0908a49e0b46bf0302e11302c0e908ac7e0c394ff506de004f08068302e65202c627e027f",
+          "offset": 40687
+        },
+        {
+          "capture": "normal-work-window-stimuli-focused-20260501/04-cycle00-get-event-status-media",
+          "hex": "908a37e04408f09047cbe4f0908a49e0b46bf0302e11302c0e908ac7e0c394ff506de004f08068302e65202c627e027f",
+          "offset": 40687
+        }
+      ],
+      "stimuli": {
+        "cycle00-get-configuration-all": 1,
+        "cycle00-get-configuration-current": 1,
+        "cycle00-get-event-status-media": 1,
+        "cycle00-mode-sense10-all": 1,
+        "cycle02-get-configuration-all": 1,
+        "cycle02-get-configuration-current": 1,
+        "cycle02-get-event-status-media": 1,
+        "cycle02-mode-sense10-all": 1,
+        "cycle05-get-configuration-all": 1,
+        "cycle05-get-configuration-current": 1,
+        "cycle05-get-event-status-media": 1,
+        "cycle05-mode-sense10-all": 1
+      },
+      "value": 107
+    },
+    {
+      "addr": 35401,
+      "branch": "cjne",
+      "count": 4,
+      "kind": "cjne_a_imm",
+      "offsets": {
+        "40448": 3,
+        "40512": 1
+      },
+      "role": "opcode/selector candidate",
+      "samples": [
+        {
+          "capture": "normal-work-window-stimuli-full-20260501/00-baseline-no-stimulus",
+          "hex": "908a37e04408f09047cbe4f0908a49e0b478aae69047d6f09047afe4f09047b1f07406f0ee20e10302901d9089cfe0ff",
+          "offset": 40495
+        },
+        {
+          "capture": "normal-work-window-stimuli-full-20260501/01-test-unit-ready",
+          "hex": "908a37e04408f09047cbe4f0908a49e0b478aae69047d6f09047afe4f09047b1f07406f0ee20e10302901d9089cfe0ff",
+          "offset": 40495
+        },
+        {
+          "capture": "normal-work-window-stimuli-full-20260501/02-request-sense",
+          "hex": "908a37e04408f09047cbe4f0908a49e0b478aae69047d6f09047afe4f09047b1f07406f0ee20e10302901d9089cfe0ff",
+          "offset": 40495
+        },
+        {
+          "capture": "normal-work-window-stimuli-focused-20260501/35-cycle07-inquiry-extrainq",
+          "hex": "908a37e04408f09047cbe4f0908a49e0b478aae69047d6f09047afe4f09047b1f07406f0ee20e10302901d9089cfe0ff",
+          "offset": 40559
+        }
+      ],
+      "stimuli": {
+        "baseline-no-stimulus": 1,
+        "cycle07-inquiry-extrainq": 1,
+        "request-sense": 1,
+        "test-unit-ready": 1
+      },
+      "value": 120
+    },
+    {
+      "addr": 35401,
+      "branch": "cjne",
+      "count": 2,
+      "kind": "cjne_a_imm",
+      "offsets": {
+        "40640": 2
+      },
+      "role": "opcode/selector candidate",
+      "samples": [
+        {
+          "capture": "normal-work-window-stimuli-focused-20260501/05-cycle01-inquiry-extrainq",
+          "hex": "908a37e04408f09047cbe4f0908a49e0b4a10d9047ca7450f09047d0e4f0801fc23f9047c97450f0908a49e0b4030a90",
+          "offset": 40687
+        },
+        {
+          "capture": "normal-work-window-stimuli-focused-20260501/30-cycle06-inquiry-extrainq",
+          "hex": "908a37e04408f09047cbe4f0908a49e0b4a10d9047ca7450f09047d0e4f0801fc23f9047c97450f0908a49e0b4030a90",
+          "offset": 40687
+        }
+      ],
+      "stimuli": {
+        "cycle01-inquiry-extrainq": 1,
+        "cycle06-inquiry-extrainq": 1
+      },
+      "value": 161
+    },
+    {
+      "addr": 35401,
+      "branch": "cjne",
+      "count": 2,
+      "kind": "cjne_a_imm",
+      "offsets": {
+        "40448": 2
+      },
+      "role": "opcode/selector candidate",
+      "samples": [
+        {
+          "capture": "normal-work-window-stimuli-full-20260501/03-inquiry-standard-96",
+          "hex": "908a37e04408f09047cbe4f0908a49e0b4cf9a7d0b7e077f2e12cf9a7d077e077f2f12cf9a7d077e077f30d310af01c3",
+          "offset": 40495
+        },
+        {
+          "capture": "normal-work-window-stimuli-full-20260501/04-inquiry-extrainq",
+          "hex": "908a37e04408f09047cbe4f0908a49e0b4cf9a7d0b7e077f2e12cf9a7d077e077f2f12cf9a7d077e077f30d310af01c3",
+          "offset": 40495
+        }
+      ],
+      "stimuli": {
+        "inquiry-extrainq": 1,
+        "inquiry-standard-96": 1
+      },
+      "value": 207
+    },
+    {
+      "addr": 35401,
+      "branch": "cjne",
+      "count": 1,
+      "kind": "cjne_a_imm",
+      "offsets": {
+        "40640": 1
+      },
+      "role": "opcode/selector candidate",
+      "samples": [
+        {
+          "capture": "normal-work-window-stimuli-focused-20260501/15-cycle03-inquiry-extrainq",
+          "hex": "908a37e04408f09047cbe4f0908a49e0b47c157ca87cecf608edf6157ca87ceff6e57c24fcf57c2404f8e6ff12f856a8",
+          "offset": 40687
+        }
+      ],
+      "stimuli": {
+        "cycle03-inquiry-extrainq": 1
+      },
+      "value": 124
+    },
+    {
+      "addr": 35402,
+      "branch": "cjne",
+      "count": 94,
+      "kind": "cjne_a_imm",
+      "offsets": {
+        "26432": 94
+      },
+      "role": "CDB byte 1 / op-specific field",
+      "samples": [
+        {
+          "capture": "normal-work-window-capture-only-20260501/00-capture-only",
+          "hex": "85f5f09085e09047b102a4be908a4ae0b40120a3e0ff6401601cef64026017ef64e26012ef64f0600def64f26008ef64",
+          "offset": 26427
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/01-capture-only",
+          "hex": "85f5f09085e09047b102a4be908a4ae0b40120a3e0ff6401601cef64026017ef64e26012ef64f0600def64f26008ef64",
+          "offset": 26427
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/02-capture-only",
+          "hex": "85f5f09085e09047b102a4be908a4ae0b40120a3e0ff6401601cef64026017ef64e26012ef64f0600def64f26008ef64",
+          "offset": 26427
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/03-capture-only",
+          "hex": "85f5f09085e09047b102a4be908a4ae0b40120a3e0ff6401601cef64026017ef64e26012ef64f0600def64f26008ef64",
+          "offset": 26427
+        }
+      ],
+      "stimuli": {
+        "baseline-no-stimulus": 1,
+        "capture-only": 14,
+        "cycle00-get-configuration-all": 1,
+        "cycle00-get-configuration-current": 1,
+        "cycle00-get-event-status-media": 1,
+        "cycle00-inquiry-extrainq": 1,
+        "cycle00-mode-sense10-all": 1,
+        "cycle01-get-configuration-all": 1,
+        "cycle01-get-configuration-current": 1,
+        "cycle01-get-event-status-media": 1,
+        "cycle01-inquiry-extrainq": 1,
+        "cycle01-mode-sense10-all": 1,
+        "cycle02-get-configuration-all": 1,
+        "cycle02-get-configuration-current": 1,
+        "cycle02-get-event-status-media": 1,
+        "cycle02-inquiry-extrainq": 1,
+        "cycle02-mode-sense10-all": 1,
+        "cycle03-get-configuration-all": 1,
+        "cycle03-get-configuration-current": 1,
+        "cycle03-get-event-status-media": 1,
+        "cycle03-inquiry-extrainq": 1,
+        "cycle03-mode-sense10-all": 1,
+        "cycle04-get-configuration-all": 1,
+        "cycle04-get-configuration-current": 1,
+        "cycle04-get-event-status-media": 1,
+        "cycle04-inquiry-extrainq": 1,
+        "cycle04-mode-sense10-all": 1,
+        "cycle05-get-configuration-all": 1,
+        "cycle05-get-configuration-current": 1,
+        "cycle05-get-event-status-media": 1,
+        "cycle05-inquiry-extrainq": 1,
+        "cycle05-mode-sense10-all": 1,
+        "cycle06-get-configuration-all": 1,
+        "cycle06-get-configuration-current": 1,
+        "cycle06-get-event-status-media": 1,
+        "cycle06-inquiry-extrainq": 1,
+        "cycle06-mode-sense10-all": 1,
+        "cycle07-get-configuration-all": 1,
+        "cycle07-get-configuration-current": 1,
+        "cycle07-get-event-status-media": 1,
+        "cycle07-inquiry-extrainq": 1,
+        "cycle07-mode-sense10-all": 1,
+        "get-configuration-all": 1,
+        "get-configuration-current": 1,
+        "get-event-status-busy": 1,
+        "get-event-status-external": 1,
+        "get-event-status-media": 2,
+        "get-event-status-multihost": 1,
+        "get-event-status-operational": 1,
+        "get-event-status-power": 1,
+        "get-performance-type00": 1,
+        "get-performance-type03": 1,
+        "inquiry-extrainq": 1,
+        "inquiry-standard-96": 1,
+        "mechanism-status": 1,
+        "mode-sense10-all": 2,
+        "mode-sense10-caching": 1,
+        "mode-sense10-capabilities": 1,
+        "mode-sense10-cd-audio": 1,
+        "mode-sense10-cd-device": 1,
+        "mode-sense10-fault-failure": 1,
+        "mode-sense10-power-condition": 1,
+        "mode-sense10-read-error-recovery": 1,
+        "read-capacity10": 1,
+        "read-disc-information": 1,
+        "read-dvd-structure-format0": 2,
+        "read-dvd-structure-format1": 1,
+        "read-dvd-structure-format2": 1,
+        "read-dvd-structure-formatff": 1,
+        "read-format-capacities": 1,
+        "read-toc-format-0": 2,
+        "read-toc-format-1": 1,
+        "read-toc-format-2": 1,
+        "read-toc-format-4": 1,
+        "read-track-information-lba0": 1,
+        "request-sense": 1,
+        "test-unit-ready": 1
+      },
+      "value": 1
+    },
+    {
+      "addr": 35402,
+      "branch": "jnz",
+      "count": 94,
+      "kind": "xrl_a_imm",
+      "offsets": {
+        "25920": 94
+      },
+      "role": "CDB byte 1 / op-specific field",
+      "samples": [
+        {
+          "capture": "normal-work-window-capture-only-20260501/00-capture-only",
+          "hex": "65bf01077db17ffb123d8922908a4ae06406705ea3e064677058a3e064787052a3e06489704ca3e0649a700214f09085",
+          "offset": 25941
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/01-capture-only",
+          "hex": "65bf01077db17ffb123d8922908a4ae06406705ea3e064677058a3e064787052a3e06489704ca3e0649a700214f09085",
+          "offset": 25941
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/02-capture-only",
+          "hex": "65bf01077db17ffb123d8922908a4ae06406705ea3e064677058a3e064787052a3e06489704ca3e0649a700214f09085",
+          "offset": 25941
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/03-capture-only",
+          "hex": "65bf01077db17ffb123d8922908a4ae06406705ea3e064677058a3e064787052a3e06489704ca3e0649a700214f09085",
+          "offset": 25941
+        }
+      ],
+      "stimuli": {
+        "baseline-no-stimulus": 1,
+        "capture-only": 14,
+        "cycle00-get-configuration-all": 1,
+        "cycle00-get-configuration-current": 1,
+        "cycle00-get-event-status-media": 1,
+        "cycle00-inquiry-extrainq": 1,
+        "cycle00-mode-sense10-all": 1,
+        "cycle01-get-configuration-all": 1,
+        "cycle01-get-configuration-current": 1,
+        "cycle01-get-event-status-media": 1,
+        "cycle01-inquiry-extrainq": 1,
+        "cycle01-mode-sense10-all": 1,
+        "cycle02-get-configuration-all": 1,
+        "cycle02-get-configuration-current": 1,
+        "cycle02-get-event-status-media": 1,
+        "cycle02-inquiry-extrainq": 1,
+        "cycle02-mode-sense10-all": 1,
+        "cycle03-get-configuration-all": 1,
+        "cycle03-get-configuration-current": 1,
+        "cycle03-get-event-status-media": 1,
+        "cycle03-inquiry-extrainq": 1,
+        "cycle03-mode-sense10-all": 1,
+        "cycle04-get-configuration-all": 1,
+        "cycle04-get-configuration-current": 1,
+        "cycle04-get-event-status-media": 1,
+        "cycle04-inquiry-extrainq": 1,
+        "cycle04-mode-sense10-all": 1,
+        "cycle05-get-configuration-all": 1,
+        "cycle05-get-configuration-current": 1,
+        "cycle05-get-event-status-media": 1,
+        "cycle05-inquiry-extrainq": 1,
+        "cycle05-mode-sense10-all": 1,
+        "cycle06-get-configuration-all": 1,
+        "cycle06-get-configuration-current": 1,
+        "cycle06-get-event-status-media": 1,
+        "cycle06-inquiry-extrainq": 1,
+        "cycle06-mode-sense10-all": 1,
+        "cycle07-get-configuration-all": 1,
+        "cycle07-get-configuration-current": 1,
+        "cycle07-get-event-status-media": 1,
+        "cycle07-inquiry-extrainq": 1,
+        "cycle07-mode-sense10-all": 1,
+        "get-configuration-all": 1,
+        "get-configuration-current": 1,
+        "get-event-status-busy": 1,
+        "get-event-status-external": 1,
+        "get-event-status-media": 2,
+        "get-event-status-multihost": 1,
+        "get-event-status-operational": 1,
+        "get-event-status-power": 1,
+        "get-performance-type00": 1,
+        "get-performance-type03": 1,
+        "inquiry-extrainq": 1,
+        "inquiry-standard-96": 1,
+        "mechanism-status": 1,
+        "mode-sense10-all": 2,
+        "mode-sense10-caching": 1,
+        "mode-sense10-capabilities": 1,
+        "mode-sense10-cd-audio": 1,
+        "mode-sense10-cd-device": 1,
+        "mode-sense10-fault-failure": 1,
+        "mode-sense10-power-condition": 1,
+        "mode-sense10-read-error-recovery": 1,
+        "read-capacity10": 1,
+        "read-disc-information": 1,
+        "read-dvd-structure-format0": 2,
+        "read-dvd-structure-format1": 1,
+        "read-dvd-structure-format2": 1,
+        "read-dvd-structure-formatff": 1,
+        "read-format-capacities": 1,
+        "read-toc-format-0": 2,
+        "read-toc-format-1": 1,
+        "read-toc-format-2": 1,
+        "read-toc-format-4": 1,
+        "read-track-information-lba0": 1,
+        "request-sense": 1,
+        "test-unit-ready": 1
+      },
+      "value": 6
+    },
+    {
+      "addr": 35402,
+      "branch": "cjne",
+      "count": 94,
+      "kind": "cjne_a_imm",
+      "offsets": {
+        "34816": 94
+      },
+      "role": "CDB byte 1 / op-specific field",
+      "samples": [
+        {
+          "capture": "normal-work-window-capture-only-20260501/00-capture-only",
+          "hex": "c23e027ea5204115efb4f311908a4ae0b40e0aa3e0b40205c23e027ea5908a49e024087050908a4be0b4220fa3c251c2",
+          "offset": 34835
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/01-capture-only",
+          "hex": "c23e027ea5204115efb4f311908a4ae0b40e0aa3e0b40205c23e027ea5908a49e024087050908a4be0b4220fa3c251c2",
+          "offset": 34835
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/02-capture-only",
+          "hex": "c23e027ea5204115efb4f311908a4ae0b40e0aa3e0b40205c23e027ea5908a49e024087050908a4be0b4220fa3c251c2",
+          "offset": 34835
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/03-capture-only",
+          "hex": "c23e027ea5204115efb4f311908a4ae0b40e0aa3e0b40205c23e027ea5908a49e024087050908a4be0b4220fa3c251c2",
+          "offset": 34835
+        }
+      ],
+      "stimuli": {
+        "baseline-no-stimulus": 1,
+        "capture-only": 14,
+        "cycle00-get-configuration-all": 1,
+        "cycle00-get-configuration-current": 1,
+        "cycle00-get-event-status-media": 1,
+        "cycle00-inquiry-extrainq": 1,
+        "cycle00-mode-sense10-all": 1,
+        "cycle01-get-configuration-all": 1,
+        "cycle01-get-configuration-current": 1,
+        "cycle01-get-event-status-media": 1,
+        "cycle01-inquiry-extrainq": 1,
+        "cycle01-mode-sense10-all": 1,
+        "cycle02-get-configuration-all": 1,
+        "cycle02-get-configuration-current": 1,
+        "cycle02-get-event-status-media": 1,
+        "cycle02-inquiry-extrainq": 1,
+        "cycle02-mode-sense10-all": 1,
+        "cycle03-get-configuration-all": 1,
+        "cycle03-get-configuration-current": 1,
+        "cycle03-get-event-status-media": 1,
+        "cycle03-inquiry-extrainq": 1,
+        "cycle03-mode-sense10-all": 1,
+        "cycle04-get-configuration-all": 1,
+        "cycle04-get-configuration-current": 1,
+        "cycle04-get-event-status-media": 1,
+        "cycle04-inquiry-extrainq": 1,
+        "cycle04-mode-sense10-all": 1,
+        "cycle05-get-configuration-all": 1,
+        "cycle05-get-configuration-current": 1,
+        "cycle05-get-event-status-media": 1,
+        "cycle05-inquiry-extrainq": 1,
+        "cycle05-mode-sense10-all": 1,
+        "cycle06-get-configuration-all": 1,
+        "cycle06-get-configuration-current": 1,
+        "cycle06-get-event-status-media": 1,
+        "cycle06-inquiry-extrainq": 1,
+        "cycle06-mode-sense10-all": 1,
+        "cycle07-get-configuration-all": 1,
+        "cycle07-get-configuration-current": 1,
+        "cycle07-get-event-status-media": 1,
+        "cycle07-inquiry-extrainq": 1,
+        "cycle07-mode-sense10-all": 1,
+        "get-configuration-all": 1,
+        "get-configuration-current": 1,
+        "get-event-status-busy": 1,
+        "get-event-status-external": 1,
+        "get-event-status-media": 2,
+        "get-event-status-multihost": 1,
+        "get-event-status-operational": 1,
+        "get-event-status-power": 1,
+        "get-performance-type00": 1,
+        "get-performance-type03": 1,
+        "inquiry-extrainq": 1,
+        "inquiry-standard-96": 1,
+        "mechanism-status": 1,
+        "mode-sense10-all": 2,
+        "mode-sense10-caching": 1,
+        "mode-sense10-capabilities": 1,
+        "mode-sense10-cd-audio": 1,
+        "mode-sense10-cd-device": 1,
+        "mode-sense10-fault-failure": 1,
+        "mode-sense10-power-condition": 1,
+        "mode-sense10-read-error-recovery": 1,
+        "read-capacity10": 1,
+        "read-disc-information": 1,
+        "read-dvd-structure-format0": 2,
+        "read-dvd-structure-format1": 1,
+        "read-dvd-structure-format2": 1,
+        "read-dvd-structure-formatff": 1,
+        "read-format-capacities": 1,
+        "read-toc-format-0": 2,
+        "read-toc-format-1": 1,
+        "read-toc-format-2": 1,
+        "read-toc-format-4": 1,
+        "read-track-information-lba0": 1,
+        "request-sense": 1,
+        "test-unit-ready": 1
+      },
+      "value": 14
+    },
+    {
+      "addr": 35402,
+      "branch": "jz",
+      "count": 46,
+      "kind": "xrl_a_imm",
+      "offsets": {
+        "32256": 8,
+        "32320": 38
+      },
+      "role": "CDB byte 1 / op-specific field",
+      "samples": [
+        {
+          "capture": "normal-work-window-stimuli-full-20260501/06-get-configuration-current",
+          "hex": "36f6a87c08ef26f618ee36f6908a4ae0640260030273de90891fe02434ff90891ee03407a87c0808f608eff6904000e0",
+          "offset": 32249
+        },
+        {
+          "capture": "normal-work-window-stimuli-full-20260501/07-get-configuration-all",
+          "hex": "36f6a87c08ef26f618ee36f6908a4ae0640260030273de90891fe02434ff90891ee03407a87c0808f608eff6904000e0",
+          "offset": 32249
+        },
+        {
+          "capture": "normal-work-window-stimuli-full-20260501/08-get-event-status-media",
+          "hex": "36f6a87c08ef26f618ee36f6908a4ae0640260030273de90891fe02434ff90891ee03407a87c0808f608eff6904000e0",
+          "offset": 32249
+        },
+        {
+          "capture": "normal-work-window-stimuli-full-20260501/09-read-toc-format-0",
+          "hex": "36f6a87c08ef26f618ee36f6908a4ae0640260030273de90891fe02434ff90891ee03407a87c0808f608eff6904000e0",
+          "offset": 32249
+        }
+      ],
+      "stimuli": {
+        "cycle00-get-configuration-all": 1,
+        "cycle00-get-configuration-current": 1,
+        "cycle00-get-event-status-media": 1,
+        "cycle01-get-configuration-all": 1,
+        "cycle01-get-configuration-current": 1,
+        "cycle01-get-event-status-media": 1,
+        "cycle01-inquiry-extrainq": 1,
+        "cycle01-mode-sense10-all": 1,
+        "cycle02-get-configuration-all": 1,
+        "cycle02-get-configuration-current": 1,
+        "cycle02-get-event-status-media": 1,
+        "cycle02-inquiry-extrainq": 1,
+        "cycle02-mode-sense10-all": 1,
+        "cycle03-get-configuration-all": 1,
+        "cycle03-get-configuration-current": 1,
+        "cycle03-get-event-status-media": 1,
+        "cycle03-inquiry-extrainq": 1,
+        "cycle03-mode-sense10-all": 1,
+        "cycle04-get-configuration-all": 1,
+        "cycle04-get-configuration-current": 1,
+        "cycle04-get-event-status-media": 1,
+        "cycle04-inquiry-extrainq": 1,
+        "cycle04-mode-sense10-all": 1,
+        "cycle05-get-configuration-all": 1,
+        "cycle05-get-configuration-current": 1,
+        "cycle05-get-event-status-media": 1,
+        "cycle05-inquiry-extrainq": 1,
+        "cycle05-mode-sense10-all": 1,
+        "cycle06-get-configuration-all": 1,
+        "cycle06-get-configuration-current": 1,
+        "cycle06-get-event-status-media": 1,
+        "cycle06-inquiry-extrainq": 1,
+        "cycle06-mode-sense10-all": 1,
+        "cycle07-get-configuration-all": 1,
+        "cycle07-get-configuration-current": 1,
+        "cycle07-get-event-status-media": 1,
+        "cycle07-inquiry-extrainq": 1,
+        "cycle07-mode-sense10-all": 1,
+        "get-configuration-all": 1,
+        "get-configuration-current": 1,
+        "get-event-status-media": 1,
+        "mechanism-status": 1,
+        "read-disc-information": 1,
+        "read-dvd-structure-format0": 1,
+        "read-toc-format-0": 1,
+        "read-track-information-lba0": 1
+      },
+      "value": 2
+    },
+    {
+      "addr": 35403,
+      "branch": "cjne",
+      "count": 94,
+      "kind": "cjne_a_imm",
+      "offsets": {
+        "34816": 94
+      },
+      "role": "CDB byte 2 / op-specific field",
+      "samples": [
+        {
+          "capture": "normal-work-window-capture-only-20260501/00-capture-only",
+          "hex": "3e027ea5908a49e024087050908a4be0b4220fa3c251c249908a37e054f7f0d23e90483474bff0e4908a18f0a3f09089",
+          "offset": 34860
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/01-capture-only",
+          "hex": "3e027ea5908a49e024087050908a4be0b4220fa3c251c249908a37e054f7f0d23e90483474bff0e4908a18f0a3f09089",
+          "offset": 34860
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/02-capture-only",
+          "hex": "3e027ea5908a49e024087050908a4be0b4220fa3c251c249908a37e054f7f0d23e90483474bff0e4908a18f0a3f09089",
+          "offset": 34860
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/03-capture-only",
+          "hex": "3e027ea5908a49e024087050908a4be0b4220fa3c251c249908a37e054f7f0d23e90483474bff0e4908a18f0a3f09089",
+          "offset": 34860
+        }
+      ],
+      "stimuli": {
+        "baseline-no-stimulus": 1,
+        "capture-only": 14,
+        "cycle00-get-configuration-all": 1,
+        "cycle00-get-configuration-current": 1,
+        "cycle00-get-event-status-media": 1,
+        "cycle00-inquiry-extrainq": 1,
+        "cycle00-mode-sense10-all": 1,
+        "cycle01-get-configuration-all": 1,
+        "cycle01-get-configuration-current": 1,
+        "cycle01-get-event-status-media": 1,
+        "cycle01-inquiry-extrainq": 1,
+        "cycle01-mode-sense10-all": 1,
+        "cycle02-get-configuration-all": 1,
+        "cycle02-get-configuration-current": 1,
+        "cycle02-get-event-status-media": 1,
+        "cycle02-inquiry-extrainq": 1,
+        "cycle02-mode-sense10-all": 1,
+        "cycle03-get-configuration-all": 1,
+        "cycle03-get-configuration-current": 1,
+        "cycle03-get-event-status-media": 1,
+        "cycle03-inquiry-extrainq": 1,
+        "cycle03-mode-sense10-all": 1,
+        "cycle04-get-configuration-all": 1,
+        "cycle04-get-configuration-current": 1,
+        "cycle04-get-event-status-media": 1,
+        "cycle04-inquiry-extrainq": 1,
+        "cycle04-mode-sense10-all": 1,
+        "cycle05-get-configuration-all": 1,
+        "cycle05-get-configuration-current": 1,
+        "cycle05-get-event-status-media": 1,
+        "cycle05-inquiry-extrainq": 1,
+        "cycle05-mode-sense10-all": 1,
+        "cycle06-get-configuration-all": 1,
+        "cycle06-get-configuration-current": 1,
+        "cycle06-get-event-status-media": 1,
+        "cycle06-inquiry-extrainq": 1,
+        "cycle06-mode-sense10-all": 1,
+        "cycle07-get-configuration-all": 1,
+        "cycle07-get-configuration-current": 1,
+        "cycle07-get-event-status-media": 1,
+        "cycle07-inquiry-extrainq": 1,
+        "cycle07-mode-sense10-all": 1,
+        "get-configuration-all": 1,
+        "get-configuration-current": 1,
+        "get-event-status-busy": 1,
+        "get-event-status-external": 1,
+        "get-event-status-media": 2,
+        "get-event-status-multihost": 1,
+        "get-event-status-operational": 1,
+        "get-event-status-power": 1,
+        "get-performance-type00": 1,
+        "get-performance-type03": 1,
+        "inquiry-extrainq": 1,
+        "inquiry-standard-96": 1,
+        "mechanism-status": 1,
+        "mode-sense10-all": 2,
+        "mode-sense10-caching": 1,
+        "mode-sense10-capabilities": 1,
+        "mode-sense10-cd-audio": 1,
+        "mode-sense10-cd-device": 1,
+        "mode-sense10-fault-failure": 1,
+        "mode-sense10-power-condition": 1,
+        "mode-sense10-read-error-recovery": 1,
+        "read-capacity10": 1,
+        "read-disc-information": 1,
+        "read-dvd-structure-format0": 2,
+        "read-dvd-structure-format1": 1,
+        "read-dvd-structure-format2": 1,
+        "read-dvd-structure-formatff": 1,
+        "read-format-capacities": 1,
+        "read-toc-format-0": 2,
+        "read-toc-format-1": 1,
+        "read-toc-format-2": 1,
+        "read-toc-format-4": 1,
+        "read-track-information-lba0": 1,
+        "request-sense": 1,
+        "test-unit-ready": 1
+      },
+      "value": 34
+    },
+    {
+      "addr": 35403,
+      "branch": "jz",
+      "count": 94,
+      "kind": "mov_r7_xrl_imm",
+      "offsets": {
+        "29248": 94
+      },
+      "role": "CDB byte 2 / op-specific field",
+      "samples": [
+        {
+          "capture": "normal-work-window-capture-only-20260501/00-capture-only",
+          "hex": "120a6b2290898ee04401f090908a4be0ff64e26004efb4f116908a53e0fea3e0ffc378aa96ee18965005eef608eff678",
+          "offset": 29236
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/01-capture-only",
+          "hex": "120a6b2290898ee04401f090908a4be0ff64e26004efb4f116908a53e0fea3e0ffc378aa96ee18965005eef608eff678",
+          "offset": 29236
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/02-capture-only",
+          "hex": "120a6b2290898ee04401f090908a4be0ff64e26004efb4f116908a53e0fea3e0ffc378aa96ee18965005eef608eff678",
+          "offset": 29236
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/03-capture-only",
+          "hex": "120a6b2290898ee04401f090908a4be0ff64e26004efb4f116908a53e0fea3e0ffc378aa96ee18965005eef608eff678",
+          "offset": 29236
+        }
+      ],
+      "stimuli": {
+        "baseline-no-stimulus": 1,
+        "capture-only": 14,
+        "cycle00-get-configuration-all": 1,
+        "cycle00-get-configuration-current": 1,
+        "cycle00-get-event-status-media": 1,
+        "cycle00-inquiry-extrainq": 1,
+        "cycle00-mode-sense10-all": 1,
+        "cycle01-get-configuration-all": 1,
+        "cycle01-get-configuration-current": 1,
+        "cycle01-get-event-status-media": 1,
+        "cycle01-inquiry-extrainq": 1,
+        "cycle01-mode-sense10-all": 1,
+        "cycle02-get-configuration-all": 1,
+        "cycle02-get-configuration-current": 1,
+        "cycle02-get-event-status-media": 1,
+        "cycle02-inquiry-extrainq": 1,
+        "cycle02-mode-sense10-all": 1,
+        "cycle03-get-configuration-all": 1,
+        "cycle03-get-configuration-current": 1,
+        "cycle03-get-event-status-media": 1,
+        "cycle03-inquiry-extrainq": 1,
+        "cycle03-mode-sense10-all": 1,
+        "cycle04-get-configuration-all": 1,
+        "cycle04-get-configuration-current": 1,
+        "cycle04-get-event-status-media": 1,
+        "cycle04-inquiry-extrainq": 1,
+        "cycle04-mode-sense10-all": 1,
+        "cycle05-get-configuration-all": 1,
+        "cycle05-get-configuration-current": 1,
+        "cycle05-get-event-status-media": 1,
+        "cycle05-inquiry-extrainq": 1,
+        "cycle05-mode-sense10-all": 1,
+        "cycle06-get-configuration-all": 1,
+        "cycle06-get-configuration-current": 1,
+        "cycle06-get-event-status-media": 1,
+        "cycle06-inquiry-extrainq": 1,
+        "cycle06-mode-sense10-all": 1,
+        "cycle07-get-configuration-all": 1,
+        "cycle07-get-configuration-current": 1,
+        "cycle07-get-event-status-media": 1,
+        "cycle07-inquiry-extrainq": 1,
+        "cycle07-mode-sense10-all": 1,
+        "get-configuration-all": 1,
+        "get-configuration-current": 1,
+        "get-event-status-busy": 1,
+        "get-event-status-external": 1,
+        "get-event-status-media": 2,
+        "get-event-status-multihost": 1,
+        "get-event-status-operational": 1,
+        "get-event-status-power": 1,
+        "get-performance-type00": 1,
+        "get-performance-type03": 1,
+        "inquiry-extrainq": 1,
+        "inquiry-standard-96": 1,
+        "mechanism-status": 1,
+        "mode-sense10-all": 2,
+        "mode-sense10-caching": 1,
+        "mode-sense10-capabilities": 1,
+        "mode-sense10-cd-audio": 1,
+        "mode-sense10-cd-device": 1,
+        "mode-sense10-fault-failure": 1,
+        "mode-sense10-power-condition": 1,
+        "mode-sense10-read-error-recovery": 1,
+        "read-capacity10": 1,
+        "read-disc-information": 1,
+        "read-dvd-structure-format0": 2,
+        "read-dvd-structure-format1": 1,
+        "read-dvd-structure-format2": 1,
+        "read-dvd-structure-formatff": 1,
+        "read-format-capacities": 1,
+        "read-toc-format-0": 2,
+        "read-toc-format-1": 1,
+        "read-toc-format-2": 1,
+        "read-toc-format-4": 1,
+        "read-track-information-lba0": 1,
+        "request-sense": 1,
+        "test-unit-ready": 1
+      },
+      "value": 226
+    },
+    {
+      "addr": 35404,
+      "branch": "jz",
+      "count": 15,
+      "kind": "mov_r7_xrl_imm",
+      "offsets": {
+        "38144": 5,
+        "38208": 5,
+        "38272": 3,
+        "38336": 2
+      },
+      "role": "controller setup high-ish byte",
+      "samples": [
+        {
+          "capture": "normal-work-window-capture-only-20260501/00-capture-only",
+          "hex": "3d89e4908a33f0d0d092af22908a4ce0ff6401601cef64026017ef64046012ef6405600d78b5760578ab7624e478b0f6",
+          "offset": 38218
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/07-capture-only",
+          "hex": "3d89e4908a33f0d0d092af22908a4ce0ff6401601cef64026017ef64046012ef6405600d78b5760578ab7624e478b0f6",
+          "offset": 38282
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/11-capture-only",
+          "hex": "3d89e4908a33f0d0d092af22908a4ce0ff6401601cef64026017ef64046012ef6405600d78b5760578ab7624e478b0f6",
+          "offset": 38154
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/12-capture-only",
+          "hex": "3d89e4908a33f0d0d092af22908a4ce0ff6401601cef64026017ef64046012ef6405600d78b5760578ab7624e478b0f6",
+          "offset": 38218
+        }
+      ],
+      "stimuli": {
+        "baseline-no-stimulus": 1,
+        "capture-only": 4,
+        "cycle01-get-configuration-all": 1,
+        "cycle02-get-configuration-current": 1,
+        "cycle02-get-event-status-media": 1,
+        "cycle02-mode-sense10-all": 1,
+        "cycle04-get-configuration-current": 1,
+        "get-event-status-media": 1,
+        "inquiry-standard-96": 1,
+        "read-capacity10": 1,
+        "read-dvd-structure-format1": 1,
+        "request-sense": 1
+      },
+      "value": 1
+    },
+    {
+      "addr": 35405,
+      "branch": "cjne",
+      "count": 94,
+      "kind": "cjne_a_imm",
+      "offsets": {
+        "36160": 94
+      },
+      "role": "length/count-ish byte",
+      "samples": [
+        {
+          "capture": "normal-work-window-capture-only-20260501/00-capture-only",
+          "hex": "4fe0f54ba3e0f54ca3e0f54a908a4de0b40122e4f549e549c3954a5059af497e00e54cef600f78b5760678ab7628e478",
+          "offset": 36189
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/01-capture-only",
+          "hex": "4fe0f54ba3e0f54ca3e0f54a908a4de0b40122e4f549e549c3954a5059af497e00e54cef600f78b5760678ab7628e478",
+          "offset": 36189
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/02-capture-only",
+          "hex": "4fe0f54ba3e0f54ca3e0f54a908a4de0b40122e4f549e549c3954a5059af497e00e54cef600f78b5760678ab7628e478",
+          "offset": 36189
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/03-capture-only",
+          "hex": "4fe0f54ba3e0f54ca3e0f54a908a4de0b40122e4f549e549c3954a5059af497e00e54cef600f78b5760678ab7628e478",
+          "offset": 36189
+        }
+      ],
+      "stimuli": {
+        "baseline-no-stimulus": 1,
+        "capture-only": 14,
+        "cycle00-get-configuration-all": 1,
+        "cycle00-get-configuration-current": 1,
+        "cycle00-get-event-status-media": 1,
+        "cycle00-inquiry-extrainq": 1,
+        "cycle00-mode-sense10-all": 1,
+        "cycle01-get-configuration-all": 1,
+        "cycle01-get-configuration-current": 1,
+        "cycle01-get-event-status-media": 1,
+        "cycle01-inquiry-extrainq": 1,
+        "cycle01-mode-sense10-all": 1,
+        "cycle02-get-configuration-all": 1,
+        "cycle02-get-configuration-current": 1,
+        "cycle02-get-event-status-media": 1,
+        "cycle02-inquiry-extrainq": 1,
+        "cycle02-mode-sense10-all": 1,
+        "cycle03-get-configuration-all": 1,
+        "cycle03-get-configuration-current": 1,
+        "cycle03-get-event-status-media": 1,
+        "cycle03-inquiry-extrainq": 1,
+        "cycle03-mode-sense10-all": 1,
+        "cycle04-get-configuration-all": 1,
+        "cycle04-get-configuration-current": 1,
+        "cycle04-get-event-status-media": 1,
+        "cycle04-inquiry-extrainq": 1,
+        "cycle04-mode-sense10-all": 1,
+        "cycle05-get-configuration-all": 1,
+        "cycle05-get-configuration-current": 1,
+        "cycle05-get-event-status-media": 1,
+        "cycle05-inquiry-extrainq": 1,
+        "cycle05-mode-sense10-all": 1,
+        "cycle06-get-configuration-all": 1,
+        "cycle06-get-configuration-current": 1,
+        "cycle06-get-event-status-media": 1,
+        "cycle06-inquiry-extrainq": 1,
+        "cycle06-mode-sense10-all": 1,
+        "cycle07-get-configuration-all": 1,
+        "cycle07-get-configuration-current": 1,
+        "cycle07-get-event-status-media": 1,
+        "cycle07-inquiry-extrainq": 1,
+        "cycle07-mode-sense10-all": 1,
+        "get-configuration-all": 1,
+        "get-configuration-current": 1,
+        "get-event-status-busy": 1,
+        "get-event-status-external": 1,
+        "get-event-status-media": 2,
+        "get-event-status-multihost": 1,
+        "get-event-status-operational": 1,
+        "get-event-status-power": 1,
+        "get-performance-type00": 1,
+        "get-performance-type03": 1,
+        "inquiry-extrainq": 1,
+        "inquiry-standard-96": 1,
+        "mechanism-status": 1,
+        "mode-sense10-all": 2,
+        "mode-sense10-caching": 1,
+        "mode-sense10-capabilities": 1,
+        "mode-sense10-cd-audio": 1,
+        "mode-sense10-cd-device": 1,
+        "mode-sense10-fault-failure": 1,
+        "mode-sense10-power-condition": 1,
+        "mode-sense10-read-error-recovery": 1,
+        "read-capacity10": 1,
+        "read-disc-information": 1,
+        "read-dvd-structure-format0": 2,
+        "read-dvd-structure-format1": 1,
+        "read-dvd-structure-format2": 1,
+        "read-dvd-structure-formatff": 1,
+        "read-format-capacities": 1,
+        "read-toc-format-0": 2,
+        "read-toc-format-1": 1,
+        "read-toc-format-2": 1,
+        "read-toc-format-4": 1,
+        "read-track-information-lba0": 1,
+        "request-sense": 1,
+        "test-unit-ready": 1
+      },
+      "value": 1
+    },
+    {
+      "addr": 35405,
+      "branch": "cjne",
+      "count": 94,
+      "kind": "cjne_a_imm",
+      "offsets": {
+        "26368": 94
+      },
+      "role": "length/count-ish byte",
+      "samples": [
+        {
+          "capture": "normal-work-window-capture-only-20260501/00-capture-only",
+          "hex": "cf2401cf3400fed0d092af22908a4de0b4f0089085f47401f08070908a50e09085f4f0908a51e09085f5f09085e09047",
+          "offset": 26387
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/01-capture-only",
+          "hex": "cf2401cf3400fed0d092af22908a4de0b4f0089085f47401f08070908a50e09085f4f0908a51e09085f5f09085e09047",
+          "offset": 26387
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/02-capture-only",
+          "hex": "cf2401cf3400fed0d092af22908a4de0b4f0089085f47401f08070908a50e09085f4f0908a51e09085f5f09085e09047",
+          "offset": 26387
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/03-capture-only",
+          "hex": "cf2401cf3400fed0d092af22908a4de0b4f0089085f47401f08070908a50e09085f4f0908a51e09085f5f09085e09047",
+          "offset": 26387
+        }
+      ],
+      "stimuli": {
+        "baseline-no-stimulus": 1,
+        "capture-only": 14,
+        "cycle00-get-configuration-all": 1,
+        "cycle00-get-configuration-current": 1,
+        "cycle00-get-event-status-media": 1,
+        "cycle00-inquiry-extrainq": 1,
+        "cycle00-mode-sense10-all": 1,
+        "cycle01-get-configuration-all": 1,
+        "cycle01-get-configuration-current": 1,
+        "cycle01-get-event-status-media": 1,
+        "cycle01-inquiry-extrainq": 1,
+        "cycle01-mode-sense10-all": 1,
+        "cycle02-get-configuration-all": 1,
+        "cycle02-get-configuration-current": 1,
+        "cycle02-get-event-status-media": 1,
+        "cycle02-inquiry-extrainq": 1,
+        "cycle02-mode-sense10-all": 1,
+        "cycle03-get-configuration-all": 1,
+        "cycle03-get-configuration-current": 1,
+        "cycle03-get-event-status-media": 1,
+        "cycle03-inquiry-extrainq": 1,
+        "cycle03-mode-sense10-all": 1,
+        "cycle04-get-configuration-all": 1,
+        "cycle04-get-configuration-current": 1,
+        "cycle04-get-event-status-media": 1,
+        "cycle04-inquiry-extrainq": 1,
+        "cycle04-mode-sense10-all": 1,
+        "cycle05-get-configuration-all": 1,
+        "cycle05-get-configuration-current": 1,
+        "cycle05-get-event-status-media": 1,
+        "cycle05-inquiry-extrainq": 1,
+        "cycle05-mode-sense10-all": 1,
+        "cycle06-get-configuration-all": 1,
+        "cycle06-get-configuration-current": 1,
+        "cycle06-get-event-status-media": 1,
+        "cycle06-inquiry-extrainq": 1,
+        "cycle06-mode-sense10-all": 1,
+        "cycle07-get-configuration-all": 1,
+        "cycle07-get-configuration-current": 1,
+        "cycle07-get-event-status-media": 1,
+        "cycle07-inquiry-extrainq": 1,
+        "cycle07-mode-sense10-all": 1,
+        "get-configuration-all": 1,
+        "get-configuration-current": 1,
+        "get-event-status-busy": 1,
+        "get-event-status-external": 1,
+        "get-event-status-media": 2,
+        "get-event-status-multihost": 1,
+        "get-event-status-operational": 1,
+        "get-event-status-power": 1,
+        "get-performance-type00": 1,
+        "get-performance-type03": 1,
+        "inquiry-extrainq": 1,
+        "inquiry-standard-96": 1,
+        "mechanism-status": 1,
+        "mode-sense10-all": 2,
+        "mode-sense10-caching": 1,
+        "mode-sense10-capabilities": 1,
+        "mode-sense10-cd-audio": 1,
+        "mode-sense10-cd-device": 1,
+        "mode-sense10-fault-failure": 1,
+        "mode-sense10-power-condition": 1,
+        "mode-sense10-read-error-recovery": 1,
+        "read-capacity10": 1,
+        "read-disc-information": 1,
+        "read-dvd-structure-format0": 2,
+        "read-dvd-structure-format1": 1,
+        "read-dvd-structure-format2": 1,
+        "read-dvd-structure-formatff": 1,
+        "read-format-capacities": 1,
+        "read-toc-format-0": 2,
+        "read-toc-format-1": 1,
+        "read-toc-format-2": 1,
+        "read-toc-format-4": 1,
+        "read-track-information-lba0": 1,
+        "request-sense": 1,
+        "test-unit-ready": 1
+      },
+      "value": 240
+    },
+    {
+      "addr": 35405,
+      "branch": "cjne",
+      "count": 4,
+      "kind": "cjne_a_imm",
+      "offsets": {
+        "28992": 2,
+        "29056": 2
+      },
+      "role": "length/count-ish byte",
+      "samples": [
+        {
+          "capture": "normal-work-window-stimuli-focused-20260501/03-cycle00-get-configuration-all",
+          "hex": "f0a87c08740426f618e436f6908a4de0b4fe028014908a4be0fea3e0ffa3e0fca3e0fdc39fecf608760112efb6057c05",
+          "offset": 29082
+        },
+        {
+          "capture": "normal-work-window-stimuli-focused-20260501/27-cycle05-get-configuration-current",
+          "hex": "f0a87c08740426f618e436f6908a4de0b4fe028014908a4be0fea3e0ffa3e0fca3e0fdc39fec8a29e0c4540f30e01190",
+          "offset": 29018
+        },
+        {
+          "capture": "normal-work-window-stimuli-focused-20260501/28-cycle05-get-configuration-all",
+          "hex": "f0a87c08740426f618e436f6908a4de0b4fe028014908a4be0fea3e0ffa3e0fca3e0fdc39fecf608760112efb6057c05",
+          "offset": 29082
+        },
+        {
+          "capture": "normal-work-window-stimuli-focused-20260501/37-cycle07-get-configuration-current",
+          "hex": "f0a87c08740426f618e436f6908a4de0b4fe028014908a4be0fea3e0ffa3e0fca3e0fdc39fec8a29e0c4540f30e01190",
+          "offset": 29018
+        }
+      ],
+      "stimuli": {
+        "cycle00-get-configuration-all": 1,
+        "cycle05-get-configuration-all": 1,
+        "cycle05-get-configuration-current": 1,
+        "cycle07-get-configuration-current": 1
+      },
+      "value": 254
+    },
+    {
+      "addr": 35411,
+      "branch": "cjne",
+      "count": 82,
+      "kind": "cjne_a_imm",
+      "offsets": {
+        "36928": 82
+      },
+      "role": "controller response/data shadow byte",
+      "samples": [
+        {
+          "capture": "normal-work-window-capture-only-20260501/00-capture-only",
+          "hex": "02066902066f02d8f3301c0c908a53e0b401057fac0270b10260e102b57c007ded7f221208b5905a287488f0a37408f0",
+          "offset": 36964
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/01-capture-only",
+          "hex": "02066902066f02d8f3301c0c908a53e0b401057fac0270b10260e102b57c007ded7f221208b5905a287488f0a37408f0",
+          "offset": 36964
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/02-capture-only",
+          "hex": "02066902066f02d8f3301c0c908a53e0b401057fac0270b10260e102b57c007ded7f221208b5905a287488f0a37408f0",
+          "offset": 36964
+        },
+        {
+          "capture": "normal-work-window-capture-only-20260501/03-capture-only",
+          "hex": "02066902066f02d8f3301c0c908a53e0b401057fac0270b10260e102b57c007ded7f221208b5905a287488f0a37408f0",
+          "offset": 36964
+        }
+      ],
+      "stimuli": {
+        "capture-only": 14,
+        "cycle00-get-configuration-all": 1,
+        "cycle00-get-configuration-current": 1,
+        "cycle00-get-event-status-media": 1,
+        "cycle00-inquiry-extrainq": 1,
+        "cycle00-mode-sense10-all": 1,
+        "cycle01-get-configuration-all": 1,
+        "cycle01-get-configuration-current": 1,
+        "cycle01-get-event-status-media": 1,
+        "cycle01-inquiry-extrainq": 1,
+        "cycle01-mode-sense10-all": 1,
+        "cycle02-get-configuration-all": 1,
+        "cycle02-get-configuration-current": 1,
+        "cycle02-get-event-status-media": 1,
+        "cycle02-inquiry-extrainq": 1,
+        "cycle02-mode-sense10-all": 1,
+        "cycle03-get-configuration-all": 1,
+        "cycle03-get-configuration-current": 1,
+        "cycle03-get-event-status-media": 1,
+        "cycle03-inquiry-extrainq": 1,
+        "cycle03-mode-sense10-all": 1,
+        "cycle04-get-configuration-all": 1,
+        "cycle04-get-configuration-current": 1,
+        "cycle04-get-event-status-media": 1,
+        "cycle04-inquiry-extrainq": 1,
+        "cycle04-mode-sense10-all": 1,
+        "cycle05-get-configuration-all": 1,
+        "cycle05-get-configuration-current": 1,
+        "cycle05-get-event-status-media": 1,
+        "cycle05-inquiry-extrainq": 1,
+        "cycle05-mode-sense10-all": 1,
+        "cycle06-get-configuration-all": 1,
+        "cycle06-get-configuration-current": 1,
+        "cycle06-get-event-status-media": 1,
+        "cycle06-inquiry-extrainq": 1,
+        "cycle06-mode-sense10-all": 1,
+        "cycle07-get-configuration-all": 1,
+        "cycle07-get-configuration-current": 1,
+        "cycle07-get-event-status-media": 1,
+        "cycle07-inquiry-extrainq": 1,
+        "cycle07-mode-sense10-all": 1,
+        "get-event-status-busy": 1,
+        "get-event-status-external": 1,
+        "get-event-status-media": 1,
+        "get-event-status-multihost": 1,
+        "get-event-status-operational": 1,
+        "get-event-status-power": 1,
+        "get-performance-type00": 1,
+        "get-performance-type03": 1,
+        "mechanism-status": 1,
+        "mode-sense10-all": 1,
+        "mode-sense10-caching": 1,
+        "mode-sense10-capabilities": 1,
+        "mode-sense10-cd-audio": 1,
+        "mode-sense10-cd-device": 1,
+        "mode-sense10-fault-failure": 1,
+        "mode-sense10-power-condition": 1,
+        "mode-sense10-read-error-recovery": 1,
+        "read-capacity10": 1,
+        "read-dvd-structure-format0": 2,
+        "read-dvd-structure-format1": 1,
+        "read-dvd-structure-format2": 1,
+        "read-dvd-structure-formatff": 1,
+        "read-format-capacities": 1,
+        "read-toc-format-0": 1,
+        "read-toc-format-1": 1,
+        "read-toc-format-2": 1,
+        "read-toc-format-4": 1
+      },
+      "value": 1
+    }
+  ],
+  "edge_rows": [
+    {
+      "addr": 35401,
+      "edges": [],
+      "role": "opcode/selector candidate"
+    },
+    {
+      "addr": 35402,
+      "edges": [
+        {
+          "count": 94,
+          "dst": 35402,
+          "kind": "direct",
+          "sample_offsets": [
+            37888,
+            38016,
+            38080
+          ],
+          "src": 18353
+        }
+      ],
+      "role": "CDB byte 1 / op-specific field"
+    },
+    {
+      "addr": 35403,
+      "edges": [
+        {
+          "count": 94,
+          "dst": 35403,
+          "kind": "direct",
+          "sample_offsets": [
+            37888,
+            38016,
+            38080
+          ],
+          "src": 18353
+        }
+      ],
+      "role": "CDB byte 2 / op-specific field"
+    },
+    {
+      "addr": 35404,
+      "edges": [
+        {
+          "count": 94,
+          "dst": 16401,
+          "kind": "direct",
+          "sample_offsets": [
+            28992,
+            29056
+          ],
+          "src": 35404
+        },
+        {
+          "count": 30,
+          "dst": 35404,
+          "kind": "direct",
+          "sample_offsets": [
+            38080,
+            38144,
+            38208,
+            38272
+          ],
+          "src": 18353
+        }
+      ],
+      "role": "controller setup high-ish byte"
+    },
+    {
+      "addr": 35405,
+      "edges": [
+        {
+          "count": 94,
+          "dst": 35405,
+          "kind": "direct",
+          "sample_offsets": [
+            38144,
+            38208,
+            38272,
+            38336
+          ],
+          "src": 18353
+        },
+        {
+          "count": 94,
+          "dst": 16402,
+          "kind": "direct",
+          "sample_offsets": [
+            28992,
+            29056
+          ],
+          "src": 35405
+        },
+        {
+          "count": 53,
+          "dst": 18390,
+          "kind": "direct",
+          "sample_offsets": [
+            30080,
+            30144
+          ],
+          "src": 35405
+        }
+      ],
+      "role": "length/count-ish byte"
+    },
+    {
+      "addr": 35406,
+      "edges": [
+        {
+          "count": 94,
+          "dst": 35406,
+          "kind": "direct",
+          "sample_offsets": [
+            38144,
+            38208,
+            38272,
+            38336
+          ],
+          "src": 18353
+        },
+        {
+          "count": 94,
+          "dst": 16403,
+          "kind": "direct",
+          "sample_offsets": [
+            28992,
+            29056
+          ],
+          "src": 35406
+        },
+        {
+          "count": 92,
+          "dst": 16537,
+          "kind": "direct",
+          "sample_offsets": [
+            29824,
+            29888
+          ],
+          "src": 35406
+        },
+        {
+          "count": 4,
+          "dst": 35406,
+          "kind": "direct",
+          "sample_offsets": [
+            28992,
+            29056
+          ],
+          "src": 16537
+        },
+        {
+          "count": 2,
+          "dst": 18353,
+          "kind": "direct",
+          "sample_offsets": [
+            34176
+          ],
+          "src": 35406
+        }
+      ],
+      "role": "subselector/status byte; low nibble tested"
+    },
+    {
+      "addr": 35407,
+      "edges": [
+        {
+          "count": 94,
+          "dst": 35407,
+          "kind": "direct",
+          "sample_offsets": [
+            38144,
+            38208,
+            38272,
+            38336
+          ],
+          "src": 18353
+        },
+        {
+          "count": 54,
+          "dst": 18390,
+          "kind": "direct",
+          "sample_offsets": [
+            33344
+          ],
+          "src": 35407
+        },
+        {
+          "count": 2,
+          "dst": 18353,
+          "kind": "direct",
+          "sample_offsets": [
+            34176
+          ],
+          "src": 35407
+        }
+      ],
+      "role": "payload/field byte"
+    },
+    {
+      "addr": 35408,
+      "edges": [
+        {
+          "count": 94,
+          "dst": 35408,
+          "kind": "direct",
+          "sample_offsets": [
+            38144,
+            38208,
+            38272,
+            38336
+          ],
+          "src": 18353
+        },
+        {
+          "count": 94,
+          "dst": 34292,
+          "kind": "direct",
+          "sample_offsets": [
+            26368
+          ],
+          "src": 35408
+        },
+        {
+          "count": 2,
+          "dst": 18353,
+          "kind": "direct",
+          "sample_offsets": [
+            34176
+          ],
+          "src": 35408
+        }
+      ],
+      "role": "payload/field byte"
+    },
+    {
+      "addr": 35409,
+      "edges": [
+        {
+          "count": 94,
+          "dst": 35409,
+          "kind": "direct",
+          "sample_offsets": [
+            38144,
+            38208,
+            38272,
+            38336
+          ],
+          "src": 18353
+        },
+        {
+          "count": 94,
+          "dst": 34293,
+          "kind": "direct",
+          "sample_offsets": [
+            26368
+          ],
+          "src": 35409
+        }
+      ],
+      "role": "payload/field byte"
+    },
+    {
+      "addr": 35410,
+      "edges": [
+        {
+          "count": 94,
+          "dst": 35410,
+          "kind": "direct",
+          "sample_offsets": [
+            38144,
+            38208,
+            38272,
+            38336
+          ],
+          "src": 18353
+        }
+      ],
+      "role": "payload/field byte"
+    },
+    {
+      "addr": 35411,
+      "edges": [
+        {
+          "count": 94,
+          "dst": 35411,
+          "kind": "direct",
+          "sample_offsets": [
+            38144,
+            38208,
+            38272,
+            38336
+          ],
+          "src": 18353
+        },
+        {
+          "count": 92,
+          "dst": 16537,
+          "kind": "direct",
+          "sample_offsets": [
+            29824,
+            29888
+          ],
+          "src": 35411
+        },
+        {
+          "count": 54,
+          "dst": 18353,
+          "kind": "direct",
+          "sample_offsets": [
+            33344
+          ],
+          "src": 35411
+        },
+        {
+          "count": 38,
+          "dst": 35411,
+          "kind": "direct",
+          "sample_offsets": [
+            28992,
+            29056,
+            32576,
+            32640
+          ],
+          "src": 16537
+        }
+      ],
+      "role": "controller response/data shadow byte"
+    },
+    {
+      "addr": 35412,
+      "edges": [
+        {
+          "count": 93,
+          "dst": 16567,
+          "kind": "direct",
+          "sample_offsets": [
+            32192
+          ],
+          "src": 35412
+        },
+        {
+          "count": 92,
+          "dst": 16537,
+          "kind": "direct",
+          "sample_offsets": [
+            29824,
+            29888
+          ],
+          "src": 35412
+        },
+        {
+          "count": 54,
+          "dst": 18353,
+          "kind": "direct",
+          "sample_offsets": [
+            33344
+          ],
+          "src": 35412
+        },
+        {
+          "count": 38,
+          "dst": 35412,
+          "kind": "direct",
+          "sample_offsets": [
+            28992,
+            29056,
+            32576,
+            32640
+          ],
+          "src": 16537
+        },
+        {
+          "count": 33,
+          "dst": 35412,
+          "kind": "direct",
+          "sample_offsets": [
+            38336
+          ],
+          "src": 18353
+        }
+      ],
+      "role": "controller response/data shadow byte"
+    }
+  ]
+}

@@ -1610,3 +1610,21 @@ cleanly by start-feature or allocation in only two cycles. So this is not the
 fast oracle yet. It is a useful constraint: GET CONFIG definitely tags the
 bridge, but we still need either more cycles on fewer variants or a more direct
 way to observe the packet-shadow fields.
+
+The follow-up was a cleanup pass on that evidence, not another live poke. I
+split out a selector-map report for the normal packet shadow. The short version
+is that `0x8a49` really does look like an opcode byte: the visible code compares
+it with `REQUEST SENSE`, `READ(10)`, `WRITE(10)`, `MODE SELECT(10)`, key/report
+key style values, and several LiteOn/vendor opcodes. The neighboring bytes now
+have a more practical sketch too: `0x8a4d` is length/count-ish, while
+`0x8a4e`, `0x8a53`, and `0x8a54` participate in controller FIFO/status traffic
+through `0x4099`.
+
+The interesting negative is still GET CONFIGURATION. It is the command that
+most clearly lights up the controller bridge in the live captures, but the
+public work-window corpus does not show a plain `0x8a49 == 0x46` compare. That
+probably means GET CONFIG reaches the bridge through a table-driven route, an
+unharvested code slice, or an earlier dispatch stage. Either way, the next live
+experiment should be narrower than "try more random commands": vary fields in
+one read/status command family and watch whether the `0x8a4d/0x8a4e` field
+roles move in lockstep with the bridge snippets.
