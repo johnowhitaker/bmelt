@@ -830,3 +830,32 @@ Safer first carryover test: patch an inert shared data/profile byte, not code,
 at a same-offset currentboot/normal chunk such as `+0x5040`, `+0x5100`, or
 `+0x5140`. If that survives a soft recovery into normal mode, then test a
 neutral byte in the write-side island.
+
+## Latest CDD Static Push
+
+New artifacts:
+
+```text
+scripts/analyze_liteon_trailer_split_hypotheses.py
+references/firmware/extracted/liteon-trailer-split-hypotheses.md/json
+scripts/analyze_liteon_cdd_hidden_runtime_correlation.py
+analysis/8051/cdd-hidden-runtime-correlation-20260501.md/json
+```
+
+The trailer split idea was tested directly: every contiguous two-byte slice of
+auth14 as a low-16 additive checksum, with the remaining 12 bytes as
+column-wise checksums over obvious CDD 12-byte/13-byte unit streams. Result:
+zero exact matches and zero useful near misses across LD5M, AD12, AHS9, CD12,
+CHS7, and CHS9. The simple "2-byte Coastermelt sum + 12-byte unit checksum"
+model is negative.
+
+The hidden-runtime/CDD correlation pass treats stable normal hidden chunks as
+possible known-output candidates. Under the naive public-offset mapping, they
+mostly land on mode `0x40`/`0x80` hard records, but raw and fixed-XOR seed
+checks against the candidate source spans are negative. This reinforces the
+current model: CDD hard modes are not cheap direct unpacking. Rotating chunks
+remain poor known-output candidates until a phase/address model is found.
+
+Recommended next direction after this CDD push: return to normal-mode I/O or
+patchability. Static CDD work is still valuable, but the latest cheap probes
+drew a blank.

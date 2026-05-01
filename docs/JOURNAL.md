@@ -1974,3 +1974,25 @@ not a safe thing to poke casually, because it is a real controller command
 helper, but it is the first clean-looking overlap region where a reversible
 currentboot gateway marker might tell us whether normal runtime patching is
 possible without a true normal-mode write primitive.
+
+The next CDD push knocked down one attractive checksum story. The 14-byte
+trailer field looked like it might split into a two-byte Coastermelt-style
+additive checksum plus a 12-byte checksum over the CDD unit structure. I added
+a focused offline probe for exactly that. It tried every contiguous two-byte
+slice of `0xe7fe0..0xe7fed` against low-16 sums, one's-complement sums, and
+two's-complement sums over the obvious firmware/container/CDD regions. It then
+tried the remaining 12 bytes as column-wise sums, XORs, CRC32-low bytes, and
+Adler-low bytes over obvious 12-byte and 13-byte CDD unit streams. Across
+LD5M, AD12, AHS9, CD12, CHS7, and CHS9, there were no exact matches and no
+near misses worth explaining. So the easy split is out.
+
+I also tried to use the normal hidden-runtime chunks as known output for the
+CDD hard modes. Stable hidden chunks do line up, under the naive public-offset
+mapping, with CDD mode `0x40`/`0x80` records. That is at least aesthetically
+consistent: the hard-looking normal runtime material points at the hard CDD
+record classes. But the cheap source/output tests were negative. The decoded
+64-byte chunks do not appear directly in their candidate CDD source spans, and
+even fixed-XOR four-byte seed checks are basically empty. This is useful
+negative evidence: if these are decoded CDD outputs, they are not coming from a
+simple byte copy, fixed XOR, or obvious unpacking. The CDD problem remains a
+real decoder/codeword problem, not a disguised CRC table.

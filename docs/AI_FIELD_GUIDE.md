@@ -1878,3 +1878,20 @@ Immediate useful directions:
     command through `0x4095..0x4098`, then restore the old state. This is not a
     safe casual patch site, but it is the best current marker-carryover test
     region because it is genuinely shared between currentboot and normal.
+68. `scripts/analyze_liteon_trailer_split_hypotheses.py` and
+    `references/firmware/extracted/liteon-trailer-split-hypotheses.md/json`
+    specifically test the "2-byte additive checksum + 12-byte CDD unit
+    checksum" idea for trailer auth14. Across LD5M, AD12, AHS9, CD12, CHS7,
+    and CHS9 there are zero exact matches and zero retained near misses. It
+    tried every contiguous 2-byte auth14 slice against low-16 additive
+    variants over plausible regions, then tried the remaining 12 bytes as
+    column-wise checksums over obvious 12-byte and 13-byte CDD unit streams.
+    Treat this split as negative unless a new nontrivial algorithm appears.
+69. `scripts/analyze_liteon_cdd_hidden_runtime_correlation.py` and
+    `analysis/8051/cdd-hidden-runtime-correlation-20260501.md/json` treat
+    stable normal hidden-runtime chunks as possible known-output candidates for
+    CDD hard-mode records. Under the naive public-offset mapping, stable hidden
+    chunks mostly land on mode `0x40`/`0x80` records, but raw/fixed-XOR seed
+    checks against those source spans are negative. This does not disprove a
+    CDD relationship; it says the relationship is not simple copying, fixed
+    XOR, or obvious byte unpacking.

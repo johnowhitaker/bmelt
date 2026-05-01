@@ -1,0 +1,97 @@
+{
+  "additive_two_byte_probe": {
+    "matches": [],
+    "near_matches": []
+  },
+  "hypothesis": "2-byte additive checksum plus 12-byte CDD unit checksum inside auth14",
+  "images": {
+    "AD12": {
+      "cdd1": {
+        "end": 850791,
+        "start": 28716
+      },
+      "cdd2": {
+        "end": 942831,
+        "start": 888832
+      },
+      "family": "S8AB0D16",
+      "path": "/Users/johno/projects/boastermelt/work/cdd-siblings/AD12-1.bin",
+      "preword": "244d39b4",
+      "trailer_auth14": "fe3ed5cbc2002a6eb5ae0dfb5d4a"
+    },
+    "AHS9": {
+      "cdd1": {
+        "end": 851488,
+        "start": 28716
+      },
+      "cdd2": {
+        "end": 942954,
+        "start": 888832
+      },
+      "family": "S8AB0HS6",
+      "path": "/Users/johno/projects/boastermelt/work/cdd-siblings/AHS9-postprocess-plain.bin",
+      "preword": "c1e2ab08",
+      "trailer_auth14": "5084d8596db47bd5da64d01ad053"
+    },
+    "CD12": {
+      "cdd1": {
+        "end": 847132,
+        "start": 28716
+      },
+      "cdd2": {
+        "end": 942866,
+        "start": 888832
+      },
+      "family": "S8AB0D16",
+      "path": "/Users/johno/projects/boastermelt/work/cdd-siblings/CD12-postprocess-plain.bin",
+      "preword": "9cec113c",
+      "trailer_auth14": "445c5e968b5f1fb80016fa3fdfc5"
+    },
+    "CHS7": {
+      "cdd1": {
+        "end": 847284,
+        "start": 28716
+      },
+      "cdd2": {
+        "end": 942900,
+        "start": 888832
+      },
+      "family": "S8AB0HS6",
+      "path": "/Users/johno/projects/boastermelt/work/cdd-siblings/CHS7-postprocess-plain.bin",
+      "preword": "cc7c7447",
+      "trailer_auth14": "f817e214ed8b13729811dfb4c2f6"
+    },
+    "CHS9": {
+      "cdd1": {
+        "end": 847402,
+        "start": 28716
+      },
+      "cdd2": {
+        "end": 942897,
+        "start": 888832
+      },
+      "family": "S8AB0HS6",
+      "path": "/Users/johno/projects/boastermelt/work/cdd-siblings/CHS9-postprocess-plain.bin",
+      "preword": "cc7c7447",
+      "trailer_auth14": "8061c6bb6c5f698b66425bb17dd7"
+    },
+    "LD5M": {
+      "cdd1": {
+        "end": 846872,
+        "start": 28716
+      },
+      "cdd2": {
+        "end": 943105,
+        "start": 888832
+      },
+      "family": "U8A60D5C",
+      "path": "/Users/johno/projects/boastermelt/references/firmware/extracted/ld5m-f0-window-0x00000-0x100000.bin",
+      "preword": "e2781a96",
+      "trailer_auth14": "4979c08a77386c1658483bf233fe"
+    }
+  },
+  "unit12_probe": {
+    "matches": [],
+    "near_matches": []
+  }
+}
