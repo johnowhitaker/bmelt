@@ -1067,3 +1067,23 @@ affine leaf, but the dense lanes are using a proprietary packet/codeword grammar
 that is not just a disguised copy of the easy motif. The next likely unlock is
 either a runtime oracle for one decoded record, or a deeper classification of
 the hard-lane operation keys.
+
+## The Mailbox Has Banks
+
+One more resident-code pass tightened the controller-mailbox picture. The
+visible 8051 command wrapper around `0x4e80/0x4e84/0x4e88/0x4e8c` had already
+looked like a generic "write three pointers and ring a doorbell" path. Raw
+disassembly showed the selector is more specific than that.
+
+The helper at `0x1daf` shifts a 32-bit value left by `r0` bits. The mailbox
+wrappers call it with `r0 = 0x15`, after loading a selector value into `r7`.
+So selector values `0`, `1`, and `2` become offsets `0x000000`, `0x200000`,
+and `0x400000`. The wrapper validates pointer ranges against a 2 MiB local
+window, adds this bank offset to the first pointer, writes the command
+descriptor, and sets `xdata[0x4e8c] = 1`.
+
+That turns a vague mailbox into a more concrete banked controller-memory
+surface. It does not decode CDD by itself, but it gives us better words for the
+next runtime-oracle attempts: the advertised decoded CDD range
+`0x184000..0x1b3fff` sits inside bank 0, and the same command family may expose
+other banked views of the controller once we can call it in the right phase.

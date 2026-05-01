@@ -101,6 +101,39 @@ around `0x5d`, `0x61`, and `0x65`, then chooses `0x17bb`, `0x17ae`, or
 `0x189c` with selector values `r7 = 0/1/2`. This is a better next target than
 blind Ghidra search if we want to name the `0x4e80/84/88/8c` descriptor fields.
 
+Follow-up raw disassembly clarifies the selector: `0x1daf` is a 32-bit
+left-shift helper, and both `0x17bb` and `0x189c` call it with `r0 = 0x15`
+after loading the selector into `r7`. So the selector contributes
+`selector << 21`, i.e. a `0x200000`-byte bank offset, before the command writes
+`xdata[0x4e80]`.
+
+The two wrappers are therefore best described as banked controller-memory
+command issuers:
+
+```text
+0x17bb:
+  validate three local ranges against a 0x200000-byte window
+  xdata[0x4e80] = pointer_a + (selector << 21)
+  xdata[0x4e84] = pointer_b
+  xdata[0x4e88] = pointer_c
+  xdata[0x4e8c] = 1
+
+0x189c:
+  validate two local ranges against a 0x200000-byte window
+  xdata[0x4e80] = pointer_a + (selector << 21)
+  xdata[0x4e84] = 0
+  xdata[0x4e88] = pointer_b
+  xdata[0x4e8c] = 1
+```
+
+That makes the earlier `r7 = 0/1/2` values look like controller address-bank
+selectors, not small command opcodes. It also explains why caller code spends
+so much effort comparing pointer windows before setting `0x4e8c`: the command
+surface appears to reject or protect transfers that would cross a 2 MiB bank
+window. This may matter for future decoded-CDD work because the advertised
+`0x184000..0x1b3fff` range sits inside bank 0, while adjacent controller
+address banks may expose different currentboot/runtime views.
+
 These paths are consistent with the field guide's current model: the visible
 8051 side stages command descriptors and polls status, while the hidden
 controller/CDD side owns the actual decode/servo details.

@@ -65,6 +65,13 @@ current raw-disassembly CDD mailbox note is:
 analysis/8051/cdd-mailbox-handoff-static-notes.md
 ```
 
+Latest 8051 mailbox detail: the `0x4e80/0x4e84/0x4e88/0x4e8c` command wrapper
+uses `r7 = 0/1/2` as a controller address-bank selector. The wrapper shifts the
+selector left by `0x15` bits (`selector << 21`, a `0x200000`-byte bank offset),
+adds it to the first pointer, validates local ranges against the 2 MiB bank
+window, then rings `xdata[0x4e8c] = 1`. That makes the wrapper a banked
+controller-memory command surface, not just a generic small-opcode mailbox.
+
 Code-execution evidence:
 
 ```text
