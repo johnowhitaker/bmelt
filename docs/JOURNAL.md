@@ -1953,3 +1953,12 @@ linear dump to patch by offset. The response bridge remains the best
 host-visible hook target, but only after we learn a real normal-mode write
 primitive or a reliable way to carry a currentboot edit into the normal
 runtime.
+
+One extra sanity check closed off a tempting shortcut. I tried normalizing all
+captures by the stable bridge tile, as if the whole 64 KiB public window were
+just shifted by one local phase. That made the corpus less stable, not more
+stable: raw public offsets have 746 positions stable at 95% or better, while
+bridge-aligned offsets have only 244. So the bridge has a real local phase,
+but it is not a universal scroll key for the window. The normal work-window is
+more like a set of independently rotating or overlaid code tiles than one
+global ring buffer.

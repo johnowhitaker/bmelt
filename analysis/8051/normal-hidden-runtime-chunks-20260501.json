@@ -51,6 +51,173 @@
       "sha256": "3c78f44b80e972eafcdd92be7bc41596ca18481516af1e7525f85792ee379ebd"
     }
   ],
+  "phase_sanity": {
+    "raw": {
+      "used_captures": 509,
+      "missing_anchor": 0,
+      "multi_anchor": 0,
+      "phase_counts": [],
+      "positions": 1024,
+      "stable_100": 741,
+      "stable_99": 743,
+      "stable_95": 746,
+      "stable_90": 746,
+      "least_stable_bridge_neighborhood": [
+        {
+          "offset": "0x7000",
+          "top": "7e15398acc97",
+          "top_count": 217,
+          "total": 509,
+          "variants": 6
+        },
+        {
+          "offset": "0x7040",
+          "top": "7e15398acc97",
+          "top_count": 256,
+          "total": 509,
+          "variants": 2
+        },
+        {
+          "offset": "0x7080",
+          "top": "5b46d4574b86",
+          "top_count": 256,
+          "total": 509,
+          "variants": 7
+        },
+        {
+          "offset": "0x70c0",
+          "top": "d92154cb54aa",
+          "top_count": 230,
+          "total": 509,
+          "variants": 5
+        },
+        {
+          "offset": "0x7100",
+          "top": "8636ecaed520",
+          "top_count": 253,
+          "total": 509,
+          "variants": 5
+        },
+        {
+          "offset": "0x7140",
+          "top": "20ea2ab16891",
+          "top_count": 251,
+          "total": 509,
+          "variants": 5
+        },
+        {
+          "offset": "0x7180",
+          "top": "8636ecaed520",
+          "top_count": 256,
+          "total": 509,
+          "variants": 6
+        },
+        {
+          "offset": "0x71c0",
+          "top": "99d4493dc4cf",
+          "top_count": 509,
+          "total": 509,
+          "variants": 1
+        },
+        {
+          "offset": "0x7200",
+          "top": "6c1b7a18ce27",
+          "top_count": 256,
+          "total": 509,
+          "variants": 2
+        }
+      ]
+    },
+    "bridge_aligned": {
+      "used_captures": 509,
+      "missing_anchor": 0,
+      "multi_anchor": 0,
+      "phase_counts": [
+        {
+          "phase": "+0x0",
+          "count": 251
+        },
+        {
+          "phase": "-0x40",
+          "count": 136
+        },
+        {
+          "phase": "+0x40",
+          "count": 122
+        }
+      ],
+      "positions": 1024,
+      "stable_100": 244,
+      "stable_99": 244,
+      "stable_95": 244,
+      "stable_90": 244,
+      "least_stable_bridge_neighborhood": [
+        {
+          "offset": "0x7000",
+          "top": "a41108260d66",
+          "top_count": 136,
+          "total": 509,
+          "variants": 6
+        },
+        {
+          "offset": "0x7040",
+          "top": "d92154cb54aa",
+          "top_count": 183,
+          "total": 509,
+          "variants": 6
+        },
+        {
+          "offset": "0x7080",
+          "top": "8f8e0add044c",
+          "top_count": 193,
+          "total": 509,
+          "variants": 5
+        },
+        {
+          "offset": "0x70c0",
+          "top": "d92154cb54aa",
+          "top_count": 204,
+          "total": 509,
+          "variants": 7
+        },
+        {
+          "offset": "0x7100",
+          "top": "841742a3e15a",
+          "top_count": 208,
+          "total": 509,
+          "variants": 6
+        },
+        {
+          "offset": "0x7140",
+          "top": "20ea2ab16891",
+          "top_count": 509,
+          "total": 509,
+          "variants": 1
+        },
+        {
+          "offset": "0x7180",
+          "top": "841742a3e15a",
+          "top_count": 232,
+          "total": 509,
+          "variants": 6
+        },
+        {
+          "offset": "0x71c0",
+          "top": "99d4493dc4cf",
+          "top_count": 251,
+          "total": 509,
+          "variants": 3
+        },
+        {
+          "offset": "0x7200",
+          "top": "6c1b7a18ce27",
+          "top_count": 242,
+          "total": 509,
+          "variants": 3
+        }
+      ]
+    }
+  },
   "anchor_chunks": {
     "public_bridge_8a4c_to_4011": {
       "short": "20ea2ab16891",

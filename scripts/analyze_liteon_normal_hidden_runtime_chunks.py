@@ -55,6 +55,9 @@ PATTERNS = {
     "controller_kick_409c": bytes.fromhex("90 40 9c"),
 }
 
+PHASE_ANCHOR_PATTERN = "public_bridge_8a4c_to_4011"
+PHASE_ANCHOR_CANONICAL_OFFSET = 0x7140
+
 INTERESTING_RANGES = {
     "controller_status": (0x4000, 0x4100),
     "front_panel_or_status": (0x4700, 0x4900),
@@ -285,6 +288,82 @@ def baseline_hashes(baseline_dir: Path) -> list[dict[str, str]]:
     return rows
 
 
+def tile_stability(paths: list[Path], align_to_bridge: bool) -> dict[str, Any]:
+    anchor = PATTERNS[PHASE_ANCHOR_PATTERN]
+    position_chunks: dict[int, Counter[str]] = defaultdict(Counter)
+    phase_counts: Counter[int] = Counter()
+    missing_anchor = 0
+    multi_anchor = 0
+    used = 0
+
+    for path in paths:
+        data = path.read_bytes()
+        phase = 0
+        if align_to_bridge:
+            hits = []
+            for offset in range(0, len(data) - CHUNK_SIZE + 1, CHUNK_SIZE):
+                chunk = data[offset : offset + CHUNK_SIZE]
+                if anchor in chunk:
+                    hits.append(offset)
+            if not hits:
+                missing_anchor += 1
+                continue
+            if len(hits) > 1:
+                multi_anchor += 1
+            phase = hits[0] - PHASE_ANCHOR_CANONICAL_OFFSET
+            phase_counts[phase] += 1
+        used += 1
+
+        for offset in range(0, len(data) - CHUNK_SIZE + 1, CHUNK_SIZE):
+            normalized_offset = (offset - phase) % len(data)
+            digest = sha256_hex(data[offset : offset + CHUNK_SIZE])
+            position_chunks[normalized_offset][digest] += 1
+
+    ratios = []
+    for offset, counter in position_chunks.items():
+        total = sum(counter.values())
+        top_digest, top_count = counter.most_common(1)[0]
+        ratios.append(
+            {
+                "offset": offset,
+                "top_sha256": top_digest,
+                "top_count": top_count,
+                "total": total,
+                "ratio": top_count / total,
+                "variants": len(counter),
+            }
+        )
+
+    return {
+        "used_captures": used,
+        "missing_anchor": missing_anchor,
+        "multi_anchor": multi_anchor,
+        "phase_counts": [{"phase": f"{phase:+#x}", "count": count} for phase, count in phase_counts.most_common()],
+        "positions": len(ratios),
+        "stable_100": sum(1 for row in ratios if row["ratio"] >= 1.0),
+        "stable_99": sum(1 for row in ratios if row["ratio"] >= 0.99),
+        "stable_95": sum(1 for row in ratios if row["ratio"] >= 0.95),
+        "stable_90": sum(1 for row in ratios if row["ratio"] >= 0.90),
+        "least_stable_bridge_neighborhood": [
+            {
+                "offset": f"0x{row['offset']:04x}",
+                "top": row["top_sha256"][:12],
+                "top_count": row["top_count"],
+                "total": row["total"],
+                "variants": row["variants"],
+            }
+            for row in sorted(
+                (
+                    row
+                    for row in ratios
+                    if 0x7000 <= int(row["offset"]) < 0x7240
+                ),
+                key=lambda item: int(item["offset"]),
+            )
+        ],
+    }
+
+
 def write_json(path: Path, data: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(data, indent=2) + "\n")
@@ -316,6 +395,9 @@ def write_report(path: Path, report: dict[str, Any]) -> None:
             for cand in row["cdd_public_offset_candidates"][:4]
         ) or "-"
         anchor_rows.append([f"`{name}`", f"`{row['short']}`", str(row["observations"]), offsets, exact, cdd])
+
+    raw_phase = report["phase_sanity"]["raw"]
+    bridge_phase = report["phase_sanity"]["bridge_aligned"]
 
     lines = [
         "# Normal Hidden Runtime Chunk Analysis",
@@ -365,6 +447,45 @@ def write_report(path: Path, report: dict[str, Any]) -> None:
         "naively trusted the slot number. That argues against using normal "
         "public offsets as direct decoded CDD addresses without an additional "
         "address/phase model.",
+        "",
+        "## Phase Sanity Check",
+        "",
+        "I also tested the tempting idea that the whole 64 KiB work-window is "
+        "just globally shifted by the public bridge chunk. It is not. The bridge "
+        "appears once in every capture and its local phase is real, but using it "
+        "as a global scroll offset makes the window *less* stable overall.",
+        "",
+        markdown_table(
+            ["view", "captures", "stable 100%", "stable >=95%", "stable >=90%", "positions"],
+            [
+                [
+                    "`raw public offsets`",
+                    str(raw_phase["used_captures"]),
+                    str(raw_phase["stable_100"]),
+                    str(raw_phase["stable_95"]),
+                    str(raw_phase["stable_90"]),
+                    str(raw_phase["positions"]),
+                ],
+                [
+                    "`bridge-aligned`",
+                    str(bridge_phase["used_captures"]),
+                    str(bridge_phase["stable_100"]),
+                    str(bridge_phase["stable_95"]),
+                    str(bridge_phase["stable_90"]),
+                    str(bridge_phase["positions"]),
+                ],
+            ],
+        ),
+        "",
+        "Bridge phases:",
+        "",
+        markdown_table(
+            ["phase vs +0x7140", "captures"],
+            [[f"`{row['phase']}`", str(row["count"])] for row in bridge_phase["phase_counts"]],
+        ),
+        "",
+        "So the public bridge gives a local anchor for one response-builder "
+        "island, not a universal address correction for the whole work-window.",
         "",
         "## Top Hidden Runtime Chunks",
         "",
@@ -439,6 +560,10 @@ def main() -> int:
         "chunks_with_visible_refs": chunks_with_refs,
         "chunks_without_visible_refs": chunks_without_refs,
         "baseline_hashes": baseline_hashes(args.baseline_dir),
+        "phase_sanity": {
+            "raw": tile_stability(paths, align_to_bridge=False),
+            "bridge_aligned": tile_stability(paths, align_to_bridge=True),
+        },
         "anchor_chunks": anchor_chunks,
         "top_hidden_runtime_chunks": top_hidden,
     }

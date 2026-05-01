@@ -1865,5 +1865,7 @@ Immediate useful directions:
     chunk `4037c8574920`. The important caution is that the same chunk appears
     at multiple public offsets, so public slot numbers like `+0x7140` cannot
     be treated as direct decoded CDD addresses without a separate phase/address
-    model. Use this corpus as hidden-runtime code evidence, not as a linear
-    decoded CDD dump.
+    model. A bridge-aligned global phase test made stability worse
+    (`746` raw positions >=95% stable versus `244` bridge-aligned), so the
+    bridge is only a local anchor, not a universal window scroll key. Use this
+    corpus as hidden-runtime code evidence, not as a linear decoded CDD dump.

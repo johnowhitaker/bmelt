@@ -789,6 +789,11 @@ to different records. Treat the normal work-window as a hidden-runtime tile
 corpus. Do not treat it as a linear decoded CDD image unless a future phase or
 address model explains the rotation.
 
+The script also tests a simple phase hypothesis. Anchoring the whole window to
+the public bridge does not work: raw public offsets have 746 positions stable
+at >=95%, while bridge-aligned offsets have only 244. The bridge phase is local
+to one response-builder island, not a global rotation key.
+
 Recommended next directions:
 
 - keep static work on the hidden tile corpus, especially chunks touching

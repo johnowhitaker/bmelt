@@ -42,6 +42,25 @@ The differing hashes are expected: even the baseline reads expose different rota
 
 The repeated CDD candidate changes for the same chunk are the important sanity check. For example, the public bridge chunk appears at several public offsets, which would place it in different CDD records if we naively trusted the slot number. That argues against using normal public offsets as direct decoded CDD addresses without an additional address/phase model.
 
+## Phase Sanity Check
+
+I also tested the tempting idea that the whole 64 KiB work-window is just globally shifted by the public bridge chunk. It is not. The bridge appears once in every capture and its local phase is real, but using it as a global scroll offset makes the window *less* stable overall.
+
+| view | captures | stable 100% | stable >=95% | stable >=90% | positions |
+| --- | --- | --- | --- | --- | --- |
+| `raw public offsets` | 509 | 741 | 746 | 746 | 1024 |
+| `bridge-aligned` | 509 | 244 | 244 | 244 | 1024 |
+
+Bridge phases:
+
+| phase vs +0x7140 | captures |
+| --- | --- |
+| `+0x0` | 251 |
+| `-0x40` | 136 |
+| `+0x40` | 122 |
+
+So the public bridge gives a local anchor for one response-builder island, not a universal address correction for the whole work-window.
+
 ## Top Hidden Runtime Chunks
 
 | chunk | obs | top public offsets | exact refs | patterns | interesting refs |
