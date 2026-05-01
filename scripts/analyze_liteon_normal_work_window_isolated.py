@@ -110,10 +110,16 @@ def load_dir(run_dir: Path, chunk_size: int) -> dict[str, Any]:
     top = []
     for digest in stimulus_only:
         item = chunks[digest]
+        stimulus_counts = Counter(
+            stimulus_name(Path(obs["capture"] + ".window.bin"))
+            for obs in item["observations"]
+            if obs["kind"] == "stimulus"
+        )
         top.append(
             {
                 "sha256": digest,
                 "stimulus_observations": item["kinds"]["stimulus"],
+                "stimuli": dict(stimulus_counts),
                 "offsets": sorted(item["offsets"]),
                 "target_refs": item["target_refs"],
                 "sample_hex": item["sample_hex"],
@@ -172,14 +178,17 @@ def render_md(report: dict[str, Any]) -> str:
             "",
             f"## {row['run']}",
             "",
-            "| obs | offsets | target refs | sample |",
-            "|---:|---|---|---|",
+            "| obs | stimuli | offsets | target refs | sample |",
+            "|---:|---|---|---|---|",
         ]
         for chunk in row["top_stimulus_only_chunks"][:24]:
+            stimuli = ", ".join(
+                f"`{name}` x{count}" for name, count in chunk.get("stimuli", {}).items()
+            ) or "-"
             refs = ", ".join(f"`0x{addr:04x}`" for addr in chunk["target_refs"]) or "-"
             offsets = ", ".join(f"`+0x{off:04x}`" for off in chunk["offsets"][:8])
             lines.append(
-                f"| {chunk['stimulus_observations']} | {offsets} | {refs} | `{chunk['sample_hex']}` |"
+                f"| {chunk['stimulus_observations']} | {stimuli} | {offsets} | {refs} | `{chunk['sample_hex']}` |"
             )
 
     lines += [

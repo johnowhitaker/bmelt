@@ -1628,3 +1628,23 @@ unharvested code slice, or an earlier dispatch stage. Either way, the next live
 experiment should be narrower than "try more random commands": vary fields in
 one read/status command family and watch whether the `0x8a4d/0x8a4e` field
 roles move in lockstep with the bridge snippets.
+
+I ran that narrower experiment next, still in normal mode and still read-only.
+This time the command family was "things that ask ordinary optical-drive
+questions": `REQUEST SENSE`, several `READ TOC` formats, and two
+`GET PERFORMANCE` types. The drive stayed in normal `LD5M`.
+
+The useful result was a split between successful and failed status paths.
+`REQUEST SENSE` and `GET PERFORMANCE type03` returned normally. The no-disc
+`READ TOC` variants and `GET PERFORMANCE type00` returned failed/check status,
+and those failures consistently exposed a recurring work-window chunk around
+`+0x8b00`. That chunk references `0x8a49` and `0x8a4d`, exactly the
+opcode/selector and count-ish bytes we care about. A companion chunk around
+`+0x7140/+0x7180` touches the controller gateway through `0x4098`, not the
+`0x4099` bridge seen in the GET CONFIG good-response path.
+
+So the normal runtime now has two visible surfaces to pull on. GET CONFIG gives
+a clean successful-response route through `0x4099` and the later shadow bytes.
+Failed TOC/performance requests give a status/error route through `0x8a49`,
+`0x8a4d`, and a `0x4098`-looking gateway. That is not yet an oracle, but it is
+another shaped edge of the same machine.

@@ -1662,3 +1662,16 @@ Immediate useful directions:
     CONFIGURATION compare is still absent even though GET CONFIG tags the
     bridge dynamically, so that path is likely table-driven, handled through an
     unharvested slice, or dispatched before this compare cluster.
+48. A focused read/status correlation run is in
+    `references/evidence/live/normal-work-window-readstatus-correlation-20260501`
+    with reports
+    `analysis/8051/normal-work-window-readstatus-correlation-20260501.md`,
+    `analysis/8051/normal-packet-selector-map-readstatus-20260501.md`, and
+    `analysis/8051/normal-readstatus-correlation-20260501.md`. It ran four
+    cycles of baseline, REQUEST SENSE, READ TOC formats `0/1/2/4`, and GET
+    PERFORMANCE types `0/3`; the drive stayed normal `LD5M`. The no-disc
+    READ TOC and GET PERFORMANCE type00 failure paths consistently exposed a
+    stimulus-only `+0x8bxx` chunk referencing `0x8a49` and `0x8a4d`, plus a
+    less frequent `+0x7140/+0x7180` `0x4098` gateway-looking chunk. This is a
+    separate failed-command/status surface from the GET CONFIG good-response
+    `0x4099` bridge.
