@@ -110,6 +110,73 @@ The main differences are:
 This makes the normal READ BUFFER window valuable for runtime observation even
 though it still does not expose decoded CDD.
 
+## 24-Bit Sparse Map
+
+A later sparse scan sampled 64 bytes at every `0x010000` boundary across the
+full 24-bit READ BUFFER offset space. IDs `0x01` and `0x02` both collapse to
+three shapes:
+
+```text
+0x?00000  small header, starts ff 54 54 45 ("TTE")
+0x?70000  the same 0x070000 work-window header sample
+else      all zero in this sparse scan
+```
+
+So the public normal-mode reader mirrors at 1 MiB granularity for these IDs.
+That matches the currentboot gateway result: high addresses like `0x184000` do
+not reach an independent decoded-CDD mapping through this path. They fold onto
+zero-looking slots in the same 20-bit window.
+
+Evidence:
+
+```text
+references/evidence/live/normal-read-buffer-work-window-20260501/id01-id02-24bit-sparse-summary.txt
+```
+
+## Buffer ID And Mode Scan
+
+An all-ID scan at `0x070000` found only IDs `0x01` and `0x02`. A broader
+selected-offset scan found these READ BUFFER mode-1 responders:
+
+```text
+id 0x00  offset 0x000000 only, 64-byte Initio bridge descriptor
+id 0x01  public 20-bit LiteOn work window
+id 0x02  same public 20-bit LiteOn work window
+id 0xe2  offset 0x000000, aliases id01/id02 work-window +0x4000
+id 0xf1  offset 0x000000, aliases id01/id02 work-window +0x5000
+```
+
+The `0xe2` and `0xf1` aliases are useful names, but not new memory surfaces:
+
+```text
+READ BUFFER id=e2 offset=0 len=0x1000 == id01 offset=0x074000 len=0x1000
+READ BUFFER id=f1 offset=0 len=0x0b60 == id01 offset=0x075000 len=0x0b60
+```
+
+`id=f1` is the `KEYPARA`/media-profile table. `id=e2` begins with the compact
+`LT...` record and `PLDS CORPORATION` string from the work window.
+
+An exhaustive scan of READ BUFFER modes `0x00..0x1f` at offset zero found the
+same thing: only mode `0x01` produced any data. Every other mode rejected every
+ID in that 64-byte probe.
+
+Allocation length matters. A later offset-zero length sweep found that
+`id=0xf0` and `id=0xf2` respond to exact `0x80`-byte reads. Those IDs are
+tracked separately:
+
+```text
+analysis/8051/normal-read-buffer-f0-f2-exact80-20260501.md
+```
+
+Evidence:
+
+```text
+references/evidence/live/normal-read-buffer-id-scan-20260501/
+references/evidence/live/normal-read-buffer-extra-buffers-20260501/
+references/evidence/live/normal-read-buffer-mode-scan-20260501/
+references/evidence/live/normal-read-buffer-mode-scan-all-20260501/
+```
+
 ## Static Clues
 
 The normal window has front-panel/mechanics references that differ from the

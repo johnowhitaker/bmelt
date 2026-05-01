@@ -1297,3 +1297,18 @@ Immediate useful directions:
    even across a true servo-driven `+5V` power cycle.
 8. For sled/focus/laser goals, statically reverse the `0x59xx` routines from
    the gateway report before any more live mechanics pokes.
+9. Public normal-mode `READ BUFFER mode=1` IDs `0x01` and `0x02` mirror at
+   1 MiB granularity across the 24-bit offset field. Do not expect addresses
+   like `0x184000` to reach decoded CDD through this path unless a different
+   buffer ID or command mode is found.
+10. The first broad READ BUFFER scan did not find that different mode. Modes
+    `0x00..0x1f` were scanned at offset zero and only mode `0x01` produced any
+    data. In mode `0x01`, IDs `0xe2` and `0xf1` are only aliases into the
+    public work window: `e2:0 == id01:0x074000`, and
+    `f1:0 == id01:0x075000`.
+11. Allocation length matters. Normal `READ BUFFER mode=1 id=f0/f2` respond to
+    exact `0x80`-byte chunks even though broad 64-byte scans miss them. `id=f0`
+    is encrypted F0 readback; issue EXTRAINQ immediately before dumping, then
+    decrypt with the EXTRAINQ IV/key and AES-CBC reset every `0x80`. `id=f2`
+    exposes encoded container material around CDD2/profile/trailer, not decoded
+    CDD.

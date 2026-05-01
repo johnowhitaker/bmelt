@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-"""Read a LiteOn READ BUFFER mode=1 window in chunks.
+"""Read a LiteOn READ BUFFER window in chunks.
 
-This is a generic wrapper around SCSI READ BUFFER(10):
+This is a generic wrapper around SCSI READ BUFFER(10). By default it uses the
+known LiteOn-useful mode 1 CDB:
 
     3C 01 <id> <24-bit offset> <24-bit length> 00
 
@@ -43,14 +44,16 @@ def ascii_preview(data: bytes, limit: int = 96) -> str:
     return "".join(chr(byte) if 0x20 <= byte < 0x7F else "." for byte in data[:limit])
 
 
-def read_buffer_cdb(buffer_id: int, offset: int, length: int) -> list[int]:
+def read_buffer_cdb(buffer_id: int, offset: int, length: int, mode: int = 0x01) -> list[int]:
     if not 0 <= offset <= 0xFFFFFF:
         raise ValueError(f"READ BUFFER offset out of 24-bit range: 0x{offset:x}")
     if not 0 <= length <= 0xFFFFFF:
         raise ValueError(f"READ BUFFER length out of 24-bit range: 0x{length:x}")
+    if not 0 <= mode <= 0x1F:
+        raise ValueError(f"READ BUFFER mode out of range: 0x{mode:x}")
     return [
         0x3C,
-        0x01,
+        mode & 0x1F,
         buffer_id & 0xFF,
         (offset >> 16) & 0xFF,
         (offset >> 8) & 0xFF,
@@ -70,13 +73,14 @@ def run_read(
     *,
     sg_raw: str,
     device: str,
+    mode: int,
     buffer_id: int,
     offset: int,
     length: int,
     timeout: int,
     process_timeout: float,
 ) -> tuple[bytes, dict[str, Any]]:
-    cdb = read_buffer_cdb(buffer_id, offset, length)
+    cdb = read_buffer_cdb(buffer_id, offset, length, mode)
     cmd = [
         sg_raw,
         "-b",
@@ -140,6 +144,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--device", default="/dev/sg0")
     parser.add_argument("--sg-raw", default=DEFAULT_SG_RAW)
+    parser.add_argument("--mode", type=parse_byte, default=0x01)
     parser.add_argument("--id", required=True, type=parse_byte, dest="buffer_id")
     parser.add_argument("--offset", required=True, type=parse_int)
     parser.add_argument("--length", required=True, type=parse_int)
@@ -171,6 +176,7 @@ def main() -> int:
         chunk, record = run_read(
             sg_raw=args.sg_raw,
             device=args.device,
+            mode=args.mode,
             buffer_id=args.buffer_id,
             offset=offset,
             length=chunk_len,
@@ -194,6 +200,7 @@ def main() -> int:
     report = {
         "device": args.device,
         "id": args.buffer_id,
+        "mode": args.mode,
         "offset": args.offset,
         "length": args.length,
         "chunk_size": args.chunk_size,
@@ -210,7 +217,7 @@ def main() -> int:
     if args.quiet:
         print(
             f"read {len(data)} bytes from READ BUFFER id=0x{args.buffer_id:02x} "
-            f"offset=0x{args.offset:06x} sha256={report['sha256']}"
+            f"mode=0x{args.mode:02x} offset=0x{args.offset:06x} sha256={report['sha256']}"
         )
     else:
         print(json.dumps({k: v for k, v in report.items() if k != "records"}, sort_keys=True))

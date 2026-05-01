@@ -1,0 +1,18 @@
+rows 256
+mode 0x01 ids 256 offsets 1 length 128
+offset=0x000000 rc=5 timeout=False len=0 count=250 interesting=0 sha= ids=0x00 0x03 0x04 0x05 0x06 0x07 0x08 0x09 0x0a 0x0b 0x0c 0x0d 0x0e 0x0f 0x10 0x11 0x12 0x13 0x14 0x15 0x16 0x17 0x18 0x19 0x1a 0x1b 0x1c 0x1d 0x1e 0x1f 0x20 0x21 ...
+offset=0x000000 rc=0 timeout=False len=128 count=1 interesting=1 sha=1b448780ca721825 ids=0xf1
+  ascii=KEYPARA.........CDROM...........................................
+  hex=4b4559504152419700000000000000004344524f4d0000030c000000000000000000000000000000000000000000000000000000000000000000000000000000
+offset=0x000000 rc=0 timeout=False len=128 count=1 interesting=1 sha=251137803ea5f0fc ids=0xf2
+  ascii=CDD...S....}.........p..@..?..?....wt....iJH....By.d.......1H.T.
+  hex=434444091016530d9000007dec030810870e80000070001840001b3fff1b3fff0dabd47774031ad990694a4808b2add942790964ded2fdd907b1893148d154da
+offset=0x000000 rc=0 timeout=False len=128 count=2 interesting=2 sha=417713c9df6e7dc2 ids=0x01 0x02
+  ascii=.TTE............................................................
+  hex=ff545445000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+offset=0x000000 rc=0 timeout=False len=128 count=1 interesting=1 sha=d121b67c088e54ec ids=0xe2
+  ascii=LT............*Q.........n...:=%Il.g.o.....e.' .................
+  hex=4c540588049204930e1c1baa1b092a51870003b5038e0491046e0dea0d3a3d25496c0567046f04b80e021b6515272000ffffffffffffffffffffffffffffffff
+offset=0x000000 rc=0 timeout=False len=128 count=1 interesting=1 sha=edf38023807e3148 ids=0xf0
+  ascii=.qP..M. 2.;.G&I..]N&..!.u=kHg.n..T.8...+.!...3...p.S.8..3.lm.3..
+  hex=1b7150e0ec4db52032e13b1a472649adbc5d4e26011721b6753d6b4867ff6ec61254e738fee7c12bb02102d2b733e6dee970e153b938fb8433eb6c6dc633a1c9

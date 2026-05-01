@@ -1143,6 +1143,30 @@ But a sparse first-MiB scan found a normal-mode map:
 0x070000..0x07ffff  mixed work/profile/code window
 ```
 
+A full 24-bit sparse pass then showed that this public normal reader has the
+same practical address-width limit as the currentboot gateway path: IDs `0x01`
+and `0x02` mirror at 1 MiB granularity. The only 64 KiB slots with non-zero
+64-byte samples were `0x?00000` and `0x?70000`; all the decoded-CDD candidate
+addresses fold into zero-looking slots through this route.
+
+An all-ID sweep tightened that map. At `0x070000`, only IDs `0x01` and `0x02`
+respond. At offset zero, `id=0x00` returns a 64-byte Initio bridge descriptor,
+while `id=0xe2` and `id=0xf1` expose named slices of the same `0x070000` work
+window. `id=e2` is exactly work-window `+0x4000`; `id=f1` is exactly
+work-window `+0x5000`, the `KEYPARA` media-profile table. An exhaustive
+offset-zero scan of READ BUFFER modes `0x00..0x1f` found no other responders,
+so the useful public variant remains mode `0x01`.
+
+Then the length sweep caught a subtle but important miss: some handlers only
+answer exact request sizes. `READ BUFFER id=f0` and `id=f2` both answer exact
+`0x80`-byte requests. `id=f0` is the encrypted F0 readback path, but the raw
+ciphertext is stateful: a stable pre-EXTRAINQ dump did not decrypt with the
+current key, while a read taken immediately after live EXTRAINQ decrypted
+cleanly to stock LD5M using the EXTRAINQ-derived AES-CBC key with `0x80` resets.
+`id=f2` exposes encoded container material, starting with CDD2 and later showing
+the identity/profile and trailer marker areas. It is useful, but still not the
+decoded CDD runtime image.
+
 The full normal `0x070000` dump has the familiar `KEYPARA`, media-profile
 strings, `PLDS CORPORATION`, serial-looking material, and 8051-like code. It is
 not byte-stable: repeated reads change bytes mostly in pages `+0x6000`,

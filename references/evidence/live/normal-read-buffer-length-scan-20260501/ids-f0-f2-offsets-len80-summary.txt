@@ -1,0 +1,40 @@
+rows 15
+mode 0x01 ids 3 offsets 5 length 128
+offset=0x000000 rc=0 timeout=False len=128 count=1 interesting=1 sha=1b448780ca721825 ids=0xf1
+  ascii=KEYPARA.........CDROM...........................................
+  hex=4b4559504152419700000000000000004344524f4d0000030c000000000000000000000000000000000000000000000000000000000000000000000000000000
+offset=0x000000 rc=0 timeout=False len=128 count=1 interesting=1 sha=251137803ea5f0fc ids=0xf2
+  ascii=CDD...S....}.........p..@..?..?....wt....iJH....By.d.......1H.T.
+  hex=434444091016530d9000007dec030810870e80000070001840001b3fff1b3fff0dabd47774031ad990694a4808b2add942790964ded2fdd907b1893148d154da
+offset=0x000000 rc=0 timeout=False len=128 count=1 interesting=1 sha=edf38023807e3148 ids=0xf0
+  ascii=.qP..M. 2.;.G&I..]N&..!.u=kHg.n..T.8...+.!...3...p.S.8..3.lm.3..
+  hex=1b7150e0ec4db52032e13b1a472649adbc5d4e26011721b6753d6b4867ff6ec61254e738fee7c12bb02102d2b733e6dee970e153b938fb8433eb6c6dc633a1c9
+offset=0x000080 rc=0 timeout=False len=128 count=1 interesting=1 sha=00c3a717cdaeac5f ids=0xf2
+  ascii=.j.). <.[x......A..@.....xGB.C....JR.r..!..D..y.3..D.".....tH...
+  hex=056ad0298c203cdc5b78021da2108cdc41f80340e801a3dcdf784742b843cedc01aa4a52ce7219dd21b908441ad279dd33b10b44fc22bfdddb10cd74489212de
+offset=0x000080 rc=0 timeout=False len=128 count=1 interesting=1 sha=a2e84812d22c227c ids=0xf0
+  ascii=.........$8......w..^.P.hz........g...4}.]..av.G..%0.k.....A..J.
+  hex=afdf98ace4ef11a9f124388eadaafdc2e67718ae5ecd501b687a1eaddc9f01a419b067efa8d8347d9b5dc4e56176fa479ad32530f86bf315ab169a4181da4ada
+offset=0x000080 rc=0 timeout=False len=128 count=1 interesting=1 sha=f71eb5a94cba0c7e ids=0xf1
+  ascii=.....<THA../.-.4.........>...7...9.....-........LSCDRW..........
+  hex=0001db0d033c5448418a052f062d033406c7021b13030000de3ef9f40437ffff013980a0b400002d00000000000000004c534344525700030300000000000000
+offset=0x000100 rc=0 timeout=False len=128 count=1 interesting=1 sha=50853418ef994387 ids=0xf1
+  ascii=HSCDRW..........................................................
+  hex=48534344525700030300000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+offset=0x000100 rc=0 timeout=False len=128 count=1 interesting=1 sha=a95aba60759553b3 ids=0xf0
+  ascii=...+&.U.URg.......h...c.......d...........Z.....){....... l...g.
+  hex=1deae82b26fd5581555267a1a9eec8841f0468b2f0c063c50b01ae8a13e9647f8c11d2b8a9ec9a1f80b25aa0a0c9c7c2297b92109dc0da1c18206c09dab267b8
+offset=0x000100 rc=0 timeout=False len=128 count=1 interesting=1 sha=e09654dd71d25326 ids=0xf2
+  ascii=.).%P.5....".......t.s.....`.....`Ka.....h@......h@......h@.....
+  hex=1d298f2550c235e1b0c08622b2c281e1fc888b748473b8e1f2f10d60d08218e2da604b619a0282e20d6840031a80d3e20d6840031ac0d6e20d6840031a00dae2
+offset=0x070000 rc=5 timeout=False len=0 count=1 interesting=0 sha= ids=0xf1
+offset=0x070000 rc=0 timeout=False len=128 count=1 interesting=1 sha=919292f0c0acde3c ids=0xf0
+  ascii=z..K4...q......B..v5.r.Y@_....a........''.DX..pw}..u.I..>A.p..<.
+  hex=7ab8c14b341a969d7193bae0aab5a442bba17635cb72cc59405fa202058f61d9e5b9899e18eeca2727d24458900e70777d0bee75cd4981a13e41e170f2bc3c01
+offset=0x070000 rc=0 timeout=False len=128 count=1 interesting=1 sha=e9175db65a978909 ids=0xf2
+  ascii=................................................................
+  hex=ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+offset=0x184000 rc=5 timeout=False len=0 count=2 interesting=0 sha= ids=0xf0 0xf1
+offset=0x184000 rc=0 timeout=False len=128 count=1 interesting=1 sha=e9175db65a978909 ids=0xf2
+  ascii=................................................................
+  hex=ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
