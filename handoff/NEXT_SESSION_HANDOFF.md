@@ -1350,3 +1350,44 @@ Good next steps:
 - try to determine what controller address/bank selector would expose the
   normal-mode decoded overlays;
 - avoid new CDD mutations on the spare until the read-only oracle is exhausted.
+
+## 2026-05-02 D7 Tail Alias Update
+
+The spare is currently useful in D7/currentboot mode. Do not reflexively recover
+it before deciding whether more currentboot tail reads are needed.
+
+Latest evidence:
+
+```text
+references/evidence/live/currentboot-byte-oracle-targeted-20260502T0150Z/
+analysis/8051/currentboot-d7-tail-alias-20260502.md
+```
+
+Key correction:
+
+```text
+0x184000 / 0x18b170 / 0x191010 through the D7 hook are F0 modulo aliases,
+not decoded CDD runtime bytes.
+```
+
+Key new lead:
+
+```text
+0xe8000..0xfffff, erased in stock F0, exposes currentboot work/profile pages.
+```
+
+Observed map:
+
+```text
+0xe8000..0xe9fff  currentboot gateway/work-like data
+0xea000..0xebfff  sampled 00
+0xec000..0xeffff  sampled ff
+0xf0000..0xfdfff  repeated profile/key-parameter pages with live drive strings
+0xfe000..0xfffff  ff
+```
+
+The full raw D7 response does not give bulk reads; the reliable byte remains
+`xdata[0xc07f]`. A faster hook would need to loop internally over sequential
+source addresses and pack selected bytes into the response. Bank that as an IO
+optimization; the higher-value immediate thread is understanding the tail alias
+and returning to a normal-runtime decoded-overlay oracle.

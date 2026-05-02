@@ -2476,3 +2476,59 @@ us with a much better read-only tool and a cleaner next question: can we use
 the byte oracle to map the resident `0x1717`/mailbox state deeply enough to
 turn controller-address reads into a decoded-runtime oracle, or do we need the
 same idea in a later normal-mode response path?
+
+The next D7 pass corrected that question in an important way. I reinstalled
+the known-good `0xd7` mapped-source hook on the spare, cold-power-cycled it,
+then sent only event 1 so the drive stayed in currentboot with the patched
+response path live. The byte oracle still works, but reads in the descriptor's
+nominal decoded range are not decoded CDD in this phase. They alias the stock
+F0 image modulo 1 MiB:
+
+```text
+0x100000 -> stock F0[0x00000]
+0x180000 -> stock F0[0x80000]
+0x184000 -> stock F0[0x84000]
+0x18b170 -> stock F0[0x8b170]
+0x191010 -> stock F0[0x91010]
+0x1b3f00 -> stock F0[0xb3f00]
+```
+
+So the earlier "nonzero `0x184000`" lead is now demoted. It was real data, but
+not the decoded CDD image. That is a useful correction rather than a failure:
+we can stop trying to explain those bytes as controller firmware.
+
+The useful surprise was the other end of the image. Stock LD5M is erased from
+`0xe8000..0xfffff`, but the D7 oracle exposes live currentboot/profile material
+there. A read starting at `0xe7fe0` matches the LD5M trailer through `0xe7fff`,
+then immediately diverges at `0xe8000`. Dense reads now show:
+
+```text
+0xe8000..0xe9fff  currentboot work/gateway-like window
+0xea000..0xebfff  sampled as all 00
+0xec000..0xeffff  sampled as all ff
+0xf0000..0xfdfff  repeated profile/key-parameter pages
+0xfe000..0xfffff  all ff
+```
+
+The `0xf0000` tail contains the spare drive's live identity/profile strings:
+`PLDS CORPORATION`, `KEYPARA`, `CDROM`, disc profile labels like `DVD+R` and
+`DVDRAM`, plus the spare's own serial/calibration-looking strings. These are
+not present in the sealed stock F0 image. Structurally they match the older
+Linux drive #1 currentboot gateway dump at `0x070000`, but the per-drive
+strings differ, exactly as expected.
+
+I also checked whether the raw `0xd7` 128-byte window could be used as a bulk
+reader. It cannot, at least not with this hook. Most of the returned window is
+a fixed/stale CDD-header buffer, and the useful selected source byte sits at
+`xdata[0xc07f]` / response byte `0xa0`. A faster reader would need a new hook
+that loops internally, advances the mapped source address, and copies the
+selected byte repeatedly into the response. That is worth banking as an IO
+engineering task, but the immediate RE value is lower than analyzing the tail
+alias we already captured.
+
+Evidence and analysis:
+
+```text
+references/evidence/live/currentboot-byte-oracle-targeted-20260502T0150Z/
+analysis/8051/currentboot-d7-tail-alias-20260502.md
+```

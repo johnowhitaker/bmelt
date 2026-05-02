@@ -1,0 +1,326 @@
+{
+  "captures": [
+    {
+      "ascii_preview_96": "................................................................",
+      "file": "alias_40702c_0040.bin",
+      "first16_hex": "adadadadadadadadadadadadadadadad",
+      "sha256": "2851d35f7ab0d33987904e17bd8d7d5e673acf4fa170583707b1a04335de4cfe",
+      "size": 64
+    },
+    {
+      "ascii_preview_96": "................................................................",
+      "file": "alias_40704c_0040.bin",
+      "first16_hex": "adadadadadadadadadadadadadadadad",
+      "sha256": "2851d35f7ab0d33987904e17bd8d7d5e673acf4fa170583707b1a04335de4cfe",
+      "size": 64
+    },
+    {
+      "ascii_preview_96": "................................................................",
+      "file": "alias_428119_0040.bin",
+      "first16_hex": "adadadadadadadadadadadadadadadad",
+      "sha256": "2851d35f7ab0d33987904e17bd8d7d5e673acf4fa170583707b1a04335de4cfe",
+      "size": 64
+    },
+    {
+      "ascii_preview_96": "................................................................",
+      "file": "alias_428139_0040.bin",
+      "first16_hex": "adadadadadadadadadadadadadadadad",
+      "sha256": "2851d35f7ab0d33987904e17bd8d7d5e673acf4fa170583707b1a04335de4cfe",
+      "size": 64
+    },
+    {
+      "ascii_preview_96": "................................................................",
+      "file": "alias_584000_0040.bin",
+      "first16_hex": "adadadadadadadadadadadadadadadad",
+      "sha256": "2851d35f7ab0d33987904e17bd8d7d5e673acf4fa170583707b1a04335de4cfe",
+      "size": 64
+    },
+    {
+      "ascii_preview_96": "................................................................",
+      "file": "alias_584020_0040.bin",
+      "first16_hex": "adadadadadadadadadadadadadadadad",
+      "sha256": "2851d35f7ab0d33987904e17bd8d7d5e673acf4fa170583707b1a04335de4cfe",
+      "size": 64
+    },
+    {
+      "ascii_preview_96": "CDD...S....}.........p..@..?..?....wt....iJH....By.d.......1H.T.M.M<.A.....=.r...X.p....xq.a..r.",
+      "file": "cdd2_header_0d9000_0200.bin",
+      "first16_hex": "434444091016530d9000007dec030810",
+      "sha256": "c089e1d020a6d6a23f61b9ae80ace0d033be4bbaa1999968baa9a784b9e98c44",
+      "size": 512
+    },
+    {
+      "ascii_preview_96": "CDD...S....}.........p..@..?..?..z...........%...R...6..1.....E..r......N:.~....^bJ...1.........",
+      "file": "cdd_header_00702c_0200.bin",
+      "first16_hex": "434444091016530d9000007dec030810",
+      "sha256": "c73d5d97938a6258f3ee35b17d65a71646bd2835723d0e3eda5bd4c69792a864",
+      "size": 512
+    },
+    {
+      "ascii_preview_96": ".P....BOOT....BOOT....BOOT....BOOT....BOOT......D....J..`....Ib.T.D@..@..T....L...........x.....",
+      "file": "ctrl_100000_0100.bin",
+      "first16_hex": "0250ca020000424f4f5400020000424f",
+      "sha256": "4429ed8f3123c8819a1f5e988eb47832cd7a64eb90e3b41fafca795729c4b874",
+      "size": 256
+    },
+    {
+      "ascii_preview_96": ".tP.N......Z.v.9.:_... ./...aq62.p...Y7.......}.,..'.s..*..uIja.m....7&..\\..v.DIi.4`b..K....^.%.",
+      "file": "ctrl_180000_0100.bin",
+      "first16_hex": "f374501d4ef496baf5da805a9d76b839",
+      "sha256": "d2c137351980bc8821e1af1d2952d4eb1d4d5836ce3f35628930d629b8999f43",
+      "size": 256
+    },
+    {
+      "ascii_preview_96": "RQ..&f=.1....E.R/.w.v&k......$.x..(/.{CsW....._......p..7.........l.._.g.h.....S...2K....q.....$",
+      "file": "ctrl_184000_0400.bin",
+      "first16_hex": "525112ff26663dc0317fd494d845ff52",
+      "sha256": "4a3926cd5b07e37c07e2041adc27c6866400fd11a85e71d0eaafbcdf1876dd67",
+      "size": 1024
+    },
+    {
+      "ascii_preview_96": "....T1m...;)6.2......e..82l}|...y.o4+..K.e.../..]j.,j$.X.......P..C.wJ.E...q......Mf...F.\\.Q.uY.",
+      "file": "ctrl_18b170_0400.bin",
+      "first16_hex": "e2bed8a554316db3901f3b2936e032a4",
+      "sha256": "37632eb797925cceeb3ab2d15714d525e43a71aa13919f486d95c75794d07cd5",
+      "size": 1024
+    },
+    {
+      "ascii_preview_96": ".6..!..G..\\RN~k....}.f...?..`4....~6N.......-K1..+0O.......0G...F#n......,.......89....jD....Xq.",
+      "file": "ctrl_191010_0400.bin",
+      "first16_hex": "d236fc2e21ca9f47fe8d5c524e7e6b93",
+      "sha256": "57bf264152afb92a37c4f47bda821fa656e5393c41d5b615dc7af4fbf1d5e062",
+      "size": 1024
+    },
+    {
+      "ascii_preview_96": "y,RK..y.^.c*O+.2.(&I9.9...q.24....v..dR..3S.....p......[...n`.w#...+.K...c..b.g.2u....%.d.......",
+      "file": "ctrl_1b3f00_0100.bin",
+      "first16_hex": "792c524bdc0979b25ee2632a4f2bb932",
+      "sha256": "1b205e61274500bbe337c62f90fc95e20e2e07a15df2ceaff9faf5183a28d0e4",
+      "size": 256
+    },
+    {
+      "ascii_preview_96": ".P....BOOT....BOOT....BOOT....BOOT....BOOT......D....J..`....Ib.T.D@..@..T....L...........x.....",
+      "file": "f0_000000_0100.bin",
+      "first16_hex": "0250ca020000424f4f5400020000424f",
+      "sha256": "4429ed8f3123c8819a1f5e988eb47832cd7a64eb90e3b41fafca795729c4b874",
+      "size": 256
+    },
+    {
+      "ascii_preview_96": "......A/t....!.D...c..c..8\".G..T...G#t...G'.D...Gd...Gct...GqtN..Gs.D@..Gp.D...G..D...D...Ga.D..",
+      "file": "f0_004a00_0100.bin",
+      "first16_hex": "fff0a3e4f090412f7409f0908221e044",
+      "sha256": "671643a00c66ce98b58d14844196dd6a22fba489f996cbf88a8ce9a0f32a77f9",
+      "size": 256
+    },
+    {
+      "ascii_preview_96": ".........................................9....K...K...K............%...........%.....%.....%....",
+      "file": "hidden_tail_0e8000_0100.bin",
+      "first16_hex": "aff39a1acffcbc0401a40000cffcbc04",
+      "sha256": "f39c92ad923718cbbfcf91443da79b9579444f770373e5d09400c299b8e143d9",
+      "size": 256
+    },
+    {
+      "ascii_preview_96": ".........................................9....K...K...K............%...........%.....%.....%....",
+      "file": "hidden_tail_0e8000_2000.bin",
+      "first16_hex": "aff39a1acffcbc0401a40000cffcbc04",
+      "sha256": "43b297904ddaa699d8a020881f08f108cdfcad0aaa1aeab939eb12a2c4d9a31d",
+      "size": 8192
+    },
+    {
+      "ascii_preview_96": "..K............%...........%.....%.....%.....#.....%.....%.....!...........$.......}..........v.",
+      "file": "hidden_tail_0e8400_0100.bin",
+      "first16_hex": "aff04b1eaff01e010410aff01e021225",
+      "sha256": "f453661e306aab8c1a631b50ef80cc09f215d996b4539b4b731ef3ffa029dee3",
+      "size": 256
+    },
+    {
+      "ascii_preview_96": "............... ................................-...v.........-...Q.....v.............%.........",
+      "file": "hidden_tail_0e8800_0100.bin",
+      "first16_hex": "b39a0200b39a0302b39a0400b39a0320",
+      "sha256": "eef463d971ac9866aa3a3b7341afed635e01dbde03cf26c345b09209da8cdf3f",
+      "size": 256
+    },
+    {
+      "ascii_preview_96": "..I.......I......7........I.......I.......I.......I.......I.......I.............K...K...K.....-.",
+      "file": "hidden_tail_0e8c00_0100.bin",
+      "first16_hex": "aff0490000180000aff0490000180000",
+      "sha256": "2633c3914af29de249c823e18998c3883fc3a94c587024932b60e637f19dc7b9",
+      "size": 256
+    },
+    {
+      "ascii_preview_96": ".7........I.......I.......I.......I.......I.......I.......I.......I.......I.......I.......I.....",
+      "file": "hidden_tail_0e9000_0100.bin",
+      "first16_hex": "b937050200030200aff0490000180000",
+      "sha256": "8badcf2e448ff8b03161f0f46bf54b564bd64af52af97679264aae7ca3517ce2",
+      "size": 256
+    },
+    {
+      "ascii_preview_96": "................................................................................................",
+      "file": "hidden_tail_0ea000_0100.bin",
+      "first16_hex": "00000000000000000000000000000000",
+      "sha256": "5341e6b2646979a70e57653007a1f310169421ec9bdd9f1a5648f75ade005af1",
+      "size": 256
+    },
+    {
+      "ascii_preview_96": "................................................................................................",
+      "file": "hidden_tail_0eb000_0100.bin",
+      "first16_hex": "00000000000000000000000000000000",
+      "sha256": "5341e6b2646979a70e57653007a1f310169421ec9bdd9f1a5648f75ade005af1",
+      "size": 256
+    },
+    {
+      "ascii_preview_96": "................................................................................................",
+      "file": "hidden_tail_0ec000_0100.bin",
+      "first16_hex": "ffffffffffffffffffffffffffffffff",
+      "sha256": "3d6876a0146de8576eb2395a858de1213d1b92c65b779df3a331cfd5a4584546",
+      "size": 256
+    },
+    {
+      "ascii_preview_96": "................................................................................................",
+      "file": "hidden_tail_0ed000_0100.bin",
+      "first16_hex": "ffffffffffffffffffffffffffffffff",
+      "sha256": "3d6876a0146de8576eb2395a858de1213d1b92c65b779df3a331cfd5a4584546",
+      "size": 256
+    },
+    {
+      "ascii_preview_96": "................................................................................................",
+      "file": "hidden_tail_0ee000_0100.bin",
+      "first16_hex": "ffffffffffffffffffffffffffffffff",
+      "sha256": "3d6876a0146de8576eb2395a858de1213d1b92c65b779df3a331cfd5a4584546",
+      "size": 256
+    },
+    {
+      "ascii_preview_96": "................................................................................................",
+      "file": "hidden_tail_0ef000_0100.bin",
+      "first16_hex": "ffffffffffffffffffffffffffffffff",
+      "sha256": "3d6876a0146de8576eb2395a858de1213d1b92c65b779df3a331cfd5a4584546",
+      "size": 256
+    },
+    {
+      "ascii_preview_96": "LT.........O...G...L.........w1.;a.........s....................PLDS CORPORATION................",
+      "file": "hidden_tail_0f0000_0100.bin",
+      "first16_hex": "4c5404fc040f041c0cc6194f118d1f47",
+      "sha256": "c7ab9d34351e2c334d522c6b941517940a75ecde2ee285ce536aad858dd62781",
+      "size": 256
+    },
+    {
+      "ascii_preview_96": "LT.........O...G...L.........w1.;a.........s....................PLDS CORPORATION................",
+      "file": "hidden_tail_0f0000_8000.bin",
+      "first16_hex": "4c5404fc040f041c0cc6194f118d1f47",
+      "sha256": "fc4b79096e1403488d11716d5a25ba4c44cd4e75d26566bd0e4153137ef0bca9",
+      "size": 32768
+    },
+    {
+      "ascii_preview_96": "KEYPARA.........CDROM...........................................................................",
+      "file": "hidden_tail_0f1000_0100.bin",
+      "first16_hex": "4b455950415241970000000000000000",
+      "sha256": "276a74e494cba35beb60ebf06223ea1bec14072118e9813a3d1c639b3f64cfe4",
+      "size": 256
+    },
+    {
+      "ascii_preview_96": "LT.........O...G...L.........w1.;a.........s....................PLDS CORPORATION................",
+      "file": "hidden_tail_0f2000_0100.bin",
+      "first16_hex": "4c5404fc040f041c0cc6194f118d1f47",
+      "sha256": "c7ab9d34351e2c334d522c6b941517940a75ecde2ee285ce536aad858dd62781",
+      "size": 256
+    },
+    {
+      "ascii_preview_96": "...........O...G...L.........w1.;a.........s....................PLDS CORPORATION................",
+      "file": "hidden_tail_0f4000_0100.bin",
+      "first16_hex": "000004fc040f041c0cc6194f118d1f47",
+      "sha256": "33661be1a60bb27c94bc51437711d9bbdacd0f726943656b874eb1a4f86c7492",
+      "size": 256
+    },
+    {
+      "ascii_preview_96": "...........O...G...L.........w1.;a.........s....................PLDS CORPORATION................",
+      "file": "hidden_tail_0f8000_0100.bin",
+      "first16_hex": "000004fc040f041c0cc6194f118d1f47",
+      "sha256": "33661be1a60bb27c94bc51437711d9bbdacd0f726943656b874eb1a4f86c7492",
+      "size": 256
+    },
+    {
+      "ascii_preview_96": "...........O...G...L.........w1.;a.........s....................PLDS CORPORATION................",
+      "file": "hidden_tail_0f8000_8000.bin",
+      "first16_hex": "000004fc040f041c0cc6194f118d1f47",
+      "sha256": "a08aa41425ded7da33b77b6b7e2b8083482fdcfeace066f6b6df09fba091bdbf",
+      "size": 32768
+    },
+    {
+      "ascii_preview_96": "LT.........O...G...L.........w1.;a.........s....................PLDS CORPORATION................",
+      "file": "hidden_tail_0fc000_0100.bin",
+      "first16_hex": "4c5404fc040f041c0cc6194f118d1f47",
+      "sha256": "c7ab9d34351e2c334d522c6b941517940a75ecde2ee285ce536aad858dd62781",
+      "size": 256
+    },
+    {
+      "ascii_preview_96": "................................................................................................",
+      "file": "hidden_tail_0ff000_0100.bin",
+      "first16_hex": "ffffffffffffffffffffffffffffffff",
+      "sha256": "3d6876a0146de8576eb2395a858de1213d1b92c65b779df3a331cfd5a4584546",
+      "size": 256
+    },
+    {
+      "ascii_preview_96": "LT.........O...G...L.........w1.;a.........s....................PLDS CORPORATION................",
+      "file": "ignored_tail_0f0000_0100.bin",
+      "first16_hex": "4c5404fc040f041c0cc6194f118d1f47",
+      "sha256": "c7ab9d34351e2c334d522c6b941517940a75ecde2ee285ce536aad858dd62781",
+      "size": 256
+    },
+    {
+      "ascii_preview_96": "..A...OI..57.h....*W.W.m...r...8;.'....G...Q.....q*..Zy%.P..(..'h.......*{....68>...p.U..u......",
+      "file": "rec137_0502fa_0400.bin",
+      "first16_hex": "86e241ccfafe4f49ddc33537ff68e700",
+      "sha256": "2308088df4ae584a1dba8994c15a984f610efc2a3532f42559d59b6477e4e26f",
+      "size": 1024
+    },
+    {
+      "ascii_preview_96": ".. .z.*..V.I8Q....MA5...6.Ii.Q.:\":..f.n3.'s..b....\"...I............oU..j_....q7..;...)G.......Z.",
+      "file": "rec59_028119_0400.bin",
+      "first16_hex": "d819200a7add2aad9f56a3493851aacc",
+      "sha256": "0226dab31cab011889cee5289676a286c7ffada3297e1ed0cf3d2a5ee0fc8e1c",
+      "size": 1024
+    },
+    {
+      "ascii_preview_96": "Iy..w8l.XH;.3........DU8A6S.LITE................................",
+      "file": "trailer_0e7fe0_0040.bin",
+      "first16_hex": "4979c08a77386c1658483bf233feffff",
+      "sha256": "d60744dce99fcc6fd496fe07610574dcefa7079887e9b9442cb29d6559757aa4",
+      "size": 64
+    },
+    {
+      "ascii_preview_96": "CDD...S....}.........p..@..?..?.................................................................",
+      "file": "window128_000000_100.bin",
+      "first16_hex": "434444091016530d9000007dec030810",
+      "sha256": "0212abb64f9c0787286c175ff43b7c5efa3d43c725a850fd7d119a82f80ec073",
+      "size": 256
+    },
+    {
+      "ascii_preview_96": "CDD...S....}.........p..@..?..?.................................................................",
+      "file": "window128_00702c_100.bin",
+      "first16_hex": "434444091016530d9000007dec030810",
+      "sha256": "6006720aceec2d9d011a3ef9e4e92f9299157b55740811370a9679b6194d5c9a",
+      "size": 256
+    },
+    {
+      "ascii_preview_96": "CDD...S....}.........p..@..?..?.................................................................",
+      "file": "window128_0e8000_100.bin",
+      "first16_hex": "434444091016530d9000007dec030810",
+      "sha256": "f6875f5160e867d2dd0639d02462bc79f0562e0558f3006547ca90406f2bda1e",
+      "size": 256
+    },
+    {
+      "ascii_preview_96": "CDD...S....}.........p..@..?..?.................................................................",
+      "file": "window128_0f0000_100.bin",
+      "first16_hex": "434444091016530d9000007dec030810",
+      "sha256": "28212832763a5d7ec2eed6cc3ca8bb97e01f51b69f555cf23df87e8c6e119ed3",
+      "size": 256
+    },
+    {
+      "ascii_preview_96": "CDD...S....}.........p..@..?..?.................................................................",
+      "file": "window128_184000_100.bin",
+      "first16_hex": "434444091016530d9000007dec030810",
+      "sha256": "1d6c793bac93410407e40b8168276d52113331950fa7594a98e3e108e29b226a",
+      "size": 256
+    }
+  ]
+}

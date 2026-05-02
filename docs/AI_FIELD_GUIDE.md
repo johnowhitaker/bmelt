@@ -2222,3 +2222,11 @@ Immediate useful directions:
     `F0[0x28519] = 0x60`. Avoid more record-59 live mutation work on this drive
     unless the plan includes a fresh/sacrificial drive or an out-of-band restore
     path.
+115. Currentboot D7 correction: `0x184000`, `0x18b170`, and `0x191010` through
+    the current D7 byte oracle are stock-F0 modulo aliases, not decoded CDD
+    runtime bytes. The interesting currentboot alias is the erased F0 tail:
+    `0xe8000..0xe9fff` exposes currentboot work/gateway-like data,
+    `0xf0000..0xfdfff` exposes repeated live profile/key pages, and
+    `0xfe000..0xfffff` is back to `ff`. Evidence:
+    `references/evidence/live/currentboot-byte-oracle-targeted-20260502T0150Z/`.
+    Analysis: `analysis/8051/currentboot-d7-tail-alias-20260502.md`.
