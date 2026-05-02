@@ -2532,3 +2532,42 @@ Evidence and analysis:
 references/evidence/live/currentboot-byte-oracle-targeted-20260502T0150Z/
 analysis/8051/currentboot-d7-tail-alias-20260502.md
 ```
+
+With that correction in place, I stepped back from the D7 reader and re-ranked
+the normal-mode footholds. The most useful thing was not a new live poke; it
+was separating "interesting response bridge" from "safe next mutation." Record
+59 is still the cleanest ownership proof, but the same byte that moved its
+normal work-window tiles also blocked update entry on one drive. So the next
+fresh live test should not be another casual record-59 mutation.
+
+The new plan promotes record 55/56. It shows up at the top of the normal I/O
+ranking, owns narrow contigs, and its decoded-looking chunks touch exactly the
+sort of places we care about: packet shadow bytes, `0x4098`, `0x47b1`, and
+status/output-looking locations around `0x48f4..0x48f6`. That makes it a better
+candidate for a fresh "can we perturb a normal-runtime I/O island?" test than
+the already risky record-59 bridge.
+
+The proposed first byte is deliberately boring:
+
+```text
+record 55 source: 0x25e7a..0x26783
+F0[0x2627a]: 0x5d -> 0x5c
+```
+
+It is record-relative `+0x400`, matching the style of the record-59 probe, and
+it is a one-way bit-clear mutation. The thing to watch is not a host response
+change yet; the immediate success criterion is a clean reversible change in
+contigs 16/21. If that works, record 55 becomes a new normal-runtime island we
+can use for a more direct response hook.
+
+Record 58 remains the GET CONFIG bridge target, with `0x27c25: 0xd3 -> 0xd2`
+as the analogous first probe. Record 60 is the write-side partner, with
+`0x28eb7: 0xf2 -> 0xf0`. Records 84/85 still look very interesting for packet
+intake, but breaking packet intake is how we lose the host channel, so they are
+not first in line.
+
+The planning note is:
+
+```text
+analysis/8051/normal-mode-oracle-next-targets-20260502.md
+```

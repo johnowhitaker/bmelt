@@ -2230,3 +2230,13 @@ Immediate useful directions:
     `0xfe000..0xfffff` is back to `ff`. Evidence:
     `references/evidence/live/currentboot-byte-oracle-targeted-20260502T0150Z/`.
     Analysis: `analysis/8051/currentboot-d7-tail-alias-20260502.md`.
+116. `analysis/8051/normal-mode-oracle-next-targets-20260502.md` promotes the
+    next normal-mode live target away from record 59. Record 55/56 is now the
+    preferred fresh ownership test because it is a high-ranked packet/response
+    output corridor with `0x8a4c..0x8a4e`, `0x4098`, `0x47b1`, and
+    `0x48f4..0x48f6` behavior, without reusing the risky record-59 bridge.
+    The proposed first probe is `F0[0x2627a] 0x5d -> 0x5c` (record 55
+    `+0x400`, bit-clear), watching contigs 16/21. Record 58 remains the best
+    GET CONFIG read/bridge target (`0x27c25: 0xd3 -> 0xd2`), and record 60 is
+    the write-side partner (`0x28eb7: 0xf2 -> 0xf0`). Defer records 84/85
+    until packet-intake risk is acceptable.
