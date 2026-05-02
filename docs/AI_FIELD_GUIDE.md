@@ -14,12 +14,46 @@ evidence tree.
   every live run.
 - Known normal identity: `PLDS DVD+-RW DS-8ABSH LD5M`.
 - Known recoverable failure identity: `PLDS DVD+-RW DS-8ABSH 0D5C`.
+- Current live status as of 2026-05-02: pause new helper-bypass/write
+  experiments until the fresh drives arrive. The original drive is alive as
+  `LD5M` but non-stock; it carries the currentboot response hook and the
+  record-59 mutation. The spare is currently bridge/card-reader-only. Use the
+  original only for read-only normal-mode observation or explicitly
+  sacrificial experiments.
 
 Rediscover:
 
 ```sh
 ssh root@jonathan-thinkpad-t480s 'cd /home/jonathan/boastermelt && python3 scripts/liteon_linux_status.py'
 ```
+
+## Latest Checkpoint
+
+The current strategic pause is deliberate:
+
+- DS-8ABSH CDD hard-body decode remains unsolved.
+- A broad static pass is contained under `cdd_cracking/`.
+- XD13 is the useful new static clue: it has a plaintext-style CDD 8051
+  code/data object, useful as a semantic atlas for LD5M decoded/runtime
+  fragments.
+- The next live phase should wait for fresh stock drives unless explicitly
+  using the original mutated drive as sacrificial hardware.
+
+Start with these scratch summaries if revisiting the CDD/static angle:
+
+```text
+cdd_cracking/cdd_hail_mary_summary_20260502.md
+cdd_cracking/completion_audit.md
+cdd_cracking/cdd-xd13-structure.md
+cdd_cracking/cdd-xd13-high-confidence-homologs.md
+cdd_cracking/cdd-runtime-control-targets.md
+cdd_cracking/cdd-controller-gateway-atlas.md
+```
+
+Important XD13 interpretation: use it as a semantic/register atlas, not as a
+byte-patch source. The stable cross-family anchors are the hardware-facing
+`0x40xx` controller gateway and `0x47b1` packet/FIFO stream. Family-local
+normal-runtime shadow addresses around `0x88xx..0x8axx` retarget.
 
 ## Minimal Artifacts
 

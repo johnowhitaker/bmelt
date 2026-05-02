@@ -2869,3 +2869,44 @@ references/evidence/live/original-drive-normal-io-baseline-20260502T032421Z/
 references/evidence/live/original-drive-normal-io-getconfig-variants-20260502T033434Z/
 references/evidence/live/original-drive-normal-io-getconfig-phase-bias-20260502T033558Z/
 ```
+
+## The Overnight CDD Hail Mary
+
+The next overnight pass went back after the CDD body itself. It was contained
+under `cdd_cracking/`, because it was intentionally broad and messy: lots of
+small static probes, public PLDS sample checks, operation-key experiments,
+known-output audits, and updater/package comparisons. It did not produce the
+thing we wanted most: a byte-exact decoder for the hard DS-8ABSH CDD bodies.
+
+It did make the failure mode much clearer. The DS-8ABSH CDD streams still look
+like structured, controller-native codeword containers. The directory/source
+layout is solid, the lane-0 affine leaf is real, and the visible resident 8051
+sets up controller/materialization windows around `0x4e80/84/88/8c`, `0x4a*`,
+and the stable `0x40xx`/`0x47b1` gateway surface. But cheap transformations
+kept failing: public compressors, CD/DVD descramblers, simple stream masks,
+byte permutations, local GF(2) block-code guesses, and direct known-output
+copies all came up negative for the hard modes.
+
+The useful new clue was XD13. Unlike the DS-8ABSH samples, XD13 has a
+plaintext-style `CDD\t` object: a CDD-relative 8051 code/data image with a
+small vector/control table. LD5M known-output snippets do not copy from it
+byte-for-byte, but they match it semantically. The stable hardware-facing DPTR
+targets are the important part: `0x40xx` controller gateway references and the
+`0x47b1` packet/FIFO stream survive across the XD13/LD5M homologs, while
+family-local `0x88xx..0x8axx` bridge-shadow addresses retarget.
+
+That changes the next phase. We do not need to crack the whole CDD before
+making hardware progress. XD13 can act as a Rosetta stone for naming routines
+and registers: record60 and neighbors look like controller FIFO/transfer code,
+records58/59 look like argument staging around `0x4011..0x4013`, and
+records84/85 look like packet/FIFO copy paths from `0x47b1` into local shadow
+state. The CDD decoder remains an open problem, but the hardware-control atlas
+is now strong enough to use.
+
+Current practical status: live write experiments should pause until the fresh
+replacement drives arrive. The original drive still reports normal `LD5M`, but
+it carries the currentboot response hook plus the record-59 mutation and its
+ordinary update-entry path is blocked. The spare is bridge-only after the
+record-55 test. Static work, XD13 mapping, and read-only planning can continue
+now; fresh-drive work should resume with clean baselines before any new CDD or
+normal-mode I/O probes.

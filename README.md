@@ -17,20 +17,31 @@ We can:
 - recover the known `0D5C` currentboot state back to `LD5M`;
 - build helper-bypass candidates that persist selected F0 byte changes;
 - execute patched 8051 helper-overlay code;
-- read small XDATA values back through a slow success/error bit channel.
+- read small XDATA values back through a slow success/error bit channel;
+- use the currentboot response hook as a much faster byte oracle for selected
+  controller/source addresses.
 - recover the newer blank-currentboot failure class with a dynamic slot-5
   profile-tail replay.
 
-Current live-drive caveat: Linux drive #1 has been recovered from the
-blank-currentboot identity and cold-boots as `LD5M`, but its F0 is not byte-stock.
-It currently contains the deliberate `currentboot-response-hook-gateway-cdb-bulk`
-resident hook at `0x4fc9 -> 0x6ee3`. Read
-`references/evidence/live/linux-drive1-blank-currentboot-after-led-probe.md`
-and the handoff before issuing more live write/control probes.
+Current live-drive caveat: the two older drives are both poor write targets.
+The original drive still enumerates as normal `LD5M`, but it is not byte-stock:
+it has the currentboot response-hook trampoline/cave plus the persistent
+record-59 CDD mutation at `F0[0x28519] = 0x60`. The spare is currently
+bridge/card-reader-only after the record-55 experiment. Treat live write work
+as paused until the fresh replacement drives arrive, unless the session
+explicitly decides to use the original as a sacrificial/mutated test subject.
 
 The current code-exec foothold is documented in
 `references/evidence/live/linux-drive1-codeexec-timing-poc.md` and
 `references/evidence/live/linux-drive1-helper-bit-channel.md`.
+
+The latest CDD static push is intentionally contained under `cdd_cracking/`.
+Its short version: the hard DS-8ABSH CDD decoder is still unsolved, but XD13
+contains a plaintext-style CDD 8051 code/data object that is useful as a
+semantic atlas for hardware-control work. Start with
+`cdd_cracking/cdd_hail_mary_summary_20260502.md`,
+`cdd_cracking/completion_audit.md`, and
+`cdd_cracking/cdd-xd13-structure.md`.
 
 ## Read First
 

@@ -1,6 +1,6 @@
 # Boastermelt Next Session Handoff
 
-Date: 2026-05-01.
+Date: 2026-05-02.
 
 This is the clean-slate handoff after the repo spring cleaning. The old
 generated logs, Wine prefixes, packaged bundles, and git history were removed
@@ -34,59 +34,25 @@ from the active tree. The compact operating set is now in this repo.
   `/dev/sg0` and `/dev/sg1`.
 - After cleanup, sysfs still showed `/dev/sg1` rev `0D5C`, but `sg_inq`
   reported `LD5M`; trust the active SCSI INQUIRY over stale sysfs text.
-- Current live state: the spare drive is switched into the Linux bench setup.
-  It is visible as the optical PLDS LUN on `/dev/sg0` and cold-boots as
-  `LD5M`. This spare does not have the Pico front-panel LED/button wiring
-  attached.
+- Current live state: pause new write experiments until the fresh drives
+  arrive.
+- Original drive: visible again as normal `LD5M`, but not byte-stock. It has
+  the currentboot response-hook trampoline/cave and the persistent record-59
+  CDD byte:
 
 ```text
-PLDS / DVD+-RW DS-8ABSH / LD5M
+0x04fc9..0x04fcb: 12 62 06 -> 02 6e e3
+0x06ee3..0x06f78: response-hook cave
+F0[0x28519] = 0x60    # stock LD5M is 0x68
 ```
 
-Spare baseline check: a read-only F0 window read of `0x28000..0x28800` matched
-the stock LD5M image, including the old record-59 mutation site:
-
-```text
-F0[0x28519] = 0x68
-```
-
-Evidence:
-
-```text
-references/evidence/live/spare-drive-baseline-20260501/README.md
-```
-
-Previous-drive caveat: Linux drive #1 is not byte-stock. The latest focused record-59
-CDD probe reinstalled this persistent byte:
-
-```text
-F0[0x28519] = 0x60   # stock LD5M is 0x68
-```
-
-A live-key sequential F0 read of `0x000000..0x030000` verified the byte. The
-drive still reports normal `LD5M`, but the normal firmware-update entry path is
-currently blocked: the LD5M pre-tail, currentboot-key tail, direct `arg=00`
-chunk, and failed-tail-then-chunk probes all time out with host transport
-errors. Do not assume the helper-bypass write path is currently available on
-that previous drive.
-
-Older caveat: this drive used to carry the deliberate
-`currentboot-response-hook-gateway-cdb-bulk` patch, but the later normal-mode
-hook test phase restored the visible prefix/cave area. The post-restore
-live-key F0 dump of `0x1000..0x6fff` matched stock LD5M with zero diffs.
-
-```text
-0x4fc9..0x4fcb = 12 62 06
-0x6ee3..       = ff...
-```
-
-Reinstall a currentboot response hook before using the bulk gateway/XDATA
-readout scripts that depend on `0x4fc9 -> 0x6ee3`.
-
-If live firmware writes are needed next, prefer a fresh/sacrificial drive or a
-new out-of-band restore route for record 59. The record-59 mutation is valuable
-evidence because it appears to touch the normal update/response bridge
-neighborhood, but it is not a safe casual probe on the spare.
+- Original-drive caveat: the normal firmware-update entry path is blocked in
+  this state. A record60 viability gate failed at event 1
+  (`profile_tail_arg7f rc=99`), and the record60 patch was never sent.
+- Spare drive: currently bridge/card-reader-only after the record-55
+  experiment; no PLDS optical LUN is available for SCSI recovery/restore.
+- Incoming fresh drives should be treated as the next clean live platform. On
+  arrival, take stock baselines before any write experiments.
 
 Rediscover:
 
@@ -118,12 +84,41 @@ Live-proven:
 - execute patched helper-overlay code and observe host-visible timing;
 - read selected XDATA bits through event-68 GOOD vs DID_ERROR;
 - read selected XDATA bits through a safer GOOD/GOOD timing channel.
+- read selected currentboot/source/controller bytes through the resident
+  response hook/D7 byte oracle when that hook is installed.
 
 Still unsolved:
 
 - the real `0xe7fe0` container seal/auth algorithm;
 - a fast/general host data-return channel from helper code;
 - stable normal-mode persistent F0 resident hooks.
+- byte-exact decode of the DS-8ABSH CDD hard bodies.
+
+## Overnight CDD Scratch
+
+The 2026-05-02 CDD cracking push is contained under `cdd_cracking/`. It did not
+recover a byte-exact decoder for hard DS-8ABSH records, but it produced useful
+negative evidence and a better XD13-based hardware-control map.
+
+Read these first if returning to that work:
+
+```text
+cdd_cracking/cdd_hail_mary_summary_20260502.md
+cdd_cracking/completion_audit.md
+cdd_cracking/cdd-xd13-structure.md
+cdd_cracking/cdd-xd13-high-confidence-homologs.md
+cdd_cracking/cdd-runtime-control-targets.md
+cdd_cracking/cdd-controller-gateway-atlas.md
+```
+
+Key interpretation:
+
+- DS-8ABSH hard CDD modes remain opaque controller-native codewords.
+- XD13 has a plaintext-style CDD 8051 code/data object.
+- Use XD13 as a semantic atlas, especially for stable `0x40xx` controller
+  gateway and `0x47b1` packet/FIFO paths.
+- Do not treat XD13 addresses or `0x88xx..0x8axx` bridge-shadow references as
+  directly portable into LD5M; those retarget by family.
 
 ## Normal-Mode Read-Only Surface
 

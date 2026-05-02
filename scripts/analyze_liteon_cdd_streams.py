@@ -181,14 +181,36 @@ def inferred_cdd2_body_start(image: CddImage) -> int | None:
 
 
 def cdd2_duplicate_len(stream1: CddStream, stream2: CddStream) -> int:
+    info = cdd1_directory_info(stream1)
+    directory = stream1.data[0x20 : info["directory_end_rel"]]
+    prefix = stream2.data[0x20:]
+
+    # DS CDD2 starts by duplicating the tail of the CDD1 directory.  Earlier
+    # versions hard-coded entry 388; public PLDS samples show the duplicate
+    # start is really entry_count - 48 (entry 400 in 448-entry images).
+    for offset in range(0, len(directory), 8):
+        candidate = directory[offset:]
+        if prefix.startswith(candidate):
+            return len(candidate)
+
     duplicate_len = 0
-    while (
-        0x20 + duplicate_len < len(stream2.data)
-        and 0xC40 + duplicate_len < len(stream1.data)
-        and stream2.data[0x20 + duplicate_len] == stream1.data[0xC40 + duplicate_len]
-    ):
+    while duplicate_len < min(len(prefix), len(directory)) and prefix[duplicate_len] == directory[duplicate_len]:
         duplicate_len += 1
     return duplicate_len
+
+
+def duplicate_tail_start_index(image: CddImage) -> int | None:
+    if len(image.streams) < 2:
+        return None
+    entries = directory_entries(image.streams[0])
+    if not entries:
+        return None
+    duplicate_len = cdd2_duplicate_len(image.streams[0], image.streams[1])
+    if duplicate_len and duplicate_len % 8 == 0 and duplicate_len <= len(entries) * 8:
+        return len(entries) - duplicate_len // 8
+    if len(entries) >= 48:
+        return len(entries) - 48
+    return None
 
 
 def cdd1_source_start_rel(image: CddImage) -> int | None:
@@ -204,9 +226,10 @@ def cdd2_source_start_rel(image: CddImage) -> int | None:
     if len(image.streams) < 2:
         return None
     sources = directory_source_addresses(image.streams[0])
-    if len(sources) <= 388:
+    duplicate_start = duplicate_tail_start_index(image)
+    if duplicate_start is None or len(sources) <= duplicate_start:
         return None
-    return sources[388] - image.streams[1].start
+    return sources[duplicate_start] - image.streams[1].start
 
 
 def cdd1_table_window(image: CddImage) -> bytes:
@@ -330,17 +353,20 @@ def source_segments(image: CddImage) -> list[tuple[int, int, int, bytes]]:
         return []
     entries = directory_entries(image.streams[0])
     starts = directory_source_addresses(image.streams[0])
+    duplicate_start = duplicate_tail_start_index(image)
+    if duplicate_start is None:
+        return []
     segments: list[tuple[int, int, int, bytes]] = []
     for index, start in enumerate(starts):
-        if index < 387:
-            end = starts[index + 1]
-        elif index == 387:
+        if index + 1 < duplicate_start:
+            end = min(starts[index + 1], image.streams[0].end)
+        elif index < duplicate_start:
             end = image.streams[0].end
         elif index < len(starts) - 1:
-            end = starts[index + 1]
+            end = min(starts[index + 1], image.streams[1].end)
         else:
             end = image.streams[1].end
-        segments.append((index, start, end, entries[index]))
+        segments.append((index, start, max(start, end), entries[index]))
     return segments
 
 
