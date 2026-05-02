@@ -48,6 +48,18 @@ Run from the Mac:
 python3 pico/client.py --port /dev/cu.usbmodem2101 "TOGGLE SERVO"
 ```
 
+Run from the Linux laptop when the Pico is plugged into that host:
+
+```sh
+python3 pico/client.py --port /dev/ttyACM0 "TOGGLE SERVO"
+```
+
+If using a hold longer than the default client timeout, pass a longer timeout:
+
+```sh
+python3 pico/client.py --port /dev/ttyACM0 --timeout 8 "TOGGLE SERVO 3000"
+```
+
 The servo holds the switch for about one second, then returns to the left/rest
 position. On 2026-04-30 this was verified from Linux as equivalent to a physical
 replug: the optical `PLDS DVD+-RW DS-8ABSH` LUN disappeared, then reappeared as

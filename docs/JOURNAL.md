@@ -2628,3 +2628,59 @@ references/evidence/live/normal-oracle-record55-stock-20260502T022556Z/
 references/evidence/live/normal-oracle-record55-5d-to-5c-20260502T022801Z/
 analysis/8051/normal-io-affine-safer-targets-20260502.md
 ```
+
+The next morning I checked the bench state after the Pico was moved from the
+MacBook to the Linux laptop. That part worked: the Pico enumerated as
+`/dev/ttyACM0`, `pyserial` is now installed on the Linux host, and
+`pico/client.py` can read the pins and command the servo from there. The servo
+power cut also behaved electrically: the Initio USB bridge disappeared and came
+back, and the Pico reported the servo back at `LEFT`.
+
+The drive itself did not recover. After the physical replug and after a
+Linux-driven servo power cut, Linux still saw only the bridge's
+`Generic- SD/MMC` LUN. There was no `/dev/sr*` and no PLDS optical generic
+device. The kernel log is useful because it shows the contrast: earlier cold
+cycles produced a normal `PLDS DVD+-RW DS-8ABSH LD5M` optical LUN, while the
+post-record-55 state re-enumerates only the bridge. That means we cannot run
+the prepared stock restore candidate yet. The next practical decision is
+whether to swap drives, try a deeper hardware-level recovery path, or pause live
+mutation and keep working statically.
+
+We then switched back from that spare to the original drive. This one came up
+immediately as a normal optical target:
+
+```text
+/dev/sg0  PLDS DVD+-RW DS-8ABSH LD5M
+/dev/sr0  CD-ROM
+```
+
+A quick spot read was misleading in the same way earlier spot reads were, so I
+used the slower reliable test: a sequential 1 MiB F0 read from offset zero. That
+showed the original is reachable but not clean stock. It has the record-59 CDD
+mutation still installed:
+
+```text
+F0[0x28519] = 0x60   stock would be 0x68
+```
+
+It also still has the resident response-hook patch:
+
+```text
+0x04fc9..0x04fcb  12 62 06 -> 02 6e e3
+0x06ee3..0x06f78  hook cave code in an erased stock region
+```
+
+The good news is that the bytes from the failed spare-drive record-55 attempt
+and the proposed record-60 affine probe are stock on this original:
+
+```text
+F0[0x2627a] = 0x5d
+F0[0x2ae8f] = 0x4e
+F0[0x27410] = 0x3a
+```
+
+So the original drive is usable for normal-mode read-only captures and perhaps
+for studying the resident response hook we already installed. It is not a clean
+target for new helper-bypass write experiments. If we use it live, we should be
+explicit that we are working on a drive with the record-59 mutation and the
+response hook already present.

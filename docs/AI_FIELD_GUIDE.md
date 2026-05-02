@@ -2265,3 +2265,24 @@ Immediate useful directions:
     raw bit-clear. Generated plans:
     `analysis/8051/record60-affine-group15-c9-to-cb-bitclear-plan-20260502.*`.
     Do not run it until the record-55 drive state is resolved/restored.
+120. The Pico has been moved to the Linux laptop and is usable as
+    `/dev/ttyACM0`. `pyserial` is installed there, so normal commands work with
+    `python3 pico/client.py --port /dev/ttyACM0 ...`. A 3-second servo power
+    cut from Linux did remove and re-enumerate the Initio bridge, and the servo
+    returned to `LEFT`, but the record-55-mutated spare still came back only as
+    `Generic- SD/MMC`; there is no `/dev/sr*` and no PLDS optical `/dev/sg0`.
+    Kernel logs show earlier good LD5M optical enumeration at 18:49, then later
+    bridge-only re-enumerations after the record-55 event. No SCSI recovery or
+    stock restore can run while the optical LUN is absent.
+121. After swapping back to the original drive, Linux sees the optical target
+    again as `/dev/sg0` / `/dev/sr0`, normal `PLDS DVD+-RW DS-8ABSH LD5M`.
+    A reliable sequential 1 MiB F0 read is not stock. It differs in exactly
+    four ranges: the resident response-hook trampoline at `0x04fc9..0x04fcb`
+    (`12 62 06` -> `02 6e e3`), hook cave code at `0x06ee3..0x06ef6` and
+    `0x06ef8..0x06f78`, and the record-59 CDD byte `0x28519` (`0x68 ->
+    0x60`). Known record-55 and record-60 probe bytes are stock
+    (`0x2627a = 0x5d`, `0x2ae8f = 0x4e`), and record-57 `0x27410` is stock.
+    This drive is usable for normal-mode read-only captures and possibly for
+    studying the already-installed hook, but it is not a clean candidate for
+    fresh helper-bypass write experiments until we either restore it or
+    consciously accept the existing mutations.
