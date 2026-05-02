@@ -2571,3 +2571,38 @@ The planning note is:
 ```text
 analysis/8051/normal-mode-oracle-next-targets-20260502.md
 ```
+
+Then we tried to turn that plan into a real oracle. First, with the spare drive
+back in normal `LD5M`, I captured a stock record-55 baseline. That part went
+well: the record-55 chunks and the two target contigs showed up over and over
+in ordinary read-only captures. This mattered because it meant record 55 was
+not just a one-frame public-window accident. It is a live normal-runtime island
+we can see from the host.
+
+The first mutation was the deliberately small one:
+
+```text
+F0[0x2627a]: 0x5d -> 0x5c
+```
+
+The helper-bypass run behaved in a familiar way up to the end. Every staged
+chunk wrote and read back correctly. The final event 544 returned the same
+`DID_ERROR` transport class we have seen before, and immediate identity still
+said `LD5M`. But the cold-boot result was different from the safer record-59
+experiment: after servo power cuts and SCSI rescans, the Linux bridge came back
+only as the Generic SD/MMC LUN. The PLDS optical LUN did not reappear.
+
+So the result is useful, but not the result we wanted. Record 55 is confirmed
+as a good read-only target, while this particular hard-lane source byte is now
+on the hazardous list. It may be boot-critical CDD material, or it may have
+left the drive/bridge in a state that needs a true physical replug. I prepared
+a stock restore candidate for `0x2627a = 0x5d` so that if the optical LUN comes
+back, the first move should be restoring that byte rather than continuing new
+experiments.
+
+Evidence:
+
+```text
+references/evidence/live/normal-oracle-record55-stock-20260502T022556Z/
+references/evidence/live/normal-oracle-record55-5d-to-5c-20260502T022801Z/
+```

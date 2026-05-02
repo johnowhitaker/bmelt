@@ -1,0 +1,14 @@
+Record55 hard-lane mutation attempt, 2026-05-02T02:28Z
+
+Candidate: runs/helper-bypass-candidates/record55-20260502/normal-oracle-rec55-plus400-5d-to-5c/liteon-full-currentboot-ld5m-helper-bypass-normal-oracle-rec55-plus400-5d-to-5c-candidate.json
+Patch: F0[0x2627a] 0x5d -> 0x5c
+
+Run behavior:
+- Event 544 returned rc=99 / DID_ERROR, same transport class seen in earlier helper-bypass CDD perturbations.
+- Immediate identity after the sequence was still LD5M.
+- sg_inq later hung, and after Pico servo power cuts the bridge enumerated only as Generic SD/MMC.
+- Linux status after 1s and 10s servo power cuts showed no PLDS optical LUN.
+- SCSI host rescan did not recover the optical LUN.
+
+Interpretation pending physical replug:
+This is probably a hazardous normal-boot CDD patch or a bridge/drive state that needs a true physical replug. The stock restore candidate has been prepared at runs/helper-bypass-candidates/record55-restore-20260502/restore-rec55-0x2627a-stock-5d/.

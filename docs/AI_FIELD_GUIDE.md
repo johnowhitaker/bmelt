@@ -2240,3 +2240,20 @@ Immediate useful directions:
     GET CONFIG read/bridge target (`0x27c25: 0xd3 -> 0xd2`), and record 60 is
     the write-side partner (`0x28eb7: 0xf2 -> 0xf0`). Defer records 84/85
     until packet-intake risk is acceptable.
+117. `references/evidence/live/normal-oracle-record55-stock-20260502T022556Z/`
+    is the stock baseline for that record-55 plan. It confirmed the target was
+    not a rare tile: `8853b78ca23e`, `95caa55b881e`, `a87d03db223d`,
+    `25956f88a30e`, and the contig-16/21 sequences appeared across ordinary
+    baseline, GET CONFIG, GET PERFORMANCE, and READ TOC/sense captures.
+118. The first record-55 hard-lane mutation was hazardous. Candidate
+    `normal-oracle-rec55-plus400-5d-to-5c` changed `F0[0x2627a] 0x5d -> 0x5c`.
+    Like the older record-59 mutation, the replay staged/readback-verified all
+    chunks and hit `DID_ERROR` at final event 544 while immediate identity still
+    reported `LD5M`. Unlike record 59, subsequent servo power cycles returned
+    only the bridge's Generic SD/MMC LUN, with no PLDS optical LUN. Treat this
+    exact byte as boot-critical or at least unsafe until a physical replug
+    proves otherwise. Evidence:
+    `references/evidence/live/normal-oracle-record55-5d-to-5c-20260502T022801Z/`.
+    A stock restore candidate is prepared under
+    `runs/helper-bypass-candidates/record55-restore-20260502/`, but it requires
+    the optical LUN to reappear before it can be used.
