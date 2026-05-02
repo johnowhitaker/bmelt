@@ -2297,3 +2297,19 @@ Immediate useful directions:
     `GET PERFORMANCE nominal` is unhealthy in this state and wedged the
     transport until a Pico servo power cycle; the focused safe set excluding it
     completed cleanly and left the optical LUN visible.
+123. A larger read-only focused-safe run on the same original-drive state
+    produced 288 work-window captures and again left the optical LUN visible.
+    Evidence:
+    `references/evidence/live/original-drive-rec59-focused-safe-20260502T030437Z/`.
+    Contig 4 was present as a full sequence at `+0x7180` in `134/288`
+    captures. The three component chunks were present in every capture; the
+    record-59 mutation mainly moves their adjacency/placement. In the mutated
+    state, chunk 1 is fixed at `+0x71c0` and chunk 2 at `+0x7200`; chunk 0
+    alternates between `+0x7140` and `+0x7180`, and the full sequence appears
+    when chunk 0 is at `+0x7180`. This reinforces that `0x28519:68->60` is a
+    schedule/interleaver/tile-placement byte, not a direct decoded instruction
+    byte. Analysis:
+    `analysis/8051/original-drive-rec59-expanded-readonly-20260502.md` and
+    `analysis/8051/original-drive-rec59-expanded-contig4-hits-20260502.md`.
+    New offline helper:
+    `scripts/analyze_liteon_work_window_state_delta.py`.

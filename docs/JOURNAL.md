@@ -2712,3 +2712,49 @@ Analysis:
 analysis/8051/original-drive-retriage-20260502.md
 analysis/8051/original-drive-rec59-focused-contig4-hits-20260502.md
 ```
+
+I then let the original drive sit in that same normal, record-59-mutated state
+and ran a larger read-only capture with only the focused-safe commands. This
+was intentionally boring: no profile-tail entry, no helper-bypass write, no
+START STOP, and no slow nominal GET PERFORMANCE. It produced 288 snapshots and
+the drive still reported as normal `LD5M` afterwards.
+
+The bigger sample sharpened the record-59 story. The three decoded-runtime
+chunks in contig 4 are always present, but the full three-chunk sequence only
+appears when the first chunk lands at the right public slot:
+
+```text
+20ea2ab16891 -> 99d4493dc4cf -> b7a129b7d392
+
+chunk 0: +0x7140 or +0x7180
+chunk 1: +0x71c0
+chunk 2: +0x7200
+```
+
+In the expanded run the full sequence appeared 134 times out of 288, always at
+`+0x7180`. That makes the record-59 byte feel less like "this source byte
+becomes this instruction byte" and more like "this source byte participates in
+the schedule/interleaver that decides how normal-runtime tiles are surfaced."
+That is still a real foothold, just not the flat decode oracle we hoped it
+might be.
+
+I also added a small state-delta tool for this exact problem:
+
+```text
+scripts/analyze_liteon_work_window_state_delta.py
+```
+
+It compares work-window captures by 64-byte tile and adjacent tile edge, then
+annotates the chunks with candidate CDD record owners. The main lesson from
+using it immediately is a cautionary one: compare like with like. If two
+capture sets have different stimuli or different run lengths, raw chunk counts
+can look more meaningful than they are. The contig-specific report is the
+cleanest evidence here.
+
+Analysis:
+
+```text
+analysis/8051/original-drive-rec59-expanded-readonly-20260502.md
+analysis/8051/original-drive-rec59-expanded-contig4-hits-20260502.md
+analysis/8051/rec59-getcfg-stock-vs-mutated-state-delta-20260502.md
+```
