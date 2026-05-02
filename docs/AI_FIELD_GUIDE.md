@@ -2286,3 +2286,14 @@ Immediate useful directions:
     studying the already-installed hook, but it is not a clean candidate for
     fresh helper-bypass write experiments until we either restore it or
     consciously accept the existing mutations.
+122. `analysis/8051/original-drive-retriage-20260502.md` summarizes the
+    follow-up read-only work on the original drive. The installed `0x6ee3`
+    cave payload matches `currentboot-response-hook-gateway-cdb-bulk`, but
+    normal LD5M responses for EXTRAINQ and GET CONFIG remain byte-identical to
+    stock; the hook is inert for these normal commands. The original drive's
+    record-59 mutation is active: contig 4 appears as a full sequence at
+    public offset `+0x7180` in `50/96` focused read-only captures, versus
+    `0/32` in the stock reference and `15/32` in the older mutated corpus.
+    `GET PERFORMANCE nominal` is unhealthy in this state and wedged the
+    transport until a Pico servo power cycle; the focused safe set excluding it
+    completed cleanly and left the optical LUN visible.

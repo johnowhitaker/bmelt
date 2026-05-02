@@ -1,0 +1,56 @@
+00 cycle00-baseline-no-stimulus: capture only
+00 cycle00-baseline-no-stimulus: window sha256=cc00410f6ef1cdce2b787150418d9858b802a37029e36df4bcbf06e2bd349418
+01 cycle00-inquiry-standard-96: stimulus rc=0 good=True len=96
+01 cycle00-inquiry-standard-96: window sha256=9707fb1340cf6fa83228feaac278f6d713d3ecef6649cc27075d24c417b66e8b
+02 cycle00-inquiry-extrainq: stimulus rc=0 good=True len=176
+02 cycle00-inquiry-extrainq: window sha256=8142b49def12e7b03d0ea0fcea45dd4fa5249a425aaedfd166b798b752b8b385
+03 cycle00-get-configuration-current: stimulus rc=0 good=True len=60
+03 cycle00-get-configuration-current: window sha256=17af1d8add85be5f1553fa73f64a39bdf3a89570d3833bbcaa29737285538900
+04 cycle00-get-configuration-all: stimulus rc=0 good=True len=252
+04 cycle00-get-configuration-all: window sha256=80e42a0e46fc8faf3b8307a575850a19435d3ff290cea086af0be3824527cf96
+05 cycle00-mode-sense10-read-error-recovery: stimulus rc=0 good=True len=20
+05 cycle00-mode-sense10-read-error-recovery: window sha256=d20ce3f8051c8795a0af5f3c0fb80c3ee2d7f2c193e95f22a1ec65a93e8033b5
+06 cycle00-get-performance-type00: stimulus rc=5 good=False len=0
+06 cycle00-get-performance-type00: window sha256=db051a8f926b263846450807e10f48ea9faec210fd3ea5c19c3dbfe9f3caec85
+07 cycle01-baseline-no-stimulus: capture only
+07 cycle01-baseline-no-stimulus: window sha256=5a682c12928a76d6d834354fcbdcf26ed2d5bd5bd04705ef1e849cb5da70dc35
+08 cycle01-inquiry-standard-96: stimulus rc=0 good=True len=96
+08 cycle01-inquiry-standard-96: window sha256=a686c40372cafab3f74716e4ce1e7c215ac075d84deb534bb4493fe73f4d45eb
+09 cycle01-inquiry-extrainq: stimulus rc=0 good=True len=176
+09 cycle01-inquiry-extrainq: window sha256=b8ded5d95989439c6fe945c65eb54c72b76a733deb01902f2e2262b04dd15c50
+10 cycle01-get-configuration-current: stimulus rc=0 good=True len=60
+10 cycle01-get-configuration-current: window sha256=d5259bc284b3ed7aacd0206c87fe9154c0072d8e9bc6c4f7ca3399fd6c4f5cf9
+11 cycle01-get-configuration-all: stimulus rc=0 good=True len=252
+11 cycle01-get-configuration-all: window sha256=d82ef2ec870369866440356b023c1d992899a42a45106abbf672b033ead97602
+12 cycle01-mode-sense10-read-error-recovery: stimulus rc=0 good=True len=20
+12 cycle01-mode-sense10-read-error-recovery: window sha256=ced4d74b4138d1641b6166259aae20f5289c9647483b1e867653738d1d896cee
+13 cycle01-get-performance-type00: stimulus rc=5 good=False len=0
+13 cycle01-get-performance-type00: window sha256=b8adb4a9351f73c9cf8fcb69a14707167b4da2ca6e29de41f93874a3099ba716
+14 cycle02-baseline-no-stimulus: capture only
+14 cycle02-baseline-no-stimulus: window sha256=657f94228006696670f55bb810ec773727480b5551708ddf801ed6b07e2aa965
+15 cycle02-inquiry-standard-96: stimulus rc=0 good=True len=96
+15 cycle02-inquiry-standard-96: window sha256=cf6d6be492ac582719e577ec382c1088612c1ac31b1c904ba226b7fd30acea88
+16 cycle02-inquiry-extrainq: stimulus rc=0 good=True len=176
+16 cycle02-inquiry-extrainq: window sha256=4119bcecb7f38687713cab0d36117fed764ba4a36edc9c0dc606c9313693745c
+17 cycle02-get-configuration-current: stimulus rc=0 good=True len=60
+17 cycle02-get-configuration-current: window sha256=d70891380a3183daff236508f2dd8c57c121ed348d8b9980a861d68ab88b56c6
+18 cycle02-get-configuration-all: stimulus rc=0 good=True len=252
+18 cycle02-get-configuration-all: window sha256=6330e8975ee90f996919d98c7b8066e828e618f4fe049169568c0676284f89a7
+19 cycle02-mode-sense10-read-error-recovery: stimulus rc=0 good=True len=20
+19 cycle02-mode-sense10-read-error-recovery: window sha256=2758461f9dd31318deaa0ee466d88c8c76cf64f1d3b18dd2df5d5e5d2fda3e94
+20 cycle02-get-performance-type00: stimulus rc=5 good=False len=0
+20 cycle02-get-performance-type00: window sha256=19d5dd12f64a3f58903269fdb3c5e250ebcd84375947dec963708fc1f83f3c73
+21 cycle03-baseline-no-stimulus: capture only
+21 cycle03-baseline-no-stimulus: window sha256=e8143d7ce32cc04277ad3b88d9ae57e7712bc28f86f5a83af12876e884350500
+22 cycle03-inquiry-standard-96: stimulus rc=0 good=True len=96
+22 cycle03-inquiry-standard-96: window sha256=fccf5c025fa5fe7a8200d85e3736c79644ac524446be55f7362e11e8a1f7f103
+23 cycle03-inquiry-extrainq: stimulus rc=0 good=True len=176
+23 cycle03-inquiry-extrainq: window sha256=2c2e1fc62390f2e338920296016ead930a488fd88dc7a005602d8c298d38f3f2
+24 cycle03-get-configuration-current: stimulus rc=0 good=True len=60
+24 cycle03-get-configuration-current: window sha256=b3a9941879154745d212aeda429fb935ef38dc5024076b26e1a389a5880d9426
+25 cycle03-get-configuration-all: stimulus rc=0 good=True len=252
+25 cycle03-get-configuration-all: window sha256=f2779f670a12f55d2c20ab6f4cd4d071dbefc1479d0019cdcfb891df8eafcf6c
+26 cycle03-mode-sense10-read-error-recovery: stimulus rc=0 good=True len=20
+26 cycle03-mode-sense10-read-error-recovery: window sha256=7e40bf28a2a288adeea3a2cc6a00d4a5246f3eb418780244fed78b98c874fb4a
+27 cycle03-get-performance-type00: stimulus rc=5 good=False len=0
+27 cycle03-get-performance-type00: window sha256=326b21395a74f79a1d59c8b50fa1c43d245dccc7aa86c27ede1e920e4e48ecc2

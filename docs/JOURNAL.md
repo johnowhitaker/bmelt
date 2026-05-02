@@ -2684,3 +2684,31 @@ for studying the resident response hook we already installed. It is not a clean
 target for new helper-bypass write experiments. If we use it live, we should be
 explicit that we are working on a drive with the record-59 mutation and the
 response hook already present.
+
+I used that mutated-but-reachable state for one more read-only pass. The cave
+payload turned out to be exactly the old
+`currentboot-response-hook-gateway-cdb-bulk` candidate. That is useful in
+currentboot, but normal LD5M EXTRAINQ and GET CONFIG responses stayed
+byte-for-byte stock. In other words, the installed hook is not secretly our
+normal-mode response channel.
+
+The record-59 mutation is very much alive, though. A focused capture that
+avoided the slow GET PERFORMANCE path saw contig 4 as a full tile sequence at
+public offset `+0x7180` in 50 of 96 captures. The stock reference had 0 of 32;
+the older record-59-mutated corpus had 15 of 32. That is a strong confirmation
+that the original drive is currently in the record-59-mutated runtime state we
+thought it was.
+
+One operational lesson: the broad read-only probe's `GET PERFORMANCE nominal`
+variant took 4.3 seconds, returned `rc=99`, and left later status checks wedged
+until a Pico servo power cycle. The narrower capture set without that command
+completed cleanly and left `/dev/sg0` visible. For this drive state, stick to
+baseline, INQUIRY/EXTRAINQ, GET CONFIG, and MODE SENSE style captures unless
+there is a specific reason to risk the slow path.
+
+Analysis:
+
+```text
+analysis/8051/original-drive-retriage-20260502.md
+analysis/8051/original-drive-rec59-focused-contig4-hits-20260502.md
+```
