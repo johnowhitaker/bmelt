@@ -34,14 +34,29 @@ from the active tree. The compact operating set is now in this repo.
   `/dev/sg0` and `/dev/sg1`.
 - After cleanup, sysfs still showed `/dev/sg1` rev `0D5C`, but `sg_inq`
   reported `LD5M`; trust the active SCSI INQUIRY over stale sysfs text.
-- Current live state: Linux drive #1 is visible as the optical PLDS LUN and
-  cold-boots as `LD5M`.
+- Current live state: the spare drive is switched into the Linux bench setup.
+  It is visible as the optical PLDS LUN on `/dev/sg0` and cold-boots as
+  `LD5M`. This spare does not have the Pico front-panel LED/button wiring
+  attached.
 
 ```text
 PLDS / DVD+-RW DS-8ABSH / LD5M
 ```
 
-Current caveat: Linux drive #1 is not byte-stock. The latest focused record-59
+Spare baseline check: a read-only F0 window read of `0x28000..0x28800` matched
+the stock LD5M image, including the old record-59 mutation site:
+
+```text
+F0[0x28519] = 0x68
+```
+
+Evidence:
+
+```text
+references/evidence/live/spare-drive-baseline-20260501/README.md
+```
+
+Previous-drive caveat: Linux drive #1 is not byte-stock. The latest focused record-59
 CDD probe reinstalled this persistent byte:
 
 ```text
@@ -53,7 +68,7 @@ drive still reports normal `LD5M`, but the normal firmware-update entry path is
 currently blocked: the LD5M pre-tail, currentboot-key tail, direct `arg=00`
 chunk, and failed-tail-then-chunk probes all time out with host transport
 errors. Do not assume the helper-bypass write path is currently available on
-this drive.
+that previous drive.
 
 Older caveat: this drive used to carry the deliberate
 `currentboot-response-hook-gateway-cdb-bulk` patch, but the later normal-mode
@@ -71,7 +86,7 @@ readout scripts that depend on `0x4fc9 -> 0x6ee3`.
 If live firmware writes are needed next, prefer a fresh/sacrificial drive or a
 new out-of-band restore route for record 59. The record-59 mutation is valuable
 evidence because it appears to touch the normal update/response bridge
-neighborhood, but it is not a safe casual probe on the current Linux drive.
+neighborhood, but it is not a safe casual probe on the spare.
 
 Rediscover:
 
@@ -1136,8 +1151,10 @@ neighborhood. The key chunks are:
 8d8c3b0a22a0  GET CONFIG bridge, 0x4099 -> xdata[0x8a4e/0x8a53/0x8a54]
 ```
 
-Record 59 is preferred because contig 4 already has a reversible ownership
-proof. Records 84/85 are the best packet-intake candidates because chunk
+Record 59 is high-value because contig 4 already has the strongest ownership
+evidence, but it is no longer a preferred live mutation target: the same
+`0x28519` probe blocked update entry on the previous drive. Records 84/85 are
+the best packet-intake candidates because chunk
 `2111cafaf69c` contains `0x47b1 -> 0x8a4c..0x8a53` CDB shadow copies, but they
 are riskier live targets.
 
@@ -1151,3 +1168,185 @@ Shortcut check: currentboot-to-normal carryover is still not promising. The
 previous gateway-write carryover through full recovery was negative, and this
 pass confirmed the currently installed hook was the XDATA-write service, not
 gateway-write. The drive was recovered back to normal `LD5M` after the check.
+
+## Latest Static Record-59 Pass
+
+New offline script/report:
+
+```text
+scripts/analyze_liteon_rec59_static_neighborhood.py
+analysis/8051/rec59-static-neighborhood-20260501.md/json
+```
+
+The record-59 known output is a decoded controller-command bridge. Its first
+known function copies CDB shadow bytes `xdata[0x8a4c..0x8a4e]` into controller
+argument registers `xdata[0x4011..0x4013]`, copies transfer-ish bytes
+`0x8a50..0x8a51` into IRAM around `0xa9..0xaa`, sets a flag, and calls
+`0xefb6`. The second visible function prepares response/setup bytes around
+`0x8857..0x8860`, touches `0x893c`, and calls `0x0a65`/`0x0a6b`.
+
+Important correction: those call targets are not visible-prefix resident code.
+The CDD map places `0x0a65`/`0x0a6b` in decoded record 5 and `0xefb6` in
+decoded record 137. That makes record 137 a better static/read-only follow-up
+than another record-59 mutation.
+
+## Latest Currentboot CDD Service Primitive
+
+New offline tooling:
+
+```text
+scripts/read_liteon_currentboot_cdd_mapped_source.py
+
+references/firmware/extracted/currentboot-response-hook-candidates/
+  currentboot-response-hook-gateway-bulk-cdd-mapped-source-v1/
+```
+
+The builder now has:
+
+```text
+--gateway-cdb-bulk-with-cdd-mapped-source
+```
+
+This hook was tested as a low-risk currentboot experiment on the spare drive.
+It keeps the ordinary gateway-bulk reader. If the host sends an INQUIRY CDB
+with `CDB[10] = e3`, the hook instead takes the usual 24-bit address from
+`CDB[7:9] + (CDB[5] & 0x3f)`, calls the resident `0x1717` mapped-source helper,
+and returns marker `0xd5` plus the 32 bytes copied to `xdata[0xc000]`.
+
+The candidate builds offline with payload length `199` in the known
+`0x6ee3..0x6fc0` FF cave. The larger idea, "mapped source + 64 status bytes +
+gateway fallback," did not fit. Also note the important address-space
+distinction: the preserved fallback is a controller-gateway reader, not an
+XDATA reader, so this v1 hook should be treated as a CDD mapped-source byte
+oracle only.
+
+Live spare result:
+
+```text
+references/evidence/live/currentboot-mapped-source-hook-v1-spare-20260502/
+```
+
+The candidate image was admitted and final identity was normal `LD5M`, but the
+special CDB did not hit the hook after normal boot. `response[0x20]` was stock
+`0x4c` (`"LD5M..."`) instead of marker `0xd5`. The low-prefix hook and cave were
+restored afterward; a sequential readback of `F0[0x0000..0x7000]` matched stock.
+
+The command shape remains useful if a future version keeps the drive in
+currentboot or hooks a normal-mode response path:
+
+```sh
+python3 scripts/read_liteon_currentboot_cdd_mapped_source.py \
+  --device /dev/sg0 \
+  --address 0x702c \
+  --length 0x20 \
+  --out /tmp/cdd-header-map.bin \
+  --json-out /tmp/cdd-header-map.json
+```
+
+Expected mapped bytes for `0x702c` are the LD5M CDD header:
+
+```text
+43 44 44 09 10 16 53 0d 90 00 00 7d ec 03 08 10
+87 0e 80 00 00 70 00 18 40 00 1b 3f ff 1b 3f ff
+```
+
+If that works, the useful next source addresses are `0x28119` (record 59),
+`0x27825` (record 58), `0x27075` (record 57), `0x502fa` (record 137, call
+target owner), and `0x0b9e9` (record 5, call target owner). Do not
+mutate these on the spare as a first step; use this hook only to map/read source
+bytes.
+
+## Latest Currentboot Byte Oracle
+
+The "keep it in currentboot" version worked.
+
+Correct workflow:
+
+1. Install the response hook through the full 544-event helper-bypass replay.
+2. Cold power-cycle with `python3 scripts/pico_power_cycle_linux_drive.py`.
+3. Send only event 1/profile-tail to enter currentboot.
+4. Query the currentboot response hook.
+5. Recover the drive back to normal `LD5M` before ending the live run.
+
+Evidence:
+
+```text
+references/evidence/live/currentboot-mapped-source-hook-v1-spare-20260502/
+```
+
+Three hook variants matter:
+
+```text
+marker 0xd5  fixed/general mapped-source header proof
+marker 0xd6  mapped source plus xdata[0x4e80..0x4ebf] status
+marker 0xd7  xdata[0xc000..0xc07f] wide window
+```
+
+The `0xd6` diagnostic proved the address reaches resident helper `0x1717`.
+After each mapped-source request, `xdata[0x4e90..0x4e93]` contains:
+
+```text
+0x400000 + requested_address + 0x20
+```
+
+Examples:
+
+```text
+0x00702c -> 0x40704c
+0x028119 -> 0x428139
+0x0502fa -> 0x45031a
+0x184000 -> 0x584020
+```
+
+The `0xd7` diagnostic found the useful output byte: `xdata[0xc07f]`.
+`scripts/read_liteon_currentboot_cdd_mapped_source.py` now has:
+
+```sh
+--d7-c07f-byte-oracle
+```
+
+That mode appends only `xdata[0xc07f]` and advances by one byte. It gives one
+source/controller byte per SCSI command, which is far faster than the old
+timing/bit channel.
+
+Proof read:
+
+```text
+source 0x28119 length 0x10 -> d819200a7add2aad9f56a3493851aacc
+stock F0[0x28119..]       -> d819200a7add2aad9f56a3493851aacc
+```
+
+Controller-space samples around the descriptor's advertised decoded range are
+now nonzero:
+
+```text
+0x184000:
+52 51 12 ff 26 66 3d c0 31 7f d4 94 d8 45 ff 52
+2f f9 77 91 76 26 6b d7 b4 eb ed e6 be 24 b5 78
+```
+
+But do not call this a decoded CDD dump yet. The bytes look high-entropy, and a
+record-59 candidate flat decoded address (`0x18b170`) did not match the known
+normal-mode record-59 overlay. Current interpretation: this is a real
+controller-address read surface, not yet the materialized CDD runtime image.
+
+Final live state after the latest run:
+
+```text
+/dev/sg0: PLDS DVD+-RW DS-8ABSH LD5M
+```
+
+Recovery log:
+
+```text
+references/evidence/live/currentboot-mapped-source-hook-v1-spare-20260502/
+  remote-logs/window128-v2-recovery-result.json
+```
+
+Good next steps:
+
+- use the byte oracle for targeted source reads of records 5, 57, 58, 59, 137;
+- map small `0x4e80`/`0x4a00`/`0x8256` state windows around `0x1717`;
+- try to determine what controller address/bank selector would expose the
+  normal-mode decoded overlays;
+- avoid new CDD mutations on the spare until the read-only oracle is exhausted.

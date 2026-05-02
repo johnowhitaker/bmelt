@@ -112,6 +112,66 @@ Live result: the trigger executed, but decoded CDD targets remained zero:
 references/evidence/live/currentboot-cdd-field-trigger-v1.md
 ```
 
+Mapped-source/currentboot byte-oracle hook:
+
+```text
+scripts/build_liteon_currentboot_response_hook_candidate.py \
+  --name gateway-bulk-cdd-mapped-source-v1 \
+  --gateway-cdb-bulk-with-cdd-mapped-source \
+  --cave-len 0xdd
+
+references/firmware/extracted/currentboot-response-hook-candidates/
+  currentboot-response-hook-gateway-bulk-cdd-mapped-source-v1/
+
+scripts/read_liteon_currentboot_cdd_mapped_source.py
+```
+
+The corrected live workflow is important:
+
+1. Install the currentboot response hook through the full helper-bypass replay.
+2. Cold power-cycle the drive/bridge.
+3. Send only the profile-tail/event-1 entry step.
+4. Query the hook while the drive remains in currentboot.
+
+If the hook is admitted and the drive boots normal `LD5M`, normal mode no
+longer reaches the currentboot response handler at `0x4fc9`.
+
+Live spare result:
+
+```text
+references/evidence/live/currentboot-mapped-source-hook-v1-spare-20260502/
+```
+
+Current state of the primitive:
+
+- The original normal-mode attempt was a useful negative: after successful
+  admission/normal boot, the special CDB returned stock `"LD5M..."`, not marker
+  `0xd5`.
+- In currentboot, the fixed-header call to resident helper `0x1717` returns the
+  LD5M CDD header from source `0x702c`.
+- The status64 diagnostic proved arbitrary host-selected source addresses reach
+  `0x1717`; `xdata[0x4e90..0x4e93]` reported
+  `0x400000 + requested_address + 0x20`.
+- The compact `0xd7` window hook exposes the useful mapped byte at
+  `xdata[0xc07f]`.
+- `scripts/read_liteon_currentboot_cdd_mapped_source.py` has
+  `--d7-c07f-byte-oracle`, which reads one mapped byte per SCSI command.
+
+Proof read:
+
+```text
+source 0x28119 -> d8 19 20 0a 7a dd 2a ad 9f 56 a3 49 38 51 aa cc
+```
+
+That matches stock `F0[0x28119..0x28128]`, so this is a reliable CDD
+source/controller-address read oracle. It is much faster and safer than the old
+timing/bit channels for targeted byte reads.
+
+The same oracle can read nonzero bytes around controller `0x184000`, but the
+sampled bytes look high-entropy and do not disassemble like the known
+normal-mode record-59 overlay. Treat this as a controller address surface, not
+as a solved flat decoded CDD dump.
+
 Code-execution evidence:
 
 ```text

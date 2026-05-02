@@ -1,0 +1,35 @@
+{
+  "address": 164121,
+  "ascii_preview": "CDD...S....}.........p..@..?..?.",
+  "bytes_hex": "434444091016530d9000007dec030810870e80000070001840001b3fff1b3fff",
+  "device": "/dev/sg0",
+  "length": 32,
+  "records": [
+    {
+      "address": 164121,
+      "base": 164096,
+      "bytes_hex": "434444091016530d9000007dec030810870e80000070001840001b3fff1b3fff",
+      "cdb": [
+        18,
+        0,
+        0,
+        0,
+        240,
+        89,
+        0,
+        2,
+        129,
+        0,
+        227,
+        0
+      ],
+      "kind": "mapped_source",
+      "marker": 213,
+      "returncode": 0,
+      "selector": 25,
+      "stderr": "SCSI Status: Good \n\nWriting 176 bytes of data to stdout\n",
+      "stdout_len": 176,
+      "used_len": 32
+    }
+  ]
+}

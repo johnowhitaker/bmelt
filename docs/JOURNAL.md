@@ -2372,3 +2372,107 @@ firmware-update entry/data path. It is a good clue for static analysis, but a
 bad casual live mutation target. Future CDD perturbation probes should avoid
 records 58/59 unless the plan explicitly includes a fresh/sacrificial drive or
 an out-of-band restore path.
+
+The spare drive went in next, without the front-panel Pico wiring. A read-only
+sequential F0 check on Linux showed it was still stock LD5M at the sharp
+record-59 byte:
+
+```text
+F0[0x28519] = 0x68
+```
+
+That gave us a clean bench target, but not one to casually burn on another
+record-59 mutation. I shifted the next pass back to tooling and static
+alignment. Record 59's decoded output is now clearly a controller-command
+bridge, not just random 8051-looking code. One visible function copies CDB
+shadow bytes from `xdata[0x8a4c..0x8a4e]` into controller argument registers
+around `0x4011..0x4013`, then calls `0xefb6`. Another prepares response/setup
+state around `0x8857..0x8860` and calls `0x0a65`/`0x0a6b`.
+
+The important twist is where those call targets live. The CDD map places
+`0x0a65` and `0x0a6b` inside decoded record 5, and `0xefb6` inside decoded
+record 137. So record 59 is not a self-contained island; it is a bridge into
+other decoded CDD overlays. That makes record 137 especially interesting for
+static and read-only currentboot work, and it makes repeated live edits to
+record 59 look less attractive.
+
+I also took the existing currentboot CDD-header success and turned it into a
+more general offline candidate. The old special hook could only ask resident
+helper `0x1717` to map the fixed CDD header at `0x702c` into `xdata[0xc000]`.
+The new candidate keeps the normal gateway-bulk reader, but reserves
+`CDB[10] = e3` as "map this CDD source address" mode. In that mode, the host
+address bytes select any 24-bit source address, `0x1717` maps it, and the hook
+returns the 32 bytes from `xdata[0xc000]` with marker `0xd5`.
+
+I briefly tried to fit "mapped source plus `0x4e80` status" into the same hook,
+but the known FF cave is too small once the normal gateway fallback is kept.
+There is also an easy trap here: `0x4e80` is an XDATA status row, while the
+fallback reader is the controller-gateway path. So this first general hook is
+deliberately narrower. It should prove whether arbitrary source mapping works;
+status can get its own hook if that becomes the next bottleneck.
+
+This is not installed on the spare yet. It is ready as a safer next live step:
+first ask it to remap `0x702c` and confirm the CDD header comes back, then try
+record source addresses like `0x28119`, `0x502fa`, and `0x0b9e9`. If it works,
+we get a reusable currentboot CDD-source oracle without doing another
+persistent CDD mutation.
+
+The first spare run gave us a clean negative. The candidate image was admitted
+and the drive came back as normal `LD5M`, but the special mapped-source CDB did
+not hit the hook. Instead of marker `0xd5`, response byte `0x20` was `0x4c`,
+the `L` in the normal `"LD5M..."` identity/profile string. In plain terms: this
+currentboot response hook can be flashed into an admitted image, but once the
+drive boots normal LD5M, that particular handler is no longer on the live
+response path.
+
+I restored the low-prefix hook and cave immediately afterward with the existing
+`restore-4fc9-cave` candidate. A sequential `F0[0x0000..0x7000]` read matched
+stock byte-for-byte, including `0x4fc9 = 12 62 06` and the `0x6ee3` cave back
+to all `ff`. So the spare is clean at the low-prefix hook site, and the lesson
+is now sharper: arbitrary-source mapping probably needs a way to stay in
+currentboot long enough to query it, or the same idea needs to be moved onto a
+normal-mode response hook.
+
+The "stay in currentboot" version worked. The correct sequence is slightly
+counterintuitive: install the hook, cold power-cycle the bridge/drive, then send
+only the profile-tail entry event so the patched currentboot response handler is
+live before normal LD5M takes over. With that workflow, the fixed-header mapper
+called resident helper `0x1717` and returned the CDD header from `0x702c`.
+
+The next diagnostic added a status window. The mapped bytes at `xdata[0xc000]`
+were mostly stale after the first header mapping, but `xdata[0x4e90..0x4e93]`
+changed with the requested source address as:
+
+```text
+0x400000 + requested_address + 0x20
+```
+
+That was a very useful correction: the host address bytes were definitely
+reaching the resident mapper. We were just looking at the wrong output byte.
+
+The compact 128-byte window hook found the right byte. Marker `0xd7` returns
+`xdata[0xc000..0xc07f]`, and the mapped source byte appears at `xdata[0xc07f]`.
+The reader now has a byte-oracle mode that pulls one byte per SCSI command. A
+16-byte read of record-59 source address `0x28119` came back as:
+
+```text
+d8 19 20 0a 7a dd 2a ad 9f 56 a3 49 38 51 aa cc
+```
+
+That matches the stock LD5M F0 bytes exactly. This is a big practical upgrade:
+we now have a currentboot byte oracle for CDD source/controller addresses,
+without using persistent CDD mutations and without the slow timing bit channel.
+
+The more ambitious read is still not solved. The oracle can read nonzero bytes
+at controller addresses like `0x184000`, but the samples look high-entropy
+rather than like flat decoded 8051 overlay code. A record-59 candidate decoded
+address around `0x18b170` also did not match the known normal-mode record-59
+overlay. So the descriptor's `0x184000..0x1b3fff` range is a real readable
+controller address surface in this path, but not yet the decoded CDD image we
+want.
+
+The spare was recovered back to normal `LD5M` after the oracle run. This leaves
+us with a much better read-only tool and a cleaner next question: can we use
+the byte oracle to map the resident `0x1717`/mailbox state deeply enough to
+turn controller-address reads into a decoded-runtime oracle, or do we need the
+same idea in a later normal-mode response path?

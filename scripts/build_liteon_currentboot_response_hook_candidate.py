@@ -767,6 +767,90 @@ def source_mapped_cdd_header_status64_replay(storage_offset: int) -> bytes:
     )
 
 
+def source_mapped_cdd_source_replay(
+    selector_mask: int, storage_offset: int
+) -> bytes:
+    """Map a host-selected CDD source address through 0x1717.
+
+    The fixed-header probes proved that 0x1717 maps a CDD source address into
+    xdata[0xc000] when xdata[0x8256..0x8257] is set to c000 and IRAM
+    0x30..0x33 contains the companion/end-minus-one value. This variant keeps
+    the same setup, but fills R5:R6:R7 from the host CDB address bytes so the
+    next run can sample arbitrary CDD source records without rebuilding the
+    hook for every address.
+    """
+
+    return b"".join(
+        [
+            write_xdata_run(0x8256, [0xC0, 0x00]),
+            write_direct_run(0x30, [0x00, 0x07, 0xFF, 0xFF]),
+            gateway_cdb_address_to_r5_r6_r7(selector_mask),
+            mov_rn_imm(4, 0x00),
+            lcall(0x1717),
+            copy_xdata_to_response_source(0xC000, 0x20, storage_offset + 1),
+            mov_rn_imm(5, 0xD5),
+        ]
+    )
+
+
+def source_mapped_cdd_source_status64_replay(
+    selector_mask: int, storage_offset: int
+) -> bytes:
+    """Map a host-selected CDD source address and return 0x4e80 status."""
+
+    return b"".join(
+        [
+            write_xdata_run(0x8256, [0xC0, 0x00]),
+            write_direct_run(0x30, [0x00, 0x07, 0xFF, 0xFF]),
+            gateway_cdb_address_to_r5_r6_r7(selector_mask),
+            mov_rn_imm(4, 0x00),
+            lcall(0x1717),
+            copy_xdata_to_response_source(0xC000, 0x20, storage_offset + 1),
+            copy_xdata_to_response_source(0x4E80, 0x40, storage_offset + 0x21),
+            mov_rn_imm(5, 0xD6),
+        ]
+    )
+
+
+def source_cdd_mapped_source_window128_only(selector_mask: int, storage_offset: int) -> bytes:
+    """Special-purpose 128-byte mapped-source hook without a fallback reader."""
+
+    source = bytearray()
+    source.extend(mov_dptr(0x8194))  # CDB byte 10: mapped-source selector.
+    source.extend(bytes([0xE0, 0x64, 0xE3, 0x70, 0x00]))  # MOVX; XRL; JNZ unknown
+    jump_to_unknown_pos = len(source) - 1
+
+    source.extend(source_mapped_cdd_source_window128_replay(selector_mask, storage_offset))
+    skip_after_replay_pos = len(source)
+    source.extend(bytes([0x80, 0x00]))  # SJMP end_source
+
+    unknown_start = len(source)
+    source.extend(mov_rn_imm(5, 0xEE))
+    end_source = len(source)
+
+    source[jump_to_unknown_pos] = rel8(jump_to_unknown_pos + 1, unknown_start)
+    source[skip_after_replay_pos + 1] = rel8(skip_after_replay_pos + 2, end_source)
+    return bytes(source)
+
+
+def source_mapped_cdd_source_window128_replay(
+    selector_mask: int, storage_offset: int
+) -> bytes:
+    """Map a host-selected CDD source address and return a wider 0xc000 window."""
+
+    return b"".join(
+        [
+            write_xdata_run(0x8256, [0xC0, 0x00]),
+            write_direct_run(0x30, [0x00, 0x07, 0xFF, 0xFF]),
+            gateway_cdb_address_to_r5_r6_r7(selector_mask),
+            mov_rn_imm(4, 0x00),
+            lcall(0x1717),
+            copy_xdata_to_response_source(0xC000, 0x80, storage_offset + 1),
+            mov_rn_imm(5, 0xD7),
+        ]
+    )
+
+
 def source_gateway_cdb_bulk_with_cdd_mapped_header_status64(
     selector_mask: int, storage_offset: int, bulk_len: int
 ) -> bytes:
@@ -789,6 +873,63 @@ def source_gateway_cdb_bulk_with_cdd_mapped_header_status64(
 
     for position in jump_to_gateway_positions:
         source[position] = rel8(position + 1, gateway_start)
+    source[skip_after_replay_pos + 1] = rel8(skip_after_replay_pos + 2, end_source)
+    return bytes(source)
+
+
+def source_cdd_mapped_source_status64_only(selector_mask: int, storage_offset: int) -> bytes:
+    """Special-purpose mapped-source/status hook without a fallback reader.
+
+    CDB[10] == 0xe3 selects the mapped-source path. Other commands return
+    marker 0xee so accidental ordinary currentboot identity probes are obvious.
+    This is intentionally narrower than the gateway-preserving variant so the
+    64-byte XDATA status copy fits in the known cave.
+    """
+
+    source = bytearray()
+    source.extend(mov_dptr(0x8194))  # CDB byte 10: mapped-source selector.
+    source.extend(bytes([0xE0, 0x64, 0xE3, 0x70, 0x00]))  # MOVX; XRL; JNZ unknown
+    jump_to_unknown_pos = len(source) - 1
+
+    source.extend(source_mapped_cdd_source_status64_replay(selector_mask, storage_offset))
+    skip_after_replay_pos = len(source)
+    source.extend(bytes([0x80, 0x00]))  # SJMP end_source
+
+    unknown_start = len(source)
+    source.extend(mov_rn_imm(5, 0xEE))
+    end_source = len(source)
+
+    source[jump_to_unknown_pos] = rel8(jump_to_unknown_pos + 1, unknown_start)
+    source[skip_after_replay_pos + 1] = rel8(skip_after_replay_pos + 2, end_source)
+    return bytes(source)
+
+
+def source_gateway_cdb_bulk_with_cdd_mapped_source(
+    selector_mask: int, storage_offset: int, bulk_len: int
+) -> bytes:
+    """Gateway bulk read with arbitrary mapped-CDD-source trigger.
+
+    Normal mode matches source_gateway_cdb_bulk(): CDB[7:9] plus the selector
+    bits read the controller gateway. Host CDB[10] == 0xe3 selects the mapped
+    source path instead, where the same address convention is passed to 0x1717
+    and xdata[0xc000..0xc01f] is returned. If status is needed, the preserved
+    gateway bulk path can read xdata[0x4e80..0x4ebf] in a follow-up command.
+    """
+
+    source = bytearray()
+    source.extend(mov_dptr(0x8194))  # CDB byte 10: mapped-source selector.
+    source.extend(bytes([0xE0, 0x64, 0xE3, 0x70, 0x00]))  # MOVX; XRL; JNZ gateway
+    jump_to_gateway_pos = len(source) - 1
+
+    source.extend(source_mapped_cdd_source_replay(selector_mask, storage_offset))
+    skip_after_replay_pos = len(source)
+    source.extend(bytes([0x80, 0x00]))  # SJMP end_source
+
+    gateway_start = len(source)
+    source.extend(source_gateway_cdb_bulk(selector_mask, storage_offset, bulk_len))
+    end_source = len(source)
+
+    source[jump_to_gateway_pos] = rel8(jump_to_gateway_pos + 1, gateway_start)
     source[skip_after_replay_pos + 1] = rel8(skip_after_replay_pos + 2, end_source)
     return bytes(source)
 
@@ -981,6 +1122,9 @@ def build_source(args: argparse.Namespace) -> tuple[str, bytes, dict[str, Any]]:
         args.gateway_cdb_bulk_with_cdd_mapped_header,
         args.gateway_cdb_bulk_with_cdd_mapped_header_status,
         args.gateway_cdb_bulk_with_cdd_mapped_header_status64,
+        args.cdd_mapped_source_status64_only,
+        args.cdd_mapped_source_window128_only,
+        args.gateway_cdb_bulk_with_cdd_mapped_source,
         args.gateway_cdb_bulk_with_cdd_parser_call,
         args.gateway_cdb_bulk_with_cdd_parser_second_doorbell,
         args.gateway_byte_with_cdd_prestage_replay,
@@ -996,6 +1140,9 @@ def build_source(args: argparse.Namespace) -> tuple[str, bytes, dict[str, Any]]:
             "--gateway-cdb-bulk-with-cdd-mapped-header, or "
             "--gateway-cdb-bulk-with-cdd-mapped-header-status, or "
             "--gateway-cdb-bulk-with-cdd-mapped-header-status64, or "
+            "--cdd-mapped-source-status64-only, or "
+            "--cdd-mapped-source-window128-only, or "
+            "--gateway-cdb-bulk-with-cdd-mapped-source, or "
             "--gateway-cdb-bulk-with-cdd-parser-call, or "
             "--gateway-cdb-bulk-with-cdd-parser-second-doorbell, or "
             "--gateway-byte-with-cdd-prestage-replay"
@@ -1144,6 +1291,53 @@ def build_source(args: argparse.Namespace) -> tuple[str, bytes, dict[str, Any]]:
                 "address_source": "normal: cdb_bytes_7_8_9_plus_control_low_bits",
                 "trigger": "host cdb_7_fc_cdb_8_e0 calls 0x1717 and returns xdata[0xc000..0xc01f] plus xdata[0x4e80..0x4ebf]",
                 "trigger_response": "0xd2 at response[0x20], mapped bytes at response[0x21..0x40], status bytes at response[0x41..0x80]",
+                "selector_mask": args.selector_mask,
+                "bulk_len": args.bulk_len,
+            },
+        )
+    if args.cdd_mapped_source_status64_only:
+        return (
+            "cdd_mapped_source_status64_only",
+            source_cdd_mapped_source_status64_only(
+                args.selector_mask,
+                RESPONSE_STORAGE_BASE + args.response_offset,
+            ),
+            {
+                "address_source": "mapped-source trigger uses cdb_bytes_7_8_9_plus_control_low_bits",
+                "trigger": "host cdb_10_e3 calls 0x1717 with source address from cdb_7_8_9_plus_control_low_bits",
+                "trigger_response": "0xd6 at response[0x20], mapped bytes at response[0x21..0x40], xdata[0x4e80..0x4ebf] status at response[0x41..0x80]",
+                "unknown_mode": "commands without cdb_10_e3 return marker 0xee; no gateway fallback in this compact diagnostic build",
+                "selector_mask": args.selector_mask,
+            },
+        )
+    if args.cdd_mapped_source_window128_only:
+        return (
+            "cdd_mapped_source_window128_only",
+            source_cdd_mapped_source_window128_only(
+                args.selector_mask,
+                RESPONSE_STORAGE_BASE + args.response_offset,
+            ),
+            {
+                "address_source": "mapped-source trigger uses cdb_bytes_7_8_9_plus_control_low_bits",
+                "trigger": "host cdb_10_e3 calls 0x1717 with source address from cdb_7_8_9_plus_control_low_bits",
+                "trigger_response": "0xd7 at response[0x20], xdata[0xc000..0xc07f] at response[0x21..0xa0]",
+                "unknown_mode": "commands without cdb_10_e3 return marker 0xee; no gateway fallback in this compact diagnostic build",
+                "selector_mask": args.selector_mask,
+            },
+        )
+    if args.gateway_cdb_bulk_with_cdd_mapped_source:
+        return (
+            "gateway_cdb_bulk_with_cdd_mapped_source",
+            source_gateway_cdb_bulk_with_cdd_mapped_source(
+                args.selector_mask,
+                RESPONSE_STORAGE_BASE + args.response_offset,
+                args.bulk_len,
+            ),
+            {
+                "address_source": "normal: cdb_bytes_7_8_9_plus_control_low_bits; mapped-source trigger uses same address convention",
+                "trigger": "host cdb_10_e3 calls 0x1717 with source address from cdb_7_8_9_plus_control_low_bits",
+                "trigger_response": "0xd5 at response[0x20], mapped bytes at response[0x21..0x40]",
+                "status_note": "this variant does not return xdata[0x4e80] status; the preserved fallback is a controller-gateway reader, not an XDATA reader",
                 "selector_mask": args.selector_mask,
                 "bulk_len": args.bulk_len,
             },
@@ -1402,6 +1596,21 @@ def parse_args() -> argparse.Namespace:
         help="like --gateway-cdb-bulk, but CDB[7:8]=fc/e0 calls the mapped-header helper and returns xdata[0xc000..0xc01f] plus xdata[0x4e80..0x4ebf]",
     )
     parser.add_argument(
+        "--gateway-cdb-bulk-with-cdd-mapped-source",
+        action="store_true",
+        help="like --gateway-cdb-bulk, but CDB[10]=e3 calls 0x1717 with source CDB[7:9]+selector and returns xdata[0xc000..0xc01f]",
+    )
+    parser.add_argument(
+        "--cdd-mapped-source-status64-only",
+        action="store_true",
+        help="compact diagnostic hook: CDB[10]=e3 calls 0x1717 with source CDB[7:9]+selector and returns xdata[0xc000..0xc01f] plus xdata[0x4e80..0x4ebf]; no gateway fallback",
+    )
+    parser.add_argument(
+        "--cdd-mapped-source-window128-only",
+        action="store_true",
+        help="compact diagnostic hook: CDB[10]=e3 calls 0x1717 with source CDB[7:9]+selector and returns xdata[0xc000..0xc07f]; no gateway fallback",
+    )
+    parser.add_argument(
         "--gateway-cdb-bulk-with-cdd-parser-call",
         action="store_true",
         help="like --gateway-cdb-bulk, but CDB[7:8]=fc/e1 calls the resident CDD parser setup and returns xdata[0x4a00..0x4a3f]",
@@ -1452,6 +1661,9 @@ def main() -> int:
         or args.gateway_cdb_bulk_with_cdd_mapped_header
         or args.gateway_cdb_bulk_with_cdd_mapped_header_status
         or args.gateway_cdb_bulk_with_cdd_mapped_header_status64
+        or args.cdd_mapped_source_status64_only
+        or args.cdd_mapped_source_window128_only
+        or args.gateway_cdb_bulk_with_cdd_mapped_source
         or args.gateway_cdb_bulk_with_cdd_parser_call
         or args.gateway_cdb_bulk_with_cdd_parser_second_doorbell
         or args.gateway_byte_with_cdd_prestage_replay

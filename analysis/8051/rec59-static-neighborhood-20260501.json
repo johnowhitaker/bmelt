@@ -1,0 +1,1478 @@
+{
+  "interpretation": [
+    "Record 59's known decoded output is a controller-command bridge, not identity text.",
+    "It copies CDB shadow bytes 0x8a4c..0x8a4e into controller argument registers 0x4011..0x4013.",
+    "Its decoded code calls other CDD-overlay records, including record 5 at 0x0a65/0x0a6b and record 137 at 0xefb6.",
+    "The source byte patched live, record-relative +0x400, did not alter visible chunk bytes in saved captures; it likely affects schedule/interleaver/control placement for this bridge neighborhood."
+  ],
+  "record59_call_targets": [
+    {
+      "count": 1,
+      "note": "",
+      "owner_decoded_span": 576,
+      "owner_decoded_start": 61008,
+      "owner_operation_key": "87804e645c03",
+      "owner_record": 137,
+      "target": 61366
+    },
+    {
+      "count": 1,
+      "note": "",
+      "owner_decoded_span": 992,
+      "owner_decoded_start": 2480,
+      "owner_operation_key": "4e3ad47ecc04",
+      "owner_record": 5,
+      "target": 2661
+    },
+    {
+      "count": 1,
+      "note": "",
+      "owner_decoded_span": 992,
+      "owner_decoded_start": 2480,
+      "owner_operation_key": "4e3ad47ecc04",
+      "owner_record": 5,
+      "target": 2667
+    }
+  ],
+  "record59_dptr_targets": [
+    {
+      "count": 2,
+      "note": "CDB shadow byte 0",
+      "owner_decoded_span": 400,
+      "owner_decoded_start": 35376,
+      "owner_operation_key": "0eea91990405",
+      "owner_record": 73,
+      "target": 35404
+    },
+    {
+      "count": 2,
+      "note": "controller CDB/arg byte 0",
+      "owner_decoded_span": 848,
+      "owner_decoded_start": 15744,
+      "owner_operation_key": "63aa4c751003",
+      "owner_record": 30,
+      "target": 16401
+    },
+    {
+      "count": 2,
+      "note": "response/setup destination byte 0",
+      "owner_decoded_span": 560,
+      "owner_decoded_start": 34560,
+      "owner_operation_key": "098ad4a36805",
+      "owner_record": 70,
+      "target": 34909
+    },
+    {
+      "count": 2,
+      "note": "response/setup destination byte 1",
+      "owner_decoded_span": 560,
+      "owner_decoded_start": 34560,
+      "owner_operation_key": "098ad4a36805",
+      "owner_record": 70,
+      "target": 34910
+    },
+    {
+      "count": 2,
+      "note": "response/setup destination byte 2",
+      "owner_decoded_span": 560,
+      "owner_decoded_start": 34560,
+      "owner_operation_key": "098ad4a36805",
+      "owner_record": 70,
+      "target": 34911
+    },
+    {
+      "count": 2,
+      "note": "response/setup destination byte 3",
+      "owner_decoded_span": 560,
+      "owner_decoded_start": 34560,
+      "owner_operation_key": "098ad4a36805",
+      "owner_record": 70,
+      "target": 34912
+    },
+    {
+      "count": 1,
+      "note": "CDB shadow byte 1",
+      "owner_decoded_span": 400,
+      "owner_decoded_start": 35376,
+      "owner_operation_key": "0eea91990405",
+      "owner_record": 73,
+      "target": 35405
+    },
+    {
+      "count": 1,
+      "note": "controller CDB/arg byte 1",
+      "owner_decoded_span": 848,
+      "owner_decoded_start": 15744,
+      "owner_operation_key": "63aa4c751003",
+      "owner_record": 30,
+      "target": 16402
+    },
+    {
+      "count": 1,
+      "note": "CDB shadow byte 2",
+      "owner_decoded_span": 400,
+      "owner_decoded_start": 35376,
+      "owner_operation_key": "0eea91990405",
+      "owner_record": 73,
+      "target": 35406
+    },
+    {
+      "count": 1,
+      "note": "controller CDB/arg byte 2",
+      "owner_decoded_span": 848,
+      "owner_decoded_start": 15744,
+      "owner_operation_key": "63aa4c751003",
+      "owner_record": 30,
+      "target": 16403
+    },
+    {
+      "count": 1,
+      "note": "CDB shadow byte 4/transfer high",
+      "owner_decoded_span": 400,
+      "owner_decoded_start": 35376,
+      "owner_operation_key": "0eea91990405",
+      "owner_record": 73,
+      "target": 35408
+    },
+    {
+      "count": 1,
+      "note": "response/setup source byte 0",
+      "owner_decoded_span": 560,
+      "owner_decoded_start": 34560,
+      "owner_operation_key": "098ad4a36805",
+      "owner_record": 70,
+      "target": 34903
+    },
+    {
+      "count": 1,
+      "note": "response/setup source byte 1",
+      "owner_decoded_span": 560,
+      "owner_decoded_start": 34560,
+      "owner_operation_key": "098ad4a36805",
+      "owner_record": 70,
+      "target": 34904
+    },
+    {
+      "count": 1,
+      "note": "",
+      "owner_decoded_span": 640,
+      "owner_decoded_start": 33552,
+      "owner_operation_key": "0fe212a8d404",
+      "owner_record": 68,
+      "target": 33967
+    },
+    {
+      "count": 1,
+      "note": "",
+      "owner_decoded_span": 640,
+      "owner_decoded_start": 33552,
+      "owner_operation_key": "0fe212a8d404",
+      "owner_record": 68,
+      "target": 33968
+    },
+    {
+      "count": 1,
+      "note": "response/setup length/command high",
+      "owner_decoded_span": 560,
+      "owner_decoded_start": 34560,
+      "owner_operation_key": "098ad4a36805",
+      "owner_record": 70,
+      "target": 34905
+    },
+    {
+      "count": 1,
+      "note": "response/setup control byte",
+      "owner_decoded_span": 80,
+      "owner_decoded_start": 35120,
+      "owner_operation_key": "331254c59e05",
+      "owner_record": 71,
+      "target": 35132
+    },
+    {
+      "count": 1,
+      "note": "",
+      "owner_decoded_span": 560,
+      "owner_decoded_start": 34560,
+      "owner_operation_key": "098ad4a36805",
+      "owner_record": 70,
+      "target": 34833
+    },
+    {
+      "count": 1,
+      "note": "",
+      "owner_decoded_span": 560,
+      "owner_decoded_start": 34560,
+      "owner_operation_key": "098ad4a36805",
+      "owner_record": 70,
+      "target": 34834
+    },
+    {
+      "count": 1,
+      "note": "",
+      "owner_decoded_span": 560,
+      "owner_decoded_start": 34560,
+      "owner_operation_key": "098ad4a36805",
+      "owner_record": 70,
+      "target": 34836
+    },
+    {
+      "count": 1,
+      "note": "",
+      "owner_decoded_span": 176,
+      "owner_decoded_start": 35200,
+      "owner_operation_key": "9492928b6204",
+      "owner_record": 72,
+      "target": 35214
+    },
+    {
+      "count": 1,
+      "note": "",
+      "owner_decoded_span": 848,
+      "owner_decoded_start": 0,
+      "owner_operation_key": "ef7a96b5bc05",
+      "owner_record": 0,
+      "target": 0
+    }
+  ],
+  "record59_jump_targets": [],
+  "records": {
+    "57": {
+      "decoded_span": 304,
+      "decoded_start": 28192,
+      "immediates": {
+        "dptrs": [
+          {
+            "count": 8,
+            "target": 34418
+          },
+          {
+            "count": 6,
+            "target": 33269
+          },
+          {
+            "count": 2,
+            "target": 34909
+          },
+          {
+            "count": 2,
+            "target": 35142
+          },
+          {
+            "count": 2,
+            "target": 33107
+          },
+          {
+            "count": 2,
+            "target": 35972
+          },
+          {
+            "count": 1,
+            "target": 33168
+          }
+        ],
+        "lcalls": [
+          {
+            "count": 2,
+            "target": 38877
+          },
+          {
+            "count": 2,
+            "target": 2823
+          },
+          {
+            "count": 1,
+            "target": 330
+          }
+        ],
+        "ljmps": [
+          {
+            "count": 1,
+            "target": 47197
+          }
+        ]
+      },
+      "known_ranges": [
+        [
+          96,
+          304
+        ]
+      ],
+      "mode": 64,
+      "operation_key": "3512d253d403",
+      "record": 57,
+      "slot_count": 4,
+      "source_end": 161829,
+      "source_len": 1968,
+      "source_minus_decoded": 1664,
+      "source_rel_0x400": 194,
+      "source_rel_0x400_window": "c4c99add1ed56b8ac2700b6fa1c04b6ea2d560c601b4752b",
+      "source_start": 159861,
+      "table_target_count": 5,
+      "top_slots": [
+        {
+          "record_relative": 96,
+          "top_chunk": "cfe0a1406283",
+          "top_count": 413,
+          "variant_count": 1
+        },
+        {
+          "record_relative": 160,
+          "top_chunk": "cfe0a1406283",
+          "top_count": 256,
+          "variant_count": 3
+        },
+        {
+          "record_relative": 224,
+          "top_chunk": "5fb5a8bf8f9a",
+          "top_count": 190,
+          "variant_count": 1
+        },
+        {
+          "record_relative": 288,
+          "top_chunk": "5fb5a8bf8f9a",
+          "top_count": 300,
+          "variant_count": 1
+        }
+      ]
+    },
+    "58": {
+      "decoded_span": 544,
+      "decoded_start": 28496,
+      "immediates": {
+        "dptrs": [
+          {
+            "count": 8,
+            "target": 16401
+          },
+          {
+            "count": 6,
+            "target": 34418
+          },
+          {
+            "count": 6,
+            "target": 35404
+          },
+          {
+            "count": 4,
+            "target": 35208
+          },
+          {
+            "count": 4,
+            "target": 16402
+          },
+          {
+            "count": 3,
+            "target": 33269
+          },
+          {
+            "count": 3,
+            "target": 35369
+          },
+          {
+            "count": 2,
+            "target": 35972
+          },
+          {
+            "count": 2,
+            "target": 35133
+          },
+          {
+            "count": 2,
+            "target": 18377
+          },
+          {
+            "count": 2,
+            "target": 18379
+          },
+          {
+            "count": 2,
+            "target": 34301
+          },
+          {
+            "count": 2,
+            "target": 34302
+          },
+          {
+            "count": 2,
+            "target": 34303
+          },
+          {
+            "count": 2,
+            "target": 34304
+          },
+          {
+            "count": 2,
+            "target": 35405
+          },
+          {
+            "count": 2,
+            "target": 35406
+          },
+          {
+            "count": 1,
+            "target": 33168
+          },
+          {
+            "count": 1,
+            "target": 33124
+          },
+          {
+            "count": 1,
+            "target": 13319
+          },
+          {
+            "count": 1,
+            "target": 16403
+          },
+          {
+            "count": 1,
+            "target": 35408
+          }
+        ],
+        "lcalls": [
+          {
+            "count": 4,
+            "target": 15753
+          },
+          {
+            "count": 2,
+            "target": 330
+          },
+          {
+            "count": 2,
+            "target": 1293
+          },
+          {
+            "count": 2,
+            "target": 13360
+          }
+        ],
+        "ljmps": [
+          {
+            "count": 2,
+            "target": 47197
+          }
+        ]
+      },
+      "known_ranges": [
+        [
+          48,
+          544
+        ]
+      ],
+      "mode": 128,
+      "operation_key": "66228ca20005",
+      "record": 58,
+      "slot_count": 8,
+      "source_end": 164121,
+      "source_len": 2292,
+      "source_minus_decoded": 1748,
+      "source_rel_0x400": 211,
+      "source_rel_0x400_window": "9a6b90747ebcb8fad3397218a2839ced4fcd9ed1405e1201",
+      "source_start": 161829,
+      "table_target_count": 3,
+      "top_slots": [
+        {
+          "record_relative": 48,
+          "top_chunk": "5fb5a8bf8f9a",
+          "top_count": 93,
+          "variant_count": 1
+        },
+        {
+          "record_relative": 112,
+          "top_chunk": "5fb5a8bf8f9a",
+          "top_count": 86,
+          "variant_count": 1
+        },
+        {
+          "record_relative": 176,
+          "top_chunk": "7e15398acc97",
+          "top_count": 334,
+          "variant_count": 3
+        },
+        {
+          "record_relative": 240,
+          "top_chunk": "7e15398acc97",
+          "top_count": 256,
+          "variant_count": 1
+        },
+        {
+          "record_relative": 304,
+          "top_chunk": "8f8e0add044c",
+          "top_count": 195,
+          "variant_count": 3
+        },
+        {
+          "record_relative": 368,
+          "top_chunk": "8f8e0add044c",
+          "top_count": 322,
+          "variant_count": 3
+        }
+      ]
+    },
+    "59": {
+      "decoded_span": 304,
+      "decoded_start": 29040,
+      "immediates": {
+        "dptrs": [
+          {
+            "count": 2,
+            "target": 35404
+          },
+          {
+            "count": 2,
+            "target": 16401
+          },
+          {
+            "count": 2,
+            "target": 34909
+          },
+          {
+            "count": 2,
+            "target": 34910
+          },
+          {
+            "count": 2,
+            "target": 34911
+          },
+          {
+            "count": 2,
+            "target": 34912
+          },
+          {
+            "count": 1,
+            "target": 35405
+          },
+          {
+            "count": 1,
+            "target": 16402
+          },
+          {
+            "count": 1,
+            "target": 35406
+          },
+          {
+            "count": 1,
+            "target": 16403
+          },
+          {
+            "count": 1,
+            "target": 35408
+          },
+          {
+            "count": 1,
+            "target": 34903
+          },
+          {
+            "count": 1,
+            "target": 34904
+          },
+          {
+            "count": 1,
+            "target": 33967
+          },
+          {
+            "count": 1,
+            "target": 33968
+          },
+          {
+            "count": 1,
+            "target": 34905
+          },
+          {
+            "count": 1,
+            "target": 35132
+          },
+          {
+            "count": 1,
+            "target": 34833
+          },
+          {
+            "count": 1,
+            "target": 34834
+          },
+          {
+            "count": 1,
+            "target": 34836
+          },
+          {
+            "count": 1,
+            "target": 35214
+          },
+          {
+            "count": 1,
+            "target": 0
+          }
+        ],
+        "lcalls": [
+          {
+            "count": 1,
+            "target": 61366
+          },
+          {
+            "count": 1,
+            "target": 2661
+          },
+          {
+            "count": 1,
+            "target": 2667
+          }
+        ],
+        "ljmps": []
+      },
+      "known_ranges": [
+        [
+          16,
+          208
+        ]
+      ],
+      "mode": 128,
+      "operation_key": "30ca94930e05",
+      "record": 59,
+      "slot_count": 3,
+      "source_end": 166583,
+      "source_len": 2462,
+      "source_minus_decoded": 2158,
+      "source_rel_0x400": 104,
+      "source_rel_0x400_window": "5ba01ddca2e4015268aca668ac76497c7ae15289f2ce5f19",
+      "source_start": 164121,
+      "table_target_count": 0,
+      "top_slots": [
+        {
+          "record_relative": 16,
+          "top_chunk": "20ea2ab16891",
+          "top_count": 219,
+          "variant_count": 3
+        },
+        {
+          "record_relative": 80,
+          "top_chunk": "99d4493dc4cf",
+          "top_count": 669,
+          "variant_count": 1
+        },
+        {
+          "record_relative": 144,
+          "top_chunk": "b7a129b7d392",
+          "top_count": 413,
+          "variant_count": 1
+        }
+      ]
+    },
+    "60": {
+      "decoded_span": 848,
+      "decoded_start": 29344,
+      "immediates": {
+        "dptrs": [
+          {
+            "count": 8,
+            "target": 16537
+          },
+          {
+            "count": 8,
+            "target": 35405
+          },
+          {
+            "count": 4,
+            "target": 35351
+          },
+          {
+            "count": 3,
+            "target": 16540
+          },
+          {
+            "count": 2,
+            "target": 35551
+          },
+          {
+            "count": 2,
+            "target": 18274
+          },
+          {
+            "count": 2,
+            "target": 35347
+          },
+          {
+            "count": 2,
+            "target": 35234
+          },
+          {
+            "count": 2,
+            "target": 35280
+          },
+          {
+            "count": 2,
+            "target": 35406
+          },
+          {
+            "count": 2,
+            "target": 35411
+          },
+          {
+            "count": 2,
+            "target": 35412
+          },
+          {
+            "count": 2,
+            "target": 18532
+          },
+          {
+            "count": 2,
+            "target": 18528
+          },
+          {
+            "count": 2,
+            "target": 18530
+          },
+          {
+            "count": 2,
+            "target": 18531
+          },
+          {
+            "count": 2,
+            "target": 18538
+          },
+          {
+            "count": 2,
+            "target": 18390
+          },
+          {
+            "count": 2,
+            "target": 18351
+          },
+          {
+            "count": 1,
+            "target": 34909
+          },
+          {
+            "count": 1,
+            "target": 34833
+          },
+          {
+            "count": 1,
+            "target": 34910
+          },
+          {
+            "count": 1,
+            "target": 34834
+          },
+          {
+            "count": 1,
+            "target": 34911
+          },
+          {
+            "count": 1,
+            "target": 34836
+          },
+          {
+            "count": 1,
+            "target": 34912
+          },
+          {
+            "count": 1,
+            "target": 35214
+          },
+          {
+            "count": 1,
+            "target": 35363
+          },
+          {
+            "count": 1,
+            "target": 16384
+          },
+          {
+            "count": 1,
+            "target": 35526
+          },
+          {
+            "count": 1,
+            "target": 16533
+          },
+          {
+            "count": 1,
+            "target": 1
+          },
+          {
+            "count": 1,
+            "target": 16535
+          },
+          {
+            "count": 1,
+            "target": 0
+          },
+          {
+            "count": 1,
+            "target": 18353
+          },
+          {
+            "count": 1,
+            "target": 35196
+          }
+        ],
+        "lcalls": [
+          {
+            "count": 2,
+            "target": 5157
+          },
+          {
+            "count": 1,
+            "target": 2661
+          },
+          {
+            "count": 1,
+            "target": 2667
+          },
+          {
+            "count": 1,
+            "target": 12215
+          }
+        ],
+        "ljmps": [
+          {
+            "count": 2,
+            "target": 46492
+          },
+          {
+            "count": 2,
+            "target": 30891
+          },
+          {
+            "count": 2,
+            "target": 42957
+          }
+        ]
+      },
+      "known_ranges": [
+        [
+          32,
+          288
+        ],
+        [
+          480,
+          848
+        ]
+      ],
+      "mode": 64,
+      "operation_key": "950a90757805",
+      "record": 60,
+      "slot_count": 10,
+      "source_end": 168927,
+      "source_len": 2344,
+      "source_minus_decoded": 1496,
+      "source_rel_0x400": 242,
+      "source_rel_0x400_window": "0ca7bf3b2973d1faf2dec2e9af1a57b1232a75bfd614dc3e",
+      "source_start": 166583,
+      "table_target_count": 0,
+      "top_slots": [
+        {
+          "record_relative": 32,
+          "top_chunk": "b7a129b7d392",
+          "top_count": 256,
+          "variant_count": 1
+        },
+        {
+          "record_relative": 96,
+          "top_chunk": "4cfa6d151318",
+          "top_count": 413,
+          "variant_count": 1
+        },
+        {
+          "record_relative": 160,
+          "top_chunk": "4cfa6d151318",
+          "top_count": 256,
+          "variant_count": 1
+        },
+        {
+          "record_relative": 224,
+          "top_chunk": "28583441dfa8",
+          "top_count": 668,
+          "variant_count": 1
+        },
+        {
+          "record_relative": 480,
+          "top_chunk": "9b673c066ae4",
+          "top_count": 164,
+          "variant_count": 1
+        },
+        {
+          "record_relative": 544,
+          "top_chunk": "9b673c066ae4",
+          "top_count": 502,
+          "variant_count": 1
+        }
+      ]
+    },
+    "66": {
+      "decoded_span": 720,
+      "decoded_start": 32176,
+      "immediates": {
+        "dptrs": [
+          {
+            "count": 6,
+            "target": 18467
+          },
+          {
+            "count": 4,
+            "target": 16384
+          },
+          {
+            "count": 4,
+            "target": 35412
+          },
+          {
+            "count": 4,
+            "target": 35380
+          },
+          {
+            "count": 4,
+            "target": 35277
+          },
+          {
+            "count": 3,
+            "target": 35551
+          },
+          {
+            "count": 3,
+            "target": 35363
+          },
+          {
+            "count": 3,
+            "target": 35552
+          },
+          {
+            "count": 3,
+            "target": 35554
+          },
+          {
+            "count": 2,
+            "target": 16565
+          },
+          {
+            "count": 2,
+            "target": 35369
+          },
+          {
+            "count": 2,
+            "target": 34161
+          },
+          {
+            "count": 2,
+            "target": 18313
+          },
+          {
+            "count": 2,
+            "target": 35402
+          },
+          {
+            "count": 2,
+            "target": 35103
+          },
+          {
+            "count": 2,
+            "target": 35102
+          },
+          {
+            "count": 2,
+            "target": 35526
+          },
+          {
+            "count": 2,
+            "target": 16529
+          },
+          {
+            "count": 2,
+            "target": 16540
+          },
+          {
+            "count": 2,
+            "target": 16537
+          },
+          {
+            "count": 2,
+            "target": 35301
+          },
+          {
+            "count": 2,
+            "target": 35105
+          },
+          {
+            "count": 2,
+            "target": 35278
+          },
+          {
+            "count": 1,
+            "target": 16566
+          },
+          {
+            "count": 1,
+            "target": 16567
+          },
+          {
+            "count": 1,
+            "target": 1
+          },
+          {
+            "count": 1,
+            "target": 16531
+          },
+          {
+            "count": 1,
+            "target": 35411
+          }
+        ],
+        "lcalls": [
+          {
+            "count": 3,
+            "target": 1347
+          },
+          {
+            "count": 3,
+            "target": 1803
+          },
+          {
+            "count": 2,
+            "target": 56129
+          },
+          {
+            "count": 2,
+            "target": 1563
+          },
+          {
+            "count": 1,
+            "target": 12215
+          }
+        ],
+        "ljmps": [
+          {
+            "count": 2,
+            "target": 20069
+          },
+          {
+            "count": 2,
+            "target": 29662
+          }
+        ]
+      },
+      "known_ranges": [
+        [
+          16,
+          720
+        ]
+      ],
+      "mode": 128,
+      "operation_key": "4e8210adb204",
+      "record": 66,
+      "slot_count": 11,
+      "source_end": 181631,
+      "source_len": 2411,
+      "source_minus_decoded": 1691,
+      "source_rel_0x400": 228,
+      "source_rel_0x400_window": "fdf7d87108147a87e4f6a3df7f27b51efb1c01794378e639",
+      "source_start": 179220,
+      "table_target_count": 0,
+      "top_slots": [
+        {
+          "record_relative": 16,
+          "top_chunk": "04a2d67cbfff",
+          "top_count": 428,
+          "variant_count": 1
+        },
+        {
+          "record_relative": 80,
+          "top_chunk": "9aa0a39b4424",
+          "top_count": 256,
+          "variant_count": 2
+        },
+        {
+          "record_relative": 144,
+          "top_chunk": "fe343ef73975",
+          "top_count": 168,
+          "variant_count": 1
+        },
+        {
+          "record_relative": 208,
+          "top_chunk": "9aa0a39b4424",
+          "top_count": 413,
+          "variant_count": 2
+        },
+        {
+          "record_relative": 272,
+          "top_chunk": "fe343ef73975",
+          "top_count": 139,
+          "variant_count": 1
+        },
+        {
+          "record_relative": 336,
+          "top_chunk": "404045e0e63c",
+          "top_count": 165,
+          "variant_count": 1
+        }
+      ]
+    },
+    "70": {
+      "decoded_span": 560,
+      "decoded_start": 34560,
+      "immediates": {
+        "dptrs": [
+          {
+            "count": 9,
+            "target": 34884
+          },
+          {
+            "count": 4,
+            "target": 16384
+          },
+          {
+            "count": 3,
+            "target": 33371
+          },
+          {
+            "count": 3,
+            "target": 22789
+          },
+          {
+            "count": 3,
+            "target": 16536
+          },
+          {
+            "count": 2,
+            "target": 22790
+          },
+          {
+            "count": 2,
+            "target": 34351
+          },
+          {
+            "count": 2,
+            "target": 22797
+          },
+          {
+            "count": 2,
+            "target": 34353
+          },
+          {
+            "count": 2,
+            "target": 18496
+          },
+          {
+            "count": 2,
+            "target": 34352
+          },
+          {
+            "count": 2,
+            "target": 18531
+          },
+          {
+            "count": 2,
+            "target": 34360
+          },
+          {
+            "count": 2,
+            "target": 34361
+          },
+          {
+            "count": 2,
+            "target": 34358
+          },
+          {
+            "count": 2,
+            "target": 35383
+          },
+          {
+            "count": 1,
+            "target": 16529
+          },
+          {
+            "count": 1,
+            "target": 34355
+          },
+          {
+            "count": 1,
+            "target": 18484
+          },
+          {
+            "count": 1,
+            "target": 35352
+          },
+          {
+            "count": 1,
+            "target": 35276
+          },
+          {
+            "count": 1,
+            "target": 35363
+          }
+        ],
+        "lcalls": [
+          {
+            "count": 6,
+            "target": 62112
+          },
+          {
+            "count": 6,
+            "target": 62266
+          },
+          {
+            "count": 2,
+            "target": 10167
+          },
+          {
+            "count": 1,
+            "target": 27023
+          }
+        ],
+        "ljmps": []
+      },
+      "known_ranges": [
+        [
+          0,
+          448
+        ]
+      ],
+      "mode": 128,
+      "operation_key": "098ad4a36805",
+      "record": 70,
+      "slot_count": 7,
+      "source_end": 191146,
+      "source_len": 2525,
+      "source_minus_decoded": 1965,
+      "source_rel_0x400": 88,
+      "source_rel_0x400_window": "22785f451f6f1b5a586f410a3c102cfd21c47a4da1fa0a22",
+      "source_start": 188621,
+      "table_target_count": 0,
+      "top_slots": [
+        {
+          "record_relative": 0,
+          "top_chunk": "d21d30cf6e6b",
+          "top_count": 209,
+          "variant_count": 3
+        },
+        {
+          "record_relative": 64,
+          "top_chunk": "d21d30cf6e6b",
+          "top_count": 195,
+          "variant_count": 3
+        },
+        {
+          "record_relative": 128,
+          "top_chunk": "fb00deab088b",
+          "top_count": 271,
+          "variant_count": 2
+        },
+        {
+          "record_relative": 192,
+          "top_chunk": "d21d30cf6e6b",
+          "top_count": 140,
+          "variant_count": 3
+        },
+        {
+          "record_relative": 256,
+          "top_chunk": "70e7ea0193bb",
+          "top_count": 256,
+          "variant_count": 1
+        },
+        {
+          "record_relative": 320,
+          "top_chunk": "23c16a978aa0",
+          "top_count": 413,
+          "variant_count": 1
+        }
+      ]
+    },
+    "84": {
+      "decoded_span": 160,
+      "decoded_start": 38112,
+      "immediates": {
+        "dptrs": [
+          {
+            "count": 15,
+            "target": 18353
+          },
+          {
+            "count": 2,
+            "target": 35404
+          },
+          {
+            "count": 2,
+            "target": 35405
+          },
+          {
+            "count": 2,
+            "target": 35406
+          },
+          {
+            "count": 2,
+            "target": 35407
+          },
+          {
+            "count": 2,
+            "target": 35408
+          },
+          {
+            "count": 2,
+            "target": 35409
+          },
+          {
+            "count": 2,
+            "target": 35410
+          },
+          {
+            "count": 2,
+            "target": 35411
+          }
+        ],
+        "lcalls": [],
+        "ljmps": []
+      },
+      "known_ranges": [
+        [
+          32,
+          160
+        ]
+      ],
+      "mode": 128,
+      "operation_key": "3b0a538aa203",
+      "record": 84,
+      "slot_count": 2,
+      "source_end": 223281,
+      "source_len": 2198,
+      "source_minus_decoded": 2038,
+      "source_rel_0x400": 253,
+      "source_rel_0x400_window": "b0eeb40a35dfe633fdb8da2dc6d7db881f6e04bd1f1af8b2",
+      "source_start": 221083,
+      "table_target_count": 0,
+      "top_slots": [
+        {
+          "record_relative": 32,
+          "top_chunk": "2111cafaf69c",
+          "top_count": 170,
+          "variant_count": 1
+        },
+        {
+          "record_relative": 96,
+          "top_chunk": "2111cafaf69c",
+          "top_count": 170,
+          "variant_count": 1
+        }
+      ]
+    },
+    "85": {
+      "decoded_span": 768,
+      "decoded_start": 38272,
+      "immediates": {
+        "dptrs": [
+          {
+            "count": 15,
+            "target": 18353
+          },
+          {
+            "count": 6,
+            "target": 35319
+          },
+          {
+            "count": 4,
+            "target": 35129
+          },
+          {
+            "count": 2,
+            "target": 35404
+          },
+          {
+            "count": 2,
+            "target": 35405
+          },
+          {
+            "count": 2,
+            "target": 35406
+          },
+          {
+            "count": 2,
+            "target": 35407
+          },
+          {
+            "count": 2,
+            "target": 35408
+          },
+          {
+            "count": 2,
+            "target": 35409
+          },
+          {
+            "count": 2,
+            "target": 35410
+          },
+          {
+            "count": 2,
+            "target": 35411
+          },
+          {
+            "count": 2,
+            "target": 35130
+          },
+          {
+            "count": 2,
+            "target": 35208
+          },
+          {
+            "count": 1,
+            "target": 0
+          }
+        ],
+        "lcalls": [
+          {
+            "count": 2,
+            "target": 1293
+          }
+        ],
+        "ljmps": []
+      },
+      "known_ranges": [
+        [
+          0,
+          128
+        ],
+        [
+          640,
+          768
+        ]
+      ],
+      "mode": 64,
+      "operation_key": "5f925170d804",
+      "record": 85,
+      "slot_count": 4,
+      "source_end": 225519,
+      "source_len": 2238,
+      "source_minus_decoded": 1470,
+      "source_rel_0x400": 29,
+      "source_rel_0x400_window": "cabd0e855a9bf57a1d9ab52e8af437956a6895e87e0ad4d9",
+      "source_start": 223281,
+      "table_target_count": 0,
+      "top_slots": [
+        {
+          "record_relative": 0,
+          "top_chunk": "2111cafaf69c",
+          "top_count": 172,
+          "variant_count": 1
+        },
+        {
+          "record_relative": 64,
+          "top_chunk": "2111cafaf69c",
+          "top_count": 157,
+          "variant_count": 1
+        },
+        {
+          "record_relative": 640,
+          "top_chunk": "306eb529b363",
+          "top_count": 24,
+          "variant_count": 1
+        },
+        {
+          "record_relative": 704,
+          "top_chunk": "306eb529b363",
+          "top_count": 54,
+          "variant_count": 1
+        }
+      ]
+    }
+  },
+  "schema": "liteon-rec59-static-neighborhood-v1"
+}
