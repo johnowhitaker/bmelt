@@ -1,0 +1,197 @@
+{
+  "experiments": [
+    {
+      "comparisons": [
+        {
+          "experiment": "rec59-getcfg",
+          "reversible_mutation": false,
+          "stable_hashes": {
+            "mutated": "3f2298adc6ed16083a3b5879c9f1fa7c56467e7661835be33c2e29a5bd30afa4",
+            "stock": "3f2298adc6ed16083a3b5879c9f1fa7c56467e7661835be33c2e29a5bd30afa4"
+          },
+          "states": {
+            "mutated": {
+              "files": 8,
+              "stable": true,
+              "top_count": 8,
+              "top_length": 60,
+              "top_prefix_hex": "000000380000000000000330002b0000001b0000001a00000016000000150000",
+              "top_sha256": "3f2298adc6ed16083a3b5879c9f1fa7c56467e7661835be33c2e29a5bd30afa4",
+              "unique_variants": 1
+            },
+            "stock": {
+              "files": 8,
+              "stable": true,
+              "top_count": 8,
+              "top_length": 60,
+              "top_prefix_hex": "000000380000000000000330002b0000001b0000001a00000016000000150000",
+              "top_sha256": "3f2298adc6ed16083a3b5879c9f1fa7c56467e7661835be33c2e29a5bd30afa4",
+              "unique_variants": 1
+            }
+          },
+          "stimulus": "r5-0f-current-sf0000"
+        },
+        {
+          "experiment": "rec59-getcfg",
+          "reversible_mutation": false,
+          "stable_hashes": {
+            "mutated": "3f2298adc6ed16083a3b5879c9f1fa7c56467e7661835be33c2e29a5bd30afa4",
+            "stock": "3f2298adc6ed16083a3b5879c9f1fa7c56467e7661835be33c2e29a5bd30afa4"
+          },
+          "states": {
+            "mutated": {
+              "files": 8,
+              "stable": true,
+              "top_count": 8,
+              "top_length": 60,
+              "top_prefix_hex": "000000380000000000000330002b0000001b0000001a00000016000000150000",
+              "top_sha256": "3f2298adc6ed16083a3b5879c9f1fa7c56467e7661835be33c2e29a5bd30afa4",
+              "unique_variants": 1
+            },
+            "stock": {
+              "files": 8,
+              "stable": true,
+              "top_count": 8,
+              "top_length": 60,
+              "top_prefix_hex": "000000380000000000000330002b0000001b0000001a00000016000000150000",
+              "top_sha256": "3f2298adc6ed16083a3b5879c9f1fa7c56467e7661835be33c2e29a5bd30afa4",
+              "unique_variants": 1
+            }
+          },
+          "stimulus": "r5-f0-current-sf0000"
+        },
+        {
+          "experiment": "rec59-getcfg",
+          "reversible_mutation": false,
+          "stable_hashes": {
+            "mutated": "3f2298adc6ed16083a3b5879c9f1fa7c56467e7661835be33c2e29a5bd30afa4",
+            "stock": "3f2298adc6ed16083a3b5879c9f1fa7c56467e7661835be33c2e29a5bd30afa4"
+          },
+          "states": {
+            "mutated": {
+              "files": 8,
+              "stable": true,
+              "top_count": 8,
+              "top_length": 60,
+              "top_prefix_hex": "000000380000000000000330002b0000001b0000001a00000016000000150000",
+              "top_sha256": "3f2298adc6ed16083a3b5879c9f1fa7c56467e7661835be33c2e29a5bd30afa4",
+              "unique_variants": 1
+            },
+            "stock": {
+              "files": 8,
+              "stable": true,
+              "top_count": 8,
+              "top_length": 60,
+              "top_prefix_hex": "000000380000000000000330002b0000001b0000001a00000016000000150000",
+              "top_sha256": "3f2298adc6ed16083a3b5879c9f1fa7c56467e7661835be33c2e29a5bd30afa4",
+              "unique_variants": 1
+            }
+          },
+          "stimulus": "std-current-sf0000-len00fc"
+        }
+      ],
+      "name": "rec59-getcfg",
+      "states": {
+        "mutated": {
+          "label": "mutated",
+          "path": "references/evidence/live/rec59-getcfg-response-diff/mutated",
+          "response_files": 24,
+          "stimuli": {
+            "r5-0f-current-sf0000": {
+              "files": 8,
+              "stable": true,
+              "unique_variants": 1,
+              "variants": [
+                {
+                  "count": 8,
+                  "example": "02-cycle00-r5-0f-current-sf0000.response.bin",
+                  "length": 60,
+                  "prefix_hex": "000000380000000000000330002b0000001b0000001a00000016000000150000",
+                  "sha256": "3f2298adc6ed16083a3b5879c9f1fa7c56467e7661835be33c2e29a5bd30afa4"
+                }
+              ]
+            },
+            "r5-f0-current-sf0000": {
+              "files": 8,
+              "stable": true,
+              "unique_variants": 1,
+              "variants": [
+                {
+                  "count": 8,
+                  "example": "03-cycle00-r5-f0-current-sf0000.response.bin",
+                  "length": 60,
+                  "prefix_hex": "000000380000000000000330002b0000001b0000001a00000016000000150000",
+                  "sha256": "3f2298adc6ed16083a3b5879c9f1fa7c56467e7661835be33c2e29a5bd30afa4"
+                }
+              ]
+            },
+            "std-current-sf0000-len00fc": {
+              "files": 8,
+              "stable": true,
+              "unique_variants": 1,
+              "variants": [
+                {
+                  "count": 8,
+                  "example": "01-cycle00-std-current-sf0000-len00fc.response.bin",
+                  "length": 60,
+                  "prefix_hex": "000000380000000000000330002b0000001b0000001a00000016000000150000",
+                  "sha256": "3f2298adc6ed16083a3b5879c9f1fa7c56467e7661835be33c2e29a5bd30afa4"
+                }
+              ]
+            }
+          }
+        },
+        "stock": {
+          "label": "stock",
+          "path": "references/evidence/live/rec59-getcfg-response-diff/stock",
+          "response_files": 24,
+          "stimuli": {
+            "r5-0f-current-sf0000": {
+              "files": 8,
+              "stable": true,
+              "unique_variants": 1,
+              "variants": [
+                {
+                  "count": 8,
+                  "example": "02-cycle00-r5-0f-current-sf0000.response.bin",
+                  "length": 60,
+                  "prefix_hex": "000000380000000000000330002b0000001b0000001a00000016000000150000",
+                  "sha256": "3f2298adc6ed16083a3b5879c9f1fa7c56467e7661835be33c2e29a5bd30afa4"
+                }
+              ]
+            },
+            "r5-f0-current-sf0000": {
+              "files": 8,
+              "stable": true,
+              "unique_variants": 1,
+              "variants": [
+                {
+                  "count": 8,
+                  "example": "03-cycle00-r5-f0-current-sf0000.response.bin",
+                  "length": 60,
+                  "prefix_hex": "000000380000000000000330002b0000001b0000001a00000016000000150000",
+                  "sha256": "3f2298adc6ed16083a3b5879c9f1fa7c56467e7661835be33c2e29a5bd30afa4"
+                }
+              ]
+            },
+            "std-current-sf0000-len00fc": {
+              "files": 8,
+              "stable": true,
+              "unique_variants": 1,
+              "variants": [
+                {
+                  "count": 8,
+                  "example": "01-cycle00-std-current-sf0000-len00fc.response.bin",
+                  "length": 60,
+                  "prefix_hex": "000000380000000000000330002b0000001b0000001a00000016000000150000",
+                  "sha256": "3f2298adc6ed16083a3b5879c9f1fa7c56467e7661835be33c2e29a5bd30afa4"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ],
+  "schema": "liteon-normal-response-diff-v1"
+}

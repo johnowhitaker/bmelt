@@ -2319,3 +2319,56 @@ full recovery path reloads/canonicalizes the normal pages. Today I confirmed
 the currently installed hook on the drive was the safer XDATA-write service,
 not the gateway-write service, so I did not burn more live cycles there. The
 drive was recovered cleanly back to normal `LD5M`.
+
+The follow-up record-59 GET CONFIG experiment changed the lesson again. I
+reinstalled the same CDD1 record-59 patch:
+
+```text
+F0 offset 0x28519: 0x68 -> 0x60
+```
+
+The final selector-15 event again reported a host transport error even though a
+sequential F0 read proved the byte persisted. After a Pico cold boot the drive
+still identified as normal `LD5M`, so I captured the focused GET CONFIG set
+against the mutated image. The ordinary GET CONFIG response payloads were
+byte-for-byte identical to stock for all three variants. So this was not the
+host-visible response shortcut we wanted.
+
+The work-window still moved. In the new GET CONFIG corpus, contig 4 did the
+opposite of the earlier GET PERFORMANCE corpus: stock captures had no full
+three-tile sequence hits, while the mutated captures had 15 full-sequence hits
+out of 32 captures at public offset `+0x7180`. All component chunks stayed
+visible in both states. That reinforces the important part of the record-59
+result: this byte controls ordering/placement in the normal decoded-runtime
+tile surface, not necessarily the existence of a stable flat code span.
+
+The static alignment is especially tidy. Record 59's encoded source starts at
+`0x28119`, making the patched byte exactly `+0x400` into the record. The record
+map gives that record a candidate decoded/public span starting at `+0x7170`,
+and the contig appears at `+0x7180`. So this is a rare source-to-runtime anchor:
+one encoded byte at record-relative `+0x400` perturbs a decoded neighborhood
+about `+0x10` into the corresponding public span.
+
+Another detail matters for the CDD format: the chunk bytes did not change. The
+same three component chunks stayed visible; their placement and adjacency
+changed. So this source byte looks less like direct payload for one 8051
+instruction byte and more like schedule, interleaver, or control material for
+how a decoded tile neighborhood is placed on the public work surface.
+
+The expensive surprise was restoration. Once this byte was installed again,
+the normal updater-entry path stopped accepting the event-1 profile-tail
+transition. The normal LD5M pre-tail, the currentboot-key tail, direct `arg=00`
+chunk staging, and "failed tail then chunk" all timed out with SCSI GOOD text
+but host transport errors. Cold power-cycling brought the drive back as normal
+`LD5M`, but did not make the update path usable again. A live-key sequential F0
+read still shows `F0[0x28519] = 0x60`.
+
+That means the older record-59 "restored" wording needs a warning label. The
+work-window state returned in that earlier capture set, but this latest pass
+shows we should not treat record 59 as a clean reversible flash oracle unless a
+sequential F0 read proves the byte is back to `0x68`. Practically, record 59 is
+now very interesting and very sharp: it appears to sit on or near the normal
+firmware-update entry/data path. It is a good clue for static analysis, but a
+bad casual live mutation target. Future CDD perturbation probes should avoid
+records 58/59 unless the plan explicitly includes a fresh/sacrificial drive or
+an out-of-band restore path.

@@ -2080,15 +2080,15 @@ Immediate useful directions:
     a 192-byte / 3-tile decoded-runtime contig with candidate common CDD record
     `59`.
 101. Live patch: F0 offset `0x28519` inside CDD stream 1 record 59 changed
-    `0x68 -> 0x60`, then was restored to `0x68`. The mutation persisted through
-    the helper bypass and the drive stayed/cold-booted as normal `LD5M`.
+    `0x68 -> 0x60`. The mutation persisted through the helper bypass and the
+    drive stayed/cold-booted as normal `LD5M`.
 102. Ownership result: stock captures had the full 3-tile contig sequence in
     `7/16` windows at public offset `+0x7180`; mutated captures had `0/24`
     full-sequence hits, while all three component tiles remained visible at
-    rearranged offsets; restored captures had `16/24` full-sequence hits. Treat
-    this as strong evidence that record 59 owns or controls this runtime
-    contig/neighborhood, and use this before/after/restore pattern as the
-    default live oracle for future CDD record ownership tests.
+    rearranged offsets; later captures labelled restored had `16/24`
+    full-sequence hits. Treat this as strong evidence that record 59 owns or
+    controls this runtime contig/neighborhood, but do not treat the restored
+    label as flash proof unless a sequential F0 read verifies `0x28519 = 0x68`.
 103. `analysis/8051/cdd-contig15-rec70-ownership-negative-20260501.md/json`
     records a useful negative. Contig 15 is a stable 2-tile sequence with
     common record label `70`; patching CDD1 record 70 at `0x2e59c`
@@ -2136,3 +2136,29 @@ Immediate useful directions:
     known recovery path reloads/canonicalizes normal pages. The currently
     installed service hook was the safer XDATA-write variant and the drive was
     recovered to normal `LD5M` after checking it.
+112. `scripts/analyze_liteon_contig_hits_by_stimulus.py` and
+    `analysis/8051/rec59-getcfg-contig4-hits-by-stimulus-20260501.md/json`
+    summarize the focused record-59 GET CONFIG follow-up. Host-visible GET
+    CONFIG response payloads stayed byte-identical stock vs mutated; the
+    ordinary response is not a shortcut channel here. The concise narrative is
+    `analysis/8051/rec59-getcfg-update-entry-block-20260501.md`.
+113. The same follow-up changed the hidden work-window phase: stock GET CONFIG
+    captures had `0/32` full contig-4 sequence hits, while the record-59 mutated
+    state had `15/32` hits at `+0x7180`. All three component chunks were still
+    visible. This reinforces that record 59 affects tile ordering/placement in
+    the normal decoded-runtime surface. Static alignment is clean: record 59's
+    encoded source starts at `0x28119`, so the patched byte `0x28519` is
+    record-relative `+0x400`; its candidate decoded span starts at public
+    `+0x7170`, and the contig hits at `+0x7180`. The record-059 known-output
+    mask covers `+0x10..+0xcf`, exactly the 192-byte contig 4 bytes. Because
+    component chunks stayed byte-identical and only placement/adjacency changed,
+    `0x28519` is likely schedule/interleaver/control material rather than a
+    direct encoded instruction byte.
+114. Important live-drive state caveat: after reinstalling `0x28519: 0x68 ->
+    0x60`, the Linux drive still cold-boots as `LD5M`, but the normal update
+    entry/data path is currently blocked. The LD5M pre-tail, currentboot-key
+    tail, direct `arg=00` chunk, and "failed tail then chunk" probes all timed
+    out with host transport errors. A live-key sequential F0 read confirms
+    `F0[0x28519] = 0x60`. Avoid more record-59 live mutation work on this drive
+    unless the plan includes a fresh/sacrificial drive or an out-of-band restore
+    path.

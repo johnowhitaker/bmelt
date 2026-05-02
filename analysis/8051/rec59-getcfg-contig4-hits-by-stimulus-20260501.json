@@ -1,0 +1,368 @@
+{
+  "chunk_count": 3,
+  "chunk_prefixes": [
+    "8a29e0c4540f",
+    "f608760112ef",
+    "e054884efeef"
+  ],
+  "contig_bytes": 192,
+  "contig_file": "analysis/8051/cdd-runtime-chunk-contigs-20260501/contig-004-03chunks.bin",
+  "schema": "liteon-contig-hits-by-stimulus-v1",
+  "states": {
+    "mutated": {
+      "path": "references/evidence/live/rec59-getcfg-response-diff/mutated",
+      "stimuli": {
+        "baseline-no-stimulus": {
+          "chunk_count_histogram": {
+            "3": 8
+          },
+          "chunk_offsets": {
+            "0": [
+              {
+                "count": 5,
+                "offset": 29056
+              },
+              {
+                "count": 3,
+                "offset": 28992
+              }
+            ],
+            "1": [
+              {
+                "count": 8,
+                "offset": 29120
+              }
+            ],
+            "2": [
+              {
+                "count": 8,
+                "offset": 29184
+              }
+            ]
+          },
+          "files": 8,
+          "sequence_hits": 5,
+          "sequence_offsets": [
+            {
+              "count": 5,
+              "offset": 29056
+            }
+          ]
+        },
+        "r5-0f-current-sf0000": {
+          "chunk_count_histogram": {
+            "3": 8
+          },
+          "chunk_offsets": {
+            "0": [
+              {
+                "count": 7,
+                "offset": 28992
+              },
+              {
+                "count": 1,
+                "offset": 29056
+              }
+            ],
+            "1": [
+              {
+                "count": 8,
+                "offset": 29120
+              }
+            ],
+            "2": [
+              {
+                "count": 8,
+                "offset": 29184
+              }
+            ]
+          },
+          "files": 8,
+          "sequence_hits": 1,
+          "sequence_offsets": [
+            {
+              "count": 1,
+              "offset": 29056
+            }
+          ]
+        },
+        "r5-f0-current-sf0000": {
+          "chunk_count_histogram": {
+            "3": 8
+          },
+          "chunk_offsets": {
+            "0": [
+              {
+                "count": 4,
+                "offset": 29056
+              },
+              {
+                "count": 4,
+                "offset": 28992
+              }
+            ],
+            "1": [
+              {
+                "count": 8,
+                "offset": 29120
+              }
+            ],
+            "2": [
+              {
+                "count": 8,
+                "offset": 29184
+              }
+            ]
+          },
+          "files": 8,
+          "sequence_hits": 4,
+          "sequence_offsets": [
+            {
+              "count": 4,
+              "offset": 29056
+            }
+          ]
+        },
+        "std-current-sf0000-len00fc": {
+          "chunk_count_histogram": {
+            "3": 8
+          },
+          "chunk_offsets": {
+            "0": [
+              {
+                "count": 5,
+                "offset": 29056
+              },
+              {
+                "count": 3,
+                "offset": 28992
+              }
+            ],
+            "1": [
+              {
+                "count": 8,
+                "offset": 29120
+              }
+            ],
+            "2": [
+              {
+                "count": 8,
+                "offset": 29184
+              }
+            ]
+          },
+          "files": 8,
+          "sequence_hits": 5,
+          "sequence_offsets": [
+            {
+              "count": 5,
+              "offset": 29056
+            }
+          ]
+        }
+      },
+      "totals": {
+        "chunk_count_histogram": {
+          "3": 32
+        },
+        "chunk_offsets": {
+          "0": [
+            {
+              "count": 17,
+              "offset": 28992
+            },
+            {
+              "count": 15,
+              "offset": 29056
+            }
+          ],
+          "1": [
+            {
+              "count": 32,
+              "offset": 29120
+            }
+          ],
+          "2": [
+            {
+              "count": 32,
+              "offset": 29184
+            }
+          ]
+        },
+        "files": 32,
+        "sequence_hits": 15,
+        "sequence_offsets": [
+          {
+            "count": 15,
+            "offset": 29056
+          }
+        ]
+      }
+    },
+    "stock": {
+      "path": "references/evidence/live/rec59-getcfg-response-diff/stock",
+      "stimuli": {
+        "baseline-no-stimulus": {
+          "chunk_count_histogram": {
+            "3": 8
+          },
+          "chunk_offsets": {
+            "0": [
+              {
+                "count": 7,
+                "offset": 28992
+              },
+              {
+                "count": 1,
+                "offset": 29056
+              }
+            ],
+            "1": [
+              {
+                "count": 8,
+                "offset": 28928
+              }
+            ],
+            "2": [
+              {
+                "count": 8,
+                "offset": 29376
+              }
+            ]
+          },
+          "files": 8,
+          "sequence_hits": 0,
+          "sequence_offsets": []
+        },
+        "r5-0f-current-sf0000": {
+          "chunk_count_histogram": {
+            "3": 8
+          },
+          "chunk_offsets": {
+            "0": [
+              {
+                "count": 6,
+                "offset": 28992
+              },
+              {
+                "count": 2,
+                "offset": 29056
+              }
+            ],
+            "1": [
+              {
+                "count": 8,
+                "offset": 28928
+              }
+            ],
+            "2": [
+              {
+                "count": 8,
+                "offset": 29376
+              }
+            ]
+          },
+          "files": 8,
+          "sequence_hits": 0,
+          "sequence_offsets": []
+        },
+        "r5-f0-current-sf0000": {
+          "chunk_count_histogram": {
+            "3": 8
+          },
+          "chunk_offsets": {
+            "0": [
+              {
+                "count": 7,
+                "offset": 28992
+              },
+              {
+                "count": 1,
+                "offset": 29056
+              }
+            ],
+            "1": [
+              {
+                "count": 8,
+                "offset": 28928
+              }
+            ],
+            "2": [
+              {
+                "count": 8,
+                "offset": 29376
+              }
+            ]
+          },
+          "files": 8,
+          "sequence_hits": 0,
+          "sequence_offsets": []
+        },
+        "std-current-sf0000-len00fc": {
+          "chunk_count_histogram": {
+            "3": 8
+          },
+          "chunk_offsets": {
+            "0": [
+              {
+                "count": 6,
+                "offset": 28992
+              },
+              {
+                "count": 2,
+                "offset": 29056
+              }
+            ],
+            "1": [
+              {
+                "count": 8,
+                "offset": 28928
+              }
+            ],
+            "2": [
+              {
+                "count": 8,
+                "offset": 29376
+              }
+            ]
+          },
+          "files": 8,
+          "sequence_hits": 0,
+          "sequence_offsets": []
+        }
+      },
+      "totals": {
+        "chunk_count_histogram": {
+          "3": 32
+        },
+        "chunk_offsets": {
+          "0": [
+            {
+              "count": 26,
+              "offset": 28992
+            },
+            {
+              "count": 6,
+              "offset": 29056
+            }
+          ],
+          "1": [
+            {
+              "count": 32,
+              "offset": 28928
+            }
+          ],
+          "2": [
+            {
+              "count": 32,
+              "offset": 29376
+            }
+          ]
+        },
+        "files": 32,
+        "sequence_hits": 0,
+        "sequence_offsets": []
+      }
+    }
+  }
+}

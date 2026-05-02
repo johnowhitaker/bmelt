@@ -1,6 +1,6 @@
 # Boastermelt Next Session Handoff
 
-Date: 2026-04-30.
+Date: 2026-05-01.
 
 This is the clean-slate handoff after the repo spring cleaning. The old
 generated logs, Wine prefixes, packaged bundles, and git history were removed
@@ -34,14 +34,28 @@ from the active tree. The compact operating set is now in this repo.
   `/dev/sg0` and `/dev/sg1`.
 - After cleanup, sysfs still showed `/dev/sg1` rev `0D5C`, but `sg_inq`
   reported `LD5M`; trust the active SCSI INQUIRY over stale sysfs text.
-- Current live state after the blank-currentboot recovery: Linux drive #1 is
-  visible as the optical PLDS LUN and cold-boots as `LD5M`.
+- Current live state: Linux drive #1 is visible as the optical PLDS LUN and
+  cold-boots as `LD5M`.
 
 ```text
 PLDS / DVD+-RW DS-8ABSH / LD5M
 ```
 
-Current caveat: this used to carry the deliberate
+Current caveat: Linux drive #1 is not byte-stock. The latest focused record-59
+CDD probe reinstalled this persistent byte:
+
+```text
+F0[0x28519] = 0x60   # stock LD5M is 0x68
+```
+
+A live-key sequential F0 read of `0x000000..0x030000` verified the byte. The
+drive still reports normal `LD5M`, but the normal firmware-update entry path is
+currently blocked: the LD5M pre-tail, currentboot-key tail, direct `arg=00`
+chunk, and failed-tail-then-chunk probes all time out with host transport
+errors. Do not assume the helper-bypass write path is currently available on
+this drive.
+
+Older caveat: this drive used to carry the deliberate
 `currentboot-response-hook-gateway-cdb-bulk` patch, but the later normal-mode
 hook test phase restored the visible prefix/cave area. The post-restore
 live-key F0 dump of `0x1000..0x6fff` matched stock LD5M with zero diffs.
@@ -53,6 +67,11 @@ live-key F0 dump of `0x1000..0x6fff` matched stock LD5M with zero diffs.
 
 Reinstall a currentboot response hook before using the bulk gateway/XDATA
 readout scripts that depend on `0x4fc9 -> 0x6ee3`.
+
+If live firmware writes are needed next, prefer a fresh/sacrificial drive or a
+new out-of-band restore route for record 59. The record-59 mutation is valuable
+evidence because it appears to touch the normal update/response bridge
+neighborhood, but it is not a safe casual probe on the current Linux drive.
 
 Rediscover:
 
