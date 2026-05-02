@@ -2600,9 +2600,31 @@ a stock restore candidate for `0x2627a = 0x5d` so that if the optical LUN comes
 back, the first move should be restoring that byte rather than continuing new
 experiments.
 
+That also changed the next-test heuristic. "Patch record-relative `+0x400`" is
+not a safety rule; it was only a pattern that worked once. I re-ranked the
+normal IO candidates by whether their four-record group has a visible affine
+CDD leaf in LD5M. Most of the top response/bridge targets do not. Record 60
+does.
+
+So the better next live candidate, after the current drive state is resolved,
+is an affine/control-byte probe rather than a hard-lane source-byte probe:
+
+```text
+record group: 60..63
+stock affine plain:  0xc9
+target affine plain: 0xcb
+patch:   F0[0x2ae8f] 0x4e -> 0x4c
+restore: F0[0x2ae8f] 0x4c -> 0x4e
+```
+
+That targets the record-60 IO neighborhood while changing a byte from the
+structured affine layer we actually understand. It is still a live risk, but it
+is a more disciplined risk than another random hard-lane mutation.
+
 Evidence:
 
 ```text
 references/evidence/live/normal-oracle-record55-stock-20260502T022556Z/
 references/evidence/live/normal-oracle-record55-5d-to-5c-20260502T022801Z/
+analysis/8051/normal-io-affine-safer-targets-20260502.md
 ```

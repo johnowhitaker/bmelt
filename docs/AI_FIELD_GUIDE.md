@@ -2257,3 +2257,11 @@ Immediate useful directions:
     A stock restore candidate is prepared under
     `runs/helper-bypass-candidates/record55-restore-20260502/`, but it requires
     the optical LUN to reappear before it can be used.
+119. `analysis/8051/normal-io-affine-safer-targets-20260502.md` re-ranks the
+    normal IO targets after the record-55 hazard. The better next live strategy
+    is not another arbitrary hard-lane `+0x400` byte. Record 60's group
+    (`60..63`) has LD5M affine evidence, so the prepared safer probe is
+    `F0[0x2ae8f] 0x4e -> 0x4c`, changing affine plain `0xc9 -> 0xcb` with a
+    raw bit-clear. Generated plans:
+    `analysis/8051/record60-affine-group15-c9-to-cb-bitclear-plan-20260502.*`.
+    Do not run it until the record-55 drive state is resolved/restored.

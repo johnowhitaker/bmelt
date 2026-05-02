@@ -1,0 +1,47 @@
+{
+  "cell_count": 1,
+  "cells": [
+    15
+  ],
+  "group": 15,
+  "image": "LD5M",
+  "image_path": "/Users/johno/projects/boastermelt/references/firmware/extracted/ld5m-f0-window-0x00000-0x100000.bin",
+  "kinds": [
+    "suffix"
+  ],
+  "patch_args": [
+    "0x2ae8f:4f"
+  ],
+  "patches": [
+    {
+      "absolute_offset": 175759,
+      "absolute_offset_hex": "0x2ae8f",
+      "after": 79,
+      "after_hex": "4f",
+      "before": 78,
+      "before_hex": "4e",
+      "cell": 15,
+      "changed": true,
+      "group": 15,
+      "kind": "suffix",
+      "mask": 135,
+      "op_key": "c89256901a00",
+      "patch_arg": "0x2ae8f:4f",
+      "plain": 201,
+      "raw": 78,
+      "record": 63,
+      "record_mod4": 3,
+      "restore_arg": "0x2ae8f:4e"
+    }
+  ],
+  "records": [
+    63
+  ],
+  "restore_args": [
+    "0x2ae8f:4e"
+  ],
+  "stock_plain": 201,
+  "stock_plain_hex": "0xc9",
+  "target_plain": 200,
+  "target_plain_hex": "0xc8"
+}
