@@ -62,6 +62,33 @@ probe analogous to the prior `+0x400` record-59 perturbation. It should be
 wrapped in full before/mutated/restored captures and sequential F0 readback if
 restore behavior looks odd.
 
+Record-55 watch set:
+
+```text
+8853b78ca23e  0x4000/0x4098 loop, seen at +0x6a00/+0x6a40/+0x6a80/+0x6ac0
+95caa55b881e  0x85ef..0x85f3 -> 0x48f4/0x48f5/0x48f6/0x48c8/0x48ef
+a87d03db223d  controller/status setup around 0x4834/0x4835/0x4e02
+25956f88a30e  packet-shadow arithmetic around 0x8a4c/0x8a4d/0x8a4e
+4f29221f2e51  record55/56 boundary chunk, broad command/status logic
+796c2cf9d837  rare but direct 0x8a4e/0x8a54 -> 0x47b1 output path
+```
+
+The focused safe-stimuli corpus already sees the record-55 island in every
+capture at `+0x6a00..+0x6bc0`, so a dedicated ownership test should not need a
+mechanical command. The best capture set is a small repeated mix of:
+
+```text
+baseline no-stimulus
+INQUIRY EXTRAINQ
+MODE SENSE(10) all
+GET CONFIGURATION current/all
+GET PERFORMANCE type 00 and type 04
+READ TOC format 0 failure followed by REQUEST SENSE
+```
+
+Those commands exercise the island enough to make the tiles visible while
+staying away from START STOP and packet-intake mutation.
+
 ### 2. Record 58: GET CONFIG Read/Bridge Setup
 
 Record 58 remains the best target for the GET CONFIG response builder.
