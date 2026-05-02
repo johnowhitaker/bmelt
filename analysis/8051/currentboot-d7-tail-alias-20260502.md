@@ -68,6 +68,30 @@ Linux drive #1, but with different per-drive identity material. That makes this
 look like a real currentboot/profile work surface rather than static firmware
 bytes.
 
+## Relationship To The Older `0x070000` Gateway Dump
+
+The tail alias is not just vaguely similar to the old gateway dump; large
+pieces line up structurally:
+
+```text
+D7 0xe8000 + 0x0000  == old gateway 0x070000 + 0x0000 for the first 0x100 bytes
+D7 0xe8000 + 0x0100  ~= old gateway 0x070000 + 0x0100 with only 5 byte changes
+D7 0xf0000 + 0x0000  ~= old gateway 0x070000 + 0x4000
+D7 0xf0000 + 0x1000  ~= old gateway 0x070000 + 0x5000
+```
+
+The imperfect matches are expected because the two captures are from different
+physical drives: the profile pages include live serial/calibration material.
+The many exact matches inside sparse/erased subpages are also useful. They show
+that the old gateway dump and the D7 tail alias are views onto the same class of
+currentboot work/profile surface, not two independent blobs that merely happen
+to share a few strings.
+
+There is not a single linear address formula across the whole tail. The first
+tail block behaves like a gateway/work-window start, while the `0xf0000+`
+blocks behave like repeated profile/key pages. Treat this as a segmented alias
+behind `0x1717`, not as a flat memory map.
+
 ## Full-Window Hook Result
 
 The raw `window128_*.bin` tests explain why this hook is still slow. A full
