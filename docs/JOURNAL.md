@@ -2735,8 +2735,15 @@ In the expanded run the full sequence appeared 134 times out of 288, always at
 `+0x7180`. That makes the record-59 byte feel less like "this source byte
 becomes this instruction byte" and more like "this source byte participates in
 the schedule/interleaver that decides how normal-runtime tiles are surfaced."
-That is still a real foothold, just not the flat decode oracle we hoped it
-might be.
+Another way to say the same thing, and maybe the more interesting way, is that
+we may have introduced a correctable CDD-codeword error. The recognizable
+decoded chunks did not become one-byte variants of themselves; they stayed
+byte-identical while the public-window phase changed. I checked the stock-only
+and mutated-only chunk sets, and the nearest only-mutated chunk was still 35
+bytes different from any only-stock chunk. So this does not look like a payload
+byte edit showing through. It looks like the controller still materialized the
+same decoded payload, but its decode/status/timing path shifted. That is still
+a real foothold, just not the flat decode oracle we hoped it might be.
 
 I also added a small state-delta tool for this exact problem:
 

@@ -2306,9 +2306,13 @@ Immediate useful directions:
     record-59 mutation mainly moves their adjacency/placement. In the mutated
     state, chunk 1 is fixed at `+0x71c0` and chunk 2 at `+0x7200`; chunk 0
     alternates between `+0x7140` and `+0x7180`, and the full sequence appears
-    when chunk 0 is at `+0x7180`. This reinforces that `0x28519:68->60` is a
-    schedule/interleaver/tile-placement byte, not a direct decoded instruction
-    byte. Analysis:
+    when chunk 0 is at `+0x7180`. This reinforces that `0x28519:68->60` is
+    not a direct decoded instruction-byte edit. It may be a
+    schedule/interleaver/tile-placement byte, or more interestingly a
+    correctable CDD-codeword error: stock-vs-mutated unique chunks had no near
+    one-byte decoded variants (nearest only-mutated chunk was 35/64 bytes
+    different from any only-stock chunk), while known decoded tiles stayed
+    byte-identical and changed phase. Analysis:
     `analysis/8051/original-drive-rec59-expanded-readonly-20260502.md` and
     `analysis/8051/original-drive-rec59-expanded-contig4-hits-20260502.md`.
     New offline helper:

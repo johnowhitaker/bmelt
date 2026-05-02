@@ -95,6 +95,27 @@ That is still valuable: it proves a single hard-lane CDD source byte can alter
 normal-mode decoded-runtime presentation in a repeatable way. But it also means
 record-59 is not a clean flat source-to-output decode oracle.
 
+There is an important alternate framing: this may be a correctable CDD-codeword
+error rather than an intentional schedule-byte edit. The public decoded chunks
+we can recognize stay byte-identical, but their tile phase changes. A quick
+stock-versus-mutated unique-chunk comparison found no near one-byte decoded
+variants:
+
+```text
+stock unique chunks:     721
+mutated unique chunks:   716
+only-mutated chunks:      37
+only-stock chunks:        42
+nearest only-mutated to only-stock chunk: 35/64 bytes different
+chunks within 8 byte differences: 0
+```
+
+So the visible effect is not "one decoded byte changed." It is more consistent
+with "the controller still materialized the same decoded payload tiles, but the
+decode/status/timing path changed." If CDD is an ECC-like controller codeword
+format, this is exactly the kind of side effect a corrected source-byte error
+could produce.
+
 The expanded run gives us a stable mutated-state baseline for future read-only
 work. It also reinforces that the public window is a rotating surface, not a
 simple memory dump. Any future CDD known-output extraction should use chunk
