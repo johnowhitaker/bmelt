@@ -92,6 +92,23 @@ tail block behaves like a gateway/work-window start, while the `0xf0000+`
 blocks behave like repeated profile/key pages. Treat this as a segmented alias
 behind `0x1717`, not as a flat memory map.
 
+## Relationship To Normal Public Work Windows
+
+A chunk-level search against the saved normal work-window corpus found exact
+64-byte matches too, but they are concentrated in the stable low/profile parts
+of the public window:
+
+```text
+D7 0xe8000 + 0x0000..0x017f  matches normal work-window +0x0000..0x017f
+D7 0xf0000 profile chunks    match normal work-window profile pages around +0x4240..+0x5f00
+```
+
+This is useful, but it is not the decoded-overlay shortcut we wanted. The
+matches are the same stable gateway/profile surface we already knew how to
+recognize, not the moving packet/response bridge chunks around public offsets
+`+0x6000..+0xa000`. In practical terms, the D7 tail alias helps map currentboot
+and profile layout; it does not replace a normal-runtime decoded-overlay oracle.
+
 ## Full-Window Hook Result
 
 The raw `window128_*.bin` tests explain why this hook is still slow. A full
