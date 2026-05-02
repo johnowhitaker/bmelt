@@ -2765,3 +2765,107 @@ analysis/8051/original-drive-rec59-expanded-readonly-20260502.md
 analysis/8051/original-drive-rec59-expanded-contig4-hits-20260502.md
 analysis/8051/rec59-getcfg-stock-vs-mutated-state-delta-20260502.md
 ```
+
+The next normal-mode I/O push was deliberately narrower. The goal was not to
+decode all of CDD or write a real hook yet; it was to find any repeatable
+normal-mode bit we could influence or observe while the drive was booted as
+plain `LD5M`.
+
+First I locked the original drive's state again. It still reported `LD5M`, and
+a focused live-key F0 read showed exactly the expected bytes:
+
+```text
+F0[0x2627a] = 0x5d   record55 stock
+F0[0x28519] = 0x60   record59 mutation still present
+F0[0x2ae8f] = 0x4e   record60 affine target still stock
+```
+
+Then I took a 96-capture focused-safe baseline: baseline, INQUIRY, EXTRAINQ,
+GET CONFIG current/all, and MODE SENSE read-error recovery. No `GET PERFORMANCE
+nominal`, no START STOP, no update entry. The drive stayed normal afterwards.
+
+This gave a tidy phase model. Record 59 is a useful ambient phase oracle:
+
+```text
+20ea2ab16891 -> 99d4493dc4cf -> b7a129b7d392
+
+chunk 0: +0x7140 or +0x7180
+chunk 1: +0x71c0
+chunk 2: +0x7200
+```
+
+The full three-chunk sequence appears only when chunk 0 lands at `+0x7180`.
+Record 60, the bridge-adjacent write-side partner, was even tidier: its watched
+chunks were fixed across every capture:
+
+```text
+4cfa6d151318 at +0x7300
+28583441dfa8 at +0x7380
+9b673c066ae4 at +0x7480
+```
+
+That made record 60 a good future mutation watch target. I built the planned
+affine patch and restore artifacts:
+
+```text
+patch:   F0[0x2ae8f] 0x4e -> 0x4c
+restore: F0[0x2ae8f] 0x4c -> 0x4e
+```
+
+But the live gate stopped us before any patch was sent. Running only events
+`0..1` from the candidate hit the same blocked update-entry behavior we saw
+after the record-59 mutation:
+
+```text
+event=0 live_extrainq_read rc=0
+event=1 profile_tail_arg7f rc=99
+```
+
+The recovery/status path then wedged in sg, so I killed the hung process and
+used the Pico servo power cut. The drive came back as normal `LD5M`. A
+post-cycle live-key F0 read confirmed that no new flash mutation happened:
+
+```text
+F0[0x2627a] = 0x5d
+F0[0x28519] = 0x60
+F0[0x2ae8f] = 0x4e
+```
+
+So the original drive is alive and useful, but not a normal helper-bypass write
+target right now. It is a mutated-but-alive normal-mode oracle.
+
+Since writes were blocked, I used the rest of the session for read-only command
+modulation. GET CONFIG field variants all returned stable response payloads.
+Record 60 stayed fixed in every capture, and record 59's phase ratios moved
+only weakly:
+
+```text
+baseline-no-stimulus        full 13/24
+std-current-sf0000-len00fc  full 15/24
+std-current-sf0020-len00fc  full 14/24
+r4-01-current-sf0000        full  9/24
+r6-01-current-sf0000        full 13/24
+```
+
+That is not a clean I/O bit. It is still useful as a classifier and sanity
+check, but the next real write-side experiment should wait for a fresh drive or
+a better restore route.
+
+I added a small focused analyzer for this kind of work:
+
+```text
+scripts/analyze_liteon_work_window_watch_chunks.py
+```
+
+It tracks specific 64-byte chunks across capture states/stimuli, reports their
+public offsets, and summarizes adjacency. This is now the quick tool for
+record58/59/60 normal-mode phase checks.
+
+Checkpoint:
+
+```text
+analysis/8051/original-drive-normal-mode-io-primitive-20260502.md
+references/evidence/live/original-drive-normal-io-baseline-20260502T032421Z/
+references/evidence/live/original-drive-normal-io-getconfig-variants-20260502T033434Z/
+references/evidence/live/original-drive-normal-io-getconfig-phase-bias-20260502T033558Z/
+```

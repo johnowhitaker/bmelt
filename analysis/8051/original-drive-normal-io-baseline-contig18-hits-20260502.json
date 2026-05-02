@@ -1,0 +1,171 @@
+{
+  "chunk_count": 2,
+  "chunk_prefixes": [
+    "8a23e054bff0",
+    "feef78aa26ff"
+  ],
+  "contig_bytes": 128,
+  "contig_file": "analysis/8051/cdd-runtime-chunk-contigs-20260501/contig-018-02chunks.bin",
+  "schema": "liteon-contig-hits-by-stimulus-v1",
+  "states": {
+    "original-baseline": {
+      "path": "references/evidence/live/original-drive-normal-io-baseline-20260502T032421Z/focused-safe-work-window",
+      "stimuli": {
+        "baseline-no-stimulus": {
+          "chunk_count_histogram": {
+            "2": 16
+          },
+          "chunk_offsets": {
+            "0": [
+              {
+                "count": 16,
+                "offset": 29440
+              }
+            ],
+            "1": [
+              {
+                "count": 16,
+                "offset": 29568
+              }
+            ]
+          },
+          "files": 16,
+          "sequence_hits": 0,
+          "sequence_offsets": []
+        },
+        "get-configuration-all": {
+          "chunk_count_histogram": {
+            "2": 16
+          },
+          "chunk_offsets": {
+            "0": [
+              {
+                "count": 16,
+                "offset": 29440
+              }
+            ],
+            "1": [
+              {
+                "count": 16,
+                "offset": 29568
+              }
+            ]
+          },
+          "files": 16,
+          "sequence_hits": 0,
+          "sequence_offsets": []
+        },
+        "get-configuration-current": {
+          "chunk_count_histogram": {
+            "2": 16
+          },
+          "chunk_offsets": {
+            "0": [
+              {
+                "count": 16,
+                "offset": 29440
+              }
+            ],
+            "1": [
+              {
+                "count": 16,
+                "offset": 29568
+              }
+            ]
+          },
+          "files": 16,
+          "sequence_hits": 0,
+          "sequence_offsets": []
+        },
+        "inquiry-extrainq": {
+          "chunk_count_histogram": {
+            "2": 16
+          },
+          "chunk_offsets": {
+            "0": [
+              {
+                "count": 16,
+                "offset": 29440
+              }
+            ],
+            "1": [
+              {
+                "count": 16,
+                "offset": 29568
+              }
+            ]
+          },
+          "files": 16,
+          "sequence_hits": 0,
+          "sequence_offsets": []
+        },
+        "inquiry-standard-96": {
+          "chunk_count_histogram": {
+            "2": 16
+          },
+          "chunk_offsets": {
+            "0": [
+              {
+                "count": 16,
+                "offset": 29440
+              }
+            ],
+            "1": [
+              {
+                "count": 16,
+                "offset": 29568
+              }
+            ]
+          },
+          "files": 16,
+          "sequence_hits": 0,
+          "sequence_offsets": []
+        },
+        "mode-sense10-read-error-recovery": {
+          "chunk_count_histogram": {
+            "2": 16
+          },
+          "chunk_offsets": {
+            "0": [
+              {
+                "count": 16,
+                "offset": 29440
+              }
+            ],
+            "1": [
+              {
+                "count": 16,
+                "offset": 29568
+              }
+            ]
+          },
+          "files": 16,
+          "sequence_hits": 0,
+          "sequence_offsets": []
+        }
+      },
+      "totals": {
+        "chunk_count_histogram": {
+          "2": 96
+        },
+        "chunk_offsets": {
+          "0": [
+            {
+              "count": 96,
+              "offset": 29440
+            }
+          ],
+          "1": [
+            {
+              "count": 96,
+              "offset": 29568
+            }
+          ]
+        },
+        "files": 96,
+        "sequence_hits": 0,
+        "sequence_offsets": []
+      }
+    }
+  }
+}

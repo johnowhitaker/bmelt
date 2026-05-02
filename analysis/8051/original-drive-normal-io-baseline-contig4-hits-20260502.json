@@ -1,0 +1,277 @@
+{
+  "chunk_count": 3,
+  "chunk_prefixes": [
+    "8a29e0c4540f",
+    "f608760112ef",
+    "e054884efeef"
+  ],
+  "contig_bytes": 192,
+  "contig_file": "analysis/8051/cdd-runtime-chunk-contigs-20260501/contig-004-03chunks.bin",
+  "schema": "liteon-contig-hits-by-stimulus-v1",
+  "states": {
+    "original-baseline": {
+      "path": "references/evidence/live/original-drive-normal-io-baseline-20260502T032421Z/focused-safe-work-window",
+      "stimuli": {
+        "baseline-no-stimulus": {
+          "chunk_count_histogram": {
+            "3": 16
+          },
+          "chunk_offsets": {
+            "0": [
+              {
+                "count": 8,
+                "offset": 28992
+              },
+              {
+                "count": 8,
+                "offset": 29056
+              }
+            ],
+            "1": [
+              {
+                "count": 16,
+                "offset": 29120
+              }
+            ],
+            "2": [
+              {
+                "count": 16,
+                "offset": 29184
+              }
+            ]
+          },
+          "files": 16,
+          "sequence_hits": 8,
+          "sequence_offsets": [
+            {
+              "count": 8,
+              "offset": 29056
+            }
+          ]
+        },
+        "get-configuration-all": {
+          "chunk_count_histogram": {
+            "3": 16
+          },
+          "chunk_offsets": {
+            "0": [
+              {
+                "count": 9,
+                "offset": 29056
+              },
+              {
+                "count": 7,
+                "offset": 28992
+              }
+            ],
+            "1": [
+              {
+                "count": 16,
+                "offset": 29120
+              }
+            ],
+            "2": [
+              {
+                "count": 16,
+                "offset": 29184
+              }
+            ]
+          },
+          "files": 16,
+          "sequence_hits": 9,
+          "sequence_offsets": [
+            {
+              "count": 9,
+              "offset": 29056
+            }
+          ]
+        },
+        "get-configuration-current": {
+          "chunk_count_histogram": {
+            "3": 16
+          },
+          "chunk_offsets": {
+            "0": [
+              {
+                "count": 9,
+                "offset": 28992
+              },
+              {
+                "count": 7,
+                "offset": 29056
+              }
+            ],
+            "1": [
+              {
+                "count": 16,
+                "offset": 29120
+              }
+            ],
+            "2": [
+              {
+                "count": 16,
+                "offset": 29184
+              }
+            ]
+          },
+          "files": 16,
+          "sequence_hits": 7,
+          "sequence_offsets": [
+            {
+              "count": 7,
+              "offset": 29056
+            }
+          ]
+        },
+        "inquiry-extrainq": {
+          "chunk_count_histogram": {
+            "3": 16
+          },
+          "chunk_offsets": {
+            "0": [
+              {
+                "count": 9,
+                "offset": 29056
+              },
+              {
+                "count": 7,
+                "offset": 28992
+              }
+            ],
+            "1": [
+              {
+                "count": 16,
+                "offset": 29120
+              }
+            ],
+            "2": [
+              {
+                "count": 16,
+                "offset": 29184
+              }
+            ]
+          },
+          "files": 16,
+          "sequence_hits": 9,
+          "sequence_offsets": [
+            {
+              "count": 9,
+              "offset": 29056
+            }
+          ]
+        },
+        "inquiry-standard-96": {
+          "chunk_count_histogram": {
+            "3": 16
+          },
+          "chunk_offsets": {
+            "0": [
+              {
+                "count": 8,
+                "offset": 28992
+              },
+              {
+                "count": 8,
+                "offset": 29056
+              }
+            ],
+            "1": [
+              {
+                "count": 16,
+                "offset": 29120
+              }
+            ],
+            "2": [
+              {
+                "count": 16,
+                "offset": 29184
+              }
+            ]
+          },
+          "files": 16,
+          "sequence_hits": 8,
+          "sequence_offsets": [
+            {
+              "count": 8,
+              "offset": 29056
+            }
+          ]
+        },
+        "mode-sense10-read-error-recovery": {
+          "chunk_count_histogram": {
+            "3": 16
+          },
+          "chunk_offsets": {
+            "0": [
+              {
+                "count": 9,
+                "offset": 29056
+              },
+              {
+                "count": 7,
+                "offset": 28992
+              }
+            ],
+            "1": [
+              {
+                "count": 16,
+                "offset": 29120
+              }
+            ],
+            "2": [
+              {
+                "count": 16,
+                "offset": 29184
+              }
+            ]
+          },
+          "files": 16,
+          "sequence_hits": 9,
+          "sequence_offsets": [
+            {
+              "count": 9,
+              "offset": 29056
+            }
+          ]
+        }
+      },
+      "totals": {
+        "chunk_count_histogram": {
+          "3": 96
+        },
+        "chunk_offsets": {
+          "0": [
+            {
+              "count": 50,
+              "offset": 29056
+            },
+            {
+              "count": 46,
+              "offset": 28992
+            }
+          ],
+          "1": [
+            {
+              "count": 96,
+              "offset": 29120
+            }
+          ],
+          "2": [
+            {
+              "count": 96,
+              "offset": 29184
+            }
+          ]
+        },
+        "files": 96,
+        "sequence_hits": 50,
+        "sequence_offsets": [
+          {
+            "count": 50,
+            "offset": 29056
+          }
+        ]
+      }
+    }
+  }
+}

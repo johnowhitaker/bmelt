@@ -1,0 +1,272 @@
+{
+  "chunks": [
+    {
+      "first16_hex": "8a29e0c4540f30e011908a4ce0c3940e",
+      "name": "rec59-c0",
+      "sha256": "20ea2ab16891b5c70526dc35ea5187e6ab4d45b592920d95e255f52d34a09baa"
+    },
+    {
+      "first16_hex": "f608760112efb6057c057c22908857e0",
+      "name": "rec59-c1",
+      "sha256": "99d4493dc4cfdc4cea75d21f27ed90af53b0f067d9238f902e536c1eec033b29"
+    },
+    {
+      "first16_hex": "e054884efeef4ef07e007f08120a65e4",
+      "name": "rec59-c2",
+      "sha256": "b7a129b7d392f0209ca71625dbfb5e4a1609c0ae26b96d7cc940ea0582952c49"
+    }
+  ],
+  "schema": "liteon-work-window-watch-chunks-v1",
+  "states": {
+    "original-baseline": {
+      "path": "references/evidence/live/original-drive-normal-io-baseline-20260502T032421Z/focused-safe-work-window",
+      "stimuli": {
+        "baseline-no-stimulus": {
+          "adjacency_histogram": {
+            "edge-bits:01": 8,
+            "full-adjacent": 8
+          },
+          "chunk_offsets": {
+            "rec59-c0": [
+              {
+                "count": 8,
+                "offset": 28992
+              },
+              {
+                "count": 8,
+                "offset": 29056
+              }
+            ],
+            "rec59-c1": [
+              {
+                "count": 16,
+                "offset": 29120
+              }
+            ],
+            "rec59-c2": [
+              {
+                "count": 16,
+                "offset": 29184
+              }
+            ]
+          },
+          "files": 16,
+          "layout_histogram": {
+            "rec59-c0@+0x7140 rec59-c1@+0x71c0 rec59-c2@+0x7200": 8,
+            "rec59-c0@+0x7180 rec59-c1@+0x71c0 rec59-c2@+0x7200": 8
+          }
+        },
+        "get-configuration-all": {
+          "adjacency_histogram": {
+            "edge-bits:01": 7,
+            "full-adjacent": 9
+          },
+          "chunk_offsets": {
+            "rec59-c0": [
+              {
+                "count": 9,
+                "offset": 29056
+              },
+              {
+                "count": 7,
+                "offset": 28992
+              }
+            ],
+            "rec59-c1": [
+              {
+                "count": 16,
+                "offset": 29120
+              }
+            ],
+            "rec59-c2": [
+              {
+                "count": 16,
+                "offset": 29184
+              }
+            ]
+          },
+          "files": 16,
+          "layout_histogram": {
+            "rec59-c0@+0x7140 rec59-c1@+0x71c0 rec59-c2@+0x7200": 7,
+            "rec59-c0@+0x7180 rec59-c1@+0x71c0 rec59-c2@+0x7200": 9
+          }
+        },
+        "get-configuration-current": {
+          "adjacency_histogram": {
+            "edge-bits:01": 9,
+            "full-adjacent": 7
+          },
+          "chunk_offsets": {
+            "rec59-c0": [
+              {
+                "count": 9,
+                "offset": 28992
+              },
+              {
+                "count": 7,
+                "offset": 29056
+              }
+            ],
+            "rec59-c1": [
+              {
+                "count": 16,
+                "offset": 29120
+              }
+            ],
+            "rec59-c2": [
+              {
+                "count": 16,
+                "offset": 29184
+              }
+            ]
+          },
+          "files": 16,
+          "layout_histogram": {
+            "rec59-c0@+0x7140 rec59-c1@+0x71c0 rec59-c2@+0x7200": 9,
+            "rec59-c0@+0x7180 rec59-c1@+0x71c0 rec59-c2@+0x7200": 7
+          }
+        },
+        "inquiry-extrainq": {
+          "adjacency_histogram": {
+            "edge-bits:01": 7,
+            "full-adjacent": 9
+          },
+          "chunk_offsets": {
+            "rec59-c0": [
+              {
+                "count": 9,
+                "offset": 29056
+              },
+              {
+                "count": 7,
+                "offset": 28992
+              }
+            ],
+            "rec59-c1": [
+              {
+                "count": 16,
+                "offset": 29120
+              }
+            ],
+            "rec59-c2": [
+              {
+                "count": 16,
+                "offset": 29184
+              }
+            ]
+          },
+          "files": 16,
+          "layout_histogram": {
+            "rec59-c0@+0x7140 rec59-c1@+0x71c0 rec59-c2@+0x7200": 7,
+            "rec59-c0@+0x7180 rec59-c1@+0x71c0 rec59-c2@+0x7200": 9
+          }
+        },
+        "inquiry-standard-96": {
+          "adjacency_histogram": {
+            "edge-bits:01": 8,
+            "full-adjacent": 8
+          },
+          "chunk_offsets": {
+            "rec59-c0": [
+              {
+                "count": 8,
+                "offset": 28992
+              },
+              {
+                "count": 8,
+                "offset": 29056
+              }
+            ],
+            "rec59-c1": [
+              {
+                "count": 16,
+                "offset": 29120
+              }
+            ],
+            "rec59-c2": [
+              {
+                "count": 16,
+                "offset": 29184
+              }
+            ]
+          },
+          "files": 16,
+          "layout_histogram": {
+            "rec59-c0@+0x7140 rec59-c1@+0x71c0 rec59-c2@+0x7200": 8,
+            "rec59-c0@+0x7180 rec59-c1@+0x71c0 rec59-c2@+0x7200": 8
+          }
+        },
+        "mode-sense10-read-error-recovery": {
+          "adjacency_histogram": {
+            "edge-bits:01": 7,
+            "full-adjacent": 9
+          },
+          "chunk_offsets": {
+            "rec59-c0": [
+              {
+                "count": 9,
+                "offset": 29056
+              },
+              {
+                "count": 7,
+                "offset": 28992
+              }
+            ],
+            "rec59-c1": [
+              {
+                "count": 16,
+                "offset": 29120
+              }
+            ],
+            "rec59-c2": [
+              {
+                "count": 16,
+                "offset": 29184
+              }
+            ]
+          },
+          "files": 16,
+          "layout_histogram": {
+            "rec59-c0@+0x7140 rec59-c1@+0x71c0 rec59-c2@+0x7200": 7,
+            "rec59-c0@+0x7180 rec59-c1@+0x71c0 rec59-c2@+0x7200": 9
+          }
+        }
+      },
+      "totals": {
+        "adjacency_histogram": {
+          "edge-bits:01": 46,
+          "full-adjacent": 50
+        },
+        "chunk_offsets": {
+          "rec59-c0": [
+            {
+              "count": 50,
+              "offset": 29056
+            },
+            {
+              "count": 46,
+              "offset": 28992
+            }
+          ],
+          "rec59-c1": [
+            {
+              "count": 96,
+              "offset": 29120
+            }
+          ],
+          "rec59-c2": [
+            {
+              "count": 96,
+              "offset": 29184
+            }
+          ]
+        },
+        "files": 96,
+        "layout_histogram": {
+          "rec59-c0@+0x7140 rec59-c1@+0x71c0 rec59-c2@+0x7200": 46,
+          "rec59-c0@+0x7180 rec59-c1@+0x71c0 rec59-c2@+0x7200": 50
+        }
+      }
+    }
+  }
+}

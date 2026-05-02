@@ -2317,3 +2317,29 @@ Immediate useful directions:
     `analysis/8051/original-drive-rec59-expanded-contig4-hits-20260502.md`.
     New offline helper:
     `scripts/analyze_liteon_work_window_state_delta.py`.
+124. The normal-mode I/O primitive phase plan was partially executed on the
+    original drive. Baseline state was confirmed with a live-key F0 read:
+    `0x2627a = 0x5d`, `0x28519 = 0x60`, and `0x2ae8f = 0x4e`. A focused-safe
+    baseline showed record59 as a phase oracle (`rec59-c0` alternates
+    `+0x7140`/`+0x7180`; `rec59-c1 = +0x71c0`; `rec59-c2 = +0x7200`) and
+    record60 as stable (`rec60-c0 = +0x7300`, `rec60-c1 = +0x7380`,
+    `rec60-c2 = +0x7480`). Evidence:
+    `references/evidence/live/original-drive-normal-io-baseline-20260502T032421Z/`.
+    Analysis:
+    `analysis/8051/original-drive-normal-mode-io-primitive-20260502.md`.
+125. Do not attempt ordinary helper-bypass writes on the current original drive
+    unless deliberately testing recovery/write-entry behavior. The record60
+    affine patch/restore artifacts were built offline, but the live viability
+    gate failed at event 1: `profile_tail_arg7f rc=99`, then sg status/recovery
+    hung until a Pico servo cycle. The record60 patch itself was never sent.
+    A post-cycle live-key F0 read confirmed no change: `0x2ae8f` remained
+    `0x4e`; record59 remained `0x60`; record55 remained `0x5d`.
+126. Read-only GET CONFIG field variants did not yet yield a normal-mode
+    communication primitive. GET CONFIG responses were byte-stable, record60
+    tiles stayed fixed in all captures, and record59 phase ratios showed only
+    weak/noisy bias rather than a clean host-controlled bit. Evidence:
+    `references/evidence/live/original-drive-normal-io-getconfig-variants-20260502T033434Z/`
+    and
+    `references/evidence/live/original-drive-normal-io-getconfig-phase-bias-20260502T033558Z/`.
+    New focused analyzer:
+    `scripts/analyze_liteon_work_window_watch_chunks.py`.

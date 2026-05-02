@@ -1,0 +1,237 @@
+{
+  "chunks": [
+    {
+      "first16_hex": "8a29e0c4540f30e011908a4ce0c3940e",
+      "name": "rec59-c0",
+      "sha256": "20ea2ab16891b5c70526dc35ea5187e6ab4d45b592920d95e255f52d34a09baa"
+    },
+    {
+      "first16_hex": "f608760112efb6057c057c22908857e0",
+      "name": "rec59-c1",
+      "sha256": "99d4493dc4cfdc4cea75d21f27ed90af53b0f067d9238f902e536c1eec033b29"
+    },
+    {
+      "first16_hex": "e054884efeef4ef07e007f08120a65e4",
+      "name": "rec59-c2",
+      "sha256": "b7a129b7d392f0209ca71625dbfb5e4a1609c0ae26b96d7cc940ea0582952c49"
+    }
+  ],
+  "schema": "liteon-work-window-watch-chunks-v1",
+  "states": {
+    "phase-bias": {
+      "path": "references/evidence/live/original-drive-normal-io-getconfig-phase-bias-20260502T033558Z",
+      "stimuli": {
+        "baseline-no-stimulus": {
+          "adjacency_histogram": {
+            "edge-bits:01": 11,
+            "full-adjacent": 13
+          },
+          "chunk_offsets": {
+            "rec59-c0": [
+              {
+                "count": 13,
+                "offset": 29056
+              },
+              {
+                "count": 11,
+                "offset": 28992
+              }
+            ],
+            "rec59-c1": [
+              {
+                "count": 24,
+                "offset": 29120
+              }
+            ],
+            "rec59-c2": [
+              {
+                "count": 24,
+                "offset": 29184
+              }
+            ]
+          },
+          "files": 24,
+          "layout_histogram": {
+            "rec59-c0@+0x7140 rec59-c1@+0x71c0 rec59-c2@+0x7200": 11,
+            "rec59-c0@+0x7180 rec59-c1@+0x71c0 rec59-c2@+0x7200": 13
+          }
+        },
+        "r4-01-current-sf0000": {
+          "adjacency_histogram": {
+            "edge-bits:01": 15,
+            "full-adjacent": 9
+          },
+          "chunk_offsets": {
+            "rec59-c0": [
+              {
+                "count": 15,
+                "offset": 28992
+              },
+              {
+                "count": 9,
+                "offset": 29056
+              }
+            ],
+            "rec59-c1": [
+              {
+                "count": 24,
+                "offset": 29120
+              }
+            ],
+            "rec59-c2": [
+              {
+                "count": 24,
+                "offset": 29184
+              }
+            ]
+          },
+          "files": 24,
+          "layout_histogram": {
+            "rec59-c0@+0x7140 rec59-c1@+0x71c0 rec59-c2@+0x7200": 15,
+            "rec59-c0@+0x7180 rec59-c1@+0x71c0 rec59-c2@+0x7200": 9
+          }
+        },
+        "r6-01-current-sf0000": {
+          "adjacency_histogram": {
+            "edge-bits:01": 11,
+            "full-adjacent": 13
+          },
+          "chunk_offsets": {
+            "rec59-c0": [
+              {
+                "count": 13,
+                "offset": 29056
+              },
+              {
+                "count": 11,
+                "offset": 28992
+              }
+            ],
+            "rec59-c1": [
+              {
+                "count": 24,
+                "offset": 29120
+              }
+            ],
+            "rec59-c2": [
+              {
+                "count": 24,
+                "offset": 29184
+              }
+            ]
+          },
+          "files": 24,
+          "layout_histogram": {
+            "rec59-c0@+0x7140 rec59-c1@+0x71c0 rec59-c2@+0x7200": 11,
+            "rec59-c0@+0x7180 rec59-c1@+0x71c0 rec59-c2@+0x7200": 13
+          }
+        },
+        "std-current-sf0000-len00fc": {
+          "adjacency_histogram": {
+            "edge-bits:01": 9,
+            "full-adjacent": 15
+          },
+          "chunk_offsets": {
+            "rec59-c0": [
+              {
+                "count": 15,
+                "offset": 29056
+              },
+              {
+                "count": 9,
+                "offset": 28992
+              }
+            ],
+            "rec59-c1": [
+              {
+                "count": 24,
+                "offset": 29120
+              }
+            ],
+            "rec59-c2": [
+              {
+                "count": 24,
+                "offset": 29184
+              }
+            ]
+          },
+          "files": 24,
+          "layout_histogram": {
+            "rec59-c0@+0x7140 rec59-c1@+0x71c0 rec59-c2@+0x7200": 9,
+            "rec59-c0@+0x7180 rec59-c1@+0x71c0 rec59-c2@+0x7200": 15
+          }
+        },
+        "std-current-sf0020-len00fc": {
+          "adjacency_histogram": {
+            "edge-bits:01": 10,
+            "full-adjacent": 14
+          },
+          "chunk_offsets": {
+            "rec59-c0": [
+              {
+                "count": 14,
+                "offset": 29056
+              },
+              {
+                "count": 10,
+                "offset": 28992
+              }
+            ],
+            "rec59-c1": [
+              {
+                "count": 24,
+                "offset": 29120
+              }
+            ],
+            "rec59-c2": [
+              {
+                "count": 24,
+                "offset": 29184
+              }
+            ]
+          },
+          "files": 24,
+          "layout_histogram": {
+            "rec59-c0@+0x7140 rec59-c1@+0x71c0 rec59-c2@+0x7200": 10,
+            "rec59-c0@+0x7180 rec59-c1@+0x71c0 rec59-c2@+0x7200": 14
+          }
+        }
+      },
+      "totals": {
+        "adjacency_histogram": {
+          "edge-bits:01": 56,
+          "full-adjacent": 64
+        },
+        "chunk_offsets": {
+          "rec59-c0": [
+            {
+              "count": 64,
+              "offset": 29056
+            },
+            {
+              "count": 56,
+              "offset": 28992
+            }
+          ],
+          "rec59-c1": [
+            {
+              "count": 120,
+              "offset": 29120
+            }
+          ],
+          "rec59-c2": [
+            {
+              "count": 120,
+              "offset": 29184
+            }
+          ]
+        },
+        "files": 120,
+        "layout_histogram": {
+          "rec59-c0@+0x7140 rec59-c1@+0x71c0 rec59-c2@+0x7200": 56,
+          "rec59-c0@+0x7180 rec59-c1@+0x71c0 rec59-c2@+0x7200": 64
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,346 @@
+{
+  "chunks": [
+    {
+      "first16_hex": "8a23e054bff0908adfe0540f64036003",
+      "name": "rec60-c0",
+      "sha256": "4cfa6d151318d9f9dc9c63b1885b0c02a58e6109b2b35fa4b81cc8280d925639"
+    },
+    {
+      "first16_hex": "feef78aa26ffee1836a87c0808f608ef",
+      "name": "rec60-c1",
+      "sha256": "28583441dfa8a17c7789580205a507d45cf44d71dacddd583a7f3b51cc4cf4c2"
+    },
+    {
+      "first16_hex": "8a4de0904099f0908a4ee0904099f090",
+      "name": "rec60-c2",
+      "sha256": "9b673c066ae46057009d7f962320e5ff963e1c4f7437d95e328290edeb39a3b7"
+    }
+  ],
+  "schema": "liteon-work-window-watch-chunks-v1",
+  "states": {
+    "getconfig-variants": {
+      "path": "references/evidence/live/original-drive-normal-io-getconfig-variants-20260502T033434Z",
+      "stimuli": {
+        "baseline-no-stimulus": {
+          "adjacency_histogram": {
+            "edge-bits:00": 8
+          },
+          "chunk_offsets": {
+            "rec60-c0": [
+              {
+                "count": 8,
+                "offset": 29440
+              }
+            ],
+            "rec60-c1": [
+              {
+                "count": 8,
+                "offset": 29568
+              }
+            ],
+            "rec60-c2": [
+              {
+                "count": 8,
+                "offset": 29824
+              }
+            ]
+          },
+          "files": 8,
+          "layout_histogram": {
+            "rec60-c0@+0x7300 rec60-c1@+0x7380 rec60-c2@+0x7480": 8
+          }
+        },
+        "ctrl-01-current-sf0000": {
+          "adjacency_histogram": {
+            "edge-bits:00": 8
+          },
+          "chunk_offsets": {
+            "rec60-c0": [
+              {
+                "count": 8,
+                "offset": 29440
+              }
+            ],
+            "rec60-c1": [
+              {
+                "count": 8,
+                "offset": 29568
+              }
+            ],
+            "rec60-c2": [
+              {
+                "count": 8,
+                "offset": 29824
+              }
+            ]
+          },
+          "files": 8,
+          "layout_histogram": {
+            "rec60-c0@+0x7300 rec60-c1@+0x7380 rec60-c2@+0x7480": 8
+          }
+        },
+        "r4-01-current-sf0000": {
+          "adjacency_histogram": {
+            "edge-bits:00": 8
+          },
+          "chunk_offsets": {
+            "rec60-c0": [
+              {
+                "count": 8,
+                "offset": 29440
+              }
+            ],
+            "rec60-c1": [
+              {
+                "count": 8,
+                "offset": 29568
+              }
+            ],
+            "rec60-c2": [
+              {
+                "count": 8,
+                "offset": 29824
+              }
+            ]
+          },
+          "files": 8,
+          "layout_histogram": {
+            "rec60-c0@+0x7300 rec60-c1@+0x7380 rec60-c2@+0x7480": 8
+          }
+        },
+        "r4-fe-current-sf0000": {
+          "adjacency_histogram": {
+            "edge-bits:00": 8
+          },
+          "chunk_offsets": {
+            "rec60-c0": [
+              {
+                "count": 8,
+                "offset": 29440
+              }
+            ],
+            "rec60-c1": [
+              {
+                "count": 8,
+                "offset": 29568
+              }
+            ],
+            "rec60-c2": [
+              {
+                "count": 8,
+                "offset": 29824
+              }
+            ]
+          },
+          "files": 8,
+          "layout_histogram": {
+            "rec60-c0@+0x7300 rec60-c1@+0x7380 rec60-c2@+0x7480": 8
+          }
+        },
+        "r5-01-current-sf0000": {
+          "adjacency_histogram": {
+            "edge-bits:00": 8
+          },
+          "chunk_offsets": {
+            "rec60-c0": [
+              {
+                "count": 8,
+                "offset": 29440
+              }
+            ],
+            "rec60-c1": [
+              {
+                "count": 8,
+                "offset": 29568
+              }
+            ],
+            "rec60-c2": [
+              {
+                "count": 8,
+                "offset": 29824
+              }
+            ]
+          },
+          "files": 8,
+          "layout_histogram": {
+            "rec60-c0@+0x7300 rec60-c1@+0x7380 rec60-c2@+0x7480": 8
+          }
+        },
+        "r5-0f-current-sf0000": {
+          "adjacency_histogram": {
+            "edge-bits:00": 8
+          },
+          "chunk_offsets": {
+            "rec60-c0": [
+              {
+                "count": 8,
+                "offset": 29440
+              }
+            ],
+            "rec60-c1": [
+              {
+                "count": 8,
+                "offset": 29568
+              }
+            ],
+            "rec60-c2": [
+              {
+                "count": 8,
+                "offset": 29824
+              }
+            ]
+          },
+          "files": 8,
+          "layout_histogram": {
+            "rec60-c0@+0x7300 rec60-c1@+0x7380 rec60-c2@+0x7480": 8
+          }
+        },
+        "r5-f0-current-sf0000": {
+          "adjacency_histogram": {
+            "edge-bits:00": 8
+          },
+          "chunk_offsets": {
+            "rec60-c0": [
+              {
+                "count": 8,
+                "offset": 29440
+              }
+            ],
+            "rec60-c1": [
+              {
+                "count": 8,
+                "offset": 29568
+              }
+            ],
+            "rec60-c2": [
+              {
+                "count": 8,
+                "offset": 29824
+              }
+            ]
+          },
+          "files": 8,
+          "layout_histogram": {
+            "rec60-c0@+0x7300 rec60-c1@+0x7380 rec60-c2@+0x7480": 8
+          }
+        },
+        "r6-01-current-sf0000": {
+          "adjacency_histogram": {
+            "edge-bits:00": 8
+          },
+          "chunk_offsets": {
+            "rec60-c0": [
+              {
+                "count": 8,
+                "offset": 29440
+              }
+            ],
+            "rec60-c1": [
+              {
+                "count": 8,
+                "offset": 29568
+              }
+            ],
+            "rec60-c2": [
+              {
+                "count": 8,
+                "offset": 29824
+              }
+            ]
+          },
+          "files": 8,
+          "layout_histogram": {
+            "rec60-c0@+0x7300 rec60-c1@+0x7380 rec60-c2@+0x7480": 8
+          }
+        },
+        "std-current-sf0000-len00fc": {
+          "adjacency_histogram": {
+            "edge-bits:00": 8
+          },
+          "chunk_offsets": {
+            "rec60-c0": [
+              {
+                "count": 8,
+                "offset": 29440
+              }
+            ],
+            "rec60-c1": [
+              {
+                "count": 8,
+                "offset": 29568
+              }
+            ],
+            "rec60-c2": [
+              {
+                "count": 8,
+                "offset": 29824
+              }
+            ]
+          },
+          "files": 8,
+          "layout_histogram": {
+            "rec60-c0@+0x7300 rec60-c1@+0x7380 rec60-c2@+0x7480": 8
+          }
+        },
+        "std-current-sf0020-len00fc": {
+          "adjacency_histogram": {
+            "edge-bits:00": 8
+          },
+          "chunk_offsets": {
+            "rec60-c0": [
+              {
+                "count": 8,
+                "offset": 29440
+              }
+            ],
+            "rec60-c1": [
+              {
+                "count": 8,
+                "offset": 29568
+              }
+            ],
+            "rec60-c2": [
+              {
+                "count": 8,
+                "offset": 29824
+              }
+            ]
+          },
+          "files": 8,
+          "layout_histogram": {
+            "rec60-c0@+0x7300 rec60-c1@+0x7380 rec60-c2@+0x7480": 8
+          }
+        }
+      },
+      "totals": {
+        "adjacency_histogram": {
+          "edge-bits:00": 80
+        },
+        "chunk_offsets": {
+          "rec60-c0": [
+            {
+              "count": 80,
+              "offset": 29440
+            }
+          ],
+          "rec60-c1": [
+            {
+              "count": 80,
+              "offset": 29568
+            }
+          ],
+          "rec60-c2": [
+            {
+              "count": 80,
+              "offset": 29824
+            }
+          ]
+        },
+        "files": 80,
+        "layout_histogram": {
+          "rec60-c0@+0x7300 rec60-c1@+0x7380 rec60-c2@+0x7480": 80
+        }
+      }
+    }
+  }
+}
