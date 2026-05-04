@@ -2942,3 +2942,40 @@ write method is still alive, reversible, and precise for at least a benign
 non-CDD byte. Drive #3 is back to stock and ready for the next bounded live
 phase. The Linux live side is now a git repo too, with the Drive #3 baseline
 and smoke-test evidence committed on `linux-live-drive3`.
+
+## Drive #3 CDD Parser Replay
+
+With the fresh-drive baseline in hand, we replayed the CDD parser/mailbox tests
+without touching the CDD streams themselves. The temporary hooks lived only in
+the low currentboot response-hook area at `0x4fc9` and the `0x6ee3` erased
+cave. This was a good reminder of how literal the phrase "currentboot response
+hook" is: if you trigger it while the drive is in normal `LD5M`, you just get
+ordinary EXTRAINQ-looking data. The working flow is install the hook, cold
+power-cycle, wait for the drive to settle, send the event-1 profile tail to
+enter currentboot, then send the guarded fake-INQUIRY trigger.
+
+Drive #3 reproduced the two important earlier results. The parser-call trigger
+returned marker `0xd3` and produced the expected `xdata[0x4a00..0x4a3f]`
+mailbox package:
+
+```text
+4a00: 01 03 00 03 00 14 07 00 00 00 00 00 00 20 00 13
+4a10: 00 00 00 00 01 ea 00 00 01 00 00 00 00 00 00 00
+4a20: 03 08 10 00 03 fe 00 00 00 00 00 01 00 0f 00 00
+4a30: 00 07 0f 00 00 00 00 00 00 00 00 00 00 00 00 00
+```
+
+The second-doorbell trigger returned marker `0xd4` and did not wedge. In both
+cases, the decoded-target gateway reads at `0x184000`, `0x184060`, and
+`0x190690` stayed all zero before and after. That is a useful clean-hardware
+negative: the visible parser setup and the later `0x4a` doorbell sequence can
+be exercised in currentboot, but they still do not wake the decoded CDD runtime
+range.
+
+A practical wrinkle: Drive #3 appears to have arrived with media inside. After
+Pico power cycles, event 1 sometimes failed with "logical unit is in process of
+becoming ready" until we waited longer. The tray was ejected after the final
+stock verification so the disc can be removed.
+
+The final independent full F0 read matched stock LD5M exactly, with `0x4fc9`
+restored to `12 62 06` and the `0x6ee3` cave restored to `ff`.

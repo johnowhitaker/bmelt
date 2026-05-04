@@ -49,6 +49,15 @@ well-instrumented as possible:
   committed on Linux branch `linux-live-drive3`:
   - `3993170 Capture Drive 3 clean LD5M baseline`
   - `80a390c Capture Drive 3 helper-bypass patch restore smoke`
+  - Drive #3 also reproduced the currentboot CDD parser-call and
+    second-doorbell mailbox tests without touching CDD bytes. Both triggers
+    executed (`0xd3` and `0xd4` respectively), but decoded-target gateway
+    reads at `0x184000`, `0x184060`, and `0x190690` remained all zero. The
+    final full F0 verification returned to stock SHA-256.
+- Drive #3 appears to have shipped with media inserted. If event-1/profile-tail
+  entry fails with `Not Ready / Logical unit is in process of becoming ready`
+  after a Pico power cycle, wait 25 to 30 seconds and retry. The tray was
+  ejected after the 2026-05-04 parser pass so the media can be removed.
 
 Start with these scratch summaries if revisiting the CDD/static angle:
 
