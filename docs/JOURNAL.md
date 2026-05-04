@@ -239,6 +239,43 @@ checking GP26 only after a SCSI command returns can only see latched state. A
 candidate register could pulse during helper execution and be restored before
 the host sees command completion.
 
+## Normal-Mode I/O And The Carryover Gate
+
+The next goal became cleaner normal-mode communication. Currentboot code
+execution is useful, but the endgame needs hooks or mailboxes while the drive
+is booted as ordinary `LD5M`.
+
+The first normal-mode mailbox pass found one small but real writable surface:
+`MODE SELECT(10)` can flip a volatile bit in mode page `0x08` and then restore
+it. That proves the host can still set some normal runtime state without
+touching flash, but we have not yet localized where that byte lives internally.
+
+In parallel, static/runtime work found a promising READ BUFFER response bridge:
+normal `READ BUFFER mode=1` copies the requested public offset through
+`xdata[0x8a4c..0x8a4e]` into controller registers `0x4011..0x4013`. A tiny hook
+there could turn a magic request like `0x070bad` into a redirect to a different
+public window such as `0x07dbc0`. That would be the first direct SCSI response
+proof in normal mode.
+
+Before touching shared code, we ran the boring safety gate: write a harmless
+marker in currentboot to a shared-looking controller/public page, then see if it
+survives any transition back into normal mode.
+
+It did not.
+
+The currentboot gateway write worked: byte `0x074030` changed from `ff` to
+`5a` and read back correctly. But `sg_reset` and USB reauthorization both left
+the drive in currentboot identity. The only reliable return path was stock
+currentboot recovery, and that returned the drive to `LD5M` while wiping the
+marker back to `ff`. The post-recovery READ BUFFER hashes matched stock.
+
+That negative is useful. It means we did not patch the shared-code response
+bridge through a delivery route that cannot carry even an inert byte. The hook
+design remains plausible, but the currentboot volatile-carryover route is
+closed for now. The next push should find a true normal-mode writable mailbox,
+selector, or response path rather than trying to smuggle normal hooks through
+currentboot recovery.
+
 The current probe method fixes that. The helper hook at plain `0x02b5` jumps to
 payload space at plain `0x0600`, where the payload either delays or repeatedly
 asserts a candidate register value while the Pico samples GP26. This is a

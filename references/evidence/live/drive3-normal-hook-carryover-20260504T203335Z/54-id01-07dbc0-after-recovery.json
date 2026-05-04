@@ -1,0 +1,44 @@
+{
+  "ascii_preview": "................................].p...`...^.$....].4...@.......@.......@.......@.. .......@....[",
+  "chunk_size": 128,
+  "device": "/dev/sg0",
+  "id": 1,
+  "length": 128,
+  "mode": 1,
+  "offset": 515008,
+  "records": [
+    {
+      "cdb": "3C 01 01 07 DB C0 00 00 80 00",
+      "cmd": [
+        "/usr/bin/sg_raw",
+        "-b",
+        "--request",
+        "128",
+        "--timeout",
+        "4",
+        "/dev/sg0",
+        "3c",
+        "01",
+        "01",
+        "07",
+        "db",
+        "c0",
+        "00",
+        "00",
+        "80",
+        "00"
+      ],
+      "elapsed_s": 0.006242,
+      "good": true,
+      "length": 128,
+      "offset": 515008,
+      "returncode": 0,
+      "stderr": "SCSI Status: Good \n\nWriting 128 bytes of data to stdout\n",
+      "stdout_first64_hex": "c582c8cac583caf0a3c8c582c8cac583cadfe9dee780bed310af01c3c0d0908a5de07002a3e0600e908a5ee024fff0908a5de034fff0904095e0908adef09040",
+      "stdout_len": 128,
+      "stdout_sha256": "deba3a77d7dd53153ad4b4e54af7b4dfcdc2d4965855b42031f3d7385f1c6e98",
+      "timed_out": false
+    }
+  ],
+  "sha256": "deba3a77d7dd53153ad4b4e54af7b4dfcdc2d4965855b42031f3d7385f1c6e98"
+}

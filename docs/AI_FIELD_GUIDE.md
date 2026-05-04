@@ -58,6 +58,13 @@ well-instrumented as possible:
   entry fails with `Not Ready / Logical unit is in process of becoming ready`
   after a Pico power cycle, wait 25 to 30 seconds and retry. The tray was
   ejected after the 2026-05-04 parser pass so the media can be removed.
+- Drive #3 later passed the normal READ BUFFER hook carryover safety gate in
+  the negative direction: a harmless currentboot gateway marker at controller
+  `0x074030` wrote and read back while currentboot was active, but `sg_reset`
+  and USB reauth stayed in currentboot, while stock recovery returned to
+  `LD5M` and wiped the marker. Do not attempt the planned shared-code normal
+  hook through currentboot volatile carryover. See
+  `analysis/8051/drive3-normal-hook-carryover-20260504.md`.
 
 Start with these scratch summaries if revisiting the CDD/static angle:
 
@@ -225,6 +232,18 @@ The same oracle can read nonzero bytes around controller `0x184000`, but the
 sampled bytes look high-entropy and do not disassemble like the known
 normal-mode record-59 overlay. Treat this as a controller address surface, not
 as a solved flat decoded CDD dump.
+
+Normal-mode I/O status:
+
+- `normal_mailbox_probe.py` found a real volatile MODE SELECT bit on page
+  `0x08`, but no direct response channel yet.
+- `analysis/8051/normal-mode-read-buffer-hook-plan-20260504.md` lays out a
+  conservative READ BUFFER response-redirect proof.
+- `analysis/8051/drive3-normal-hook-carryover-20260504.md` closes the first
+  proposed delivery route: currentboot gateway writes do not carry into normal
+  mode through the available soft/recovery transitions.
+- The next normal-mode work should look for a true normal writable mailbox or
+  hook selector, not patch shared code through unproven currentboot carryover.
 
 Code-execution evidence:
 

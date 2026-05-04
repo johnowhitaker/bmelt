@@ -1,0 +1,35 @@
+{
+  "address": 475184,
+  "ascii_preview": "Z",
+  "bytes_hex": "5a",
+  "device": "/dev/sg0",
+  "length": 1,
+  "readback_ascii_preview": "Z",
+  "readback_hex": "5a",
+  "records": [
+    {
+      "address": 475184,
+      "cdb": [
+        18,
+        0,
+        0,
+        0,
+        240,
+        64,
+        0,
+        7,
+        64,
+        48,
+        90,
+        90
+      ],
+      "readback": 90,
+      "returncode": 0,
+      "stderr": "SCSI Status: Good \n\nWriting 176 bytes of data to stdout\n",
+      "stdout_len": 176,
+      "use_cdb5_selector": false,
+      "value": 90
+    }
+  ],
+  "use_cdb5_selector": false
+}

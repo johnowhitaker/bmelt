@@ -1,0 +1,12 @@
+## usb deauthorize/reauthorize /sys/bus/usb/devices/1-1/authorized
+## status after usb reauth
+/dev/sg0: vendor='PLDS' model='DVD+-RW DS-8ABSH' rev=';D5C' type='5'  <-- optical target
+  Vendor identification: PLDS
+  Product identification: DVD+-RW DS-8ABSH
+  Product revision level: ;D5C
+/dev/sg1: vendor='Generic-' model='SD/MMC' rev='1.00' type='0'
+  Vendor identification: Generic-
+  Product identification: SD/MMC
+  Product revision level: 1.00
+/dev/sg0  /dev/sr0  PLDS      DVD+-RW DS-8ABSH  ;D5C
+/dev/sg1  /dev/sda  Generic-  SD/MMC            1.00

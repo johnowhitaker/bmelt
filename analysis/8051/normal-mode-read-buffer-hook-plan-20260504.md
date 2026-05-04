@@ -193,3 +193,25 @@ host CDB bytes -> normal runtime branch -> controller response args -> host-visi
 If it works, the next hook can replace the fixed redirect with a tiny
 `NMIO` response that returns `xdata[0x8a49..0x8a54]`, the MODE SELECT page-bit
 state if localized, or selected controller/mailbox bytes.
+
+## Carryover Gate Result
+
+The inert carryover gate was run after this plan was written. It failed safely:
+
+- the currentboot gateway hook installed and Drive #3 recovered to `LD5M`;
+- a harmless marker write at controller/public `0x074030` changed `ff -> 5a`
+  while currentboot was active;
+- `sg_reset` and USB bridge reauthorization both stayed in currentboot;
+- stock recovery returned to `LD5M` but wiped the marker back to `ff`;
+- the `0x070bad` and `0x07dbc0` READ BUFFER hashes matched stock afterward.
+
+So the response-redirect hook design remains useful, but this delivery route is
+not viable. Do not attempt the shared-code hook via volatile currentboot
+carryover unless a different, proven currentboot-to-normal transition appears.
+
+Detailed evidence:
+
+```text
+analysis/8051/drive3-normal-hook-carryover-20260504.md
+references/evidence/live/drive3-normal-hook-carryover-20260504T203335Z/
+```

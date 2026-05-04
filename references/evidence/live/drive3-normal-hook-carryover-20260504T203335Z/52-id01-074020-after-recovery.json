@@ -1,0 +1,44 @@
+{
+  "ascii_preview": "?L... ....').Z..................PLDS CORPORATION................",
+  "chunk_size": 64,
+  "device": "/dev/sg0",
+  "id": 1,
+  "length": 64,
+  "mode": 1,
+  "offset": 475168,
+  "records": [
+    {
+      "cdb": "3C 01 01 07 40 20 00 00 40 00",
+      "cmd": [
+        "/usr/bin/sg_raw",
+        "-b",
+        "--request",
+        "64",
+        "--timeout",
+        "4",
+        "/dev/sg0",
+        "3c",
+        "01",
+        "01",
+        "07",
+        "40",
+        "20",
+        "00",
+        "00",
+        "40",
+        "00"
+      ],
+      "elapsed_s": 0.004658,
+      "good": true,
+      "length": 64,
+      "offset": 475168,
+      "returncode": 0,
+      "stderr": "SCSI Status: Good \n\nWriting 64 bytes of data to stdout\n",
+      "stdout_first64_hex": "3f4c07bc0620069a131627290e5a1881ffffffffffffffffffffffffffffffff504c445320434f52504f524154494f4effffffffffffffffffffffffffffffff",
+      "stdout_len": 64,
+      "stdout_sha256": "a27071f164eb5ffd63661cd22bc2723f92c1937f0e05eb546a485bd8d5cf3f7b",
+      "timed_out": false
+    }
+  ],
+  "sha256": "a27071f164eb5ffd63661cd22bc2723f92c1937f0e05eb546a485bd8d5cf3f7b"
+}

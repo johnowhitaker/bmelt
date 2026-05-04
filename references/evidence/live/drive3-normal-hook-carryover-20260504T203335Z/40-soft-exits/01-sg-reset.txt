@@ -1,0 +1,19 @@
+## before sg_reset
+/dev/sg0: vendor='PLDS' model='DVD+-RW DS-8ABSH' rev='LD5M' type='5'  <-- optical target
+  Vendor identification: PLDS
+  Product identification: DVD+-RW DS-8ABSH
+  Product revision level: ;D5C
+/dev/sg1: vendor='Generic-' model='SD/MMC' rev='1.00' type='0'
+  Vendor identification: Generic-
+  Product identification: SD/MMC
+  Product revision level: 1.00
+## sg_reset
+## after sg_reset
+/dev/sg0: vendor='PLDS' model='DVD+-RW DS-8ABSH' rev='LD5M' type='5'  <-- optical target
+  Vendor identification: PLDS
+  Product identification: DVD+-RW DS-8ABSH
+  Product revision level: ;D5C
+/dev/sg1: vendor='Generic-' model='SD/MMC' rev='1.00' type='0'
+  Vendor identification: Generic-
+  Product identification: SD/MMC
+  Product revision level: 1.00
