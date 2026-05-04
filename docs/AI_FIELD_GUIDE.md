@@ -14,12 +14,20 @@ evidence tree.
   every live run.
 - Known normal identity: `PLDS DVD+-RW DS-8ABSH LD5M`.
 - Known recoverable failure identity: `PLDS DVD+-RW DS-8ABSH 0D5C`.
-- Current live status as of 2026-05-02: pause new helper-bypass/write
-  experiments until the fresh drives arrive. The original drive is alive as
-  `LD5M` but non-stock; it carries the currentboot response hook and the
-  record-59 mutation. The spare is currently bridge/card-reader-only. Use the
-  original only for read-only normal-mode observation or explicitly
-  sacrificial experiments.
+- Current live status as of 2026-05-04: Drive #3 is a fresh stock `LD5M`
+  target on the Linux host. Its full F0 dump matches the local LD5M reference
+  byte-for-byte. A benign helper-bypass write changed only identity date byte
+  `F0[0xd8ff4]` from `0x32` to `0x33`, and the matching restore returned the
+  full F0 image to the stock SHA-256. Drive #3 is therefore the current clean
+  live target for bounded experiments. The original drive is alive but
+  non-stock; the spare is bridge/card-reader-only.
+- The Linux live workspace is now also a git repo at
+  `/home/jonathan/boastermelt`, branch `linux-live-drive3`, with bare sync
+  remote `/home/jonathan/bmelt-live.git`. From the Mac repo, fetch it with:
+
+```sh
+git fetch linux-live linux-live-drive3
+```
 
 Rediscover:
 
@@ -29,15 +37,18 @@ ssh root@jonathan-thinkpad-t480s 'cd /home/jonathan/boastermelt && python3 scrip
 
 ## Latest Checkpoint
 
-The current strategic pause is deliberate:
+The fresh-drive pause is over, but Drive #3 should be kept as clean and
+well-instrumented as possible:
 
 - DS-8ABSH CDD hard-body decode remains unsolved.
 - A broad static pass is contained under `cdd_cracking/`.
 - XD13 is the useful new static clue: it has a plaintext-style CDD 8051
   code/data object, useful as a semantic atlas for LD5M decoded/runtime
   fragments.
-- The next live phase should wait for fresh stock drives unless explicitly
-  using the original mutated drive as sacrificial hardware.
+- Drive #3 baseline evidence and reversible helper-bypass smoke evidence are
+  committed on Linux branch `linux-live-drive3`:
+  - `3993170 Capture Drive 3 clean LD5M baseline`
+  - `80a390c Capture Drive 3 helper-bypass patch restore smoke`
 
 Start with these scratch summaries if revisiting the CDD/static angle:
 

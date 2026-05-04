@@ -2910,3 +2910,35 @@ ordinary update-entry path is blocked. The spare is bridge-only after the
 record-55 test. Static work, XD13 mapping, and read-only planning can continue
 now; fresh-drive work should resume with clean baselines before any new CDD or
 normal-mode I/O probes.
+
+## Drive #3 Arrives
+
+The first fresh replacement drive is now Drive #3. It came up on the Linux host
+as the expected `PLDS DVD+-RW DS-8ABSH LD5M` optical target. We took the boring
+baseline first: standard INQUIRY, EXTRAINQ, GET CONFIG current/all, MODE
+SENSE read-error, and a full decrypted F0 dump from offset zero. The EXTRAINQ
+matched the known LD5M profile material, and the full F0 SHA-256 matched the
+stock LD5M reference exactly.
+
+That also exposed one operational trap worth remembering. Arbitrary small F0
+spot reads can decrypt strangely unless the AES stream context is correct for
+the chosen offset. A contiguous zero-based read is the reliable proof. For
+Drive #3, the zero-based 1 MiB dump matched stock byte-for-byte.
+
+Then we ran the smallest useful helper-bypass smoke: change the identity date
+byte `F0[0xd8ff4]` from ASCII `2` to ASCII `3`, making `2016/10/18` look like
+`3016/10/18`. The replay staged and verified every chunk. The final event
+still produced the familiar confusing sg/tool result, and the runner's
+immediate post-F0 hash was misleading, but an independent full zero-based read
+settled it: exactly one byte changed, and it was the intended one.
+
+The matching restore candidate then put `F0[0xd8ff4]` back from `0x33` to
+`0x32`. Again the runner's immediate post hash was untrustworthy around the
+reset/finalizer boundary; again the independent full zero-based read gave the
+truth. Drive #3 returned to the exact stock LD5M SHA-256.
+
+So the important result is simple: on a clean fresh drive, the helper-bypass
+write method is still alive, reversible, and precise for at least a benign
+non-CDD byte. Drive #3 is back to stock and ready for the next bounded live
+phase. The Linux live side is now a git repo too, with the Drive #3 baseline
+and smoke-test evidence committed on `linux-live-drive3`.
