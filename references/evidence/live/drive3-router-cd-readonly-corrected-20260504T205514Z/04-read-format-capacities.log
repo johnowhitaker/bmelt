@@ -1,0 +1,9 @@
+## 04-read-format-capacities
+request_len: 252
+cdb: 23 00 00 00 00 00 00 00 fc 00
+rc=0
+SCSI Status: Good 
+
+Writing 12 bytes of data to stdout
+1d1657b4d50f61387fa6e074a0ce61ef210f77b10f79babd83b630a149079180  references/evidence/live/drive3-router-cd-readonly-corrected-20260504T205514Z/04-read-format-capacities.bin
+00000000: 00 00 00 08 00 00 83 91 02 00 08 00              ............

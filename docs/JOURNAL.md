@@ -3145,3 +3145,28 @@ can use as a selector for future hooks. A small public work-window snapshot was
 identical in the mutated/restored states, so this bit does not obviously leak
 through the work-window by itself. Detailed note:
 `analysis/8051/drive3-normal-mailbox-probes-20260504.md`.
+
+## Router CD-ROM Probe
+
+The only non-sensitive physical disc on hand was an old router software CD-ROM,
+so we used it as a read-only media-present probe. It was useful, but not magic.
+
+The drive recognized it cleanly. `TEST UNIT READY` succeeded, READ CAPACITY(10)
+reported last LBA `0x8390` with 2048-byte sectors, and GET CONFIGURATION showed
+current profile `0x0008`, CD-ROM. READ TOC formats `0`, `1`, and `2` worked.
+READ(10) of the first 17 sectors also worked, and sector 16 was an ordinary
+ISO9660 primary volume descriptor with `CD001`, `WIN32`, `CD503A3`, and
+UltraISO strings.
+
+Two things did not happen. First, a public `READ BUFFER id=01` window captured
+right after reading LBA 16 did not contain the sector payload or obvious
+fragments of it. So the public normal work-window is not just exposing the last
+user-sector buffer at the sampled offsets. Second, `REPORT KEY` still did not
+give us a CSS/DVD auth path: with CD media inserted, AGID and ASF now fail as
+`Cannot read medium - incompatible format`, while RPC state still succeeds.
+
+That makes the CD a good read-only media-state and READ(10)/TOC test disc, but
+not the normal mailbox we want. A cheap pressed DVD remains the right next
+piece for `REPORT KEY` / `SEND KEY`, and rewritable DVD media remains the right
+future target for sacrificial sector-write/buffer-flow experiments. Detailed
+note: `analysis/8051/drive3-router-cd-readonly-20260504.md`.

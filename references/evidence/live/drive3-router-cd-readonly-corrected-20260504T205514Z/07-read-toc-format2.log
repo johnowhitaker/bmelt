@@ -1,0 +1,11 @@
+## 07-read-toc-format2
+request_len: 252
+cdb: 43 00 02 00 00 00 00 00 fc 00
+rc=0
+SCSI Status: Good 
+
+Writing 48 bytes of data to stdout
+d22eb0ebb52f99ccb0783c33892c5a11cf0494a0871eea72b1dc1df5e372bbe3  references/evidence/live/drive3-router-cd-readonly-corrected-20260504T205514Z/07-read-toc-format2.bin
+00000000: 00 2e 01 01 01 14 00 a0 00 00 00 00 01 00 00 01  ................
+00000010: 14 00 a1 00 00 00 00 01 00 00 01 14 00 a2 00 00  ................
+00000020: 00 00 07 1f 06 01 14 00 01 00 00 00 00 00 02 00  ................

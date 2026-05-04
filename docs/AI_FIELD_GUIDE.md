@@ -2494,3 +2494,17 @@ Immediate useful directions:
     So this bit should be treated as a direct MODE SENSE/MODE SELECT mailbox,
     not as a public work-window phase control. Detailed report:
     `analysis/8051/drive3-normal-mailbox-probes-20260504.md`.
+139. With a router software CD-ROM inserted, Drive #3 behaves as a normal
+    readable CD-ROM target. READ CAPACITY(10) reports last LBA `0x8390` and
+    block size `2048`; GET CONFIGURATION current profile is `0x0008`
+    CD-ROM; READ(10) of LBA 16 returns an ISO9660 `CD001` primary volume
+    descriptor. A 64 KiB public `READ BUFFER id=01 offset=0x070000` snapshot
+    after the read had no targeted hits for the sector payload, so the public
+    window is not a simple last-sector buffer. Evidence:
+    `analysis/8051/drive3-router-cd-readonly-20260504.md`.
+140. `REPORT KEY` with the CD inserted gives media-aware incompatibility:
+    CSS AGID and ASF return `Illegal Request / Cannot read medium -
+    incompatible format`; RPC state still succeeds. This confirms the router
+    CD is useful for CD media-present paths but not for DVD CSS nonce work.
+    A pressed DVD is still needed for the real `REPORT KEY` / `SEND KEY`
+    mailbox test.

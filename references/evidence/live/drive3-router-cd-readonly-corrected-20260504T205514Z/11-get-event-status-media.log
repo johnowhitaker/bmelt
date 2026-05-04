@@ -1,0 +1,9 @@
+## 11-get-event-status-media
+request_len: 252
+cdb: 4a 01 00 00 10 00 00 00 fc 00
+rc=0
+SCSI Status: Good 
+
+Writing 8 bytes of data to stdout
+02a23769c583e31fc103cfc792badafb1feb5f2b937ab49947db900e343941af  references/evidence/live/drive3-router-cd-readonly-corrected-20260504T205514Z/11-get-event-status-media.bin
+00000000: 00 06 04 5e 00 02 00 00                          ...^....

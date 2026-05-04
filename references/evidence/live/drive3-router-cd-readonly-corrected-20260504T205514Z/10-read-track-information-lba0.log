@@ -1,0 +1,12 @@
+## 10-read-track-information-lba0
+request_len: 252
+cdb: 52 01 00 00 00 00 00 00 fc 00
+rc=5
+SCSI Status: Check Condition 
+
+Sense Information:
+Fixed format, current; Sense key: Illegal Request
+Additional sense: Invalid field in cdb
+
+Error 5 occurred, no data received
+no stdout

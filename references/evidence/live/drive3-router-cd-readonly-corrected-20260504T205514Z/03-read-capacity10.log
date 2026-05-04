@@ -1,0 +1,9 @@
+## 03-read-capacity10
+request_len: 8
+cdb: 25 00 00 00 00 00 00 00 00 00
+rc=0
+SCSI Status: Good 
+
+Writing 8 bytes of data to stdout
+b97b323742d9b13ba7c01261f37e6c04b1e6a8f7fc4a6daa6e68403b45abbf01  references/evidence/live/drive3-router-cd-readonly-corrected-20260504T205514Z/03-read-capacity10.bin
+00000000: 00 00 83 90 00 00 08 00                          ........
