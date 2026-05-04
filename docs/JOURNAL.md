@@ -3070,3 +3070,41 @@ primitive. The better next move is either a targeted, explicitly approved
 normal-mode response hook, or static ranking of response-construction islands
 using XD13/LD5M homologs. Notes:
 `analysis/8051/drive3-normal-response-matrix-20260504.md`.
+
+## Drive #3 Normal Mailbox Probes
+
+The next outside-AI suggestion was to stop trying to squeeze meaning out of
+phasey public work-window tiles and look for ordinary normal-mode objects that
+can carry host data. We built `scripts/normal_mailbox_probe.py` for that: it
+logs exact CDBs, data-out payloads, direct responses, sense/status text, hashes,
+and optional work-window snapshots.
+
+The safest candidate, standard SCSI echo buffer, was a clean negative.
+`READ BUFFER mode=0x0b`, `WRITE BUFFER mode=0x0a`, and `READ BUFFER mode=0x0a`
+all returned `Illegal Request / Invalid field in CDB`. The drive stayed normal
+`LD5M`, but there is no echo-buffer mailbox here.
+
+The DVD auth path was partly useful. Without media inserted, `REPORT KEY` AGID
+and ASF returned `Not Ready / Medium not present - tray closed`, while RPC state
+returned eight stable bytes: `0006000064fe0100`. That means the
+`REPORT KEY`/`SEND KEY` harness is ready for a later pressed-disc test, but it
+does not give us a no-media nonce channel.
+
+The breakthrough was simpler: volatile `MODE SELECT(10)`. A read-only changeable
+survey showed caching page `0x08` has page byte `0x02`, mask `0x04`,
+advertised as changeable. We toggled only that bit with `MODE SELECT(10) PF=1
+SP=0`, read it back with `MODE SENSE(10)`, restored immediately, and read it
+back again:
+
+```text
+0x04 -> 0x00 -> 0x04
+roundtrip=True
+identity_stable=True
+```
+
+This is the first clean normal-mode mailbox primitive. It is not a drive-to-host
+memory leak, but it is a reliable host-controlled normal-mode state bit that we
+can use as a selector for future hooks. A small public work-window snapshot was
+identical in the mutated/restored states, so this bit does not obviously leak
+through the work-window by itself. Detailed note:
+`analysis/8051/drive3-normal-mailbox-probes-20260504.md`.

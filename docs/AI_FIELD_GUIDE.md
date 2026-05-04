@@ -2448,3 +2448,30 @@ Immediate useful directions:
     construction islands before asking for approval for any further live CDD
     mutation. Detailed note:
     `analysis/8051/drive3-normal-response-matrix-20260504.md`.
+134. `scripts/normal_mailbox_probe.py` is now the main harness for low-risk
+    normal-mode mailbox tests. It logs exact CDBs, payloads, responses, sense,
+    hashes, and optional work-window captures. Subcommands currently cover
+    `echo-buffer`, `dvd-auth`, `mode-changeable`, and `mode-mailbox`.
+135. Standard SCSI echo buffer is closed on Drive #3. `READ BUFFER mode=0x0b`,
+    `WRITE BUFFER mode=0x0a`, and `READ BUFFER mode=0x0a` all returned
+    `Illegal Request / Invalid field in CDB`. Evidence:
+    `references/evidence/live/normal-mailbox-echo-20260504T201130Z/`.
+136. `REPORT KEY` without media gives a normal no-media answer for AGID/ASF,
+    while RPC state succeeds with `0006000064fe0100`. No AGID means no host
+    challenge was sent. This path is still worth revisiting with known-safe
+    pressed media. Evidence:
+    `references/evidence/live/normal-mailbox-dvd-auth-20260504T201420Z/`.
+137. We now have a clean normal-mode host-writable/readable volatile bit:
+    `MODE SELECT(10) PF=1 SP=0` on caching page `0x08`, page byte `0x02`,
+    mask `0x04`, followed by `MODE SENSE(10)` readback. Drive #3 accepted
+    `0x04 -> 0x00`, then restored `0x00 -> 0x04`; `roundtrip=True` and
+    identity remained `LD5M`. This is not a memory exfil channel, but it is a
+    reliable host-controlled selector bit for future normal-mode hooks.
+    Evidence:
+    `references/evidence/live/normal-mailbox-mode-select-20260504T201731Z/`.
+138. A repeat of the MODE SELECT round trip with `0x4000`-byte public
+    work-window snapshots showed identical mutated/restored hashes
+    `363eebc5d945fc7612e0ded8e7c87ad1594b8ac0021cf802d0d38d539544dfcf`.
+    So this bit should be treated as a direct MODE SENSE/MODE SELECT mailbox,
+    not as a public work-window phase control. Detailed report:
+    `analysis/8051/drive3-normal-mailbox-probes-20260504.md`.
