@@ -1,0 +1,1645 @@
+{
+  "patterns": [
+    {
+      "hex": "8a23e054bff0908adfe0540f64036003",
+      "length": 16,
+      "name": "4cfa6d151318"
+    },
+    {
+      "hex": "feef78aa26ffee1836a87c0808f608ef",
+      "length": 16,
+      "name": "28583441dfa8"
+    },
+    {
+      "hex": "8a4de0904099f0908a4ee0904099f090",
+      "length": 16,
+      "name": "9b673c066ae4"
+    },
+    {
+      "hex": "8a29e0c4540f30e011908a4ce0c3940e",
+      "length": 16,
+      "name": "20ea2ab16891"
+    },
+    {
+      "hex": "08eff6904000e020e7f9908ac6e09040",
+      "length": 16,
+      "name": "4037c8574920"
+    },
+    {
+      "hex": "7b017a60798278a6c3",
+      "length": 9,
+      "name": "4f29221f2e51"
+    },
+    {
+      "hex": "7b017a60798a78a6c3",
+      "length": 9,
+      "name": "796c2cf9d837"
+    }
+  ],
+  "schema": "liteon-work-window-watch-patterns-v1",
+  "states": {
+    "patched": {
+      "path": "references/evidence/live/drive3-normal-mode-xd13-sidechannel-20260504/record60-affine-postpatch-normal-focused",
+      "stimuli": {
+        "baseline-no-stimulus": {
+          "files": 3,
+          "layout_histogram": {
+            "4cfa6d151318@+0x7300 28583441dfa8@+0x7380 9b673c066ae4@+0x7480 20ea2ab16891@+0x7010 4037c8574920@+0x738e 4f29221f2e51@- 796c2cf9d837@-": 1,
+            "4cfa6d151318@+0x7300 28583441dfa8@+0x7380 9b673c066ae4@+0x7480 20ea2ab16891@+0x7090 4037c8574920@+0x738e 4f29221f2e51@- 796c2cf9d837@-": 2
+          },
+          "pattern_offsets": {
+            "20ea2ab16891": [
+              {
+                "count": 2,
+                "offset": 28992
+              },
+              {
+                "count": 2,
+                "offset": 28816
+              },
+              {
+                "count": 1,
+                "offset": 28688
+              },
+              {
+                "count": 1,
+                "offset": 29056
+              }
+            ],
+            "28583441dfa8": [
+              {
+                "count": 3,
+                "offset": 29568
+              },
+              {
+                "count": 3,
+                "offset": 30612
+              },
+              {
+                "count": 3,
+                "offset": 31827
+              }
+            ],
+            "4037c8574920": [
+              {
+                "count": 3,
+                "offset": 29582
+              },
+              {
+                "count": 3,
+                "offset": 30626
+              },
+              {
+                "count": 3,
+                "offset": 31508
+              },
+              {
+                "count": 2,
+                "offset": 30197
+              },
+              {
+                "count": 2,
+                "offset": 32418
+              }
+            ],
+            "4cfa6d151318": [
+              {
+                "count": 3,
+                "offset": 29440
+              }
+            ],
+            "4f29221f2e51": [],
+            "796c2cf9d837": [],
+            "9b673c066ae4": [
+              {
+                "count": 3,
+                "offset": 29824
+              }
+            ]
+          }
+        },
+        "get-configuration-all": {
+          "files": 3,
+          "layout_histogram": {
+            "4cfa6d151318@+0x7300 28583441dfa8@+0x7380 9b673c066ae4@+0x7480 20ea2ab16891@+0x7090 4037c8574920@+0x738e 4f29221f2e51@- 796c2cf9d837@-": 2,
+            "4cfa6d151318@+0x7300 28583441dfa8@+0x7380 9b673c066ae4@+0x7480 20ea2ab16891@+0x70d0 4037c8574920@+0x738e 4f29221f2e51@- 796c2cf9d837@-": 1
+          },
+          "pattern_offsets": {
+            "20ea2ab16891": [
+              {
+                "count": 2,
+                "offset": 28816
+              },
+              {
+                "count": 2,
+                "offset": 29056
+              },
+              {
+                "count": 1,
+                "offset": 28992
+              },
+              {
+                "count": 1,
+                "offset": 28880
+              }
+            ],
+            "28583441dfa8": [
+              {
+                "count": 3,
+                "offset": 29568
+              },
+              {
+                "count": 3,
+                "offset": 30612
+              },
+              {
+                "count": 3,
+                "offset": 31827
+              }
+            ],
+            "4037c8574920": [
+              {
+                "count": 3,
+                "offset": 29582
+              },
+              {
+                "count": 3,
+                "offset": 30197
+              },
+              {
+                "count": 3,
+                "offset": 30626
+              },
+              {
+                "count": 3,
+                "offset": 31508
+              },
+              {
+                "count": 3,
+                "offset": 32418
+              }
+            ],
+            "4cfa6d151318": [
+              {
+                "count": 3,
+                "offset": 29440
+              }
+            ],
+            "4f29221f2e51": [],
+            "796c2cf9d837": [],
+            "9b673c066ae4": [
+              {
+                "count": 3,
+                "offset": 29824
+              }
+            ]
+          }
+        },
+        "get-configuration-current": {
+          "files": 3,
+          "layout_histogram": {
+            "4cfa6d151318@+0x7300 28583441dfa8@+0x7380 9b673c066ae4@+0x7480 20ea2ab16891@+0x7010 4037c8574920@+0x738e 4f29221f2e51@- 796c2cf9d837@-": 1,
+            "4cfa6d151318@+0x7300 28583441dfa8@+0x7380 9b673c066ae4@+0x7480 20ea2ab16891@+0x7090 4037c8574920@+0x738e 4f29221f2e51@- 796c2cf9d837@-": 1,
+            "4cfa6d151318@+0x7300 28583441dfa8@+0x7380 9b673c066ae4@+0x7480 20ea2ab16891@+0x70d0 4037c8574920@+0x738e 4f29221f2e51@- 796c2cf9d837@-": 1
+          },
+          "pattern_offsets": {
+            "20ea2ab16891": [
+              {
+                "count": 2,
+                "offset": 28992
+              },
+              {
+                "count": 1,
+                "offset": 28688
+              },
+              {
+                "count": 1,
+                "offset": 29056
+              },
+              {
+                "count": 1,
+                "offset": 28880
+              },
+              {
+                "count": 1,
+                "offset": 28816
+              }
+            ],
+            "28583441dfa8": [
+              {
+                "count": 3,
+                "offset": 29568
+              },
+              {
+                "count": 3,
+                "offset": 30612
+              },
+              {
+                "count": 3,
+                "offset": 31827
+              }
+            ],
+            "4037c8574920": [
+              {
+                "count": 3,
+                "offset": 29582
+              },
+              {
+                "count": 3,
+                "offset": 30197
+              },
+              {
+                "count": 3,
+                "offset": 30626
+              },
+              {
+                "count": 3,
+                "offset": 31508
+              },
+              {
+                "count": 3,
+                "offset": 32418
+              }
+            ],
+            "4cfa6d151318": [
+              {
+                "count": 3,
+                "offset": 29440
+              }
+            ],
+            "4f29221f2e51": [],
+            "796c2cf9d837": [],
+            "9b673c066ae4": [
+              {
+                "count": 3,
+                "offset": 29824
+              }
+            ]
+          }
+        },
+        "get-event-status-media": {
+          "files": 3,
+          "layout_histogram": {
+            "4cfa6d151318@+0x7300 28583441dfa8@+0x7380 9b673c066ae4@+0x7480 20ea2ab16891@+0x7090 4037c8574920@+0x738e 4f29221f2e51@- 796c2cf9d837@-": 2,
+            "4cfa6d151318@+0x7300 28583441dfa8@+0x7380 9b673c066ae4@+0x7480 20ea2ab16891@+0x70d0 4037c8574920@+0x738e 4f29221f2e51@- 796c2cf9d837@-": 1
+          },
+          "pattern_offsets": {
+            "20ea2ab16891": [
+              {
+                "count": 2,
+                "offset": 28816
+              },
+              {
+                "count": 2,
+                "offset": 29056
+              },
+              {
+                "count": 1,
+                "offset": 28992
+              },
+              {
+                "count": 1,
+                "offset": 28880
+              }
+            ],
+            "28583441dfa8": [
+              {
+                "count": 3,
+                "offset": 29568
+              },
+              {
+                "count": 3,
+                "offset": 30612
+              },
+              {
+                "count": 3,
+                "offset": 31827
+              }
+            ],
+            "4037c8574920": [
+              {
+                "count": 3,
+                "offset": 29582
+              },
+              {
+                "count": 3,
+                "offset": 30197
+              },
+              {
+                "count": 3,
+                "offset": 30626
+              },
+              {
+                "count": 3,
+                "offset": 31508
+              },
+              {
+                "count": 3,
+                "offset": 32418
+              }
+            ],
+            "4cfa6d151318": [
+              {
+                "count": 3,
+                "offset": 29440
+              }
+            ],
+            "4f29221f2e51": [],
+            "796c2cf9d837": [],
+            "9b673c066ae4": [
+              {
+                "count": 3,
+                "offset": 29824
+              }
+            ]
+          }
+        },
+        "inquiry-extrainq": {
+          "files": 3,
+          "layout_histogram": {
+            "4cfa6d151318@+0x7300 28583441dfa8@+0x7380 9b673c066ae4@+0x7480 20ea2ab16891@+0x7010 4037c8574920@+0x738e 4f29221f2e51@- 796c2cf9d837@-": 1,
+            "4cfa6d151318@+0x7300 28583441dfa8@+0x7380 9b673c066ae4@+0x7480 20ea2ab16891@+0x7090 4037c8574920@+0x738e 4f29221f2e51@- 796c2cf9d837@-": 2
+          },
+          "pattern_offsets": {
+            "20ea2ab16891": [
+              {
+                "count": 2,
+                "offset": 29056
+              },
+              {
+                "count": 2,
+                "offset": 28816
+              },
+              {
+                "count": 1,
+                "offset": 28688
+              },
+              {
+                "count": 1,
+                "offset": 28992
+              }
+            ],
+            "28583441dfa8": [
+              {
+                "count": 3,
+                "offset": 29568
+              },
+              {
+                "count": 3,
+                "offset": 30612
+              },
+              {
+                "count": 3,
+                "offset": 31827
+              }
+            ],
+            "4037c8574920": [
+              {
+                "count": 3,
+                "offset": 29582
+              },
+              {
+                "count": 3,
+                "offset": 30626
+              },
+              {
+                "count": 3,
+                "offset": 31508
+              },
+              {
+                "count": 2,
+                "offset": 30197
+              },
+              {
+                "count": 2,
+                "offset": 32418
+              }
+            ],
+            "4cfa6d151318": [
+              {
+                "count": 3,
+                "offset": 29440
+              }
+            ],
+            "4f29221f2e51": [],
+            "796c2cf9d837": [],
+            "9b673c066ae4": [
+              {
+                "count": 3,
+                "offset": 29824
+              }
+            ]
+          }
+        },
+        "mode-sense10-all": {
+          "files": 3,
+          "layout_histogram": {
+            "4cfa6d151318@+0x7300 28583441dfa8@+0x7380 9b673c066ae4@+0x7480 20ea2ab16891@+0x7010 4037c8574920@+0x738e 4f29221f2e51@- 796c2cf9d837@-": 1,
+            "4cfa6d151318@+0x7300 28583441dfa8@+0x7380 9b673c066ae4@+0x7480 20ea2ab16891@+0x7090 4037c8574920@+0x738e 4f29221f2e51@- 796c2cf9d837@-": 2
+          },
+          "pattern_offsets": {
+            "20ea2ab16891": [
+              {
+                "count": 2,
+                "offset": 29056
+              },
+              {
+                "count": 2,
+                "offset": 28816
+              },
+              {
+                "count": 1,
+                "offset": 28688
+              },
+              {
+                "count": 1,
+                "offset": 28992
+              }
+            ],
+            "28583441dfa8": [
+              {
+                "count": 3,
+                "offset": 29568
+              },
+              {
+                "count": 3,
+                "offset": 30612
+              },
+              {
+                "count": 3,
+                "offset": 31827
+              }
+            ],
+            "4037c8574920": [
+              {
+                "count": 3,
+                "offset": 29582
+              },
+              {
+                "count": 3,
+                "offset": 30626
+              },
+              {
+                "count": 3,
+                "offset": 31508
+              },
+              {
+                "count": 2,
+                "offset": 30197
+              },
+              {
+                "count": 2,
+                "offset": 32418
+              }
+            ],
+            "4cfa6d151318": [
+              {
+                "count": 3,
+                "offset": 29440
+              }
+            ],
+            "4f29221f2e51": [],
+            "796c2cf9d837": [],
+            "9b673c066ae4": [
+              {
+                "count": 3,
+                "offset": 29824
+              }
+            ]
+          }
+        }
+      },
+      "totals": {
+        "files": 18,
+        "layout_histogram": {
+          "4cfa6d151318@+0x7300 28583441dfa8@+0x7380 9b673c066ae4@+0x7480 20ea2ab16891@+0x7010 4037c8574920@+0x738e 4f29221f2e51@- 796c2cf9d837@-": 4,
+          "4cfa6d151318@+0x7300 28583441dfa8@+0x7380 9b673c066ae4@+0x7480 20ea2ab16891@+0x7090 4037c8574920@+0x738e 4f29221f2e51@- 796c2cf9d837@-": 11,
+          "4cfa6d151318@+0x7300 28583441dfa8@+0x7380 9b673c066ae4@+0x7480 20ea2ab16891@+0x70d0 4037c8574920@+0x738e 4f29221f2e51@- 796c2cf9d837@-": 3
+        },
+        "pattern_offsets": {
+          "20ea2ab16891": [
+            {
+              "count": 11,
+              "offset": 28816
+            },
+            {
+              "count": 10,
+              "offset": 29056
+            },
+            {
+              "count": 8,
+              "offset": 28992
+            },
+            {
+              "count": 4,
+              "offset": 28688
+            },
+            {
+              "count": 3,
+              "offset": 28880
+            }
+          ],
+          "28583441dfa8": [
+            {
+              "count": 18,
+              "offset": 29568
+            },
+            {
+              "count": 18,
+              "offset": 30612
+            },
+            {
+              "count": 18,
+              "offset": 31827
+            }
+          ],
+          "4037c8574920": [
+            {
+              "count": 18,
+              "offset": 29582
+            },
+            {
+              "count": 18,
+              "offset": 30626
+            },
+            {
+              "count": 18,
+              "offset": 31508
+            },
+            {
+              "count": 15,
+              "offset": 30197
+            },
+            {
+              "count": 15,
+              "offset": 32418
+            }
+          ],
+          "4cfa6d151318": [
+            {
+              "count": 18,
+              "offset": 29440
+            }
+          ],
+          "4f29221f2e51": [],
+          "796c2cf9d837": [],
+          "9b673c066ae4": [
+            {
+              "count": 18,
+              "offset": 29824
+            }
+          ]
+        }
+      }
+    },
+    "pre": {
+      "path": "references/evidence/live/drive3-normal-mode-xd13-sidechannel-20260504/read-only-focused-cycles",
+      "stimuli": {
+        "baseline-no-stimulus": {
+          "files": 3,
+          "layout_histogram": {
+            "4cfa6d151318@+0x7380 28583441dfa8@+0x73c0 9b673c066ae4@+0x7480 20ea2ab16891@+0x7090 4037c8574920@+0x73ce 4f29221f2e51@- 796c2cf9d837@-": 2,
+            "4cfa6d151318@+0x7380 28583441dfa8@- 9b673c066ae4@- 20ea2ab16891@+0x7050 4037c8574920@- 4f29221f2e51@- 796c2cf9d837@-": 1
+          },
+          "pattern_offsets": {
+            "20ea2ab16891": [
+              {
+                "count": 2,
+                "offset": 29056
+              },
+              {
+                "count": 2,
+                "offset": 28816
+              },
+              {
+                "count": 1,
+                "offset": 28752
+              },
+              {
+                "count": 1,
+                "offset": 28928
+              }
+            ],
+            "28583441dfa8": [
+              {
+                "count": 2,
+                "offset": 29632
+              },
+              {
+                "count": 2,
+                "offset": 30484
+              },
+              {
+                "count": 2,
+                "offset": 31763
+              }
+            ],
+            "4037c8574920": [
+              {
+                "count": 2,
+                "offset": 29646
+              },
+              {
+                "count": 2,
+                "offset": 30498
+              },
+              {
+                "count": 2,
+                "offset": 31700
+              },
+              {
+                "count": 2,
+                "offset": 32418
+              }
+            ],
+            "4cfa6d151318": [
+              {
+                "count": 3,
+                "offset": 29568
+              }
+            ],
+            "4f29221f2e51": [],
+            "796c2cf9d837": [],
+            "9b673c066ae4": [
+              {
+                "count": 2,
+                "offset": 29824
+              }
+            ]
+          }
+        },
+        "get-configuration-all": {
+          "files": 3,
+          "layout_histogram": {
+            "4cfa6d151318@+0x7380 28583441dfa8@+0x73c0 9b673c066ae4@+0x7480 20ea2ab16891@+0x7050 4037c8574920@+0x73ce 4f29221f2e51@- 796c2cf9d837@-": 1,
+            "4cfa6d151318@+0x7380 28583441dfa8@+0x73c0 9b673c066ae4@+0x7480 20ea2ab16891@+0x7090 4037c8574920@+0x73ce 4f29221f2e51@- 796c2cf9d837@-": 2
+          },
+          "pattern_offsets": {
+            "20ea2ab16891": [
+              {
+                "count": 2,
+                "offset": 28816
+              },
+              {
+                "count": 2,
+                "offset": 28928
+              },
+              {
+                "count": 1,
+                "offset": 29056
+              },
+              {
+                "count": 1,
+                "offset": 28752
+              }
+            ],
+            "28583441dfa8": [
+              {
+                "count": 3,
+                "offset": 29632
+              },
+              {
+                "count": 3,
+                "offset": 30484
+              },
+              {
+                "count": 3,
+                "offset": 31763
+              }
+            ],
+            "4037c8574920": [
+              {
+                "count": 3,
+                "offset": 29646
+              },
+              {
+                "count": 3,
+                "offset": 30498
+              },
+              {
+                "count": 3,
+                "offset": 31700
+              },
+              {
+                "count": 3,
+                "offset": 32418
+              }
+            ],
+            "4cfa6d151318": [
+              {
+                "count": 3,
+                "offset": 29568
+              }
+            ],
+            "4f29221f2e51": [],
+            "796c2cf9d837": [],
+            "9b673c066ae4": [
+              {
+                "count": 3,
+                "offset": 29824
+              }
+            ]
+          }
+        },
+        "get-configuration-current": {
+          "files": 3,
+          "layout_histogram": {
+            "4cfa6d151318@+0x7380 28583441dfa8@+0x73c0 9b673c066ae4@+0x7480 20ea2ab16891@+0x7050 4037c8574920@+0x73ce 4f29221f2e51@- 796c2cf9d837@-": 2,
+            "4cfa6d151318@+0x7380 28583441dfa8@+0x73c0 9b673c066ae4@+0x7480 20ea2ab16891@+0x7090 4037c8574920@+0x73ce 4f29221f2e51@- 796c2cf9d837@-": 1
+          },
+          "pattern_offsets": {
+            "20ea2ab16891": [
+              {
+                "count": 2,
+                "offset": 28752
+              },
+              {
+                "count": 2,
+                "offset": 29056
+              },
+              {
+                "count": 1,
+                "offset": 28928
+              },
+              {
+                "count": 1,
+                "offset": 28816
+              }
+            ],
+            "28583441dfa8": [
+              {
+                "count": 3,
+                "offset": 29632
+              },
+              {
+                "count": 3,
+                "offset": 30484
+              },
+              {
+                "count": 2,
+                "offset": 31763
+              }
+            ],
+            "4037c8574920": [
+              {
+                "count": 3,
+                "offset": 29646
+              },
+              {
+                "count": 3,
+                "offset": 30498
+              },
+              {
+                "count": 3,
+                "offset": 32418
+              },
+              {
+                "count": 2,
+                "offset": 31700
+              }
+            ],
+            "4cfa6d151318": [
+              {
+                "count": 3,
+                "offset": 29568
+              }
+            ],
+            "4f29221f2e51": [],
+            "796c2cf9d837": [],
+            "9b673c066ae4": [
+              {
+                "count": 3,
+                "offset": 29824
+              }
+            ]
+          }
+        },
+        "get-event-status-media": {
+          "files": 3,
+          "layout_histogram": {
+            "4cfa6d151318@+0x7380 28583441dfa8@+0x73c0 9b673c066ae4@+0x7480 20ea2ab16891@+0x7050 4037c8574920@+0x73ce 4f29221f2e51@- 796c2cf9d837@-": 1,
+            "4cfa6d151318@+0x7380 28583441dfa8@+0x73c0 9b673c066ae4@+0x7480 20ea2ab16891@+0x7090 4037c8574920@+0x73ce 4f29221f2e51@- 796c2cf9d837@-": 2
+          },
+          "pattern_offsets": {
+            "20ea2ab16891": [
+              {
+                "count": 2,
+                "offset": 28816
+              },
+              {
+                "count": 2,
+                "offset": 28928
+              },
+              {
+                "count": 1,
+                "offset": 29056
+              },
+              {
+                "count": 1,
+                "offset": 28752
+              }
+            ],
+            "28583441dfa8": [
+              {
+                "count": 3,
+                "offset": 29632
+              },
+              {
+                "count": 3,
+                "offset": 30484
+              },
+              {
+                "count": 3,
+                "offset": 31763
+              }
+            ],
+            "4037c8574920": [
+              {
+                "count": 3,
+                "offset": 29646
+              },
+              {
+                "count": 3,
+                "offset": 30498
+              },
+              {
+                "count": 3,
+                "offset": 31700
+              },
+              {
+                "count": 3,
+                "offset": 32418
+              }
+            ],
+            "4cfa6d151318": [
+              {
+                "count": 3,
+                "offset": 29568
+              }
+            ],
+            "4f29221f2e51": [],
+            "796c2cf9d837": [],
+            "9b673c066ae4": [
+              {
+                "count": 3,
+                "offset": 29824
+              }
+            ]
+          }
+        },
+        "inquiry-extrainq": {
+          "files": 3,
+          "layout_histogram": {
+            "4cfa6d151318@+0x7380 28583441dfa8@+0x73c0 9b673c066ae4@+0x7480 20ea2ab16891@+0x7090 4037c8574920@+0x73ce 4f29221f2e51@- 796c2cf9d837@-": 2,
+            "4cfa6d151318@+0x7380 28583441dfa8@- 9b673c066ae4@- 20ea2ab16891@+0x7090 4037c8574920@- 4f29221f2e51@- 796c2cf9d837@-": 1
+          },
+          "pattern_offsets": {
+            "20ea2ab16891": [
+              {
+                "count": 3,
+                "offset": 28816
+              },
+              {
+                "count": 2,
+                "offset": 29056
+              },
+              {
+                "count": 1,
+                "offset": 28928
+              }
+            ],
+            "28583441dfa8": [
+              {
+                "count": 2,
+                "offset": 29632
+              },
+              {
+                "count": 2,
+                "offset": 30484
+              },
+              {
+                "count": 2,
+                "offset": 31763
+              }
+            ],
+            "4037c8574920": [
+              {
+                "count": 2,
+                "offset": 29646
+              },
+              {
+                "count": 2,
+                "offset": 30498
+              },
+              {
+                "count": 2,
+                "offset": 31700
+              },
+              {
+                "count": 2,
+                "offset": 32418
+              }
+            ],
+            "4cfa6d151318": [
+              {
+                "count": 3,
+                "offset": 29568
+              }
+            ],
+            "4f29221f2e51": [],
+            "796c2cf9d837": [],
+            "9b673c066ae4": [
+              {
+                "count": 2,
+                "offset": 29824
+              }
+            ]
+          }
+        },
+        "mode-sense10-all": {
+          "files": 3,
+          "layout_histogram": {
+            "4cfa6d151318@+0x7380 28583441dfa8@+0x73c0 9b673c066ae4@+0x7480 20ea2ab16891@+0x7090 4037c8574920@+0x73ce 4f29221f2e51@- 796c2cf9d837@-": 2,
+            "4cfa6d151318@+0x7380 28583441dfa8@- 9b673c066ae4@- 20ea2ab16891@+0x7090 4037c8574920@- 4f29221f2e51@- 796c2cf9d837@-": 1
+          },
+          "pattern_offsets": {
+            "20ea2ab16891": [
+              {
+                "count": 3,
+                "offset": 28816
+              },
+              {
+                "count": 2,
+                "offset": 29056
+              },
+              {
+                "count": 1,
+                "offset": 28928
+              }
+            ],
+            "28583441dfa8": [
+              {
+                "count": 2,
+                "offset": 29632
+              },
+              {
+                "count": 2,
+                "offset": 30484
+              },
+              {
+                "count": 2,
+                "offset": 31763
+              }
+            ],
+            "4037c8574920": [
+              {
+                "count": 2,
+                "offset": 29646
+              },
+              {
+                "count": 2,
+                "offset": 30498
+              },
+              {
+                "count": 2,
+                "offset": 31700
+              },
+              {
+                "count": 2,
+                "offset": 32418
+              }
+            ],
+            "4cfa6d151318": [
+              {
+                "count": 3,
+                "offset": 29568
+              }
+            ],
+            "4f29221f2e51": [],
+            "796c2cf9d837": [],
+            "9b673c066ae4": [
+              {
+                "count": 2,
+                "offset": 29824
+              }
+            ]
+          }
+        }
+      },
+      "totals": {
+        "files": 18,
+        "layout_histogram": {
+          "4cfa6d151318@+0x7380 28583441dfa8@+0x73c0 9b673c066ae4@+0x7480 20ea2ab16891@+0x7050 4037c8574920@+0x73ce 4f29221f2e51@- 796c2cf9d837@-": 4,
+          "4cfa6d151318@+0x7380 28583441dfa8@+0x73c0 9b673c066ae4@+0x7480 20ea2ab16891@+0x7090 4037c8574920@+0x73ce 4f29221f2e51@- 796c2cf9d837@-": 11,
+          "4cfa6d151318@+0x7380 28583441dfa8@- 9b673c066ae4@- 20ea2ab16891@+0x7050 4037c8574920@- 4f29221f2e51@- 796c2cf9d837@-": 1,
+          "4cfa6d151318@+0x7380 28583441dfa8@- 9b673c066ae4@- 20ea2ab16891@+0x7090 4037c8574920@- 4f29221f2e51@- 796c2cf9d837@-": 2
+        },
+        "pattern_offsets": {
+          "20ea2ab16891": [
+            {
+              "count": 13,
+              "offset": 28816
+            },
+            {
+              "count": 10,
+              "offset": 29056
+            },
+            {
+              "count": 8,
+              "offset": 28928
+            },
+            {
+              "count": 5,
+              "offset": 28752
+            }
+          ],
+          "28583441dfa8": [
+            {
+              "count": 15,
+              "offset": 29632
+            },
+            {
+              "count": 15,
+              "offset": 30484
+            },
+            {
+              "count": 14,
+              "offset": 31763
+            }
+          ],
+          "4037c8574920": [
+            {
+              "count": 15,
+              "offset": 29646
+            },
+            {
+              "count": 15,
+              "offset": 30498
+            },
+            {
+              "count": 15,
+              "offset": 32418
+            },
+            {
+              "count": 14,
+              "offset": 31700
+            }
+          ],
+          "4cfa6d151318": [
+            {
+              "count": 18,
+              "offset": 29568
+            }
+          ],
+          "4f29221f2e51": [],
+          "796c2cf9d837": [],
+          "9b673c066ae4": [
+            {
+              "count": 15,
+              "offset": 29824
+            }
+          ]
+        }
+      }
+    },
+    "restored": {
+      "path": "references/evidence/live/drive3-normal-mode-xd13-sidechannel-20260504/record60-affine-restored-normal-focused",
+      "stimuli": {
+        "baseline-no-stimulus": {
+          "files": 3,
+          "layout_histogram": {
+            "4cfa6d151318@+0x7300 28583441dfa8@+0x7380 9b673c066ae4@+0x7480 20ea2ab16891@+0x7010 4037c8574920@+0x738e 4f29221f2e51@- 796c2cf9d837@-": 2,
+            "4cfa6d151318@+0x7300 28583441dfa8@+0x7380 9b673c066ae4@+0x7480 20ea2ab16891@+0x7090 4037c8574920@+0x738e 4f29221f2e51@- 796c2cf9d837@-": 1
+          },
+          "pattern_offsets": {
+            "20ea2ab16891": [
+              {
+                "count": 2,
+                "offset": 29056
+              },
+              {
+                "count": 2,
+                "offset": 28688
+              },
+              {
+                "count": 1,
+                "offset": 28816
+              },
+              {
+                "count": 1,
+                "offset": 28992
+              }
+            ],
+            "28583441dfa8": [
+              {
+                "count": 3,
+                "offset": 29568
+              },
+              {
+                "count": 3,
+                "offset": 30612
+              },
+              {
+                "count": 3,
+                "offset": 31827
+              }
+            ],
+            "4037c8574920": [
+              {
+                "count": 3,
+                "offset": 29582
+              },
+              {
+                "count": 3,
+                "offset": 30626
+              },
+              {
+                "count": 3,
+                "offset": 31508
+              },
+              {
+                "count": 2,
+                "offset": 30197
+              },
+              {
+                "count": 2,
+                "offset": 32418
+              }
+            ],
+            "4cfa6d151318": [
+              {
+                "count": 3,
+                "offset": 29440
+              }
+            ],
+            "4f29221f2e51": [],
+            "796c2cf9d837": [],
+            "9b673c066ae4": [
+              {
+                "count": 3,
+                "offset": 29824
+              }
+            ]
+          }
+        },
+        "get-configuration-all": {
+          "files": 3,
+          "layout_histogram": {
+            "4cfa6d151318@+0x7300 28583441dfa8@+0x7380 9b673c066ae4@+0x7480 20ea2ab16891@+0x7010 4037c8574920@+0x738e 4f29221f2e51@- 796c2cf9d837@-": 3
+          },
+          "pattern_offsets": {
+            "20ea2ab16891": [
+              {
+                "count": 3,
+                "offset": 28688
+              },
+              {
+                "count": 2,
+                "offset": 29056
+              },
+              {
+                "count": 1,
+                "offset": 28992
+              }
+            ],
+            "28583441dfa8": [
+              {
+                "count": 3,
+                "offset": 29568
+              },
+              {
+                "count": 3,
+                "offset": 30612
+              },
+              {
+                "count": 3,
+                "offset": 31827
+              }
+            ],
+            "4037c8574920": [
+              {
+                "count": 3,
+                "offset": 29582
+              },
+              {
+                "count": 3,
+                "offset": 30197
+              },
+              {
+                "count": 3,
+                "offset": 30626
+              },
+              {
+                "count": 3,
+                "offset": 31508
+              },
+              {
+                "count": 3,
+                "offset": 32418
+              }
+            ],
+            "4cfa6d151318": [
+              {
+                "count": 3,
+                "offset": 29440
+              }
+            ],
+            "4f29221f2e51": [],
+            "796c2cf9d837": [],
+            "9b673c066ae4": [
+              {
+                "count": 3,
+                "offset": 29824
+              }
+            ]
+          }
+        },
+        "get-configuration-current": {
+          "files": 3,
+          "layout_histogram": {
+            "4cfa6d151318@+0x7300 28583441dfa8@+0x7380 9b673c066ae4@+0x7480 20ea2ab16891@+0x7090 4037c8574920@+0x738e 4f29221f2e51@- 796c2cf9d837@-": 2,
+            "4cfa6d151318@+0x7300 28583441dfa8@+0x7380 9b673c066ae4@+0x7480 20ea2ab16891@+0x70d0 4037c8574920@+0x738e 4f29221f2e51@- 796c2cf9d837@-": 1
+          },
+          "pattern_offsets": {
+            "20ea2ab16891": [
+              {
+                "count": 2,
+                "offset": 28816
+              },
+              {
+                "count": 2,
+                "offset": 28992
+              },
+              {
+                "count": 1,
+                "offset": 28880
+              },
+              {
+                "count": 1,
+                "offset": 29056
+              }
+            ],
+            "28583441dfa8": [
+              {
+                "count": 3,
+                "offset": 29568
+              },
+              {
+                "count": 3,
+                "offset": 30612
+              },
+              {
+                "count": 3,
+                "offset": 31827
+              }
+            ],
+            "4037c8574920": [
+              {
+                "count": 3,
+                "offset": 29582
+              },
+              {
+                "count": 3,
+                "offset": 30197
+              },
+              {
+                "count": 3,
+                "offset": 30626
+              },
+              {
+                "count": 3,
+                "offset": 31508
+              },
+              {
+                "count": 3,
+                "offset": 32418
+              }
+            ],
+            "4cfa6d151318": [
+              {
+                "count": 3,
+                "offset": 29440
+              }
+            ],
+            "4f29221f2e51": [],
+            "796c2cf9d837": [],
+            "9b673c066ae4": [
+              {
+                "count": 3,
+                "offset": 29824
+              }
+            ]
+          }
+        },
+        "get-event-status-media": {
+          "files": 3,
+          "layout_histogram": {
+            "4cfa6d151318@+0x7300 28583441dfa8@+0x7380 9b673c066ae4@+0x7480 20ea2ab16891@+0x7010 4037c8574920@+0x738e 4f29221f2e51@- 796c2cf9d837@-": 3
+          },
+          "pattern_offsets": {
+            "20ea2ab16891": [
+              {
+                "count": 3,
+                "offset": 28688
+              },
+              {
+                "count": 2,
+                "offset": 29056
+              },
+              {
+                "count": 1,
+                "offset": 28992
+              }
+            ],
+            "28583441dfa8": [
+              {
+                "count": 3,
+                "offset": 29568
+              },
+              {
+                "count": 3,
+                "offset": 30612
+              },
+              {
+                "count": 3,
+                "offset": 31827
+              }
+            ],
+            "4037c8574920": [
+              {
+                "count": 3,
+                "offset": 29582
+              },
+              {
+                "count": 3,
+                "offset": 30197
+              },
+              {
+                "count": 3,
+                "offset": 30626
+              },
+              {
+                "count": 3,
+                "offset": 31508
+              },
+              {
+                "count": 3,
+                "offset": 32418
+              }
+            ],
+            "4cfa6d151318": [
+              {
+                "count": 3,
+                "offset": 29440
+              }
+            ],
+            "4f29221f2e51": [],
+            "796c2cf9d837": [],
+            "9b673c066ae4": [
+              {
+                "count": 3,
+                "offset": 29824
+              }
+            ]
+          }
+        },
+        "inquiry-extrainq": {
+          "files": 3,
+          "layout_histogram": {
+            "4cfa6d151318@+0x7300 28583441dfa8@+0x7380 9b673c066ae4@+0x7480 20ea2ab16891@+0x7010 4037c8574920@+0x738e 4f29221f2e51@- 796c2cf9d837@-": 2,
+            "4cfa6d151318@+0x7300 28583441dfa8@+0x7380 9b673c066ae4@+0x7480 20ea2ab16891@+0x7090 4037c8574920@+0x738e 4f29221f2e51@- 796c2cf9d837@-": 1
+          },
+          "pattern_offsets": {
+            "20ea2ab16891": [
+              {
+                "count": 2,
+                "offset": 28992
+              },
+              {
+                "count": 2,
+                "offset": 28688
+              },
+              {
+                "count": 1,
+                "offset": 28816
+              },
+              {
+                "count": 1,
+                "offset": 29056
+              }
+            ],
+            "28583441dfa8": [
+              {
+                "count": 3,
+                "offset": 29568
+              },
+              {
+                "count": 3,
+                "offset": 30612
+              },
+              {
+                "count": 3,
+                "offset": 31827
+              }
+            ],
+            "4037c8574920": [
+              {
+                "count": 3,
+                "offset": 29582
+              },
+              {
+                "count": 3,
+                "offset": 30626
+              },
+              {
+                "count": 3,
+                "offset": 31508
+              },
+              {
+                "count": 2,
+                "offset": 30197
+              },
+              {
+                "count": 2,
+                "offset": 32418
+              }
+            ],
+            "4cfa6d151318": [
+              {
+                "count": 3,
+                "offset": 29440
+              }
+            ],
+            "4f29221f2e51": [],
+            "796c2cf9d837": [],
+            "9b673c066ae4": [
+              {
+                "count": 3,
+                "offset": 29824
+              }
+            ]
+          }
+        },
+        "mode-sense10-all": {
+          "files": 3,
+          "layout_histogram": {
+            "4cfa6d151318@+0x7300 28583441dfa8@+0x7380 9b673c066ae4@+0x7480 20ea2ab16891@+0x7010 4037c8574920@+0x738e 4f29221f2e51@- 796c2cf9d837@-": 2,
+            "4cfa6d151318@+0x7300 28583441dfa8@+0x7380 9b673c066ae4@+0x7480 20ea2ab16891@+0x7090 4037c8574920@+0x738e 4f29221f2e51@- 796c2cf9d837@-": 1
+          },
+          "pattern_offsets": {
+            "20ea2ab16891": [
+              {
+                "count": 2,
+                "offset": 28992
+              },
+              {
+                "count": 2,
+                "offset": 28688
+              },
+              {
+                "count": 1,
+                "offset": 28816
+              },
+              {
+                "count": 1,
+                "offset": 29056
+              }
+            ],
+            "28583441dfa8": [
+              {
+                "count": 3,
+                "offset": 29568
+              },
+              {
+                "count": 3,
+                "offset": 30612
+              },
+              {
+                "count": 3,
+                "offset": 31827
+              }
+            ],
+            "4037c8574920": [
+              {
+                "count": 3,
+                "offset": 29582
+              },
+              {
+                "count": 3,
+                "offset": 30626
+              },
+              {
+                "count": 3,
+                "offset": 31508
+              },
+              {
+                "count": 2,
+                "offset": 30197
+              },
+              {
+                "count": 2,
+                "offset": 32418
+              }
+            ],
+            "4cfa6d151318": [
+              {
+                "count": 3,
+                "offset": 29440
+              }
+            ],
+            "4f29221f2e51": [],
+            "796c2cf9d837": [],
+            "9b673c066ae4": [
+              {
+                "count": 3,
+                "offset": 29824
+              }
+            ]
+          }
+        }
+      },
+      "totals": {
+        "files": 18,
+        "layout_histogram": {
+          "4cfa6d151318@+0x7300 28583441dfa8@+0x7380 9b673c066ae4@+0x7480 20ea2ab16891@+0x7010 4037c8574920@+0x738e 4f29221f2e51@- 796c2cf9d837@-": 12,
+          "4cfa6d151318@+0x7300 28583441dfa8@+0x7380 9b673c066ae4@+0x7480 20ea2ab16891@+0x7090 4037c8574920@+0x738e 4f29221f2e51@- 796c2cf9d837@-": 5,
+          "4cfa6d151318@+0x7300 28583441dfa8@+0x7380 9b673c066ae4@+0x7480 20ea2ab16891@+0x70d0 4037c8574920@+0x738e 4f29221f2e51@- 796c2cf9d837@-": 1
+        },
+        "pattern_offsets": {
+          "20ea2ab16891": [
+            {
+              "count": 12,
+              "offset": 28688
+            },
+            {
+              "count": 9,
+              "offset": 29056
+            },
+            {
+              "count": 9,
+              "offset": 28992
+            },
+            {
+              "count": 5,
+              "offset": 28816
+            },
+            {
+              "count": 1,
+              "offset": 28880
+            }
+          ],
+          "28583441dfa8": [
+            {
+              "count": 18,
+              "offset": 29568
+            },
+            {
+              "count": 18,
+              "offset": 30612
+            },
+            {
+              "count": 18,
+              "offset": 31827
+            }
+          ],
+          "4037c8574920": [
+            {
+              "count": 18,
+              "offset": 29582
+            },
+            {
+              "count": 18,
+              "offset": 30626
+            },
+            {
+              "count": 18,
+              "offset": 31508
+            },
+            {
+              "count": 15,
+              "offset": 30197
+            },
+            {
+              "count": 15,
+              "offset": 32418
+            }
+          ],
+          "4cfa6d151318": [
+            {
+              "count": 18,
+              "offset": 29440
+            }
+          ],
+          "4f29221f2e51": [],
+          "796c2cf9d837": [],
+          "9b673c066ae4": [
+            {
+              "count": 18,
+              "offset": 29824
+            }
+          ]
+        }
+      }
+    }
+  }
+}

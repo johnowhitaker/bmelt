@@ -2979,3 +2979,68 @@ stock verification so the disc can be removed.
 
 The final independent full F0 read matched stock LD5M exactly, with `0x4fc9`
 restored to `12 62 06` and the `0x6ee3` cave restored to `ff`.
+
+## Drive #3 Normal-Mode Side-Channel Attempt
+
+The next push used the XD13 plaintext 8051 islands as an atlas for LD5M normal
+mode. That paid off immediately as an observation tool: the public normal
+work-window reliably shows XD13-homologous snippets from record55-ish,
+record58-ish, and record60-ish packet/bridge code. In particular, the record60
+cluster around `+0x7300..+0x7480` and the record58 cluster around
+`+0x7050..+0x7180` are good watchpoints.
+
+The read-only side was conservative. GET CONFIG field variants, a CDB echo scan,
+and a broader status/error command corpus did not reveal a host-visible response
+byte or a clean command-controlled bit. They did confirm that the XD13 patterns
+are useful normal-mode probes.
+
+Then we tried one structured, safer-than-hard-lane CDD edit:
+`F0[0x2ae8f] 0x4e -> 0x4c`, changing record60/group15 affine plain
+`0xc9 -> 0xcb`. It staged, Drive #3 stayed `LD5M`, and the record60 watch
+patterns moved locally in the public work-window: for example
+`4cfa6d151318` moved from `+0x7380` to `+0x7300`. At first glance that looked
+like the normal-mode oracle we wanted.
+
+The restore is the important part of the story. The stock restore candidate
+reported success, and a full zero-based 1 MiB F0 dump after cold boot matched
+the stock LD5M SHA-256 exactly:
+
+```text
+488f49c7f5d8141186db6ca006a33cccefcc391b537d2a903f4ebaa7ea8f2e39
+```
+
+But the public work-window stayed in the shifted layout. Three more stock
+cold-boot controls also stayed shifted. So the flash was restored, but the
+runtime/viewing surface did not simply rewind. The apparent record60 effect is
+therefore not yet a proven firmware-byte-controlled bit; it is evidence that the
+normal-mode public window is a tiled/runtime phase surface with state we do not
+fully control.
+
+Repeated baseline-only captures, repeated GET CONFIG captures, an interleaved
+baseline/GET CONFIG A/B, and a broader read-only phase screen showed the record58
+watchpoint moving among several offset pairs. No command reliably set the phase.
+Current conclusion: XD13 gives us a good normal-mode observation surface, but
+not yet a slow normal-mode side channel. Future CDD edits should pause until we
+either have a better control experiment or explicitly decide the risk is worth
+it. Notes:
+`analysis/8051/drive3-normal-mode-sidechannel-20260504.md`.
+
+We then ran the byte-identical stock replay control. This reused the record60
+restore candidate, whose target image is stock LD5M and whose image diff is
+zero bytes. The replay completed cleanly with `success=1` and final revision
+`LD5M`. After a Pico cold boot, the focused normal-mode work-window capture
+still showed the same shifted record60 layout as before the replay:
+`4cfa6d151318 @ +0x7300`, `28583441dfa8 @ +0x7380`, and
+`9b673c066ae4 @ +0x7480` in all captures. A full zero-based F0 read after the
+control again matched stock LD5M exactly:
+
+```text
+488f49c7f5d8141186db6ca006a33cccefcc391b537d2a903f4ebaa7ea8f2e39
+```
+
+So a same-image helper-bypass replay is safe on Drive #3 under this flow, but it
+does not explain or reset the shifted work-window phase. It rules out the
+simplest "any stock replay causes the shift" theory. The remaining state is
+more likely a runtime/tile phase that the first baseline happened not to show,
+or a state transition triggered by the earlier record60 edit/update sequence
+that persists even when the flash image is stock.

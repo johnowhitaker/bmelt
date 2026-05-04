@@ -2397,3 +2397,33 @@ Immediate useful directions:
     `references/evidence/live/original-drive-normal-io-getconfig-phase-bias-20260502T033558Z/`.
     New focused analyzer:
     `scripts/analyze_liteon_work_window_watch_chunks.py`.
+127. Drive #3 normal-mode side-channel work used the XD13 plaintext islands as
+    an atlas. The read-only part validated XD13-derived record55/58/60
+    signatures in the public normal work-window, but GET CONFIG field variants,
+    CDB echo scans, and a broader read-only status/error screen did not expose
+    a reliable host-controlled response bit. The useful lightweight analyzer is
+    `scripts/analyze_liteon_work_window_watch_patterns.py`.
+128. The structured record60 affine probe on Drive #3 changed
+    `F0[0x2ae8f] 0x4e -> 0x4c` (record60/group15 affine plain
+    `0xc9 -> 0xcb`). Drive #3 stayed `LD5M`, and record60 watch signatures
+    shifted locally in the normal work-window, for example
+    `4cfa6d151318` moved from `+0x7380` to `+0x7300`. The restore candidate
+    then returned the full zero-based 1 MiB F0 dump to the stock LD5M SHA-256,
+    but the public work-window stayed shifted across further cold boots. Treat
+    this as evidence of runtime/tile-surface state, not as a proven
+    firmware-byte-to-bit oracle.
+129. Current Drive #3 rule: do not run more CDD edits without explicit approval.
+    Full sequential F0 readback is the restore truth source; spot CDD reads can
+    lie. The next write-path control, if desired, should be a byte-identical
+    stock replay control, but it still exercises the update/write machinery and
+    should be approved before running. Detailed note:
+    `analysis/8051/drive3-normal-mode-sidechannel-20260504.md`.
+130. The byte-identical stock replay control has now been run on Drive #3. It
+    reused the zero-diff record60 restore candidate, completed with
+    `success=1`, and Drive #3 returned as normal `LD5M` after a Pico cold boot.
+    The post-control full zero-based F0 dump still matched stock LD5M
+    (`488f49c7f5d8141186db6ca006a33cccefcc391b537d2a903f4ebaa7ea8f2e39`).
+    The shifted normal work-window layout was unchanged before/after the stock
+    replay. Conclusion: same-image replay is not the simple cause of the
+    record60 phase shift and does not reset it. Report:
+    `analysis/8051/drive3-stock-replay-control-watch-20260504.md`.
