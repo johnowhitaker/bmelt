@@ -3044,3 +3044,29 @@ simplest "any stock replay causes the shift" theory. The remaining state is
 more likely a runtime/tile phase that the first baseline happened not to show,
 or a state transition triggered by the earlier record60 edit/update sequence
 that persists even when the flash image is stock.
+
+## Drive #3 Read-Only Normal Response Matrix
+
+The next slice stayed fully read-only in normal `LD5M` mode. We built a response
+matrix runner that pairs standard command responses, REQUEST SENSE after
+failures, and the public normal work-window. The command set covered
+INQUIRY/EXTRAINQ, GET CONFIGURATION, MODE SENSE, GET EVENT STATUS, REQUEST
+SENSE, and a cautious disc/status set.
+
+The result is a clean negative for the easy version of normal-mode I/O. Direct
+host responses were perfectly stable across repeated and shuffled runs, but no
+response payload exposed a useful internal bit. The XD13-derived record58/60
+work-window snippets continued to appear, but their offsets were phasey. A weak
+`MODE SENSE cd-device` lead disappeared in a randomized A/B test: it split the
+same way as TEST UNIT READY and standard INQUIRY controls.
+
+We also scanned every captured work-window byte for simple single-byte
+correlations with CDB fields. That did not find a convincing packet-shadow leak.
+The few candidates were common constants or tiny statistical lifts, not a usable
+channel.
+
+So the public normal work-window remains an observation surface, not an I/O
+primitive. The better next move is either a targeted, explicitly approved
+normal-mode response hook, or static ranking of response-construction islands
+using XD13/LD5M homologs. Notes:
+`analysis/8051/drive3-normal-response-matrix-20260504.md`.

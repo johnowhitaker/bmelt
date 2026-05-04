@@ -2427,3 +2427,24 @@ Immediate useful directions:
     replay. Conclusion: same-image replay is not the simple cause of the
     record60 phase shift and does not reset it. Report:
     `analysis/8051/drive3-stock-replay-control-watch-20260504.md`.
+131. A fully read-only normal-response matrix was run on Drive #3. New tools:
+    `scripts/capture_liteon_normal_response_matrix.py` and
+    `scripts/analyze_liteon_normal_response_matrix_correlations.py`. Evidence:
+    `references/evidence/live/drive3-normal-response-matrix-core-20260504/`,
+    `drive3-normal-response-matrix-core-repeat-20260504/`,
+    `drive3-normal-response-matrix-core-shuffled-20260504/`,
+    `drive3-normal-response-matrix-modesense-cddevice-ab-20260504/`, and
+    `drive3-normal-response-matrix-disc-status-20260504/`.
+132. The normal-response matrix is a useful negative. Standard read-only command
+    responses are byte-stable across repeated/shuffled runs, but none exposed a
+    usable internal bit. XD13-derived record58/60 work-window snippets still
+    appear, but their offsets track public-window phase drift rather than a
+    command-controlled state. A weak `MODE SENSE cd-device` lead failed a
+    randomized A/B test against TEST UNIT READY and standard INQUIRY controls.
+133. A single-byte work-window correlation scan did not find a convincing CDB
+    shadow leak. Treat the public normal work-window as an observation surface,
+    not a communication primitive. The next high-ROI options are a carefully
+    targeted normal-mode response hook, or static ranking of XD13/LD5M response
+    construction islands before asking for approval for any further live CDD
+    mutation. Detailed note:
+    `analysis/8051/drive3-normal-response-matrix-20260504.md`.
