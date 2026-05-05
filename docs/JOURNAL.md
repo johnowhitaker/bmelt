@@ -3404,3 +3404,11 @@ and return an arbitrary XDATA window, such as `0x4e00..0x4e3f`,
 `0x4a00..0x4a3f`, or `0x8240..0x827f`. Dry-run builds fit exactly in the
 existing hook cave, but this has not been run on the drive yet. Detailed note:
 `analysis/8051/cdd-materializer-dispatch-followup-20260505.md`.
+
+A further static pass shifted the best observation point from arbitrary decoded
+CDD addresses to the visible controller packet-return buffers. `FUN_CODE_51bc`
+looks like a canned controller FIFO/config upload, not the materializer. The
+more interesting branch is `xdata[0x48a0].4` around `0x27fa`: it copies 12
+controller FIFO bytes into `0x818a..0x8195` and 32 more into
+`0x810e..0x812d`. Future currentboot hooks should capture those packet-return
+windows around mode-2/parser continuation attempts.

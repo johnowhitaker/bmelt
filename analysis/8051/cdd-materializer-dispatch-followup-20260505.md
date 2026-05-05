@@ -275,6 +275,84 @@ not the missing hard CDD decoder. They are more likely the place where the
 controller tells the 8051 side "I have work/status for you" after another
 hidden engine has acted.
 
+## Follow-Up: `0x40b2`, `0x51bc`, And The Packet Return Path
+
+A second static pass traced the immediate handoff around:
+
+```text
+0x268a -> 0x48e7 -> 0x51bc -> 0x40b2 -> 0x27e9 service branch
+```
+
+The useful correction is that `FUN_CODE_51bc` does not look like the CDD
+materializer either. It is more like a controller FIFO/config upload helper:
+
+```text
+0x51bc:
+  load/prep 0x803b and 0x810e via 0x1e1c
+  if xdata[0x48a0].7 is clear:
+      toggle 0x4968 / 0x4960 / 0x4961
+      write 0x40c0 = dc, 0x40d3 = 20, 0x40c3 = 80 then 00, 0x40c2 = 02
+  clear 0x4990..0x4994 status-ish bytes
+  call 0x6012 with code table 0x439e, length 0x20
+  write a long code table beginning at 0x4452 to controller FIFO 0x4098
+```
+
+That points to controller configuration or a canned command upload, not a
+record-by-record decompressor.
+
+The branch from `FUN_CODE_40b2` at `0x41e3` is now clearer:
+
+```text
+restore xdata[0x4023] from xdata[0x80b0]
+FUN_CODE_1009(5)
+FUN_CODE_141e(0)           ; selector 0 reads the 0x4e1b predicate
+if 0x4e1b != 1:
+    FUN_CODE_1009(1)
+else:
+    copy 0x8229..0x822c -> 0x8245..0x8248
+    refresh/fill 0x8249..0x824c and 0x824d..0x8250
+    FUN_CODE_111a(0x02)
+```
+
+So the `0x4e1b` flag set by `FUN_CODE_111a(0x80)` decides whether the later
+continuation `FUN_CODE_111a(0x02)` is even attempted.
+
+The most promising observation point is still the `0x48a0.4` controller-service
+branch at `0x27fa`, because it copies controller-supplied bytes into ordinary
+XDATA:
+
+```text
+if xdata[0x48a0].4:
+    clear xdata[0x48a0].4
+    read controller address 00:0000
+    discard/record one leading FIFO byte into IRAM[0x29]
+    copy 12 FIFO bytes -> xdata[0x818a..0x8195]
+    copy 32 FIFO bytes -> xdata[0x810e..0x812d]
+```
+
+After that packet copy, the code updates packet/status fields:
+
+```text
+if xdata[0x47c1].0:
+    xdata[0x80e9] = 0x0b
+    xdata[0x47d2] |= 0x01
+else:
+    xdata[0x80e9] = xdata[0x47c5]
+    xdata[0x80ea] = xdata[0x47c4]
+    xdata[0x47d2] &= 0xfe
+clear 0x4014..0x4017
+```
+
+Bits `0x48a0.6` and `0x48a0.5` are separate status-receiver paths through
+`0x4b4f`; after that call they set `0x47c9` to `0x51` or `0x50`, set
+`0x47cb = 0x54`, clear `0x47c4/0x47c5`, and write `0x47d0 = 0x10`.
+
+Practical next implication: a low-risk currentboot observation hook should
+capture `0x818a..0x8195`, `0x810e..0x812d`, `0x47c1..0x47d2`, and
+`0x48a0/0x4e1b` around mode-2/parser continuation attempts. Those windows are
+more likely to contain controller-returned state than arbitrary decoded CDD
+addresses.
+
 ## Next Read
 
 If we continue static-only, the next best target is the branch after

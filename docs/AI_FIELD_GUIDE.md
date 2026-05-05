@@ -184,6 +184,12 @@ call. Useful first windows are `0x4e00..0x4e3f`, `0x4a00..0x4a3f`,
 been run live. See
 `analysis/8051/cdd-materializer-dispatch-followup-20260505.md`.
 
+Additional static follow-up: `FUN_CODE_51bc` now looks like a canned
+controller FIFO/config upload helper, not the missing CDD materializer. The
+better observation target is the `xdata[0x48a0].4` service branch, which copies
+controller-returned packets into `0x818a..0x8195` and `0x810e..0x812d`.
+Prioritize those windows in the next selected-XDATA hook run.
+
 Replay helper:
 
 ```text
