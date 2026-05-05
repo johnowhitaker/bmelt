@@ -1,0 +1,7 @@
+SCSI Status: Check Condition 
+
+Sense Information:
+Fixed format, current; Sense key: Illegal Request
+Additional sense: Command sequence error
+
+Error 5 occurred, no data received

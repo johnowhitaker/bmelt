@@ -73,11 +73,16 @@ def parse_int(value: str) -> int:
 def load_windows(run_dirs: list[Path]) -> list[dict[str, Any]]:
     windows = []
     for run_dir in run_dirs:
-        for path in sorted(run_dir.glob("*.window.bin")):
+        paths = sorted({*run_dir.glob("*.window.bin"), *run_dir.glob("*.work-window.bin")})
+        for path in paths:
+            if path.name.endswith(".work-window.bin"):
+                capture = path.name.removesuffix(".work-window.bin")
+            else:
+                capture = path.name.removesuffix(".window.bin")
             windows.append(
                 {
                     "run": run_dir.name,
-                    "capture": path.name.removesuffix(".window.bin"),
+                    "capture": capture,
                     "path": str(path),
                     "data": path.read_bytes(),
                 }

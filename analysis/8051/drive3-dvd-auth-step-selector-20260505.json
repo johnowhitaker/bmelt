@@ -1,0 +1,911 @@
+{
+  "by_addr": [
+    {
+      "addr": 35401,
+      "role": "CDB byte 0 / opcode selector",
+      "total": 118,
+      "unique_values": 6,
+      "values": [
+        {
+          "count": 70,
+          "value": 40
+        },
+        {
+          "count": 21,
+          "value": 3
+        },
+        {
+          "count": 11,
+          "value": 27
+        },
+        {
+          "count": 6,
+          "value": 164
+        },
+        {
+          "count": 6,
+          "value": 163
+        },
+        {
+          "count": 4,
+          "value": 42
+        }
+      ]
+    },
+    {
+      "addr": 35402,
+      "role": "CDB byte 1 / op-specific field",
+      "total": 14,
+      "unique_values": 2,
+      "values": [
+        {
+          "count": 7,
+          "value": 6
+        },
+        {
+          "count": 7,
+          "value": 1
+        }
+      ]
+    },
+    {
+      "addr": 35403,
+      "role": "CDB byte 2 / op-specific field",
+      "total": 7,
+      "unique_values": 1,
+      "values": [
+        {
+          "count": 7,
+          "value": 226
+        }
+      ]
+    },
+    {
+      "addr": 35404,
+      "role": "CDB byte 3 / controller setup byte",
+      "total": 7,
+      "unique_values": 1,
+      "values": [
+        {
+          "count": 7,
+          "value": 1
+        }
+      ]
+    },
+    {
+      "addr": 35405,
+      "role": "CDB byte 4 or reused controller/status byte",
+      "total": 0,
+      "unique_values": 0,
+      "values": []
+    },
+    {
+      "addr": 35406,
+      "role": "CDB byte 5 or reused controller/status byte",
+      "total": 0,
+      "unique_values": 0,
+      "values": []
+    },
+    {
+      "addr": 35407,
+      "role": "CDB byte 6 / payload field",
+      "total": 0,
+      "unique_values": 0,
+      "values": []
+    },
+    {
+      "addr": 35408,
+      "role": "CDB byte 7 / payload field",
+      "total": 0,
+      "unique_values": 0,
+      "values": []
+    },
+    {
+      "addr": 35409,
+      "role": "CDB byte 8 / payload field",
+      "total": 0,
+      "unique_values": 0,
+      "values": []
+    },
+    {
+      "addr": 35410,
+      "role": "CDB byte 9 / payload field",
+      "total": 0,
+      "unique_values": 0,
+      "values": []
+    },
+    {
+      "addr": 35411,
+      "role": "CDB byte 10 or reused controller/status byte",
+      "total": 0,
+      "unique_values": 0,
+      "values": []
+    },
+    {
+      "addr": 35412,
+      "role": "CDB byte 11 or reused controller/status byte",
+      "total": 0,
+      "unique_values": 0,
+      "values": []
+    }
+  ],
+  "capture_count": 7,
+  "compare_rows": [
+    {
+      "addr": 35401,
+      "branch": "jz",
+      "count": 28,
+      "kind": "mov_r7_xrl_imm",
+      "offsets": {
+        "24832": 1,
+        "24896": 3,
+        "24960": 2,
+        "25024": 1,
+        "30272": 7,
+        "38592": 7,
+        "39872": 7
+      },
+      "role": "CDB byte 0 / opcode selector",
+      "samples": [
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/02-after-report-key-css-agid",
+          "hex": "9089c8f09047c4e09089c9f0908a49e0ff64286013ef64be600eef64a86009ef64d56004efb4b9099047c5e4f09047c4",
+          "offset": 24835
+        },
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/02-after-report-key-css-agid",
+          "hex": "02b839c27790809ee04408f0908a49e0ff64286019ef64a86014ef64be600fef64d5600aef64b96005ef64f0905722e0",
+          "offset": 30293
+        },
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/02-after-report-key-css-agid",
+          "hex": "f0f0e054f847b1e0908a54f0908a49e0ff64286009ef64a86004efb4be07908243e04480f0908a49e064286003029e31",
+          "offset": 38587
+        },
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/02-after-report-key-css-agid",
+          "hex": "0012050d908988eef0a3eff0908a49e0ff64286004efb4a80f908946e0ffa3e090892dcff0a3eff0908a49e064286003",
+          "offset": 39910
+        }
+      ],
+      "stimuli": {
+        "after-report-key-css-agid": 4,
+        "after-report-key-css-asf": 4,
+        "after-report-key-css-drive-challenge": 4,
+        "after-report-key-css-invalidate-agid": 4,
+        "after-report-key-css-key1": 4,
+        "after-report-key-css-rpc-state": 4,
+        "after-send-key-css-host-challenge": 4
+      },
+      "value": 40
+    },
+    {
+      "addr": 35401,
+      "branch": "jz",
+      "count": 28,
+      "kind": "xrl_a_imm",
+      "offsets": {
+        "34688": 7,
+        "38592": 7,
+        "38720": 7,
+        "39936": 7
+      },
+      "role": "CDB byte 0 / opcode selector",
+      "samples": [
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/02-after-report-key-css-agid",
+          "hex": "78abf678b0f6908a44e0601a908a49e064286012e0644a600de0600ae064466005e412f2a022908844eff090825be030",
+          "offset": 34718
+        },
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/02-after-report-key-css-agid",
+          "hex": "04efb4be07908243e04480f0908a49e064286003029e319089f7e0ffd39402507cef14602a146027240270600ff09059",
+          "offset": 38612
+        },
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/02-after-report-key-css-agid",
+          "hex": "e090892dcff0a3eff0025f2f908a49e064286008e064a86003025e7a301f10908a500b7402f0905005e0540f4480f090",
+          "offset": 38751
+        },
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/02-after-report-key-css-agid",
+          "hex": "e0ffa3e090892dcff0a3eff0908a49e06428600302a016908a69e0fca3e0fda3e0fea3e0ff908a4be0f8a3e0f9a3e0fa",
+          "offset": 39938
+        }
+      ],
+      "stimuli": {
+        "after-report-key-css-agid": 4,
+        "after-report-key-css-asf": 4,
+        "after-report-key-css-drive-challenge": 4,
+        "after-report-key-css-invalidate-agid": 4,
+        "after-report-key-css-key1": 4,
+        "after-report-key-css-rpc-state": 4,
+        "after-send-key-css-host-challenge": 4
+      },
+      "value": 40
+    },
+    {
+      "addr": 35401,
+      "branch": "cjne",
+      "count": 14,
+      "kind": "cjne_a_imm",
+      "offsets": {
+        "34688": 7,
+        "40768": 7
+      },
+      "role": "CDB byte 0 / opcode selector",
+      "samples": [
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/02-after-report-key-css-agid",
+          "hex": "063978a976eb08761402711d908a49e0b4030302a4c2e478b5f678abf678b0f6908a44e0601a908a49e064286012e064",
+          "offset": 34692
+        },
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/02-after-report-key-css-agid",
+          "hex": "e4f0801fc23f9047c97450f0908a49e0b4030a9047cf7401f0a3f080069047d07401f0908a38e054eff09040187403f0",
+          "offset": 40779
+        },
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/04-after-report-key-css-asf",
+          "hex": "063978a976eb08761402711d908a49e0b4030302a4c2e478b5f678abf678b0f6908a44e0601a908a49e064286012e064",
+          "offset": 34692
+        },
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/04-after-report-key-css-asf",
+          "hex": "e4f0801fc23f9047c97450f0908a49e0b4030a9047cf7401f0a3f080069047d07401f0908a38e054eff09040187403f0",
+          "offset": 40779
+        }
+      ],
+      "stimuli": {
+        "after-report-key-css-agid": 2,
+        "after-report-key-css-asf": 2,
+        "after-report-key-css-drive-challenge": 2,
+        "after-report-key-css-invalidate-agid": 2,
+        "after-report-key-css-key1": 2,
+        "after-report-key-css-rpc-state": 2,
+        "after-send-key-css-host-challenge": 2
+      },
+      "value": 3
+    },
+    {
+      "addr": 35401,
+      "branch": "cjne",
+      "count": 14,
+      "kind": "cjne_a_imm",
+      "offsets": {
+        "27392": 1,
+        "27456": 1,
+        "27520": 3,
+        "27584": 2,
+        "39296": 7
+      },
+      "role": "CDB byte 0 / opcode selector",
+      "samples": [
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/02-after-report-key-css-agid",
+          "hex": "7f00020513e478a6f612b092908a49e0b42839908a50e07004a3e0640112050da87ceef608eff6e57c2403f8e69055ac",
+          "offset": 27555
+        },
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/02-after-report-key-css-agid",
+          "hex": "849dffee9c908988f0a3eff0908a49e0b42829c3908989e09464908988e09400401ae47f01fefdfc78a21233b2c31233",
+          "offset": 39295
+        },
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/04-after-report-key-css-asf",
+          "hex": "7f00020513e478a6f612b092908a49e0b42839908a50e07004a3e0640112050da87ceef608eff6e57c2403f8e69055ac",
+          "offset": 27555
+        },
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/04-after-report-key-css-asf",
+          "hex": "849dffee9c908988f0a3eff0908a49e0b42829c3908989e09464908988e09400401ae47f01fefdfc78a21233b2c31233",
+          "offset": 39295
+        }
+      ],
+      "stimuli": {
+        "after-report-key-css-agid": 2,
+        "after-report-key-css-asf": 2,
+        "after-report-key-css-drive-challenge": 2,
+        "after-report-key-css-invalidate-agid": 2,
+        "after-report-key-css-key1": 2,
+        "after-report-key-css-rpc-state": 2,
+        "after-send-key-css-host-challenge": 2
+      },
+      "value": 40
+    },
+    {
+      "addr": 35401,
+      "branch": "jz",
+      "count": 7,
+      "kind": "xrl_a_imm",
+      "offsets": {
+        "25536": 7
+      },
+      "role": "CDB byte 0 / opcode selector",
+      "samples": [
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/02-after-report-key-css-agid",
+          "hex": "6404604720470578b5e66008908a49e064036037908a23e0ff1313543f30e008908a49e07002802390892ce0ffc41354",
+          "offset": 25566
+        },
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/04-after-report-key-css-asf",
+          "hex": "6404604720470578b5e66008908a49e064036037908a23e0ff1313543f30e008908a49e07002802390892ce0ffc41354",
+          "offset": 25566
+        },
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/06-after-report-key-css-rpc-state",
+          "hex": "6404604720470578b5e66008908a49e064036037908a23e0ff1313543f30e008908a49e07002802390892ce0ffc41354",
+          "offset": 25566
+        },
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/08-after-send-key-css-host-challenge",
+          "hex": "6404604720470578b5e66008908a49e064036037908a23e0ff1313543f30e008908a49e07002802390892ce0ffc41354",
+          "offset": 25566
+        }
+      ],
+      "stimuli": {
+        "after-report-key-css-agid": 1,
+        "after-report-key-css-asf": 1,
+        "after-report-key-css-drive-challenge": 1,
+        "after-report-key-css-invalidate-agid": 1,
+        "after-report-key-css-key1": 1,
+        "after-report-key-css-rpc-state": 1,
+        "after-send-key-css-host-challenge": 1
+      },
+      "value": 3
+    },
+    {
+      "addr": 35401,
+      "branch": "cjne",
+      "count": 7,
+      "kind": "cjne_a_imm",
+      "offsets": {
+        "40640": 7
+      },
+      "role": "CDB byte 0 / opcode selector",
+      "samples": [
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/02-after-report-key-css-agid",
+          "hex": "908a37e04408f09047cbe4f0908a49e0b41b089089f6e064146023301a089089f6e064136018301c182023089089f6e0",
+          "offset": 40687
+        },
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/04-after-report-key-css-asf",
+          "hex": "908a37e04408f09047cbe4f0908a49e0b41b089089f6e064146023301a089089f6e064136018301c182023089089f6e0",
+          "offset": 40687
+        },
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/06-after-report-key-css-rpc-state",
+          "hex": "908a37e04408f09047cbe4f0908a49e0b41b089089f6e064146023301a089089f6e064136018301c182023089089f6e0",
+          "offset": 40687
+        },
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/08-after-send-key-css-host-challenge",
+          "hex": "908a37e04408f09047cbe4f0908a49e0b41b089089f6e064146023301a089089f6e064136018301c182023089089f6e0",
+          "offset": 40687
+        }
+      ],
+      "stimuli": {
+        "after-report-key-css-agid": 1,
+        "after-report-key-css-asf": 1,
+        "after-report-key-css-drive-challenge": 1,
+        "after-report-key-css-invalidate-agid": 1,
+        "after-report-key-css-key1": 1,
+        "after-report-key-css-rpc-state": 1,
+        "after-send-key-css-host-challenge": 1
+      },
+      "value": 27
+    },
+    {
+      "addr": 35401,
+      "branch": "cjne",
+      "count": 6,
+      "kind": "cjne_a_imm",
+      "offsets": {
+        "37312": 6
+      },
+      "role": "CDB byte 0 / opcode selector",
+      "samples": [
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/04-after-report-key-css-asf",
+          "hex": "8a53e0543fffbf0803026f62908a49e0b4a30d908a53e0543fffbf0603026f73908937e030e70c78b5760278ab763ae4",
+          "offset": 37322
+        },
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/06-after-report-key-css-rpc-state",
+          "hex": "8a53e0543fffbf0803026f62908a49e0b4a30d908a53e0543fffbf0603026f73908937e030e70c78b5760278ab763ae4",
+          "offset": 37322
+        },
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/08-after-send-key-css-host-challenge",
+          "hex": "8a53e0543fffbf0803026f62908a49e0b4a30d908a53e0543fffbf0603026f73908937e030e70c78b5760278ab763ae4",
+          "offset": 37322
+        },
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/10-after-report-key-css-key1",
+          "hex": "8a53e0543fffbf0803026f62908a49e0b4a30d908a53e0543fffbf0603026f73908937e030e70c78b5760278ab763ae4",
+          "offset": 37322
+        }
+      ],
+      "stimuli": {
+        "after-report-key-css-asf": 1,
+        "after-report-key-css-drive-challenge": 1,
+        "after-report-key-css-invalidate-agid": 1,
+        "after-report-key-css-key1": 1,
+        "after-report-key-css-rpc-state": 1,
+        "after-send-key-css-host-challenge": 1
+      },
+      "value": 163
+    },
+    {
+      "addr": 35401,
+      "branch": "cjne",
+      "count": 6,
+      "kind": "cjne_a_imm",
+      "offsets": {
+        "37312": 6
+      },
+      "role": "CDB byte 0 / opcode selector",
+      "samples": [
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/04-after-report-key-css-asf",
+          "hex": "908a23e0ffc4540f20e00675908a49e0b4a40d908a53e0543fffbf0803026f62908a49e0b4a30d908a53e0543fffbf06",
+          "offset": 37302
+        },
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/06-after-report-key-css-rpc-state",
+          "hex": "908a23e0ffc4540f20e00675908a49e0b4a40d908a53e0543fffbf0803026f62908a49e0b4a30d908a53e0543fffbf06",
+          "offset": 37302
+        },
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/08-after-send-key-css-host-challenge",
+          "hex": "908a23e0ffc4540f20e00675908a49e0b4a40d908a53e0543fffbf0803026f62908a49e0b4a30d908a53e0543fffbf06",
+          "offset": 37302
+        },
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/10-after-report-key-css-key1",
+          "hex": "908a23e0ffc4540f20e00675908a49e0b4a40d908a53e0543fffbf0803026f62908a49e0b4a30d908a53e0543fffbf06",
+          "offset": 37302
+        }
+      ],
+      "stimuli": {
+        "after-report-key-css-asf": 1,
+        "after-report-key-css-drive-challenge": 1,
+        "after-report-key-css-invalidate-agid": 1,
+        "after-report-key-css-key1": 1,
+        "after-report-key-css-rpc-state": 1,
+        "after-send-key-css-host-challenge": 1
+      },
+      "value": 164
+    },
+    {
+      "addr": 35401,
+      "branch": "jnz",
+      "count": 4,
+      "kind": "xrl_a_imm",
+      "offsets": {
+        "35776": 4
+      },
+      "role": "CDB byte 0 / opcode selector",
+      "samples": [
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/08-after-send-key-css-host-challenge",
+          "hex": "40e0ffc4540f30e03212b092908a49e0641b7027908a4de0540fffbf021d20431a908a2de0ffc41313540320e00a908d",
+          "offset": 35796
+        },
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/10-after-report-key-css-key1",
+          "hex": "40e0ffc4540f30e03212b092908a49e0641b7027908a4de0540fffbf021d20431a908a2de0ffc41313540320e00a908d",
+          "offset": 35796
+        },
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/12-after-report-key-css-drive-challenge",
+          "hex": "40e0ffc4540f30e03212b092908a49e0641b7027908a4de0540fffbf021d20431a908a2de0ffc41313540320e00a908d",
+          "offset": 35796
+        },
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/14-after-report-key-css-invalidate-agid",
+          "hex": "40e0ffc4540f30e03212b092908a49e0641b7027908a4de0540fffbf021d20431a908a2de0ffc41313540320e00a908d",
+          "offset": 35796
+        }
+      ],
+      "stimuli": {
+        "after-report-key-css-drive-challenge": 1,
+        "after-report-key-css-invalidate-agid": 1,
+        "after-report-key-css-key1": 1,
+        "after-send-key-css-host-challenge": 1
+      },
+      "value": 27
+    },
+    {
+      "addr": 35401,
+      "branch": "jz",
+      "count": 4,
+      "kind": "xrl_a_imm",
+      "offsets": {
+        "25152": 4
+      },
+      "role": "CDB byte 0 / opcode selector",
+      "samples": [
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/08-after-send-key-css-host-challenge",
+          "hex": "10af01c3c0d0203e0302b319908a49e0642a6004e0b4aa0de4908a18f0a3f0c252c245c24f103f0302b209908aa3f0a3",
+          "offset": 25171
+        },
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/10-after-report-key-css-key1",
+          "hex": "10af01c3c0d0203e0302b319908a49e0642a6004e0b4aa0de4908a18f0a3f0c252c245c24f103f0302b209908aa3f0a3",
+          "offset": 25171
+        },
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/12-after-report-key-css-drive-challenge",
+          "hex": "10af01c3c0d0203e0302b319908a49e0642a6004e0b4aa0de4908a18f0a3f0c252c245c24f103f0302b209908aa3f0a3",
+          "offset": 25171
+        },
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/14-after-report-key-css-invalidate-agid",
+          "hex": "10af01c3c0d0203e0302b319908a49e0642a6004e0b4aa0de4908a18f0a3f0c252c245c24f103f0302b209908aa3f0a3",
+          "offset": 25171
+        }
+      ],
+      "stimuli": {
+        "after-report-key-css-drive-challenge": 1,
+        "after-report-key-css-invalidate-agid": 1,
+        "after-report-key-css-key1": 1,
+        "after-send-key-css-host-challenge": 1
+      },
+      "value": 42
+    },
+    {
+      "addr": 35402,
+      "branch": "cjne",
+      "count": 7,
+      "kind": "cjne_a_imm",
+      "offsets": {
+        "26368": 7
+      },
+      "role": "CDB byte 1 / op-specific field",
+      "samples": [
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/02-after-report-key-css-agid",
+          "hex": "f07b327df0e09047b102a4be908a4ae0b40120a3e0ff6401601cef64026017ef64e26012ef64f0600def64f26008ef64",
+          "offset": 26363
+        },
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/04-after-report-key-css-asf",
+          "hex": "f07b327df0e09047b102a4be908a4ae0b40120a3e0ff6401601cef64026017ef64e26012ef64f0600def64f26008ef64",
+          "offset": 26363
+        },
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/06-after-report-key-css-rpc-state",
+          "hex": "f07b327df0e09047b102a4be908a4ae0b40120a3e0ff6401601cef64026017ef64e26012ef64f0600def64f26008ef64",
+          "offset": 26363
+        },
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/08-after-send-key-css-host-challenge",
+          "hex": "f07b327df0e09047b102a4be908a4ae0b40120a3e0ff6401601cef64026017ef64e26012ef64f0600def64f26008ef64",
+          "offset": 26363
+        }
+      ],
+      "stimuli": {
+        "after-report-key-css-agid": 1,
+        "after-report-key-css-asf": 1,
+        "after-report-key-css-drive-challenge": 1,
+        "after-report-key-css-invalidate-agid": 1,
+        "after-report-key-css-key1": 1,
+        "after-report-key-css-rpc-state": 1,
+        "after-send-key-css-host-challenge": 1
+      },
+      "value": 1
+    },
+    {
+      "addr": 35402,
+      "branch": "jnz",
+      "count": 7,
+      "kind": "xrl_a_imm",
+      "offsets": {
+        "25920": 7
+      },
+      "role": "CDB byte 1 / op-specific field",
+      "samples": [
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/02-after-report-key-css-agid",
+          "hex": "65bf01077db17ffb123d8922908a4ae06406705ea3e064677058a3e064787052a3e06489704ca3e0649a70dbe090576b",
+          "offset": 25941
+        },
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/04-after-report-key-css-asf",
+          "hex": "65bf01077db17ffb123d8922908a4ae06406705ea3e064677058a3e064787052a3e06489704ca3e0649a70701020380d",
+          "offset": 25941
+        },
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/06-after-report-key-css-rpc-state",
+          "hex": "65bf01077db17ffb123d8922908a4ae06406705ea3e064677058a3e064787052a3e06489704ca3e0649a70701020380d",
+          "offset": 25941
+        },
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/08-after-send-key-css-host-challenge",
+          "hex": "65bf01077db17ffb123d8922908a4ae06406705ea3e064677058a3e064787052a3e06489704ca3e0649a70701020380d",
+          "offset": 25941
+        }
+      ],
+      "stimuli": {
+        "after-report-key-css-agid": 1,
+        "after-report-key-css-asf": 1,
+        "after-report-key-css-drive-challenge": 1,
+        "after-report-key-css-invalidate-agid": 1,
+        "after-report-key-css-key1": 1,
+        "after-report-key-css-rpc-state": 1,
+        "after-send-key-css-host-challenge": 1
+      },
+      "value": 6
+    },
+    {
+      "addr": 35403,
+      "branch": "jz",
+      "count": 7,
+      "kind": "mov_r7_xrl_imm",
+      "offsets": {
+        "29312": 7
+      },
+      "role": "CDB byte 2 / op-specific field",
+      "samples": [
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/02-after-report-key-css-agid",
+          "hex": "6b379979558d2c4000c14800908a4be0ff64e26004efb4f116908a53e0fea3e0ffc378aa96ee18965005eef608eff678",
+          "offset": 29300
+        },
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/04-after-report-key-css-asf",
+          "hex": "6b379979558d2c4000c14800908a4be0ff64e26004efb4f116908a53e0fea3e0ffc378aa96ee18965005eef608eff678",
+          "offset": 29300
+        },
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/06-after-report-key-css-rpc-state",
+          "hex": "d092af2290401ae0ff741cf0908a4be0ff64e26004efb4f116908a53e0fea3e0ffc378aa96ee18965005eef608eff678",
+          "offset": 29300
+        },
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/08-after-send-key-css-host-challenge",
+          "hex": "d092af2290401ae0ff741cf0908a4be0ff64e26004efb4f116908a53e0fea3e0ffc378aa96ee18965005eef608eff678",
+          "offset": 29300
+        }
+      ],
+      "stimuli": {
+        "after-report-key-css-agid": 1,
+        "after-report-key-css-asf": 1,
+        "after-report-key-css-drive-challenge": 1,
+        "after-report-key-css-invalidate-agid": 1,
+        "after-report-key-css-key1": 1,
+        "after-report-key-css-rpc-state": 1,
+        "after-send-key-css-host-challenge": 1
+      },
+      "value": 226
+    },
+    {
+      "addr": 35404,
+      "branch": "jz",
+      "count": 7,
+      "kind": "mov_r7_xrl_imm",
+      "offsets": {
+        "38208": 3,
+        "38272": 2,
+        "38336": 2
+      },
+      "role": "CDB byte 3 / controller setup byte",
+      "samples": [
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/02-after-report-key-css-agid",
+          "hex": "3d89e4908a33f0d0d092af22908a4ce0ff6401601cef64026017ef64046012ef6405600d78b5760578ab7624e478b0f6",
+          "offset": 38346
+        },
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/04-after-report-key-css-asf",
+          "hex": "3d89e4908a33f0d0d092af22908a4ce0ff6401601cef64026017ef64046012ef6405600d78b5760578ab7624e478b0f6",
+          "offset": 38218
+        },
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/06-after-report-key-css-rpc-state",
+          "hex": "3d89e4908a33f0d0d092af22908a4ce0ff6401601cef64026017ef64046012ef6405600d78b5760578ab7624e478b0f6",
+          "offset": 38218
+        },
+        {
+          "capture": "normal-mailbox-dvd-auth-20260505T034456990715Z/08-after-send-key-css-host-challenge",
+          "hex": "3d89e4908a33f0d0d092af22908a4ce0ff6401601cef64026017ef64046012ef6405600d78b5760578ab7624e478b0f6",
+          "offset": 38282
+        }
+      ],
+      "stimuli": {
+        "after-report-key-css-agid": 1,
+        "after-report-key-css-asf": 1,
+        "after-report-key-css-drive-challenge": 1,
+        "after-report-key-css-invalidate-agid": 1,
+        "after-report-key-css-key1": 1,
+        "after-report-key-css-rpc-state": 1,
+        "after-send-key-css-host-challenge": 1
+      },
+      "value": 1
+    }
+  ],
+  "edge_rows": [
+    {
+      "addr": 35401,
+      "edges": [],
+      "role": "CDB byte 0 / opcode selector"
+    },
+    {
+      "addr": 35402,
+      "edges": [
+        {
+          "count": 7,
+          "dst": 35402,
+          "kind": "direct",
+          "sample_offsets": [
+            38016
+          ],
+          "src": 18353
+        }
+      ],
+      "role": "CDB byte 1 / op-specific field"
+    },
+    {
+      "addr": 35403,
+      "edges": [
+        {
+          "count": 7,
+          "dst": 35403,
+          "kind": "direct",
+          "sample_offsets": [
+            38016
+          ],
+          "src": 18353
+        }
+      ],
+      "role": "CDB byte 2 / op-specific field"
+    },
+    {
+      "addr": 35404,
+      "edges": [
+        {
+          "count": 7,
+          "dst": 16401,
+          "kind": "direct",
+          "sample_offsets": [
+            28928
+          ],
+          "src": 35404
+        }
+      ],
+      "role": "CDB byte 3 / controller setup byte"
+    },
+    {
+      "addr": 35405,
+      "edges": [
+        {
+          "count": 7,
+          "dst": 35405,
+          "kind": "direct",
+          "sample_offsets": [
+            38144
+          ],
+          "src": 18353
+        },
+        {
+          "count": 7,
+          "dst": 16402,
+          "kind": "direct",
+          "sample_offsets": [
+            28928
+          ],
+          "src": 35405
+        }
+      ],
+      "role": "CDB byte 4 or reused controller/status byte"
+    },
+    {
+      "addr": 35406,
+      "edges": [
+        {
+          "count": 7,
+          "dst": 35406,
+          "kind": "direct",
+          "sample_offsets": [
+            38144
+          ],
+          "src": 18353
+        },
+        {
+          "count": 7,
+          "dst": 16403,
+          "kind": "direct",
+          "sample_offsets": [
+            28928
+          ],
+          "src": 35406
+        }
+      ],
+      "role": "CDB byte 5 or reused controller/status byte"
+    },
+    {
+      "addr": 35407,
+      "edges": [
+        {
+          "count": 7,
+          "dst": 35407,
+          "kind": "direct",
+          "sample_offsets": [
+            38144
+          ],
+          "src": 18353
+        }
+      ],
+      "role": "CDB byte 6 / payload field"
+    },
+    {
+      "addr": 35408,
+      "edges": [
+        {
+          "count": 7,
+          "dst": 35408,
+          "kind": "direct",
+          "sample_offsets": [
+            38144
+          ],
+          "src": 18353
+        }
+      ],
+      "role": "CDB byte 7 / payload field"
+    },
+    {
+      "addr": 35409,
+      "edges": [
+        {
+          "count": 7,
+          "dst": 35409,
+          "kind": "direct",
+          "sample_offsets": [
+            38144
+          ],
+          "src": 18353
+        }
+      ],
+      "role": "CDB byte 8 / payload field"
+    },
+    {
+      "addr": 35410,
+      "edges": [
+        {
+          "count": 7,
+          "dst": 35410,
+          "kind": "direct",
+          "sample_offsets": [
+            38144
+          ],
+          "src": 18353
+        }
+      ],
+      "role": "CDB byte 9 / payload field"
+    },
+    {
+      "addr": 35411,
+      "edges": [
+        {
+          "count": 7,
+          "dst": 35411,
+          "kind": "direct",
+          "sample_offsets": [
+            38144
+          ],
+          "src": 18353
+        }
+      ],
+      "role": "CDB byte 10 or reused controller/status byte"
+    },
+    {
+      "addr": 35412,
+      "edges": [],
+      "role": "CDB byte 11 or reused controller/status byte"
+    }
+  ]
+}

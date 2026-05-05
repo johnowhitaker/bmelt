@@ -1070,7 +1070,7 @@ def send_dvd_auth_command(
 
 def run_dvd_auth(args: argparse.Namespace) -> int:
     """Probe normal REPORT KEY/SEND KEY traffic without touching firmware or media writes."""
-    run_id = datetime.now(timezone.utc).strftime("normal-mailbox-dvd-auth-%Y%m%dT%H%M%SZ")
+    run_id = datetime.now(timezone.utc).strftime("normal-mailbox-dvd-auth-%Y%m%dT%H%M%S%fZ")
     out_dir = args.out_dir / run_id
     out_dir.mkdir(parents=True, exist_ok=True)
     nonce = parse_hex_bytes(args.nonce) if args.nonce else default_auth_nonce()
@@ -1087,10 +1087,32 @@ def run_dvd_auth(args: argparse.Namespace) -> int:
         ),
         "nonce_hex": nonce.hex(),
         "send_challenge": args.send_challenge,
+        "capture_step_windows": args.capture_step_windows,
         "steps": [],
         "windows": [],
     }
     idx = 0
+
+    def maybe_capture_step_window(index: int, role: str) -> int:
+        if not args.capture_step_windows:
+            return index
+        window = capture_work_window(
+            args=args,
+            out_dir=out_dir,
+            index=index,
+            name=f"after-{role}",
+            payload=nonce,
+        )
+        window["role"] = f"work-window-after-{role}"
+        report["windows"].append(window)
+        print(
+            f"{index:02d} window after {role} exact_nonce_hits="
+            f"{len(window['payload_hits'].get('exact_offsets', [])) if window.get('payload_hits') else 0} "
+            f"sha={window['sha256'][:16]}",
+            flush=True,
+        )
+        return index + 1
+
     identity_record = save_command_result(args=args, out_dir=out_dir, index=idx, command=inquiry_command())
     report["steps"].append(identity_record | {"role": "identity-before"})
     report["identity_before"] = identity_summary(Path(identity_record["response_path"]).read_bytes())
@@ -1119,6 +1141,7 @@ def run_dvd_auth(args: argparse.Namespace) -> int:
     agid = parse_css_agid(agid_data) if agid_record.get("good") else None
     report["agid"] = agid
     print(f"parsed_agid={agid}", flush=True)
+    idx = maybe_capture_step_window(idx, "report-key-css-agid")
 
     # These formats are useful even when AGID grant fails: ASF and RPC are
     # specified as reserved/ignored AGID in MMC-6.
@@ -1144,6 +1167,7 @@ def run_dvd_auth(args: argparse.Namespace) -> int:
             nonce=nonce,
         )
         report["steps"].append(record)
+        idx = maybe_capture_step_window(idx, name)
 
     if agid is not None:
         if args.send_challenge:
@@ -1170,6 +1194,7 @@ def run_dvd_auth(args: argparse.Namespace) -> int:
                 nonce=nonce,
             )
             report["steps"].append(send_record)
+            idx = maybe_capture_step_window(idx, "send-key-css-host-challenge")
 
             idx, key1_record, _ = send_dvd_auth_command(
                 args=args,
@@ -1189,6 +1214,7 @@ def run_dvd_auth(args: argparse.Namespace) -> int:
                 nonce=nonce,
             )
             report["steps"].append(key1_record)
+            idx = maybe_capture_step_window(idx, "report-key-css-key1")
 
             idx, challenge_record, _ = send_dvd_auth_command(
                 args=args,
@@ -1208,6 +1234,7 @@ def run_dvd_auth(args: argparse.Namespace) -> int:
                 nonce=nonce,
             )
             report["steps"].append(challenge_record)
+            idx = maybe_capture_step_window(idx, "report-key-css-drive-challenge")
         else:
             report["challenge_path_skipped"] = (
                 "CSS challenge/key commands require a host challenge first; "
@@ -1232,6 +1259,7 @@ def run_dvd_auth(args: argparse.Namespace) -> int:
             nonce=nonce,
         )
         report["steps"].append(invalidate_record)
+        idx = maybe_capture_step_window(idx, "report-key-css-invalidate-agid")
 
     if args.capture_window:
         window = capture_work_window(
@@ -1360,6 +1388,11 @@ def parse_args() -> argparse.Namespace:
         help="also send a standard CSS host challenge with the nonce after AGID grant",
     )
     dvd.add_argument("--capture-window", action="store_true")
+    dvd.add_argument(
+        "--capture-step-windows",
+        action="store_true",
+        help="capture the public work window after each auth command; this intentionally interleaves READ BUFFER commands",
+    )
     dvd.add_argument("--window-mode", type=parse_byte, default=0x01)
     dvd.add_argument("--window-id", type=parse_byte, default=0x01)
     dvd.add_argument("--window-offset", type=parse_int, default=0x070000)

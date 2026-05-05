@@ -2520,3 +2520,34 @@ Immediate useful directions:
     `000e00007e2f16a7be83358bace60000`, AGID invalidated cleanly, and identity
     stayed `LD5M`. The sampled public window had no nonce hit. Detailed report:
     `analysis/8051/drive3-movie-dvd-auth-20260505.md`.
+143. Follow-up DVD auth nonce tests prove the path is host-controlled. Four
+    different host challenges produced four different key1 responses; repeating
+    nonce `535445503157494e3033` produced the same key1
+    `000a00005539c62770000000` three times, while the drive challenge changed
+    each session. This is a real normal-mode bidirectional auth transform, not
+    arbitrary memory I/O.
+144. `dvd-auth --capture-step-windows` can now interleave public work-window
+    captures after each auth command. A 16 KiB step run showed identical window
+    hashes and no nonce hits. A 64 KiB step run showed phase changes across the
+    auth sequence and exposed an A3/A4 selector island at public offset
+    `+0x91c2`. Selector analysis:
+    `analysis/8051/drive3-dvd-auth-step-selector-20260505.md`.
+145. The `+0x91c2` island checks `xdata[0x8a49] == 0xa4` with
+    `(xdata[0x8a53] & 0x3f) == 0x08`, then jumps to `0x6f62`; it also checks
+    `xdata[0x8a49] == 0xa3` with low format `0x06`, then jumps to `0x6f73`.
+    Treat `REPORT KEY` format `8` as the safe read-only branch. Treat
+    `SEND KEY` format `6` as hazardous because it is likely the DVD RPC/region
+    write/config side.
+146. A read-only `REPORT KEY` format scan with the pressed DVD and AGID `3`
+    found successful formats `0x00` AGID, `0x05` ASF, and `0x08` RPC state;
+    format `0x3f` invalidated AGID cleanly at the end. Formats `0x01/0x02`
+    fail with `Command sequence error` without the required host-challenge
+    sequence, format `0x04` reports key exchange not established, and most
+    others are invalid field. Evidence:
+    `references/evidence/live/drive3-dvd-report-key-scan-20260505T034858209881Z/`.
+147. Current safe next target: map the `REPORT KEY format 8 -> 0x6f62` branch
+    and its nearby state effects around `0x4867..0x486b`, `0x4a01`,
+    `0x5904`, and `0x5950`. Do not broad-fuzz CSS, and do not send
+    `SEND KEY format 6` unless deliberately choosing to risk DVD region/RPC
+    state. Follow-up note:
+    `analysis/8051/drive3-dvd-auth-followup-20260505.md`.

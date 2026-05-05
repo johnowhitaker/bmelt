@@ -3204,3 +3204,33 @@ the nonce, so the data is not simply sitting in the public `0x070000` window.
 The next job is to localize where the `0xa3`/`0xa4` packet path stores the
 nonce and response material internally. Detailed note:
 `analysis/8051/drive3-movie-dvd-auth-20260505.md`.
+
+The follow-up made the shape of that path much clearer. Different host
+challenges produce different key1 responses, and repeating the same host
+challenge produces the same key1 while the drive challenge changes each session.
+So this is not just a boring fixed response: normal `LD5M` is accepting a
+host-controlled value, processing it, and returning computed state.
+
+The raw nonce still does not show up in the public work-window. A 16 KiB
+step-window capture stayed identical after every auth command, and a 64 KiB
+step-window capture changed phase across the auth sequence but still had no
+exact nonce hit. The useful thing the wider capture gave us was code: at public
+window `+0x91c2`, there is a real A3/A4 selector island. It checks
+`xdata[0x8a49]` for `REPORT KEY` (`0xa4`) and `SEND KEY` (`0xa3`), then checks
+`xdata[0x8a53] & 0x3f`. The read-only `REPORT KEY` format `8` branch jumps to
+`0x6f62`; the `SEND KEY` format `6` branch jumps to `0x6f73`.
+
+That last detail matters. Format `8` is the safe RPC-state read path we already
+use. Format `6` is very likely the write/config side for DVD region/RPC state,
+so it is now on the "do not casually poke this" list. A read-only `REPORT KEY`
+format scan confirmed the safe surface: AGID format `0`, ASF format `5`, and
+RPC-state format `8` succeed; challenge/key formats fail until the correct
+sequence is established; unknown formats return invalid-field errors. The drive
+remained `LD5M`.
+
+This did not give arbitrary normal-mode memory I/O, but it did give a grounded
+normal-mode command island to study. The next sensible target is the safe
+`REPORT KEY format 8 -> 0x6f62` path and the state bytes around
+`0x4867..0x486b`, `0x4a01`, `0x5904`, and `0x5950`, not broad CSS fuzzing.
+Detailed follow-up:
+`analysis/8051/drive3-dvd-auth-followup-20260505.md`.
