@@ -1,0 +1,467 @@
+{
+  "event1": {
+    "cdb": "3B 05 01 00 00 00 00 0B D0 7F 00 00",
+    "cmd": [
+      "/usr/bin/sg_raw",
+      "--cmdset=1",
+      "-b",
+      "--timeout",
+      "20",
+      "--send",
+      "3024",
+      "/dev/sg0",
+      "3b",
+      "05",
+      "01",
+      "00",
+      "00",
+      "00",
+      "00",
+      "0b",
+      "d0",
+      "7f",
+      "00",
+      "00"
+    ],
+    "elapsed_seconds": 0.20071311999345198,
+    "payload_len": 3024,
+    "payload_sha256": "64e3093035572e91b9e1948012f378d0fbd0a8d8b384d6a33fef8ae3122f1dc8",
+    "request_len": 0,
+    "returncode": 0,
+    "stderr": "SCSI Status: Good \n\n",
+    "stdout_first64_hex": "",
+    "stdout_hex": "",
+    "stdout_len": 0,
+    "stdout_sha256": null
+  },
+  "finished_at_utc": "2026-05-05T23:34:44.166108+00:00",
+  "gateway_bands": [
+    {
+      "ascii_preview": "................................................................................................................................",
+      "gateway_address": 458752,
+      "length": 4096,
+      "nonzero": false,
+      "path": "/home/jonathan/boastermelt/references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0307bb/gateway-band/070000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+    },
+    {
+      "ascii_preview": "................................................................................................................................",
+      "gateway_address": 462848,
+      "length": 4096,
+      "nonzero": false,
+      "path": "/home/jonathan/boastermelt/references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0307bb/gateway-band/071000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+    },
+    {
+      "ascii_preview": "................................................................................................................................",
+      "gateway_address": 466944,
+      "length": 4096,
+      "nonzero": false,
+      "path": "/home/jonathan/boastermelt/references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0307bb/gateway-band/072000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+    },
+    {
+      "ascii_preview": "................................................................................................................................",
+      "gateway_address": 471040,
+      "length": 4096,
+      "nonzero": false,
+      "path": "/home/jonathan/boastermelt/references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0307bb/gateway-band/073000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+    },
+    {
+      "ascii_preview": "................................................................................................................................",
+      "gateway_address": 475136,
+      "length": 4096,
+      "nonzero": false,
+      "path": "/home/jonathan/boastermelt/references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0307bb/gateway-band/074000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+    },
+    {
+      "ascii_preview": "................................................................................................................................",
+      "gateway_address": 479232,
+      "length": 4096,
+      "nonzero": false,
+      "path": "/home/jonathan/boastermelt/references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0307bb/gateway-band/075000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+    },
+    {
+      "ascii_preview": "................................................................................................................................",
+      "gateway_address": 483328,
+      "length": 4096,
+      "nonzero": false,
+      "path": "/home/jonathan/boastermelt/references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0307bb/gateway-band/076000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+    },
+    {
+      "ascii_preview": "................................................................................................................................",
+      "gateway_address": 487424,
+      "length": 4096,
+      "nonzero": false,
+      "path": "/home/jonathan/boastermelt/references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0307bb/gateway-band/077000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+    },
+    {
+      "ascii_preview": "................................................................................................................................",
+      "gateway_address": 491520,
+      "length": 4096,
+      "nonzero": false,
+      "path": "/home/jonathan/boastermelt/references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0307bb/gateway-band/078000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+    },
+    {
+      "ascii_preview": "................................................................................................................................",
+      "gateway_address": 495616,
+      "length": 4096,
+      "nonzero": false,
+      "path": "/home/jonathan/boastermelt/references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0307bb/gateway-band/079000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+    },
+    {
+      "ascii_preview": "................................................................................................................................",
+      "gateway_address": 499712,
+      "length": 4096,
+      "nonzero": false,
+      "path": "/home/jonathan/boastermelt/references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0307bb/gateway-band/07a000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+    },
+    {
+      "ascii_preview": "...........................................O...........F.....W.....-...........K.................J.....<........................",
+      "gateway_address": 503808,
+      "length": 4096,
+      "nonzero": true,
+      "path": "/home/jonathan/boastermelt/references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0307bb/gateway-band/07b000.bin",
+      "sha256": "03879143a2770e0ddfbc457b3880f38d81eb43c90b418672864bf6d99099e8aa"
+    },
+    {
+      "ascii_preview": ".........d.....e................qP.................}.....r....dz...........$.......................x.....5.................C....",
+      "gateway_address": 507904,
+      "length": 4096,
+      "nonzero": true,
+      "path": "/home/jonathan/boastermelt/references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0307bb/gateway-band/07c000.bin",
+      "sha256": "9d3069af21ef3c7ef3f7d509b166cf27697544141b2042a091ce93173617af6d"
+    },
+    {
+      "ascii_preview": "\".....)..%..\"..%.....(\"........\"P..\"....\"......)....:....\"P..%...\"....%...\"..........(......\".....).......\"...u.../..3..3.....@.",
+      "gateway_address": 512000,
+      "length": 4096,
+      "nonzero": true,
+      "path": "/home/jonathan/boastermelt/references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0307bb/gateway-band/07d000.bin",
+      "sha256": "e9ad50159c097e9244f6312eebc14bba5d204f42d7e6d32684fc63fd9037dd8e"
+    },
+    {
+      "ascii_preview": "....p...@.......P.@...p..@..p..@..p..@..p..@..p..@.$.`..@..N....?..N>...@..NE...A..J&......B.........?.`...I...@.`..D...N>..N=..",
+      "gateway_address": 516096,
+      "length": 4096,
+      "nonzero": true,
+      "path": "/home/jonathan/boastermelt/references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0307bb/gateway-band/07e000.bin",
+      "sha256": "6c608ea8de3802e8ec438eef3c3e7a40576d187951af19696733c084740015a5"
+    },
+    {
+      "ascii_preview": ".z...........%...R...6..1.....E..r......N:.~....^bJ...1.............H.P.F.Q......2....j.n.U..5..?....U....V. eC.y2.......Y......",
+      "gateway_address": 520192,
+      "length": 4096,
+      "nonzero": true,
+      "path": "/home/jonathan/boastermelt/references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0307bb/gateway-band/07f000.bin",
+      "sha256": "13c122ad0007f4e081251d86a1b098aa847ecc228c41789d0d4e6cbecc303e1d"
+    },
+    {
+      "ascii_preview": "................................................................................................................................",
+      "gateway_address": 4194304,
+      "length": 4096,
+      "nonzero": false,
+      "path": "/home/jonathan/boastermelt/references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0307bb/gateway-band/400000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+    }
+  ],
+  "identity_after_cycle": {
+    "extrainq": {
+      "cdb": "12 00 00 00 F0 40 00 00 00 00 00 00",
+      "cmd": [
+        "/usr/bin/sg_raw",
+        "--cmdset=1",
+        "-b",
+        "--timeout",
+        "10",
+        "--request",
+        "240",
+        "/dev/sg0",
+        "12",
+        "00",
+        "00",
+        "00",
+        "f0",
+        "40",
+        "00",
+        "00",
+        "00",
+        "00",
+        "00",
+        "00"
+      ],
+      "elapsed_seconds": 0.0063147249893518165,
+      "payload_len": 0,
+      "payload_sha256": null,
+      "request_len": 240,
+      "returncode": 0,
+      "stderr": "SCSI Status: Good \n\nWriting 176 bytes of data to stdout\n",
+      "stdout_first64_hex": "05800032ab000000504c4453202020204456442b2d52572044532d38414253484c44354d323031362f31302f31382031343a3138202020200000000000000000",
+      "stdout_hex": "05800032ab000000504c4453202020204456442b2d52572044532d38414253484c44354d323031362f31302f31382031343a313820202020000000000000000000000000000000000000000000000000000000000000000000000000000000004558545241494e510046ef13004588100120b4050000000000005fff01000f00000fbfff02000e80000ebfff03000d90000e7fff04000fc0000fdfff30443543314435302d3120204c44354d01000000",
+      "stdout_len": 176,
+      "stdout_sha256": "077fe3994e5692c807360ab0b16d043b1a7a7e2da4f4bf83724eee1432fe99be"
+    },
+    "standard": {
+      "cdb": "12 00 00 00 24 00",
+      "cmd": [
+        "/usr/bin/sg_raw",
+        "--cmdset=1",
+        "-b",
+        "--timeout",
+        "10",
+        "--request",
+        "36",
+        "/dev/sg0",
+        "12",
+        "00",
+        "00",
+        "00",
+        "24",
+        "00"
+      ],
+      "elapsed_seconds": 0.005124111004988663,
+      "payload_len": 0,
+      "payload_sha256": null,
+      "request_len": 36,
+      "returncode": 0,
+      "stderr": "SCSI Status: Good \n\nWriting 36 bytes of data to stdout\n",
+      "stdout_first64_hex": "058000325b000000504c4453202020204456442b2d52572044532d38414253484c44354d",
+      "stdout_hex": "058000325b000000504c4453202020204456442b2d52572044532d38414253484c44354d",
+      "stdout_len": 36,
+      "stdout_sha256": "0ee0c5976aa08dacebffd4d5bfcad1b10ef5e8e052f7ebe4514ba7d2b335e43d"
+    },
+    "standard_decoded": {
+      "product": "DVD+-RW DS-8ABSH",
+      "revision": "LD5M",
+      "sha256": "0ee0c5976aa08dacebffd4d5bfcad1b10ef5e8e052f7ebe4514ba7d2b335e43d",
+      "vendor": "PLDS"
+    }
+  },
+  "identity_before_event1": {
+    "extrainq": {
+      "cdb": "12 00 00 00 F0 40 00 00 00 00 00 00",
+      "cmd": [
+        "/usr/bin/sg_raw",
+        "--cmdset=1",
+        "-b",
+        "--timeout",
+        "10",
+        "--request",
+        "240",
+        "/dev/sg0",
+        "12",
+        "00",
+        "00",
+        "00",
+        "f0",
+        "40",
+        "00",
+        "00",
+        "00",
+        "00",
+        "00",
+        "00"
+      ],
+      "elapsed_seconds": 0.006613338991883211,
+      "payload_len": 0,
+      "payload_sha256": null,
+      "request_len": 240,
+      "returncode": 0,
+      "stderr": "SCSI Status: Good \n\nWriting 176 bytes of data to stdout\n",
+      "stdout_first64_hex": "05800032ab000000504c4453202020204456442b2d52572044532d38414253484c44354d323031362f31302f31382031343a3138202020200000000000000000",
+      "stdout_hex": "05800032ab000000504c4453202020204456442b2d52572044532d38414253484c44354d323031362f31302f31382031343a313820202020000000000000000000000000000000000000000000000000000000000000000000000000000000004558545241494e510046ef13004588100120b4050000000000005fff01000f00000fbfff02000e80000ebfff03000d90000e7fff04000fc0000fdfff30443543314435302d3120204c44354d01000000",
+      "stdout_len": 176,
+      "stdout_sha256": "077fe3994e5692c807360ab0b16d043b1a7a7e2da4f4bf83724eee1432fe99be"
+    },
+    "standard": {
+      "cdb": "12 00 00 00 24 00",
+      "cmd": [
+        "/usr/bin/sg_raw",
+        "--cmdset=1",
+        "-b",
+        "--timeout",
+        "10",
+        "--request",
+        "36",
+        "/dev/sg0",
+        "12",
+        "00",
+        "00",
+        "00",
+        "24",
+        "00"
+      ],
+      "elapsed_seconds": 0.004225377997499891,
+      "payload_len": 0,
+      "payload_sha256": null,
+      "request_len": 36,
+      "returncode": 0,
+      "stderr": "SCSI Status: Good \n\nWriting 36 bytes of data to stdout\n",
+      "stdout_first64_hex": "058000325b000000504c4453202020204456442b2d52572044532d38414253484c44354d",
+      "stdout_hex": "058000325b000000504c4453202020204456442b2d52572044532d38414253484c44354d",
+      "stdout_len": 36,
+      "stdout_sha256": "0ee0c5976aa08dacebffd4d5bfcad1b10ef5e8e052f7ebe4514ba7d2b335e43d"
+    },
+    "standard_decoded": {
+      "product": "DVD+-RW DS-8ABSH",
+      "revision": "LD5M",
+      "sha256": "0ee0c5976aa08dacebffd4d5bfcad1b10ef5e8e052f7ebe4514ba7d2b335e43d",
+      "vendor": "PLDS"
+    }
+  },
+  "pre_extrainq": {
+    "cdb": "12 00 00 00 F0 40 00 00 00 00 00 00",
+    "cmd": [
+      "/usr/bin/sg_raw",
+      "--cmdset=1",
+      "-b",
+      "--timeout",
+      "10",
+      "--request",
+      "176",
+      "/dev/sg0",
+      "12",
+      "00",
+      "00",
+      "00",
+      "f0",
+      "40",
+      "00",
+      "00",
+      "00",
+      "00",
+      "00",
+      "00"
+    ],
+    "elapsed_seconds": 0.005668576006428339,
+    "payload_len": 0,
+    "payload_sha256": null,
+    "request_len": 176,
+    "returncode": 0,
+    "stderr": "SCSI Status: Good \n\nWriting 176 bytes of data to stdout\n",
+    "stdout_first64_hex": "05800032ab000000504c4453202020204456442b2d52572044532d38414253484c44354d323031362f31302f31382031343a3138202020200000000000000000",
+    "stdout_hex": "05800032ab000000504c4453202020204456442b2d52572044532d38414253484c44354d323031362f31302f31382031343a313820202020000000000000000000000000000000000000000000000000000000000000000000000000000000004558545241494e510046ef13004588100120b4050000000000005fff01000f00000fbfff02000e80000ebfff03000d90000e7fff04000fc0000fdfff30443543314435302d3120204c44354d01000000",
+    "stdout_len": 176,
+    "stdout_sha256": "077fe3994e5692c807360ab0b16d043b1a7a7e2da4f4bf83724eee1432fe99be"
+  },
+  "sample_index": null,
+  "selector": 34,
+  "servo_after": {
+    "cmd": [
+      "/usr/bin/python3",
+      "pico/client.py",
+      "--port",
+      "/dev/ttyACM0",
+      "TOGGLE SERVO",
+      "1500"
+    ],
+    "response_json": {
+      "ok": true,
+      "servo": {
+        "left_us": 1000,
+        "pin": "GP10",
+        "position": "LEFT",
+        "right_us": 2000
+      }
+    },
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "{\"ok\": true, \"servo\": {\"left_us\": 1000, \"pin\": \"GP10\", \"position\": \"LEFT\", \"right_us\": 2000}}\n{\"error\": \"unknown command\", \"ok\": false}\n"
+  },
+  "servo_before": {
+    "cmd": [
+      "/usr/bin/python3",
+      "pico/client.py",
+      "--port",
+      "/dev/ttyACM0",
+      "TOGGLE SERVO",
+      "1500"
+    ],
+    "response_json": {
+      "ok": true,
+      "servo": {
+        "left_us": 1000,
+        "pin": "GP10",
+        "position": "LEFT",
+        "right_us": 2000
+      }
+    },
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "{\"ok\": true, \"servo\": {\"left_us\": 1000, \"pin\": \"GP10\", \"position\": \"LEFT\", \"right_us\": 2000}}\n{\"error\": \"unknown command\", \"ok\": false}\n"
+  },
+  "source": 198587,
+  "source_dir": "/home/jonathan/boastermelt/references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0307bb",
+  "started_at_utc": "2026-05-05T23:34:30.813273+00:00",
+  "trigger": {
+    "cdb": "12 00 00 00 F0 40 07 BB EA 22 03 00",
+    "cmd": [
+      "/usr/bin/sg_raw",
+      "--cmdset=1",
+      "-b",
+      "--timeout",
+      "10",
+      "--request",
+      "176",
+      "/dev/sg0",
+      "12",
+      "00",
+      "00",
+      "00",
+      "f0",
+      "40",
+      "07",
+      "bb",
+      "ea",
+      "22",
+      "03",
+      "00"
+    ],
+    "elapsed_seconds": 0.005311385000823066,
+    "payload_len": 0,
+    "payload_sha256": null,
+    "request_len": 176,
+    "returncode": 0,
+    "stderr": "SCSI Status: Good \n\nWriting 176 bytes of data to stdout\n",
+    "stdout_first64_hex": "05800032ab000000504c4453202020204456442b2d52572044532d3841425348de000000000000000000000000010000000003cd7000001db000078d4b000788",
+    "stdout_hex": "05800032ab000000504c4453202020204456442b2d52572044532d3841425348de000000000000000000000000010000000003cd7000001db000078d4b000788500400000085e1116300004345000000000000000000000000000000000000004558545241494e510046ef13004598100120b4050000000000005fff01000f00000fbfff02000e80000ebfff03000d90000e7fff04000fc0000fdfff3044354320202020202020204c44353001000000",
+    "stdout_len": 176,
+    "stdout_sha256": "f052149ded2619eccb088462c1d1ef3d22405752854eb66366ebc543c1752e8d"
+  },
+  "trigger_marker": 222,
+  "tur_before_event1": {
+    "cdb": "00 00 00 00 00 00",
+    "cmd": [
+      "/usr/bin/sg_raw",
+      "--cmdset=1",
+      "-b",
+      "--timeout",
+      "10",
+      "/dev/sg0",
+      "00",
+      "00",
+      "00",
+      "00",
+      "00",
+      "00"
+    ],
+    "elapsed_seconds": 0.012745553991408087,
+    "payload_len": 0,
+    "payload_sha256": null,
+    "request_len": 0,
+    "returncode": 2,
+    "stderr": "SCSI Status: Check Condition \n\nSense Information:\nFixed format, current; Sense key: Not Ready\nAdditional sense: Medium not present - tray closed\n\n",
+    "stdout_first64_hex": "",
+    "stdout_hex": "",
+    "stdout_len": 0,
+    "stdout_sha256": null
+  }
+}

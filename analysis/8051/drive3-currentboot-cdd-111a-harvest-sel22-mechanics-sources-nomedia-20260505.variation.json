@@ -1,0 +1,16 @@
+{
+  "gateway_file": "070000.bin",
+  "run_dir": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505",
+  "source_count": 5,
+  "sources": [
+    "0x025549",
+    "0x02e0cd",
+    "0x02fe88",
+    "0x0307bb",
+    "0x0370ef"
+  ],
+  "varying": [],
+  "varying_byte_count": 0,
+  "varying_runs": [],
+  "width": 4096
+}

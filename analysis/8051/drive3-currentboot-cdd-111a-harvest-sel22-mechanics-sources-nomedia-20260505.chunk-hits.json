@@ -1,0 +1,953 @@
+{
+  "files": [
+    {
+      "gateway_base": 458752,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-025549/gateway-band/070000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "025549",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 462848,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-025549/gateway-band/071000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "025549",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 466944,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-025549/gateway-band/072000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "025549",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 471040,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-025549/gateway-band/073000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "025549",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 475136,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-025549/gateway-band/074000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "025549",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 479232,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-025549/gateway-band/075000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "025549",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 483328,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-025549/gateway-band/076000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "025549",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 487424,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-025549/gateway-band/077000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "025549",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 491520,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-025549/gateway-band/078000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "025549",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 495616,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-025549/gateway-band/079000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "025549",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 499712,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-025549/gateway-band/07a000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "025549",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 503808,
+      "hits": [],
+      "nonzero_chunks": 64,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-025549/gateway-band/07b000.bin",
+      "sha256": "03879143a2770e0ddfbc457b3880f38d81eb43c90b418672864bf6d99099e8aa",
+      "size": 4096,
+      "source": "025549",
+      "unique_chunks": 64
+    },
+    {
+      "gateway_base": 507904,
+      "hits": [],
+      "nonzero_chunks": 64,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-025549/gateway-band/07c000.bin",
+      "sha256": "9d3069af21ef3c7ef3f7d509b166cf27697544141b2042a091ce93173617af6d",
+      "size": 4096,
+      "source": "025549",
+      "unique_chunks": 64
+    },
+    {
+      "gateway_base": 512000,
+      "hits": [],
+      "nonzero_chunks": 59,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-025549/gateway-band/07d000.bin",
+      "sha256": "e9ad50159c097e9244f6312eebc14bba5d204f42d7e6d32684fc63fd9037dd8e",
+      "size": 4096,
+      "source": "025549",
+      "unique_chunks": 60
+    },
+    {
+      "gateway_base": 516096,
+      "hits": [],
+      "nonzero_chunks": 64,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-025549/gateway-band/07e000.bin",
+      "sha256": "1a7ab88a080afff7587a7118b3199496d1745100cc95d6c3ac5172623ccbdc92",
+      "size": 4096,
+      "source": "025549",
+      "unique_chunks": 64
+    },
+    {
+      "gateway_base": 520192,
+      "hits": [],
+      "nonzero_chunks": 57,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-025549/gateway-band/07f000.bin",
+      "sha256": "13c122ad0007f4e081251d86a1b098aa847ecc228c41789d0d4e6cbecc303e1d",
+      "size": 4096,
+      "source": "025549",
+      "unique_chunks": 57
+    },
+    {
+      "gateway_base": 4194304,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-025549/gateway-band/400000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "025549",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": null,
+      "hits": [],
+      "nonzero_chunks": 2,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-025549/trigger-response.bin",
+      "sha256": "859eea21e4a6850849a6780b0f74d1ea896e261d7f8886af9ee90a4122e5db77",
+      "size": 176,
+      "source": "025549",
+      "unique_chunks": 2
+    },
+    {
+      "gateway_base": 458752,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-02e0cd/gateway-band/070000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "02e0cd",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 462848,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-02e0cd/gateway-band/071000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "02e0cd",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 466944,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-02e0cd/gateway-band/072000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "02e0cd",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 471040,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-02e0cd/gateway-band/073000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "02e0cd",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 475136,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-02e0cd/gateway-band/074000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "02e0cd",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 479232,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-02e0cd/gateway-band/075000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "02e0cd",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 483328,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-02e0cd/gateway-band/076000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "02e0cd",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 487424,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-02e0cd/gateway-band/077000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "02e0cd",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 491520,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-02e0cd/gateway-band/078000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "02e0cd",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 495616,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-02e0cd/gateway-band/079000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "02e0cd",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 499712,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-02e0cd/gateway-band/07a000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "02e0cd",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 503808,
+      "hits": [],
+      "nonzero_chunks": 64,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-02e0cd/gateway-band/07b000.bin",
+      "sha256": "03879143a2770e0ddfbc457b3880f38d81eb43c90b418672864bf6d99099e8aa",
+      "size": 4096,
+      "source": "02e0cd",
+      "unique_chunks": 64
+    },
+    {
+      "gateway_base": 507904,
+      "hits": [],
+      "nonzero_chunks": 64,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-02e0cd/gateway-band/07c000.bin",
+      "sha256": "9d3069af21ef3c7ef3f7d509b166cf27697544141b2042a091ce93173617af6d",
+      "size": 4096,
+      "source": "02e0cd",
+      "unique_chunks": 64
+    },
+    {
+      "gateway_base": 512000,
+      "hits": [],
+      "nonzero_chunks": 59,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-02e0cd/gateway-band/07d000.bin",
+      "sha256": "e9ad50159c097e9244f6312eebc14bba5d204f42d7e6d32684fc63fd9037dd8e",
+      "size": 4096,
+      "source": "02e0cd",
+      "unique_chunks": 60
+    },
+    {
+      "gateway_base": 516096,
+      "hits": [],
+      "nonzero_chunks": 64,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-02e0cd/gateway-band/07e000.bin",
+      "sha256": "1b62c72acaa8dab6fa0c36c7fea2a160d4353d08ccc90386f7de2769aa5d19fc",
+      "size": 4096,
+      "source": "02e0cd",
+      "unique_chunks": 64
+    },
+    {
+      "gateway_base": 520192,
+      "hits": [],
+      "nonzero_chunks": 57,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-02e0cd/gateway-band/07f000.bin",
+      "sha256": "13c122ad0007f4e081251d86a1b098aa847ecc228c41789d0d4e6cbecc303e1d",
+      "size": 4096,
+      "source": "02e0cd",
+      "unique_chunks": 57
+    },
+    {
+      "gateway_base": 4194304,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-02e0cd/gateway-band/400000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "02e0cd",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": null,
+      "hits": [],
+      "nonzero_chunks": 2,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-02e0cd/trigger-response.bin",
+      "sha256": "36c3246cdfcc97e479a0f98e92d0882b27125dc6cbaf6f833e66b9f1e2c66a45",
+      "size": 176,
+      "source": "02e0cd",
+      "unique_chunks": 2
+    },
+    {
+      "gateway_base": 458752,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-02fe88/gateway-band/070000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "02fe88",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 462848,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-02fe88/gateway-band/071000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "02fe88",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 466944,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-02fe88/gateway-band/072000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "02fe88",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 471040,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-02fe88/gateway-band/073000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "02fe88",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 475136,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-02fe88/gateway-band/074000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "02fe88",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 479232,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-02fe88/gateway-band/075000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "02fe88",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 483328,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-02fe88/gateway-band/076000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "02fe88",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 487424,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-02fe88/gateway-band/077000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "02fe88",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 491520,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-02fe88/gateway-band/078000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "02fe88",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 495616,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-02fe88/gateway-band/079000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "02fe88",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 499712,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-02fe88/gateway-band/07a000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "02fe88",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 503808,
+      "hits": [],
+      "nonzero_chunks": 64,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-02fe88/gateway-band/07b000.bin",
+      "sha256": "03879143a2770e0ddfbc457b3880f38d81eb43c90b418672864bf6d99099e8aa",
+      "size": 4096,
+      "source": "02fe88",
+      "unique_chunks": 64
+    },
+    {
+      "gateway_base": 507904,
+      "hits": [],
+      "nonzero_chunks": 64,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-02fe88/gateway-band/07c000.bin",
+      "sha256": "9d3069af21ef3c7ef3f7d509b166cf27697544141b2042a091ce93173617af6d",
+      "size": 4096,
+      "source": "02fe88",
+      "unique_chunks": 64
+    },
+    {
+      "gateway_base": 512000,
+      "hits": [],
+      "nonzero_chunks": 59,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-02fe88/gateway-band/07d000.bin",
+      "sha256": "e9ad50159c097e9244f6312eebc14bba5d204f42d7e6d32684fc63fd9037dd8e",
+      "size": 4096,
+      "source": "02fe88",
+      "unique_chunks": 60
+    },
+    {
+      "gateway_base": 516096,
+      "hits": [],
+      "nonzero_chunks": 64,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-02fe88/gateway-band/07e000.bin",
+      "sha256": "a81174641dccfacd995d6096e5049d7a02738316e4a611a19353693c022b7c29",
+      "size": 4096,
+      "source": "02fe88",
+      "unique_chunks": 64
+    },
+    {
+      "gateway_base": 520192,
+      "hits": [],
+      "nonzero_chunks": 57,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-02fe88/gateway-band/07f000.bin",
+      "sha256": "13c122ad0007f4e081251d86a1b098aa847ecc228c41789d0d4e6cbecc303e1d",
+      "size": 4096,
+      "source": "02fe88",
+      "unique_chunks": 57
+    },
+    {
+      "gateway_base": 4194304,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-02fe88/gateway-band/400000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "02fe88",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": null,
+      "hits": [],
+      "nonzero_chunks": 2,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-02fe88/trigger-response.bin",
+      "sha256": "4ce0dee925b9eadc46b6a6adbb6cb7fb0c4339b1bab1dc3578510575f3b23ab8",
+      "size": 176,
+      "source": "02fe88",
+      "unique_chunks": 2
+    },
+    {
+      "gateway_base": 458752,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0307bb/gateway-band/070000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "0307bb",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 462848,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0307bb/gateway-band/071000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "0307bb",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 466944,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0307bb/gateway-band/072000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "0307bb",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 471040,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0307bb/gateway-band/073000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "0307bb",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 475136,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0307bb/gateway-band/074000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "0307bb",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 479232,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0307bb/gateway-band/075000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "0307bb",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 483328,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0307bb/gateway-band/076000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "0307bb",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 487424,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0307bb/gateway-band/077000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "0307bb",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 491520,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0307bb/gateway-band/078000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "0307bb",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 495616,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0307bb/gateway-band/079000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "0307bb",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 499712,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0307bb/gateway-band/07a000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "0307bb",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 503808,
+      "hits": [],
+      "nonzero_chunks": 64,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0307bb/gateway-band/07b000.bin",
+      "sha256": "03879143a2770e0ddfbc457b3880f38d81eb43c90b418672864bf6d99099e8aa",
+      "size": 4096,
+      "source": "0307bb",
+      "unique_chunks": 64
+    },
+    {
+      "gateway_base": 507904,
+      "hits": [],
+      "nonzero_chunks": 64,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0307bb/gateway-band/07c000.bin",
+      "sha256": "9d3069af21ef3c7ef3f7d509b166cf27697544141b2042a091ce93173617af6d",
+      "size": 4096,
+      "source": "0307bb",
+      "unique_chunks": 64
+    },
+    {
+      "gateway_base": 512000,
+      "hits": [],
+      "nonzero_chunks": 59,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0307bb/gateway-band/07d000.bin",
+      "sha256": "e9ad50159c097e9244f6312eebc14bba5d204f42d7e6d32684fc63fd9037dd8e",
+      "size": 4096,
+      "source": "0307bb",
+      "unique_chunks": 60
+    },
+    {
+      "gateway_base": 516096,
+      "hits": [],
+      "nonzero_chunks": 64,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0307bb/gateway-band/07e000.bin",
+      "sha256": "6c608ea8de3802e8ec438eef3c3e7a40576d187951af19696733c084740015a5",
+      "size": 4096,
+      "source": "0307bb",
+      "unique_chunks": 64
+    },
+    {
+      "gateway_base": 520192,
+      "hits": [],
+      "nonzero_chunks": 57,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0307bb/gateway-band/07f000.bin",
+      "sha256": "13c122ad0007f4e081251d86a1b098aa847ecc228c41789d0d4e6cbecc303e1d",
+      "size": 4096,
+      "source": "0307bb",
+      "unique_chunks": 57
+    },
+    {
+      "gateway_base": 4194304,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0307bb/gateway-band/400000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "0307bb",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": null,
+      "hits": [],
+      "nonzero_chunks": 2,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0307bb/trigger-response.bin",
+      "sha256": "f052149ded2619eccb088462c1d1ef3d22405752854eb66366ebc543c1752e8d",
+      "size": 176,
+      "source": "0307bb",
+      "unique_chunks": 2
+    },
+    {
+      "gateway_base": 458752,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0370ef/gateway-band/070000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "0370ef",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 462848,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0370ef/gateway-band/071000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "0370ef",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 466944,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0370ef/gateway-band/072000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "0370ef",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 471040,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0370ef/gateway-band/073000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "0370ef",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 475136,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0370ef/gateway-band/074000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "0370ef",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 479232,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0370ef/gateway-band/075000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "0370ef",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 483328,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0370ef/gateway-band/076000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "0370ef",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 487424,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0370ef/gateway-band/077000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "0370ef",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 491520,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0370ef/gateway-band/078000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "0370ef",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 495616,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0370ef/gateway-band/079000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "0370ef",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 499712,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0370ef/gateway-band/07a000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "0370ef",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 503808,
+      "hits": [],
+      "nonzero_chunks": 64,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0370ef/gateway-band/07b000.bin",
+      "sha256": "03879143a2770e0ddfbc457b3880f38d81eb43c90b418672864bf6d99099e8aa",
+      "size": 4096,
+      "source": "0370ef",
+      "unique_chunks": 64
+    },
+    {
+      "gateway_base": 507904,
+      "hits": [],
+      "nonzero_chunks": 64,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0370ef/gateway-band/07c000.bin",
+      "sha256": "9d3069af21ef3c7ef3f7d509b166cf27697544141b2042a091ce93173617af6d",
+      "size": 4096,
+      "source": "0370ef",
+      "unique_chunks": 64
+    },
+    {
+      "gateway_base": 512000,
+      "hits": [],
+      "nonzero_chunks": 59,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0370ef/gateway-band/07d000.bin",
+      "sha256": "e9ad50159c097e9244f6312eebc14bba5d204f42d7e6d32684fc63fd9037dd8e",
+      "size": 4096,
+      "source": "0370ef",
+      "unique_chunks": 60
+    },
+    {
+      "gateway_base": 516096,
+      "hits": [],
+      "nonzero_chunks": 64,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0370ef/gateway-band/07e000.bin",
+      "sha256": "cf6c2f99e53d68b45fe143523dbbca55462f08646d516e428b854fa5fa253acc",
+      "size": 4096,
+      "source": "0370ef",
+      "unique_chunks": 64
+    },
+    {
+      "gateway_base": 520192,
+      "hits": [],
+      "nonzero_chunks": 57,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0370ef/gateway-band/07f000.bin",
+      "sha256": "13c122ad0007f4e081251d86a1b098aa847ecc228c41789d0d4e6cbecc303e1d",
+      "size": 4096,
+      "source": "0370ef",
+      "unique_chunks": 57
+    },
+    {
+      "gateway_base": 4194304,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0370ef/gateway-band/400000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "0370ef",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": null,
+      "hits": [],
+      "nonzero_chunks": 2,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505/sel22-src-0370ef/trigger-response.bin",
+      "sha256": "c28210e86df63297638adc3a405e9b97a2cb23cc869d530b22cb8b5831f93e8f",
+      "size": 176,
+      "source": "0370ef",
+      "unique_chunks": 2
+    }
+  ],
+  "files_scanned": 90,
+  "hit_count": 0,
+  "hits": [],
+  "inputs": [
+    "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505"
+  ],
+  "known_chunk_count": 175,
+  "source_summary": [
+    {
+      "files": 18,
+      "gateway_bases_with_hits": [],
+      "hit_count": 0,
+      "nonzero_chunks": 310,
+      "source": "025549",
+      "top_labels": []
+    },
+    {
+      "files": 18,
+      "gateway_bases_with_hits": [],
+      "hit_count": 0,
+      "nonzero_chunks": 310,
+      "source": "02e0cd",
+      "top_labels": []
+    },
+    {
+      "files": 18,
+      "gateway_bases_with_hits": [],
+      "hit_count": 0,
+      "nonzero_chunks": 310,
+      "source": "02fe88",
+      "top_labels": []
+    },
+    {
+      "files": 18,
+      "gateway_bases_with_hits": [],
+      "hit_count": 0,
+      "nonzero_chunks": 310,
+      "source": "0307bb",
+      "top_labels": []
+    },
+    {
+      "files": 18,
+      "gateway_bases_with_hits": [],
+      "hit_count": 0,
+      "nonzero_chunks": 310,
+      "source": "0370ef",
+      "top_labels": []
+    }
+  ]
+}

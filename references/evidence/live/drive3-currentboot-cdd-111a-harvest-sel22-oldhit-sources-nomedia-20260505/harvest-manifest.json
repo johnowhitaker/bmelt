@@ -1,0 +1,216 @@
+{
+  "candidate": "/home/jonathan/boastermelt/references/firmware/extracted/currentboot-response-hook-candidates/currentboot-response-hook-gateway-bulk-cdd-111a-selector-cdb9-source-cdb10/currentboot-response-hook-gateway-bulk-cdd-111a-selector-cdb9-source-cdb10/liteon-full-currentboot-ld5m-helper-bypass-currentboot-response-hook-gateway-bulk-cdd-111a-selector-cdb9-source-cdb10-candidate.json",
+  "errors": [],
+  "event1_cdb": "3B 05 01 00 00 00 00 0B D0 7F 00 00",
+  "event1_payload_sha256": "64e3093035572e91b9e1948012f378d0fbd0a8d8b384d6a33fef8ae3122f1dc8",
+  "finished_at_utc": "2026-05-05T23:36:20.397009+00:00",
+  "gateway_bands": [
+    {
+      "length": 28672,
+      "start": 471040
+    }
+  ],
+  "results": [
+    {
+      "gateway_bands": [
+        {
+          "ascii_preview": "U....x..3.x..3\".............N.....$...>......3.`.........G..N.....$...>..N..............N..|....}...} .-..<.....................",
+          "gateway_address": 471040,
+          "length": 4096,
+          "nonzero": true,
+          "path": "/home/jonathan/boastermelt/references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505/sel22-src-007000/gateway-band/073000.bin",
+          "sha256": "2f3e7437223f59cc1fc919d344df4410dfc17f39db694eaedd0d314792e5f7c0"
+        },
+        {
+          "ascii_preview": "j.U....KU....TgL.....4.L.2...s.MU....s6N.......Nm:U...WOZh@..p.O.8.@...O..Nd\\./P...n...Pd2R{.\".QIj.a.3.Q.i...c.Q...dX.zR...V.T.R",
+          "gateway_address": 475136,
+          "length": 4096,
+          "nonzero": true,
+          "path": "/home/jonathan/boastermelt/references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505/sel22-src-007000/gateway-band/074000.bin",
+          "sha256": "40a4842ace2fefd00da7a8be02389dc25d54d5605c4cd22c16d1a883906ac803"
+        },
+        {
+          "ascii_preview": "................................................................................................................................",
+          "gateway_address": 479232,
+          "length": 4096,
+          "nonzero": false,
+          "path": "/home/jonathan/boastermelt/references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505/sel22-src-007000/gateway-band/075000.bin",
+          "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+        },
+        {
+          "ascii_preview": "................................................................................................................................",
+          "gateway_address": 483328,
+          "length": 4096,
+          "nonzero": false,
+          "path": "/home/jonathan/boastermelt/references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505/sel22-src-007000/gateway-band/076000.bin",
+          "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+        },
+        {
+          "ascii_preview": "................................................................................................................................",
+          "gateway_address": 487424,
+          "length": 4096,
+          "nonzero": false,
+          "path": "/home/jonathan/boastermelt/references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505/sel22-src-007000/gateway-band/077000.bin",
+          "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+        },
+        {
+          "ascii_preview": "................................................................................................................................",
+          "gateway_address": 491520,
+          "length": 4096,
+          "nonzero": false,
+          "path": "/home/jonathan/boastermelt/references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505/sel22-src-007000/gateway-band/078000.bin",
+          "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+        },
+        {
+          "ascii_preview": "................................................................................................................................",
+          "gateway_address": 495616,
+          "length": 4096,
+          "nonzero": false,
+          "path": "/home/jonathan/boastermelt/references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505/sel22-src-007000/gateway-band/079000.bin",
+          "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+        }
+      ],
+      "sample_index": null,
+      "source": 28672,
+      "source_dir": "/home/jonathan/boastermelt/references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505/sel22-src-007000",
+      "trigger_marker": 222
+    },
+    {
+      "gateway_bands": [
+        {
+          "ascii_preview": "U....x..3.x..3\".............N.....$...>......3.`.........G..N.....$...>..N..............N..|....}...} .-..<.....................",
+          "gateway_address": 471040,
+          "length": 4096,
+          "nonzero": true,
+          "path": "/home/jonathan/boastermelt/references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505/sel22-src-009000/gateway-band/073000.bin",
+          "sha256": "2f3e7437223f59cc1fc919d344df4410dfc17f39db694eaedd0d314792e5f7c0"
+        },
+        {
+          "ascii_preview": "j.U....KU....TgL.....4.L.2...s.MU....s6N.......Nm:U...WOZh@..p.O.8.@...O..Nd\\./P...n...Pd2R{.\".QIj.a.3.Q.i...c.Q...dX.zR...V.T.R",
+          "gateway_address": 475136,
+          "length": 4096,
+          "nonzero": true,
+          "path": "/home/jonathan/boastermelt/references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505/sel22-src-009000/gateway-band/074000.bin",
+          "sha256": "40a4842ace2fefd00da7a8be02389dc25d54d5605c4cd22c16d1a883906ac803"
+        },
+        {
+          "ascii_preview": "................................................................................................................................",
+          "gateway_address": 479232,
+          "length": 4096,
+          "nonzero": false,
+          "path": "/home/jonathan/boastermelt/references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505/sel22-src-009000/gateway-band/075000.bin",
+          "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+        },
+        {
+          "ascii_preview": "................................................................................................................................",
+          "gateway_address": 483328,
+          "length": 4096,
+          "nonzero": false,
+          "path": "/home/jonathan/boastermelt/references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505/sel22-src-009000/gateway-band/076000.bin",
+          "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+        },
+        {
+          "ascii_preview": "................................................................................................................................",
+          "gateway_address": 487424,
+          "length": 4096,
+          "nonzero": false,
+          "path": "/home/jonathan/boastermelt/references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505/sel22-src-009000/gateway-band/077000.bin",
+          "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+        },
+        {
+          "ascii_preview": "................................................................................................................................",
+          "gateway_address": 491520,
+          "length": 4096,
+          "nonzero": false,
+          "path": "/home/jonathan/boastermelt/references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505/sel22-src-009000/gateway-band/078000.bin",
+          "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+        },
+        {
+          "ascii_preview": "................................................................................................................................",
+          "gateway_address": 495616,
+          "length": 4096,
+          "nonzero": false,
+          "path": "/home/jonathan/boastermelt/references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505/sel22-src-009000/gateway-band/079000.bin",
+          "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+        }
+      ],
+      "sample_index": null,
+      "source": 36864,
+      "source_dir": "/home/jonathan/boastermelt/references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505/sel22-src-009000",
+      "trigger_marker": 222
+    },
+    {
+      "gateway_bands": [
+        {
+          "ascii_preview": "U....x..3.x..3\".............N.....$...>......3.`.........G..N.....$...>..N..............N..|....}...} .-..<.....................",
+          "gateway_address": 471040,
+          "length": 4096,
+          "nonzero": true,
+          "path": "/home/jonathan/boastermelt/references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505/sel22-src-00e000/gateway-band/073000.bin",
+          "sha256": "2f3e7437223f59cc1fc919d344df4410dfc17f39db694eaedd0d314792e5f7c0"
+        },
+        {
+          "ascii_preview": "j.U....KU....TgL.....4.L.2...s.MU....s6N.......Nm:U...WOZh@..p.O.8.@...O..Nd\\./P...n...Pd2R{.\".QIj.a.3.Q.i...c.Q...dX.zR...V.T.R",
+          "gateway_address": 475136,
+          "length": 4096,
+          "nonzero": true,
+          "path": "/home/jonathan/boastermelt/references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505/sel22-src-00e000/gateway-band/074000.bin",
+          "sha256": "40a4842ace2fefd00da7a8be02389dc25d54d5605c4cd22c16d1a883906ac803"
+        },
+        {
+          "ascii_preview": "................................................................................................................................",
+          "gateway_address": 479232,
+          "length": 4096,
+          "nonzero": false,
+          "path": "/home/jonathan/boastermelt/references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505/sel22-src-00e000/gateway-band/075000.bin",
+          "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+        },
+        {
+          "ascii_preview": "................................................................................................................................",
+          "gateway_address": 483328,
+          "length": 4096,
+          "nonzero": false,
+          "path": "/home/jonathan/boastermelt/references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505/sel22-src-00e000/gateway-band/076000.bin",
+          "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+        },
+        {
+          "ascii_preview": "................................................................................................................................",
+          "gateway_address": 487424,
+          "length": 4096,
+          "nonzero": false,
+          "path": "/home/jonathan/boastermelt/references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505/sel22-src-00e000/gateway-band/077000.bin",
+          "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+        },
+        {
+          "ascii_preview": "................................................................................................................................",
+          "gateway_address": 491520,
+          "length": 4096,
+          "nonzero": false,
+          "path": "/home/jonathan/boastermelt/references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505/sel22-src-00e000/gateway-band/078000.bin",
+          "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+        },
+        {
+          "ascii_preview": "................................................................................................................................",
+          "gateway_address": 495616,
+          "length": 4096,
+          "nonzero": false,
+          "path": "/home/jonathan/boastermelt/references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505/sel22-src-00e000/gateway-band/079000.bin",
+          "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+        }
+      ],
+      "sample_index": null,
+      "source": 57344,
+      "source_dir": "/home/jonathan/boastermelt/references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505/sel22-src-00e000",
+      "trigger_marker": 222
+    }
+  ],
+  "run_name": "drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505",
+  "samples_per_source": 1,
+  "selector": 34,
+  "sources": [
+    28672,
+    36864,
+    57344
+  ],
+  "started_at_utc": "2026-05-05T23:35:46.423514+00:00"
+}

@@ -190,6 +190,57 @@ better observation target is the `xdata[0x48a0].4` service branch, which copies
 controller-returned packets into `0x818a..0x8195` and `0x810e..0x812d`.
 Prioritize those windows in the next selected-XDATA hook run.
 
+Latest materializer foothold: `FUN_CODE_111a` selector `0x22` can expose
+source-indexed controller gateway material from currentboot without editing the
+CDD body. The response-hook builder supports
+`--gateway-cdb-bulk-with-cdd-111a-selector`,
+`--cdd-111a-selector-from-cdb9`, and `--cdd-111a-source-from-cdb`; the trigger
+CDB uses `CDB[8] = 0xea`, selector in `CDB[9]`, and source operand
+`00:CDB[10]:CDB[6]:CDB[7]`. See
+`analysis/8051/cdd-111a-selector-live-20260505.md`.
+
+The automated harvester for this path is:
+
+```text
+scripts/harvest_liteon_currentboot_cdd_111a.py
+scripts/analyze_liteon_cdd_111a_harvest.py
+analysis/8051/cdd-111a-harvester-20260505.md
+```
+
+The first exact normal-runtime chunk hits were phase-sensitive: an earlier
+hand-run selector-22 sweep exposed exact 64-byte chunks from the normal
+work-window corpus, while fresh isolated cold-cycle pilots exposed different
+structured controller material. Treat selector-22 as a real non-mutating
+materialization oracle, but do not assume every entry lands in the same gateway
+phase.
+
+The initial broad selector-22 run was stopped early because the current phase
+made `0x22` source-insensitive. A quick two-source matrix initially suggested
+that selectors `0x20`, `0x21`, and especially `0x23` were source-sensitive in
+the current phase. Later multi-trigger and same-source controls corrected this:
+those pages are mostly selector/phase surfaces, not reliable source-indexed CDD
+output.
+
+The old hit-producing selector-22 hand sweep remains worth studying, but treat
+it as a phase-specific artifact until reproduced:
+
+```text
+references/evidence/live/drive3-currentboot-gateway-cdd-111a-source-cdb10-ladder-20260505/
+```
+
+It produced exact normal-runtime chunk hits around `0x076000..0x078000`.
+Fresh automated selector-22 runs in nearby source ranges did not reproduce that
+phase.
+
+For any new selector harvest, analyze with:
+
+```sh
+python3 scripts/analyze_liteon_cdd_111a_source_variation.py \
+  references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel23-cdd1-20260505 \
+  --json-out analysis/8051/drive3-currentboot-cdd-111a-harvest-sel23-cdd1-20260505.variation.json \
+  --md-out analysis/8051/drive3-currentboot-cdd-111a-harvest-sel23-cdd1-20260505.variation.md
+```
+
 Replay helper:
 
 ```text
@@ -2614,3 +2665,269 @@ Immediate useful directions:
     not broad-fuzz CSS, and do not send `SEND KEY format 6` unless deliberately
     choosing to risk DVD region/RPC state. Follow-up note:
     `analysis/8051/drive3-dvd-auth-followup-20260505.md`.
+148. The completed selector-23 CDD1 materializer harvest is now the best CDD
+    oracle artifact. It is under
+    `references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel23-cdd1-20260505/`
+    with reports
+    `analysis/8051/drive3-currentboot-cdd-111a-harvest-sel23-cdd1-20260505.variation.md`
+    and
+    `analysis/8051/drive3-currentboot-cdd-111a-harvest-sel23-cdd1-20260505.chunk-hits.md`.
+    It has 200 source samples, 213 source-dependent bytes, and zero exact
+    64-byte hits against the current normal-runtime contig corpus.
+149. The key finding from the selector-23 harvest is locality: source-dependent
+    output is concentrated around `gateway[0x070193]`,
+    `gateway[0x070199]`, `gateway[0x0701ae]`, and especially
+    `gateway[0x070211..0x0702f1]`. Treat this as a controller
+    materializer/work-queue surface, not as flat decoded firmware.
+150. Two record-14 fine sweeps are available:
+    `drive3-currentboot-cdd-111a-harvest-sel23-rec14-fine-20260505/` and
+    `drive3-currentboot-cdd-111a-harvest-sel21-rec14-fine-20260505/`.
+    They prove source address matters within a single CDD record. Selector
+    `0x23` varies 212 bytes for those 12 source points; selector `0x21` varies
+    102 bytes. Both expose repeated source-dependent operand tuples at
+    `0x0208`, `0x025b`, and `0x0262`.
+151. Next CDD-static/live bridge target: explain the repeated operand tuple
+    emitted by selector `0x21/0x23`. It does not directly equal source address,
+    record index, source-relative offset, op-key bytes, decoded-span field, or
+    raw nearby source bytes. Compare it against CDD source windows, affine lane
+    values, record class, and sibling/XD13 plaintext material before trying any
+    CDD mutation.
+152. A selector-23 fine sweep over CDD records 58-60 is available under
+    `references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel23-rec58-60-fine-20260505/`.
+    It behaves like record 14: 29 source points, 213 varying bytes in
+    `gateway[0x070000]`, and no exact 64-byte normal-runtime chunk hits. The
+    repeated operand tuple is cleaner here: 28/29 samples copy the same
+    `lead/unit/value` triple into the `0x0208`, `0x025b`, and `0x0262` slots,
+    with only the lane byte changing. Source `0x029000` inside record 60 is an
+    important outlier because it changes the generated template shape.
+153. Selector comparison over five record-58/60 points shows selector `0x23`
+    is the useful source-sensitive path for this hook setup. Selector `0x22`
+    produced an invariant/zero tuple surface; selector `0x24` produced an
+    invariant constant/error-looking surface. Static wrapper reading says
+    selector `0x23` is the path that banks the source as `source + (1 << 21)`.
+154. Do not mistake the staged destination operand `0x0007b000` for decoded
+    output. The follow-up dump
+    `drive3-currentboot-cdd-111a-harvest-sel23-rec58-60-dest7b000-points-20260505/`
+    shows `0x07b000..0x07ffff` is mostly a stable currentboot parser/workspace
+    bank. `gateway[0x07f000..0x07fd9f]` exactly mirrors F0
+    `0x704c..0x7deb`, the 436 8-byte CDD1 directory entries. A generic gateway
+    read of `0x200000 + source` returned zeros, so the banked CDD source is
+    internal to the controller transaction and not directly exposed.
+155. Updated CDD-oracle target: parse the small generated program/template at
+    `gateway[0x070211..0x0702f1]` and explain its repeated
+    `lead/lane/unit/value` operands. Avoid CDD mutations until this grammar is
+    better understood.
+156. Correction after multi-trigger controls: the selector-23 broad/fine
+    harvests are not reliable CDD source oracles. In a single currentboot
+    session, selector-23 A/B/A/B captures for distinct sources produced
+    byte-identical `gateway[0x070000]` pages; selectors `0x20` and `0x21`
+    behave similarly at the gateway-page level. Selector `0x21` direct trigger
+    responses vary across calls, but same-source repeats show that variation is
+    controller phase/state, not stable source material.
+157. Fresh first-call selector-21 controls also weaken the source-oracle model:
+    first calls for sources `0x007000` and `0x00d000` are effectively
+    identical except for a counter-like byte in one run. Use the old
+    selector-23 “source-dependent tuple” analyses only as descriptions of a
+    phase surface, not as decoded CDD evidence.
+158. The remaining useful CDD/materializer artifact is the older selector-22
+    `source-cdb10-ladder` run:
+    `references/evidence/live/drive3-currentboot-gateway-cdd-111a-source-cdb10-ladder-20260505/`.
+    It has exact 64-byte hits against the normal-runtime contig corpus at
+    `0x076000..0x078000` for sources `0x007000`, `0x009000`, and `0x00e000`.
+    Fresh isolated attempts have not reproduced that phase, so the active
+    question is what prelude/controller state made that old run land there.
+159. Do not run CDD mutations just to chase this. The next safe work is
+    non-mutating: compare old vs fresh selector-22 status rows, disassemble the
+    old pages, and look for a reproducible prelude that changes the `0x4e90`
+    status/phase from current `0xdf`-style rows back to the old `0x3b` or
+    `0x62` rows.
+160. The reproducible prelude was found: after event 1, read standard INQUIRY
+    and EXTRAINQ, then wait briefly before triggering selector `0x22`. The
+    harvester option is `--post-event1-identity`; the best tested recipe is
+    `--post-event1-identity --after-event1-delay 2`.
+161. With that prelude, selector `0x22` returns the old `0x3b`-phase trigger
+    status and stable gateway pages `0x073000`, `0x074000`, and `0x079000`.
+    The volatile middle pages `0x075000..0x078000` again expose exact chunks
+    from the normal-runtime corpus. Evidence:
+    `analysis/8051/drive3-currentboot-cdd-111a-sel22-post-event1-phase-repro-20260505.md`.
+162. Correct interpretation: this is a non-mutating phase sampler/runtime-code
+    harvester, not a decoded-source oracle. The same source `0x007000` can
+    produce different chunk hits across repeats, and a 10-source ladder showed
+    hits at different source labels. Use repeated same-source sampling to
+    harvest chunks; do not infer source ownership without a stronger control.
+163. The harvester now supports `--samples-per-source`, and
+    `scripts/analyze_liteon_cdd_111a_phase_corpus.py` clusters repeated
+    selector-22 samples. Use these instead of manual shell loops when collecting
+    phase-sampler evidence.
+164. Best current selector-22 sampling recipe:
+    `--post-event1-identity --after-event1-delay 2 --after-trigger-delay 0.5`.
+    Across 70 same-source samples this produced 46 exact observations of 7
+    unique known normal-runtime 64-byte chunks. The chunks appear in a stable
+    tile neighborhood around `0x076e40`, `0x077280..0x0777c0`, and
+    `0x078900..0x0789c0`.
+165. Timing note: quick reads after the selector trigger are better than waiting.
+    A small scan found hits at `0.0s` and `0.5s`, but no hits at `1.0s` or
+    `2.0s`. Even `0.5s` is stochastic, so treat it as a higher-yield sampler,
+    not a deterministic phase lock.
+166. Adding XD13 postprocessed plain firmware as a 64-byte aligned known source
+    did not add exact matches to the selector-22 phase corpus. XD13 remains
+    useful for semantic homologs, but this sampler currently matches only the
+    DS-8ABSH normal-runtime chunk corpus.
+167. The XD13 mechanics pass identifies LD5M CDD record 74 as the best current
+    hardware-control watch target. LD5M record74 known-output bytes and the
+    XD13 homolog at CDD-relative `0x46be6` share the same register choreography:
+    gate on `0x480e`, clear `0x48a5.4` and `0x4762.4`, briefly assert
+    `0x4860.2`, clear bits in `0x5905`/`0x5a01`, delay, then clear
+    `0x4864.0`, `0x5905.2`, and `0x4860.2`. Treat this as a complete stock
+    mechanics transition/cleanup routine, not as a raw actuator latch.
+168. Drive #3 read-only baseline `drive3-normal-mechanics-baseline-20260505`
+    confirms record74 is visible in the normal public work window at
+    `READ BUFFER id=01 offset=0x070000`: public `+0x8b00` maps to record74
+    `+0x00`, and public `+0x8c40` maps to the repeated cleanup chunk
+    `record74 +0x40/+0x80`. An eight-capture no-stimulus cadence showed those
+    slots are stable (`1` variant each), while unrelated runtime slots rotate.
+    A read-only status-stimulus pass with `GET EVENT STATUS` variants and
+    `MECHANISM STATUS` also left those two watch slots fixed in every capture.
+169. Record54 is another mechanics/servo homolog, but it is riskier for live
+    use. It writes `0x5907`, `0x5908`, `0x48c1`, `0x48c0`, `0x48f1`, and
+    `0x590b`, and has profile-specific constants (`0x5907=0x35` in LD5M
+    known-output, `0x66` in the XD13 homolog). Use it as a static clue, not as
+    an initial live recipe.
+170. Current hardware-control rule: prefer stock host commands and full
+    routines. Avoid raw writes to `0x4860`, `0x4864`, `0x4867`, `0x5905`,
+    `0x5907`, `0x590b`, `0x59f0`, or `0x5a01` until the surrounding state gates
+    and delay/poll calls are understood. Front-panel Pico wiring is useful for
+    the next correlation pass, but not required for the current read-only
+    mapping step. Detailed note:
+    `analysis/8051/drive3-xd13-mechanics-recipe-candidates-20260505.md`.
+171. The front-panel swap was validated on Drive #3. `GP27` is the released-high
+    front eject button line, and `GP26` is a useful LED/activity timing probe.
+    `scripts/capture_liteon_start_stop_with_pico.py` captures Pico GPIO samples
+    alongside gated stock `START STOP UNIT` variants or a gated GP27 button
+    pulse. Stock SCSI eject (`1B 00 00 00 02 00`) returned GOOD in about
+    1.29 s and made GP26 go strongly high for about 1.05 s inside the command
+    window. The SCSI load variant (`1B 00 00 00 03 00`) returned CHECK quickly;
+    this mechanism needs manual push-back rather than automatic load.
+172. A 120 ms GP27 low pulse confirms the Pico can electrically press the front
+    button. It drove GP27 near 0 V, GP26 went strongly high for about 5.7 s, and
+    immediate post-pulse `READ BUFFER` work-window captures failed while the
+    mechanism was busy, then later recovered. The user heard movement attempts
+    but no clean open; likely the swapped cable obstructed the sled/tray. Treat
+    this as electrical/button-path confirmation, not a clean mechanics semantic
+    trace. Do not repeat front-button movement tests until the cable has clear
+    mechanical routing. Detailed note:
+    `analysis/8051/drive3-front-panel-start-stop-pico-20260505.md`.
+173. After the user cleared the front-panel cable, both the GP27 pulse and stock
+    SCSI eject were repeated. Both routes entered the mechanics path, made GP26
+    stay high for about 5.7 s, and made work-window reads fail while the drive
+    was busy. Neither physically ejected. The stock SCSI eject returned `rc=99`
+    after about 4.3 s and then recovered; the drive stayed `LD5M`. Current
+    interpretation: the remaining issue is physical/mechanical completion, not
+    host-command or button reachability. Stop repeating eject attempts in this
+    state; use the captured traces for static analysis or inspect the mechanism
+    physically.
+174. The new GP28 tray-present simulator works. The user wired GP28 through a
+    220 ohm resistor to the tray/sled switch line. `GP28 LOW` simulates the
+    tray/sled fully in; `GP28 Z/high` simulates the tray ejected/open. New
+    helper `scripts/capture_liteon_simulated_tray_eject.py` held GP28 low,
+    waited 2 s, sent stock SCSI eject (`1B 00 00 00 02 00`), then released
+    GP28 about 322 ms after command start. The eject command returned GOOD in
+    about 0.79 s, REQUEST SENSE was clean, `MECHANISM STATUS` changed from
+    `00 00 00 00 00 00 00 00` to `00 10 00 00 00 00 00 00`, all eight
+    post-event work-window captures succeeded, and Drive #3 stayed `LD5M`.
+    This is now the preferred tray-state primitive. For any future experiment
+    that expects the drive to look closed/loaded, explicitly set GP28 LOW first
+    and allow a short settle period. The state after the run is simulated
+    open/ejected (`GP28 Z/high`, mechanism `00 10 ...`).
+175. The cleaner front-button/tray simulator is
+    `scripts/capture_liteon_frontpanel_button_tray_sim.py`. It owns the Pico
+    serial port in one loop, pulls GP27 low only for the requested pulse, and
+    releases GP28 only at the scheduled simulated tray-open time. A clean Drive
+    #3 run used a 120 ms GP27 pulse and GP28 release about 310 ms after the
+    pulse began. The drive reported mechanism `00 10 ...`, REQUEST SENSE stayed
+    clean, GP26 produced a short activity pulse, and the script restored GP28
+    LOW afterwards.
+176. GP28 has a host-visible state matrix independent of physical motion:
+    `GP28 LOW -> MECHANISM STATUS 00 00 00 00 00 00 00 00`; `GP28 Z/high ->
+    MECHANISM STATUS 00 10 00 00 00 00 00 00`; restoring GP28 LOW returns the
+    all-zero mechanism status. Use this host-visible status before treating a
+    mechanics experiment as "closed" or "open".
+177. `xdata[0x4814].4` remains the known GP27/front-eject-button bit, but GP28
+    tray-present is not simply `xdata[0x4814].2`. A targeted bit-channel read
+    saw `0x4814.2 = 1` with GP28 LOW, and a split helper-event run still saw 1
+    with GP28 released. A GP28 LOW-vs-Z syndrome scan over byte `0x4814` found
+    no odd bit change. So GP28 is drive-visible and host-visible, but not as a
+    stable single-bit change in `0x4814` during the currentboot helper phase.
+178. New helper for future pin-state/XDATA scans:
+    `scripts/scan_liteon_pico_xdata_state_syndrome.py`. It runs entirely on the
+    Linux host, holds a setup state for events 0..67, changes the Pico pin only
+    for event 68, interprets the GOOD/DID_ERROR predicate channel, then uses the
+    blank-currentboot recovery path and restores the final pin state. This is
+    safer for GP28-style state comparisons than the older GP27-specific scanner.
+179. Important recovery fix: after some helper predicates Drive #3 can land in
+    the malformed/blank-currentboot identity where normal currentboot recovery
+    is not enough. `scripts/recover_liteon_blank_currentboot_linux.py` must use
+    the generated dynamic bank-2 pMac payload for the bank-2 pMac event. The
+    patched script recovered the post-GP28 helper state cleanly, followed by a
+    Pico power cycle and GP28 LOW restore.
+180. With the Pico now attached to the Linux host, use
+    `scripts/probe_liteon_linux_pico_led_payload.py` for helper-event LED
+    timing probes. Unlike the older Mac-side wrapper, it samples GP26 locally on
+    Linux and deliberately does not call `ALLZ`, because releasing GP28 changes
+    the simulated tray state. The first Linux runs compared delay-only baseline
+    against restored `xdata[0x483f]` writes (`00` and `01`). Both `0x483f`
+    runs looked like the baseline seven-transition event/recovery shape, so
+    demote `0x483f` as a likely direct LED latch.
+181. A GP28 LOW-vs-Z syndrome scan over the wider `0x4800..0x487f` XDATA
+    front-panel/status band found no odd single-bit change. Several later
+    predicates were noisy because the LOW-side setup hit a transient Unit
+    Attention / invalid-field state, but the solid total-parity result was
+    `LOW=1`, `Z=1`, delta `0`. Current interpretation remains: GP28 is cleanly
+    host-visible through `MECHANISM STATUS`, but not exposed as a simple stable
+    currentboot XDATA bit in the obvious `0x48xx` status band.
+182. Simulated tray load/close was checked from the open state. Stock SCSI
+    `START STOP load` (`1B 00 00 00 03 00`) still returns Illegal Request /
+    invalid field, but setting GP28 LOW afterward cleanly returns
+    `MECHANISM STATUS` to all-zero closed. So the useful tray primitive is not
+    SCSI load; it is explicit Pico control of GP28, with stock eject/button
+    paths used only for triggering the drive's mechanics state machine.
+183. With a movie DVD inserted, stock `READ(10)` and `SEEK(10)` LBA ladders
+    were captured:
+    `references/evidence/live/drive3-dvd-read10-lba-control-corpus-20260505T231732Z/`
+    and
+    `references/evidence/live/drive3-dvd-seek10-lba-control-corpus-20260505T232203Z/`.
+    The user visually confirmed spin-up, laser-on behavior, and fast sled
+    movement during the seek demo. The captured ladder is not a calibrated
+    positioning proof: only the first `SEEK(10) LBA 0x10` took meaningful time
+    (`~0.63 s`), while later seeks returned in milliseconds. Treat this as
+    evidence that standard MMC commands reach the physical motion stack, not as
+    a precise LBA-to-position map.
+184. The SEEK/READ work-window pass did not expose a simple
+    `xdata[0x8a49] == 0x2b` branch. It mostly exposed shared packet and
+    mechanics islands: `0x8a49..0x8a54`, `0x47b1`, `0x4000/0x409x`,
+    `0x486x`, `0x590x`, and `0x5a0x`. Current best low-level target is the
+    scheduler/controller mailbox step before those register writes, not blind
+    single-bit raw pokes. Details:
+    `analysis/8051/drive3-dvd-seek10-lba-control-findings-20260505.md`.
+185. `scripts/harvest_liteon_currentboot_cdd_111a.py` now waits for TEST UNIT
+    READY to leave the transient `Logical unit is in process of becoming ready`
+    state after LD5M identity appears. This matters when media is inserted:
+    INQUIRY can report LD5M while the drive is still spinning up, and event1
+    sent during that window fails with Not Ready. `Medium not present` is not
+    treated as a blocker.
+186. After media removal, two selector-22 currentboot materializer harvests
+    completed safely but did not help with mechanics decoding:
+    `drive3-currentboot-cdd-111a-harvest-sel22-mechanics-sources-nomedia-20260505`
+    and
+    `drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505`.
+    Both returned Drive #3 to `LD5M`; both had zero exact known-runtime chunk
+    hits. The old selector-22 exact-hit phase did not reproduce. Treat selector
+    22 as state-sensitive, not as a reliable source-addressed decoded-record
+    oracle.
+187. Current mechanics target list is summarized in
+    `analysis/8051/drive3-mechanics-snippet-inventory-20260505.md`. The most
+    action-looking routine sets `0x5a01 |= 0x05`, `0x5905 |= 0x01`,
+    `0x5905 |= 0x04`, and `0x4820 = 0x04`, but it is behind scheduler gates
+    around `0x8aed`, `0x8a33`, and IRAM flags. Prefer finding the stock
+    scheduler route to that routine over replaying those four writes from
+    currentboot.

@@ -1,0 +1,277 @@
+{
+  "files": [
+    {
+      "gateway_base": 471040,
+      "hits": [],
+      "nonzero_chunks": 64,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505/sel22-src-007000/gateway-band/073000.bin",
+      "sha256": "2f3e7437223f59cc1fc919d344df4410dfc17f39db694eaedd0d314792e5f7c0",
+      "size": 4096,
+      "source": "007000",
+      "unique_chunks": 64
+    },
+    {
+      "gateway_base": 475136,
+      "hits": [],
+      "nonzero_chunks": 41,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505/sel22-src-007000/gateway-band/074000.bin",
+      "sha256": "40a4842ace2fefd00da7a8be02389dc25d54d5605c4cd22c16d1a883906ac803",
+      "size": 4096,
+      "source": "007000",
+      "unique_chunks": 41
+    },
+    {
+      "gateway_base": 479232,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505/sel22-src-007000/gateway-band/075000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "007000",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 483328,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505/sel22-src-007000/gateway-band/076000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "007000",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 487424,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505/sel22-src-007000/gateway-band/077000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "007000",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 491520,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505/sel22-src-007000/gateway-band/078000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "007000",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 495616,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505/sel22-src-007000/gateway-band/079000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "007000",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": null,
+      "hits": [],
+      "nonzero_chunks": 2,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505/sel22-src-007000/trigger-response.bin",
+      "sha256": "3774489095b2be52f374b2b16e38bfb59202d82990eb3a869002bae6d5f40f32",
+      "size": 176,
+      "source": "007000",
+      "unique_chunks": 2
+    },
+    {
+      "gateway_base": 471040,
+      "hits": [],
+      "nonzero_chunks": 64,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505/sel22-src-009000/gateway-band/073000.bin",
+      "sha256": "2f3e7437223f59cc1fc919d344df4410dfc17f39db694eaedd0d314792e5f7c0",
+      "size": 4096,
+      "source": "009000",
+      "unique_chunks": 64
+    },
+    {
+      "gateway_base": 475136,
+      "hits": [],
+      "nonzero_chunks": 41,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505/sel22-src-009000/gateway-band/074000.bin",
+      "sha256": "40a4842ace2fefd00da7a8be02389dc25d54d5605c4cd22c16d1a883906ac803",
+      "size": 4096,
+      "source": "009000",
+      "unique_chunks": 41
+    },
+    {
+      "gateway_base": 479232,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505/sel22-src-009000/gateway-band/075000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "009000",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 483328,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505/sel22-src-009000/gateway-band/076000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "009000",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 487424,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505/sel22-src-009000/gateway-band/077000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "009000",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 491520,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505/sel22-src-009000/gateway-band/078000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "009000",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 495616,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505/sel22-src-009000/gateway-band/079000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "009000",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": null,
+      "hits": [],
+      "nonzero_chunks": 2,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505/sel22-src-009000/trigger-response.bin",
+      "sha256": "3774489095b2be52f374b2b16e38bfb59202d82990eb3a869002bae6d5f40f32",
+      "size": 176,
+      "source": "009000",
+      "unique_chunks": 2
+    },
+    {
+      "gateway_base": 471040,
+      "hits": [],
+      "nonzero_chunks": 64,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505/sel22-src-00e000/gateway-band/073000.bin",
+      "sha256": "2f3e7437223f59cc1fc919d344df4410dfc17f39db694eaedd0d314792e5f7c0",
+      "size": 4096,
+      "source": "00e000",
+      "unique_chunks": 64
+    },
+    {
+      "gateway_base": 475136,
+      "hits": [],
+      "nonzero_chunks": 41,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505/sel22-src-00e000/gateway-band/074000.bin",
+      "sha256": "40a4842ace2fefd00da7a8be02389dc25d54d5605c4cd22c16d1a883906ac803",
+      "size": 4096,
+      "source": "00e000",
+      "unique_chunks": 41
+    },
+    {
+      "gateway_base": 479232,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505/sel22-src-00e000/gateway-band/075000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "00e000",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 483328,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505/sel22-src-00e000/gateway-band/076000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "00e000",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 487424,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505/sel22-src-00e000/gateway-band/077000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "00e000",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 491520,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505/sel22-src-00e000/gateway-band/078000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "00e000",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": 495616,
+      "hits": [],
+      "nonzero_chunks": 0,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505/sel22-src-00e000/gateway-band/079000.bin",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "source": "00e000",
+      "unique_chunks": 1
+    },
+    {
+      "gateway_base": null,
+      "hits": [],
+      "nonzero_chunks": 2,
+      "path": "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505/sel22-src-00e000/trigger-response.bin",
+      "sha256": "3774489095b2be52f374b2b16e38bfb59202d82990eb3a869002bae6d5f40f32",
+      "size": 176,
+      "source": "00e000",
+      "unique_chunks": 2
+    }
+  ],
+  "files_scanned": 24,
+  "hit_count": 0,
+  "hits": [],
+  "inputs": [
+    "references/evidence/live/drive3-currentboot-cdd-111a-harvest-sel22-oldhit-sources-nomedia-20260505"
+  ],
+  "known_chunk_count": 175,
+  "source_summary": [
+    {
+      "files": 8,
+      "gateway_bases_with_hits": [],
+      "hit_count": 0,
+      "nonzero_chunks": 107,
+      "source": "007000",
+      "top_labels": []
+    },
+    {
+      "files": 8,
+      "gateway_bases_with_hits": [],
+      "hit_count": 0,
+      "nonzero_chunks": 107,
+      "source": "009000",
+      "top_labels": []
+    },
+    {
+      "files": 8,
+      "gateway_bases_with_hits": [],
+      "hit_count": 0,
+      "nonzero_chunks": 107,
+      "source": "00e000",
+      "top_labels": []
+    }
+  ]
+}
