@@ -2508,3 +2508,15 @@ Immediate useful directions:
     CD is useful for CD media-present paths but not for DVD CSS nonce work.
     A pressed DVD is still needed for the real `REPORT KEY` / `SEND KEY`
     mailbox test.
+141. A pressed movie DVD unlocks the real normal-mode CSS/MMC auth path. Drive
+    #3 reports current profile `0x0010` DVD-ROM, READ DVD STRUCTURE format `0`
+    succeeds, and `REPORT KEY` grants AGID `3`. The auth sequence is
+    order-sensitive: asking for the drive challenge before sending a host
+    challenge returns `Command sequence error`.
+142. `scripts/normal_mailbox_probe.py dvd-auth --send-challenge` now uses the
+    observed host-challenge-first order. On Drive #3 it succeeded end-to-end:
+    `SEND KEY` host challenge GOOD, `REPORT KEY` key1 returned
+    `000a00007e4bea0202000000`, `REPORT KEY` drive challenge returned
+    `000e00007e2f16a7be83358bace60000`, AGID invalidated cleanly, and identity
+    stayed `LD5M`. The sampled public window had no nonce hit. Detailed report:
+    `analysis/8051/drive3-movie-dvd-auth-20260505.md`.

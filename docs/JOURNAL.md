@@ -3170,3 +3170,37 @@ not the normal mailbox we want. A cheap pressed DVD remains the right next
 piece for `REPORT KEY` / `SEND KEY`, and rewritable DVD media remains the right
 future target for sacrificial sector-write/buffer-flow experiments. Detailed
 note: `analysis/8051/drive3-router-cd-readonly-20260504.md`.
+
+## Pressed DVD Auth Path
+
+The next physical-media turn was much better: a pressed movie DVD went into
+Drive #3. This time the drive reported current profile `0x0010`, DVD-ROM, and
+READ DVD STRUCTURE format `0` worked. The disc is the right kind of media for
+the MMC/CSS auth path.
+
+The first `REPORT KEY` run granted AGID `3`, and ASF/RPC state both returned
+normally. It also exposed a script mistake: requesting the drive challenge
+before sending a host challenge returned `Command sequence error`. That was not
+a failure of the path; it was the drive enforcing CSS sequencing.
+
+After fixing the harness to send the host challenge first, the full small
+auth exchange worked:
+
+```text
+REPORT KEY AGID:          GOOD, AGID=3
+SEND KEY host challenge:  GOOD
+REPORT KEY key1:          GOOD, 000a00007e4bea0202000000
+REPORT KEY drive challenge:
+                           GOOD, 000e00007e2f16a7be83358bace60000
+invalidate AGID:          GOOD
+identity after:           LD5M
+```
+
+This is an important normal-mode milestone. It is not arbitrary memory I/O,
+but it is a clean bidirectional host/device command path in ordinary `LD5M`:
+the host sends a nonce through `SEND KEY`, and the drive returns stateful auth
+material through `REPORT KEY`. A sampled public work-window did not contain
+the nonce, so the data is not simply sitting in the public `0x070000` window.
+The next job is to localize where the `0xa3`/`0xa4` packet path stores the
+nonce and response material internally. Detailed note:
+`analysis/8051/drive3-movie-dvd-auth-20260505.md`.

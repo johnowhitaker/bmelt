@@ -1146,26 +1146,10 @@ def run_dvd_auth(args: argparse.Namespace) -> int:
         report["steps"].append(record)
 
     if agid is not None:
-        idx, challenge_record, _ = send_dvd_auth_command(
-            args=args,
-            out_dir=out_dir,
-            index=idx,
-            command=Command(
-                "report-key-css-drive-challenge",
-                report_key_cdb(
-                    key_class=0x00,
-                    key_format=0x01,
-                    allocation_length=16,
-                    agid=agid,
-                ),
-                request_len=16,
-            ),
-            role="report-key-css-drive-challenge",
-            nonce=nonce,
-        )
-        report["steps"].append(challenge_record)
-
         if args.send_challenge:
+            # CSS authentication is order-sensitive: the drive rejects the
+            # challenge/key path with "command sequence error" until it sees a
+            # host challenge for the granted AGID.
             payload = b"\x00\x0e\x00\x00" + nonce + b"\x00\x00"
             idx, send_record, _ = send_dvd_auth_command(
                 args=args,
@@ -1205,6 +1189,30 @@ def run_dvd_auth(args: argparse.Namespace) -> int:
                 nonce=nonce,
             )
             report["steps"].append(key1_record)
+
+            idx, challenge_record, _ = send_dvd_auth_command(
+                args=args,
+                out_dir=out_dir,
+                index=idx,
+                command=Command(
+                    "report-key-css-drive-challenge",
+                    report_key_cdb(
+                        key_class=0x00,
+                        key_format=0x01,
+                        allocation_length=16,
+                        agid=agid,
+                    ),
+                    request_len=16,
+                ),
+                role="report-key-css-drive-challenge-after-host-challenge",
+                nonce=nonce,
+            )
+            report["steps"].append(challenge_record)
+        else:
+            report["challenge_path_skipped"] = (
+                "CSS challenge/key commands require a host challenge first; "
+                "rerun with --send-challenge to exercise the bidirectional path."
+            )
 
         idx, invalidate_record, _ = send_dvd_auth_command(
             args=args,

@@ -1,0 +1,9 @@
+## 03-read-capacity10
+request_len: 8
+cdb: 25 00 00 00 00 00 00 00 00 00
+rc=0
+SCSI Status: Good 
+
+Writing 8 bytes of data to stdout
+cf9f53722784107113768dc2a4c578664f761a42956eac05abf29538f0e21c21  references/evidence/live/drive3-movie-dvd-auth-20260505T033701Z/03-read-capacity10.bin
+00000000: 00 16 73 2f 00 00 08 00                          ..s/....
