@@ -65,6 +65,12 @@ well-instrumented as possible:
   `LD5M` and wiped the marker. Do not attempt the planned shared-code normal
   hook through currentboot volatile carryover. See
   `analysis/8051/drive3-normal-hook-carryover-20260504.md`.
+- Drive #3 also ran the guarded `xdata[0x8196] == 2` CDD materializer probe.
+  It did not populate decoded addresses `0x184000..0x1b3fff`, but it did
+  expose a live source window: after the trigger, controller gateway
+  `0x07b000..0x07ffff` matched stock F0 `0x7000..0xbfff` byte-for-byte. The
+  drive recovered cleanly to `LD5M`. See
+  `analysis/8051/cdd-materializer-mode2-live-20260505.md`.
 
 Start with these scratch summaries if revisiting the CDD/static angle:
 
@@ -154,11 +160,16 @@ hard-body decoder. Normal boot first performs a `LITE` trailer handshake
 through `0x4000/0x4098`, validates descriptor words, and then calls
 `FUN_CODE_002e`. The ordinary visible LD5M setup stages `xdata[0x8196] = 0`,
 so the `0x8196 == 2` branch is not proven normal boot, but it remains the best
-untested non-mutating controller-oracle candidate. That branch issues a
+non-mutating controller-oracle candidate tested so far. That branch issues a
 `0x5000` byte `0x4e80/84/88/8c` transaction using `0x00407000`,
 `0x0007b000`, and `0x00005000`; sample decoded companion addresses around
-`0x19c120..0x19d2e0` if this path is ever tested. Full note:
-`analysis/8051/cdd-materializer-static-20260505.md`.
+`0x19c120..0x19d2e0` if testing variants of this path. Live result: the
+special trigger returned marker `0xd8` and stable `0x4e80..0x4ebf` status, but
+the decoded ranges stayed zero. The useful positive was a mapped source view:
+gateway `0x07b000..0x07ffff` became F0 `0x7000..0xbfff`. Static and live
+notes:
+`analysis/8051/cdd-materializer-static-20260505.md` and
+`analysis/8051/cdd-materializer-mode2-live-20260505.md`.
 
 Replay helper:
 

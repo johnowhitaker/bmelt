@@ -1,0 +1,36 @@
+{
+  "address": 99872,
+  "ascii_preview": "Flash Type Error..Y......Y..T.D.",
+  "bytes_hex": "466c6173682054797065204572726f7200905904e4f0a3f09059c0e054fe4404",
+  "chunk_size": 127,
+  "device": "/dev/sg0",
+  "length": 32,
+  "records": [
+    {
+      "address": 99871,
+      "base": 99840,
+      "bytes_hex": "f0466c6173682054797065204572726f7200905904e4f0a3f09059c0e054fe4404",
+      "cdb": [
+        18,
+        0,
+        0,
+        0,
+        240,
+        95,
+        0,
+        1,
+        134,
+        0,
+        0,
+        0
+      ],
+      "discarded_stale_first_byte": 240,
+      "length": 33,
+      "requested_address": 99872,
+      "returncode": 0,
+      "selector": 31,
+      "stderr": "SCSI Status: Good \n\nWriting 176 bytes of data to stdout\n",
+      "stdout_len": 176
+    }
+  ]
+}

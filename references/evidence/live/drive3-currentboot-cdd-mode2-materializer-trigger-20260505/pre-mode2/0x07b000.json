@@ -1,0 +1,62 @@
+{
+  "address": 503808,
+  "ascii_preview": "...........................................O...........F.....W.....-...........K.................J.....<........................",
+  "bytes_hex": "c48c0201a790c3960201a790e3f30201b190ee0a0201b190eb9d02018490c8ab0201a290a1000201b690f94f0201bb90af060201b690d9460201d990bd570201a790ef2d0201ed90ef0602019890fd4b0201bb909dcc0201fc90a7060201f790f54a0201f790f73c0201f790febd020184908e8b0201f790fcbd02018e90abf8",
+  "chunk_size": 127,
+  "device": "/dev/sg0",
+  "length": 128,
+  "records": [
+    {
+      "address": 503807,
+      "base": 503744,
+      "bytes_hex": "abc48c0201a790c3960201a790e3f30201b190ee0a0201b190eb9d02018490c8ab0201a290a1000201b690f94f0201bb90af060201b690d9460201d990bd570201a790ef2d0201ed90ef0602019890fd4b0201bb909dcc0201fc90a7060201f790f54a0201f790f73c0201f790febd020184908e8b0201f790fcbd02018e90ab",
+      "cdb": [
+        18,
+        0,
+        0,
+        0,
+        240,
+        127,
+        0,
+        7,
+        175,
+        192,
+        0,
+        0
+      ],
+      "discarded_stale_first_byte": 171,
+      "length": 128,
+      "requested_address": 503808,
+      "returncode": 0,
+      "selector": 63,
+      "stderr": "SCSI Status: Good \n\nWriting 176 bytes of data to stdout\n",
+      "stdout_len": 176
+    },
+    {
+      "address": 503934,
+      "base": 503872,
+      "bytes_hex": "4cf8",
+      "cdb": [
+        18,
+        0,
+        0,
+        0,
+        240,
+        126,
+        0,
+        7,
+        176,
+        64,
+        0,
+        0
+      ],
+      "discarded_stale_first_byte": 76,
+      "length": 2,
+      "requested_address": 503935,
+      "returncode": 0,
+      "selector": 62,
+      "stderr": "SCSI Status: Good \n\nWriting 176 bytes of data to stdout\n",
+      "stdout_len": 176
+    }
+  ]
+}

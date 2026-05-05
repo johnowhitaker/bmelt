@@ -3345,3 +3345,32 @@ after. That is not risk-free because it rings real controller transfer
 registers, but it is materially safer and more informative than editing a hard
 CDD body while we still cannot encode targeted decoded-byte changes. Detailed
 note: `analysis/8051/cdd-materializer-static-20260505.md`.
+
+## Mode-2 Materializer Live Probe
+
+We ran that guarded mode-2 replay on Drive #3. The drive accepted the temporary
+currentboot hook, the hook fallback read still returned the known
+`Flash Type Error` bytes, and the special trigger returned marker `0xd8`, so
+our injected path definitely ran. The trigger also copied back a stable
+`0x4e80..0x4ebf` status block, with `0x4ea0 = 0x06`, and repeated exactly on a
+second run.
+
+The decoded destination ranges we hoped for stayed blank. Reads around
+`0x184000`, `0x190690`, and the companion band `0x19c120..0x19d210` were all
+zero before and after the trigger.
+
+But there was one very concrete side effect: after mode 2, the controller
+gateway window `0x07b000..0x07ffff` became a byte-for-byte view of stock F0
+`0x7000..0xbfff`. In plain terms, the mode-2 path did not decode CDD, but it
+did expose the front of the encoded CDD object through a live controller
+window. `0x07b000` returned the outer descriptor and `CDD\x09` header;
+`0x07b400`, `0x07b800`, `0x07c000`, `0x07d000`, and `0x07ff00` matched
+corresponding F0 offsets exactly, while `0x080000` returned zero.
+
+So this test narrows the materializer story. The `0x8196 == 2` branch is a real
+controller transfer, not a random dead branch, but it is probably a mapped
+source/exposure step rather than the hard-body expansion step. The next
+materializer question is now sharper: what later normal-boot/controller command
+consumes that exposed CDD source window and turns it into the decoded runtime
+overlays? Detailed note:
+`analysis/8051/cdd-materializer-mode2-live-20260505.md`.

@@ -1,0 +1,88 @@
+{
+  "address": 504832,
+  "ascii_preview": "f.pF..P..T.G.Q..bE.G.rS..E;Hh...<..H....|..Im..Q...JMa.v\"4NJ.!.k...J.RSW..GKj.U....KU....TgL.....4.L.2...s.MU....s6N.......Nm:U...WOZh@..p.O.8.@...O..Nd\\./P...n...Pd2R{.\".QIj.a.3.Q.i...c.Q...dX.zR...V.T.R...qH.aSS...>D.Sg...N.JT>..%...T...S..,US..VZ.zU[..M",
+  "bytes_hex": "66e47046cde25098aa540647df5194a56245a047a87253a6b4453b486812168d3cd5e348bae215947c9183496d91055186d10b4a4d61d17622344e4af5210d6bc885c44a8f525357f413474b6aa255850215cc4b55a2d3919c54674cadc212a4be34fd4c8a32d4a6ea739c4d558a0fb5d873364e95a912a50cd5c64e6d3a55878a14574f5a6840031a70ee4fb5380740ec81f64f87804e645ca32f50f011cd6e0a0589506432527b94220651496a0f61f23384518c691280a263ff5189820a6458037a521d0a8f560854eb52daf98a71481361535302cc803e44cb5367b28d934e954a543e8291251ab0db540da98953a6c22c5553d9c9565af27a555be98a4d",
+  "chunk_size": 127,
+  "device": "/dev/sg0",
+  "length": 256,
+  "records": [
+    {
+      "address": 504831,
+      "base": 504768,
+      "bytes_hex": "5566e47046cde25098aa540647df5194a56245a047a87253a6b4453b486812168d3cd5e348bae215947c9183496d91055186d10b4a4d61d17622344e4af5210d6bc885c44a8f525357f413474b6aa255850215cc4b55a2d3919c54674cadc212a4be34fd4c8a32d4a6ea739c4d558a0fb5d873364e95a912a50cd5c64e6d3a55",
+      "cdb": [
+        18,
+        0,
+        0,
+        0,
+        240,
+        127,
+        0,
+        7,
+        179,
+        192,
+        0,
+        0
+      ],
+      "discarded_stale_first_byte": 85,
+      "length": 128,
+      "requested_address": 504832,
+      "returncode": 0,
+      "selector": 63,
+      "stderr": "SCSI Status: Good \n\nWriting 176 bytes of data to stdout\n",
+      "stdout_len": 176
+    },
+    {
+      "address": 504958,
+      "base": 504896,
+      "bytes_hex": "e9878a14574f5a6840031a70ee4fb5380740ec81f64f87804e645ca32f50f011cd6e0a0589506432527b94220651496a0f61f23384518c691280a263ff5189820a6458037a521d0a8f560854eb52daf98a71481361535302cc803e44cb5367b28d934e954a543e8291251ab0db540da98953a6c22c5553d9c9565af27a555be9",
+      "cdb": [
+        18,
+        0,
+        0,
+        0,
+        240,
+        126,
+        0,
+        7,
+        180,
+        64,
+        0,
+        0
+      ],
+      "discarded_stale_first_byte": 233,
+      "length": 128,
+      "requested_address": 504959,
+      "returncode": 0,
+      "selector": 62,
+      "stderr": "SCSI Status: Good \n\nWriting 176 bytes of data to stdout\n",
+      "stdout_len": 176
+    },
+    {
+      "address": 505085,
+      "base": 505024,
+      "bytes_hex": "3f8a4d",
+      "cdb": [
+        18,
+        0,
+        0,
+        0,
+        240,
+        125,
+        0,
+        7,
+        180,
+        192,
+        0,
+        0
+      ],
+      "discarded_stale_first_byte": 63,
+      "length": 3,
+      "requested_address": 505086,
+      "returncode": 0,
+      "selector": 61,
+      "stderr": "SCSI Status: Good \n\nWriting 176 bytes of data to stdout\n",
+      "stdout_len": 176
+    }
+  ]
+}
