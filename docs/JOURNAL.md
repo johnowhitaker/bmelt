@@ -3374,3 +3374,33 @@ materializer question is now sharper: what later normal-boot/controller command
 consumes that exposed CDD source window and turns it into the decoded runtime
 overlays? Detailed note:
 `analysis/8051/cdd-materializer-mode2-live-20260505.md`.
+
+## Materializer Dispatch Follow-Up
+
+The next static pass cleaned up an important decompiler lie. Several of the
+8051 functions use inline dispatch tables: a call pops its return address and
+interprets the following bytes as `(target, selector)` entries. Ghidra renders
+those bytes as nonsense code unless we manually treat them as data.
+
+With that corrected, `FUN_CODE_111a` is easier to understand. It copies three
+32-bit staged descriptor fields from `0x8245..0x8250`, then dispatches on a
+selector. The visible normal setup case is selector `0x80`; the later
+`FUN_CODE_40b2` continuation branch uses selector `0x02`. That means the
+mode-2 parser path we live-tested and the `FUN_CODE_111a(2)` continuation are
+not the same thing.
+
+The current model is therefore:
+
+```text
+mode-2 parser path       exposes/copies encoded CDD source bytes
+normal selector 0x80     stages descriptor/setup state and status flags
+selector 0x02 branch     later continuation/status path
+hidden controller side   likely performs hard-body materialization
+```
+
+One new tool was added for the next live-safe observation pass: the currentboot
+response-hook builder can now run the same non-persistent mode-2 parser call
+and return an arbitrary XDATA window, such as `0x4e00..0x4e3f`,
+`0x4a00..0x4a3f`, or `0x8240..0x827f`. Dry-run builds fit exactly in the
+existing hook cave, but this has not been run on the drive yet. Detailed note:
+`analysis/8051/cdd-materializer-dispatch-followup-20260505.md`.

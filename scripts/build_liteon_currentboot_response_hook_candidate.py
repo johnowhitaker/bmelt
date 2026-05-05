@@ -1040,6 +1040,48 @@ def source_mapped_cdd_parser_mode2_status64_replay(storage_offset: int) -> bytes
     )
 
 
+def source_mapped_cdd_parser_mode2_xdata_window_replay(
+    storage_offset: int, xdata_address: int, xdata_length: int, marker: int
+) -> bytes:
+    """Call the CDD parser mode-2 branch and return a selected XDATA window.
+
+    This is the same non-persistent setup as
+    source_mapped_cdd_parser_mode2_status64_replay(), but it lets later probes
+    inspect state windows such as 0x4e00, 0x4a00, or 0x8240 after the mode-2
+    call without building a custom hook for each window.
+    """
+
+    return b"".join(
+        [
+            write_xdata_run(0x8196, [0x02]),
+            write_xdata_run(0x8227, [0x00, 0x2C]),
+            write_xdata_run(
+                0x8248,
+                [
+                    0x00,
+                    0x00,
+                    0x40,
+                    0x00,
+                    0x00,
+                    0x08,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x50,
+                    0x00,
+                    0x40,
+                    0x00,
+                ],
+            ),
+            bytes([0xE4, 0xFC, 0xFD, 0xFF, 0x7E, 0x70]),  # R4:R5:R6:R7 = 00:00:70:00.
+            lcall(0x002E),
+            copy_xdata_to_response_source(xdata_address, xdata_length, storage_offset + 1),
+            mov_rn_imm(5, marker),
+        ]
+    )
+
+
 def source_gateway_cdb_bulk_with_cdd_parser_mode2_status64(
     selector_mask: int, storage_offset: int, bulk_len: int
 ) -> bytes:
@@ -1053,6 +1095,41 @@ def source_gateway_cdb_bulk_with_cdd_parser_mode2_status64(
         jump_to_gateway_positions.append(len(source) - 1)
 
     source.extend(source_mapped_cdd_parser_mode2_status64_replay(storage_offset))
+    skip_after_replay_pos = len(source)
+    source.extend(bytes([0x80, 0x00]))  # SJMP end_source
+
+    gateway_start = len(source)
+    source.extend(source_gateway_cdb_bulk(selector_mask, storage_offset, bulk_len))
+    end_source = len(source)
+
+    for position in jump_to_gateway_positions:
+        source[position] = rel8(position + 1, gateway_start)
+    source[skip_after_replay_pos + 1] = rel8(skip_after_replay_pos + 2, end_source)
+    return bytes(source)
+
+
+def source_gateway_cdb_bulk_with_cdd_parser_mode2_xdata_window(
+    selector_mask: int,
+    storage_offset: int,
+    bulk_len: int,
+    xdata_address: int,
+    xdata_length: int,
+    marker: int,
+) -> bytes:
+    """Gateway bulk read with parser mode-2 plus selected-XDATA trigger."""
+
+    source = bytearray()
+    jump_to_gateway_positions: list[int] = []
+    for cdb_addr, expected in ((0x8191, 0xFC), (0x8192, 0xE5)):
+        source.extend(mov_dptr(cdb_addr))
+        source.extend(bytes([0xE0, 0x64, expected, 0x70, 0x00]))  # MOVX; XRL; JNZ gateway
+        jump_to_gateway_positions.append(len(source) - 1)
+
+    source.extend(
+        source_mapped_cdd_parser_mode2_xdata_window_replay(
+            storage_offset, xdata_address, xdata_length, marker
+        )
+    )
     skip_after_replay_pos = len(source)
     source.extend(bytes([0x80, 0x00]))  # SJMP end_source
 
@@ -1192,6 +1269,7 @@ def build_source(args: argparse.Namespace) -> tuple[str, bytes, dict[str, Any]]:
         args.gateway_cdb_bulk_with_cdd_mapped_source,
         args.gateway_cdb_bulk_with_cdd_parser_call,
         args.gateway_cdb_bulk_with_cdd_parser_mode2_status64,
+        args.gateway_cdb_bulk_with_cdd_parser_mode2_xdata_window,
         args.gateway_cdb_bulk_with_cdd_parser_second_doorbell,
         args.gateway_byte_with_cdd_prestage_replay,
     ]
@@ -1211,6 +1289,7 @@ def build_source(args: argparse.Namespace) -> tuple[str, bytes, dict[str, Any]]:
             "--gateway-cdb-bulk-with-cdd-mapped-source, or "
             "--gateway-cdb-bulk-with-cdd-parser-call, or "
             "--gateway-cdb-bulk-with-cdd-parser-mode2-status64, or "
+            "--gateway-cdb-bulk-with-cdd-parser-mode2-xdata-window, or "
             "--gateway-cdb-bulk-with-cdd-parser-second-doorbell, or "
             "--gateway-byte-with-cdd-prestage-replay"
         )
@@ -1439,6 +1518,35 @@ def build_source(args: argparse.Namespace) -> tuple[str, bytes, dict[str, Any]]:
                 "trigger_response": "0xd8 at response[0x20], 0x4e80 status bytes at response[0x21..0x60]",
                 "selector_mask": args.selector_mask,
                 "bulk_len": args.bulk_len,
+            },
+        )
+    if args.gateway_cdb_bulk_with_cdd_parser_mode2_xdata_window:
+        return (
+            "gateway_cdb_bulk_with_cdd_parser_mode2_xdata_window",
+            source_gateway_cdb_bulk_with_cdd_parser_mode2_xdata_window(
+                args.selector_mask,
+                RESPONSE_STORAGE_BASE + args.response_offset,
+                args.bulk_len,
+                args.mode2_xdata_address,
+                args.mode2_xdata_len,
+                args.mode2_marker,
+            ),
+            {
+                "address_source": "normal: cdb_bytes_7_8_9_plus_control_low_bits",
+                "trigger": (
+                    "host cdb_7_fc_cdb_8_e5 writes xdata[0x8196]=2, "
+                    "calls resident CDD parser setup at 0x002e, and returns "
+                    f"xdata[0x{args.mode2_xdata_address:04x}.."
+                    f"0x{args.mode2_xdata_address + args.mode2_xdata_len - 1:04x}]"
+                ),
+                "trigger_response": (
+                    f"0x{args.mode2_marker:02x} at response[0x20], selected "
+                    "XDATA window at response[0x21..]"
+                ),
+                "selector_mask": args.selector_mask,
+                "bulk_len": args.bulk_len,
+                "mode2_xdata_address": args.mode2_xdata_address,
+                "mode2_xdata_len": args.mode2_xdata_len,
             },
         )
     if args.gateway_cdb_bulk_with_cdd_parser_second_doorbell:
@@ -1704,6 +1812,11 @@ def parse_args() -> argparse.Namespace:
         help="like --gateway-cdb-bulk, but CDB[7:8]=fc/e4 sets xdata[0x8196]=2, calls the resident CDD parser, and returns xdata[0x4e80..0x4ebf]",
     )
     parser.add_argument(
+        "--gateway-cdb-bulk-with-cdd-parser-mode2-xdata-window",
+        action="store_true",
+        help="like --gateway-cdb-bulk, but CDB[7:8]=fc/e5 sets xdata[0x8196]=2, calls the resident CDD parser, and returns --mode2-xdata-len bytes from --mode2-xdata-address",
+    )
+    parser.add_argument(
         "--gateway-cdb-bulk-with-cdd-parser-second-doorbell",
         action="store_true",
         help="like --gateway-cdb-bulk, but CDB[8]=e2 calls the parser setup then rings the later 0x4a doorbell",
@@ -1729,6 +1842,9 @@ def parse_args() -> argparse.Namespace:
         help="read XDATA address CDB[7:8] + selector, and write CDB[9] first if CDB[10:11] is a5 5a",
     )
     parser.add_argument("--bulk-len", type=parse_byte, default=0x80)
+    parser.add_argument("--mode2-xdata-address", type=parse_addr, default=0x4E00)
+    parser.add_argument("--mode2-xdata-len", type=parse_byte, default=0x40)
+    parser.add_argument("--mode2-marker", type=parse_byte, default=0xD9)
     parser.add_argument("--selector-mask", type=parse_byte, default=0x3F)
     parser.add_argument("--restore", action="store_true")
     parser.add_argument("--dry-run", action="store_true")
@@ -1754,6 +1870,7 @@ def main() -> int:
         or args.gateway_cdb_bulk_with_cdd_mapped_source
         or args.gateway_cdb_bulk_with_cdd_parser_call
         or args.gateway_cdb_bulk_with_cdd_parser_mode2_status64
+        or args.gateway_cdb_bulk_with_cdd_parser_mode2_xdata_window
         or args.gateway_cdb_bulk_with_cdd_parser_second_doorbell
         or args.gateway_byte_with_cdd_prestage_replay
         or args.xdata_cdb_address

@@ -171,6 +171,19 @@ notes:
 `analysis/8051/cdd-materializer-static-20260505.md` and
 `analysis/8051/cdd-materializer-mode2-live-20260505.md`.
 
+Follow-up correction: `FUN_CODE_111a` uses an inline selector dispatch table
+that Ghidra misrenders as code. Selector `0x80` is the normal descriptor/setup
+case reached from `FUN_CODE_48e7`; selector `0x02` is the later continuation
+case reached by the `FUN_CODE_40b2` branch when `xdata[0x4819].0` is set.
+Those are distinct from the `xdata[0x8196] == 2` branch inside
+`FUN_CODE_002e`. The response-hook builder now has
+`--gateway-cdb-bulk-with-cdd-parser-mode2-xdata-window`, which runs the same
+non-persistent mode-2 parser call and returns a selected XDATA window after the
+call. Useful first windows are `0x4e00..0x4e3f`, `0x4a00..0x4a3f`,
+`0x8240..0x827f`, and `0x8190..0x81af`. This has dry-run tested but has not
+been run live. See
+`analysis/8051/cdd-materializer-dispatch-followup-20260505.md`.
+
 Replay helper:
 
 ```text
