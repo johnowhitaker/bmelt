@@ -149,6 +149,17 @@ live replay would write that header-derived `0x4a` field package and sample
 `0x4a24..0x4a29`, `0x4ea0`, and decoded CDD targets before attempting the
 higher-risk `0x4e8c` mapped-header command.
 
+Materializer correction: the visible 8051 is a transaction layer, not the
+hard-body decoder. Normal boot first performs a `LITE` trailer handshake
+through `0x4000/0x4098`, validates descriptor words, and then calls
+`FUN_CODE_002e`. The ordinary visible LD5M setup stages `xdata[0x8196] = 0`,
+so the `0x8196 == 2` branch is not proven normal boot, but it remains the best
+untested non-mutating controller-oracle candidate. That branch issues a
+`0x5000` byte `0x4e80/84/88/8c` transaction using `0x00407000`,
+`0x0007b000`, and `0x00005000`; sample decoded companion addresses around
+`0x19c120..0x19d2e0` if this path is ever tested. Full note:
+`analysis/8051/cdd-materializer-static-20260505.md`.
+
 Replay helper:
 
 ```text

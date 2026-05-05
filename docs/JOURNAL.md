@@ -3306,3 +3306,42 @@ work is either a real encoder breakthrough, or a non-mutating materialization
 oracle that lets us observe the exact decoded byte while learning source-bit
 influence. Detailed note:
 `analysis/8051/cdd-patchability-blocker-20260505.md`.
+
+## CDD Materializer Static Pass
+
+The next static pass reframed the "materializer" more carefully. There still is
+no visible 8051 routine that decodes hard CDD record bodies byte-for-byte.
+Instead, the resident 8051 acts like a controller transaction layer: it stages
+descriptor fields, maps small windows, rings `0x4a*` mailboxes, drives the
+`0x4e80/84/88/8c` transfer engine, and polls status. The opaque controller side
+still appears to own the actual hard-body materialization.
+
+The important correction is that normal boot does more than call the parser. It
+first runs a `LITE` trailer handshake through the `0x4000`/`0x4098` controller
+gateway, validates descriptor words, copies descriptor state into
+`0x8248..0x8255`, and only then calls `FUN_CODE_002e`. Several earlier
+currentboot shortcuts entered the parser without recreating that full prelude,
+so their negative decoded-memory results are narrower than they first looked.
+
+`FUN_CODE_002e` now has a cleaner mode split:
+
+```text
+xdata[0x8196] == 1      early/special return
+xdata[0x8196] == 2      larger descriptor-transfer path
+xdata[0x8196] otherwise default mapped-header + 0x4a mailbox path
+```
+
+The visible LD5M normal setup stages `xdata[0x8196] = 0`, so mode `2` is not
+proven to be ordinary boot. But it is still the best untested non-mutating
+controller-oracle candidate: it issues a `0x5000` byte `0x4e` transfer using
+`0x4e80 = 0x00407000`, `0x4e84 = 0x0007b000`, and
+`0x4e88 = 0x00005000`. That numeric `0x7b000..0x7ffff` extent overlaps CDD
+records whose decoded destinations are around `0x19c120..0x19d2e0`, and the
+older currentboot decoded-target probes did not sample that band.
+
+So the next live experiment, if we choose it, should be a guarded, non-mutating
+mode-2/materializer replay with status and companion-band samples before and
+after. That is not risk-free because it rings real controller transfer
+registers, but it is materially safer and more informative than editing a hard
+CDD body while we still cannot encode targeted decoded-byte changes. Detailed
+note: `analysis/8051/cdd-materializer-static-20260505.md`.
