@@ -3220,6 +3220,11 @@ window `+0x91c2`, there is a real A3/A4 selector island. It checks
 `xdata[0x8a53] & 0x3f`. The read-only `REPORT KEY` format `8` branch jumps to
 `0x6f62`; the `SEND KEY` format `6` branch jumps to `0x6f73`.
 
+One subtle correction: those are 8051 code targets, not public-window offsets.
+The public window is a tiled observation surface, so `+0x6f62` is not
+automatically the body of the `0x6f62` branch. We need to identify the actual
+target tile before treating the branch body as mapped.
+
 That last detail matters. Format `8` is the safe RPC-state read path we already
 use. Format `6` is very likely the write/config side for DVD region/RPC state,
 so it is now on the "do not casually poke this" list. A read-only `REPORT KEY`
@@ -3229,8 +3234,7 @@ sequence is established; unknown formats return invalid-field errors. The drive
 remained `LD5M`.
 
 This did not give arbitrary normal-mode memory I/O, but it did give a grounded
-normal-mode command island to study. The next sensible target is the safe
-`REPORT KEY format 8 -> 0x6f62` path and the state bytes around
-`0x4867..0x486b`, `0x4a01`, `0x5904`, and `0x5950`, not broad CSS fuzzing.
-Detailed follow-up:
+normal-mode command island to study. The next sensible target is to find the
+real body or public tile for the safe `REPORT KEY format 8 -> 0x6f62` path, not
+broad CSS fuzzing. Detailed follow-up:
 `analysis/8051/drive3-dvd-auth-followup-20260505.md`.

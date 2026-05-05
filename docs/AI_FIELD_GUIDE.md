@@ -2537,7 +2537,9 @@ Immediate useful directions:
     `xdata[0x8a49] == 0xa3` with low format `0x06`, then jumps to `0x6f73`.
     Treat `REPORT KEY` format `8` as the safe read-only branch. Treat
     `SEND KEY` format `6` as hazardous because it is likely the DVD RPC/region
-    write/config side.
+    write/config side. Caveat: `0x6f62`/`0x6f73` are 8051 code targets, not
+    public-window offsets. The public work-window is tiled, so do not assume
+    `+0x6f62` is the branch body.
 146. A read-only `REPORT KEY` format scan with the pressed DVD and AGID `3`
     found successful formats `0x00` AGID, `0x05` ASF, and `0x08` RPC state;
     format `0x3f` invalidated AGID cleanly at the end. Formats `0x01/0x02`
@@ -2545,9 +2547,8 @@ Immediate useful directions:
     sequence, format `0x04` reports key exchange not established, and most
     others are invalid field. Evidence:
     `references/evidence/live/drive3-dvd-report-key-scan-20260505T034858209881Z/`.
-147. Current safe next target: map the `REPORT KEY format 8 -> 0x6f62` branch
-    and its nearby state effects around `0x4867..0x486b`, `0x4a01`,
-    `0x5904`, and `0x5950`. Do not broad-fuzz CSS, and do not send
-    `SEND KEY format 6` unless deliberately choosing to risk DVD region/RPC
-    state. Follow-up note:
+147. Current safe next target: find the actual body or public-window tile for
+    the `REPORT KEY format 8 -> 0x6f62` branch, then map its state effects. Do
+    not broad-fuzz CSS, and do not send `SEND KEY format 6` unless deliberately
+    choosing to risk DVD region/RPC state. Follow-up note:
     `analysis/8051/drive3-dvd-auth-followup-20260505.md`.

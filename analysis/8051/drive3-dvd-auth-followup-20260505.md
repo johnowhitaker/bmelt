@@ -118,6 +118,13 @@ Extracted chunks and r2 disassembly are in:
 The first AGID window showed a different phase at `+0x91c0`; from the ASF step
 onward, the A3/A4 selector island is stable at `+0x91c2`.
 
+Important caveat: the public work-window is a tiled/rotating observation
+surface, not a flat 8051 code-address map. The `LJMP 0x6f62` and `LJMP 0x6f73`
+targets above are real code targets, but public offsets `+0x6f62` and
+`+0x6f73` are not automatically those routines. The `public-offset-6f*.bin`
+extracts in this directory are phase/context samples only, not confirmed branch
+targets.
+
 ## Read-only REPORT KEY format scan
 
 A read-only `REPORT KEY` format scan over `0x01..0x0f`, with AGID `3`, found
@@ -152,8 +159,8 @@ rather than being left in the public `0x070000` work-window.
 The best next step is not broad CSS fuzzing. The safe next static/live target is
 the visible `REPORT KEY format 8` selector path:
 
-1. map the `0x6f62` branch and its nearby `0x4867..0x486b`, `0x4a01`, and
-   `0x5904/0x5950` state effects;
+1. find the actual `0x6f62` branch body or its public-window tile, then map its
+   state effects;
 2. correlate those with repeated `REPORT KEY format 8` and ordinary
    command/window captures;
 3. only after that, decide whether this read-only branch is a plausible normal
