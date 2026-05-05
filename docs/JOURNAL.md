@@ -3238,3 +3238,27 @@ normal-mode command island to study. The next sensible target is to find the
 real body or public tile for the safe `REPORT KEY format 8 -> 0x6f62` path, not
 broad CSS fuzzing. Detailed follow-up:
 `analysis/8051/drive3-dvd-auth-followup-20260505.md`.
+
+The next normal-hook push sharpened that target but did not install a custom
+hook. The safe `REPORT KEY format 8` branch is now more convincing as a real
+normal branch body: the selector jumps to `0x6f62`, the currentboot gateway
+scan has direct register references beginning at `0x6f62`, and live windows
+show the same mechanics/status-looking code around `0x4867`, `0x486a`, and
+`0x486b`. A sibling plaintext-style PLDS image also contains the key
+`0x4867 |= 0x14` sequence around `0x1838f5`, which makes the branch look like a
+hardware/status setup path rather than a response generator.
+
+We also tried a fully safe selector idea: flip the proven volatile
+`MODE SELECT` page `0x08` bit and observe the read-only `REPORT KEY format 8`
+response before, during, and after the flip. The bit round-tripped cleanly
+`0x04 -> 0x00 -> 0x04`, and the drive stayed `LD5M`, but the direct RPC-state
+response was identical each time: `0006000064fe0100`. The public window moved
+around, but that is still phase noise, not a controlled response bit.
+
+So the state is narrower: we have normal command islands, a real normal
+host-writable state bit, and a conservative `READ BUFFER` response-redirect hook
+design. What we still do not have is a safe delivery path into the CDD-derived
+normal runtime. Currentboot volatile writes do not survive into normal mode,
+visible F0-prefix hooks do not hit the normal handlers, and CDD runtime
+mutation is the next risk boundary. Detailed note:
+`analysis/8051/drive3-normal-hook-poc-status-20260505.md`.

@@ -242,8 +242,20 @@ Normal-mode I/O status:
 - `analysis/8051/drive3-normal-hook-carryover-20260504.md` closes the first
   proposed delivery route: currentboot gateway writes do not carry into normal
   mode through the available soft/recovery transitions.
+- Pressed-DVD `REPORT KEY` / `SEND KEY` is a real normal bidirectional command
+  path. The host challenge affects key1 deterministically, but the nonce does
+  not appear in the public work-window.
+- `REPORT KEY format 8` is the safest grounded normal branch. The selector
+  jumps to `0x6f62`, and branch-body evidence points at a mechanics/status
+  routine around `0x4867`, `0x486a`, `0x486b`, and `0x590x`, not a direct
+  response generator. See
+  `analysis/8051/drive3-normal-hook-poc-status-20260505.md`.
+- The proven MODE SELECT bit was tested as a selector for `REPORT KEY format 8`;
+  it round-tripped cleanly but did not change the direct RPC-state response.
+  Re-run with `scripts/probe_liteon_mode_bit_observer.py` if needed.
 - The next normal-mode work should look for a true normal writable mailbox or
-  hook selector, not patch shared code through unproven currentboot carryover.
+  an explicitly approved safe CDD/runtime delivery route, not patch shared code
+  through unproven currentboot carryover.
 
 Code-execution evidence:
 

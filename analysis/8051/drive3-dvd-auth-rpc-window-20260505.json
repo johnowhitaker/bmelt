@@ -1,0 +1,2018 @@
+{
+  "capture_count": 4,
+  "controller_edges": [
+    {
+      "count": 4,
+      "dst": 35550,
+      "kind": "direct",
+      "sample_offsets": [
+        56256
+      ],
+      "src": 16533
+    },
+    {
+      "count": 4,
+      "dst": 35564,
+      "kind": "direct",
+      "sample_offsets": [
+        56256
+      ],
+      "src": 16534
+    },
+    {
+      "count": 4,
+      "dst": 35563,
+      "kind": "direct",
+      "sample_offsets": [
+        56320
+      ],
+      "src": 16535
+    },
+    {
+      "count": 4,
+      "dst": 16401,
+      "kind": "direct",
+      "sample_offsets": [
+        28864
+      ],
+      "src": 34302
+    },
+    {
+      "count": 4,
+      "dst": 16402,
+      "kind": "direct",
+      "sample_offsets": [
+        28864
+      ],
+      "src": 34303
+    },
+    {
+      "count": 4,
+      "dst": 16533,
+      "kind": "direct",
+      "sample_offsets": [
+        56320
+      ],
+      "src": 35237
+    },
+    {
+      "count": 4,
+      "dst": 16401,
+      "kind": "direct",
+      "sample_offsets": [
+        29056
+      ],
+      "src": 35404
+    },
+    {
+      "count": 4,
+      "dst": 16402,
+      "kind": "direct",
+      "sample_offsets": [
+        29056
+      ],
+      "src": 35405
+    },
+    {
+      "count": 4,
+      "dst": 16403,
+      "kind": "direct",
+      "sample_offsets": [
+        29056
+      ],
+      "src": 35406
+    },
+    {
+      "count": 4,
+      "dst": 16534,
+      "kind": "direct",
+      "sample_offsets": [
+        56320
+      ],
+      "src": 35419
+    },
+    {
+      "count": 4,
+      "dst": 16535,
+      "kind": "direct",
+      "sample_offsets": [
+        56320
+      ],
+      "src": 35420
+    },
+    {
+      "count": 4,
+      "dst": 16533,
+      "kind": "direct",
+      "sample_offsets": [
+        56384
+      ],
+      "src": 35550
+    },
+    {
+      "count": 4,
+      "dst": 16535,
+      "kind": "direct",
+      "sample_offsets": [
+        56384
+      ],
+      "src": 35563
+    },
+    {
+      "count": 4,
+      "dst": 16534,
+      "kind": "direct",
+      "sample_offsets": [
+        56384
+      ],
+      "src": 35564
+    },
+    {
+      "count": 1,
+      "dst": 16529,
+      "kind": "direct",
+      "sample_offsets": [
+        28992
+      ],
+      "src": 35237
+    }
+  ],
+  "controller_sequences": [
+    {
+      "count": 8,
+      "label": "controller FIFO writer: setup 4095..4097 then data to 4098",
+      "sample_capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/02-after-report-key-css-agid",
+      "sample_hex": "4000e020e7f99089a5e0904095f0908a5be0904096f0908a5ce0904097f0a3eff0904000e020e7f9904098edf0908a5ce02402f0908a5be03400f0e0b44013a3e0b4000e908a2de04402f0e4908a5bf0a3f0904000e020e7f9908adee0904095f0908aece0904096f0908aebe0904097",
+      "sample_offset": 56367,
+      "sample_ops": [
+        "read 0x8a5d",
+        "read 0x8a5e",
+        "write 0x8a5e",
+        "read 0x8a5d",
+        "write 0x8a5d",
+        "read 0x4095",
+        "0x8ade<=xdata_0x4095",
+        "read 0x4096",
+        "0x8aec<=xdata_0x4096",
+        "read 0x4097",
+        "0x8aeb<=xdata_0x4097",
+        "read 0x4000",
+        "0x4095<=xdata_0x89a5",
+        "read 0x8a5b",
+        "0x4096<=xdata_0x8a5b",
+        "read 0x8a5c",
+        "0x4097<=xdata_0x8a5c",
+        "write 0x4098"
+      ],
+      "sample_snippet_offset": 56335
+    },
+    {
+      "count": 8,
+      "label": "restore mirrored controller setup: 8ade/8aec/8aeb -> 4095..4097",
+      "sample_capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/02-after-report-key-css-agid",
+      "sample_hex": "a3f0904000e020e7f9908adee0904095f0908aece0904096f0908aebe0904097f0d0d092af22c0e0c0f0c083c082c0d075d0187b437d587f45123e1ae4ff120279908565eff0603ba37401f0908566e0ff120279cbefcb908566e0fd7f53123e1a908565e0c313fff0a3e004f0ef70dc",
+      "sample_offset": 56447,
+      "sample_ops": [
+        "read 0x8a5b",
+        "0x4096<=xdata_0x8a5b",
+        "read 0x8a5c",
+        "0x4097<=xdata_0x8a5c",
+        "write 0x4098",
+        "read 0x4000",
+        "write 0x4098",
+        "read 0x8a5c",
+        "write 0x8a5b",
+        "write 0x8a5c",
+        "read 0x4000",
+        "read 0x8ade",
+        "0x4095<=xdata_0x8ade",
+        "read 0x8aec",
+        "0x4096<=xdata_0x8aec",
+        "read 0x8aeb",
+        "0x4097<=xdata_0x8aeb",
+        "read 0x4097"
+      ],
+      "sample_snippet_offset": 56415
+    }
+  ],
+  "copy_edges": [
+    {
+      "count": 4,
+      "dst": 35550,
+      "kind": "direct",
+      "sample_offsets": [
+        56256
+      ],
+      "src": 16533
+    },
+    {
+      "count": 4,
+      "dst": 35564,
+      "kind": "direct",
+      "sample_offsets": [
+        56256
+      ],
+      "src": 16534
+    },
+    {
+      "count": 4,
+      "dst": 35563,
+      "kind": "direct",
+      "sample_offsets": [
+        56320
+      ],
+      "src": 16535
+    },
+    {
+      "count": 4,
+      "dst": 35402,
+      "kind": "direct",
+      "sample_offsets": [
+        38016
+      ],
+      "src": 18353
+    },
+    {
+      "count": 4,
+      "dst": 35403,
+      "kind": "direct",
+      "sample_offsets": [
+        38016
+      ],
+      "src": 18353
+    },
+    {
+      "count": 4,
+      "dst": 35405,
+      "kind": "direct",
+      "sample_offsets": [
+        38144
+      ],
+      "src": 18353
+    },
+    {
+      "count": 4,
+      "dst": 35406,
+      "kind": "direct",
+      "sample_offsets": [
+        38144
+      ],
+      "src": 18353
+    },
+    {
+      "count": 4,
+      "dst": 35407,
+      "kind": "direct",
+      "sample_offsets": [
+        38144
+      ],
+      "src": 18353
+    },
+    {
+      "count": 4,
+      "dst": 35408,
+      "kind": "direct",
+      "sample_offsets": [
+        38144
+      ],
+      "src": 18353
+    },
+    {
+      "count": 4,
+      "dst": 35409,
+      "kind": "direct",
+      "sample_offsets": [
+        38144
+      ],
+      "src": 18353
+    },
+    {
+      "count": 4,
+      "dst": 35410,
+      "kind": "direct",
+      "sample_offsets": [
+        38144
+      ],
+      "src": 18353
+    },
+    {
+      "count": 4,
+      "dst": 35411,
+      "kind": "direct",
+      "sample_offsets": [
+        38144
+      ],
+      "src": 18353
+    },
+    {
+      "count": 4,
+      "dst": 16401,
+      "kind": "direct",
+      "sample_offsets": [
+        28864
+      ],
+      "src": 34302
+    },
+    {
+      "count": 4,
+      "dst": 16402,
+      "kind": "direct",
+      "sample_offsets": [
+        28864
+      ],
+      "src": 34303
+    },
+    {
+      "count": 4,
+      "dst": 16533,
+      "kind": "direct",
+      "sample_offsets": [
+        56320
+      ],
+      "src": 35237
+    },
+    {
+      "count": 4,
+      "dst": 16401,
+      "kind": "direct",
+      "sample_offsets": [
+        29056
+      ],
+      "src": 35404
+    },
+    {
+      "count": 4,
+      "dst": 16402,
+      "kind": "direct",
+      "sample_offsets": [
+        29056
+      ],
+      "src": 35405
+    },
+    {
+      "count": 4,
+      "dst": 16403,
+      "kind": "direct",
+      "sample_offsets": [
+        29056
+      ],
+      "src": 35406
+    },
+    {
+      "count": 4,
+      "dst": 16534,
+      "kind": "direct",
+      "sample_offsets": [
+        56320
+      ],
+      "src": 35419
+    },
+    {
+      "count": 4,
+      "dst": 16535,
+      "kind": "direct",
+      "sample_offsets": [
+        56320
+      ],
+      "src": 35420
+    },
+    {
+      "count": 4,
+      "dst": 16533,
+      "kind": "direct",
+      "sample_offsets": [
+        56384
+      ],
+      "src": 35550
+    },
+    {
+      "count": 4,
+      "dst": 16535,
+      "kind": "direct",
+      "sample_offsets": [
+        56384
+      ],
+      "src": 35563
+    },
+    {
+      "count": 4,
+      "dst": 16534,
+      "kind": "direct",
+      "sample_offsets": [
+        56384
+      ],
+      "src": 35564
+    },
+    {
+      "count": 3,
+      "dst": 34352,
+      "kind": "direct",
+      "sample_offsets": [
+        33984
+      ],
+      "src": 18531
+    },
+    {
+      "count": 3,
+      "dst": 18531,
+      "kind": "direct",
+      "sample_offsets": [
+        35008
+      ],
+      "src": 34352
+    },
+    {
+      "count": 1,
+      "dst": 16529,
+      "kind": "direct",
+      "sample_offsets": [
+        28992
+      ],
+      "src": 35237
+    },
+    {
+      "count": 1,
+      "dst": 18353,
+      "kind": "direct",
+      "sample_offsets": [
+        25600
+      ],
+      "src": 35556
+    }
+  ],
+  "fifo_bursts": [
+    {
+      "count": 2,
+      "dst_end": 35403,
+      "dst_start": 35402,
+      "observations": 4,
+      "sample_capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/02-after-report-key-css-agid",
+      "sample_offset": 38063
+    },
+    {
+      "count": 7,
+      "dst_end": 35411,
+      "dst_start": 35405,
+      "observations": 4,
+      "sample_capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/02-after-report-key-css-agid",
+      "sample_offset": 38151
+    }
+  ],
+  "snippets": [
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/02-after-report-key-css-agid",
+      "hex": "8a4ce0c3940e4008904011740ef080089085fee0904011f09085ffe0904012f0908600802e90fd123d89908988e0ffa3e0fd123d897f0012050d908988eef0a3",
+      "label": "copy 0x85fe->0x4011",
+      "offset": 28890
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/02-after-report-key-css-agid",
+      "hex": "904011740ef080089085fee0904011f09085ffe0904012f0908600802e90fd123d89908988e0ffa3e0fd123d897f0012050d908988eef0a3eff0908a3ae0547f",
+      "label": "copy 0x85ff->0x4012",
+      "offset": 28898
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/02-after-report-key-css-agid",
+      "hex": "8a4ce0c3940e4008904011740ef08008908a4ce0904011f0908a4de0904012f0908a4ee0904013f0908a50e0ffa3e078a9cff608eff6e04401f0905997e04450",
+      "label": "copy 0x8a4c->0x4011",
+      "offset": 29066
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/02-after-report-key-css-agid",
+      "hex": "904011740ef08008908a4ce0904011f0908a4de0904012f0908a4ee0904013f0908a50e0ffa3e078a9cff608eff6e04401f0905997e04450f022ee70089055cd",
+      "label": "copy 0x8a4d->0x4012",
+      "offset": 29074
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/02-after-report-key-css-agid",
+      "hex": "908a4ce0904011f0908a4de0904012f0908a4ee0904013f0908a50e0ffa3e078a9cff608eff6e04401f0905997e04450f022ee70089055cde054e7f022eeb401",
+      "label": "copy 0x8a4e->0x4013",
+      "offset": 29082
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/02-after-report-key-css-agid",
+      "hex": "e04480f0229047b0e4f0a3e0908a49f09047b1e0908a4af09047b1e0908a4bf090249089ece004f0e0c3940a401d908a23e04410f0c2789088f1e054fbf09089",
+      "label": "copy 0x47b1->0x8a4a",
+      "offset": 38047
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/02-after-report-key-css-agid",
+      "hex": "e4f0a3e0908a49f09047b1e0908a4af09047b1e0908a4bf090249089ece004f0e0c3940a401d908a23e04410f0c2789088f1e054fbf09089247401f08005e490",
+      "label": "copy 0x47b1->0x8a4b",
+      "offset": 38055
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/02-after-report-key-css-agid",
+      "hex": "940240031202bb908a47b1e0908a4cf09047b1e0908a4df09047b1e0908a4ef09047b1e0908a4ff09047b1e0908a50f09047b1e0908a51f09047b1e0908a52f0",
+      "label": "copy 0x47b1->0x8a4d",
+      "offset": 38135
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/02-after-report-key-css-agid",
+      "hex": "8a47b1e0908a4cf09047b1e0908a4df09047b1e0908a4ef09047b1e0908a4ff09047b1e0908a50f09047b1e0908a51f09047b1e0908a52f09047b1e0908a53f0",
+      "label": "copy 0x47b1->0x8a4e",
+      "offset": 38143
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/02-after-report-key-css-agid",
+      "hex": "9047b1e0908a4df09047b1e0908a4ef09047b1e0908a4ff09047b1e0908a50f09047b1e0908a51f09047b1e0908a52f09047b1e0908a53f0907ff9123d89e4fd",
+      "label": "copy 0x47b1->0x8a4f",
+      "offset": 38151
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/02-after-report-key-css-agid",
+      "hex": "9047b1e0908a4ef09047b1e0908a4ff09047b1e0908a50f09047b1e0908a51f09047b1e0908a52f09047b1e0908a53f0907ff9123d89e4fd7f40123d89e4908a",
+      "label": "copy 0x47b1->0x8a50",
+      "offset": 38159
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/02-after-report-key-css-agid",
+      "hex": "9047b1e0908a4ff09047b1e0908a50f09047b1e0908a51f09047b1e0908a52f09047b1e0908a53f0907ff9123d89e4fd7f40123d89e4908a33f0d0d092af2290",
+      "label": "copy 0x47b1->0x8a51",
+      "offset": 38167
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/02-after-report-key-css-agid",
+      "hex": "9047b1e0908a50f09047b1e0908a51f09047b1e0908a52f09047b1e0908a53f0907ff9123d89e4fd7f40123d89e4908a33f0d0d092af22908a4ce0ff6401601c",
+      "label": "copy 0x47b1->0x8a52",
+      "offset": 38175
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/02-after-report-key-css-agid",
+      "hex": "9047b1e0908a51f09047b1e0908a52f09047b1e0908a53f0907ff9123d89e4fd7f40123d89e4908a33f0d0d092af22908a4ce0ff6401601cef64026017ef6404",
+      "label": "copy 0x47b1->0x8a53",
+      "offset": 38183
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/02-after-report-key-css-agid",
+      "hex": "600e908a5ee024fff0908a5de034fff0904095e0908adef0904096e0908aecf0904097e0908aebf0904000e020e7f99089a5e0904095f0908a5be0904096f090",
+      "label": "copy 0x4095->0x8ade",
+      "offset": 56294
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/02-after-report-key-css-agid",
+      "hex": "f0908a5de034fff0904095e0908adef0904096e0908aecf0904097e0908aebf0904000e020e7f99089a5e0904095f0908a5be0904096f0908a5ce0904097f0a3",
+      "label": "copy 0x4096->0x8aec",
+      "offset": 56302
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/02-after-report-key-css-agid",
+      "hex": "904095e0908adef0904096e0908aecf0904097e0908aebf0904000e020e7f99089a5e0904095f0908a5be0904096f0908a5ce0904097f0a3eff0904000e020e7",
+      "label": "copy 0x4097->0x8aeb",
+      "offset": 56310
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/02-after-report-key-css-agid",
+      "hex": "f0904097e0908aebf0904000e020e7f99089a5e0904095f0908a5be0904096f0908a5ce0904097f0a3eff0904000e020e7f9904098edf0908a5ce02402f0908a",
+      "label": "copy 0x89a5->0x4095",
+      "offset": 56325
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/02-after-report-key-css-agid",
+      "hex": "f0904000e020e7f99089a5e0904095f0908a5be0904096f0908a5ce0904097f0a3eff0904000e020e7f9904098edf0908a5ce02402f0908a5be03400f0e0b440",
+      "label": "copy 0x8a5b->0x4096",
+      "offset": 56333
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/02-after-report-key-css-agid",
+      "hex": "9089a5e0904095f0908a5be0904096f0908a5ce0904097f0a3eff0904000e020e7f9904098edf0908a5ce02402f0908a5be03400f0e0b44013a3e0b4000e908a",
+      "label": "copy 0x8a5c->0x4097",
+      "offset": 56341
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/02-after-report-key-css-agid",
+      "hex": "02f0e4908a5bf0a3f0904000e020e7f9908adee0904095f0908aece0904096f0908aebe0904097f0d0d092af22c0e0c0f0c083c082c0d075d0187b437d587f45",
+      "label": "copy 0x8ade->0x4095",
+      "offset": 56408
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/02-after-report-key-css-agid",
+      "hex": "f0904000e020e7f9908adee0904095f0908aece0904096f0908aebe0904097f0d0d092af22c0e0c0f0c083c082c0d075d0187b437d587f45123e1ae4ff120279",
+      "label": "copy 0x8aec->0x4096",
+      "offset": 56416
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/02-after-report-key-css-agid",
+      "hex": "908adee0904095f0908aece0904096f0908aebe0904097f0d0d092af22c0e0c0f0c083c082c0d075d0187b437d587f45123e1ae4ff120279908565eff0603ba3",
+      "label": "copy 0x8aeb->0x4097",
+      "offset": 56424
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/02-after-report-key-css-agid",
+      "hex": "2347c5e09089c8f09047c4e09089c9f0908a49e0ff64286013ef64be600eef64a86009ef64d56004efb4b9099047c5e4f09047c4f09047d2e054fef0904014e4",
+      "label": "compare 0x8a49 with 0x28",
+      "offset": 25023
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/02-after-report-key-css-agid",
+      "hex": "908920e06404604720470578b5e66008908a49e064036037908a23e0ff1313543f30e008908afea3e02400ffec3efe90881ce02ff090881be03ef090881be0f9",
+      "label": "compare 0x8a49 with 0x03",
+      "offset": 25370
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/02-after-report-key-css-agid",
+      "hex": "e00d129865bf01077db17ffb123d8922908a4ae06406705ea3e064677058a3e064787052a3e06489704ca3e0649a7059547006e0543ff08004e044c0f07f1112",
+      "label": "compare 0x8a4a with 0x06",
+      "offset": 25937
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/02-after-report-key-css-agid",
+      "hex": "70479088cee0fba3e0e09047b102a4be908a4ae0b40120a3e0ff6401601cef64026017ef64e26012ef64f0600def64f26008ef64f1600302a36b908a50e0fea3",
+      "label": "compare 0x8a4a with 0x01",
+      "offset": 26487
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/02-after-report-key-css-agid",
+      "hex": "6007d2497f00020513e478a6f612b092908a49e0b42839908a50e07004a3e06401900001122fb7904835f0ef4440904834f0904e02e04408f0d2a9057c057cd0",
+      "label": "compare 0x8a49 with 0x28",
+      "offset": 27487
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/02-after-report-key-css-agid",
+      "hex": "054000886b379979558d2c4000c14800908a4be0ff64e26004efb4f116908a53e0fea3e0ffc378aa96ee18965005eef608eff678aae630e00606e61870010690",
+      "label": "compare 0x8a4b with 0xe2",
+      "offset": 29360
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/02-after-report-key-css-agid",
+      "hex": "0720e00302b839c27790809ee04408f0908a49e0ff64286019ef64a86014ef64be600fef64d5600aef64b96005ef6459c07404f09059617408f09059227403f0",
+      "label": "compare 0x8a49 with 0x28",
+      "offset": 30353
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/02-after-report-key-css-agid",
+      "hex": "02063302063978a976eb08761402711d908a49e0b4030302a4c2e478b5f678abf678b0f6908a44e0601a908a49e064286012e0644a600de0600ae064466005e4",
+      "label": "compare 0x8a49 with 0x03",
+      "offset": 34624
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/02-after-report-key-css-agid",
+      "hex": "e478b5f678abf678b0f6908a44e0601a908a49e064286012e0644a600de0600ae064466005e4e0904091f0a3e55ef0a3e55ff0904000e020e7f9904098e09040",
+      "label": "compare 0x8a49 with 0x28",
+      "offset": 34650
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/02-after-report-key-css-agid",
+      "hex": "fd7f40123d89e4908a33f0d0d092af22908a4ce0ff6401601cef64026017ef64046012ef6405600d78b5760578ab7624e478b0f6227f0112bb183ae0c4131354",
+      "label": "compare 0x8a4c with 0x01",
+      "offset": 38214
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/02-after-report-key-css-agid",
+      "hex": "908042e0fe1313540147b1e0908a54f0908a49e0ff64286009ef64a86004efb4be07908243e04480f0908a49e064286003029e319089f7e0ffd39402507cef14",
+      "label": "compare 0x8a49 with 0x28",
+      "offset": 38391
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/02-after-report-key-css-agid",
+      "hex": "ef64a86004efb4be07908243e04480f0908a49e064286003029e319089f7e0ffd39402507cef14602a14602724027060e04402f09058007405f0905950e4f0e0",
+      "label": "compare 0x8a49 with 0x28",
+      "offset": 38416
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/02-after-report-key-css-agid",
+      "hex": "807d017e009dffee9c908988f0a3eff0908a49e0b42829c3908989e09464908988e09400401ae47f01fefdfc78a21233b2c31233117009908a38e04401f08007",
+      "label": "compare 0x8a49 with 0x28",
+      "offset": 39291
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/02-after-report-key-css-agid",
+      "hex": "123d897f0012050d908988eef0a3eff0908a49e0ff64286004efb4a80f9030e6617f5f1208d990855ceff0908355e0feefd39e400890855ce0908355f090849b",
+      "label": "compare 0x8a49 with 0x28",
+      "offset": 39842
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/02-after-report-key-css-agid",
+      "hex": "0af08946e0ffa3e090892dcff0a3eff0908a49e06428600302a016908a69e0fca3e0fda3e0fea3e0ff908a4be0f8a3e0f9a3e0faa3e0fbc31233116077908a50",
+      "label": "compare 0x8a49 with 0x28",
+      "offset": 39998
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/02-after-report-key-css-agid",
+      "hex": "1f20e04c908a37e04408f09047cbe4f0908a49e0b4a10d9047ca7450f09047d0e4f0801fc23f9047c97450f0908a49e0b4030a9047cf7401f0a3f080069047d0",
+      "label": "compare 0x8a49 with 0xa1",
+      "offset": 40683
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/02-after-report-key-css-agid",
+      "hex": "f09047d0e4f0801fc23f9047c97450f0908a49e0b4030a9047cf7401f0a3f080069047d07401f0908a38e054eff09040187403f0d0d092af221b089089f6e064",
+      "label": "compare 0x8a49 with 0x03",
+      "offset": 40711
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/04-after-report-key-css-asf",
+      "hex": "2447c5e09089c8f09047c4e09089c9f0908a49e0ff64286013ef64be600eef64a86009ef64d56004efb4b9099047c5e4f09047c4f09047d2e054fef0904014e4",
+      "label": "compare 0x8a49 with 0x28",
+      "offset": 24895
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/04-after-report-key-css-asf",
+      "hex": "6007d2497f00020513e478a6f612b092908a49e0b42839908a50e07004a3e06401900001122fb7904835f0ef4440904834f0904e02e04408f0d2a9057c057cd0",
+      "label": "compare 0x8a49 with 0x28",
+      "offset": 27423
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/04-after-report-key-css-asf",
+      "hex": "02063302063978a976eb08761402711d908a49e0b4030302a4c2e478b5f678abf678b0f6908a44e0601a908a49e064286012e0644a600de0600ae064466005e4",
+      "label": "compare 0x8a49 with 0x03",
+      "offset": 34752
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/04-after-report-key-css-asf",
+      "hex": "e478b5f678abf678b0f6908a44e0601a908a49e064286012e0644a600de0600ae064466005e4ff12063f908a49e01234e26a30126a3c3b6a393c6a36466a334a",
+      "label": "compare 0x8a49 with 0x28",
+      "offset": 34778
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/04-after-report-key-css-asf",
+      "hex": "5013af6f121425e56fb402217ff40675908a49e0b4a40d908a53e0543fffbf0803026f62908a49e0b4a30d908a53e0543fffbf0603026f73908937e030e70c78",
+      "label": "compare 0x8a49 with 0xa4",
+      "offset": 37298
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/04-after-report-key-css-asf",
+      "hex": "b4a40d908a53e0543fffbf0803026f62908a49e0b4a30d908a53e0543fffbf0603026f73908937e030e70c78b5760278ab763ae402714c78a1e61440027d14ed",
+      "label": "compare 0x8a49 with 0xa3",
+      "offset": 37318
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/04-after-report-key-css-asf",
+      "hex": "fd7f40123d89e4908a33f0d0d092af22908a4ce0ff6401601cef64026017ef64046012ef6405600d78b5760578ab7624e478b0f6227f0112bb1847b1e0908a54",
+      "label": "compare 0x8a4c with 0x01",
+      "offset": 38342
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/04-after-report-key-css-asf",
+      "hex": "46e0ffa3e090892dcff0a3eff0025f2f908a49e064286008e064a86003025e7a301f10908a0ff0905950e0540ff090592ae054cc4422f09053347401f09057e2",
+      "label": "compare 0x8a49 with 0x28",
+      "offset": 38811
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/04-after-report-key-css-asf",
+      "hex": "1f20e04c908a37e04408f09047cbe4f0908a49e0b4e0fea3e0ffe4122dc7d0e0fbd0e0fad0e0f9d0e0f8122ab28051908626e0fea3e0ffc39090d7e09ffd9090",
+      "label": "compare 0x8a49 with 0xe0",
+      "offset": 40683
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/04-after-report-key-css-asf",
+      "hex": "f09047d0e4f0801fc23f9047c97450f0908a49e0b4030a9047cf7401f0a3f080069047d07401f0908a38e054eff09040187403f0d0d092af22023b0b02003600",
+      "label": "compare 0x8a49 with 0x03",
+      "offset": 40903
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/06-after-report-key-css-rpc-state",
+      "hex": "6007d2497f00020513e478a6f612b092908a49e0b42839908a50e07004a3e064017a00900001123029905502e0a87cf6e6fe08e6ff057c057c057cd0d092af22",
+      "label": "compare 0x8a49 with 0x28",
+      "offset": 27615
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/06-after-report-key-css-rpc-state",
+      "hex": "1f20e04c908a37e04408f09047cbe4f0908a49e0b41b089089f6e064146023301a089089f6e064136018301c182023089089f6e06411600a30230a9089f6e0b4",
+      "label": "compare 0x8a49 with 0x1b",
+      "offset": 40683
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/08-after-report-key-css-invalidate-agid",
+      "hex": "e054eff0a87c087601904000e020e7f99089a5e0904091f0a87c0808e6a3f07b00a97c09097a00900001122fb7904093f0904098e0a87c8a29e0c4540f30e011",
+      "label": "copy 0x89a5->0x4091",
+      "offset": 29001
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/08-after-report-key-css-invalidate-agid",
+      "hex": "031b22d310af01c3c0d0203e0302b319908a49e0642a6004e0b4aa0de4908a18f0a3f0c252c245c24f103f0302b209908aa3f0a3f0a3f09047d7e054fef0d23f",
+      "label": "compare 0x8a49 with 0x2a",
+      "offset": 25167
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/08-after-report-key-css-invalidate-agid",
+      "hex": "800b908940e0ffc4540f30e03212b092908a49e0641b7027908a4de0540fffbf021d20431a908a2de0ffc41313540320ff7c007d6e12305d7e007f0acfcdcfce",
+      "label": "compare 0x8a49 with 0x1b",
+      "offset": 35664
+    },
+    {
+      "capture": "normal-mailbox-dvd-auth-20260505T040403172305Z/08-after-report-key-css-invalidate-agid",
+      "hex": "fd7f40123d89e4908a33f0d0d092af22908a4ce0ff6401601cef64026017ef64046012ef6405600d78b5760578ab7624e478b0f6227f0112bb183ae0c4131354",
+      "label": "compare 0x8a4c with 0x01",
+      "offset": 38278
+    }
+  ],
+  "target_compares": [
+    {
+      "addr": 35401,
+      "branch": "jz",
+      "count": 16,
+      "kind": "mov_r7_xrl_imm",
+      "sample_offsets": [
+        24896,
+        25024,
+        30336,
+        38400,
+        39808
+      ],
+      "value": 40
+    },
+    {
+      "addr": 35401,
+      "branch": "jz",
+      "count": 15,
+      "kind": "xrl_a_imm",
+      "sample_offsets": [
+        34624,
+        34752,
+        38400,
+        38784,
+        40000
+      ],
+      "value": 40
+    },
+    {
+      "addr": 35401,
+      "branch": "cjne",
+      "count": 8,
+      "kind": "cjne_a_imm",
+      "sample_offsets": [
+        34624,
+        34752,
+        40704,
+        40896
+      ],
+      "value": 3
+    },
+    {
+      "addr": 35401,
+      "branch": "cjne",
+      "count": 8,
+      "kind": "cjne_a_imm",
+      "sample_offsets": [
+        27392,
+        27456,
+        27584,
+        39296
+      ],
+      "value": 40
+    },
+    {
+      "addr": 35401,
+      "branch": "jz",
+      "count": 4,
+      "kind": "xrl_a_imm",
+      "sample_offsets": [
+        25344
+      ],
+      "value": 3
+    },
+    {
+      "addr": 35402,
+      "branch": "cjne",
+      "count": 4,
+      "kind": "cjne_a_imm",
+      "sample_offsets": [
+        26496
+      ],
+      "value": 1
+    },
+    {
+      "addr": 35402,
+      "branch": "jnz",
+      "count": 4,
+      "kind": "xrl_a_imm",
+      "sample_offsets": [
+        25920
+      ],
+      "value": 6
+    },
+    {
+      "addr": 35403,
+      "branch": "jz",
+      "count": 4,
+      "kind": "mov_r7_xrl_imm",
+      "sample_offsets": [
+        29376
+      ],
+      "value": 226
+    },
+    {
+      "addr": 35404,
+      "branch": "jz",
+      "count": 4,
+      "kind": "mov_r7_xrl_imm",
+      "sample_offsets": [
+        38208,
+        38272,
+        38336
+      ],
+      "value": 1
+    },
+    {
+      "addr": 35401,
+      "branch": "cjne",
+      "count": 3,
+      "kind": "cjne_a_imm",
+      "sample_offsets": [
+        37312
+      ],
+      "value": 163
+    },
+    {
+      "addr": 35401,
+      "branch": "cjne",
+      "count": 3,
+      "kind": "cjne_a_imm",
+      "sample_offsets": [
+        37312
+      ],
+      "value": 164
+    },
+    {
+      "addr": 35401,
+      "branch": "cjne",
+      "count": 2,
+      "kind": "cjne_a_imm",
+      "sample_offsets": [
+        40640
+      ],
+      "value": 27
+    },
+    {
+      "addr": 35401,
+      "branch": "jnz",
+      "count": 1,
+      "kind": "xrl_a_imm",
+      "sample_offsets": [
+        35648
+      ],
+      "value": 27
+    },
+    {
+      "addr": 35401,
+      "branch": "jz",
+      "count": 1,
+      "kind": "xrl_a_imm",
+      "sample_offsets": [
+        25152
+      ],
+      "value": 42
+    },
+    {
+      "addr": 35401,
+      "branch": "cjne",
+      "count": 1,
+      "kind": "cjne_a_imm",
+      "sample_offsets": [
+        40640
+      ],
+      "value": 161
+    },
+    {
+      "addr": 35401,
+      "branch": "cjne",
+      "count": 1,
+      "kind": "cjne_a_imm",
+      "sample_offsets": [
+        40640
+      ],
+      "value": 224
+    }
+  ],
+  "target_dptr_observations": 933,
+  "target_dptr_refs": [
+    {
+      "addr": 35363,
+      "chunk_count": 33,
+      "observations": 127,
+      "sample_offsets": [
+        24896,
+        24960,
+        25344,
+        25408,
+        28608,
+        28928,
+        28992,
+        29440,
+        29504,
+        30720,
+        32128,
+        32384,
+        32640,
+        33216,
+        33408,
+        34176,
+        34304,
+        34368,
+        34496,
+        34880,
+        35136,
+        35456,
+        36096,
+        36160,
+        37184,
+        37440,
+        37504,
+        37696,
+        37888,
+        38080,
+        39936,
+        56000,
+        60992,
+        61056,
+        61120,
+        61184
+      ]
+    },
+    {
+      "addr": 35401,
+      "chunk_count": 26,
+      "observations": 104,
+      "sample_offsets": [
+        24896,
+        25024,
+        25152,
+        25344,
+        25792,
+        27392,
+        27456,
+        27584,
+        28288,
+        30336,
+        34304,
+        34496,
+        34624,
+        34752,
+        34816,
+        35456,
+        35648,
+        36544,
+        37312,
+        37632,
+        37952,
+        38016,
+        38400,
+        38784,
+        39296,
+        39488,
+        39552,
+        39616,
+        39808,
+        40000,
+        40128,
+        40640,
+        40704,
+        40896
+      ]
+    },
+    {
+      "addr": 16384,
+      "chunk_count": 13,
+      "observations": 66,
+      "sample_offsets": [
+        27328,
+        28992,
+        29248,
+        34688,
+        37248,
+        37568,
+        37696,
+        55232,
+        56320,
+        56384,
+        58816,
+        58880,
+        58944
+      ]
+    },
+    {
+      "addr": 18353,
+      "chunk_count": 14,
+      "observations": 66,
+      "sample_offsets": [
+        25280,
+        25536,
+        25600,
+        25984,
+        26496,
+        28992,
+        29248,
+        29568,
+        33216,
+        36096,
+        36352,
+        38016,
+        38144,
+        40576
+      ]
+    },
+    {
+      "addr": 35551,
+      "chunk_count": 12,
+      "observations": 48,
+      "sample_offsets": [
+        29184,
+        32640,
+        32832,
+        33280,
+        36160,
+        37696,
+        37888,
+        38080,
+        55872,
+        56000,
+        60992,
+        61056,
+        61248
+      ]
+    },
+    {
+      "addr": 35409,
+      "chunk_count": 10,
+      "observations": 34,
+      "sample_offsets": [
+        28544,
+        28992,
+        30720,
+        33216,
+        33408,
+        34368,
+        34496,
+        36096,
+        38144,
+        39808,
+        40384
+      ]
+    },
+    {
+      "addr": 35411,
+      "chunk_count": 8,
+      "observations": 33,
+      "sample_offsets": [
+        29376,
+        30464,
+        34176,
+        36672,
+        37312,
+        38144,
+        39808
+      ]
+    },
+    {
+      "addr": 35404,
+      "chunk_count": 6,
+      "observations": 32,
+      "sample_offsets": [
+        26624,
+        27712,
+        28864,
+        29056,
+        38144,
+        38208,
+        38272,
+        38336
+      ]
+    },
+    {
+      "addr": 16536,
+      "chunk_count": 6,
+      "observations": 30,
+      "sample_offsets": [
+        27328,
+        28992,
+        29248,
+        34688,
+        37248,
+        56320
+      ]
+    },
+    {
+      "addr": 18535,
+      "chunk_count": 8,
+      "observations": 27,
+      "sample_offsets": [
+        26368,
+        28160,
+        28608,
+        28672,
+        29632,
+        33792,
+        34240,
+        42560
+      ]
+    },
+    {
+      "addr": 35408,
+      "chunk_count": 7,
+      "observations": 26,
+      "sample_offsets": [
+        26496,
+        27392,
+        27456,
+        27584,
+        28544,
+        29056,
+        38144,
+        40000,
+        40384
+      ]
+    },
+    {
+      "addr": 18538,
+      "chunk_count": 8,
+      "observations": 24,
+      "sample_offsets": [
+        26368,
+        28160,
+        28608,
+        28672,
+        29632,
+        33728,
+        35264,
+        37248
+      ]
+    },
+    {
+      "addr": 35403,
+      "chunk_count": 6,
+      "observations": 24,
+      "sample_offsets": [
+        26624,
+        29376,
+        32000,
+        38016,
+        39488,
+        39552,
+        39616,
+        40000
+      ]
+    },
+    {
+      "addr": 35405,
+      "chunk_count": 9,
+      "observations": 23,
+      "sample_offsets": [
+        25280,
+        25536,
+        27712,
+        29056,
+        35648,
+        38144,
+        39488,
+        39552,
+        39616,
+        40384,
+        40576
+      ]
+    },
+    {
+      "addr": 35406,
+      "chunk_count": 4,
+      "observations": 20,
+      "sample_offsets": [
+        27712,
+        29056,
+        31808,
+        38144
+      ]
+    },
+    {
+      "addr": 18531,
+      "chunk_count": 6,
+      "observations": 18,
+      "sample_offsets": [
+        31552,
+        33728,
+        33792,
+        33984,
+        34240,
+        35008
+      ]
+    },
+    {
+      "addr": 35402,
+      "chunk_count": 5,
+      "observations": 17,
+      "sample_offsets": [
+        25792,
+        25920,
+        26496,
+        38016,
+        39936
+      ]
+    },
+    {
+      "addr": 16401,
+      "chunk_count": 2,
+      "observations": 16,
+      "sample_offsets": [
+        28864,
+        29056
+      ]
+    },
+    {
+      "addr": 18529,
+      "chunk_count": 5,
+      "observations": 16,
+      "sample_offsets": [
+        31552,
+        33728,
+        33792,
+        34240,
+        37248
+      ]
+    },
+    {
+      "addr": 18530,
+      "chunk_count": 6,
+      "observations": 16,
+      "sample_offsets": [
+        25280,
+        31552,
+        33728,
+        33856,
+        34240,
+        35264
+      ]
+    },
+    {
+      "addr": 35407,
+      "chunk_count": 3,
+      "observations": 16,
+      "sample_offsets": [
+        28544,
+        38144,
+        39488,
+        39552,
+        39616
+      ]
+    },
+    {
+      "addr": 18532,
+      "chunk_count": 4,
+      "observations": 13,
+      "sample_offsets": [
+        33728,
+        33856,
+        35264,
+        38528
+      ]
+    },
+    {
+      "addr": 16533,
+      "chunk_count": 3,
+      "observations": 12,
+      "sample_offsets": [
+        56256,
+        56320,
+        56384
+      ]
+    },
+    {
+      "addr": 16534,
+      "chunk_count": 3,
+      "observations": 12,
+      "sample_offsets": [
+        56256,
+        56320,
+        56384
+      ]
+    },
+    {
+      "addr": 16535,
+      "chunk_count": 2,
+      "observations": 12,
+      "sample_offsets": [
+        56320,
+        56384
+      ]
+    },
+    {
+      "addr": 35419,
+      "chunk_count": 2,
+      "observations": 12,
+      "sample_offsets": [
+        56320,
+        56384
+      ]
+    },
+    {
+      "addr": 16529,
+      "chunk_count": 3,
+      "observations": 9,
+      "sample_offsets": [
+        28992,
+        34688,
+        58816
+      ]
+    },
+    {
+      "addr": 16402,
+      "chunk_count": 2,
+      "observations": 8,
+      "sample_offsets": [
+        28864,
+        29056
+      ]
+    },
+    {
+      "addr": 16538,
+      "chunk_count": 2,
+      "observations": 8,
+      "sample_offsets": [
+        58880,
+        58944
+      ]
+    },
+    {
+      "addr": 16540,
+      "chunk_count": 2,
+      "observations": 8,
+      "sample_offsets": [
+        58880,
+        58944
+      ]
+    },
+    {
+      "addr": 35410,
+      "chunk_count": 2,
+      "observations": 8,
+      "sample_offsets": [
+        28544,
+        38144
+      ]
+    },
+    {
+      "addr": 35420,
+      "chunk_count": 1,
+      "observations": 8,
+      "sample_offsets": [
+        56320
+      ]
+    },
+    {
+      "addr": 35550,
+      "chunk_count": 2,
+      "observations": 8,
+      "sample_offsets": [
+        56256,
+        56384
+      ]
+    },
+    {
+      "addr": 35563,
+      "chunk_count": 2,
+      "observations": 8,
+      "sample_offsets": [
+        56320,
+        56384
+      ]
+    },
+    {
+      "addr": 35564,
+      "chunk_count": 2,
+      "observations": 8,
+      "sample_offsets": [
+        56320,
+        56384
+      ]
+    },
+    {
+      "addr": 35237,
+      "chunk_count": 2,
+      "observations": 5,
+      "sample_offsets": [
+        28992,
+        56320
+      ]
+    },
+    {
+      "addr": 16403,
+      "chunk_count": 1,
+      "observations": 4,
+      "sample_offsets": [
+        29056
+      ]
+    },
+    {
+      "addr": 35412,
+      "chunk_count": 1,
+      "observations": 4,
+      "sample_offsets": [
+        38400
+      ]
+    },
+    {
+      "addr": 18528,
+      "chunk_count": 1,
+      "observations": 2,
+      "sample_offsets": [
+        29632
+      ]
+    },
+    {
+      "addr": 16531,
+      "chunk_count": 1,
+      "observations": 1,
+      "sample_offsets": [
+        28992
+      ]
+    }
+  ],
+  "target_writes": [
+    {
+      "addr": 35363,
+      "count": 22,
+      "kind": "or_mask",
+      "sample_offsets": [
+        28992,
+        30720,
+        33216,
+        33408,
+        34304,
+        34496,
+        36096,
+        39936
+      ],
+      "value": 2
+    },
+    {
+      "addr": 35363,
+      "count": 16,
+      "kind": "or_mask",
+      "sample_offsets": [
+        32640,
+        37504,
+        56000,
+        61056
+      ],
+      "value": 64
+    },
+    {
+      "addr": 35363,
+      "count": 12,
+      "kind": "or_mask",
+      "sample_offsets": [
+        32384,
+        34304,
+        34368,
+        37888,
+        38080
+      ],
+      "value": 16
+    },
+    {
+      "addr": 16401,
+      "count": 8,
+      "kind": "write_imm",
+      "sample_offsets": [
+        28864,
+        29056
+      ],
+      "value": 14
+    },
+    {
+      "addr": 16538,
+      "count": 8,
+      "kind": "write_zero",
+      "sample_offsets": [
+        58880,
+        58944
+      ],
+      "value": 0
+    },
+    {
+      "addr": 35363,
+      "count": 8,
+      "kind": "and_mask",
+      "sample_offsets": [
+        61120,
+        61184
+      ],
+      "value": 239
+    },
+    {
+      "addr": 18530,
+      "count": 5,
+      "kind": "and_mask",
+      "sample_offsets": [
+        33728,
+        35264
+      ],
+      "value": 63
+    },
+    {
+      "addr": 18538,
+      "count": 5,
+      "kind": "and_mask",
+      "sample_offsets": [
+        33728,
+        35264
+      ],
+      "value": 223
+    },
+    {
+      "addr": 18353,
+      "count": 4,
+      "kind": "write_zero",
+      "sample_offsets": [
+        25984,
+        36352
+      ],
+      "value": 0
+    },
+    {
+      "addr": 18529,
+      "count": 4,
+      "kind": "or_mask",
+      "sample_offsets": [
+        33792
+      ],
+      "value": 8
+    },
+    {
+      "addr": 18529,
+      "count": 4,
+      "kind": "or_mask",
+      "sample_offsets": [
+        33792
+      ],
+      "value": 64
+    },
+    {
+      "addr": 18529,
+      "count": 4,
+      "kind": "write_imm",
+      "sample_offsets": [
+        31552
+      ],
+      "value": 64
+    },
+    {
+      "addr": 18530,
+      "count": 4,
+      "kind": "write_imm",
+      "sample_offsets": [
+        31552
+      ],
+      "value": 115
+    },
+    {
+      "addr": 18531,
+      "count": 4,
+      "kind": "or_mask",
+      "sample_offsets": [
+        33792
+      ],
+      "value": 29
+    },
+    {
+      "addr": 18531,
+      "count": 4,
+      "kind": "write_imm",
+      "sample_offsets": [
+        31552
+      ],
+      "value": 29
+    },
+    {
+      "addr": 18532,
+      "count": 4,
+      "kind": "and_mask",
+      "sample_offsets": [
+        33856
+      ],
+      "value": 253
+    },
+    {
+      "addr": 18532,
+      "count": 4,
+      "kind": "or_mask",
+      "sample_offsets": [
+        35264
+      ],
+      "value": 4
+    },
+    {
+      "addr": 18532,
+      "count": 4,
+      "kind": "write_zero",
+      "sample_offsets": [
+        38528
+      ],
+      "value": 0
+    },
+    {
+      "addr": 18535,
+      "count": 4,
+      "kind": "and_mask",
+      "sample_offsets": [
+        26368
+      ],
+      "value": 235
+    },
+    {
+      "addr": 18535,
+      "count": 4,
+      "kind": "and_mask",
+      "sample_offsets": [
+        33792
+      ],
+      "value": 253
+    },
+    {
+      "addr": 18535,
+      "count": 4,
+      "kind": "or_mask",
+      "sample_offsets": [
+        28160
+      ],
+      "value": 8
+    },
+    {
+      "addr": 18535,
+      "count": 4,
+      "kind": "or_mask",
+      "sample_offsets": [
+        28160
+      ],
+      "value": 16
+    },
+    {
+      "addr": 18538,
+      "count": 4,
+      "kind": "and_mask",
+      "sample_offsets": [
+        26368
+      ],
+      "value": 250
+    },
+    {
+      "addr": 18538,
+      "count": 4,
+      "kind": "or_mask",
+      "sample_offsets": [
+        28160
+      ],
+      "value": 5
+    },
+    {
+      "addr": 35410,
+      "count": 4,
+      "kind": "and_mask",
+      "sample_offsets": [
+        28544
+      ],
+      "value": 254
+    },
+    {
+      "addr": 35363,
+      "count": 3,
+      "kind": "and_mask",
+      "sample_offsets": [
+        36160
+      ],
+      "value": 191
+    },
+    {
+      "addr": 35363,
+      "count": 3,
+      "kind": "and_mask",
+      "sample_offsets": [
+        35136
+      ],
+      "value": 247
+    },
+    {
+      "addr": 18528,
+      "count": 2,
+      "kind": "write_zero",
+      "sample_offsets": [
+        29632
+      ],
+      "value": 0
+    },
+    {
+      "addr": 18529,
+      "count": 2,
+      "kind": "write_zero",
+      "sample_offsets": [
+        37248
+      ],
+      "value": 0
+    },
+    {
+      "addr": 18530,
+      "count": 2,
+      "kind": "and_mask",
+      "sample_offsets": [
+        25280
+      ],
+      "value": 251
+    },
+    {
+      "addr": 18535,
+      "count": 2,
+      "kind": "or_mask",
+      "sample_offsets": [
+        28608
+      ],
+      "value": 20
+    },
+    {
+      "addr": 18535,
+      "count": 2,
+      "kind": "write_imm",
+      "sample_offsets": [
+        29632
+      ],
+      "value": 97
+    },
+    {
+      "addr": 18538,
+      "count": 2,
+      "kind": "or_mask",
+      "sample_offsets": [
+        28608
+      ],
+      "value": 44
+    },
+    {
+      "addr": 18538,
+      "count": 2,
+      "kind": "write_zero",
+      "sample_offsets": [
+        29632
+      ],
+      "value": 0
+    },
+    {
+      "addr": 35551,
+      "count": 2,
+      "kind": "and_mask",
+      "sample_offsets": [
+        37696
+      ],
+      "value": 240
+    },
+    {
+      "addr": 18353,
+      "count": 1,
+      "kind": "write_imm",
+      "sample_offsets": [
+        25984
+      ],
+      "value": 2
+    },
+    {
+      "addr": 18353,
+      "count": 1,
+      "kind": "write_imm",
+      "sample_offsets": [
+        25280
+      ],
+      "value": 3
+    },
+    {
+      "addr": 18353,
+      "count": 1,
+      "kind": "write_imm",
+      "sample_offsets": [
+        25536
+      ],
+      "value": 4
+    },
+    {
+      "addr": 18353,
+      "count": 1,
+      "kind": "write_imm",
+      "sample_offsets": [
+        25984
+      ],
+      "value": 6
+    },
+    {
+      "addr": 18529,
+      "count": 1,
+      "kind": "and_mask",
+      "sample_offsets": [
+        33728
+      ],
+      "value": 127
+    },
+    {
+      "addr": 18529,
+      "count": 1,
+      "kind": "and_mask",
+      "sample_offsets": [
+        34240
+      ],
+      "value": 247
+    },
+    {
+      "addr": 18531,
+      "count": 1,
+      "kind": "and_mask",
+      "sample_offsets": [
+        33728
+      ],
+      "value": 253
+    },
+    {
+      "addr": 18532,
+      "count": 1,
+      "kind": "and_mask",
+      "sample_offsets": [
+        33728
+      ],
+      "value": 251
+    },
+    {
+      "addr": 18535,
+      "count": 1,
+      "kind": "and_mask",
+      "sample_offsets": [
+        28672
+      ],
+      "value": 227
+    },
+    {
+      "addr": 18535,
+      "count": 1,
+      "kind": "and_mask",
+      "sample_offsets": [
+        28672
+      ],
+      "value": 247
+    },
+    {
+      "addr": 18535,
+      "count": 1,
+      "kind": "or_mask",
+      "sample_offsets": [
+        34240
+      ],
+      "value": 2
+    },
+    {
+      "addr": 18538,
+      "count": 1,
+      "kind": "and_mask",
+      "sample_offsets": [
+        28672
+      ],
+      "value": 242
+    }
+  ],
+  "targets": [
+    16384,
+    16401,
+    16402,
+    16403,
+    16529,
+    16530,
+    16531,
+    16533,
+    16534,
+    16535,
+    16536,
+    16537,
+    16538,
+    16539,
+    16540,
+    16565,
+    16566,
+    16567,
+    18353,
+    18528,
+    18529,
+    18530,
+    18531,
+    18532,
+    18533,
+    18534,
+    18535,
+    18536,
+    18537,
+    18538,
+    35099,
+    35168,
+    35169,
+    35237,
+    35363,
+    35401,
+    35402,
+    35403,
+    35404,
+    35405,
+    35406,
+    35407,
+    35408,
+    35409,
+    35410,
+    35411,
+    35412,
+    35419,
+    35420,
+    35550,
+    35551,
+    35563,
+    35564
+  ],
+  "unique_target_chunks": 118
+}
