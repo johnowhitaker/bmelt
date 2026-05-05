@@ -3262,3 +3262,47 @@ normal runtime. Currentboot volatile writes do not survive into normal mode,
 visible F0-prefix hooks do not hit the normal handlers, and CDD runtime
 mutation is the next risk boundary. Detailed note:
 `analysis/8051/drive3-normal-hook-poc-status-20260505.md`.
+
+## Static CDD Patchability Reset
+
+After stepping back from "try a CDD mutation and see what happens", the next
+static pass made the blocker more concrete. The normal `READ BUFFER mode=1`
+bridge code is not an arbitrary black box: it copies the requested 24-bit
+public offset through `xdata[0x8a4c..0x8a4e]` into controller registers
+`0x4011..0x4013`, but clamps the high byte to `0x0e` when the host asks for
+anything at or above `0x0e0000`.
+
+That means a very small decoded patch might be enough to expose the decoded CDD
+range. In record 59 we can see this byte sequence in the decoded-looking
+normal code:
+
+```text
+90 8a 4c e0 c3 94 0e 40 08 90 40 11 74 0e f0
+MOV DPTR,#8a4c ; MOVX A,@DPTR ; CLR C ; SUBB A,#0e ; JC pass
+MOV DPTR,#4011 ; MOV A,#0e ; MOVX @DPTR,A
+```
+
+If the second immediate could become `0x18` instead of `0x0e`, then a normal
+host `READ BUFFER` request with a clamped high byte should point at
+`0x18xxxx`, right where the CDD descriptor says the decoded/controller range
+starts (`0x184000..0x1b3fff`). That would be far smaller than a full custom
+response hook: one decoded byte, record59 decoded-relative `0x026`, visible
+value `0x0e`, desired value `0x18`.
+
+The bad news is also clearer. Record 59 is a mode-`0x80` hard CDD record at
+F0 `0x28119..0x28ab7`, operation key `30ca94930e05`, and that operation key is
+unique among the six DS-8ABSH sibling images. We know the decoded byte we want
+to change, but not which encoded source bits produce it. The earlier record59
+source edit at F0 `0x28519` remains strong ownership evidence, but it changed
+public tile phase/visibility rather than a known decoded byte. The repeated
+decoded-looking tiles across records 58/59/60 also do not come with repeated
+source blocks; the longest exact source overlap among the relevant record
+pairs is only a few bytes.
+
+So the problem has narrowed again. We are not blocked on imagining useful
+normal-mode code. We are blocked on turning even a single chosen decoded byte
+inside a hard CDD record into a controlled encoded edit. The next sensible CDD
+work is either a real encoder breakthrough, or a non-mutating materialization
+oracle that lets us observe the exact decoded byte while learning source-bit
+influence. Detailed note:
+`analysis/8051/cdd-patchability-blocker-20260505.md`.
