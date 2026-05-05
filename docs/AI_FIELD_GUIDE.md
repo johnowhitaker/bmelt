@@ -1685,11 +1685,20 @@ Immediate useful directions:
     serious readout route probably needs a normal-runtime hook, a hardware
     side-channel, or a deeper controller state transition than `0x002e` plus
     the `0x4a` doorbells.
-25. Normal-runtime `READ BUFFER mode=1 id=01 offset=0x070000` now looks like a
+25. A follow-up mode-2 currentboot hook returned selected XDATA windows after
+    `FUN_CODE_002e`. The `0x8100` window contained a stable 32-byte packet at
+    `xdata[0x810e..0x812d]`:
+    `....1D50-1  LD5MDVD+-RW DS-8ABSH`. A narrower `0x8180` hook showed
+    `xdata[0x818a..0x8195] = 12 00 00 00 b0 40 92 fc e5 00 00 00` and
+    `xdata[0x8196] = 02`. So the mode-2 parser call does update the same
+    packet-return/shadow windows predicted by the static `0x48a0.4` branch,
+    even though it still does not materialize decoded CDD bytes. Evidence:
+    `analysis/8051/cdd-materializer-mode2-live-20260505.md`.
+26. Normal-runtime `READ BUFFER mode=1 id=01 offset=0x070000` now looks like a
     page-frame/cache surface, not just a fixed code/table dump. Repeated
     capture-only reads rotate a small set of informative `0x40` chunks around
     pages like `+0x6000`, `+0x8600`, and `+0x9500`.
-26. Safe read-only/no-data-out normal SCSI/MMC stimuli pull additional tiles
+27. Safe read-only/no-data-out normal SCSI/MMC stimuli pull additional tiles
     into that same public window. The capture-only control had 704 informative
     unique chunks; the safe-stimulus run had 752, sharing all 704 control
     chunks plus 48 stimulus-only chunks. Evidence:
@@ -1697,7 +1706,7 @@ Immediate useful directions:
     `analysis/8051/normal-work-window-capture-only-20260501.md`,
     `analysis/8051/normal-work-window-stimuli-full-20260501.md`, and
     `analysis/8051/normal-work-window-stimuli-vs-capture-only-20260501.md`.
-27. Treat this as a third decoded-material extraction path alongside static CDD
+28. Treat this as a third decoded-material extraction path alongside static CDD
     decoding and slow currentboot gateway readout. Public offsets are probably
     frame slots rather than stable logical addresses, because the same tile can
     appear at multiple offsets. Next useful work is to run broader repeated

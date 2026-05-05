@@ -147,3 +147,64 @@ focus on either:
   `FUN_CODE_40b2`; or
 - identifying the later controller command that consumes the exposed/mapped
   CDD source window and performs hard-body expansion.
+
+## Follow-up: packet windows after mode 2
+
+A later Drive #3 follow-up used the same non-mutating mode-2 parser call, but
+changed the response hook to return selected XDATA windows after `FUN_CODE_002e`
+returns. This was aimed at the suspected `0x48a0.4` return-packet service path:
+the static branch copies 12 FIFO bytes to `xdata[0x818a..0x8195]` and 32 FIFO
+bytes to `xdata[0x810e..0x812d]`.
+
+The first hook returned `xdata[0x8100..0x81bf]` with marker `0xd9`. It showed a
+stable 32-byte packet at `0x810e..0x812d`:
+
+```text
+xdata 0x8100: 00 00 00 00 00 84 00 34 00 00 00 00 00 00 00 00
+xdata 0x8110: 00 00 31 44 35 30 2d 31 20 20 4c 44 35 4d 44 56
+xdata 0x8120: 44 2b 2d 52 57 20 44 53 2d 38 41 42 53 48 00 00
+```
+
+In ASCII, the useful portion is:
+
+```text
+....1D50-1  LD5MDVD+-RW DS-8ABSH
+```
+
+The second hook returned `xdata[0x8180..0x81bf]` with marker `0xda`, repeated
+twice byte-for-byte:
+
+```text
+xdata 0x8180: 00 00 00 00 00 00 00 00 00 00 12 00 00 00 b0 40
+xdata 0x8190: 92 fc e5 00 00 00 02 00 00 00 00 00 00 00 00 00
+xdata 0x81a0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+xdata 0x81b0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+```
+
+That confirms two useful details:
+
+- `xdata[0x818a..0x8195]` really is the 12-byte packet/CDB shadow; here it
+  contains `12 00 00 00 b0 40 92 fc e5 00 00 00`, matching the special trigger
+  command as seen by the firmware.
+- `xdata[0x8196]` still reads back as `0x02` after the call, matching the
+  branch selector this hook wrote before calling `FUN_CODE_002e`.
+
+This still does not expose decoded CDD bytes, but it makes the packet-return
+mailbox concrete. The mode-2 parser call fills/updates the same packet-shadow
+and 32-byte return buffer used by the visible resident command machinery. That
+makes `0x810e..0x812d` and `0x818a..0x8196` good observation windows for future
+currentboot parser experiments.
+
+One practical note: media in the drive caused one transient
+`Logical unit is in process of becoming ready` failure when re-entering
+currentboot after a Pico cold cycle. Waiting a few seconds and retrying worked;
+the drive recovered cleanly to `LD5M`.
+
+Evidence:
+
+```text
+references/evidence/live/drive3-currentboot-cdd-mode2-xdata-8100-install-20260505/
+references/evidence/live/drive3-currentboot-cdd-mode2-xdata-8100-trigger-20260505/
+references/evidence/live/drive3-currentboot-cdd-mode2-xdata-8180-install-20260505/
+references/evidence/live/drive3-currentboot-cdd-mode2-xdata-8180-trigger-20260505/
+```

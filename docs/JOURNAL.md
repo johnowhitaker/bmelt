@@ -3412,3 +3412,44 @@ more interesting branch is `xdata[0x48a0].4` around `0x27fa`: it copies 12
 controller FIFO bytes into `0x818a..0x8195` and 32 more into
 `0x810e..0x812d`. Future currentboot hooks should capture those packet-return
 windows around mode-2/parser continuation attempts.
+
+## Mode-2 Packet Windows
+
+We ran that packet-window follow-up on Drive #3 without touching the CDD body.
+The first currentboot hook called `FUN_CODE_002e` with `xdata[0x8196] = 2`,
+then copied back `xdata[0x8100..0x81bf]`. This returned marker `0xd9`, and the
+important part was not blank:
+
+```text
+xdata[0x810e..0x812d] = ....1D50-1  LD5MDVD+-RW DS-8ABSH
+```
+
+That is exactly the kind of 32-byte controller-return packet the static
+`0x48a0.4` branch suggested should land at `0x810e..0x812d`.
+
+The second hook narrowed in on `xdata[0x8180..0x81bf]`. It returned marker
+`0xda`, repeated byte-for-byte, and showed:
+
+```text
+xdata[0x818a..0x8195] = 12 00 00 00 b0 40 92 fc e5 00 00 00
+xdata[0x8196]         = 02
+```
+
+That is the live packet shadow: the firmware can see the special 12-byte host
+CDB, and the mode selector survives the parser call. This is still not decoded
+CDD output, but it is a real foothold in the command/mailbox machinery. In
+plain English: we did not get the hidden controller firmware yet, but we did
+watch the parser path exchange a little structured note with the controller and
+leave that note in XDATA where our hook can read it.
+
+The drive recovered cleanly to normal `LD5M` afterward. One practical wrinkle:
+with media in the drive, one currentboot entry attempt returned `Logical unit is
+in process of becoming ready`; waiting a few seconds and retrying worked.
+
+Evidence:
+
+```text
+references/evidence/live/drive3-currentboot-cdd-mode2-xdata-8100-trigger-20260505/
+references/evidence/live/drive3-currentboot-cdd-mode2-xdata-8180-trigger-20260505/
+analysis/8051/cdd-materializer-mode2-live-20260505.md
+```
