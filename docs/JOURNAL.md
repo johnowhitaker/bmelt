@@ -4181,8 +4181,10 @@ dry-run unless `--execute` is passed, and even then it checks `sg_inq` first
 and refuses to touch anything unless the target is visibly `PLDS DS-8ABSH`.
 The script runs the whole planned arc: baseline probe, install bridge-clamp
 candidate, cold boot, patched probe, install restore, cold boot, restored
-probe. That should reduce the chance of improvising the next live test when a
-healthy drive is back.
+probe. I tightened this once more so the wrapper refuses to install the patch
+unless the baseline `0x077000` capture actually contains the stock bridge-clamp
+pattern, unless that guard is deliberately overridden. That should reduce the
+chance of improvising the next live test when a healthy drive is back.
 
 One surprise from the stuck `Generic External 1.14` state: the optical LUN is
 gone, but the Initio bridge is not completely blind. `sg_sat_identify -p

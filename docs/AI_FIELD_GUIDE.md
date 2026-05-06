@@ -3008,7 +3008,9 @@ Immediate useful directions:
     default. With `--execute`, it refuses to run unless `sg_inq` reports a
     PLDS DS-8ABSH optical LUN, then runs baseline probe, bridge-clamp
     candidate install, Pico cold boot, patched probe, restore install, Pico
-    cold boot, and restored probe.
+    cold boot, and restored probe. It also refuses the install if the baseline
+    `0x077000` captures do not contain the stock bridge-clamp pattern, unless
+    `--allow-no-baseline-clamp-hit` is passed deliberately.
 198. `scripts/analyze_liteon_materialized_bridge_clamp_live_test.py` is the
     offline result checker for that wrapper. Point it at a capture directory
     containing `baseline-*`, `patched-*`, and `restored-*` bins. The desired

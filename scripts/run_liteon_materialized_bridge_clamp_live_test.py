@@ -43,6 +43,7 @@ PROBE = ROOT / "scripts/probe_liteon_materialized_bridge_clamp_effect.py"
 RUN_EXPERIMENT = ROOT / "scripts/run_liteon_linux_persistence_experiment.py"
 PICO_CLIENT = ROOT / "pico/client.py"
 BUILD_CANDIDATES = ROOT / "scripts/build_liteon_post_materializer_hook_candidates.py"
+STOCK_CLAMP_PATTERN = bytes.fromhex("90 8a 4c e0 c3 94 0e 40 08 90 40 11 74 0e f0")
 
 
 def timestamp() -> str:
@@ -128,6 +129,14 @@ def capture_probe(device: str, out_dir: Path, label: str, repeat: int, execute: 
     )
 
 
+def count_baseline_clamp_hits(out_dir: Path, label: str) -> dict[str, Any]:
+    files = sorted(out_dir.glob(f"{label}-r*-id01-off077000.bin"))
+    hits = 0
+    for path in files:
+        hits += path.read_bytes().count(STOCK_CLAMP_PATTERN)
+    return {"label": label, "files": [str(path) for path in files], "stock_clamp_hits": hits}
+
+
 def run_candidate(candidate: Path, device: str, execute: bool) -> dict[str, Any]:
     if not candidate.exists():
         raise FileNotFoundError(candidate)
@@ -185,6 +194,11 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="with --execute, run identity + baseline probe only; do not install candidates",
     )
+    parser.add_argument(
+        "--allow-no-baseline-clamp-hit",
+        action="store_true",
+        help="allow install even if baseline 0x077000 captures do not show the stock bridge clamp pattern",
+    )
     parser.add_argument("--skip-restore", action="store_true")
     parser.add_argument("--execute", action="store_true", help="actually run live commands")
     return parser.parse_args()
@@ -209,6 +223,9 @@ def main() -> int:
     report["steps"].append(
         {"name": "probe-baseline", "result": capture_probe(args.device, out_dir, "baseline", args.probe_repeat, args.execute)}
     )
+    if args.execute:
+        clamp_check = count_baseline_clamp_hits(out_dir, "baseline")
+        report["steps"].append({"name": "baseline-clamp-check", "result": clamp_check})
     if args.preflight_only:
         if args.execute:
             summary_path = out_dir / f"{args.run_name}.json"
@@ -217,6 +234,16 @@ def main() -> int:
         else:
             print(json.dumps({"dry_run": True, "run_name": args.run_name, "preflight_only": True}, indent=2, sort_keys=True))
         return 0
+
+    if args.execute:
+        clamp_check = report["steps"][-1]["result"]
+        if clamp_check["stock_clamp_hits"] < 1 and not args.allow_no_baseline_clamp_hit:
+            summary_path = out_dir / f"{args.run_name}.json"
+            summary_path.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
+            raise RuntimeError(
+                "baseline 0x077000 captures did not show the stock bridge clamp pattern; "
+                "refusing install without --allow-no-baseline-clamp-hit"
+            )
 
     report["steps"].append({"name": "install-candidate", "result": run_candidate(CANDIDATE, args.device, args.execute)})
     report["steps"].append({"name": "cold-cycle-patched", "result": cold_cycle(args.pico_port, args.servo_hold_ms, args.execute)})

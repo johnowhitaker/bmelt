@@ -64,7 +64,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--out-dir", type=Path, required=True)
     parser.add_argument("--label", default="bridge-clamp-probe")
     parser.add_argument("--offset", action="append", default=[], help="repeatable; default known proof offsets")
-    parser.add_argument("--length", type=parse_int, default=0x80)
+    parser.add_argument("--length", type=parse_int, default=0x200)
     parser.add_argument("--repeat", type=int, default=3)
     parser.add_argument("--delay", type=float, default=0.15)
     parser.add_argument("--timeout", type=int, default=4)

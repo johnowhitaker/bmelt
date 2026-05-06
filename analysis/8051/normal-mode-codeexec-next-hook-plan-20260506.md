@@ -139,14 +139,14 @@ Suggested live proof shape:
 
 ```text
 baseline A: READ BUFFER id=01 offset=0x070000 len=0x80
-baseline B: READ BUFFER id=01 offset=0x077000 len=0x80
-baseline C: READ BUFFER id=01 offset=0x0f0000 len=0x80
+baseline B: READ BUFFER id=01 offset=0x077000 len=0x200
+baseline C: READ BUFFER id=01 offset=0x0f0000 len=0x200
 install candidate and cold boot
 patched A:  READ BUFFER id=01 offset=0x070000 len=0x80  (should stay stock)
-patched B:  READ BUFFER id=01 offset=0x077000 len=0x80  (may show 74 07 f0 if hook lands and bridge slot is visible)
-patched C:  READ BUFFER id=01 offset=0x0f0000 len=0x80  (should change if clamp affects direct response)
+patched B:  READ BUFFER id=01 offset=0x077000 len=0x200  (may show 74 07 f0 if hook lands and bridge slot is visible)
+patched C:  READ BUFFER id=01 offset=0x0f0000 len=0x200  (should change if clamp affects direct response)
 restore stock resident and cold boot
-restore C:  READ BUFFER id=01 offset=0x0f0000 len=0x80  (should match baseline again)
+restore C:  READ BUFFER id=01 offset=0x0f0000 len=0x200  (should match baseline again)
 ```
 
 The read-only helper for those captures is:
@@ -187,6 +187,10 @@ PLDS DS-8ABSH optical LUN. With `--execute`, it performs:
 baseline probe -> install candidate -> Pico cold boot -> patched probe
 -> install restore -> Pico cold boot -> restored probe
 ```
+
+The wrapper also counts the stock clamp pattern in baseline `0x077000`
+captures and refuses the install if the target bridge chunk is not visible,
+unless `--allow-no-baseline-clamp-hit` is passed deliberately.
 
 If this lands, it is a real bridge over the CDD wall: a resident-prefix hook
 can modify decoded/materialized normal code without knowing how to encode the
