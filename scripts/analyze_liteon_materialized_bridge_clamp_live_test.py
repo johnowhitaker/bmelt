@@ -51,6 +51,81 @@ def load_captures(run_dir: Path) -> dict[str, dict[int, list[dict[str, Any]]]]:
     return captures
 
 
+def stderr_preview(text: str, limit: int = 220) -> str:
+    compact = " ".join(text.strip().split())
+    if len(compact) <= limit:
+        return compact
+    return compact[: limit - 3] + "..."
+
+
+def load_probe_attempts(run_dir: Path) -> dict[str, dict[int, list[dict[str, Any]]]]:
+    """Load probe JSON summaries, including failed READ BUFFER attempts.
+
+    The `.bin` files tell us what was successfully read. The probe's per-label
+    JSON tells us about the important negative case: a candidate offset was
+    requested but rejected, timed out, or returned a short response. That
+    distinction matters for the bridge-oracle ladder, especially the `0x18`
+    decoded-band step.
+    """
+
+    attempts: dict[str, dict[int, list[dict[str, Any]]]] = {}
+    for path in sorted(run_dir.glob("*.json")):
+        try:
+            report = json.loads(path.read_text())
+        except (OSError, json.JSONDecodeError):
+            continue
+        label = report.get("label")
+        captures = report.get("captures")
+        if not isinstance(label, str) or not isinstance(captures, list):
+            continue
+        expected_len = int(report.get("length", 0) or 0)
+        for capture in captures:
+            if not isinstance(capture, dict):
+                continue
+            offset = capture.get("offset")
+            record = capture.get("record") or {}
+            if not isinstance(offset, int) or not isinstance(record, dict):
+                continue
+            length = int(capture.get("length", 0) or 0)
+            ok = (
+                record.get("returncode") == 0
+                and not record.get("timed_out")
+                and (expected_len == 0 or length == expected_len)
+            )
+            attempts.setdefault(label, {}).setdefault(offset, []).append(
+                {
+                    "summary_path": str(path),
+                    "repeat": capture.get("repeat"),
+                    "length": length,
+                    "expected_length": expected_len,
+                    "sha256": capture.get("sha256"),
+                    "returncode": record.get("returncode"),
+                    "timed_out": bool(record.get("timed_out")),
+                    "good": bool(record.get("good")),
+                    "stdout_len": record.get("stdout_len"),
+                    "cdb": record.get("cdb"),
+                    "stderr_preview": stderr_preview(str(record.get("stderr", ""))),
+                    "ok": ok,
+                }
+            )
+    return attempts
+
+
+def summarize_attempts(entries: list[dict[str, Any]]) -> dict[str, Any]:
+    failures = [entry for entry in entries if not entry["ok"]]
+    return {
+        "attempt_count": len(entries),
+        "successful_attempts": len(entries) - len(failures),
+        "failed_attempts": len(failures),
+        "timed_out_attempts": sum(1 for entry in entries if entry["timed_out"]),
+        "returncodes": sorted({str(entry["returncode"]) for entry in entries}),
+        "stderr_previews": sorted(
+            {entry["stderr_preview"] for entry in failures if entry["stderr_preview"]}
+        )[:5],
+        "cdbs": sorted({entry["cdb"] for entry in entries if entry.get("cdb")}),
+    }
+
+
 def summarize_hashes(entries: list[dict[str, Any]]) -> dict[str, Any]:
     hashes = [entry["sha256"] for entry in entries]
     return {
@@ -75,21 +150,42 @@ def count_clamp_values(entries: list[dict[str, Any]]) -> dict[str, int]:
     return {f"0x{value:02x}": count_patterns(entries, clamp_pattern(value)) for value in CLAMP_VALUES_OF_INTEREST}
 
 
-def compare_labels(captures: dict[str, dict[int, list[dict[str, Any]]]]) -> dict[str, Any]:
-    labels = sorted(captures)
-    offsets = sorted({offset for by_offset in captures.values() for offset in by_offset})
+def compare_labels(
+    captures: dict[str, dict[int, list[dict[str, Any]]]],
+    attempts: dict[str, dict[int, list[dict[str, Any]]]],
+) -> dict[str, Any]:
+    labels = sorted(set(captures) | set(attempts))
+    offsets = sorted(
+        {offset for by_offset in captures.values() for offset in by_offset}
+        | {offset for by_offset in attempts.values() for offset in by_offset}
+    )
     comparisons: dict[str, Any] = {}
     for offset in offsets:
         per_label = {}
         for label in labels:
             entries = captures.get(label, {}).get(offset, [])
+            attempt_entries = attempts.get(label, {}).get(offset, [])
+            attempt_summary = summarize_attempts(attempt_entries) if attempt_entries else None
             if entries:
                 summary = summarize_hashes(entries)
                 summary["clamp_pattern_hits_by_value"] = count_clamp_values(entries)
                 summary["stock_clamp_pattern_hits"] = summary["clamp_pattern_hits_by_value"]["0x0e"]
                 summary["patched_clamp_pattern_hits"] = summary["clamp_pattern_hits_by_value"]["0x07"]
                 summary["patched_clamp18_pattern_hits"] = summary["clamp_pattern_hits_by_value"]["0x18"]
+                if attempt_summary:
+                    summary["attempts"] = attempt_summary
                 per_label[label] = summary
+            elif attempt_summary:
+                per_label[label] = {
+                    "count": 0,
+                    "unique_hashes": [],
+                    "stable": False,
+                    "clamp_pattern_hits_by_value": {"0x0e": 0, "0x07": 0, "0x18": 0},
+                    "stock_clamp_pattern_hits": 0,
+                    "patched_clamp_pattern_hits": 0,
+                    "patched_clamp18_pattern_hits": 0,
+                    "attempts": attempt_summary,
+                }
         baseline = per_label.get("baseline", {}).get("unique_hashes", [])
         patched = per_label.get("patched", {}).get("unique_hashes", [])
         restored = per_label.get("restored", {}).get("unique_hashes", [])
@@ -150,6 +246,22 @@ def build_assessment(comparisons: dict[str, Any]) -> list[str]:
             "DECODED-BAND PARTIAL: decoded-band offset(s) changed but did not restore to baseline: "
             + ", ".join(decoded_partials)
         )
+    decoded_failures = []
+    for offset_text, comparison in comparisons.items():
+        offset = int(offset_text, 16)
+        if offset < 0x180000:
+            continue
+        labels = comparison.get("labels", {})
+        for label in ("baseline", "patched", "restored"):
+            attempts = labels.get(label, {}).get("attempts")
+            if attempts and attempts.get("failed_attempts", 0):
+                decoded_failures.append(
+                    f"{offset_text}/{label}: {attempts['failed_attempts']}/{attempts['attempt_count']} failed"
+                )
+    if decoded_failures:
+        lines.append(
+            "DECODED-BAND COMMAND FAILURES: " + "; ".join(decoded_failures[:8])
+        )
     if not lines:
         lines.append("No baseline/patched/restored comparison could be made from the available files.")
     return lines
@@ -166,10 +278,12 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     args = parse_args()
     captures = load_captures(args.run_dir)
-    comparisons = compare_labels(captures)
+    attempts = load_probe_attempts(args.run_dir)
+    comparisons = compare_labels(captures, attempts)
     report = {
         "run_dir": str(args.run_dir),
         "labels": sorted(captures),
+        "probe_summary_labels": sorted(attempts),
         "comparisons": comparisons,
         "assessment": build_assessment(comparisons),
     }
@@ -198,6 +312,20 @@ def main() -> int:
             for label, summary in comparison["labels"].items():
                 hashes = ", ".join(f"`{value[:16]}`" for value in summary["unique_hashes"])
                 lines.append(f"- {label}: {summary['count']} captures, stable=`{summary['stable']}`, hashes={hashes}")
+                attempts = summary.get("attempts")
+                if attempts:
+                    lines.append(
+                        "  attempts: "
+                        f"ok=`{attempts['successful_attempts']}/{attempts['attempt_count']}`, "
+                        f"failed=`{attempts['failed_attempts']}`, "
+                        f"timed_out=`{attempts['timed_out_attempts']}`, "
+                        f"returncodes={', '.join(f'`{value}`' for value in attempts['returncodes'])}"
+                    )
+                    if attempts["stderr_previews"]:
+                        lines.append(
+                            "  stderr: "
+                            + " | ".join(f"`{value}`" for value in attempts["stderr_previews"])
+                        )
                 if (
                     summary["stock_clamp_pattern_hits"]
                     or summary["patched_clamp_pattern_hits"]

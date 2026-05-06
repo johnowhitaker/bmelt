@@ -153,6 +153,59 @@ def write_synthetic_capture_tree(tmp: Path) -> tuple[Path, Path]:
     (run_dir / "baseline-r0-id01-off184000.bin").write_bytes(bytes([0x20]) * 0x80)
     (run_dir / "patched-r0-id01-off184000.bin").write_bytes(bytes([0x24]) * 0x80)
     (run_dir / "restored-r0-id01-off184000.bin").write_bytes(bytes([0x20]) * 0x80)
+    for label in ("baseline", "patched", "restored"):
+        captures = []
+        for offset in (0x077000, 0x0F0000, 0x184000):
+            data_path = run_dir / f"{label}-r0-id01-off{offset:06x}.bin"
+            captures.append(
+                {
+                    "repeat": 0,
+                    "offset": offset,
+                    "path": str(data_path),
+                    "length": 0x80 if offset != 0x077000 else 0x1000,
+                    "sha256": "synthetic",
+                    "first64_hex": "",
+                    "record": {
+                        "cdb": f"3C 01 01 {(offset >> 16) & 0xff:02X} {(offset >> 8) & 0xff:02X} {offset & 0xff:02X} 00 00 80 00",
+                        "returncode": 0,
+                        "timed_out": False,
+                        "stdout_len": 0x80 if offset != 0x077000 else 0x1000,
+                        "stderr": "SCSI Status: Good",
+                        "good": True,
+                    },
+                }
+            )
+        captures.append(
+            {
+                "repeat": 0,
+                "offset": 0x198900,
+                "path": str(run_dir / f"{label}-r0-id01-off198900.bin"),
+                "length": 0,
+                "sha256": None,
+                "first64_hex": "",
+                "record": {
+                    "cdb": "3C 01 01 19 89 00 00 00 80 00",
+                    "returncode": 2,
+                    "timed_out": False,
+                    "stdout_len": 0,
+                    "stderr": "synthetic CHECK CONDITION",
+                    "good": False,
+                },
+            }
+        )
+        (run_dir / f"{label}.json").write_text(
+            json.dumps(
+                {
+                    "label": label,
+                    "device": "/dev/synthetic",
+                    "length": 0x80,
+                    "captures": captures,
+                },
+                indent=2,
+                sort_keys=True,
+            )
+            + "\n"
+        )
     return baseline, run_dir
 
 
@@ -211,6 +264,7 @@ def dynamic_smoke_check(checks: list[dict[str, Any]], tmp: Path) -> None:
     selection = json.loads(selection_path.read_text()) if selection_path.exists() else {}
     high = analysis.get("comparisons", {}).get("0x0f0000", {})
     decoded = analysis.get("comparisons", {}).get("0x184000", {})
+    rejected_decoded = analysis.get("comparisons", {}).get("0x198900", {}).get("labels", {}).get("patched", {}).get("attempts", {})
     slot = analysis.get("comparisons", {}).get("0x077000", {}).get("labels", {}).get("patched", {})
     ok = (
         build["returncode"] == 0
@@ -224,6 +278,7 @@ def dynamic_smoke_check(checks: list[dict[str, Any]], tmp: Path) -> None:
         and high.get("restored_matches_baseline") is True
         and decoded.get("patched_differs_from_baseline") is True
         and decoded.get("restored_matches_baseline") is True
+        and rejected_decoded.get("failed_attempts") == 1
         and slot.get("patched_clamp18_pattern_hits", 0) > 0
     )
     add_check(
@@ -239,6 +294,7 @@ def dynamic_smoke_check(checks: list[dict[str, Any]], tmp: Path) -> None:
         payload_length=selection.get("payload_length"),
         high_offset=high,
         decoded_184000=decoded,
+        rejected_decoded_198900=rejected_decoded,
         patched_slot=slot,
     )
 
@@ -293,7 +349,8 @@ def remote_readonly_check(checks: list[dict[str, Any]], linux_host: str | None, 
 
 def build_assessment(report: dict[str, Any]) -> list[str]:
     checks = report["checks"]
-    failed = [row["name"] for row in checks if not row["ok"]]
+    failed = [row["name"] for row in checks if not row["ok"] and row["name"] != "linux_bench_readonly_probe"]
+    linux_probe = next((row for row in checks if row["name"] == "linux_bench_readonly_probe"), None)
     lines = []
     if failed:
         lines.append("Offline readiness has failures: " + ", ".join(failed))
@@ -311,6 +368,9 @@ def build_assessment(report: dict[str, Any]) -> list[str]:
         )
     else:
         lines.append("Live gate is closed: no PLDS DS-8ABSH optical LUN is visible.")
+    if linux_probe and not linux_probe["ok"]:
+        rc = linux_probe.get("result", {}).get("returncode")
+        lines.append(f"Linux bench read-only probe failed or timed out (rc={rc}); offline readiness is still reported separately.")
     if report.get("require_live_ready") and not plds:
         lines.append("Because --require-live-ready was set, this is a failing readiness state.")
     return lines

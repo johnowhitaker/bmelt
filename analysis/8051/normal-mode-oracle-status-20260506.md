@@ -130,6 +130,8 @@ It distinguishes:
 - oracle patch value `0x18`;
 - high-offset response changes and restore;
 - decoded-band offset changes and restore.
+- READ BUFFER command failures, timeouts, short/no-byte responses, and stderr
+  snippets from the probe JSON summaries.
 
 ## Offline Smoke Test
 
@@ -148,7 +150,9 @@ offline pieces were sanity-tested with synthetic `/tmp` captures on
    `analyze_liteon_materialized_bridge_clamp_live_test.py` reported:
    - high-offset `0x0f0000` changed and restored;
    - the `0x077000` clamp pattern changed from stock `0x0e` to patched `0x18`;
-   - decoded-band `0x184000` changed and restored.
+   - decoded-band `0x184000` changed and restored;
+   - a synthetic rejected decoded-band offset was reported as a command
+     failure rather than silently disappearing because no `.bin` was written.
 
 This does not prove the live hook will land, but it verifies the planned
 builder/verifier/analyzer loop for the exact success shape expected from the

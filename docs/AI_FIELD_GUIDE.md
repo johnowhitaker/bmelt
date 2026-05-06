@@ -3096,7 +3096,9 @@ Immediate useful directions:
     patch (`0x18`). In a future ladder run, the `0x18` step should be judged on
     both direct decoded-band hash changes and visible `0x077000` clamp-pattern
     hits patched to `0x18`; otherwise a no-effect decoded read could be a
-    failed runtime-slot patch rather than a failed materialization oracle.
+    failed runtime-slot patch rather than a failed materialization oracle. It
+    also reads the probe JSON summaries, so failed/short/timed-out READ BUFFER
+    attempts are reported explicitly even when no `.bin` capture exists.
 209. `scripts/verify_liteon_bridge_clamp_candidate.py` is now generic enough
     for fixed and dynamic bridge-clamp candidates. It reads dynamic selection
     JSON when present, verifies the selected public addresses and patch value

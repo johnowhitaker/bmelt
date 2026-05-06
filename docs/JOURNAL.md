@@ -4392,6 +4392,13 @@ DPTR-preserving cave, and the analyzer still recognized the patched/restored
 high-offset and decoded-band signatures. That gives us a better offline
 simulation of the future live ladder without sending any drive commands.
 
+The analyzer now reads the probe JSON summaries too, not just the successful
+`.bin` captures. That matters for the eventual `0x18` attempt: if a decoded
+address is still rejected, times out, or returns no bytes, the report will say
+that directly instead of merely omitting the offset. The readiness smoke now
+includes a synthetic rejected decoded-band offset to keep this diagnostic path
+covered.
+
 One quick hardware-state check did not open a path out of the Generic fallback.
 The Pico tray/sled-present line on `GP28` was tried both ways across cold
 cycles: high-Z to simulate open, then LOW to simulate closed. Neither state
