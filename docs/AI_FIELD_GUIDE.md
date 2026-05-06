@@ -3062,3 +3062,9 @@ Immediate useful directions:
     `--dynamic-patch-value 0x18`. That is the first direct attempt to make
     normal READ BUFFER request the decoded CDD band near `0x184000`, but it
     should only be run after a successful `0x07` proof and restore.
+204. For that `0x18` attempt, use
+    `--include-decoded-oracle-offsets` on
+    `scripts/run_liteon_materialized_bridge_clamp_live_test.py`. It extends the
+    baseline/patched/restored capture set with candidate decoded-materialized
+    addresses (`0x184000`, `0x191010`, `0x198900`, etc.) and the analyzer now
+    flags decoded-band offsets whose patched hashes change and restore.

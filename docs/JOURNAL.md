@@ -4258,3 +4258,10 @@ somewhere visibly different and prove normal runtime code was patched. If that
 works and restores cleanly, `0x18` is the interesting patch: it may let host
 READ BUFFER requests reach the decoded CDD band around `0x184000`. I wrote that
 up in `analysis/8051/bridge-clamp-to-materialization-oracle-plan-20260506.md`.
+
+To make that second step less hand-wavy, I extended the bridge-clamp probe and
+live wrapper with `--include-decoded-oracle-offsets`. In a `0x18` run, the
+capture set can now automatically include `0x184000` plus the table-derived
+targets `0x191010`, `0x198900`, `0x199030`, `0x19c020`, `0x19c800`,
+`0x1a0000`, and `0x1a2fe0`. The analyzer now calls out decoded-band offsets
+that change under the patch and return after restore.

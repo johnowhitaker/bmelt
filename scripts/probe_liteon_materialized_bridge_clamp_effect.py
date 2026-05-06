@@ -30,6 +30,17 @@ from read_liteon_read_buffer_bulk import DEFAULT_SG_RAW, parse_int, run_read
 
 
 DEFAULT_OFFSETS = [0x070000, 0x074000, 0x077000, 0x0F0000]
+DECODED_ORACLE_OFFSETS = [
+    0x180000,
+    0x184000,
+    0x191010,
+    0x198900,
+    0x199030,
+    0x19C020,
+    0x19C800,
+    0x1A0000,
+    0x1A2FE0,
+]
 
 
 def run_identity(device: str) -> dict[str, Any]:
@@ -51,10 +62,22 @@ def run_identity(device: str) -> dict[str, Any]:
     }
 
 
-def parse_offsets(values: list[str]) -> list[int]:
-    if not values:
-        return DEFAULT_OFFSETS
-    return [parse_int(value) for value in values]
+def unique_offsets(values: list[int]) -> list[int]:
+    out = []
+    seen = set()
+    for value in values:
+        if value in seen:
+            continue
+        seen.add(value)
+        out.append(value)
+    return out
+
+
+def parse_offsets(values: list[str], include_decoded_oracle_offsets: bool) -> list[int]:
+    offsets = [parse_int(value) for value in values] if values else list(DEFAULT_OFFSETS)
+    if include_decoded_oracle_offsets:
+        offsets.extend(DECODED_ORACLE_OFFSETS)
+    return unique_offsets(offsets)
 
 
 def parse_args() -> argparse.Namespace:
@@ -64,6 +87,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--out-dir", type=Path, required=True)
     parser.add_argument("--label", default="bridge-clamp-probe")
     parser.add_argument("--offset", action="append", default=[], help="repeatable; default known proof offsets")
+    parser.add_argument(
+        "--include-decoded-oracle-offsets",
+        action="store_true",
+        help="also probe candidate decoded CDD/materialized addresses for the 0x18 clamp experiment",
+    )
     parser.add_argument("--length", type=parse_int, default=0x200)
     parser.add_argument("--repeat", type=int, default=3)
     parser.add_argument("--delay", type=float, default=0.15)
@@ -79,7 +107,7 @@ def main() -> int:
     if args.length < 1:
         raise ValueError("--length must be >= 1")
 
-    offsets = parse_offsets(args.offset)
+    offsets = parse_offsets(args.offset, args.include_decoded_oracle_offsets)
     args.out_dir.mkdir(parents=True, exist_ok=True)
 
     report: dict[str, Any] = {
@@ -90,6 +118,7 @@ def main() -> int:
         "id": 0x01,
         "length": args.length,
         "offsets": offsets,
+        "include_decoded_oracle_offsets": args.include_decoded_oracle_offsets,
         "repeat": args.repeat,
         "captures": [],
     }

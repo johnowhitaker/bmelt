@@ -116,6 +116,26 @@ def build_assessment(comparisons: dict[str, Any]) -> list[str]:
             lines.append("BASELINE SLOT CHECK: 0x077000 did not show the stock clamp pattern in captured repeats.")
         if patched_hits:
             lines.append(f"PATCH SLOT CHECK: 0x077000 contains {patched_hits} patched clamp-pattern hit(s).")
+    decoded_successes = []
+    decoded_partials = []
+    for offset_text, comparison in comparisons.items():
+        offset = int(offset_text, 16)
+        if offset < 0x180000:
+            continue
+        if comparison["patched_differs_from_baseline"] and comparison["restored_matches_baseline"]:
+            decoded_successes.append(offset_text)
+        elif comparison["patched_differs_from_baseline"]:
+            decoded_partials.append(offset_text)
+    if decoded_successes:
+        lines.append(
+            "ORACLE-LEANING: decoded-band offset(s) changed under patched firmware and restored: "
+            + ", ".join(decoded_successes)
+        )
+    if decoded_partials:
+        lines.append(
+            "DECODED-BAND PARTIAL: decoded-band offset(s) changed but did not restore to baseline: "
+            + ", ".join(decoded_partials)
+        )
     if not lines:
         lines.append("No baseline/patched/restored comparison could be made from the available files.")
     return lines

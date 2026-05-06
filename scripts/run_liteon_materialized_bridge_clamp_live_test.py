@@ -112,22 +112,32 @@ def ensure_candidate_files(execute: bool) -> dict[str, Any]:
     return record
 
 
-def capture_probe(device: str, out_dir: Path, label: str, repeat: int, execute: bool) -> dict[str, Any]:
-    return run_cmd(
-        [
-            sys.executable,
-            str(PROBE),
-            "--device",
-            device,
-            "--out-dir",
-            str(out_dir),
-            "--label",
-            label,
-            "--repeat",
-            str(repeat),
-        ],
-        execute=execute,
-    )
+def capture_probe(
+    device: str,
+    out_dir: Path,
+    label: str,
+    repeat: int,
+    offsets: list[int],
+    include_decoded_oracle_offsets: bool,
+    execute: bool,
+) -> dict[str, Any]:
+    cmd = [
+        sys.executable,
+        str(PROBE),
+        "--device",
+        device,
+        "--out-dir",
+        str(out_dir),
+        "--label",
+        label,
+        "--repeat",
+        str(repeat),
+    ]
+    for offset in offsets:
+        cmd.extend(["--offset", f"0x{offset:06x}"])
+    if include_decoded_oracle_offsets:
+        cmd.append("--include-decoded-oracle-offsets")
+    return run_cmd(cmd, execute=execute)
 
 
 def count_baseline_clamp_hits(out_dir: Path, label: str) -> dict[str, Any]:
@@ -231,6 +241,18 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--out-root", type=Path, default=ROOT / "references/evidence/live")
     parser.add_argument("--run-name", default=f"materialized-bridge-clamp-live-{timestamp()}")
     parser.add_argument("--probe-repeat", type=int, default=3)
+    parser.add_argument(
+        "--probe-offset",
+        action="append",
+        type=lambda value: int(value, 0),
+        default=[],
+        help="repeatable READ BUFFER offset for all baseline/patched/restored probes; default proof offsets if omitted",
+    )
+    parser.add_argument(
+        "--include-decoded-oracle-offsets",
+        action="store_true",
+        help="also capture decoded-band candidate offsets such as 0x184000; intended for the 0x18 clamp experiment",
+    )
     parser.add_argument("--servo-hold-ms", type=int, default=3000)
     parser.add_argument("--settle-s", type=float, default=8.0)
     parser.add_argument(
@@ -266,6 +288,7 @@ def main() -> int:
         raise ValueError("--dynamic-patch-value must be a byte")
     out_dir = args.out_root / args.run_name
     active_candidate = CANDIDATE
+    probe_offsets = list(args.probe_offset)
     report: dict[str, Any] = {
         "run_name": args.run_name,
         "device": args.device,
@@ -274,6 +297,8 @@ def main() -> int:
         "dynamic_candidate_from_baseline": args.build_dynamic_candidate_from_baseline,
         "dynamic_patch_value": args.dynamic_patch_value,
         "execute": args.execute,
+        "probe_offsets": probe_offsets,
+        "include_decoded_oracle_offsets": args.include_decoded_oracle_offsets,
         "steps": [],
     }
     if args.execute:
@@ -282,7 +307,18 @@ def main() -> int:
     report["steps"].append({"name": "ensure-candidates", "result": ensure_candidate_files(args.execute)})
     report["steps"].append({"name": "identity-baseline", "result": check_plds_identity(args.device, args.execute)})
     report["steps"].append(
-        {"name": "probe-baseline", "result": capture_probe(args.device, out_dir, "baseline", args.probe_repeat, args.execute)}
+        {
+            "name": "probe-baseline",
+            "result": capture_probe(
+                args.device,
+                out_dir,
+                "baseline",
+                args.probe_repeat,
+                probe_offsets,
+                args.include_decoded_oracle_offsets,
+                args.execute,
+            ),
+        }
     )
     if args.execute:
         clamp_check = count_baseline_clamp_hits(out_dir, "baseline")
@@ -325,7 +361,18 @@ def main() -> int:
         time.sleep(args.settle_s)
     report["steps"].append({"name": "identity-patched", "result": check_plds_identity(args.device, args.execute)})
     report["steps"].append(
-        {"name": "probe-patched", "result": capture_probe(args.device, out_dir, "patched", args.probe_repeat, args.execute)}
+        {
+            "name": "probe-patched",
+            "result": capture_probe(
+                args.device,
+                out_dir,
+                "patched",
+                args.probe_repeat,
+                probe_offsets,
+                args.include_decoded_oracle_offsets,
+                args.execute,
+            ),
+        }
     )
 
     if not args.skip_restore:
@@ -337,7 +384,15 @@ def main() -> int:
         report["steps"].append(
             {
                 "name": "probe-restored",
-                "result": capture_probe(args.device, out_dir, "restored", args.probe_repeat, args.execute),
+                "result": capture_probe(
+                    args.device,
+                    out_dir,
+                    "restored",
+                    args.probe_repeat,
+                    probe_offsets,
+                    args.include_decoded_oracle_offsets,
+                    args.execute,
+                ),
             }
         )
 

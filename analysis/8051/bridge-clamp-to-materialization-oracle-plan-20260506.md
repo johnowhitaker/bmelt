@@ -101,12 +101,21 @@ after `0x4011..0x4013`. But `0x18` is the natural second test only after the
      --pico-port /dev/ttyACM0 \
      --build-dynamic-candidate-from-baseline \
      --dynamic-patch-value 0x18 \
+     --include-decoded-oracle-offsets \
      --execute
    ```
 
 4. If `0x18` changes high-offset responses, add focused probes for
    `0x180000`, `0x184000`, `0x190000`, and known CDD table target addresses
    such as `0x191010`, `0x198900`, and `0x1a0000`.
+
+   The wrapper/probe now has that first focused set built in through
+   `--include-decoded-oracle-offsets`, currently:
+
+   ```text
+   0x180000, 0x184000, 0x191010, 0x198900, 0x199030,
+   0x19c020, 0x19c800, 0x1a0000, 0x1a2fe0
+   ```
 
 ## Risk
 
