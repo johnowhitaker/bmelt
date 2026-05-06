@@ -4453,3 +4453,10 @@ useful materialized-runtime island, but it is not the same thing as the normal
 public bridge-clamp page. The immediate live proof should stay with the
 baseline-derived normal bridge-clamp builder; selector22 hook targets are for a
 later, more deliberate response-hook attempt.
+
+I also folded that future second-stage hook tooling into the readiness audit.
+`scripts/audit_liteon_bridge_oracle_readiness.py` now dry-runs the selector22
+multi-blob smoke target (`0x077cd6:e4f5d022` plus `0x078406:122cd6`) and
+checks that it still produces the expected two runtime patches, a 141-byte
+payload, and 80 bytes of cave room. The current audit result is still the same
+big-picture state: offline tooling is coherent, live gate is closed.

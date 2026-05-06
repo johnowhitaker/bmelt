@@ -10,6 +10,8 @@ Checks performed:
 * local bridge-oracle scripts compile;
 * fixed bridge-clamp candidate verifier passes;
 * dynamic builder/verifier/analyzer smoke test passes against synthetic data;
+* post-materializer multi-blob writer dry-run fits the selector22
+  cave+trampoline smoke target;
 * guarded ladder dry-run renders the expected steps;
 * optional Linux bench read-only probe reports whether a PLDS optical LUN is
   visible and whether the Pico port exists.
@@ -41,6 +43,7 @@ DYNAMIC_BUILDER = ROOT / "scripts/build_liteon_dynamic_bridge_clamp_candidate.py
 VERIFIER = ROOT / "scripts/verify_liteon_bridge_clamp_candidate.py"
 ANALYZER = ROOT / "scripts/analyze_liteon_materialized_bridge_clamp_live_test.py"
 PROBE = ROOT / "scripts/probe_liteon_materialized_bridge_clamp_effect.py"
+MULTI_BLOB_BUILDER = ROOT / "scripts/build_liteon_post_materializer_multi_blob_writer_candidate.py"
 RESTORE_ROOT = ROOT / "references/firmware/extracted/helper-bypass-candidates"
 
 REQUIRED_SCRIPTS = [
@@ -51,6 +54,7 @@ REQUIRED_SCRIPTS = [
     VERIFIER,
     ANALYZER,
     PROBE,
+    MULTI_BLOB_BUILDER,
 ]
 
 STOCK_CLAMP = bytes.fromhex("90 8a 4c e0 c3 94 0e 40 08 90 40 11 74 0e f0")
@@ -299,6 +303,53 @@ def dynamic_smoke_check(checks: list[dict[str, Any]], tmp: Path) -> None:
     )
 
 
+def parse_last_json_line(stdout: str) -> dict[str, Any]:
+    for line in reversed(stdout.splitlines()):
+        line = line.strip()
+        if not line.startswith("{"):
+            continue
+        try:
+            return json.loads(line)
+        except json.JSONDecodeError:
+            continue
+    return {}
+
+
+def multi_blob_smoke_check(checks: list[dict[str, Any]]) -> None:
+    result = run(
+        [
+            sys.executable,
+            str(MULTI_BLOB_BUILDER),
+            "--runtime-patch",
+            "0x077cd6:e4f5d022",
+            "--runtime-patch",
+            "0x078406:122cd6",
+            "--name",
+            "readiness-multi-blob-selector22-ret",
+            "--dry-run",
+        ]
+    )
+    parsed = parse_last_json_line(result["stdout"])
+    ok = (
+        result["returncode"] == 0
+        and parsed.get("patch_count") == 2
+        and parsed.get("payload_len") == 141
+        and parsed.get("payload_room_remaining") == 80
+        and parsed.get("runtime_patches")
+        == [
+            {"address": "0x077cd6", "blob_len": 4},
+            {"address": "0x078406", "blob_len": 3},
+        ]
+    )
+    add_check(
+        checks,
+        "multi_blob_selector22_smoke_dry_run",
+        ok,
+        result=result,
+        parsed=parsed,
+    )
+
+
 def ladder_dry_run_check(checks: list[dict[str, Any]], device: str, pico_port: str) -> None:
     result = run([sys.executable, str(LADDER), "--device", device, "--pico-port", pico_port])
     ok = result["returncode"] == 0 and "dry_run" in result["stdout"] and "clamp07" in result["stdout"] and "clamp18" in result["stdout"]
@@ -414,6 +465,7 @@ def main() -> int:
         py_compile_check(checks)
         fixed_candidate_check(checks, tmp)
         dynamic_smoke_check(checks, tmp)
+        multi_blob_smoke_check(checks)
         ladder_dry_run_check(checks, args.device, args.pico_port)
         linux_bench = remote_readonly_check(checks, args.linux_host, args.linux_cwd, args.pico_port)
 

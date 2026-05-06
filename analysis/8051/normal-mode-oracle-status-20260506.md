@@ -212,10 +212,14 @@ offline pieces were sanity-tested with synthetic `/tmp` captures on
    - decoded-band `0x184000` changed and restored;
    - a synthetic rejected decoded-band offset was reported as a command
      failure rather than silently disappearing because no `.bin` was written.
+5. `build_liteon_post_materializer_multi_blob_writer_candidate.py` dry-ran
+   the selector22 cave+trampoline smoke target and reported the expected two
+   runtime patches, 141-byte payload, and 80 bytes of remaining cave room.
 
 This does not prove the live hook will land, but it verifies the planned
 builder/verifier/analyzer loop for the exact success shape expected from the
-future `0x18` materialization-oracle run.
+future `0x18` materialization-oracle run, and it keeps the second-stage
+multi-blob response-hook tooling under the same readiness umbrella.
 
 ## Current Live Blocker
 
