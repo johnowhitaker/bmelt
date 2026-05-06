@@ -16,24 +16,29 @@ For the gutted DS-8ABSH front-panel board:
 | Blue | Pico `GND` | drive/front-panel ground reference | reference only |
 | Green | `GP27` | front eject button line, normally open/high unless pressed or pulled low | safe to read; short low pulse simulates button press |
 | Yellow | `GP26` | LED `+` side / LED driver candidate | read-only until the firmware GPIO path is mapped |
+| Switch sense | `GP28` through 220 ohm resistor | tray/sled-present switch line | LOW simulates tray in/closed; high-Z simulates tray out/open |
 
-Do not use `GP28` for this wiring. It was used briefly as a candidate ground
-before blue was moved to Pico `GND`; leave it disconnected/high-Z.
-
-There is also a separate drive-inserted switch held closed with a rubber band.
-That switch is not the GP27 front eject button, which is not being held down.
-If the tray is ejected, the held-closed insert switch may confuse normal
-mechanism state.
+The earlier "do not use GP28" note is obsolete. Blue is now on Pico `GND`, and
+GP28 is intentionally wired through a resistor to the tray/sled-present switch.
+Never drive GP28 high; use only `SET GP28 LOW` or `SET GP28 Z`.
 
 Observed idle state after blue was moved to Pico `GND`:
 
 ```text
 GP27 / green button line: ~2.85-2.91 V, digital high
 GP26 / yellow LED line:   ~1.02-1.24 V, digital low
+GP28 / tray-present line: ~0 V when driven LOW through the resistor
 ```
 
 `SET GP27 LOW` pulls the button line to ~0 V and `SET GP27 Z` releases it back
 high. The drive remained enumerated as `LD5M` after a short GP27 low pulse.
+`SET GP28 LOW` makes `MECHANISM STATUS` report closed/all-zero; `SET GP28 Z`
+makes it report the simulated open state `00 10 ...`.
+
+Bridge-fallback recovery check, 2026-05-06: cold-cycling with `GP28 Z`
+simulated-open and with `GP28 LOW` simulated-closed both returned to the same
+Generic bridge fallback, not a visible `PLDS DS-8ABSH` optical LUN. So the
+current enumeration blocker is not just the tray/sled-present switch state.
 
 ## USB Power-Cycle Servo
 

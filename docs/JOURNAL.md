@@ -4391,3 +4391,12 @@ builder selected all six common clamp immediates, the verifier accepted the
 DPTR-preserving cave, and the analyzer still recognized the patched/restored
 high-offset and decoded-band signatures. That gives us a better offline
 simulation of the future live ladder without sending any drive commands.
+
+One quick hardware-state check did not open a path out of the Generic fallback.
+The Pico tray/sled-present line on `GP28` was tried both ways across cold
+cycles: high-Z to simulate open, then LOW to simulate closed. Neither state
+made Linux enumerate a `PLDS DS-8ABSH` optical LUN; both came back to the same
+`Generic External 1.14` / `Generic- SD/MMC` bridge state. SAT identify still
+sees the LD5M PLDS below the Initio bridge, so the drive is alive, but we still
+do not have a usable MMC command surface for helper-bypass or the bridge
+oracle.

@@ -3148,3 +3148,10 @@ Immediate useful directions:
     covers the common set while still letting a baseline-derived dynamic run
     target whatever slots are actually visible in that run. Updated report:
     `analysis/8051/materialized-bridge-clamp-slots-20260506.md`.
+215. Pico tray/sled-present line check, 2026-05-06: `GP28` is wired through a
+    220 ohm resistor to the switch-sense line. `SET GP28 Z` simulates open and
+    `SET GP28 LOW` simulates closed. Cold-cycling in both states still returned
+    only the Generic bridge fallback, not a visible `PLDS DS-8ABSH` optical
+    LUN. This rules out the current tray-present simulator state as the simple
+    cause of the missing optical LUN. Keep `GP28 LOW` as the default simulated
+    closed state unless a specific mechanics test needs the open state.
