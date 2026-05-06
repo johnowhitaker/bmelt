@@ -3157,3 +3157,13 @@ Immediate useful directions:
     LUN. This rules out the current tray-present simulator state as the simple
     cause of the missing optical LUN. Keep `GP28 LOW` as the default simulated
     closed state unless a specific mechanics test needs the open state.
+216. `scripts/build_liteon_post_materializer_blob_writer_candidate.py` is a
+    prepared second-stage tool, not a first proof step. If the smaller
+    bridge-clamp ladder proves that the `0x422c` post-materializer hook can
+    alter materialized normal runtime RAM and restore cleanly, this builder can
+    generate a candidate that streams a contiguous RAM blob through
+    `0x4095..0x4098` from a code-table in the `0x6ee3` cave. A dry-run smoke
+    build for a three-byte blob at `0x077156` produced an 87-byte cave payload,
+    leaving room for roughly 137 bytes of contiguous patch data. The write-side
+    FIFO auto-increment assumption is still live-unproven, so do not use this
+    before the `0x07` bridge-clamp proof lands.

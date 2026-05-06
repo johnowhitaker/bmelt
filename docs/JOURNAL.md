@@ -4407,3 +4407,18 @@ made Linux enumerate a `PLDS DS-8ABSH` optical LUN; both came back to the same
 sees the LD5M PLDS below the Initio bridge, so the drive is alive, but we still
 do not have a usable MMC command surface for helper-bypass or the bridge
 oracle.
+
+While waiting on that live gate, I prepared the next tool we would want if the
+bridge-clamp proof succeeds. The clamp candidate only changes a handful of
+single bytes, which is enough to prove normal-mode code execution but not
+enough to install a useful response hook. The new
+`scripts/build_liteon_post_materializer_blob_writer_candidate.py` still uses
+the safer `0x422c` post-materializer hook, but its cave contains a small loop:
+set a 24-bit controller/public address through `0x4095..0x4097`, then stream
+an embedded table of bytes through `0x4098`. In dry-run, a three-byte patch at
+`0x077156` needs an 87-byte cave payload and leaves room for about 137 bytes of
+contiguous patch data. This is deliberately second-stage tooling. It relies on
+the write FIFO behaving as an auto-incrementing stream, which is consistent
+with the gateway model but still needs live proof. The immediate live ladder is
+unchanged: prove `0x07`, then attempt `0x18`; only after that should a larger
+blob writer be considered.

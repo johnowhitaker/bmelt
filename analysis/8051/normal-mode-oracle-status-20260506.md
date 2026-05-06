@@ -133,6 +133,34 @@ It distinguishes:
 - READ BUFFER command failures, timeouts, short/no-byte responses, and stderr
   snippets from the probe JSON summaries.
 
+### Second-Stage Blob Writer
+
+```sh
+python3 scripts/build_liteon_post_materializer_blob_writer_candidate.py \
+  --address 0x077156 \
+  --hex "74 07 f0" \
+  --name post-materializer-blob-smoke-077156-3b \
+  --dry-run
+```
+
+This is not part of the first live proof. It exists for the next phase if the
+`0x07` bridge-clamp ladder proves that the `0x422c` post-materializer hook can
+write materialized normal runtime RAM and restore cleanly.
+
+The builder emits a cave routine at `0x6ee3` that:
+
+- saves DPTR and bank-0 `R0/R1/R7`;
+- sets a 24-bit controller/public destination through `0x4095..0x4097`;
+- streams an embedded code-table through `0x4098`;
+- restores the saved state and returns with the stock `CLR A; MOV PSW,A; RET`
+  epilogue shape.
+
+A dry-run smoke build for a three-byte blob at `0x077156` produced an 87-byte
+cave payload, leaving room for roughly 137 bytes of contiguous patch data. The
+remaining unproven assumption is write-side FIFO auto-increment across
+successive `0x4098` writes, so this is second-stage tooling, not something to
+run before the smaller bridge-clamp proof succeeds.
+
 ## Offline Smoke Test
 
 The bridge-clamp ladder is still blocked on live PLDS visibility, but the
