@@ -3119,3 +3119,15 @@ Immediate useful directions:
     `--execute` captures real `0x077000` windows, so dry-run should not print a
     misleading fixed-candidate install path for a dynamic `0x07` or `0x18`
     ladder step.
+213. `scripts/audit_liteon_bridge_oracle_readiness.py` is the one-command
+    readiness audit for the current blocked bridge-oracle phase. It sends no
+    firmware-update/helper-bypass writes. It compiles the relevant
+    bridge-oracle scripts, verifies the fixed candidate, runs a synthetic
+    dynamic `0x18` builder/verifier/analyzer smoke test, dry-runs the guarded
+    ladder, and optionally probes the Linux bench read-only through
+    `watch_liteon_plds_preflight.py`. Example:
+    `python3 scripts/audit_liteon_bridge_oracle_readiness.py --linux-host
+    root@jonathan-thinkpad-t480s --pico-port /dev/ttyACM0`. The expected
+    blocked-state result is `offline_ok=true, live_ready=false`; use
+    `--require-live-ready` when you specifically want the command to fail until
+    `sg_inq` sees `PLDS DS-8ABSH`.

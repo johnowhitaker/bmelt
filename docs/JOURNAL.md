@@ -4339,3 +4339,18 @@ install/cold-cycle/probe sequence. That avoids a misleading printout where a
 dynamic `0x18` dry-run appeared to install the fixed `0x07` candidate. In real
 `--execute` mode the wrapper still captures the baseline, builds the dynamic
 candidate, verifies it, installs it, restores, and captures the result.
+
+I added one more guardrail around that whole plan:
+`scripts/audit_liteon_bridge_oracle_readiness.py`. This is not a new live
+experiment. It is a readiness audit that answers a narrower question: are the
+offline pieces coherent, and is the Linux bench actually in a state where the
+guarded ladder may run? It compiles the bridge-oracle scripts, verifies the
+fixed restore/candidate pair, builds a synthetic dynamic `0x18` candidate from
+a fake baseline clamp slot, checks that the verifier accepts it, checks that
+the analyzer recognizes synthetic high-offset and decoded-band changed/restored
+evidence, and dry-runs the ladder. With `--linux-host
+root@jonathan-thinkpad-t480s`, it also runs the PLDS watcher read-only on the
+bench. The current result is the useful blocked-state answer:
+`offline_ok=true`, `live_ready=false`. In other words, the tooling path is ready,
+but the hardware gate is still closed until the optical LUN enumerates as
+`PLDS DS-8ABSH` instead of `Generic External`.
