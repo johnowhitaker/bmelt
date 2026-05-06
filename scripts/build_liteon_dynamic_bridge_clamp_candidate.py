@@ -5,7 +5,9 @@ The fixed bridge-clamp candidate writes the six most common clamp slots from
 the historical corpus. This script narrows that down for a specific drive/run:
 scan baseline `READ BUFFER id=01 offset=0x077000` captures, find the stock
 bridge-clamp pattern that is actually visible, then generate a candidate whose
-cave writes only those observed clamp immediate addresses.
+cave writes only those observed clamp immediate addresses. The cave preserves
+DPTR around the controller-gateway writes, then returns with the stock
+`A=0` / `PSW=0` epilogue shape.
 
 No drive commands are sent.
 """
@@ -26,7 +28,7 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT_ROOT = ROOT / "references/firmware/extracted/helper-bypass-candidates"
 BUILD_HELPER = ROOT / "scripts/build_liteon_helper_bypass_candidate.py"
 CAVE_ADDR = 0x6EE3
-CAVE_LEN = 0xD0
+CAVE_LEN = 0xDD
 HOOK_OFFSET = 0x422C
 PATCH_VALUE = 0x07
 CLAMP_PATTERN = bytes.fromhex("90 8a 4c e0 c3 94 0e 40 08 90 40 11 74 0e f0")
@@ -81,9 +83,25 @@ def lcall(addr: int) -> bytes:
     return bytes([0x12, (addr >> 8) & 0xFF, addr & 0xFF])
 
 
+def push_direct(addr: int) -> bytes:
+    return bytes([0xC0, addr & 0xFF])
+
+
+def pop_direct(addr: int) -> bytes:
+    return bytes([0xD0, addr & 0xFF])
+
+
 def runtime_bridge_clamp_payload(addresses: list[int], value: int) -> bytes:
-    payload = b"".join(write_controller_public_byte(addr, value) for addr in addresses)
-    payload += bytes([0xE4, 0xF5, 0xD0, 0x22])  # CLR A; MOV PSW,A; RET
+    payload = b"".join(
+        [
+            push_direct(0x83),  # DPH
+            push_direct(0x82),  # DPL
+            *(write_controller_public_byte(addr, value) for addr in addresses),
+            pop_direct(0x82),
+            pop_direct(0x83),
+            bytes([0xE4, 0xF5, 0xD0, 0x22]),  # CLR A; MOV PSW,A; RET
+        ]
+    )
     if len(payload) > CAVE_LEN:
         raise ValueError(f"payload length {len(payload)} exceeds cave length {CAVE_LEN}")
     return payload

@@ -3055,7 +3055,9 @@ Immediate useful directions:
     clamp immediate addresses actually visible in that run. The guarded live
     wrapper now supports `--build-dynamic-candidate-from-baseline`; this should
     be preferred for the next PLDS-visible attempt if the baseline exposes one
-    or more clamp slots. It still sends no drive commands by itself.
+    or more clamp slots. Its cave preserves DPTR around the controller-gateway
+    writes, then returns with the stock `A=0` / `PSW=0` epilogue shape. It
+    still sends no drive commands by itself.
 203. `analysis/8051/bridge-clamp-to-materialization-oracle-plan-20260506.md`
     spells out the follow-up if the `0x07` proof works. The same dynamic
     candidate builder can write `0x18` into the observed clamp immediates with
@@ -3099,9 +3101,10 @@ Immediate useful directions:
     for fixed and dynamic bridge-clamp candidates. It reads dynamic selection
     JSON when present, verifies the selected public addresses and patch value
     (`0x07` or `0x18`), accepts shorter dynamic cave payloads, and can use a
-    separate restore-candidate root. The live wrapper calls it before
-    installation in `--execute` runs, after any baseline-derived dynamic
-    candidate is generated.
+    separate restore-candidate root. It also reports whether the cave preserves
+    DPTR; new dynamic candidates should report `preserves_dptr=true`. The live
+    wrapper calls it before installation in `--execute` runs, after any
+    baseline-derived dynamic candidate is generated.
 210. `scripts/watch_liteon_plds_preflight.py` prints a `next_ladder_command`
     whenever a real PLDS DS-8ABSH LUN appears. This command is the guarded
     `run_liteon_bridge_oracle_ladder.py --execute` invocation for that device
@@ -3123,8 +3126,9 @@ Immediate useful directions:
     readiness audit for the current blocked bridge-oracle phase. It sends no
     firmware-update/helper-bypass writes. It compiles the relevant
     bridge-oracle scripts, verifies the fixed candidate, runs a synthetic
-    dynamic `0x18` builder/verifier/analyzer smoke test, dry-runs the guarded
-    ladder, and optionally probes the Linux bench read-only through
+    dynamic `0x18` builder/verifier/analyzer smoke test, confirms the synthetic
+    dynamic cave preserves DPTR, dry-runs the guarded ladder, and optionally
+    probes the Linux bench read-only through
     `watch_liteon_plds_preflight.py`. Example:
     `python3 scripts/audit_liteon_bridge_oracle_readiness.py --linux-host
     root@jonathan-thinkpad-t480s --pico-port /dev/ttyACM0`. The expected

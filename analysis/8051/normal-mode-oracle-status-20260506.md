@@ -90,6 +90,8 @@ The verifier checks fixed and dynamic candidates:
 
 - resident hook changed only at `0x422c`;
 - cave bytes are parsed gateway-write blocks ending in `CLR A; MOV PSW,A; RET`;
+- dynamic candidates preserve DPTR around those gateway writes, so the hook
+  returns with stock `A=0`/`PSW=0` while avoiding an extra DPTR side effect;
 - dynamic candidate writes exactly the selected baseline-visible clamp
   addresses;
 - patch value is the intended `0x07` or `0x18`;
@@ -121,7 +123,8 @@ offline pieces were sanity-tested with synthetic `/tmp` captures on
 2. the builder selected the observed immediate address and generated a dynamic
    `0x18` candidate under `/tmp`;
 3. `verify_liteon_bridge_clamp_candidate.py` accepted that candidate against
-   the normal restore candidate;
+   the normal restore candidate and confirmed that the dynamic cave preserves
+   DPTR;
 4. synthetic baseline/patched/restored captures were analyzed, and
    `analyze_liteon_materialized_bridge_clamp_live_test.py` reported:
    - high-offset `0x0f0000` changed and restored;

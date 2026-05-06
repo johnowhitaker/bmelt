@@ -4354,3 +4354,14 @@ bench. The current result is the useful blocked-state answer:
 `offline_ok=true`, `live_ready=false`. In other words, the tooling path is ready,
 but the hardware gate is still closed until the optical LUN enumerates as
 `PLDS DS-8ABSH` instead of `Generic External`.
+
+One small safety improvement came out of reviewing that hook shape again. The
+old dynamic bridge-clamp cave wrote through the controller gateway and then
+returned with the stock `CLR A; MOV PSW,A; RET` epilogue, but it left DPTR
+pointing at the last gateway register it touched. That might not matter at a
+true return epilogue, but it is avoidable state churn. The dynamic builder now
+wraps the gateway writes with `PUSH DPH; PUSH DPL` and `POP DPL; POP DPH`, so
+the next live dynamic candidate still returns with stock `A=0` and `PSW=0` but
+also preserves DPTR. The verifier accepts legacy caves and reports the shape,
+while the readiness smoke test now requires the synthetic dynamic `0x18`
+candidate to report `preserves_dptr=true`.

@@ -119,7 +119,11 @@ def stock_40b2_return_payload() -> bytes:
 
     return b"".join(
         [
+            push_direct(0x83),  # DPH
+            push_direct(0x82),  # DPL
             write_controller_public_byte(MARKER_ADDR, MARKER_VALUE),
+            pop_direct(0x82),
+            pop_direct(0x83),
             bytes([0xE4, 0xF5, 0xD0, 0x22]),  # CLR A; MOV PSW,A; RET
         ]
     )
@@ -154,8 +158,12 @@ def runtime_bridge_clamp_payload() -> bytes:
     """Patch materialized normal READ BUFFER bridge clamp immediates in RAM."""
 
     return b"".join(
-        [write_controller_public_byte(addr, BRIDGE_CLAMP_PATCH_VALUE) for addr in BRIDGE_CLAMP_IMMEDIATE_ADDRS]
-        + [
+        [
+            push_direct(0x83),  # DPH
+            push_direct(0x82),  # DPL
+            *(write_controller_public_byte(addr, BRIDGE_CLAMP_PATCH_VALUE) for addr in BRIDGE_CLAMP_IMMEDIATE_ADDRS),
+            pop_direct(0x82),
+            pop_direct(0x83),
             bytes([0xE4, 0xF5, 0xD0, 0x22]),  # CLR A; MOV PSW,A; RET
         ]
     )

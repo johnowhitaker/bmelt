@@ -209,6 +209,7 @@ def dynamic_smoke_check(checks: list[dict[str, Any]], tmp: Path) -> None:
         and verify["returncode"] == 0
         and analyze["returncode"] == 0
         and verify_report.get("all_ok") is True
+        and verify_report.get("cave_meta", {}).get("preserves_dptr") is True
         and high.get("patched_differs_from_baseline") is True
         and high.get("restored_matches_baseline") is True
         and decoded.get("patched_differs_from_baseline") is True
@@ -223,6 +224,7 @@ def dynamic_smoke_check(checks: list[dict[str, Any]], tmp: Path) -> None:
         verify_returncode=verify["returncode"],
         analyze_returncode=analyze["returncode"],
         verifier_all_ok=verify_report.get("all_ok"),
+        verifier_cave_meta=verify_report.get("cave_meta"),
         high_offset=high,
         decoded_184000=decoded,
         patched_slot=slot,

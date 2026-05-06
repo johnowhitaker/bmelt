@@ -8,6 +8,7 @@ live PLDS-visible run:
 * restore image is byte-identical to the LD5M base image;
 * helper tail mutations include the low-sector erase/program range patches;
 * the cave writes exactly the expected controller/public clamp bytes;
+* new dynamic caves preserve DPTR around those gateway writes;
 * final replay candidates exist and carry the expected low-prefix diff summary.
 
 No drive commands are sent.
@@ -30,7 +31,7 @@ RESTORE_SLUG = "post-materializer-runtime-bridge-clamp07-restore"
 
 HOOK_OFFSET = 0x422C
 CAVE_OFFSET = 0x6EE3
-CAVE_LEN = 208
+CAVE_LEN = 0xDD
 EXPECTED_HOOK_BEFORE = bytes.fromhex("e4 f5 d0")
 EXPECTED_HOOK_AFTER = bytes.fromhex("12 6e e3")
 EXPECTED_CAVE_BEFORE = b"\xff" * CAVE_LEN
@@ -76,7 +77,7 @@ def split_patch_text(value: str) -> tuple[str, str]:
     return offset.lower(), payload.lower()
 
 
-def extract_gateway_writes(cave: bytes) -> tuple[list[dict[str, int]], int]:
+def extract_gateway_writes(cave: bytes) -> tuple[list[dict[str, int]], int, dict[str, Any]]:
     """Parse the builder's repeated gateway write blocks.
 
     Expected block:
@@ -90,11 +91,20 @@ def extract_gateway_writes(cave: bytes) -> tuple[list[dict[str, int]], int]:
     middle = bytes.fromhex("f0 a3 74")
     middle2 = bytes.fromhex("f0 a3 74")
     suffix = bytes.fromhex("f0 90 40 00 e0 20 e7 f9 90 40 98 74")
+    dptr_save = bytes.fromhex("c0 83 c0 82")  # PUSH DPH; PUSH DPL
+    dptr_restore = bytes.fromhex("d0 82 d0 83")  # POP DPL; POP DPH
+    stock_return = bytes.fromhex("e4 f5 d0 22")  # CLR A; MOV PSW,A; RET
     out = []
     pos = 0
+    preserves_dptr = False
+    if cave.startswith(dptr_save):
+        preserves_dptr = True
+        pos += len(dptr_save)
     while pos < len(cave):
-        if cave[pos : pos + 4] == bytes.fromhex("e4 f5 d0 22"):
-            return out, pos + 4
+        if preserves_dptr and cave[pos : pos + len(dptr_restore) + len(stock_return)] == dptr_restore + stock_return:
+            return out, pos + len(dptr_restore) + len(stock_return), {"preserves_dptr": True}
+        if cave[pos : pos + len(stock_return)] == stock_return:
+            return out, pos + len(stock_return), {"preserves_dptr": False}
         if not cave.startswith(prefix, pos):
             raise ValueError(f"unexpected cave bytes at +0x{pos:x}: {cave[pos:pos+16].hex()}")
         p = pos + len(prefix)
@@ -170,7 +180,7 @@ def verify(
     restore_manifest = read_json(manifest_path(restore_root, restore_slug))
     final_candidate = read_json(final_candidate_path(candidate_root, candidate_slug))
     restore_final = read_json(final_candidate_path(restore_root, restore_slug))
-    writes, cave_payload_len = extract_gateway_writes(candidate[CAVE_OFFSET : CAVE_OFFSET + CAVE_LEN])
+    writes, cave_payload_len, cave_meta = extract_gateway_writes(candidate[CAVE_OFFSET : CAVE_OFFSET + CAVE_LEN])
 
     checks: list[dict[str, Any]] = []
 
@@ -181,6 +191,7 @@ def verify(
     check("base_cave_ff", base[CAVE_OFFSET : CAVE_OFFSET + CAVE_LEN] == EXPECTED_CAVE_BEFORE)
     check("candidate_hook_patch", candidate[HOOK_OFFSET : HOOK_OFFSET + 3] == EXPECTED_HOOK_AFTER)
     check("candidate_cave_not_ff", candidate[CAVE_OFFSET : CAVE_OFFSET + CAVE_LEN] != EXPECTED_CAVE_BEFORE)
+    check("candidate_cave_return_shape", True, **cave_meta)
     check(
         "candidate_cave_tail_unchanged",
         candidate[CAVE_OFFSET + cave_payload_len : CAVE_OFFSET + CAVE_LEN]
@@ -245,6 +256,7 @@ def verify(
         "expected_clamp_addrs": [f"0x{addr:06x}" for addr in expected_clamp_addrs],
         "expected_clamp_value": f"0x{expected_clamp_value:02x}",
         "cave_payload_len": cave_payload_len,
+        "cave_meta": cave_meta,
         "all_ok": all(row["ok"] for row in checks),
         "checks": checks,
     }
@@ -260,6 +272,7 @@ def write_md(report: dict[str, Any], path: Path) -> None:
         f"expected clamp value: `{report['expected_clamp_value']}`",
         f"expected clamp addresses: `{', '.join(report['expected_clamp_addrs'])}`",
         f"cave payload length: `{report['cave_payload_len']}`",
+        f"cave preserves DPTR: `{report['cave_meta'].get('preserves_dptr')}`",
         f"all ok: `{report['all_ok']}`",
         "",
         "| check | ok | detail |",
