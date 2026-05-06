@@ -4273,3 +4273,12 @@ see `0x0f0000` change and restore, and only then does the ladder run dynamic
 `0x18` with decoded-oracle offsets. Like the lower-level wrapper, it is dry-run
 unless `--execute` is passed, and the actual write steps are still guarded by
 visible `PLDS DS-8ABSH` identity.
+
+I spent one more pass on the current bench fallback, because the drive is not
+dead: SAT identify can still see LD5M PLDS below the Initio bridge. Host-side
+USB resets did not get us out. Deauthorizing and reauthorizing USB `1-1`,
+rebinding `usb-storage`, issuing USBDEVFS_RESET, and `sg_reset --device
+/dev/sg0` all returned to the same `Generic External 1.14` direct-access disk
+LUN. That makes the live boundary clear: no helper-bypass or hook write paths
+while the bridge is in this state. The next live experiment needs hardware to
+enumerate as `PLDS DS-8ABSH` again, at which point the guarded ladder is ready.

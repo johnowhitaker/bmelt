@@ -3074,3 +3074,9 @@ Immediate useful directions:
     dynamic `0x18` with decoded-oracle offsets. It is dry-run by default and
     delegates all live writes to the still-gated materialized bridge-clamp
     wrapper.
+206. `analysis/8051/bridge-fallback-host-reset-recovery-20260506.md` records
+    the current bridge-fallback boundary. USB deauthorize/reauthorize,
+    usb-storage unbind/bind, USBDEVFS_RESET, and `sg_reset --device /dev/sg0`
+    all returned to `Generic External 1.14`; SAT identify still sees LD5M PLDS
+    underneath. Treat this as blocked for live hook writes until a physical
+    replug/swap or different bridge/direct-SATA path exposes `PLDS DS-8ABSH`.
