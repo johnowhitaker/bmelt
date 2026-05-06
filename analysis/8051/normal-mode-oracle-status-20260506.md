@@ -185,8 +185,12 @@ smoke test:
 - generated cave payload/table length: 141 bytes, leaving 80 bytes.
 
 See `analysis/8051/selector22-runtime-response-hook-targets-20260506.md` for
-why those addresses are interesting. This is not a first live step and should
-not be run before the smaller `0x07` clamp proof succeeds and restores.
+why those addresses are interesting and for the important caveat: selector22 is
+not byte-identical to the normal public bridge-clamp page. The normal
+bridge-clamp ladder should still use baseline-derived normal work-window slots,
+not selector22 logical addresses. This multi-blob selector22 target is not a
+first live step and should not be run before the smaller `0x07` clamp proof
+succeeds and restores.
 
 ## Offline Smoke Test
 

@@ -3185,4 +3185,9 @@ Immediate useful directions:
     logical `0x1406` (`0x078406` public), logical `0x2cd6` (`0x077cd6`
     public), and packet/mechanics helpers at `0x17eb`, `0x33cf`, and `0x3661`.
     Treat this as a future hook target list, not as proof that those addresses
-    are currently patchable.
+    are currently patchable. A follow-up scan confirmed that selector22 does
+    not contain the normal bridge-clamp pattern
+    `908a4ce0c3940e4008904011740ef0`; the normal baseline work-window does
+    contain it at `+0x70d9` and `+0x7189` in one capture. Keep using the
+    baseline-derived dynamic normal bridge-clamp builder for the first live
+    proof.

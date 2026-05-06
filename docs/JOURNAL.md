@@ -4444,3 +4444,12 @@ code touching the same packet-shadow bytes we care about, with plausible
 places for a later response hook. It does not remove the live gate. The order
 is still: get a PLDS LUN back, prove `0x07`, try `0x18`, then consider a
 proper multi-blob response hook.
+
+One correction matters here. I checked the selector22 stitched image against
+the normal work-window bridge-clamp pattern. Selector22 has no full
+`908a4ce0c3940e4008904011740ef0` hit, while a normal baseline work-window
+does have the expected pattern at `+0x70d9` and `+0x7189`. So selector22 is a
+useful materialized-runtime island, but it is not the same thing as the normal
+public bridge-clamp page. The immediate live proof should stay with the
+baseline-derived normal bridge-clamp builder; selector22 hook targets are for a
+later, more deliberate response-hook attempt.

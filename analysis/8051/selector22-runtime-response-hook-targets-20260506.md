@@ -25,7 +25,36 @@ public/controller 0x073000 -> logical 0x6000
 ```
 
 That makes this image a concrete target list for a future post-materializer
-runtime writer. It does not yet prove we can patch these bytes live.
+runtime writer. It does not yet prove we can patch these bytes live, and it is
+not byte-identical to the normal public bridge-clamp surface.
+
+## Important Non-Equivalence
+
+Do not conflate this selector22 image with the normal `READ BUFFER
+0x070000..0x07ffff` public work-window captures.
+
+Offline checks on 2026-05-06 found:
+
+```text
+selector22 stitched image:
+  stock bridge-clamp pattern hits: none
+
+normal baseline work-window:
+  stock bridge-clamp pattern hits: +0x70d9 and +0x7189 in one baseline
+  corresponding clamp immediates:  0x0770e6 and 0x077196
+```
+
+The pattern is:
+
+```text
+90 8a 4c e0 c3 94 0e 40 08 90 40 11 74 0e f0
+```
+
+So the bridge-clamp ladder must continue to use the normal baseline-derived
+dynamic builder, not selector22 logical addresses. Selector22 is useful as a
+separate materialized-runtime target list, especially for packet-shadow code
+and possible caves, but it is not the same code page as the known
+`0x8a4c -> 0x4011` clamp chunk.
 
 ## Useful Addresses
 
@@ -37,17 +66,19 @@ runtime writer. It does not yet prove we can patch these bytes live.
 | `0x33cf` | `0x0763cf` | mechanics/state reset helper, clears `0x4860..0x4864`, writes `0x4867 = 0x61`, clears `0x486a..0x486b` |
 | `0x3661` | `0x076661` | broader packet dispatcher checking `0x28`, `0xa8`, `0xbe`, `0xd5`, `0xb9` |
 
-The most attractive future code-exec proof is therefore a two-region runtime
-patch:
+One possible future code-exec proof is therefore a two-region selector22
+runtime patch:
 
 ```text
 write hook body at public 0x077cd6
 write LCALL 0x2cd6 at public 0x078406 or another confirmed hot entry
 ```
 
-This is why `scripts/build_liteon_post_materializer_multi_blob_writer_candidate.py`
-now exists: a hook body plus trampoline must be written in the same boot, after
-the normal runtime has materialized.
+This is one reason
+`scripts/build_liteon_post_materializer_multi_blob_writer_candidate.py` now
+exists: a hook body plus trampoline must be written in the same boot, after the
+runtime has materialized. This exact selector22 smoke target is a dry-run
+tooling target, not a recommended first live hook.
 
 ## 0x1406 Handler Shape
 
