@@ -2931,3 +2931,68 @@ Immediate useful directions:
     around `0x8aed`, `0x8a33`, and IRAM flags. Prefer finding the stock
     scheduler route to that routine over replaying those four writes from
     currentboot.
+188. Drive #3 materializer call-site test on 2026-05-06:
+    `0x41de` (`LCALL 0x002e; JNC 0x422f`) was patched to call a cave at
+    `0x6ee3` using the helper-bypass low-sector rewrite path. The marker
+    variant called original `0x002e`, preserved PSW/ACC/DPTR, wrote `0x5a` to
+    controller/public `0x074030`, and returned. It programmed and persisted
+    cleanly, but normal `READ BUFFER id=01 offset=0x074000` still showed
+    `0xff` at `+0x30` before and after cold cycle. Evidence:
+    `references/evidence/live/drive3-materializer-post002e-marker-074030-20260506/`.
+189. The follow-up timing variant at the same `0x41de` call site also
+    programmed cleanly, but after cold cycles Drive #3 stopped enumerating as a
+    PLDS optical LUN and the Initio bridge exposed only `Generic External 1.14`.
+    GP28/GP27 boot-state combinations did not recover an optical/currentboot
+    personality. Treat this as strong evidence that the visible resident
+    materializer path can affect normal boot, but also as a warning that this
+    point is boot-critical/watchdog-sensitive. Do not repeat the delay hook.
+    Detailed note:
+    `analysis/8051/drive3-materializer-post002e-live-20260506.md`.
+190. Current Drive #3 state after the timing hook: optical LUN absent; bridge
+    fallback only. A stock restore candidate exists at
+    `references/firmware/extracted/helper-bypass-candidates/materializer-post002e-marker-074030-restore/`,
+    but it was not run because the PLDS/currentboot LUN is not visible. Do not
+    send helper-bypass WRITE BUFFER recovery CDBs to the bridge fallback unless
+    there is new evidence they reach the drive firmware rather than the USB
+    bridge.
+191. Static follow-up on the `0x41de` failure identified the sharper blocker:
+    the delay was inserted before `FUN_CODE_40b2` restores `0x4023` from
+    `0x80b0`, repeats `FUN_CODE_1009(5)`, checks `FUN_CODE_141e(0)`, and may
+    call `FUN_CODE_111a(2)`. That makes the original hook point a live but
+    boot-critical materializer transaction, not a quiet callback. The new
+    detailed note is
+    `analysis/8051/normal-mode-codeexec-next-hook-plan-20260506.md`.
+192. Offline-only follow-up candidates now exist for the next PLDS-visible
+    drive. Preferred first:
+    `references/firmware/extracted/helper-bypass-candidates/post-materializer-ret-marker-074030/`,
+    with restore
+    `references/firmware/extracted/helper-bypass-candidates/post-materializer-ret-marker-074030-restore/`.
+    It patches the `FUN_CODE_40b2` return epilogue at `0x422c`, after the
+    fragile continuation, and writes only `0x5a` to public/controller
+    `0x074030`. Higher-risk second:
+    `post-40b2-caller-marker-074030/`, with restore
+    `post-40b2-caller-marker-074030-restore/`. Do not run either while only the
+    `Generic External` bridge fallback is visible.
+193. `scripts/build_liteon_post_materializer_hook_candidates.py` regenerates
+    those four candidate directories. It sends no drive commands. The intended
+    first success check is still normal `READ BUFFER mode=1 id=01
+    offset=0x074000 length=0x80`, looking for `+0x30 == 0x5a`.
+194. A better post-materializer candidate now exists:
+    `references/firmware/extracted/helper-bypass-candidates/post-materializer-runtime-bridge-clamp07/`,
+    with restore
+    `post-materializer-runtime-bridge-clamp07-restore/`. It uses the same
+    late `0x422c` resident hook, but instead of writing a free-standing marker
+    it writes into the already materialized normal response bridge at six
+    common rotating public slots: `0x077156`, `0x077196`, `0x0770e6`,
+    `0x077026`, `0x0770a6`, and `0x077066`, changing the response-clamp
+    immediate `0x0e -> 0x07`. This is a RAM
+    patch of decoded normal runtime code, not a CDD source mutation. If it
+    lands, high-offset `READ BUFFER id=01` responses should change directly
+    while normal `0x070000..0x07ffff` reads stay stock.
+195. The new highest-value live proof, once a PLDS-visible drive is available,
+    is therefore: baseline `READ BUFFER id=01 offset=0x070000` and
+    `0x0f0000`, install `post-materializer-runtime-bridge-clamp07`, cold boot,
+    recapture both offsets, then restore stock and confirm `0x0f0000` returns
+    to baseline. `scripts/probe_liteon_materialized_bridge_clamp_effect.py`
+    is the read-only capture harness for this proof. Do not run the write
+    candidate while only `Generic External` is visible.

@@ -4041,3 +4041,125 @@ reaches the set-bit routine `0x5a01 |= 0x05; 0x5905 |= 0x01; 0x5905 |= 0x04;
 is behind gates around `0x8aed`, `0x8a33`, and IRAM flags. Replaying only those
 stores from currentboot is probably not enough; reaching or instrumenting the
 stock scheduler path is the cleaner route.
+
+The next normal-mode code-execution push tried the visible resident
+CDD/materializer call site at `0x41de`, where the stock code does
+`LCALL 0x002e` followed by `JNC 0x422f`. This was attractive because it sits in
+the resident prefix, before the hidden CDD overlay world fully takes over, and
+helper-bypass can now rewrite those low sectors.
+
+The first patch was conservative:
+
+```text
+0x41de: LCALL 0x002e -> LCALL 0x6ee3
+0x6ee3: call original 0x002e, preserve PSW/ACC/DPTR,
+        write 0x5a to controller/public 0x074030, restore, ret
+```
+
+It programmed cleanly, event 544 passed, Drive #3 stayed `LD5M`, and a
+cold-boot F0 spot dump confirmed the hook persisted. But the normal public
+window at `READ BUFFER id=01 offset=0x074000` still had `0xff` at `+0x30`,
+both before and after a Pico cold cycle. So the marker either ran too early and
+was overwritten, used the wrong alias for that context, or the call site was not
+hit in the observable path.
+
+The second patch used the same call site but replaced the marker with a nested
+delay loop after the original `0x002e` returned. That also programmed cleanly
+and matched the patched F0 target, but after cold power cycles Drive #3 no
+longer returned as a PLDS optical LUN. The Initio bridge fell back to
+`Generic External 1.14`. Holding/releasing GP28 tray-present and GP27 button
+across power-up did not bring back an optical/currentboot personality. I did
+not send the full WRITE BUFFER recovery sequence to the bridge fallback because
+there was no evidence those CDBs would reach the PLDS firmware rather than the
+USB bridge.
+
+This is an uncomfortable but useful result. The materializer call site is
+probably reachable or timing-sensitive during normal startup, but it is too
+fragile for blocking work. It is not yet a normal-mode I/O primitive. Future
+fresh-drive work should avoid delay loops there and use only quick one-shot
+markers, or move later into a normal command handler after boot has stabilized.
+
+Detailed note:
+
+```text
+analysis/8051/drive3-materializer-post002e-live-20260506.md
+```
+
+I then went back to the raw 8051 assembly instead of trusting the rough Ghidra
+C. That made the failure much less mysterious. The patched `0x41de` call is
+inside `FUN_CODE_40b2`, and it is followed by real boot-critical work:
+restoring a controller shadow register, running `FUN_CODE_1009(5)` again,
+checking `FUN_CODE_141e(0)`, and sometimes calling the `FUN_CODE_111a(2)`
+continuation. The delay did not just prove "this code runs"; it stalled the
+materializer before the stock continuation had finished.
+
+That gives us a cleaner next attempt. Instead of patching inside the
+`0x002e` transaction, I prepared two offline hook candidates that move the
+marker later:
+
+```text
+references/firmware/extracted/helper-bypass-candidates/post-materializer-ret-marker-074030/
+references/firmware/extracted/helper-bypass-candidates/post-materializer-ret-marker-074030-restore/
+references/firmware/extracted/helper-bypass-candidates/post-40b2-caller-marker-074030/
+references/firmware/extracted/helper-bypass-candidates/post-40b2-caller-marker-074030-restore/
+```
+
+The preferred one patches the `0x40b2` return epilogue at `0x422c`, after the
+fragile materializer continuation. It writes only one marker byte,
+`0x074030 = 0x5a`, then restores the stock return state (`A=0`, `PSW=0`) and
+returns through the original `RET`. The caller-wrapper variant patches the
+caller at `0x26fb`, runs original `0x40b2`, then writes the same marker while
+preserving PSW/ACC/DPTR; it is more likely to run after the system settles, but
+it may execute repeatedly, so it is second.
+
+These were generated locally only. No live CDBs were sent. The current Drive #3
+is still bridge-fallback only, so it is not a candidate for these tests unless
+it becomes PLDS-visible again. On the next PLDS-visible drive, the first check
+is simple: run the return-epilogue marker candidate, cold boot, then read
+normal `READ BUFFER id=01 offset=0x074000`; if byte `+0x30` changes from
+`0xff` to `0x5a`, we finally have a resident-prefix normal-boot marker after
+materialization.
+
+New note:
+
+```text
+analysis/8051/normal-mode-codeexec-next-hook-plan-20260506.md
+```
+
+One more refinement came out of the static pass. The plain marker is a weak
+proof: even if the resident hook runs, a marker at `0x074030` can be
+overwritten or hidden by the normal public-window machinery. The stronger idea
+is to use the resident hook as a boot-time RAM patcher for the materialized
+normal runtime itself.
+
+We have a known normal response-bridge chunk, seen at public offsets
+`0x077100`, `0x077140`, and `0x077180`, that copies packet-shadow bytes into
+controller response-address registers. Inside that bridge is a clamp:
+
+```text
+... 90 8a 4c e0 c3 94 0e 40 08 90 40 11 74 0e f0 ...
+```
+
+The new candidate
+`post-materializer-runtime-bridge-clamp07` changes the second `0x0e` to
+`0x07` in the six most common observed rotating slots:
+
+```text
+0x077156: 0x0e -> 0x07
+0x077196: 0x0e -> 0x07
+0x0770e6: 0x0e -> 0x07
+0x077026: 0x0e -> 0x07
+0x0770a6: 0x0e -> 0x07
+0x077066: 0x0e -> 0x07
+```
+
+The practical test is clean: baseline normal `READ BUFFER id=01` at
+`0x070000` and a high offset like `0x0f0000`, install the candidate, cold boot,
+and see whether only the high-offset direct response changes. If that happens,
+we have crossed an important line: visible resident code can patch decoded
+normal runtime code after materialization without knowing how to encode the
+CDD. That would be the first real normal-mode code-execution bridge toward a
+proper materialization oracle. I also added the read-only helper
+`scripts/probe_liteon_materialized_bridge_clamp_effect.py` so the before/after
+READ BUFFER capture set can be run repeatably when a PLDS-visible drive is
+available.
