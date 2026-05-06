@@ -4365,3 +4365,11 @@ the next live dynamic candidate still returns with stock `A=0` and `PSW=0` but
 also preserves DPTR. The verifier accepts legacy caves and reports the shape,
 while the readiness smoke test now requires the synthetic dynamic `0x18`
 candidate to report `preserves_dptr=true`.
+
+I also made the lower-level live wrapper more opinionated. It now refuses to
+install the fixed bridge-clamp candidate under `--execute` unless
+`--allow-fixed-candidate` is passed explicitly. The guarded ladder already uses
+baseline-derived dynamic candidates; this change makes direct calls follow the
+same discipline by default. A direct fixed-candidate run failed immediately
+with the intended refusal message, before sending any drive command, while the
+dynamic dry-run and ladder dry-run still render the expected sequence.

@@ -78,6 +78,11 @@ The ladder:
 3. refuses `0x18` unless the `0x07` proof passes, unless explicitly forced;
 4. runs dynamic `0x18` with decoded-oracle offsets only after that proof.
 
+The lower-level live wrapper also refuses a direct fixed-candidate install
+under `--execute` unless `--allow-fixed-candidate` is passed deliberately.
+This keeps the normal path on baseline-derived dynamic candidates, where the
+run patches only clamp slots actually visible in that run.
+
 ### Candidate Verification
 
 Before a live install, the live wrapper now runs:

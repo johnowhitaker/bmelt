@@ -6,8 +6,8 @@ Dry-run by default. With `--execute`, this script:
 1. Refuses to continue unless `sg_inq` reports a PLDS DS-8ABSH optical LUN.
 2. Captures baseline READ BUFFER windows with
    `probe_liteon_materialized_bridge_clamp_effect.py`.
-3. Installs the `post-materializer-runtime-bridge-clamp07` helper-bypass
-   candidate using the existing persistence experiment runner.
+3. Preferably builds and installs a dynamic helper-bypass candidate from the
+   baseline-visible bridge-clamp slots.
 4. Cold-cycles with the Pico servo, then captures the same READ BUFFER windows.
 5. Installs the matching restore candidate, cold-cycles, and captures again.
 
@@ -92,11 +92,15 @@ def check_plds_identity(device: str, execute: bool) -> dict[str, Any]:
     return record
 
 
-def ensure_candidate_files(execute: bool) -> dict[str, Any]:
-    missing = [path for path in (CANDIDATE, RESTORE) if not path.exists()]
+def ensure_candidate_files(execute: bool, *, need_fixed_candidate: bool) -> dict[str, Any]:
+    required = [RESTORE]
+    if need_fixed_candidate:
+        required.append(CANDIDATE)
+    missing = [path for path in required if not path.exists()]
     record: dict[str, Any] = {
         "candidate": str(CANDIDATE),
         "restore": str(RESTORE),
+        "need_fixed_candidate": need_fixed_candidate,
         "missing": [str(path) for path in missing],
     }
     if not missing:
@@ -106,7 +110,7 @@ def ensure_candidate_files(execute: bool) -> dict[str, Any]:
     record["generate_result"] = run_cmd(cmd, execute=execute)
     record["generated"] = execute
     if execute:
-        still_missing = [str(path) for path in (CANDIDATE, RESTORE) if not path.exists()]
+        still_missing = [str(path) for path in required if not path.exists()]
         record["still_missing"] = still_missing
         if still_missing:
             raise FileNotFoundError("candidate generation did not produce: " + ", ".join(still_missing))
@@ -305,6 +309,11 @@ def parse_args() -> argparse.Namespace:
         help="byte written into observed bridge-clamp immediates by the dynamic candidate",
     )
     parser.add_argument("--skip-restore", action="store_true")
+    parser.add_argument(
+        "--allow-fixed-candidate",
+        action="store_true",
+        help="allow --execute without --build-dynamic-candidate-from-baseline; dynamic baseline-derived candidates are preferred",
+    )
     parser.add_argument("--execute", action="store_true", help="actually run live commands")
     return parser.parse_args()
 
@@ -323,6 +332,7 @@ def main() -> int:
         "restore": str(RESTORE),
         "dynamic_candidate_from_baseline": args.build_dynamic_candidate_from_baseline,
         "dynamic_patch_value": args.dynamic_patch_value,
+        "allow_fixed_candidate": args.allow_fixed_candidate,
         "execute": args.execute,
         "probe_offsets": probe_offsets,
         "include_decoded_oracle_offsets": args.include_decoded_oracle_offsets,
@@ -331,7 +341,27 @@ def main() -> int:
     if args.execute:
         out_dir.mkdir(parents=True, exist_ok=True)
 
-    report["steps"].append({"name": "ensure-candidates", "result": ensure_candidate_files(args.execute)})
+    fixed_candidate_install_requested = not args.preflight_only and not args.build_dynamic_candidate_from_baseline
+    if args.execute and fixed_candidate_install_requested and not args.allow_fixed_candidate:
+        raise RuntimeError(
+            "refusing fixed bridge-clamp candidate install under --execute; "
+            "use --build-dynamic-candidate-from-baseline or pass --allow-fixed-candidate deliberately"
+        )
+
+    if args.preflight_only:
+        report["steps"].append(
+            {"name": "ensure-candidates", "result": {"skipped": True, "reason": "preflight-only"}}
+        )
+    else:
+        report["steps"].append(
+            {
+                "name": "ensure-candidates",
+                "result": ensure_candidate_files(
+                    args.execute,
+                    need_fixed_candidate=fixed_candidate_install_requested,
+                ),
+            }
+        )
     report["steps"].append({"name": "identity-baseline", "result": check_plds_identity(args.device, args.execute)})
     report["steps"].append(
         {

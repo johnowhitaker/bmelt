@@ -3121,7 +3121,10 @@ Immediate useful directions:
     intentional: a baseline-derived dynamic candidate cannot exist until
     `--execute` captures real `0x077000` windows, so dry-run should not print a
     misleading fixed-candidate install path for a dynamic `0x07` or `0x18`
-    ladder step.
+    ladder step. The same wrapper now refuses a direct fixed-candidate install
+    under `--execute` unless `--allow-fixed-candidate` is passed deliberately;
+    use `--build-dynamic-candidate-from-baseline` for the normal bridge-oracle
+    route.
 213. `scripts/audit_liteon_bridge_oracle_readiness.py` is the one-command
     readiness audit for the current blocked bridge-oracle phase. It sends no
     firmware-update/helper-bypass writes. It compiles the relevant
