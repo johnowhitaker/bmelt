@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Offline verifier for the post-materializer bridge-clamp candidate.
+"""Offline verifier for post-materializer bridge-clamp candidates.
 
 This script checks the specific safety properties that matter before the next
 live PLDS-visible run:
@@ -51,30 +51,24 @@ def read_json(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text())
 
 
-def candidate_dir(slug: str) -> Path:
-    return OUT_ROOT / slug
+def candidate_dir(root: Path, slug: str) -> Path:
+    return root / slug
 
 
-def image_path(slug: str) -> Path:
-    return candidate_dir(slug) / f"ld5m-helper-bypass-{slug}.bin"
+def image_path(root: Path, slug: str) -> Path:
+    return candidate_dir(root, slug) / f"ld5m-helper-bypass-{slug}.bin"
 
 
-def manifest_path(slug: str) -> Path:
-    return candidate_dir(slug) / "manifest.json"
+def manifest_path(root: Path, slug: str) -> Path:
+    return candidate_dir(root, slug) / "manifest.json"
 
 
-def final_candidate_path(slug: str) -> Path:
-    return candidate_dir(slug) / f"liteon-full-currentboot-ld5m-helper-bypass-{slug}-candidate.json"
+def final_candidate_path(root: Path, slug: str) -> Path:
+    return candidate_dir(root, slug) / f"liteon-full-currentboot-ld5m-helper-bypass-{slug}-candidate.json"
 
 
 def diff_offsets(base: bytes, other: bytes) -> list[int]:
     return [i for i, (a, b) in enumerate(zip(base, other)) if a != b]
-
-
-def expected_diff_offsets() -> set[int]:
-    return set(range(HOOK_OFFSET, HOOK_OFFSET + len(EXPECTED_HOOK_AFTER))) | set(
-        range(CAVE_OFFSET, CAVE_OFFSET + CAVE_LEN)
-    )
 
 
 def split_patch_text(value: str) -> tuple[str, str]:
@@ -82,7 +76,7 @@ def split_patch_text(value: str) -> tuple[str, str]:
     return offset.lower(), payload.lower()
 
 
-def extract_gateway_writes(cave: bytes) -> list[dict[str, int]]:
+def extract_gateway_writes(cave: bytes) -> tuple[list[dict[str, int]], int]:
     """Parse the builder's repeated gateway write blocks.
 
     Expected block:
@@ -100,7 +94,7 @@ def extract_gateway_writes(cave: bytes) -> list[dict[str, int]]:
     pos = 0
     while pos < len(cave):
         if cave[pos : pos + 4] == bytes.fromhex("e4 f5 d0 22"):
-            break
+            return out, pos + 4
         if not cave.startswith(prefix, pos):
             raise ValueError(f"unexpected cave bytes at +0x{pos:x}: {cave[pos:pos+16].hex()}")
         p = pos + len(prefix)
@@ -125,17 +119,58 @@ def extract_gateway_writes(cave: bytes) -> list[dict[str, int]]:
             raise ValueError(f"bad gateway final write at +0x{p-1:x}")
         out.append({"address": (hi << 16) | (mid << 8) | lo, "value": value})
         pos = p
-    return out
+    raise ValueError("cave payload did not end with CLR A; MOV PSW,A; RET")
 
 
-def verify() -> dict[str, Any]:
+def read_dynamic_selection(root: Path, slug: str) -> dict[str, Any] | None:
+    path = candidate_dir(root, slug) / "dynamic-bridge-clamp-selection.json"
+    if not path.exists():
+        return None
+    return read_json(path)
+
+
+def resolve_expected_plan(
+    *,
+    candidate_root: Path,
+    slug: str,
+    expected_addrs: list[int],
+    expected_value: int | None,
+) -> tuple[list[int], int, dict[str, Any] | None]:
+    dynamic = read_dynamic_selection(candidate_root, slug)
+    if dynamic:
+        addrs_from_dynamic = [int(row["address"]) for row in dynamic.get("selected", [])]
+        value_from_dynamic = int(dynamic.get("patch_value"))
+    else:
+        addrs_from_dynamic = EXPECTED_CLAMP_ADDRS
+        value_from_dynamic = EXPECTED_CLAMP_VALUE
+    addrs = expected_addrs or addrs_from_dynamic
+    value = expected_value if expected_value is not None else value_from_dynamic
+    return addrs, value, dynamic
+
+
+def verify(
+    *,
+    candidate_root: Path,
+    restore_root: Path,
+    candidate_slug: str,
+    restore_slug: str,
+    expected_addrs: list[int],
+    expected_value: int | None,
+) -> dict[str, Any]:
+    expected_clamp_addrs, expected_clamp_value, dynamic_selection = resolve_expected_plan(
+        candidate_root=candidate_root,
+        slug=candidate_slug,
+        expected_addrs=expected_addrs,
+        expected_value=expected_value,
+    )
     base = BASE.read_bytes()
-    candidate = image_path(CANDIDATE_SLUG).read_bytes()
-    restore = image_path(RESTORE_SLUG).read_bytes()
-    candidate_manifest = read_json(manifest_path(CANDIDATE_SLUG))
-    restore_manifest = read_json(manifest_path(RESTORE_SLUG))
-    final_candidate = read_json(final_candidate_path(CANDIDATE_SLUG))
-    restore_final = read_json(final_candidate_path(RESTORE_SLUG))
+    candidate = image_path(candidate_root, candidate_slug).read_bytes()
+    restore = image_path(restore_root, restore_slug).read_bytes()
+    candidate_manifest = read_json(manifest_path(candidate_root, candidate_slug))
+    restore_manifest = read_json(manifest_path(restore_root, restore_slug))
+    final_candidate = read_json(final_candidate_path(candidate_root, candidate_slug))
+    restore_final = read_json(final_candidate_path(restore_root, restore_slug))
+    writes, cave_payload_len = extract_gateway_writes(candidate[CAVE_OFFSET : CAVE_OFFSET + CAVE_LEN])
 
     checks: list[dict[str, Any]] = []
 
@@ -146,16 +181,24 @@ def verify() -> dict[str, Any]:
     check("base_cave_ff", base[CAVE_OFFSET : CAVE_OFFSET + CAVE_LEN] == EXPECTED_CAVE_BEFORE)
     check("candidate_hook_patch", candidate[HOOK_OFFSET : HOOK_OFFSET + 3] == EXPECTED_HOOK_AFTER)
     check("candidate_cave_not_ff", candidate[CAVE_OFFSET : CAVE_OFFSET + CAVE_LEN] != EXPECTED_CAVE_BEFORE)
+    check(
+        "candidate_cave_tail_unchanged",
+        candidate[CAVE_OFFSET + cave_payload_len : CAVE_OFFSET + CAVE_LEN]
+        == base[CAVE_OFFSET + cave_payload_len : CAVE_OFFSET + CAVE_LEN],
+        cave_payload_len=cave_payload_len,
+    )
     check("restore_image_equals_base", restore == base, restore_sha256=sha256(restore), base_sha256=sha256(base))
 
     diffs = set(diff_offsets(base, candidate))
+    allowed_ranges = set(range(HOOK_OFFSET, HOOK_OFFSET + len(EXPECTED_HOOK_AFTER))) | set(
+        range(CAVE_OFFSET, CAVE_OFFSET + cave_payload_len)
+    )
     check(
-        "candidate_only_expected_offsets_changed",
-        diffs == expected_diff_offsets(),
+        "candidate_only_hook_and_parsed_cave_changed",
+        diffs <= allowed_ranges,
         changed_count=len(diffs),
-        expected_count=len(expected_diff_offsets()),
-        unexpected=sorted(diffs - expected_diff_offsets())[:16],
-        missing=sorted(expected_diff_offsets() - diffs)[:16],
+        allowed_count=len(allowed_ranges),
+        unexpected=sorted(diffs - allowed_ranges)[:16],
     )
 
     helper_patches = {split_patch_text(value) for value in candidate_manifest.get("helper_patches", [])}
@@ -171,11 +214,11 @@ def verify() -> dict[str, Any]:
         helper_patches=sorted(f"{offset}:{payload}" for offset, payload in restore_helper_patches),
     )
 
-    writes = extract_gateway_writes(candidate[CAVE_OFFSET : CAVE_OFFSET + CAVE_LEN])
     check(
         "candidate_gateway_writes_match_plan",
-        writes == [{"address": addr, "value": EXPECTED_CLAMP_VALUE} for addr in EXPECTED_CLAMP_ADDRS],
+        writes == [{"address": addr, "value": expected_clamp_value} for addr in expected_clamp_addrs],
         writes=[{"address": f"0x{row['address']:06x}", "value": f"0x{row['value']:02x}"} for row in writes],
+        expected_writes=[{"address": f"0x{addr:06x}", "value": f"0x{expected_clamp_value:02x}"} for addr in expected_clamp_addrs],
     )
 
     final_diff = final_candidate.get("diff_summary", {})
@@ -193,9 +236,15 @@ def verify() -> dict[str, Any]:
     )
 
     report = {
-        "candidate": CANDIDATE_SLUG,
-        "restore": RESTORE_SLUG,
+        "candidate": candidate_slug,
+        "restore": restore_slug,
+        "candidate_root": str(candidate_root),
+        "restore_root": str(restore_root),
         "base": str(BASE),
+        "dynamic_selection": dynamic_selection,
+        "expected_clamp_addrs": [f"0x{addr:06x}" for addr in expected_clamp_addrs],
+        "expected_clamp_value": f"0x{expected_clamp_value:02x}",
+        "cave_payload_len": cave_payload_len,
         "all_ok": all(row["ok"] for row in checks),
         "checks": checks,
     }
@@ -208,6 +257,9 @@ def write_md(report: dict[str, Any], path: Path) -> None:
         "",
         f"candidate: `{report['candidate']}`",
         f"restore: `{report['restore']}`",
+        f"expected clamp value: `{report['expected_clamp_value']}`",
+        f"expected clamp addresses: `{', '.join(report['expected_clamp_addrs'])}`",
+        f"cave payload length: `{report['cave_payload_len']}`",
         f"all ok: `{report['all_ok']}`",
         "",
         "| check | ok | detail |",
@@ -221,6 +273,28 @@ def write_md(report: dict[str, Any], path: Path) -> None:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--candidate-slug", default=CANDIDATE_SLUG)
+    parser.add_argument("--restore-slug", default=RESTORE_SLUG)
+    parser.add_argument("--candidate-root", type=Path, default=OUT_ROOT)
+    parser.add_argument(
+        "--restore-root",
+        type=Path,
+        default=None,
+        help="root for restore slug; defaults to --candidate-root when omitted",
+    )
+    parser.add_argument(
+        "--expected-clamp-addr",
+        action="append",
+        type=lambda value: int(value, 0),
+        default=[],
+        help="repeatable expected controller/public address; defaults to dynamic-selection JSON or fixed plan",
+    )
+    parser.add_argument(
+        "--expected-clamp-value",
+        type=lambda value: int(value, 0),
+        default=None,
+        help="expected byte written to each clamp address; defaults to dynamic-selection JSON or fixed 0x07",
+    )
     parser.add_argument("--json-out", type=Path, default=ROOT / "analysis/8051/bridge-clamp-candidate-verify-20260506.json")
     parser.add_argument("--md-out", type=Path, default=ROOT / "analysis/8051/bridge-clamp-candidate-verify-20260506.md")
     return parser.parse_args()
@@ -228,7 +302,16 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> int:
     args = parse_args()
-    report = verify()
+    if args.expected_clamp_value is not None and not 0 <= args.expected_clamp_value <= 0xFF:
+        raise ValueError("--expected-clamp-value must be a byte")
+    report = verify(
+        candidate_root=args.candidate_root,
+        restore_root=args.restore_root or args.candidate_root,
+        candidate_slug=args.candidate_slug,
+        restore_slug=args.restore_slug,
+        expected_addrs=args.expected_clamp_addr,
+        expected_value=args.expected_clamp_value,
+    )
     args.json_out.parent.mkdir(parents=True, exist_ok=True)
     args.json_out.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
     write_md(report, args.md_out)

@@ -4305,3 +4305,15 @@ matters because the next run has two different failure modes: the resident hook
 may fail to patch the runtime slot, or the slot may patch successfully but the
 controller may still reject/read-clamp decoded-band offsets. The analyzer can
 now separate those.
+
+I also made the bridge-clamp verifier match the dynamic plan. The old verifier
+only knew the fixed six-slot `0x07` candidate. The live ladder now generates a
+candidate from whatever clamp slots are actually visible in the baseline, and
+the second step writes `0x18`, so the verifier needed to understand that. It
+now reads `dynamic-bridge-clamp-selection.json` when present, checks the exact
+selected public addresses and byte value, tolerates shorter cave payloads for
+fewer writes, and can verify a dynamic candidate while using the stock restore
+candidate from the normal helper-candidate directory. The guarded live wrapper
+now runs this verifier after dynamic candidate generation and before any
+install. I tested it offline against the fixed candidate and a synthetic
+dynamic `0x18` two-slot candidate.

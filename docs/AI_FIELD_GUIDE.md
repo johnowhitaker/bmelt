@@ -3095,3 +3095,10 @@ Immediate useful directions:
     both direct decoded-band hash changes and visible `0x077000` clamp-pattern
     hits patched to `0x18`; otherwise a no-effect decoded read could be a
     failed runtime-slot patch rather than a failed materialization oracle.
+209. `scripts/verify_liteon_bridge_clamp_candidate.py` is now generic enough
+    for fixed and dynamic bridge-clamp candidates. It reads dynamic selection
+    JSON when present, verifies the selected public addresses and patch value
+    (`0x07` or `0x18`), accepts shorter dynamic cave payloads, and can use a
+    separate restore-candidate root. The live wrapper calls it before
+    installation in `--execute` runs, after any baseline-derived dynamic
+    candidate is generated.

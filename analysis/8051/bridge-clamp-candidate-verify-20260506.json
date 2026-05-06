@@ -2,6 +2,8 @@
   "all_ok": true,
   "base": "/Users/johno/projects/boastermelt/references/firmware/extracted/ld5m-f0-window-0x00000-0x100000.bin",
   "candidate": "post-materializer-runtime-bridge-clamp07",
+  "candidate_root": "/Users/johno/projects/boastermelt/references/firmware/extracted/helper-bypass-candidates",
+  "cave_payload_len": 208,
   "checks": [
     {
       "name": "base_hook_stock",
@@ -20,16 +22,20 @@
       "ok": true
     },
     {
+      "cave_payload_len": 208,
+      "name": "candidate_cave_tail_unchanged",
+      "ok": true
+    },
+    {
       "base_sha256": "488f49c7f5d8141186db6ca006a33cccefcc391b537d2a903f4ebaa7ea8f2e39",
       "name": "restore_image_equals_base",
       "ok": true,
       "restore_sha256": "488f49c7f5d8141186db6ca006a33cccefcc391b537d2a903f4ebaa7ea8f2e39"
     },
     {
+      "allowed_count": 211,
       "changed_count": 211,
-      "expected_count": 211,
-      "missing": [],
-      "name": "candidate_only_expected_offsets_changed",
+      "name": "candidate_only_hook_and_parsed_cave_changed",
       "ok": true,
       "unexpected": []
     },
@@ -52,6 +58,32 @@
       "ok": true
     },
     {
+      "expected_writes": [
+        {
+          "address": "0x077156",
+          "value": "0x07"
+        },
+        {
+          "address": "0x077196",
+          "value": "0x07"
+        },
+        {
+          "address": "0x0770e6",
+          "value": "0x07"
+        },
+        {
+          "address": "0x077026",
+          "value": "0x07"
+        },
+        {
+          "address": "0x0770a6",
+          "value": "0x07"
+        },
+        {
+          "address": "0x077066",
+          "value": "0x07"
+        }
+      ],
       "name": "candidate_gateway_writes_match_plan",
       "ok": true,
       "writes": [
@@ -98,5 +130,16 @@
       "restore_modified_byte_count": 0
     }
   ],
-  "restore": "post-materializer-runtime-bridge-clamp07-restore"
+  "dynamic_selection": null,
+  "expected_clamp_addrs": [
+    "0x077156",
+    "0x077196",
+    "0x0770e6",
+    "0x077026",
+    "0x0770a6",
+    "0x077066"
+  ],
+  "expected_clamp_value": "0x07",
+  "restore": "post-materializer-runtime-bridge-clamp07-restore",
+  "restore_root": "/Users/johno/projects/boastermelt/references/firmware/extracted/helper-bypass-candidates"
 }

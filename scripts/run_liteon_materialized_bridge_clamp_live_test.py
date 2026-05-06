@@ -44,6 +44,7 @@ RUN_EXPERIMENT = ROOT / "scripts/run_liteon_linux_persistence_experiment.py"
 PICO_CLIENT = ROOT / "pico/client.py"
 BUILD_CANDIDATES = ROOT / "scripts/build_liteon_post_materializer_hook_candidates.py"
 BUILD_DYNAMIC_CANDIDATE = ROOT / "scripts/build_liteon_dynamic_bridge_clamp_candidate.py"
+VERIFY_CANDIDATE = ROOT / "scripts/verify_liteon_bridge_clamp_candidate.py"
 STOCK_CLAMP_PATTERN = bytes.fromhex("90 8a 4c e0 c3 94 0e 40 08 90 40 11 74 0e f0")
 
 
@@ -216,6 +217,32 @@ def build_dynamic_candidate(out_dir: Path, run_name: str, max_writes: int, patch
     return record
 
 
+def verify_bridge_candidate(candidate: Path, restore: Path, out_dir: Path, execute: bool) -> dict[str, Any]:
+    candidate_slug = candidate.parent.name
+    restore_slug = restore.parent.name
+    candidate_root = candidate.parent.parent
+    restore_root = restore.parent.parent
+    return run_cmd(
+        [
+            sys.executable,
+            str(VERIFY_CANDIDATE),
+            "--candidate-root",
+            str(candidate_root),
+            "--restore-root",
+            str(restore_root),
+            "--candidate-slug",
+            candidate_slug,
+            "--restore-slug",
+            restore_slug,
+            "--json-out",
+            str(out_dir / f"{candidate_slug}.verify.json"),
+            "--md-out",
+            str(out_dir / f"{candidate_slug}.verify.md"),
+        ],
+        execute=execute,
+    )
+
+
 def cold_cycle(pico_port: str | None, hold_ms: int, execute: bool) -> dict[str, Any]:
     if not pico_port:
         print("# skipping Pico cold cycle: no --pico-port")
@@ -355,6 +382,23 @@ def main() -> int:
             active_candidate = Path(dynamic_result["candidate"])
             report["candidate"] = str(active_candidate)
 
+    if args.build_dynamic_candidate_from_baseline and not args.execute:
+        report["steps"].append(
+            {
+                "name": "verify-active-candidate",
+                "result": {
+                    "skipped": True,
+                    "reason": "dynamic candidate is built from live baseline only with --execute",
+                },
+            }
+        )
+    else:
+        report["steps"].append(
+            {
+                "name": "verify-active-candidate",
+                "result": verify_bridge_candidate(active_candidate, RESTORE, out_dir, args.execute),
+            }
+        )
     report["steps"].append({"name": "install-candidate", "result": run_candidate(active_candidate, args.device, args.execute)})
     report["steps"].append({"name": "cold-cycle-patched", "result": cold_cycle(args.pico_port, args.servo_hold_ms, args.execute)})
     if args.execute:
