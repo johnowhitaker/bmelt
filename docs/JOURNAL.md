@@ -4249,3 +4249,12 @@ target is a visible PLDS optical LUN and captured the baseline. That keeps the
 planned code-execution proof pointed at the current run's actual materialized
 normal code, instead of assuming the rotating work window landed on the same
 six slots as the old corpus.
+
+The same clamp gives us a sensible two-step oracle plan. Disassembly confirms
+that the byte we patch is the `MOV A,#0x0e` immediate used when the normal READ
+BUFFER handler caps the high byte before writing controller register `0x4011`.
+So `0x07` is the proof patch: it should make high-offset requests fold
+somewhere visibly different and prove normal runtime code was patched. If that
+works and restores cleanly, `0x18` is the interesting patch: it may let host
+READ BUFFER requests reach the decoded CDD band around `0x184000`. I wrote that
+up in `analysis/8051/bridge-clamp-to-materialization-oracle-plan-20260506.md`.

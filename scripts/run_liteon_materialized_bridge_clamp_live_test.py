@@ -163,8 +163,8 @@ def run_candidate(candidate: Path, device: str, execute: bool) -> dict[str, Any]
     )
 
 
-def build_dynamic_candidate(out_dir: Path, run_name: str, max_writes: int, execute: bool) -> dict[str, Any]:
-    name = f"{run_name}-dynamic-bridge-clamp"
+def build_dynamic_candidate(out_dir: Path, run_name: str, max_writes: int, patch_value: int, execute: bool) -> dict[str, Any]:
+    name = f"{run_name}-dynamic-bridge-clamp{patch_value:02x}"
     record = run_cmd(
         [
             sys.executable,
@@ -174,6 +174,8 @@ def build_dynamic_candidate(out_dir: Path, run_name: str, max_writes: int, execu
             name,
             "--max-writes",
             str(max_writes),
+            "--patch-value",
+            f"0x{patch_value:02x}",
         ],
         execute=execute,
     )
@@ -247,6 +249,12 @@ def parse_args() -> argparse.Namespace:
         help="after baseline capture, build/install a candidate that patches only clamp slots visible in this run",
     )
     parser.add_argument("--dynamic-max-writes", type=int, default=3)
+    parser.add_argument(
+        "--dynamic-patch-value",
+        type=lambda value: int(value, 0),
+        default=0x07,
+        help="byte written into observed bridge-clamp immediates by the dynamic candidate",
+    )
     parser.add_argument("--skip-restore", action="store_true")
     parser.add_argument("--execute", action="store_true", help="actually run live commands")
     return parser.parse_args()
@@ -254,6 +262,8 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> int:
     args = parse_args()
+    if not 0 <= args.dynamic_patch_value <= 0xFF:
+        raise ValueError("--dynamic-patch-value must be a byte")
     out_dir = args.out_root / args.run_name
     active_candidate = CANDIDATE
     report: dict[str, Any] = {
@@ -262,6 +272,7 @@ def main() -> int:
         "candidate": str(active_candidate),
         "restore": str(RESTORE),
         "dynamic_candidate_from_baseline": args.build_dynamic_candidate_from_baseline,
+        "dynamic_patch_value": args.dynamic_patch_value,
         "execute": args.execute,
         "steps": [],
     }
@@ -296,7 +307,13 @@ def main() -> int:
             )
 
     if args.build_dynamic_candidate_from_baseline:
-        dynamic_result = build_dynamic_candidate(out_dir, args.run_name, args.dynamic_max_writes, args.execute)
+        dynamic_result = build_dynamic_candidate(
+            out_dir,
+            args.run_name,
+            args.dynamic_max_writes,
+            args.dynamic_patch_value,
+            args.execute,
+        )
         report["steps"].append({"name": "build-dynamic-candidate", "result": dynamic_result})
         if args.execute:
             active_candidate = Path(dynamic_result["candidate"])

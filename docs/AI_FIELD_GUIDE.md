@@ -3056,3 +3056,9 @@ Immediate useful directions:
     wrapper now supports `--build-dynamic-candidate-from-baseline`; this should
     be preferred for the next PLDS-visible attempt if the baseline exposes one
     or more clamp slots. It still sends no drive commands by itself.
+203. `analysis/8051/bridge-clamp-to-materialization-oracle-plan-20260506.md`
+    spells out the follow-up if the `0x07` proof works. The same dynamic
+    candidate builder can write `0x18` into the observed clamp immediates with
+    `--dynamic-patch-value 0x18`. That is the first direct attempt to make
+    normal READ BUFFER request the decoded CDD band near `0x184000`, but it
+    should only be run after a successful `0x07` proof and restore.
