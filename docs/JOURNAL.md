@@ -4213,3 +4213,26 @@ waits for `sg_inq` to report `PLDS DS-8ABSH`, and can run the read-only
 bridge-clamp preflight automatically. It does not install the hook candidate.
 That gives us a safe way to leave the Linux box watching for a recovered drive
 without accidentally treating the Generic bridge fallback as a firmware target.
+
+Before leaving the bridge-clamp candidate queued, I added one more offline
+sanity check: `scripts/verify_liteon_bridge_clamp_candidate.py`. This verifier
+does not talk to the drive. It compares the generated patched image against
+the LD5M base, checks that only the `0x422c` hook and the `0x6ee3` FF cave are
+changed, verifies that the restore image is byte-for-byte identical to base
+LD5M, and confirms that the helper profile-tail patches really move erase and
+programming down to sector `0x04`. It also parses the cave payload and confirms
+that the only controller writes are the six planned bridge-clamp bytes:
+
+```text
+0x077156 = 0x07
+0x077196 = 0x07
+0x0770e6 = 0x07
+0x077026 = 0x07
+0x0770a6 = 0x07
+0x077066 = 0x07
+```
+
+The verification report is
+`analysis/8051/bridge-clamp-candidate-verify-20260506.md`, and every check
+passes. That does not prove the hook will work live, but it removes a class of
+avoidable mistakes from the next PLDS-visible attempt.

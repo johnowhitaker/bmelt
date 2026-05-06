@@ -1,0 +1,102 @@
+{
+  "all_ok": true,
+  "base": "/Users/johno/projects/boastermelt/references/firmware/extracted/ld5m-f0-window-0x00000-0x100000.bin",
+  "candidate": "post-materializer-runtime-bridge-clamp07",
+  "checks": [
+    {
+      "name": "base_hook_stock",
+      "ok": true
+    },
+    {
+      "name": "base_cave_ff",
+      "ok": true
+    },
+    {
+      "name": "candidate_hook_patch",
+      "ok": true
+    },
+    {
+      "name": "candidate_cave_not_ff",
+      "ok": true
+    },
+    {
+      "base_sha256": "488f49c7f5d8141186db6ca006a33cccefcc391b537d2a903f4ebaa7ea8f2e39",
+      "name": "restore_image_equals_base",
+      "ok": true,
+      "restore_sha256": "488f49c7f5d8141186db6ca006a33cccefcc391b537d2a903f4ebaa7ea8f2e39"
+    },
+    {
+      "changed_count": 211,
+      "expected_count": 211,
+      "missing": [],
+      "name": "candidate_only_expected_offsets_changed",
+      "ok": true,
+      "unexpected": []
+    },
+    {
+      "helper_patches": [
+        "0x169:752204",
+        "0x2b5:0232c4",
+        "0x345:752440"
+      ],
+      "name": "candidate_helper_low_sector_patches_present",
+      "ok": true
+    },
+    {
+      "helper_patches": [
+        "0x169:752204",
+        "0x2b5:0232c4",
+        "0x345:752440"
+      ],
+      "name": "restore_helper_low_sector_patches_present",
+      "ok": true
+    },
+    {
+      "name": "candidate_gateway_writes_match_plan",
+      "ok": true,
+      "writes": [
+        {
+          "address": "0x077156",
+          "value": "0x07"
+        },
+        {
+          "address": "0x077196",
+          "value": "0x07"
+        },
+        {
+          "address": "0x0770e6",
+          "value": "0x07"
+        },
+        {
+          "address": "0x077026",
+          "value": "0x07"
+        },
+        {
+          "address": "0x0770a6",
+          "value": "0x07"
+        },
+        {
+          "address": "0x077066",
+          "value": "0x07"
+        }
+      ]
+    },
+    {
+      "final_modified_byte_count": 211,
+      "image_changed_count": 211,
+      "name": "final_candidate_diff_count_matches_image",
+      "ok": true
+    },
+    {
+      "event_count": 546,
+      "name": "final_candidate_event_count",
+      "ok": true
+    },
+    {
+      "name": "restore_final_candidate_diff_count_zero",
+      "ok": true,
+      "restore_modified_byte_count": 0
+    }
+  ],
+  "restore": "post-materializer-runtime-bridge-clamp07-restore"
+}

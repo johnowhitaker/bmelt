@@ -3039,3 +3039,12 @@ Immediate useful directions:
     does not install the hook candidate. Example on Linux:
     `python3 scripts/watch_liteon_plds_preflight.py --interval-s 10
     --execute-preflight --pico-port /dev/ttyACM0`.
+201. `scripts/verify_liteon_bridge_clamp_candidate.py` is the offline verifier
+    for the current bridge-clamp hook candidate. It checks that the patched
+    image changes exactly the `0x422c` hook and `0x6ee3..0x6fb3` cave bytes,
+    the restore image is byte-identical to base LD5M, the helper tail includes
+    the low-sector erase/program patches (`0x169:752204`, `0x345:752440`),
+    and the cave writes only the six planned `0x077xxx -> 0x07` clamp bytes.
+    Latest report:
+    `analysis/8051/bridge-clamp-candidate-verify-20260506.md`, all checks
+    passing.
