@@ -4384,3 +4384,10 @@ while the baseline-derived builder can still target rare slots if a future
 run happens to expose them. The readiness audit still passes offline, and the
 live gate is still closed because the Linux bench has no visible
 `PLDS DS-8ABSH` optical LUN.
+
+I also upgraded that readiness audit to exercise the real default shape: a
+synthetic six-slot `0x18` dynamic candidate, not a toy one-slot candidate. The
+builder selected all six common clamp immediates, the verifier accepted the
+DPTR-preserving cave, and the analyzer still recognized the patched/restored
+high-offset and decoded-band signatures. That gives us a better offline
+simulation of the future live ladder without sending any drive commands.

@@ -3129,9 +3129,9 @@ Immediate useful directions:
     readiness audit for the current blocked bridge-oracle phase. It sends no
     firmware-update/helper-bypass writes. It compiles the relevant
     bridge-oracle scripts, verifies the fixed candidate, runs a synthetic
-    dynamic `0x18` builder/verifier/analyzer smoke test, confirms the synthetic
-    dynamic cave preserves DPTR, dry-runs the guarded ladder, and optionally
-    probes the Linux bench read-only through
+    six-slot dynamic `0x18` builder/verifier/analyzer smoke test, confirms the
+    synthetic dynamic cave preserves DPTR, dry-runs the guarded ladder, and
+    optionally probes the Linux bench read-only through
     `watch_liteon_plds_preflight.py`. Example:
     `python3 scripts/audit_liteon_bridge_oracle_readiness.py --linux-host
     root@jonathan-thinkpad-t480s --pico-port /dev/ttyACM0`. The expected

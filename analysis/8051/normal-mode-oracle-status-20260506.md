@@ -137,10 +137,10 @@ The bridge-clamp ladder is still blocked on live PLDS visibility, but the
 offline pieces were sanity-tested with synthetic `/tmp` captures on
 2026-05-06:
 
-1. a fake baseline `0x077000` capture containing one stock clamp sequence was
-   fed to `build_liteon_dynamic_bridge_clamp_candidate.py`;
-2. the builder selected the observed immediate address and generated a dynamic
-   `0x18` candidate under `/tmp`;
+1. a fake baseline `0x077000` capture containing the six common stock clamp
+   sequences was fed to `build_liteon_dynamic_bridge_clamp_candidate.py`;
+2. the builder selected all six observed immediate addresses and generated a
+   dynamic `0x18` candidate under `/tmp`;
 3. `verify_liteon_bridge_clamp_candidate.py` accepted that candidate against
    the normal restore candidate and confirmed that the dynamic cave preserves
    DPTR;

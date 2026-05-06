@@ -55,6 +55,8 @@ REQUIRED_SCRIPTS = [
 
 STOCK_CLAMP = bytes.fromhex("90 8a 4c e0 c3 94 0e 40 08 90 40 11 74 0e f0")
 PATCH18_CLAMP = bytes.fromhex("90 8a 4c e0 c3 94 0e 40 08 90 40 11 74 18 f0")
+SYNTHETIC_CLAMP_IMMEDIATE_OFFSETS = [0x156, 0x196, 0x0E6, 0x026, 0x0A6, 0x066]
+CLAMP_IMMEDIATE_INDEX = 13
 
 
 def utc_now() -> str:
@@ -132,12 +134,16 @@ def write_synthetic_capture_tree(tmp: Path) -> tuple[Path, Path]:
     run_dir.mkdir()
 
     blob = bytearray([0x55] * 0x1000)
-    blob[0x123 : 0x123 + len(STOCK_CLAMP)] = STOCK_CLAMP
+    for immediate_offset in SYNTHETIC_CLAMP_IMMEDIATE_OFFSETS:
+        pattern_start = immediate_offset - CLAMP_IMMEDIATE_INDEX
+        blob[pattern_start : pattern_start + len(STOCK_CLAMP)] = STOCK_CLAMP
     (baseline / "baseline-r0-id01-off077000.bin").write_bytes(blob)
 
     for label, pattern in (("baseline", STOCK_CLAMP), ("patched", PATCH18_CLAMP), ("restored", STOCK_CLAMP)):
         out = bytearray([0x11] * 0x1000)
-        out[0x123 : 0x123 + len(pattern)] = pattern
+        for immediate_offset in SYNTHETIC_CLAMP_IMMEDIATE_OFFSETS:
+            pattern_start = immediate_offset - CLAMP_IMMEDIATE_INDEX
+            out[pattern_start : pattern_start + len(pattern)] = pattern
         (run_dir / f"{label}-r0-id01-off077000.bin").write_bytes(out)
 
     # Minimal direct-effect signatures for the analyzer.
@@ -163,7 +169,7 @@ def dynamic_smoke_check(checks: list[dict[str, Any]], tmp: Path) -> None:
             "--out-dir",
             str(candidate_root),
             "--max-writes",
-            "1",
+            "6",
             "--patch-value",
             "0x18",
         ]
@@ -201,6 +207,8 @@ def dynamic_smoke_check(checks: list[dict[str, Any]], tmp: Path) -> None:
 
     verify_report = json.loads((tmp / "dynamic-verify.json").read_text()) if (tmp / "dynamic-verify.json").exists() else {}
     analysis = json.loads((tmp / "dynamic-analysis.json").read_text()) if (tmp / "dynamic-analysis.json").exists() else {}
+    selection_path = candidate_dir / "dynamic-bridge-clamp-selection.json"
+    selection = json.loads(selection_path.read_text()) if selection_path.exists() else {}
     high = analysis.get("comparisons", {}).get("0x0f0000", {})
     decoded = analysis.get("comparisons", {}).get("0x184000", {})
     slot = analysis.get("comparisons", {}).get("0x077000", {}).get("labels", {}).get("patched", {})
@@ -210,6 +218,8 @@ def dynamic_smoke_check(checks: list[dict[str, Any]], tmp: Path) -> None:
         and analyze["returncode"] == 0
         and verify_report.get("all_ok") is True
         and verify_report.get("cave_meta", {}).get("preserves_dptr") is True
+        and len(selection.get("selected", [])) == 6
+        and selection.get("payload_length", 9999) <= 0xDD
         and high.get("patched_differs_from_baseline") is True
         and high.get("restored_matches_baseline") is True
         and decoded.get("patched_differs_from_baseline") is True
@@ -225,6 +235,8 @@ def dynamic_smoke_check(checks: list[dict[str, Any]], tmp: Path) -> None:
         analyze_returncode=analyze["returncode"],
         verifier_all_ok=verify_report.get("all_ok"),
         verifier_cave_meta=verify_report.get("cave_meta"),
+        selected=selection.get("selected"),
+        payload_length=selection.get("payload_length"),
         high_offset=high,
         decoded_184000=decoded,
         patched_slot=slot,
