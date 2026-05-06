@@ -3032,3 +3032,10 @@ Immediate useful directions:
     packet-command path. Use `scripts/probe_liteon_bridge_fallback_sat.py` as a
     read-only diagnostic only; do not send helper-bypass WRITE BUFFER paths to
     this Generic bridge fallback.
+200. `scripts/watch_liteon_plds_preflight.py` is the safe waiting wrapper for
+    the current bench state. It scans only `/dev/sg[0-9]+`, looks for `PLDS
+    DS-8ABSH` in `sg_inq`, and can run the read-only bridge-clamp preflight
+    with `--execute-preflight` once a real optical/currentboot LUN appears. It
+    does not install the hook candidate. Example on Linux:
+    `python3 scripts/watch_liteon_plds_preflight.py --interval-s 10
+    --execute-preflight --pico-port /dev/ttyACM0`.

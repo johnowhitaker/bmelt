@@ -4206,3 +4206,10 @@ read-only INQUIRY path, although it did not kill SAT identify. The new helper
 state. It is not a recovery method yet, but it gives a sharper statement of
 where the failure sits: not dead drive silicon, not a missing USB bridge, but a
 bad bridge-facing enumeration/personality state.
+
+I also added `scripts/watch_liteon_plds_preflight.py` for the next manual
+replug/swap moment. It watches only real `/dev/sg[0-9]+` SCSI-generic nodes,
+waits for `sg_inq` to report `PLDS DS-8ABSH`, and can run the read-only
+bridge-clamp preflight automatically. It does not install the hook candidate.
+That gives us a safe way to leave the Linux box watching for a recovered drive
+without accidentally treating the Generic bridge fallback as a firmware target.
