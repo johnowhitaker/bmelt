@@ -3107,3 +3107,9 @@ Immediate useful directions:
     `run_liteon_bridge_oracle_ladder.py --execute` invocation for that device
     and Pico port. The watcher still does not run the ladder by itself; it only
     runs the read-only preflight when `--execute-preflight` is passed.
+211. `analysis/8051/normal-mode-oracle-status-20260506.md` is the compact
+    status/audit note for the current blocked phase. It maps the goal to
+    concrete success criteria, lists the prepared watcher/ladder/verifier/
+    analyzer path, and states the missing evidence: no normal-mode code-exec
+    proof and no decoded-band oracle yet because the bench is still in Generic
+    bridge fallback rather than a visible PLDS optical LUN.

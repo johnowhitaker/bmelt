@@ -4324,3 +4324,12 @@ guarded bridge-oracle ladder command for that device and Pico port. It still
 does not run the write ladder automatically; the only optional action remains
 the read-only preflight. This keeps the handoff explicit while avoiding another
 search through notes at the moment the drive finally enumerates correctly.
+
+I wrote one compact status/audit note for this phase:
+`analysis/8051/normal-mode-oracle-status-20260506.md`. It states the concrete
+success criteria, what is prepared, and what is still missing. In plain terms:
+we have a guarded plan to prove normal-mode code execution by patching the
+materialized READ BUFFER bridge after the CDD materializer runs, and a second
+step that might turn that bridge into a decoded CDD oracle. We do not yet have
+the live proof, because the hardware currently presents only the Generic Initio
+fallback rather than a PLDS optical LUN.
