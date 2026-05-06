@@ -3022,7 +3022,8 @@ Immediate useful directions:
     `references/evidence/live/bridge-fallback-sat-probe-20260506.json`.
     SAT software reset (`ATA PASS-THROUGH(16)` protocol 1) and COMRESET
     (protocol 0), each followed by a Pico power cycle, did not recover the PLDS
-    optical LUN. A cautious ATAPI PACKET/TUR-style probe did not provide a
-    usable packet-command path. Use `scripts/probe_liteon_bridge_fallback_sat.py`
-    as a read-only diagnostic only; do not send helper-bypass WRITE BUFFER
-    paths to this Generic bridge fallback.
+    optical LUN. A full Linux host reboot also returned to the same Generic
+    fallback. A cautious ATAPI PACKET/TUR-style probe did not provide a usable
+    packet-command path. Use `scripts/probe_liteon_bridge_fallback_sat.py` as a
+    read-only diagnostic only; do not send helper-bypass WRITE BUFFER paths to
+    this Generic bridge fallback.

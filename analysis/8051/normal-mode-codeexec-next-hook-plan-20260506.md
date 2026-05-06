@@ -292,7 +292,8 @@ scripts/probe_liteon_bridge_fallback_sat.py
 That means the drive below the bridge is not electrically gone. The bridge is
 seeing an ATAPI packet device underneath, but still presenting the host with a
 disk-like fallback LUN. I tried SAT software reset and COMRESET, followed by
-Pico power cycles; both returned to the same fallback. A small ATAPI PACKET
-probe also failed to produce a usable read-only INQUIRY path. Treat this as a
-diagnostic clue, not as permission to run update/recovery WRITE BUFFER paths
-against `Generic External`.
+Pico power cycles; both returned to the same fallback. A full Linux host reboot
+also returned to the same fallback. A small ATAPI PACKET probe failed to
+produce a usable read-only INQUIRY path. Treat this as a diagnostic clue, not
+as permission to run update/recovery WRITE BUFFER paths against `Generic
+External`.
