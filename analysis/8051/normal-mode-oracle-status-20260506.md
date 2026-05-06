@@ -110,6 +110,28 @@ It distinguishes:
 - high-offset response changes and restore;
 - decoded-band offset changes and restore.
 
+## Offline Smoke Test
+
+The bridge-clamp ladder is still blocked on live PLDS visibility, but the
+offline pieces were sanity-tested with synthetic `/tmp` captures on
+2026-05-06:
+
+1. a fake baseline `0x077000` capture containing one stock clamp sequence was
+   fed to `build_liteon_dynamic_bridge_clamp_candidate.py`;
+2. the builder selected the observed immediate address and generated a dynamic
+   `0x18` candidate under `/tmp`;
+3. `verify_liteon_bridge_clamp_candidate.py` accepted that candidate against
+   the normal restore candidate;
+4. synthetic baseline/patched/restored captures were analyzed, and
+   `analyze_liteon_materialized_bridge_clamp_live_test.py` reported:
+   - high-offset `0x0f0000` changed and restored;
+   - the `0x077000` clamp pattern changed from stock `0x0e` to patched `0x18`;
+   - decoded-band `0x184000` changed and restored.
+
+This does not prove the live hook will land, but it verifies the planned
+builder/verifier/analyzer loop for the exact success shape expected from the
+future `0x18` materialization-oracle run.
+
 ## Current Live Blocker
 
 The Linux bench currently sees:
@@ -165,4 +187,3 @@ the failure was:
 - patched runtime slot not observed;
 - high-offset response unchanged;
 - restore mismatch.
-
