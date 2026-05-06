@@ -4163,3 +4163,13 @@ proper materialization oracle. I also added the read-only helper
 `scripts/probe_liteon_materialized_bridge_clamp_effect.py` so the before/after
 READ BUFFER capture set can be run repeatably when a PLDS-visible drive is
 available.
+
+To avoid trusting hand-picked offsets, I added a slot scanner too:
+`scripts/analyze_liteon_materialized_bridge_clamp_slots.py`. It searched the
+saved work-window corpus for the exact bridge clamp sequence and found `3934`
+instances across `1967` files. The candidate's six public addresses are exactly
+the top six rotating clamp-immediate slots. That makes the next live proof much
+cleaner: if it fails, the likely problem is not "wrong byte in the bridge"; it
+is that the resident hook did not run late enough, the public write alias did
+not hit materialized RAM from that context, or the high-offset probe does not
+exercise this clamp path the way the static read suggests.

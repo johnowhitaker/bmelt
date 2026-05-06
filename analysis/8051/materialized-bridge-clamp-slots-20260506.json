@@ -1,0 +1,77 @@
+{
+  "builder_addresses": [
+    487766,
+    487830,
+    487654,
+    487462,
+    487590,
+    487526
+  ],
+  "covered_top_slots": 6,
+  "files_with_hits": 1967,
+  "missing_top_slots": [],
+  "pattern_hex": "908a4ce0c3940e4008904011740ef0",
+  "public_base": 458752,
+  "roots": [
+    "/Users/johno/projects/boastermelt/references/evidence/live"
+  ],
+  "top_n": 6,
+  "top_slots": [
+    {
+      "count": 931,
+      "covered": true,
+      "example": "references/evidence/live/drive3-router-cd-readonly-corrected-20260504T205514Z/31-id01-window-after-read10-lba16.bin",
+      "file_count": 931,
+      "file_offset": 29014,
+      "public_addr": 487766,
+      "rank": 1
+    },
+    {
+      "count": 814,
+      "covered": true,
+      "example": "references/evidence/live/normal-work-window-harvest-baseline-20260501/27-cycle27-baseline-no-stimulus.window.bin",
+      "file_count": 814,
+      "file_offset": 29078,
+      "public_addr": 487830,
+      "rank": 2
+    },
+    {
+      "count": 716,
+      "covered": true,
+      "example": "references/evidence/live/normal-work-window-harvest-baseline-20260501/27-cycle27-baseline-no-stimulus.window.bin",
+      "file_count": 716,
+      "file_offset": 28902,
+      "public_addr": 487654,
+      "rank": 3
+    },
+    {
+      "count": 604,
+      "covered": true,
+      "example": "references/evidence/live/drive3-normal-response-matrix-core-repeat-20260504/051-cycle01-modesense-capabilities.window.bin",
+      "file_count": 604,
+      "file_offset": 28710,
+      "public_addr": 487462,
+      "rank": 4
+    },
+    {
+      "count": 404,
+      "covered": true,
+      "example": "references/evidence/live/drive3-router-cd-readonly-corrected-20260504T205514Z/31-id01-window-after-read10-lba16.bin",
+      "file_count": 404,
+      "file_offset": 28838,
+      "public_addr": 487590,
+      "rank": 5
+    },
+    {
+      "count": 243,
+      "covered": true,
+      "example": "references/evidence/live/normal-start-stop-start-20260501/03-after-start-stop-start-02.window.bin",
+      "file_count": 243,
+      "file_offset": 28774,
+      "public_addr": 487526,
+      "rank": 6
+    }
+  ],
+  "total_hits": 3934,
+  "unique_slots": 8
+}

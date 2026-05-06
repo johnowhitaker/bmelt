@@ -162,6 +162,16 @@ python3 scripts/probe_liteon_materialized_bridge_clamp_effect.py \
   --label baseline
 ```
 
+Static slot validation is recorded here:
+
+```text
+analysis/8051/materialized-bridge-clamp-slots-20260506.md
+```
+
+That scan found the exact bridge clamp pattern in `3934` saved capture
+instances across `1967` files. The six addresses in the candidate cover the top
+six rotating clamp-immediate slots.
+
 If this lands, it is a real bridge over the CDD wall: a resident-prefix hook
 can modify decoded/materialized normal code without knowing how to encode the
 CDD source.

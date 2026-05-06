@@ -2996,3 +2996,9 @@ Immediate useful directions:
     to baseline. `scripts/probe_liteon_materialized_bridge_clamp_effect.py`
     is the read-only capture harness for this proof. Do not run the write
     candidate while only `Generic External` is visible.
+196. `scripts/analyze_liteon_materialized_bridge_clamp_slots.py` validates the
+    bridge-clamp target set offline. It found the exact clamp pattern
+    `908a4ce0c3940e4008904011740ef0` in `3934` saved capture instances across
+    `1967` files, and the six candidate addresses cover the top six rotating
+    clamp-immediate slots. Report:
+    `analysis/8051/materialized-bridge-clamp-slots-20260506.md`.
