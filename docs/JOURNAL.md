@@ -4373,3 +4373,14 @@ baseline-derived dynamic candidates; this change makes direct calls follow the
 same discipline by default. A direct fixed-candidate run failed immediately
 with the intended refusal message, before sending any drive command, while the
 dynamic dry-run and ladder dry-run still render the expected sequence.
+
+One last offline tightening pass looked at the bridge-clamp copies themselves.
+The corpus scan now reports every observed materialized clamp slot, not just
+the top six. There are eight total: six common slots that match the historical
+fixed candidate, plus two rare slots at `0x077116` and `0x0771d6`. That is a
+nice sanity check on the ladder defaults. The live path now uses
+`--dynamic-max-writes 6` by default, enough to cover the common rotating set,
+while the baseline-derived builder can still target rare slots if a future
+run happens to expose them. The readiness audit still passes offline, and the
+live gate is still closed because the Linux bench has no visible
+`PLDS DS-8ABSH` optical LUN.

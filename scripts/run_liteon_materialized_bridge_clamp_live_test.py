@@ -301,7 +301,12 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="after baseline capture, build/install a candidate that patches only clamp slots visible in this run",
     )
-    parser.add_argument("--dynamic-max-writes", type=int, default=3)
+    parser.add_argument(
+        "--dynamic-max-writes",
+        type=int,
+        default=6,
+        help="maximum observed bridge-clamp slots to patch in a dynamic baseline-derived candidate",
+    )
     parser.add_argument(
         "--dynamic-patch-value",
         type=lambda value: int(value, 0),
@@ -331,6 +336,7 @@ def main() -> int:
         "candidate": str(active_candidate),
         "restore": str(RESTORE),
         "dynamic_candidate_from_baseline": args.build_dynamic_candidate_from_baseline,
+        "dynamic_max_writes": args.dynamic_max_writes,
         "dynamic_patch_value": args.dynamic_patch_value,
         "allow_fixed_candidate": args.allow_fixed_candidate,
         "execute": args.execute,

@@ -131,6 +131,29 @@ def write_reports(report: dict[str, Any], json_out: Path, md_out: Path) -> None:
         "direct-response proof signal if the resident hook can patch materialized",
         "runtime RAM after CDD setup.",
         "",
+        "## All Observed Slots",
+        "",
+        "| rank | public addr | file offset | count | phase bucket | covered |",
+        "|---:|---:|---:|---:|---:|:---:|",
+    ]
+    for row in report["all_slots"]:
+        lines.append(
+            "| {rank} | `0x{public_addr:06x}` | `0x{file_offset:04x}` | {count} | `0x{phase_bucket:02x}` | {covered} |".format(
+                rank=row["rank"],
+                public_addr=row["public_addr"],
+                file_offset=row["file_offset"],
+                count=row["count"],
+                phase_bucket=row["phase_bucket"],
+                covered="yes" if row["covered"] else "no",
+            )
+        )
+    lines += [
+        "",
+        "Phase buckets are file offsets modulo `0x40`. Slots outside the",
+        "builder-covered set are useful diagnostics: if a future baseline exposes",
+        "only those rare slots, the dynamic builder can still target them from the",
+        "run-local baseline rather than relying on historical fixed addresses.",
+        "",
     ]
     md_out.write_text("\n".join(lines))
 
@@ -160,13 +183,14 @@ def main() -> int:
         file_offset_by_addr.setdefault(addr, hit["file_offset"])
         files_by_addr[addr].add(hit["file"])
 
-    top_slots = []
-    for rank, (addr, count) in enumerate(count_by_addr.most_common(max(args.top_n, 1)), start=1):
-        top_slots.append(
+    all_slots = []
+    for rank, (addr, count) in enumerate(count_by_addr.most_common(), start=1):
+        all_slots.append(
             {
                 "rank": rank,
                 "public_addr": addr,
                 "file_offset": file_offset_by_addr[addr],
+                "phase_bucket": file_offset_by_addr[addr] & 0x3F,
                 "count": count,
                 "file_count": len(files_by_addr[addr]),
                 "covered": addr in builder_addresses,
@@ -174,6 +198,7 @@ def main() -> int:
             }
         )
 
+    top_slots = all_slots[: max(args.top_n, 1)]
     top_addrs = [row["public_addr"] for row in top_slots[: args.top_n]]
     report = {
         "roots": [str(path) for path in args.roots],
@@ -184,6 +209,7 @@ def main() -> int:
         "unique_slots": len(count_by_addr),
         "top_n": args.top_n,
         "builder_addresses": builder_addresses,
+        "all_slots": all_slots,
         "top_slots": top_slots,
         "covered_top_slots": sum(1 for addr in top_addrs if addr in builder_addresses),
         "missing_top_slots": [addr for addr in top_addrs if addr not in builder_addresses],

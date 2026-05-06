@@ -3044,7 +3044,7 @@ Immediate useful directions:
     image changes exactly the `0x422c` hook and `0x6ee3..0x6fb3` cave bytes,
     the restore image is byte-identical to base LD5M, the helper tail includes
     the low-sector erase/program patches (`0x169:752204`, `0x345:752440`),
-    and the cave writes only the six planned `0x077xxx -> 0x07` clamp bytes.
+    and the cave writes only the selected `0x077xxx -> 0x07/0x18` clamp bytes.
     Latest report:
     `analysis/8051/bridge-clamp-candidate-verify-20260506.md`, all checks
     passing.
@@ -3138,3 +3138,13 @@ Immediate useful directions:
     blocked-state result is `offline_ok=true, live_ready=false`; use
     `--require-live-ready` when you specifically want the command to fail until
     `sg_inq` sees `PLDS DS-8ABSH`.
+214. `scripts/analyze_liteon_materialized_bridge_clamp_slots.py` now reports
+    every observed materialized bridge-clamp copy, not just the top six. The
+    saved corpus has eight slots total. The common six are exactly the
+    historical fixed-builder addresses (`0x077156`, `0x077196`, `0x0770e6`,
+    `0x077026`, `0x0770a6`, `0x077066`); two rare slots
+    (`0x077116`, `0x0771d6`) are left as diagnostics. The guarded dynamic
+    live wrapper and ladder now default to `--dynamic-max-writes 6`, which
+    covers the common set while still letting a baseline-derived dynamic run
+    target whatever slots are actually visible in that run. Updated report:
+    `analysis/8051/materialized-bridge-clamp-slots-20260506.md`.

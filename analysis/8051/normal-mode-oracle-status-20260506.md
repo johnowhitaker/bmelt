@@ -83,6 +83,20 @@ under `--execute` unless `--allow-fixed-candidate` is passed deliberately.
 This keeps the normal path on baseline-derived dynamic candidates, where the
 run patches only clamp slots actually visible in that run.
 
+The dynamic baseline-derived path now defaults to six writes
+(`--dynamic-max-writes 6`). An offline scan of saved normal work-window
+captures found eight rotating bridge-clamp copies total, but the six common
+slots are the historical fixed-builder set:
+
+```text
+0x077156, 0x077196, 0x0770e6, 0x077026, 0x0770a6, 0x077066
+```
+
+The two rare slots, `0x077116` and `0x0771d6`, remain useful diagnostics. A
+run-local dynamic candidate can still target them if they are the slots visible
+in that baseline. See
+`analysis/8051/materialized-bridge-clamp-slots-20260506.md`.
+
 ### Candidate Verification
 
 Before a live install, the live wrapper now runs:

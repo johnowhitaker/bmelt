@@ -59,6 +59,7 @@ def run_live_test(
     out_root: Path,
     run_name: str,
     patch_value: int,
+    dynamic_max_writes: int,
     include_decoded_oracle_offsets: bool,
     probe_repeat: int,
     execute: bool,
@@ -79,6 +80,8 @@ def run_live_test(
         "--build-dynamic-candidate-from-baseline",
         "--dynamic-patch-value",
         f"0x{patch_value:02x}",
+        "--dynamic-max-writes",
+        str(dynamic_max_writes),
     ]
     if include_decoded_oracle_offsets:
         cmd.append("--include-decoded-oracle-offsets")
@@ -116,6 +119,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--out-root", type=Path, default=ROOT / "references/evidence/live")
     parser.add_argument("--run-prefix", default=f"bridge-oracle-ladder-{timestamp()}")
     parser.add_argument("--probe-repeat", type=int, default=3)
+    parser.add_argument(
+        "--dynamic-max-writes",
+        type=int,
+        default=6,
+        help="maximum observed bridge-clamp slots to patch in each dynamic live-test candidate",
+    )
     parser.add_argument("--execute", action="store_true")
     parser.add_argument(
         "--force-0x18",
@@ -134,6 +143,7 @@ def main() -> int:
         "execute": args.execute,
         "run07": run07,
         "run18": run18,
+        "dynamic_max_writes": args.dynamic_max_writes,
         "steps": [],
     }
 
@@ -146,6 +156,7 @@ def main() -> int:
                 out_root=args.out_root,
                 run_name=run07,
                 patch_value=0x07,
+                dynamic_max_writes=args.dynamic_max_writes,
                 include_decoded_oracle_offsets=False,
                 probe_repeat=args.probe_repeat,
                 execute=args.execute,
@@ -170,6 +181,7 @@ def main() -> int:
                 out_root=args.out_root,
                 run_name=run18,
                 patch_value=0x18,
+                dynamic_max_writes=args.dynamic_max_writes,
                 include_decoded_oracle_offsets=True,
                 probe_repeat=args.probe_repeat,
                 execute=args.execute,
