@@ -3080,3 +3080,12 @@ Immediate useful directions:
     all returned to `Generic External 1.14`; SAT identify still sees LD5M PLDS
     underneath. Treat this as blocked for live hook writes until a physical
     replug/swap or different bridge/direct-SATA path exposes `PLDS DS-8ABSH`.
+207. `analysis/8051/bridge-fallback-sat-atapi-tunnel-notes-20260506.md`
+    closes the tempting SAT tunnel idea. `sg_sat_identify -p` works in the
+    fallback because ATA PASS-THROUGH can issue ATA command `0xa1` (`IDENTIFY
+    PACKET DEVICE`), but that is not arbitrary ATAPI/MMC packet forwarding.
+    Earlier T10 pass-through drafts briefly listed a packet protocol, while
+    later SAT drafts removed the ATAPI/packet scope; sg3_utils also treats
+    protocol 8 as device diagnostic, not packet. Keep the hard gate: helper
+    bypass and materialization-oracle writes require `sg_inq` to report
+    `PLDS DS-8ABSH`, not `Generic External`.

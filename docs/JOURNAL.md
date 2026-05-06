@@ -4282,3 +4282,16 @@ rebinding `usb-storage`, issuing USBDEVFS_RESET, and `sg_reset --device
 LUN. That makes the live boundary clear: no helper-bypass or hook write paths
 while the bridge is in this state. The next live experiment needs hardware to
 enumerate as `PLDS DS-8ABSH` again, at which point the guarded ladder is ready.
+
+I also checked whether the fallback could still be useful as a SAT/ATAPI packet
+tunnel. The answer is probably no. Verbose `sg_sat_identify -p` shows an ATA
+PASS-THROUGH(16) command carrying ATA command `0xa1`, `IDENTIFY PACKET DEVICE`.
+That proves the PLDS ATAPI device is alive behind the bridge, but it is not the
+same thing as forwarding arbitrary 12-byte MMC packets such as INQUIRY or READ
+BUFFER. Old T10 ATA pass-through drafts briefly listed a packet protocol, but
+later SAT drafts removed that ATAPI scope, matching sg3_utils behavior. I wrote
+the details in
+`analysis/8051/bridge-fallback-sat-atapi-tunnel-notes-20260506.md`. Practical
+effect: the Generic bridge fallback remains diagnostic only; all live
+firmware/code-execution tooling should keep requiring a visible PLDS optical
+LUN.
