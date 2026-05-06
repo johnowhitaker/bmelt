@@ -4265,3 +4265,11 @@ capture set can now automatically include `0x184000` plus the table-derived
 targets `0x191010`, `0x198900`, `0x199030`, `0x19c020`, `0x19c800`,
 `0x1a0000`, and `0x1a2fe0`. The analyzer now calls out decoded-band offsets
 that change under the patch and return after restore.
+
+I also wrapped the two-step sequence as
+`scripts/run_liteon_bridge_oracle_ladder.py`. It exists to keep the exciting
+part from outrunning the evidence: dynamic `0x07` runs first, the analyzer must
+see `0x0f0000` change and restore, and only then does the ladder run dynamic
+`0x18` with decoded-oracle offsets. Like the lower-level wrapper, it is dry-run
+unless `--execute` is passed, and the actual write steps are still guarded by
+visible `PLDS DS-8ABSH` identity.

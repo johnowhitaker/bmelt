@@ -3068,3 +3068,9 @@ Immediate useful directions:
     baseline/patched/restored capture set with candidate decoded-materialized
     addresses (`0x184000`, `0x191010`, `0x198900`, etc.) and the analyzer now
     flags decoded-band offsets whose patched hashes change and restore.
+205. `scripts/run_liteon_bridge_oracle_ladder.py` is the safest wrapper for the
+    next healthy-drive attempt. It runs dynamic `0x07`, analyzes that the
+    high-offset `0x0f0000` proof changed and restored, and only then runs
+    dynamic `0x18` with decoded-oracle offsets. It is dry-run by default and
+    delegates all live writes to the still-gated materialized bridge-clamp
+    wrapper.
