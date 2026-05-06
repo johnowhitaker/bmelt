@@ -3132,9 +3132,10 @@ Immediate useful directions:
     firmware-update/helper-bypass writes. It compiles the relevant
     bridge-oracle scripts, verifies the fixed candidate, runs a synthetic
     six-slot dynamic `0x18` builder/verifier/analyzer smoke test, confirms the
-    synthetic dynamic cave preserves DPTR, dry-runs the selector22 multi-blob
-    cave+trampoline smoke target, dry-runs the guarded ladder, and optionally
-    probes the Linux bench read-only through
+    synthetic dynamic cave preserves DPTR, builds the selector22 multi-blob
+    cave+trampoline smoke target in a temporary directory and verifies the
+    resulting helper-bypass image/restore artifacts, dry-runs the guarded
+    ladder, and optionally probes the Linux bench read-only through
     `watch_liteon_plds_preflight.py`. Example:
     `python3 scripts/audit_liteon_bridge_oracle_readiness.py --linux-host
     root@jonathan-thinkpad-t480s --pico-port /dev/ttyACM0`. The expected

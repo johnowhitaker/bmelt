@@ -35,6 +35,7 @@ from typing import Any
 
 
 ROOT = Path(__file__).resolve().parents[1]
+BASE_IMAGE = ROOT / "references/firmware/extracted/ld5m-f0-window-0x00000-0x100000.bin"
 
 WATCHER = ROOT / "scripts/watch_liteon_plds_preflight.py"
 LADDER = ROOT / "scripts/run_liteon_bridge_oracle_ladder.py"
@@ -61,6 +62,16 @@ STOCK_CLAMP = bytes.fromhex("90 8a 4c e0 c3 94 0e 40 08 90 40 11 74 0e f0")
 PATCH18_CLAMP = bytes.fromhex("90 8a 4c e0 c3 94 0e 40 08 90 40 11 74 18 f0")
 SYNTHETIC_CLAMP_IMMEDIATE_OFFSETS = [0x156, 0x196, 0x0E6, 0x026, 0x0A6, 0x066]
 CLAMP_IMMEDIATE_INDEX = 13
+HOOK_OFFSET = 0x422C
+CAVE_OFFSET = 0x6EE3
+MULTI_BLOB_PAYLOAD_LEN = 141
+STOCK_HOOK = bytes.fromhex("e4 f5 d0")
+PATCHED_HOOK = bytes.fromhex("12 6e e3")
+EXPECTED_HELPER_PATCHES = {
+    ("0x2b5", "0232c4"),
+    ("0x169", "752204"),
+    ("0x345", "752440"),
+}
 
 
 def utc_now() -> str:
@@ -315,7 +326,19 @@ def parse_last_json_line(stdout: str) -> dict[str, Any]:
     return {}
 
 
-def multi_blob_smoke_check(checks: list[dict[str, Any]]) -> None:
+def split_patch_text(value: str) -> tuple[str, str]:
+    offset, payload = value.split(":", 1)
+    return offset.lower(), payload.lower()
+
+
+def diff_offsets(base: bytes, other: bytes) -> list[int]:
+    if len(base) != len(other):
+        raise ValueError(f"length mismatch: {len(base)} != {len(other)}")
+    return [index for index, (left, right) in enumerate(zip(base, other)) if left != right]
+
+
+def multi_blob_smoke_check(checks: list[dict[str, Any]], tmp: Path) -> None:
+    out_dir = tmp / "multi-blob-candidates"
     result = run(
         [
             sys.executable,
@@ -326,27 +349,76 @@ def multi_blob_smoke_check(checks: list[dict[str, Any]]) -> None:
             "0x078406:122cd6",
             "--name",
             "readiness-multi-blob-selector22-ret",
-            "--dry-run",
+            "--out-dir",
+            str(out_dir),
         ]
     )
     parsed = parse_last_json_line(result["stdout"])
+    candidate_slug = parsed.get("candidate", "readiness-multi-blob-selector22-ret")
+    restore_slug = parsed.get("restore", "readiness-multi-blob-selector22-ret-restore")
+    candidate_dir = out_dir / candidate_slug
+    restore_dir = out_dir / restore_slug
+
+    artifact: dict[str, Any] = {"candidate_dir": str(candidate_dir), "restore_dir": str(restore_dir)}
+    artifacts_ok = False
+    try:
+        base = BASE_IMAGE.read_bytes()
+        candidate_image = candidate_dir / f"ld5m-helper-bypass-{candidate_slug}.bin"
+        restore_image = restore_dir / f"ld5m-helper-bypass-{restore_slug}.bin"
+        candidate_manifest = json.loads((candidate_dir / "manifest.json").read_text())
+        restore_manifest = json.loads((restore_dir / "manifest.json").read_text())
+        candidate = candidate_image.read_bytes()
+        restore = restore_image.read_bytes()
+        diffs = diff_offsets(base, candidate)
+        expected_diff_ranges = set(range(HOOK_OFFSET, HOOK_OFFSET + len(PATCHED_HOOK))) | set(
+            range(CAVE_OFFSET, CAVE_OFFSET + MULTI_BLOB_PAYLOAD_LEN)
+        )
+        candidate_helper_patches = {split_patch_text(value) for value in candidate_manifest.get("helper_patches", [])}
+        restore_helper_patches = {split_patch_text(value) for value in restore_manifest.get("helper_patches", [])}
+        artifact = {
+            **artifact,
+            "candidate_image_exists": candidate_image.exists(),
+            "restore_image_exists": restore_image.exists(),
+            "candidate_hook_hex": candidate[HOOK_OFFSET : HOOK_OFFSET + len(PATCHED_HOOK)].hex(),
+            "base_hook_hex": base[HOOK_OFFSET : HOOK_OFFSET + len(STOCK_HOOK)].hex(),
+            "restore_equals_base": restore == base,
+            "candidate_changed_count": len(diffs),
+            "candidate_unexpected_diff_offsets": [f"0x{offset:05x}" for offset in sorted(set(diffs) - expected_diff_ranges)[:16]],
+            "candidate_helper_patches": sorted(f"{offset}:{payload}" for offset, payload in candidate_helper_patches),
+            "restore_helper_patches": sorted(f"{offset}:{payload}" for offset, payload in restore_helper_patches),
+        }
+        artifacts_ok = (
+            base[HOOK_OFFSET : HOOK_OFFSET + len(STOCK_HOOK)] == STOCK_HOOK
+            and candidate[HOOK_OFFSET : HOOK_OFFSET + len(PATCHED_HOOK)] == PATCHED_HOOK
+            and candidate[CAVE_OFFSET : CAVE_OFFSET + MULTI_BLOB_PAYLOAD_LEN] != b"\xff" * MULTI_BLOB_PAYLOAD_LEN
+            and restore == base
+            and set(diffs) <= expected_diff_ranges
+            and len(diffs) == len(expected_diff_ranges)
+            and EXPECTED_HELPER_PATCHES <= candidate_helper_patches
+            and EXPECTED_HELPER_PATCHES <= restore_helper_patches
+        )
+    except Exception as exc:  # pragma: no cover - diagnostic path for readiness output
+        artifact = {**artifact, "artifact_error": str(exc)}
+
     ok = (
         result["returncode"] == 0
         and parsed.get("patch_count") == 2
-        and parsed.get("payload_len") == 141
+        and parsed.get("payload_len") == MULTI_BLOB_PAYLOAD_LEN
         and parsed.get("payload_room_remaining") == 80
         and parsed.get("runtime_patches")
         == [
             {"address": "0x077cd6", "blob_len": 4},
             {"address": "0x078406", "blob_len": 3},
         ]
+        and artifacts_ok
     )
     add_check(
         checks,
-        "multi_blob_selector22_smoke_dry_run",
+        "multi_blob_selector22_artifact_smoke",
         ok,
         result=result,
         parsed=parsed,
+        artifact=artifact,
     )
 
 
@@ -465,7 +537,7 @@ def main() -> int:
         py_compile_check(checks)
         fixed_candidate_check(checks, tmp)
         dynamic_smoke_check(checks, tmp)
-        multi_blob_smoke_check(checks)
+        multi_blob_smoke_check(checks, tmp)
         ladder_dry_run_check(checks, args.device, args.pico_port)
         linux_bench = remote_readonly_check(checks, args.linux_host, args.linux_cwd, args.pico_port)
 
