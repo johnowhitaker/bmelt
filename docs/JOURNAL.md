@@ -4173,3 +4173,12 @@ cleaner: if it fails, the likely problem is not "wrong byte in the bridge"; it
 is that the resident hook did not run late enough, the public write alias did
 not hit materialized RAM from that context, or the high-offset probe does not
 exercise this clamp path the way the static read suggests.
+
+Finally, I wrapped the live sequence in
+`scripts/run_liteon_materialized_bridge_clamp_live_test.py`. It is deliberately
+dry-run unless `--execute` is passed, and even then it checks `sg_inq` first
+and refuses to touch anything unless the target is visibly `PLDS DS-8ABSH`.
+The script runs the whole planned arc: baseline probe, install bridge-clamp
+candidate, cold boot, patched probe, install restore, cold boot, restored
+probe. That should reduce the chance of improvising the next live test when a
+healthy drive is back.

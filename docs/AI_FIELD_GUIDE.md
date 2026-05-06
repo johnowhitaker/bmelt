@@ -3002,3 +3002,9 @@ Immediate useful directions:
     `1967` files, and the six candidate addresses cover the top six rotating
     clamp-immediate slots. Report:
     `analysis/8051/materialized-bridge-clamp-slots-20260506.md`.
+197. `scripts/run_liteon_materialized_bridge_clamp_live_test.py` is the
+    guarded live wrapper for the next PLDS-visible drive. It is dry-run by
+    default. With `--execute`, it refuses to run unless `sg_inq` reports a
+    PLDS DS-8ABSH optical LUN, then runs baseline probe, bridge-clamp
+    candidate install, Pico cold boot, patched probe, restore install, Pico
+    cold boot, and restored probe.

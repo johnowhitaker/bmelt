@@ -172,6 +172,20 @@ That scan found the exact bridge clamp pattern in `3934` saved capture
 instances across `1967` files. The six addresses in the candidate cover the top
 six rotating clamp-immediate slots.
 
+The guarded end-to-end live wrapper is:
+
+```text
+scripts/run_liteon_materialized_bridge_clamp_live_test.py
+```
+
+It is dry-run by default and refuses the write path unless `sg_inq` reports a
+PLDS DS-8ABSH optical LUN. With `--execute`, it performs:
+
+```text
+baseline probe -> install candidate -> Pico cold boot -> patched probe
+-> install restore -> Pico cold boot -> restored probe
+```
+
 If this lands, it is a real bridge over the CDD wall: a resident-prefix hook
 can modify decoded/materialized normal code without knowing how to encode the
 CDD source.
