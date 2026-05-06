@@ -4295,3 +4295,13 @@ the details in
 effect: the Generic bridge fallback remains diagnostic only; all live
 firmware/code-execution tooling should keep requiring a visible PLDS optical
 LUN.
+
+While the drive was blocked in that fallback, I tightened the bridge-oracle
+analyzer. It already knew how to spot the `0x07` proof patch in the materialized
+READ BUFFER bridge. The second ladder step uses `0x18`, so I changed
+`scripts/analyze_liteon_materialized_bridge_clamp_live_test.py` to count stock
+`0x0e`, proof `0x07`, and oracle `0x18` clamp-pattern hits separately. That
+matters because the next run has two different failure modes: the resident hook
+may fail to patch the runtime slot, or the slot may patch successfully but the
+controller may still reject/read-clamp decoded-band offsets. The analyzer can
+now separate those.

@@ -17,8 +17,13 @@ from typing import Any
 
 
 CAPTURE_RE = re.compile(r"^(?P<label>.+)-r(?P<repeat>\d+)-id01-off(?P<offset>[0-9a-fA-F]{6})\.bin$")
-CLAMP_PATTERN = bytes.fromhex("90 8a 4c e0 c3 94 0e 40 08 90 40 11 74 0e f0")
-PATCHED_CLAMP_PATTERN = bytes.fromhex("90 8a 4c e0 c3 94 0e 40 08 90 40 11 74 07 f0")
+CLAMP_PREFIX = bytes.fromhex("90 8a 4c e0 c3 94 0e 40 08 90 40 11 74")
+CLAMP_SUFFIX = bytes.fromhex("f0")
+CLAMP_VALUES_OF_INTEREST = [0x0E, 0x07, 0x18]
+
+
+def clamp_pattern(value: int) -> bytes:
+    return CLAMP_PREFIX + bytes([value & 0xFF]) + CLAMP_SUFFIX
 
 
 def sha256(data: bytes) -> str:
@@ -66,6 +71,10 @@ def count_patterns(entries: list[dict[str, Any]], pattern: bytes) -> int:
     return total
 
 
+def count_clamp_values(entries: list[dict[str, Any]]) -> dict[str, int]:
+    return {f"0x{value:02x}": count_patterns(entries, clamp_pattern(value)) for value in CLAMP_VALUES_OF_INTEREST}
+
+
 def compare_labels(captures: dict[str, dict[int, list[dict[str, Any]]]]) -> dict[str, Any]:
     labels = sorted(captures)
     offsets = sorted({offset for by_offset in captures.values() for offset in by_offset})
@@ -76,8 +85,10 @@ def compare_labels(captures: dict[str, dict[int, list[dict[str, Any]]]]) -> dict
             entries = captures.get(label, {}).get(offset, [])
             if entries:
                 summary = summarize_hashes(entries)
-                summary["stock_clamp_pattern_hits"] = count_patterns(entries, CLAMP_PATTERN)
-                summary["patched_clamp_pattern_hits"] = count_patterns(entries, PATCHED_CLAMP_PATTERN)
+                summary["clamp_pattern_hits_by_value"] = count_clamp_values(entries)
+                summary["stock_clamp_pattern_hits"] = summary["clamp_pattern_hits_by_value"]["0x0e"]
+                summary["patched_clamp_pattern_hits"] = summary["clamp_pattern_hits_by_value"]["0x07"]
+                summary["patched_clamp18_pattern_hits"] = summary["clamp_pattern_hits_by_value"]["0x18"]
                 per_label[label] = summary
         baseline = per_label.get("baseline", {}).get("unique_hashes", [])
         patched = per_label.get("patched", {}).get("unique_hashes", [])
@@ -109,13 +120,16 @@ def build_assessment(comparisons: dict[str, Any]) -> list[str]:
         lines.append("NOTE: 0x074000 changed; inspect bytes manually to separate old marker behavior from bridge-clamp effects.")
     if slot:
         base_hits = slot["labels"].get("baseline", {}).get("stock_clamp_pattern_hits", 0)
-        patched_hits = slot["labels"].get("patched", {}).get("patched_clamp_pattern_hits", 0)
+        patched_hits_07 = slot["labels"].get("patched", {}).get("patched_clamp_pattern_hits", 0)
+        patched_hits_18 = slot["labels"].get("patched", {}).get("patched_clamp18_pattern_hits", 0)
         if base_hits:
             lines.append(f"BASELINE SLOT CHECK: 0x077000 contains {base_hits} stock clamp-pattern hit(s).")
         else:
             lines.append("BASELINE SLOT CHECK: 0x077000 did not show the stock clamp pattern in captured repeats.")
-        if patched_hits:
-            lines.append(f"PATCH SLOT CHECK: 0x077000 contains {patched_hits} patched clamp-pattern hit(s).")
+        if patched_hits_07:
+            lines.append(f"PATCH SLOT CHECK: 0x077000 contains {patched_hits_07} clamp-pattern hit(s) patched to 0x07.")
+        if patched_hits_18:
+            lines.append(f"PATCH SLOT CHECK: 0x077000 contains {patched_hits_18} clamp-pattern hit(s) patched to 0x18.")
     decoded_successes = []
     decoded_partials = []
     for offset_text, comparison in comparisons.items():
@@ -184,11 +198,16 @@ def main() -> int:
             for label, summary in comparison["labels"].items():
                 hashes = ", ".join(f"`{value[:16]}`" for value in summary["unique_hashes"])
                 lines.append(f"- {label}: {summary['count']} captures, stable=`{summary['stable']}`, hashes={hashes}")
-                if summary["stock_clamp_pattern_hits"] or summary["patched_clamp_pattern_hits"]:
+                if (
+                    summary["stock_clamp_pattern_hits"]
+                    or summary["patched_clamp_pattern_hits"]
+                    or summary["patched_clamp18_pattern_hits"]
+                ):
                     lines.append(
                         "  clamp hits: "
                         f"stock=`{summary['stock_clamp_pattern_hits']}`, "
-                        f"patched=`{summary['patched_clamp_pattern_hits']}`"
+                        f"patched07=`{summary['patched_clamp_pattern_hits']}`, "
+                        f"patched18=`{summary['patched_clamp18_pattern_hits']}`"
                     )
             lines.append("")
         args.md_out.write_text("\n".join(lines).rstrip() + "\n")

@@ -3089,3 +3089,9 @@ Immediate useful directions:
     protocol 8 as device diagnostic, not packet. Keep the hard gate: helper
     bypass and materialization-oracle writes require `sg_inq` to report
     `PLDS DS-8ABSH`, not `Generic External`.
+208. `scripts/analyze_liteon_materialized_bridge_clamp_live_test.py` now
+    distinguishes the proof clamp patch (`0x07`) from the decoded-oracle clamp
+    patch (`0x18`). In a future ladder run, the `0x18` step should be judged on
+    both direct decoded-band hash changes and visible `0x077000` clamp-pattern
+    hits patched to `0x18`; otherwise a no-effect decoded read could be a
+    failed runtime-slot patch rather than a failed materialization oracle.
