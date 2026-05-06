@@ -3102,3 +3102,8 @@ Immediate useful directions:
     separate restore-candidate root. The live wrapper calls it before
     installation in `--execute` runs, after any baseline-derived dynamic
     candidate is generated.
+210. `scripts/watch_liteon_plds_preflight.py` prints a `next_ladder_command`
+    whenever a real PLDS DS-8ABSH LUN appears. This command is the guarded
+    `run_liteon_bridge_oracle_ladder.py --execute` invocation for that device
+    and Pico port. The watcher still does not run the ladder by itself; it only
+    runs the read-only preflight when `--execute-preflight` is passed.

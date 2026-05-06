@@ -4317,3 +4317,10 @@ candidate from the normal helper-candidate directory. The guarded live wrapper
 now runs this verifier after dynamic candidate generation and before any
 install. I tested it offline against the fixed candidate and a synthetic
 dynamic `0x18` two-slot candidate.
+
+Finally, I made the PLDS watcher more useful for the next physical replug or
+bridge swap. When it sees a real `PLDS DS-8ABSH` LUN, it now prints the exact
+guarded bridge-oracle ladder command for that device and Pico port. It still
+does not run the write ladder automatically; the only optional action remains
+the read-only preflight. This keeps the handoff explicit while avoiding another
+search through notes at the moment the drive finally enumerates correctly.

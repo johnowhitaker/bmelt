@@ -27,6 +27,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 PREFLIGHT = ROOT / "scripts/run_liteon_materialized_bridge_clamp_live_test.py"
+LADDER = ROOT / "scripts/run_liteon_bridge_oracle_ladder.py"
 
 
 def now() -> str:
@@ -114,6 +115,18 @@ def run_preflight(device: str, pico_port: str, run_name: str, execute: bool) -> 
     return run(cmd, timeout=120.0)
 
 
+def ladder_command(device: str, pico_port: str) -> list[str]:
+    return [
+        sys.executable,
+        str(LADDER),
+        "--device",
+        device,
+        "--pico-port",
+        pico_port,
+        "--execute",
+    ]
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--once", action="store_true", help="scan once and exit")
@@ -137,7 +150,9 @@ def main() -> int:
         print(json.dumps({"timestamp_utc": state["timestamp_utc"], "plds_devices": state["plds_devices"]}, sort_keys=True))
         if state["plds_devices"]:
             device = state["plds_devices"][0]
+            state["next_ladder_command"] = ladder_command(device, args.pico_port)
             send_discord(args.discord_webhook, f"boastermelt: PLDS DS-8ABSH visible at {device}; running preflight={args.execute_preflight}")
+            print(json.dumps({"next_ladder_command": state["next_ladder_command"]}, sort_keys=True))
             if args.execute_preflight:
                 run_name = args.run_name or f"plds-preflight-{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}"
                 state["preflight"] = run_preflight(device, args.pico_port, run_name, execute=True)
