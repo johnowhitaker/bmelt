@@ -42,6 +42,7 @@ RESTORE = (
 PROBE = ROOT / "scripts/probe_liteon_materialized_bridge_clamp_effect.py"
 RUN_EXPERIMENT = ROOT / "scripts/run_liteon_linux_persistence_experiment.py"
 PICO_CLIENT = ROOT / "pico/client.py"
+BUILD_CANDIDATES = ROOT / "scripts/build_liteon_post_materializer_hook_candidates.py"
 
 
 def timestamp() -> str:
@@ -85,6 +86,27 @@ def check_plds_identity(device: str, execute: bool) -> dict[str, Any]:
         raise RuntimeError(
             f"refusing write path: {device} is not a visible PLDS DS-8ABSH optical LUN\n{text}"
         )
+    return record
+
+
+def ensure_candidate_files(execute: bool) -> dict[str, Any]:
+    missing = [path for path in (CANDIDATE, RESTORE) if not path.exists()]
+    record: dict[str, Any] = {
+        "candidate": str(CANDIDATE),
+        "restore": str(RESTORE),
+        "missing": [str(path) for path in missing],
+    }
+    if not missing:
+        record["generated"] = False
+        return record
+    cmd = [sys.executable, str(BUILD_CANDIDATES)]
+    record["generate_result"] = run_cmd(cmd, execute=execute)
+    record["generated"] = execute
+    if execute:
+        still_missing = [str(path) for path in (CANDIDATE, RESTORE) if not path.exists()]
+        record["still_missing"] = still_missing
+        if still_missing:
+            raise FileNotFoundError("candidate generation did not produce: " + ", ".join(still_missing))
     return record
 
 
@@ -158,6 +180,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--probe-repeat", type=int, default=3)
     parser.add_argument("--servo-hold-ms", type=int, default=3000)
     parser.add_argument("--settle-s", type=float, default=8.0)
+    parser.add_argument(
+        "--preflight-only",
+        action="store_true",
+        help="with --execute, run identity + baseline probe only; do not install candidates",
+    )
     parser.add_argument("--skip-restore", action="store_true")
     parser.add_argument("--execute", action="store_true", help="actually run live commands")
     return parser.parse_args()
@@ -177,10 +204,20 @@ def main() -> int:
     if args.execute:
         out_dir.mkdir(parents=True, exist_ok=True)
 
+    report["steps"].append({"name": "ensure-candidates", "result": ensure_candidate_files(args.execute)})
     report["steps"].append({"name": "identity-baseline", "result": check_plds_identity(args.device, args.execute)})
     report["steps"].append(
         {"name": "probe-baseline", "result": capture_probe(args.device, out_dir, "baseline", args.probe_repeat, args.execute)}
     )
+    if args.preflight_only:
+        if args.execute:
+            summary_path = out_dir / f"{args.run_name}.json"
+            summary_path.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
+            print(json.dumps({"summary": str(summary_path), "preflight_only": True}, indent=2, sort_keys=True))
+        else:
+            print(json.dumps({"dry_run": True, "run_name": args.run_name, "preflight_only": True}, indent=2, sort_keys=True))
+        return 0
+
     report["steps"].append({"name": "install-candidate", "result": run_candidate(CANDIDATE, args.device, args.execute)})
     report["steps"].append({"name": "cold-cycle-patched", "result": cold_cycle(args.pico_port, args.servo_hold_ms, args.execute)})
     if args.execute:

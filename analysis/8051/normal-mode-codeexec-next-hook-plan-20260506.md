@@ -273,3 +273,26 @@ responses.
 The current Drive #3 is not a candidate for running these hooks. It still needs
 PLDS optical/currentboot visibility before any restore or further write is
 defensible.
+
+The one useful detail from the current stuck state is that the bridge fallback
+still exposes SAT `IDENTIFY PACKET DEVICE`. A read-only probe recorded:
+
+```text
+/dev/sg0 SCSI identity: Generic External 1.14, Direct-Access
+SAT packet identity:    LD5M / PLDS DVD+/-RW DS-8ABSH
+```
+
+Evidence:
+
+```text
+references/evidence/live/bridge-fallback-sat-probe-20260506.json
+scripts/probe_liteon_bridge_fallback_sat.py
+```
+
+That means the drive below the bridge is not electrically gone. The bridge is
+seeing an ATAPI packet device underneath, but still presenting the host with a
+disk-like fallback LUN. I tried SAT software reset and COMRESET, followed by
+Pico power cycles; both returned to the same fallback. A small ATAPI PACKET
+probe also failed to produce a usable read-only INQUIRY path. Treat this as a
+diagnostic clue, not as permission to run update/recovery WRITE BUFFER paths
+against `Generic External`.

@@ -3008,3 +3008,21 @@ Immediate useful directions:
     PLDS DS-8ABSH optical LUN, then runs baseline probe, bridge-clamp
     candidate install, Pico cold boot, patched probe, restore install, Pico
     cold boot, and restored probe.
+198. `scripts/analyze_liteon_materialized_bridge_clamp_live_test.py` is the
+    offline result checker for that wrapper. Point it at a capture directory
+    containing `baseline-*`, `patched-*`, and `restored-*` bins. The desired
+    first success is: high-offset `0x0f0000` changes under the patched firmware
+    and returns to baseline after restore, while ordinary `0x070000` does not
+    show a broad/random change.
+199. Bridge-fallback SAT diagnostic, 2026-05-06: even while the optical LUN is
+    absent and `/dev/sg0` reports `Generic External 1.14`, `sg_sat_identify -p
+    /dev/sg0` still reaches the attached ATAPI device and reports firmware
+    `LD5M`, model `PLDS DVD+/-RW DS-8ABSH`, serial
+    `HMN3XPLC0088251BRA00`. Evidence:
+    `references/evidence/live/bridge-fallback-sat-probe-20260506.json`.
+    SAT software reset (`ATA PASS-THROUGH(16)` protocol 1) and COMRESET
+    (protocol 0), each followed by a Pico power cycle, did not recover the PLDS
+    optical LUN. A cautious ATAPI PACKET/TUR-style probe did not provide a
+    usable packet-command path. Use `scripts/probe_liteon_bridge_fallback_sat.py`
+    as a read-only diagnostic only; do not send helper-bypass WRITE BUFFER
+    paths to this Generic bridge fallback.

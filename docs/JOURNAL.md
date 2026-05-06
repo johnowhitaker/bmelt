@@ -4182,3 +4182,24 @@ The script runs the whole planned arc: baseline probe, install bridge-clamp
 candidate, cold boot, patched probe, install restore, cold boot, restored
 probe. That should reduce the chance of improvising the next live test when a
 healthy drive is back.
+
+One surprise from the stuck `Generic External 1.14` state: the optical LUN is
+gone, but the Initio bridge is not completely blind. `sg_sat_identify -p
+/dev/sg0` still reaches the attached ATAPI device through SAT and reports:
+
+```text
+firmware: LD5M
+model:    PLDS DVD+/-RW DS-8ABSH
+serial:   HMN3XPLC0088251BRA00
+```
+
+So the drive below the bridge is alive enough to answer ATA `IDENTIFY PACKET
+DEVICE`; the bridge is simply exposing the wrong kind of SCSI LUN to the host.
+I tried SAT software reset and COMRESET forms, followed by Pico power cycles.
+Both returned to the same Generic bridge fallback. A cautious ATAPI `PACKET`
+experiment also failed to produce a usable read-only INQUIRY path, although it
+did not kill SAT identify. The new helper
+`scripts/probe_liteon_bridge_fallback_sat.py` records this read-only diagnostic
+state. It is not a recovery method yet, but it gives a sharper statement of
+where the failure sits: not dead drive silicon, not a missing USB bridge, but a
+bad bridge-facing enumeration/personality state.
