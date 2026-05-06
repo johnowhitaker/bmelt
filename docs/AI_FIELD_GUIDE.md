@@ -3167,3 +3167,22 @@ Immediate useful directions:
     leaving room for roughly 137 bytes of contiguous patch data. The write-side
     FIFO auto-increment assumption is still live-unproven, so do not use this
     before the `0x07` bridge-clamp proof lands.
+217. `scripts/build_liteon_post_materializer_multi_blob_writer_candidate.py`
+    extends that same second-stage idea to multiple runtime regions in one
+    boot. This matters because a real normal-mode response hook probably needs
+    at least two materialized-RAM edits: one hook body in a runtime cave and
+    one trampoline or branch at a hot entry point. The dry-run smoke target is
+    selector22 logical `0x2cd6` / public `0x077cd6` as the cave and selector22
+    logical `0x1406` / public `0x078406` as a packet-shadow handler entry:
+    `--runtime-patch 0x077cd6:e4f5d022 --runtime-patch 0x078406:122cd6`.
+    That produces a 141-byte cave payload/table and leaves 80 bytes. This is
+    still not a first live step; run it only after the `0x07` bridge-clamp
+    proof shows the post-materializer writer can touch materialized runtime RAM
+    and restore cleanly.
+218. `analysis/8051/selector22-runtime-response-hook-targets-20260506.md`
+    maps the stitched selector22 runtime image into public/controller
+    addresses using the current `full-reverse` page model. Useful anchors are
+    logical `0x1406` (`0x078406` public), logical `0x2cd6` (`0x077cd6`
+    public), and packet/mechanics helpers at `0x17eb`, `0x33cf`, and `0x3661`.
+    Treat this as a future hook target list, not as proof that those addresses
+    are currently patchable.

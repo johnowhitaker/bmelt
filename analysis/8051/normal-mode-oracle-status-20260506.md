@@ -161,6 +161,33 @@ remaining unproven assumption is write-side FIFO auto-increment across
 successive `0x4098` writes, so this is second-stage tooling, not something to
 run before the smaller bridge-clamp proof succeeds.
 
+### Second-Stage Multi-Blob Writer
+
+```sh
+python3 scripts/build_liteon_post_materializer_multi_blob_writer_candidate.py \
+  --runtime-patch 0x077cd6:e4f5d022 \
+  --runtime-patch 0x078406:122cd6 \
+  --name post-materializer-multi-blob-smoke-selector22-ret \
+  --dry-run
+```
+
+This exists for the first real normal-runtime response hook after the bridge
+proof. A response hook normally needs at least two writes in the same boot:
+
+- a small hook body in a materialized runtime cave;
+- an entry-point trampoline or conditional branch to that hook body.
+
+The dry-run above targets the selector-22 runtime image only as a toolchain
+smoke test:
+
+- cave body at public/controller `0x077cd6`, logical `0x2cd6`;
+- trampoline at public/controller `0x078406`, logical `0x1406`;
+- generated cave payload/table length: 141 bytes, leaving 80 bytes.
+
+See `analysis/8051/selector22-runtime-response-hook-targets-20260506.md` for
+why those addresses are interesting. This is not a first live step and should
+not be run before the smaller `0x07` clamp proof succeeds and restores.
+
 ## Offline Smoke Test
 
 The bridge-clamp ladder is still blocked on live PLDS visibility, but the

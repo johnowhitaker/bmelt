@@ -4422,3 +4422,25 @@ the write FIFO behaving as an auto-incrementing stream, which is consistent
 with the gateway model but still needs live proof. The immediate live ladder is
 unchanged: prove `0x07`, then attempt `0x18`; only after that should a larger
 blob writer be considered.
+
+I then tightened that second-stage idea one notch further. A useful
+normal-mode hook probably needs two edits in the materialized runtime at once:
+put a hook body somewhere quiet, then patch a hot handler to call it. The new
+`scripts/build_liteon_post_materializer_multi_blob_writer_candidate.py` walks a
+small embedded table of `address, length, bytes` entries and streams each blob
+through the same controller gateway after materialization. As a dry-run only,
+I aimed it at the stitched selector22 runtime image: a 42-byte zero cave at
+logical `0x2cd6` / public `0x077cd6`, and a packet-shadow handler entry at
+logical `0x1406` / public `0x078406`. The smoke build fits comfortably in the
+resident `0x6ee3` cave: 141 bytes total, with 80 bytes still free. This is not
+a new live first step. It is the tool we will want if the little bridge-clamp
+proof finally tells us, “yes, the post-materializer hook can patch live normal
+runtime RAM.”
+
+The selector22 runtime image now has its own target note:
+`analysis/8051/selector22-runtime-response-hook-targets-20260506.md`. The
+interesting picture is that this materialized CDD output contains real 8051
+code touching the same packet-shadow bytes we care about, with plausible
+places for a later response hook. It does not remove the live gate. The order
+is still: get a PLDS LUN back, prove `0x07`, try `0x18`, then consider a
+proper multi-blob response hook.
