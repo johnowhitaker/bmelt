@@ -139,12 +139,14 @@ Suggested live proof shape:
 
 ```text
 baseline A: READ BUFFER id=01 offset=0x070000 len=0x80
-baseline B: READ BUFFER id=01 offset=0x0f0000 len=0x80
+baseline B: READ BUFFER id=01 offset=0x077000 len=0x80
+baseline C: READ BUFFER id=01 offset=0x0f0000 len=0x80
 install candidate and cold boot
 patched A:  READ BUFFER id=01 offset=0x070000 len=0x80  (should stay stock)
-patched B:  READ BUFFER id=01 offset=0x0f0000 len=0x80  (should change if hook lands)
+patched B:  READ BUFFER id=01 offset=0x077000 len=0x80  (may show 74 07 f0 if hook lands and bridge slot is visible)
+patched C:  READ BUFFER id=01 offset=0x0f0000 len=0x80  (should change if clamp affects direct response)
 restore stock resident and cold boot
-restore B:  READ BUFFER id=01 offset=0x0f0000 len=0x80  (should match baseline again)
+restore C:  READ BUFFER id=01 offset=0x0f0000 len=0x80  (should match baseline again)
 ```
 
 The read-only helper for those captures is:
@@ -211,7 +213,8 @@ The PLDS optical/currentboot LUN must be visible first.
 For a fresh or recovered PLDS-visible drive:
 
 1. Capture stock identity and `READ BUFFER id=01 offset=0x074000`.
-2. Also capture `READ BUFFER id=01 offset=0x070000` and `0x0f0000`.
+2. Also capture `READ BUFFER id=01 offset=0x070000`, `0x077000`, and
+   `0x0f0000`.
 3. Prefer `post-materializer-runtime-bridge-clamp07` if the high-offset
    baseline is stable; otherwise run `post-materializer-ret-marker-074030`.
 4. Cold-cycle with Pico.

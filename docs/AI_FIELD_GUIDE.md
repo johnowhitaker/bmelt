@@ -2991,11 +2991,12 @@ Immediate useful directions:
     while normal `0x070000..0x07ffff` reads stay stock.
 195. The new highest-value live proof, once a PLDS-visible drive is available,
     is therefore: baseline `READ BUFFER id=01 offset=0x070000` and
-    `0x0f0000`, install `post-materializer-runtime-bridge-clamp07`, cold boot,
-    recapture both offsets, then restore stock and confirm `0x0f0000` returns
-    to baseline. `scripts/probe_liteon_materialized_bridge_clamp_effect.py`
-    is the read-only capture harness for this proof. Do not run the write
-    candidate while only `Generic External` is visible.
+    `0x0f0000`, plus the direct clamp-slot window at `0x077000`; install
+    `post-materializer-runtime-bridge-clamp07`, cold boot, recapture, then
+    restore stock and confirm `0x0f0000` returns to baseline.
+    `scripts/probe_liteon_materialized_bridge_clamp_effect.py` is the read-only
+    capture harness for this proof. Do not run the write candidate while only
+    `Generic External` is visible.
 196. `scripts/analyze_liteon_materialized_bridge_clamp_slots.py` validates the
     bridge-clamp target set offline. It found the exact clamp pattern
     `908a4ce0c3940e4008904011740ef0` in `3934` saved capture instances across
@@ -3013,7 +3014,9 @@ Immediate useful directions:
     containing `baseline-*`, `patched-*`, and `restored-*` bins. The desired
     first success is: high-offset `0x0f0000` changes under the patched firmware
     and returns to baseline after restore, while ordinary `0x070000` does not
-    show a broad/random change.
+    show a broad/random change. It also counts stock and patched clamp-pattern
+    hits in the `0x077000` slot window so a no-effect result can be separated
+    from "we never saw the target bridge chunk."
 199. Bridge-fallback SAT diagnostic, 2026-05-06: even while the optical LUN is
     absent and `/dev/sg0` reports `Generic External 1.14`, `sg_sat_identify -p
     /dev/sg0` still reaches the attached ATAPI device and reports firmware

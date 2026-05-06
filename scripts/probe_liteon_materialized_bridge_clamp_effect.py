@@ -7,6 +7,7 @@ post-materializer runtime-bridge-clamp07 candidate:
 
     0x070000  ordinary public work-window baseline
     0x074000  old marker-check window
+    0x077000  response-bridge clamp slot window
     0x0f0000  high-offset clamp proof window
 
 The intended use is to run it before a candidate, after cold boot with the
@@ -28,7 +29,7 @@ from typing import Any
 from read_liteon_read_buffer_bulk import DEFAULT_SG_RAW, parse_int, run_read
 
 
-DEFAULT_OFFSETS = [0x070000, 0x074000, 0x0F0000]
+DEFAULT_OFFSETS = [0x070000, 0x074000, 0x077000, 0x0F0000]
 
 
 def run_identity(device: str) -> dict[str, Any]:

@@ -17,6 +17,8 @@ from typing import Any
 
 
 CAPTURE_RE = re.compile(r"^(?P<label>.+)-r(?P<repeat>\d+)-id01-off(?P<offset>[0-9a-fA-F]{6})\.bin$")
+CLAMP_PATTERN = bytes.fromhex("90 8a 4c e0 c3 94 0e 40 08 90 40 11 74 0e f0")
+PATCHED_CLAMP_PATTERN = bytes.fromhex("90 8a 4c e0 c3 94 0e 40 08 90 40 11 74 07 f0")
 
 
 def sha256(data: bytes) -> str:
@@ -53,6 +55,17 @@ def summarize_hashes(entries: list[dict[str, Any]]) -> dict[str, Any]:
     }
 
 
+def count_patterns(entries: list[dict[str, Any]], pattern: bytes) -> int:
+    total = 0
+    needle = pattern.hex()
+    for entry in entries:
+        path = Path(entry["path"])
+        if not path.exists():
+            continue
+        total += path.read_bytes().hex().count(needle)
+    return total
+
+
 def compare_labels(captures: dict[str, dict[int, list[dict[str, Any]]]]) -> dict[str, Any]:
     labels = sorted(captures)
     offsets = sorted({offset for by_offset in captures.values() for offset in by_offset})
@@ -62,7 +75,10 @@ def compare_labels(captures: dict[str, dict[int, list[dict[str, Any]]]]) -> dict
         for label in labels:
             entries = captures.get(label, {}).get(offset, [])
             if entries:
-                per_label[label] = summarize_hashes(entries)
+                summary = summarize_hashes(entries)
+                summary["stock_clamp_pattern_hits"] = count_patterns(entries, CLAMP_PATTERN)
+                summary["patched_clamp_pattern_hits"] = count_patterns(entries, PATCHED_CLAMP_PATTERN)
+                per_label[label] = summary
         baseline = per_label.get("baseline", {}).get("unique_hashes", [])
         patched = per_label.get("patched", {}).get("unique_hashes", [])
         restored = per_label.get("restored", {}).get("unique_hashes", [])
@@ -79,6 +95,7 @@ def build_assessment(comparisons: dict[str, Any]) -> list[str]:
     high = comparisons.get("0x0f0000")
     ordinary = comparisons.get("0x070000")
     marker = comparisons.get("0x074000")
+    slot = comparisons.get("0x077000")
     if high:
         if high["patched_differs_from_baseline"] and high["restored_matches_baseline"]:
             lines.append("SUCCESS-LEANING: high-offset 0x0f0000 changed under patched firmware and restored to baseline.")
@@ -90,6 +107,15 @@ def build_assessment(comparisons: dict[str, Any]) -> list[str]:
         lines.append("CAUTION: ordinary 0x070000 also changed; this may be phase/noise or a broad behavioral effect.")
     if marker and marker["patched_differs_from_baseline"]:
         lines.append("NOTE: 0x074000 changed; inspect bytes manually to separate old marker behavior from bridge-clamp effects.")
+    if slot:
+        base_hits = slot["labels"].get("baseline", {}).get("stock_clamp_pattern_hits", 0)
+        patched_hits = slot["labels"].get("patched", {}).get("patched_clamp_pattern_hits", 0)
+        if base_hits:
+            lines.append(f"BASELINE SLOT CHECK: 0x077000 contains {base_hits} stock clamp-pattern hit(s).")
+        else:
+            lines.append("BASELINE SLOT CHECK: 0x077000 did not show the stock clamp pattern in captured repeats.")
+        if patched_hits:
+            lines.append(f"PATCH SLOT CHECK: 0x077000 contains {patched_hits} patched clamp-pattern hit(s).")
     if not lines:
         lines.append("No baseline/patched/restored comparison could be made from the available files.")
     return lines
@@ -138,6 +164,12 @@ def main() -> int:
             for label, summary in comparison["labels"].items():
                 hashes = ", ".join(f"`{value[:16]}`" for value in summary["unique_hashes"])
                 lines.append(f"- {label}: {summary['count']} captures, stable=`{summary['stable']}`, hashes={hashes}")
+                if summary["stock_clamp_pattern_hits"] or summary["patched_clamp_pattern_hits"]:
+                    lines.append(
+                        "  clamp hits: "
+                        f"stock=`{summary['stock_clamp_pattern_hits']}`, "
+                        f"patched=`{summary['patched_clamp_pattern_hits']}`"
+                    )
             lines.append("")
         args.md_out.write_text("\n".join(lines).rstrip() + "\n")
     return 0

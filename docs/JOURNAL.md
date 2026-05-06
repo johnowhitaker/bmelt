@@ -4154,12 +4154,13 @@ The new candidate
 ```
 
 The practical test is clean: baseline normal `READ BUFFER id=01` at
-`0x070000` and a high offset like `0x0f0000`, install the candidate, cold boot,
-and see whether only the high-offset direct response changes. If that happens,
-we have crossed an important line: visible resident code can patch decoded
-normal runtime code after materialization without knowing how to encode the
-CDD. That would be the first real normal-mode code-execution bridge toward a
-proper materialization oracle. I also added the read-only helper
+`0x070000`, the bridge slot window `0x077000`, and a high offset like
+`0x0f0000`; install the candidate; cold boot; and see whether the clamp-slot
+bytes and/or high-offset direct response change. If that happens, we have
+crossed an important line: visible resident code can patch decoded normal
+runtime code after materialization without knowing how to encode the CDD. That
+would be the first real normal-mode code-execution bridge toward a proper
+materialization oracle. I also added the read-only helper
 `scripts/probe_liteon_materialized_bridge_clamp_effect.py` so the before/after
 READ BUFFER capture set can be run repeatably when a PLDS-visible drive is
 available.
