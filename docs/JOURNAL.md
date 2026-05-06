@@ -4236,3 +4236,16 @@ The verification report is
 `analysis/8051/bridge-clamp-candidate-verify-20260506.md`, and every check
 passes. That does not prove the hook will work live, but it removes a class of
 avoidable mistakes from the next PLDS-visible attempt.
+
+One more refinement makes that next attempt less blunt. The fixed bridge-clamp
+candidate writes six historically common rotating slots, but the real question
+in a live run is which clamp slot is visible in that baseline. I added
+`scripts/build_liteon_dynamic_bridge_clamp_candidate.py` to answer that
+offline: point it at the read-only baseline capture directory and it builds a
+candidate that writes only the observed stock clamp immediates. The guarded
+live wrapper can now do this automatically with
+`--build-dynamic-candidate-from-baseline`, after it has already confirmed the
+target is a visible PLDS optical LUN and captured the baseline. That keeps the
+planned code-execution proof pointed at the current run's actual materialized
+normal code, instead of assuming the rotating work window landed on the same
+six slots as the old corpus.

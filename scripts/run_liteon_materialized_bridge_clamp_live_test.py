@@ -43,6 +43,7 @@ PROBE = ROOT / "scripts/probe_liteon_materialized_bridge_clamp_effect.py"
 RUN_EXPERIMENT = ROOT / "scripts/run_liteon_linux_persistence_experiment.py"
 PICO_CLIENT = ROOT / "pico/client.py"
 BUILD_CANDIDATES = ROOT / "scripts/build_liteon_post_materializer_hook_candidates.py"
+BUILD_DYNAMIC_CANDIDATE = ROOT / "scripts/build_liteon_dynamic_bridge_clamp_candidate.py"
 STOCK_CLAMP_PATTERN = bytes.fromhex("90 8a 4c e0 c3 94 0e 40 08 90 40 11 74 0e f0")
 
 
@@ -162,6 +163,47 @@ def run_candidate(candidate: Path, device: str, execute: bool) -> dict[str, Any]
     )
 
 
+def build_dynamic_candidate(out_dir: Path, run_name: str, max_writes: int, execute: bool) -> dict[str, Any]:
+    name = f"{run_name}-dynamic-bridge-clamp"
+    record = run_cmd(
+        [
+            sys.executable,
+            str(BUILD_DYNAMIC_CANDIDATE),
+            str(out_dir),
+            "--name",
+            name,
+            "--max-writes",
+            str(max_writes),
+        ],
+        execute=execute,
+    )
+    if not execute:
+        record["candidate"] = None
+        return record
+
+    candidate_dir = None
+    for line in reversed(record["stdout"].splitlines()):
+        line = line.strip()
+        if not line.startswith("{"):
+            continue
+        try:
+            parsed = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        if "candidate_dir" in parsed:
+            candidate_dir = Path(parsed["candidate_dir"])
+            record["selection"] = parsed
+            break
+    if candidate_dir is None:
+        raise RuntimeError("dynamic candidate builder did not report candidate_dir")
+    slug = candidate_dir.name
+    candidate = candidate_dir / f"liteon-full-currentboot-ld5m-helper-bypass-{slug}-candidate.json"
+    if not candidate.exists():
+        raise FileNotFoundError(candidate)
+    record["candidate"] = str(candidate)
+    return record
+
+
 def cold_cycle(pico_port: str | None, hold_ms: int, execute: bool) -> dict[str, Any]:
     if not pico_port:
         print("# skipping Pico cold cycle: no --pico-port")
@@ -199,6 +241,12 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="allow install even if baseline 0x077000 captures do not show the stock bridge clamp pattern",
     )
+    parser.add_argument(
+        "--build-dynamic-candidate-from-baseline",
+        action="store_true",
+        help="after baseline capture, build/install a candidate that patches only clamp slots visible in this run",
+    )
+    parser.add_argument("--dynamic-max-writes", type=int, default=3)
     parser.add_argument("--skip-restore", action="store_true")
     parser.add_argument("--execute", action="store_true", help="actually run live commands")
     return parser.parse_args()
@@ -207,11 +255,13 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     args = parse_args()
     out_dir = args.out_root / args.run_name
+    active_candidate = CANDIDATE
     report: dict[str, Any] = {
         "run_name": args.run_name,
         "device": args.device,
-        "candidate": str(CANDIDATE),
+        "candidate": str(active_candidate),
         "restore": str(RESTORE),
+        "dynamic_candidate_from_baseline": args.build_dynamic_candidate_from_baseline,
         "execute": args.execute,
         "steps": [],
     }
@@ -245,7 +295,14 @@ def main() -> int:
                 "refusing install without --allow-no-baseline-clamp-hit"
             )
 
-    report["steps"].append({"name": "install-candidate", "result": run_candidate(CANDIDATE, args.device, args.execute)})
+    if args.build_dynamic_candidate_from_baseline:
+        dynamic_result = build_dynamic_candidate(out_dir, args.run_name, args.dynamic_max_writes, args.execute)
+        report["steps"].append({"name": "build-dynamic-candidate", "result": dynamic_result})
+        if args.execute:
+            active_candidate = Path(dynamic_result["candidate"])
+            report["candidate"] = str(active_candidate)
+
+    report["steps"].append({"name": "install-candidate", "result": run_candidate(active_candidate, args.device, args.execute)})
     report["steps"].append({"name": "cold-cycle-patched", "result": cold_cycle(args.pico_port, args.servo_hold_ms, args.execute)})
     if args.execute:
         time.sleep(args.settle_s)

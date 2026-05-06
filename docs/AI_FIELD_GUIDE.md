@@ -3048,3 +3048,11 @@ Immediate useful directions:
     Latest report:
     `analysis/8051/bridge-clamp-candidate-verify-20260506.md`, all checks
     passing.
+202. `scripts/build_liteon_dynamic_bridge_clamp_candidate.py` is an offline
+    narrowing tool for the same bridge-clamp plan. Given a read-only baseline
+    capture directory containing `*-id01-off077000.bin`, it scans for the stock
+    clamp sequence and builds a helper-bypass candidate that patches only the
+    clamp immediate addresses actually visible in that run. The guarded live
+    wrapper now supports `--build-dynamic-candidate-from-baseline`; this should
+    be preferred for the next PLDS-visible attempt if the baseline exposes one
+    or more clamp slots. It still sends no drive commands by itself.
