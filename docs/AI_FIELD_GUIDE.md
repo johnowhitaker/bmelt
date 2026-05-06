@@ -3113,3 +3113,9 @@ Immediate useful directions:
     analyzer path, and states the missing evidence: no normal-mode code-exec
     proof and no decoded-band oracle yet because the bench is still in Generic
     bridge fallback rather than a visible PLDS optical LUN.
+212. `scripts/run_liteon_materialized_bridge_clamp_live_test.py` dynamic
+    dry-runs now stop before the install/cold-cycle/probe sequence. This is
+    intentional: a baseline-derived dynamic candidate cannot exist until
+    `--execute` captures real `0x077000` windows, so dry-run should not print a
+    misleading fixed-candidate install path for a dynamic `0x07` or `0x18`
+    ladder step.

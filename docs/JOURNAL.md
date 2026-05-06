@@ -4333,3 +4333,9 @@ materialized READ BUFFER bridge after the CDD materializer runs, and a second
 step that might turn that bridge into a decoded CDD oracle. We do not yet have
 the live proof, because the hardware currently presents only the Generic Initio
 fallback rather than a PLDS optical LUN.
+
+One small tooling cleanup: dynamic bridge-clamp dry-runs now stop before the
+install/cold-cycle/probe sequence. That avoids a misleading printout where a
+dynamic `0x18` dry-run appeared to install the fixed `0x07` candidate. In real
+`--execute` mode the wrapper still captures the baseline, builds the dynamic
+candidate, verifies it, installs it, restores, and captures the result.

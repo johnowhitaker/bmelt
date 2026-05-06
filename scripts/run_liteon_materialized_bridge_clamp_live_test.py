@@ -381,24 +381,36 @@ def main() -> int:
         if args.execute:
             active_candidate = Path(dynamic_result["candidate"])
             report["candidate"] = str(active_candidate)
+        else:
+            report["steps"].append(
+                {
+                    "name": "stop-before-install",
+                    "result": {
+                        "dry_run_dynamic_requires_execute": True,
+                        "reason": "dynamic candidate path depends on baseline captures generated only in --execute mode",
+                    },
+                }
+            )
+            print(
+                json.dumps(
+                    {
+                        "dry_run": True,
+                        "run_name": args.run_name,
+                        "dynamic_candidate_from_baseline": True,
+                        "stopped_before_install": True,
+                    },
+                    indent=2,
+                    sort_keys=True,
+                )
+            )
+            return 0
 
-    if args.build_dynamic_candidate_from_baseline and not args.execute:
-        report["steps"].append(
-            {
-                "name": "verify-active-candidate",
-                "result": {
-                    "skipped": True,
-                    "reason": "dynamic candidate is built from live baseline only with --execute",
-                },
-            }
-        )
-    else:
-        report["steps"].append(
-            {
-                "name": "verify-active-candidate",
-                "result": verify_bridge_candidate(active_candidate, RESTORE, out_dir, args.execute),
-            }
-        )
+    report["steps"].append(
+        {
+            "name": "verify-active-candidate",
+            "result": verify_bridge_candidate(active_candidate, RESTORE, out_dir, args.execute),
+        }
+    )
     report["steps"].append({"name": "install-candidate", "result": run_candidate(active_candidate, args.device, args.execute)})
     report["steps"].append({"name": "cold-cycle-patched", "result": cold_cycle(args.pico_port, args.servo_hold_ms, args.execute)})
     if args.execute:
