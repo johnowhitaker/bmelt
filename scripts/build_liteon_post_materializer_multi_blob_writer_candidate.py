@@ -21,6 +21,12 @@ It saves DPTR and bank-0 R0..R7, walks an embedded table of
 controller public write gateway (`0x4095..0x4098`), restores saved state, and
 exits with the stock `CLR A; MOV PSW,A; RET` epilogue.
 
+By default each blob sets the 24-bit destination once, then streams bytes to
+`0x4098`. That uses the same FIFO auto-increment assumption as the single-blob
+writer. For the first tiny proof hook, `--strict-per-byte-address` is safer:
+it expands the table into `24-bit-address, byte` entries and reprograms
+`0x4095..0x4097` before every byte.
+
 Use this only after the smaller bridge-clamp ladder has proven that this
 post-materializer hook can alter materialized normal runtime RAM and restore
 cleanly.
@@ -180,13 +186,38 @@ def build_table(patches: list[tuple[int, bytes]]) -> bytes:
     return bytes(table)
 
 
-def build_payload(patches: list[tuple[int, bytes]]) -> bytes:
-    if not 1 <= len(patches) <= 0xFF:
-        raise ValueError("patch count must be 1..255")
+def build_strict_table(patches: list[tuple[int, bytes]]) -> bytes:
+    table = bytearray()
+    for address, blob in patches:
+        for index, value in enumerate(blob):
+            byte_addr = address + index
+            if byte_addr > 0xFFFFFF:
+                raise ValueError("strict patch address exceeds 24-bit controller/public address space")
+            table.extend([(byte_addr >> 16) & 0xFF, (byte_addr >> 8) & 0xFF, byte_addr & 0xFF, value])
+    return bytes(table)
 
-    asm = Asm8051()
-    asm.ljmp("main")
 
+def total_blob_bytes(patches: list[tuple[int, bytes]]) -> int:
+    return sum(len(blob) for _address, blob in patches)
+
+
+def emit_prologue(asm: Asm8051) -> None:
+    asm.emit(*push_direct(0x83))  # DPH
+    asm.emit(*push_direct(0x82))  # DPL
+    for direct in range(8):
+        asm.emit(*push_direct(direct))
+    asm.emit(0x75, 0xD0, 0x00)  # MOV PSW,#0
+
+
+def emit_epilogue(asm: Asm8051) -> None:
+    for direct in reversed(range(8)):
+        asm.emit(*pop_direct(direct))
+    asm.emit(*pop_direct(0x82))  # DPL
+    asm.emit(*pop_direct(0x83))  # DPH
+    asm.emit(0xE4, 0xF5, 0xD0, 0x22)  # CLR A; MOV PSW,A; RET
+
+
+def emit_next_table_byte(asm: Asm8051) -> None:
     # Returns the next embedded table byte in A and advances R1:R0.
     asm.label("next_table_byte")
     asm.emit(0x85, 0x00, 0x82)  # MOV DPL,R0
@@ -198,12 +229,33 @@ def build_payload(patches: list[tuple[int, bytes]]) -> bytes:
     asm.label("next_done")
     asm.emit(0x22)  # RET
 
+
+def finalize_payload(asm: Asm8051, table: bytes, table_addr_pos: int) -> bytes:
+    code = bytearray(asm.resolve(CAVE_ADDR))
+    table_addr = CAVE_ADDR + len(code)
+    if table_addr > 0xFFFF:
+        raise ValueError("table address exceeds 8051 code address space")
+    code[table_addr_pos] = table_addr & 0xFF
+    code[table_addr_pos + 2] = (table_addr >> 8) & 0xFF
+    payload = bytes(code) + table
+    if len(payload) > CAVE_LEN:
+        raise ValueError(
+            f"payload plus table length {len(payload)} exceeds cave length {CAVE_LEN}; "
+            f"payload={len(payload)} code={len(code)} table={len(table)}"
+        )
+    return payload
+
+
+def build_stream_payload(patches: list[tuple[int, bytes]]) -> bytes:
+    if not 1 <= len(patches) <= 0xFF:
+        raise ValueError("patch count must be 1..255")
+
+    asm = Asm8051()
+    asm.ljmp("main")
+    emit_next_table_byte(asm)
+
     asm.label("main")
-    asm.emit(*push_direct(0x83))  # DPH
-    asm.emit(*push_direct(0x82))  # DPL
-    for direct in range(8):
-        asm.emit(*push_direct(direct))
-    asm.emit(0x75, 0xD0, 0x00)  # MOV PSW,#0
+    emit_prologue(asm)
 
     table_addr_pos = len(asm.code) + 1
     asm.emit(0x78, 0x00)  # MOV R0,#table-low (patched below)
@@ -241,25 +293,59 @@ def build_payload(patches: list[tuple[int, bytes]]) -> bytes:
     asm.djnz_r2("byte_loop")
     asm.djnz_r7("entry_loop")
 
-    for direct in reversed(range(8)):
-        asm.emit(*pop_direct(direct))
-    asm.emit(*pop_direct(0x82))  # DPL
-    asm.emit(*pop_direct(0x83))  # DPH
-    asm.emit(0xE4, 0xF5, 0xD0, 0x22)  # CLR A; MOV PSW,A; RET
+    emit_epilogue(asm)
+    return finalize_payload(asm, build_table(patches), table_addr_pos)
 
-    code = bytearray(asm.resolve(CAVE_ADDR))
-    table_addr = CAVE_ADDR + len(code)
-    if table_addr > 0xFFFF:
-        raise ValueError("table address exceeds 8051 code address space")
-    code[table_addr_pos] = table_addr & 0xFF
-    code[table_addr_pos + 2] = (table_addr >> 8) & 0xFF
-    payload = bytes(code) + build_table(patches)
-    if len(payload) > CAVE_LEN:
-        raise ValueError(
-            f"payload plus table length {len(payload)} exceeds cave length {CAVE_LEN}; "
-            f"payload={len(payload)} code={len(code)} table={len(payload)-len(code)}"
-        )
-    return payload
+
+def build_strict_payload(patches: list[tuple[int, bytes]]) -> bytes:
+    byte_count = total_blob_bytes(patches)
+    if not 1 <= byte_count <= 0xFF:
+        raise ValueError("strict byte count must be 1..255")
+
+    asm = Asm8051()
+    asm.ljmp("main")
+    emit_next_table_byte(asm)
+
+    asm.label("main")
+    emit_prologue(asm)
+    table_addr_pos = len(asm.code) + 1
+    asm.emit(0x78, 0x00)  # MOV R0,#table-low (patched below)
+    asm.emit(0x79, 0x00)  # MOV R1,#table-high (patched below)
+    asm.emit(0x7F, byte_count)  # MOV R7,#byte-entry-count
+
+    asm.label("entry_loop")
+    asm.lcall("next_table_byte")
+    asm.emit(0xFC)  # MOV R4,A ; address high
+    asm.lcall("next_table_byte")
+    asm.emit(0xFD)  # MOV R5,A ; address mid
+    asm.lcall("next_table_byte")
+    asm.emit(0xFE)  # MOV R6,A ; address low
+    asm.lcall("next_table_byte")
+    asm.emit(0xFA)  # MOV R2,A ; byte value
+
+    asm.label("wait_before_address")
+    asm.emit(*mov_dptr(0x4000), 0xE0)
+    asm.jb(0xE7, "wait_before_address")
+    asm.emit(*mov_dptr(0x4095))
+    asm.emit(0xEC, 0xF0)  # MOV A,R4; MOVX @DPTR,A
+    asm.emit(0xA3, 0xED, 0xF0)  # INC DPTR; MOV A,R5; MOVX @DPTR,A
+    asm.emit(0xA3, 0xEE, 0xF0)  # INC DPTR; MOV A,R6; MOVX @DPTR,A
+
+    asm.label("wait_before_fifo")
+    asm.emit(*mov_dptr(0x4000), 0xE0)
+    asm.jb(0xE7, "wait_before_fifo")
+    asm.emit(*mov_dptr(0x4098))
+    asm.emit(0xEA, 0xF0)  # MOV A,R2; MOVX @DPTR,A
+    asm.djnz_r7("entry_loop")
+
+    emit_epilogue(asm)
+    return finalize_payload(asm, build_strict_table(patches), table_addr_pos)
+
+
+def build_payload(patches: list[tuple[int, bytes]], *, strict_per_byte_address: bool = False) -> bytes:
+    if strict_per_byte_address:
+        return build_strict_payload(patches)
+    return build_stream_payload(patches)
 
 
 def patch_arg(offset: int, data: bytes) -> str:
@@ -290,6 +376,7 @@ def write_note(
     restore_name: str,
     runtime_patches: list[tuple[int, bytes]],
     payload: bytes,
+    writer_mode: str,
     dry_run: bool,
 ) -> None:
     if dry_run:
@@ -303,6 +390,7 @@ def write_note(
         f"- candidate: `{name}`",
         f"- restore: `{restore_name}`",
         f"- hook: `0x{HOOK_OFFSET:04x} -> LCALL 0x{CAVE_ADDR:04x}`",
+        f"- writer mode: `{writer_mode}`",
         f"- runtime patch count: `{len(runtime_patches)}`",
         f"- cave payload+table length: `{len(payload)}` / `0x{CAVE_LEN:x}`",
         "",
@@ -322,6 +410,11 @@ def write_note(
             "patches such as a cave body plus an entry-point trampoline; it is not",
             "a first proof step.",
             "",
+            "`streaming` mode sets the destination once per blob and relies on",
+            "`0x4098` writes auto-incrementing. `strict-per-byte-address` mode",
+            "reprograms `0x4095..0x4097` before every byte, which is bulkier but",
+            "avoids that auto-increment assumption for tiny proof hooks.",
+            "",
         ]
     )
     note.write_text("\n".join(lines))
@@ -340,6 +433,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--name")
     parser.add_argument("--out-dir", type=Path, default=OUT_ROOT)
     parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument(
+        "--strict-per-byte-address",
+        action="store_true",
+        help="reprogram the 24-bit destination before every byte instead of streaming each blob through 0x4098",
+    )
     return parser.parse_args()
 
 
@@ -357,7 +455,8 @@ def main() -> int:
     if cave != b"\xff" * CAVE_LEN:
         raise ValueError(f"cave 0x{CAVE_ADDR:04x}..0x{CAVE_ADDR + CAVE_LEN:04x} is not all FF")
 
-    payload = build_payload(runtime_patches)
+    writer_mode = "strict-per-byte-address" if args.strict_per_byte_address else "streaming"
+    payload = build_payload(runtime_patches, strict_per_byte_address=args.strict_per_byte_address)
     base_name = args.name or f"post-materializer-multi-blob-{len(runtime_patches)}patch-{utc_stamp()}"
     name = slugify(base_name)
     restore_name = slugify(base_name + "-restore")
@@ -369,7 +468,7 @@ def main() -> int:
         args.out_dir,
         args.dry_run,
     )
-    write_note(args.out_dir, name, restore_name, runtime_patches, payload, args.dry_run)
+    write_note(args.out_dir, name, restore_name, runtime_patches, payload, writer_mode, args.dry_run)
     print(
         json.dumps(
             {
@@ -382,6 +481,7 @@ def main() -> int:
                 ],
                 "payload_len": len(payload),
                 "payload_room_remaining": CAVE_LEN - len(payload),
+                "writer_mode": writer_mode,
             },
             sort_keys=True,
         )

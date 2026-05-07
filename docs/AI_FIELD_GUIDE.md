@@ -3177,8 +3177,12 @@ Immediate useful directions:
     selector22 logical `0x2cd6` / public `0x077cd6` as the cave and selector22
     logical `0x1406` / public `0x078406` as a packet-shadow handler entry:
     `--runtime-patch 0x077cd6:e4f5d022 --runtime-patch 0x078406:122cd6`.
-    That produces a 141-byte cave payload/table and leaves 80 bytes. This is
-    still not a first live step; run it only after the `0x07` bridge-clamp
+    In the safer `--strict-per-byte-address` mode this produces a 146-byte cave
+    payload/table and leaves 75 bytes. Strict mode reprograms `0x4095..0x4097`
+    before every byte instead of relying on `0x4098` auto-incrementing after a
+    single address setup. The older streaming mode is still available for
+    larger contiguous blobs after that write-side behavior is live-proven. This
+    is still not a first live step; run it only after the `0x07` bridge-clamp
     proof shows the post-materializer writer can touch materialized runtime RAM
     and restore cleanly.
 218. `analysis/8051/selector22-runtime-response-hook-targets-20260506.md`

@@ -4432,10 +4432,13 @@ through the same controller gateway after materialization. As a dry-run only,
 I aimed it at the stitched selector22 runtime image: a 42-byte zero cave at
 logical `0x2cd6` / public `0x077cd6`, and a packet-shadow handler entry at
 logical `0x1406` / public `0x078406`. The smoke build fits comfortably in the
-resident `0x6ee3` cave: 141 bytes total, with 80 bytes still free. This is not
-a new live first step. It is the tool we will want if the little bridge-clamp
-proof finally tells us, “yes, the post-materializer hook can patch live normal
-runtime RAM.”
+resident `0x6ee3` cave. The safer strict version is now 146 bytes total, with
+75 bytes still free. Strict mode reprograms the public/controller address for
+every byte instead of relying on the `0x4098` FIFO auto-incrementing across a
+blob. The original streaming writer is still available later if that
+auto-increment behavior is proven live. This is not a new live first step. It
+is the tool we will want if the little bridge-clamp proof finally tells us,
+“yes, the post-materializer hook can patch live normal runtime RAM.”
 
 The selector22 runtime image now has its own target note:
 `analysis/8051/selector22-runtime-response-hook-targets-20260506.md`. The
@@ -4458,7 +4461,7 @@ I also folded that future second-stage hook tooling into the readiness audit.
 `scripts/audit_liteon_bridge_oracle_readiness.py` now builds the selector22
 multi-blob smoke target (`0x077cd6:e4f5d022` plus `0x078406:122cd6`) in a
 temporary directory and checks the real helper-bypass artifacts: expected two
-runtime patches, a 141-byte payload, 80 bytes of cave room, hook/cave-only
-image diffs, low-sector helper patches, and a restore image that is
-byte-identical to base. The current audit result is still the same big-picture
-state: offline tooling is coherent, live gate is closed.
+runtime patches, a 146-byte strict-mode payload, 75 bytes of cave room,
+hook/cave-only image diffs, low-sector helper patches, and a restore image that
+is byte-identical to base. The current audit result is still the same
+big-picture state: offline tooling is coherent, live gate is closed.

@@ -64,7 +64,9 @@ SYNTHETIC_CLAMP_IMMEDIATE_OFFSETS = [0x156, 0x196, 0x0E6, 0x026, 0x0A6, 0x066]
 CLAMP_IMMEDIATE_INDEX = 13
 HOOK_OFFSET = 0x422C
 CAVE_OFFSET = 0x6EE3
-MULTI_BLOB_PAYLOAD_LEN = 141
+MULTI_BLOB_PAYLOAD_LEN = 146
+MULTI_BLOB_PAYLOAD_ROOM = 75
+MULTI_BLOB_WRITER_MODE = "strict-per-byte-address"
 STOCK_HOOK = bytes.fromhex("e4 f5 d0")
 PATCHED_HOOK = bytes.fromhex("12 6e e3")
 EXPECTED_HELPER_PATCHES = {
@@ -351,6 +353,7 @@ def multi_blob_smoke_check(checks: list[dict[str, Any]], tmp: Path) -> None:
             "readiness-multi-blob-selector22-ret",
             "--out-dir",
             str(out_dir),
+            "--strict-per-byte-address",
         ]
     )
     parsed = parse_last_json_line(result["stdout"])
@@ -404,7 +407,8 @@ def multi_blob_smoke_check(checks: list[dict[str, Any]], tmp: Path) -> None:
         result["returncode"] == 0
         and parsed.get("patch_count") == 2
         and parsed.get("payload_len") == MULTI_BLOB_PAYLOAD_LEN
-        and parsed.get("payload_room_remaining") == 80
+        and parsed.get("payload_room_remaining") == MULTI_BLOB_PAYLOAD_ROOM
+        and parsed.get("writer_mode") == MULTI_BLOB_WRITER_MODE
         and parsed.get("runtime_patches")
         == [
             {"address": "0x077cd6", "blob_len": 4},

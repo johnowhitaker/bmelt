@@ -168,6 +168,7 @@ python3 scripts/build_liteon_post_materializer_multi_blob_writer_candidate.py \
   --runtime-patch 0x077cd6:e4f5d022 \
   --runtime-patch 0x078406:122cd6 \
   --name post-materializer-multi-blob-smoke-selector22-ret \
+  --strict-per-byte-address \
   --dry-run
 ```
 
@@ -182,7 +183,14 @@ smoke test:
 
 - cave body at public/controller `0x077cd6`, logical `0x2cd6`;
 - trampoline at public/controller `0x078406`, logical `0x1406`;
-- generated cave payload/table length: 141 bytes, leaving 80 bytes.
+- generated cave payload/table length in strict mode: 146 bytes, leaving 75
+  bytes.
+
+The builder still supports the older streaming mode, which sets the
+destination once per blob and assumes `0x4098` auto-increments. The readiness
+smoke now uses `--strict-per-byte-address`: it reprograms `0x4095..0x4097`
+for every byte, which is bulkier but safer for a tiny first multi-region proof
+because it avoids relying on the unproven auto-increment behavior.
 
 See `analysis/8051/selector22-runtime-response-hook-targets-20260506.md` for
 why those addresses are interesting and for the important caveat: selector22 is
@@ -213,11 +221,12 @@ offline pieces were sanity-tested with synthetic `/tmp` captures on
    - a synthetic rejected decoded-band offset was reported as a command
      failure rather than silently disappearing because no `.bin` was written.
 5. `build_liteon_post_materializer_multi_blob_writer_candidate.py` built the
-   selector22 cave+trampoline smoke target in a temporary directory. The audit
-   checks the actual helper-bypass artifacts: two runtime patches, 141-byte
-   payload, 80 bytes of remaining cave room, hook bytes changed only at
-   `0x422c`, cave bytes changed only for the parsed payload length, low-sector
-   helper patches present, and restore image byte-identical to base.
+   selector22 cave+trampoline smoke target in a temporary directory using
+   strict per-byte addressing. The audit checks the actual helper-bypass
+   artifacts: two runtime patches, 146-byte payload, 75 bytes of remaining cave
+   room, hook bytes changed only at `0x422c`, cave bytes changed only for the
+   parsed payload length, low-sector helper patches present, and restore image
+   byte-identical to base.
 
 This does not prove the live hook will land, but it verifies the planned
 builder/verifier/analyzer loop for the exact success shape expected from the
