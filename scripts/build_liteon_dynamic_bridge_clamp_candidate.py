@@ -30,9 +30,19 @@ BUILD_HELPER = ROOT / "scripts/build_liteon_helper_bypass_candidate.py"
 CAVE_ADDR = 0x6EE3
 CAVE_LEN = 0xDD
 HOOK_OFFSET = 0x422C
-PATCH_VALUE = 0x07
 CLAMP_PATTERN = bytes.fromhex("90 8a 4c e0 c3 94 0e 40 08 90 40 11 74 0e f0")
-CLAMP_IMMEDIATE_INDEX = 13
+PATCH_KINDS = {
+    "clamp-immediate": {
+        "index": 13,
+        "default_value": 0x07,
+        "description": "patch MOV A,#0x0e clamp output immediate",
+    },
+    "threshold-immediate": {
+        "index": 6,
+        "default_value": 0x1C,
+        "description": "patch SUBB A,#0x0e comparison threshold immediate",
+    },
+}
 DEFAULT_PUBLIC_BASE = 0x077000
 
 
@@ -107,7 +117,7 @@ def runtime_bridge_clamp_payload(addresses: list[int], value: int) -> bytes:
     return payload
 
 
-def scan_file(path: Path, public_base: int) -> list[dict[str, Any]]:
+def scan_file(path: Path, public_base: int, patch_index: int) -> list[dict[str, Any]]:
     data = path.read_bytes()
     hits = []
     start = 0
@@ -119,21 +129,21 @@ def scan_file(path: Path, public_base: int) -> list[dict[str, Any]]:
             {
                 "path": str(path),
                 "file_offset": idx,
-                "immediate_file_offset": idx + CLAMP_IMMEDIATE_INDEX,
-                "public_addr": public_base + idx + CLAMP_IMMEDIATE_INDEX,
+                "immediate_file_offset": idx + patch_index,
+                "public_addr": public_base + idx + patch_index,
             }
         )
         start = idx + 1
 
 
-def scan_baseline(baseline_dir: Path, public_base: int) -> tuple[list[dict[str, Any]], Counter[int]]:
+def scan_baseline(baseline_dir: Path, public_base: int, patch_index: int) -> tuple[list[dict[str, Any]], Counter[int]]:
     files = sorted(baseline_dir.glob("*-id01-off077000.bin"))
     if not files:
         files = sorted(baseline_dir.glob("*.bin"))
     hits = []
     counter: Counter[int] = Counter()
     for path in files:
-        for hit in scan_file(path, public_base):
+        for hit in scan_file(path, public_base, patch_index):
             hits.append(hit)
             counter[int(hit["public_addr"])] += 1
     return hits, counter
@@ -168,6 +178,9 @@ def write_report(candidate_dir: Path, report: dict[str, Any]) -> None:
         "",
         f"baseline dir: `{report['baseline_dir']}`",
         f"candidate: `{report['candidate_name']}`",
+        f"patch kind: `{report['patch_kind']}`",
+        f"patch index: `{report['patch_index']}`",
+        f"patch value: `0x{report['patch_value']:02x}`",
         f"payload length: `{report['payload_length']}`",
         "",
         "| rank | address | count |",
@@ -185,7 +198,18 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--out-dir", type=Path, default=OUT_ROOT)
     parser.add_argument("--public-base", type=lambda value: int(value, 0), default=DEFAULT_PUBLIC_BASE)
     parser.add_argument("--max-writes", type=int, default=6)
-    parser.add_argument("--patch-value", type=lambda value: int(value, 0), default=PATCH_VALUE)
+    parser.add_argument(
+        "--patch-kind",
+        choices=sorted(PATCH_KINDS),
+        default="clamp-immediate",
+        help="which byte in the stock bridge-clamp sequence to patch",
+    )
+    parser.add_argument(
+        "--patch-value",
+        type=lambda value: int(value, 0),
+        default=None,
+        help="byte value to write; defaults depend on --patch-kind",
+    )
     return parser.parse_args()
 
 
@@ -193,21 +217,27 @@ def main() -> int:
     args = parse_args()
     if args.max_writes < 1:
         raise ValueError("--max-writes must be >= 1")
-    if not 0 <= args.patch_value <= 0xFF:
+    patch_kind = PATCH_KINDS[args.patch_kind]
+    patch_index = int(patch_kind["index"])
+    patch_value = int(patch_kind["default_value"] if args.patch_value is None else args.patch_value)
+    if not 0 <= patch_value <= 0xFF:
         raise ValueError("--patch-value must be a byte")
-    hits, counter = scan_baseline(args.baseline_dir, args.public_base)
+    hits, counter = scan_baseline(args.baseline_dir, args.public_base, patch_index)
     if not counter:
         raise SystemExit(f"no stock bridge-clamp patterns found under {args.baseline_dir}")
     selected_addrs = [addr for addr, _count in counter.most_common(args.max_writes)]
-    payload = runtime_bridge_clamp_payload(selected_addrs, args.patch_value)
-    name = slugify(args.name or f"post-materializer-runtime-bridge-clamp07-dynamic-{timestamp()}")
+    payload = runtime_bridge_clamp_payload(selected_addrs, patch_value)
+    name = slugify(args.name or f"post-materializer-runtime-bridge-{args.patch_kind}-{patch_value:02x}-dynamic-{timestamp()}")
     candidate_dir = run_builder(name, payload, args.out_dir)
     report = {
         "baseline_dir": str(args.baseline_dir),
         "candidate_name": name,
         "candidate_dir": str(candidate_dir),
         "public_base": args.public_base,
-        "patch_value": args.patch_value,
+        "patch_kind": args.patch_kind,
+        "patch_kind_description": patch_kind["description"],
+        "patch_index": patch_index,
+        "patch_value": patch_value,
         "payload_length": len(payload),
         "hit_count": len(hits),
         "all_hits": [

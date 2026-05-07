@@ -58,6 +58,7 @@ def run_live_test(
     pico_port: str,
     out_root: Path,
     run_name: str,
+    patch_kind: str,
     patch_value: int,
     dynamic_max_writes: int,
     include_decoded_oracle_offsets: bool,
@@ -78,6 +79,8 @@ def run_live_test(
         "--probe-repeat",
         str(probe_repeat),
         "--build-dynamic-candidate-from-baseline",
+        "--dynamic-patch-kind",
+        patch_kind,
         "--dynamic-patch-value",
         f"0x{patch_value:02x}",
         "--dynamic-max-writes",
@@ -125,6 +128,18 @@ def parse_args() -> argparse.Namespace:
         default=6,
         help="maximum observed bridge-clamp slots to patch in each dynamic live-test candidate",
     )
+    parser.add_argument(
+        "--oracle-patch-kind",
+        choices=("clamp-immediate", "threshold-immediate"),
+        default="clamp-immediate",
+        help="dynamic patch kind for the second decoded-oracle step",
+    )
+    parser.add_argument(
+        "--oracle-patch-value",
+        type=lambda value: int(value, 0),
+        default=0x18,
+        help="dynamic patch value for the second decoded-oracle step",
+    )
     parser.add_argument("--execute", action="store_true")
     parser.add_argument(
         "--force-0x18",
@@ -137,13 +152,15 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     args = parse_args()
     run07 = f"{args.run_prefix}-clamp07"
-    run18 = f"{args.run_prefix}-clamp18"
+    run18 = f"{args.run_prefix}-{args.oracle_patch_kind}-{args.oracle_patch_value:02x}"
     report: dict[str, Any] = {
         "run_prefix": args.run_prefix,
         "execute": args.execute,
         "run07": run07,
         "run18": run18,
         "dynamic_max_writes": args.dynamic_max_writes,
+        "oracle_patch_kind": args.oracle_patch_kind,
+        "oracle_patch_value": args.oracle_patch_value,
         "steps": [],
     }
 
@@ -155,6 +172,7 @@ def main() -> int:
                 pico_port=args.pico_port,
                 out_root=args.out_root,
                 run_name=run07,
+                patch_kind="clamp-immediate",
                 patch_value=0x07,
                 dynamic_max_writes=args.dynamic_max_writes,
                 include_decoded_oracle_offsets=False,
@@ -180,7 +198,8 @@ def main() -> int:
                 pico_port=args.pico_port,
                 out_root=args.out_root,
                 run_name=run18,
-                patch_value=0x18,
+                patch_kind=args.oracle_patch_kind,
+                patch_value=args.oracle_patch_value,
                 dynamic_max_writes=args.dynamic_max_writes,
                 include_decoded_oracle_offsets=True,
                 probe_repeat=args.probe_repeat,

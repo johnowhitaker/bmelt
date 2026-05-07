@@ -315,6 +315,73 @@ def dynamic_smoke_check(checks: list[dict[str, Any]], tmp: Path) -> None:
         patched_slot=slot,
     )
 
+    threshold_build = run(
+        [
+            sys.executable,
+            str(DYNAMIC_BUILDER),
+            str(baseline),
+            "--name",
+            "codex-readiness-dynamic-threshold1c",
+            "--out-dir",
+            str(candidate_root),
+            "--max-writes",
+            "6",
+            "--patch-kind",
+            "threshold-immediate",
+            "--patch-value",
+            "0x1c",
+        ]
+    )
+    threshold_candidate_dir = candidate_root / "codex-readiness-dynamic-threshold1c"
+    threshold_verify = run(
+        [
+            sys.executable,
+            str(VERIFIER),
+            "--candidate-root",
+            str(candidate_root),
+            "--restore-root",
+            str(RESTORE_ROOT),
+            "--candidate-slug",
+            threshold_candidate_dir.name,
+            "--restore-slug",
+            "post-materializer-runtime-bridge-clamp07-restore",
+            "--json-out",
+            str(tmp / "threshold-verify.json"),
+            "--md-out",
+            str(tmp / "threshold-verify.md"),
+        ]
+    )
+    threshold_report = (
+        json.loads((tmp / "threshold-verify.json").read_text())
+        if (tmp / "threshold-verify.json").exists()
+        else {}
+    )
+    threshold_selection_path = threshold_candidate_dir / "dynamic-bridge-clamp-selection.json"
+    threshold_selection = (
+        json.loads(threshold_selection_path.read_text()) if threshold_selection_path.exists() else {}
+    )
+    threshold_ok = (
+        threshold_build["returncode"] == 0
+        and threshold_verify["returncode"] == 0
+        and threshold_report.get("all_ok") is True
+        and threshold_selection.get("patch_kind") == "threshold-immediate"
+        and threshold_selection.get("patch_index") == 6
+        and threshold_selection.get("patch_value") == 0x1C
+        and len(threshold_selection.get("selected", [])) == 6
+    )
+    add_check(
+        checks,
+        "dynamic_threshold1c_builder_verifier_smoke",
+        threshold_ok,
+        build_returncode=threshold_build["returncode"],
+        verify_returncode=threshold_verify["returncode"],
+        verifier_all_ok=threshold_report.get("all_ok"),
+        selection={
+            key: threshold_selection.get(key)
+            for key in ("patch_kind", "patch_index", "patch_value", "selected", "payload_length")
+        },
+    )
+
 
 def parse_last_json_line(stdout: str) -> dict[str, Any]:
     for line in reversed(stdout.splitlines()):
@@ -428,7 +495,12 @@ def multi_blob_smoke_check(checks: list[dict[str, Any]], tmp: Path) -> None:
 
 def ladder_dry_run_check(checks: list[dict[str, Any]], device: str, pico_port: str) -> None:
     result = run([sys.executable, str(LADDER), "--device", device, "--pico-port", pico_port])
-    ok = result["returncode"] == 0 and "dry_run" in result["stdout"] and "clamp07" in result["stdout"] and "clamp18" in result["stdout"]
+    ok = (
+        result["returncode"] == 0
+        and "dry_run" in result["stdout"]
+        and "clamp07" in result["stdout"]
+        and "clamp-immediate-18" in result["stdout"]
+    )
     add_check(checks, "bridge_oracle_ladder_dry_run", ok, result=result)
 
 

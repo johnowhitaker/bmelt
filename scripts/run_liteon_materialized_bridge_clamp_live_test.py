@@ -178,8 +178,15 @@ def run_candidate(candidate: Path, device: str, execute: bool) -> dict[str, Any]
     )
 
 
-def build_dynamic_candidate(out_dir: Path, run_name: str, max_writes: int, patch_value: int, execute: bool) -> dict[str, Any]:
-    name = f"{run_name}-dynamic-bridge-clamp{patch_value:02x}"
+def build_dynamic_candidate(
+    out_dir: Path,
+    run_name: str,
+    max_writes: int,
+    patch_kind: str,
+    patch_value: int,
+    execute: bool,
+) -> dict[str, Any]:
+    name = f"{run_name}-dynamic-bridge-{patch_kind}-{patch_value:02x}"
     record = run_cmd(
         [
             sys.executable,
@@ -189,6 +196,8 @@ def build_dynamic_candidate(out_dir: Path, run_name: str, max_writes: int, patch
             name,
             "--max-writes",
             str(max_writes),
+            "--patch-kind",
+            patch_kind,
             "--patch-value",
             f"0x{patch_value:02x}",
         ],
@@ -308,10 +317,16 @@ def parse_args() -> argparse.Namespace:
         help="maximum observed bridge-clamp slots to patch in a dynamic baseline-derived candidate",
     )
     parser.add_argument(
+        "--dynamic-patch-kind",
+        choices=("clamp-immediate", "threshold-immediate"),
+        default="clamp-immediate",
+        help="which byte in the observed bridge-clamp sequence the dynamic candidate should patch",
+    )
+    parser.add_argument(
         "--dynamic-patch-value",
         type=lambda value: int(value, 0),
-        default=0x07,
-        help="byte written into observed bridge-clamp immediates by the dynamic candidate",
+        default=None,
+        help="byte written into observed bridge-clamp immediates by the dynamic candidate; defaults depend on --dynamic-patch-kind",
     )
     parser.add_argument("--skip-restore", action="store_true")
     parser.add_argument(
@@ -325,7 +340,10 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> int:
     args = parse_args()
-    if not 0 <= args.dynamic_patch_value <= 0xFF:
+    dynamic_patch_value = args.dynamic_patch_value
+    if dynamic_patch_value is None:
+        dynamic_patch_value = 0x1C if args.dynamic_patch_kind == "threshold-immediate" else 0x07
+    if not 0 <= dynamic_patch_value <= 0xFF:
         raise ValueError("--dynamic-patch-value must be a byte")
     out_dir = args.out_root / args.run_name
     active_candidate = CANDIDATE
@@ -337,7 +355,8 @@ def main() -> int:
         "restore": str(RESTORE),
         "dynamic_candidate_from_baseline": args.build_dynamic_candidate_from_baseline,
         "dynamic_max_writes": args.dynamic_max_writes,
-        "dynamic_patch_value": args.dynamic_patch_value,
+        "dynamic_patch_kind": args.dynamic_patch_kind,
+        "dynamic_patch_value": dynamic_patch_value,
         "allow_fixed_candidate": args.allow_fixed_candidate,
         "execute": args.execute,
         "probe_offsets": probe_offsets,
@@ -410,7 +429,8 @@ def main() -> int:
             out_dir,
             args.run_name,
             args.dynamic_max_writes,
-            args.dynamic_patch_value,
+            args.dynamic_patch_kind,
+            dynamic_patch_value,
             args.execute,
         )
         report["steps"].append({"name": "build-dynamic-candidate", "result": dynamic_result})

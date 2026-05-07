@@ -4465,3 +4465,34 @@ runtime patches, a 146-byte strict-mode payload, 75 bytes of cave room,
 hook/cave-only image diffs, low-sector helper patches, and a restore image that
 is byte-identical to base. The current audit result is still the same
 big-picture state: offline tooling is coherent, live gate is closed.
+
+Reviewing the bridge-clamp disassembly exposed one more nuance in the planned
+oracle step. The `0x18` candidate changes the clamp output byte, which means
+every request whose high byte is `>= 0x0e` gets forced to high byte `0x18`.
+That can test `0x184000`, but it aliases `0x191010` into `0x181010` and
+`0x1a0000` into `0x180000`. A better full decoded-band test is probably to
+patch the comparison threshold instead: change `SUBB A,#0x0e` to
+`SUBB A,#0x1c`. Then high bytes `0x18..0x1b` should pass through normally,
+covering the whole `0x184000..0x1b3fff` band without forcing everything into
+the `0x18xxxx` page.
+
+I added that as an optional builder/live-wrapper path, not as a silent default
+change. The old guarded ladder still does the historical `0x07` proof and
+`clamp-immediate 0x18` second step unless told otherwise. The newer command,
+once a PLDS LUN is visible and the proof gate passes, is:
+
+```sh
+python3 scripts/run_liteon_bridge_oracle_ladder.py \
+  --device /dev/sg0 \
+  --pico-port /dev/ttyACM0 \
+  --oracle-patch-kind threshold-immediate \
+  --oracle-patch-value 0x1c \
+  --execute
+```
+
+The analyzer now counts the `0x1c` threshold-pattern hits too, so if that live
+run happens later we can tell the difference between "the runtime slot was not
+patched" and "the slot patched, but the decoded-band read still failed."
+I also put this threshold variant into the readiness audit with a synthetic
+builder/verifier smoke test, so future offline checks cover both the historical
+`clamp-immediate 0x18` path and the newer `threshold-immediate 0x1c` path.

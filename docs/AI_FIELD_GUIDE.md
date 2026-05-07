@@ -3052,19 +3052,24 @@ Immediate useful directions:
     narrowing tool for the same bridge-clamp plan. Given a read-only baseline
     capture directory containing `*-id01-off077000.bin`, it scans for the stock
     clamp sequence and builds a helper-bypass candidate that patches only the
-    clamp immediate addresses actually visible in that run. The guarded live
-    wrapper now supports `--build-dynamic-candidate-from-baseline`; this should
-    be preferred for the next PLDS-visible attempt if the baseline exposes one
-    or more clamp slots. Its cave preserves DPTR around the controller-gateway
+    immediate addresses actually visible in that run. By default it patches the
+    clamp-output immediate; with `--patch-kind threshold-immediate` it patches
+    the `SUBB A,#0x0e` comparison threshold instead. The guarded live wrapper
+    now supports `--build-dynamic-candidate-from-baseline`; this should be
+    preferred for the next PLDS-visible attempt if the baseline exposes one or
+    more clamp slots. Its cave preserves DPTR around the controller-gateway
     writes, then returns with the stock `A=0` / `PSW=0` epilogue shape. It
     still sends no drive commands by itself.
 203. `analysis/8051/bridge-clamp-to-materialization-oracle-plan-20260506.md`
-    spells out the follow-up if the `0x07` proof works. The same dynamic
-    candidate builder can write `0x18` into the observed clamp immediates with
-    `--dynamic-patch-value 0x18`. That is the first direct attempt to make
-    normal READ BUFFER request the decoded CDD band near `0x184000`, but it
-    should only be run after a successful `0x07` proof and restore.
-204. For that `0x18` attempt, use
+    spells out the follow-up if the `0x07` proof works. The old second step
+    writes `0x18` into the observed clamp-output immediates with
+    `--dynamic-patch-value 0x18`, which can test `0x184000` but aliases every
+    high byte `>=0x0e` to `0x18`. The better full decoded-band variant is
+    probably `--dynamic-patch-kind threshold-immediate --dynamic-patch-value
+    0x1c`, which should let high bytes `0x18..0x1b` pass through unchanged.
+    Either decoded-oracle variant should only be run after a successful `0x07`
+    proof and restore.
+204. For that decoded-oracle attempt, use
     `--include-decoded-oracle-offsets` on
     `scripts/run_liteon_materialized_bridge_clamp_live_test.py`. It extends the
     baseline/patched/restored capture set with candidate decoded-materialized
@@ -3073,9 +3078,11 @@ Immediate useful directions:
 205. `scripts/run_liteon_bridge_oracle_ladder.py` is the safest wrapper for the
     next healthy-drive attempt. It runs dynamic `0x07`, analyzes that the
     high-offset `0x0f0000` proof changed and restored, and only then runs
-    dynamic `0x18` with decoded-oracle offsets. It is dry-run by default and
-    delegates all live writes to the still-gated materialized bridge-clamp
-    wrapper.
+    the configured decoded-oracle step with decoded-oracle offsets. It defaults
+    to the historical `clamp-immediate 0x18` second step, but can run the newer
+    threshold variant with `--oracle-patch-kind threshold-immediate
+    --oracle-patch-value 0x1c`. It is dry-run by default and delegates all live
+    writes to the still-gated materialized bridge-clamp wrapper.
 206. `analysis/8051/bridge-fallback-host-reset-recovery-20260506.md` records
     the current bridge-fallback boundary. USB deauthorize/reauthorize,
     usb-storage unbind/bind, USBDEVFS_RESET, and `sg_reset --device /dev/sg0`
@@ -3092,17 +3099,18 @@ Immediate useful directions:
     bypass and materialization-oracle writes require `sg_inq` to report
     `PLDS DS-8ABSH`, not `Generic External`.
 208. `scripts/analyze_liteon_materialized_bridge_clamp_live_test.py` now
-    distinguishes the proof clamp patch (`0x07`) from the decoded-oracle clamp
-    patch (`0x18`). In a future ladder run, the `0x18` step should be judged on
-    both direct decoded-band hash changes and visible `0x077000` clamp-pattern
-    hits patched to `0x18`; otherwise a no-effect decoded read could be a
-    failed runtime-slot patch rather than a failed materialization oracle. It
-    also reads the probe JSON summaries, so failed/short/timed-out READ BUFFER
-    attempts are reported explicitly even when no `.bin` capture exists.
+    distinguishes the proof clamp patch (`0x07`), the decoded-oracle clamp
+    patch (`0x18`), and the decoded-oracle threshold patch (`0x1c`). In a
+    future ladder run, the decoded-oracle step should be judged on both direct
+    decoded-band hash changes and visible `0x077000` clamp/threshold-pattern
+    hits; otherwise a no-effect decoded read could be a failed runtime-slot
+    patch rather than a failed materialization oracle. It also reads the probe
+    JSON summaries, so failed/short/timed-out READ BUFFER attempts are reported
+    explicitly even when no `.bin` capture exists.
 209. `scripts/verify_liteon_bridge_clamp_candidate.py` is now generic enough
     for fixed and dynamic bridge-clamp candidates. It reads dynamic selection
     JSON when present, verifies the selected public addresses and patch value
-    (`0x07` or `0x18`), accepts shorter dynamic cave payloads, and can use a
+    (`0x07`, `0x18`, or threshold `0x1c`), accepts shorter dynamic cave payloads, and can use a
     separate restore-candidate root. It also reports whether the cave preserves
     DPTR; new dynamic candidates should report `preserves_dptr=true`. The live
     wrapper calls it before installation in `--execute` runs, after any
@@ -3132,10 +3140,11 @@ Immediate useful directions:
     firmware-update/helper-bypass writes. It compiles the relevant
     bridge-oracle scripts, verifies the fixed candidate, runs a synthetic
     six-slot dynamic `0x18` builder/verifier/analyzer smoke test, confirms the
-    synthetic dynamic cave preserves DPTR, builds the selector22 multi-blob
-    cave+trampoline smoke target in a temporary directory and verifies the
-    resulting helper-bypass image/restore artifacts, dry-runs the guarded
-    ladder, and optionally probes the Linux bench read-only through
+    synthetic dynamic cave preserves DPTR, runs a second synthetic
+    `threshold-immediate 0x1c` builder/verifier smoke test, builds the
+    selector22 multi-blob cave+trampoline smoke target in a temporary directory
+    and verifies the resulting helper-bypass image/restore artifacts, dry-runs
+    the guarded ladder, and optionally probes the Linux bench read-only through
     `watch_liteon_plds_preflight.py`. Example:
     `python3 scripts/audit_liteon_bridge_oracle_readiness.py --linux-host
     root@jonathan-thinkpad-t480s --pico-port /dev/ttyACM0`. The expected

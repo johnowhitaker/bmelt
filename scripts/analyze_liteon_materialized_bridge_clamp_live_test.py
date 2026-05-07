@@ -20,10 +20,17 @@ CAPTURE_RE = re.compile(r"^(?P<label>.+)-r(?P<repeat>\d+)-id01-off(?P<offset>[0-
 CLAMP_PREFIX = bytes.fromhex("90 8a 4c e0 c3 94 0e 40 08 90 40 11 74")
 CLAMP_SUFFIX = bytes.fromhex("f0")
 CLAMP_VALUES_OF_INTEREST = [0x0E, 0x07, 0x18]
+THRESHOLD_PATTERN_PREFIX = bytes.fromhex("90 8a 4c e0 c3 94")
+THRESHOLD_PATTERN_SUFFIX = bytes.fromhex("40 08 90 40 11 74 0e f0")
+THRESHOLD_VALUES_OF_INTEREST = [0x0E, 0x1C]
 
 
 def clamp_pattern(value: int) -> bytes:
     return CLAMP_PREFIX + bytes([value & 0xFF]) + CLAMP_SUFFIX
+
+
+def threshold_pattern(value: int) -> bytes:
+    return THRESHOLD_PATTERN_PREFIX + bytes([value & 0xFF]) + THRESHOLD_PATTERN_SUFFIX
 
 
 def sha256(data: bytes) -> str:
@@ -150,6 +157,13 @@ def count_clamp_values(entries: list[dict[str, Any]]) -> dict[str, int]:
     return {f"0x{value:02x}": count_patterns(entries, clamp_pattern(value)) for value in CLAMP_VALUES_OF_INTEREST}
 
 
+def count_threshold_values(entries: list[dict[str, Any]]) -> dict[str, int]:
+    return {
+        f"0x{value:02x}": count_patterns(entries, threshold_pattern(value))
+        for value in THRESHOLD_VALUES_OF_INTEREST
+    }
+
+
 def compare_labels(
     captures: dict[str, dict[int, list[dict[str, Any]]]],
     attempts: dict[str, dict[int, list[dict[str, Any]]]],
@@ -169,9 +183,12 @@ def compare_labels(
             if entries:
                 summary = summarize_hashes(entries)
                 summary["clamp_pattern_hits_by_value"] = count_clamp_values(entries)
+                summary["threshold_pattern_hits_by_value"] = count_threshold_values(entries)
                 summary["stock_clamp_pattern_hits"] = summary["clamp_pattern_hits_by_value"]["0x0e"]
                 summary["patched_clamp_pattern_hits"] = summary["clamp_pattern_hits_by_value"]["0x07"]
                 summary["patched_clamp18_pattern_hits"] = summary["clamp_pattern_hits_by_value"]["0x18"]
+                summary["stock_threshold_pattern_hits"] = summary["threshold_pattern_hits_by_value"]["0x0e"]
+                summary["patched_threshold1c_pattern_hits"] = summary["threshold_pattern_hits_by_value"]["0x1c"]
                 if attempt_summary:
                     summary["attempts"] = attempt_summary
                 per_label[label] = summary
@@ -181,9 +198,12 @@ def compare_labels(
                     "unique_hashes": [],
                     "stable": False,
                     "clamp_pattern_hits_by_value": {"0x0e": 0, "0x07": 0, "0x18": 0},
+                    "threshold_pattern_hits_by_value": {"0x0e": 0, "0x1c": 0},
                     "stock_clamp_pattern_hits": 0,
                     "patched_clamp_pattern_hits": 0,
                     "patched_clamp18_pattern_hits": 0,
+                    "stock_threshold_pattern_hits": 0,
+                    "patched_threshold1c_pattern_hits": 0,
                     "attempts": attempt_summary,
                 }
         baseline = per_label.get("baseline", {}).get("unique_hashes", [])
@@ -218,6 +238,7 @@ def build_assessment(comparisons: dict[str, Any]) -> list[str]:
         base_hits = slot["labels"].get("baseline", {}).get("stock_clamp_pattern_hits", 0)
         patched_hits_07 = slot["labels"].get("patched", {}).get("patched_clamp_pattern_hits", 0)
         patched_hits_18 = slot["labels"].get("patched", {}).get("patched_clamp18_pattern_hits", 0)
+        threshold_hits_1c = slot["labels"].get("patched", {}).get("patched_threshold1c_pattern_hits", 0)
         if base_hits:
             lines.append(f"BASELINE SLOT CHECK: 0x077000 contains {base_hits} stock clamp-pattern hit(s).")
         else:
@@ -226,6 +247,10 @@ def build_assessment(comparisons: dict[str, Any]) -> list[str]:
             lines.append(f"PATCH SLOT CHECK: 0x077000 contains {patched_hits_07} clamp-pattern hit(s) patched to 0x07.")
         if patched_hits_18:
             lines.append(f"PATCH SLOT CHECK: 0x077000 contains {patched_hits_18} clamp-pattern hit(s) patched to 0x18.")
+        if threshold_hits_1c:
+            lines.append(
+                f"PATCH SLOT CHECK: 0x077000 contains {threshold_hits_1c} threshold-pattern hit(s) patched to 0x1c."
+            )
     decoded_successes = []
     decoded_partials = []
     for offset_text, comparison in comparisons.items():

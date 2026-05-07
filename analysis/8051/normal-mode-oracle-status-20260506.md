@@ -42,8 +42,14 @@ Two planned patch values:
 
 - `0x07`: proof patch. If high-offset reads fold differently and restore, we
   have evidence that a resident hook patched materialized normal runtime code.
-- `0x18`: oracle patch. If `0x07` works, `0x18` may let READ BUFFER request
-  decoded/controller addresses around `0x184000`.
+- `0x18`: simple oracle patch. If `0x07` works, `0x18` may let READ BUFFER
+  request decoded/controller addresses around `0x184000`, but it aliases all
+  high bytes `>= 0x0e` to `0x18`.
+- `threshold-immediate 0x1c`: better oracle patch. Instead of changing the
+  clamp output, change the `SUBB A,#0x0e` threshold to `0x1c` so high bytes
+  `0x18..0x1b` should pass through unchanged. This is likely the better way to
+  cover the full `0x184000..0x1b3fff` CDD decoded range, but it should still
+  wait until the `0x07` proof succeeds.
 
 ## Prepared Toolchain
 
@@ -75,8 +81,22 @@ The ladder:
 
 1. runs dynamic `0x07` first;
 2. analyzes that high offset `0x0f0000` changed and restored;
-3. refuses `0x18` unless the `0x07` proof passes, unless explicitly forced;
-4. runs dynamic `0x18` with decoded-oracle offsets only after that proof.
+3. refuses the decoded-oracle step unless the `0x07` proof passes, unless
+   explicitly forced;
+4. runs the configured decoded-oracle patch with decoded-oracle offsets only
+   after that proof.
+
+By default the ladder still runs the historical `clamp-immediate 0x18` second
+step. To try the newer full-band threshold variant after the proof gate:
+
+```sh
+python3 scripts/run_liteon_bridge_oracle_ladder.py \
+  --device /dev/sg0 \
+  --pico-port /dev/ttyACM0 \
+  --oracle-patch-kind threshold-immediate \
+  --oracle-patch-value 0x1c \
+  --execute
+```
 
 The lower-level live wrapper also refuses a direct fixed-candidate install
 under `--execute` unless `--allow-fixed-candidate` is passed deliberately.
@@ -213,14 +233,17 @@ offline pieces were sanity-tested with synthetic `/tmp` captures on
 3. `verify_liteon_bridge_clamp_candidate.py` accepted that candidate against
    the normal restore candidate and confirmed that the dynamic cave preserves
    DPTR;
-4. synthetic baseline/patched/restored captures were analyzed, and
+4. the same synthetic baseline was also used for a `threshold-immediate 0x1c`
+   dynamic candidate. The verifier accepted its generated gateway-write plan,
+   giving offline coverage for the newer full-band decoded-oracle variant;
+5. synthetic baseline/patched/restored captures were analyzed, and
    `analyze_liteon_materialized_bridge_clamp_live_test.py` reported:
    - high-offset `0x0f0000` changed and restored;
    - the `0x077000` clamp pattern changed from stock `0x0e` to patched `0x18`;
    - decoded-band `0x184000` changed and restored;
    - a synthetic rejected decoded-band offset was reported as a command
      failure rather than silently disappearing because no `.bin` was written.
-5. `build_liteon_post_materializer_multi_blob_writer_candidate.py` built the
+6. `build_liteon_post_materializer_multi_blob_writer_candidate.py` built the
    selector22 cave+trampoline smoke target in a temporary directory using
    strict per-byte addressing. The audit checks the actual helper-bypass
    artifacts: two runtime patches, 146-byte payload, 75 bytes of remaining cave
@@ -230,8 +253,9 @@ offline pieces were sanity-tested with synthetic `/tmp` captures on
 
 This does not prove the live hook will land, but it verifies the planned
 builder/verifier/analyzer loop for the exact success shape expected from the
-future `0x18` materialization-oracle run, and it keeps the second-stage
-multi-blob response-hook tooling under the same readiness umbrella.
+future materialization-oracle run, including the newer threshold variant, and
+it keeps the second-stage multi-blob response-hook tooling under the same
+readiness umbrella.
 
 ## Current Live Blocker
 
