@@ -1,0 +1,67 @@
+{
+  "allow_fixed_candidate": false,
+  "candidate": "/home/jonathan/boastermelt/references/firmware/extracted/helper-bypass-candidates/post-materializer-runtime-bridge-clamp07/liteon-full-currentboot-ld5m-helper-bypass-post-materializer-runtime-bridge-clamp07-candidate.json",
+  "device": "/dev/sg0",
+  "dynamic_candidate_from_baseline": true,
+  "dynamic_max_writes": 6,
+  "dynamic_patch_value": 7,
+  "execute": true,
+  "include_decoded_oracle_offsets": false,
+  "probe_offsets": [],
+  "restore": "/home/jonathan/boastermelt/references/firmware/extracted/helper-bypass-candidates/post-materializer-runtime-bridge-clamp07-restore/liteon-full-currentboot-ld5m-helper-bypass-post-materializer-runtime-bridge-clamp07-restore-candidate.json",
+  "run_name": "freshdrive4-bridgeclamp-preflight-20260507",
+  "steps": [
+    {
+      "name": "ensure-candidates",
+      "result": {
+        "reason": "preflight-only",
+        "skipped": true
+      }
+    },
+    {
+      "name": "identity-baseline",
+      "result": {
+        "cmd": [
+          "/usr/bin/sg_inq",
+          "/dev/sg0"
+        ],
+        "plds_ds8absh": true,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "standard INQUIRY:\n  PQual=0  PDT=5  RMB=1  LU_CONG=0  hot_pluggable=0  version=0x00  [no conformance claimed]\n  [AERC=0]  [TrmTsk=0]  NormACA=1  HiSUP=1  Resp_data_format=2\n  SCCS=0  ACC=0  TPGS=0  3PC=0  Protect=0  [BQue=0]\n  EncServ=0  MultiP=0  [MChngr=0]  [ACKREQQ=0]  Addr16=0\n  [RelAdr=0]  WBus16=0  Sync=0  [Linked=0]  [TranDis=0]  CmdQue=0\n  [SPI: Clocking=0x0  QAS=0  IUS=0]\n    length=96 (0x60)   Peripheral device type: cd/dvd\n Vendor identification: PLDS    \n Product identification: DVD+-RW DS-8ABSH\n Product revision level: LD5M\n"
+      }
+    },
+    {
+      "name": "probe-baseline",
+      "result": {
+        "cmd": [
+          "/usr/bin/python3",
+          "/home/jonathan/boastermelt/scripts/probe_liteon_materialized_bridge_clamp_effect.py",
+          "--device",
+          "/dev/sg0",
+          "--out-dir",
+          "/home/jonathan/boastermelt/references/evidence/live/freshdrive4-bridgeclamp-preflight-20260507",
+          "--label",
+          "baseline",
+          "--repeat",
+          "3"
+        ],
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\n  \"hashes\": {\n    \"0x070000\": [\n      \"715a7880369c17812591a93f845a5ee1bf54b2c107a578050d8b08a1b438f516\",\n      \"715a7880369c17812591a93f845a5ee1bf54b2c107a578050d8b08a1b438f516\",\n      \"715a7880369c17812591a93f845a5ee1bf54b2c107a578050d8b08a1b438f516\"\n    ],\n    \"0x074000\": [\n      \"18469f79007353f523a076fec7b5e2a74cda534e6e90980567e5610e8da86681\",\n      \"18469f79007353f523a076fec7b5e2a74cda534e6e90980567e5610e8da86681\",\n      \"18469f79007353f523a076fec7b5e2a74cda534e6e90980567e5610e8da86681\"\n    ],\n    \"0x077000\": [\n      \"237c5d7bd78d9b289675378460ca35eb3a6f1ca00bdd50c76f152f494b8032fd\",\n      \"237c5d7bd78d9b289675378460ca35eb3a6f1ca00bdd50c76f152f494b8032fd\",\n      \"237c5d7bd78d9b289675378460ca35eb3a6f1ca00bdd50c76f152f494b8032fd\"\n    ],\n    \"0x0f0000\": [\n      \"076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560\",\n      \"076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560\",\n      \"076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560\"\n    ]\n  },\n  \"summary\": \"/home/jonathan/boastermelt/references/evidence/live/freshdrive4-bridgeclamp-preflight-20260507/baseline.json\"\n}\n"
+      }
+    },
+    {
+      "name": "baseline-clamp-check",
+      "result": {
+        "files": [
+          "/home/jonathan/boastermelt/references/evidence/live/freshdrive4-bridgeclamp-preflight-20260507/baseline-r00-id01-off077000.bin",
+          "/home/jonathan/boastermelt/references/evidence/live/freshdrive4-bridgeclamp-preflight-20260507/baseline-r01-id01-off077000.bin",
+          "/home/jonathan/boastermelt/references/evidence/live/freshdrive4-bridgeclamp-preflight-20260507/baseline-r02-id01-off077000.bin"
+        ],
+        "label": "baseline",
+        "stock_clamp_hits": 6
+      }
+    }
+  ]
+}

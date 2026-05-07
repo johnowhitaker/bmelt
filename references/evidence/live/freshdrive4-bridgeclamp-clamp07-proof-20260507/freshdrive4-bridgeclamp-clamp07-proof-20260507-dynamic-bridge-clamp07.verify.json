@@ -1,0 +1,181 @@
+{
+  "all_ok": true,
+  "base": "/home/jonathan/boastermelt/references/firmware/extracted/ld5m-f0-window-0x00000-0x100000.bin",
+  "candidate": "freshdrive4-bridgeclamp-clamp07-proof-20260507-dynamic-bridge-clamp07",
+  "candidate_root": "/home/jonathan/boastermelt/references/firmware/extracted/helper-bypass-candidates",
+  "cave_meta": {
+    "preserves_dptr": true
+  },
+  "cave_payload_len": 80,
+  "checks": [
+    {
+      "name": "base_hook_stock",
+      "ok": true
+    },
+    {
+      "name": "base_cave_ff",
+      "ok": true
+    },
+    {
+      "name": "candidate_hook_patch",
+      "ok": true
+    },
+    {
+      "name": "candidate_cave_not_ff",
+      "ok": true
+    },
+    {
+      "name": "candidate_cave_return_shape",
+      "ok": true,
+      "preserves_dptr": true
+    },
+    {
+      "cave_payload_len": 80,
+      "name": "candidate_cave_tail_unchanged",
+      "ok": true
+    },
+    {
+      "base_sha256": "488f49c7f5d8141186db6ca006a33cccefcc391b537d2a903f4ebaa7ea8f2e39",
+      "name": "restore_image_equals_base",
+      "ok": true,
+      "restore_sha256": "488f49c7f5d8141186db6ca006a33cccefcc391b537d2a903f4ebaa7ea8f2e39"
+    },
+    {
+      "allowed_count": 83,
+      "changed_count": 83,
+      "name": "candidate_only_hook_and_parsed_cave_changed",
+      "ok": true,
+      "unexpected": []
+    },
+    {
+      "helper_patches": [
+        "0x169:752204",
+        "0x2b5:0232c4",
+        "0x345:752440"
+      ],
+      "name": "candidate_helper_low_sector_patches_present",
+      "ok": true
+    },
+    {
+      "helper_patches": [
+        "0x169:752204",
+        "0x2b5:0232c4",
+        "0x345:752440"
+      ],
+      "name": "restore_helper_low_sector_patches_present",
+      "ok": true
+    },
+    {
+      "expected_writes": [
+        {
+          "address": "0x0770e6",
+          "value": "0x07"
+        },
+        {
+          "address": "0x077156",
+          "value": "0x07"
+        }
+      ],
+      "name": "candidate_gateway_writes_match_plan",
+      "ok": true,
+      "writes": [
+        {
+          "address": "0x0770e6",
+          "value": "0x07"
+        },
+        {
+          "address": "0x077156",
+          "value": "0x07"
+        }
+      ]
+    },
+    {
+      "final_modified_byte_count": 83,
+      "image_changed_count": 83,
+      "name": "final_candidate_diff_count_matches_image",
+      "ok": true
+    },
+    {
+      "event_count": 546,
+      "name": "final_candidate_event_count",
+      "ok": true
+    },
+    {
+      "name": "restore_final_candidate_diff_count_zero",
+      "ok": true,
+      "restore_modified_byte_count": 0
+    }
+  ],
+  "dynamic_selection": {
+    "all_hits": [
+      {
+        "file_offset": 217,
+        "immediate_file_offset": 230,
+        "path": "/home/jonathan/boastermelt/references/evidence/live/freshdrive4-bridgeclamp-clamp07-proof-20260507/baseline-r00-id01-off077000.bin",
+        "public_addr": 487654,
+        "public_addr_hex": "0x0770e6"
+      },
+      {
+        "file_offset": 329,
+        "immediate_file_offset": 342,
+        "path": "/home/jonathan/boastermelt/references/evidence/live/freshdrive4-bridgeclamp-clamp07-proof-20260507/baseline-r00-id01-off077000.bin",
+        "public_addr": 487766,
+        "public_addr_hex": "0x077156"
+      },
+      {
+        "file_offset": 217,
+        "immediate_file_offset": 230,
+        "path": "/home/jonathan/boastermelt/references/evidence/live/freshdrive4-bridgeclamp-clamp07-proof-20260507/baseline-r01-id01-off077000.bin",
+        "public_addr": 487654,
+        "public_addr_hex": "0x0770e6"
+      },
+      {
+        "file_offset": 329,
+        "immediate_file_offset": 342,
+        "path": "/home/jonathan/boastermelt/references/evidence/live/freshdrive4-bridgeclamp-clamp07-proof-20260507/baseline-r01-id01-off077000.bin",
+        "public_addr": 487766,
+        "public_addr_hex": "0x077156"
+      },
+      {
+        "file_offset": 217,
+        "immediate_file_offset": 230,
+        "path": "/home/jonathan/boastermelt/references/evidence/live/freshdrive4-bridgeclamp-clamp07-proof-20260507/baseline-r02-id01-off077000.bin",
+        "public_addr": 487654,
+        "public_addr_hex": "0x0770e6"
+      },
+      {
+        "file_offset": 329,
+        "immediate_file_offset": 342,
+        "path": "/home/jonathan/boastermelt/references/evidence/live/freshdrive4-bridgeclamp-clamp07-proof-20260507/baseline-r02-id01-off077000.bin",
+        "public_addr": 487766,
+        "public_addr_hex": "0x077156"
+      }
+    ],
+    "baseline_dir": "/home/jonathan/boastermelt/references/evidence/live/freshdrive4-bridgeclamp-clamp07-proof-20260507",
+    "candidate_dir": "/home/jonathan/boastermelt/references/firmware/extracted/helper-bypass-candidates/freshdrive4-bridgeclamp-clamp07-proof-20260507-dynamic-bridge-clamp07",
+    "candidate_name": "freshdrive4-bridgeclamp-clamp07-proof-20260507-dynamic-bridge-clamp07",
+    "hit_count": 6,
+    "patch_value": 7,
+    "payload_length": 80,
+    "public_base": 487424,
+    "selected": [
+      {
+        "address": 487654,
+        "address_hex": "0x0770e6",
+        "count": 3
+      },
+      {
+        "address": 487766,
+        "address_hex": "0x077156",
+        "count": 3
+      }
+    ]
+  },
+  "expected_clamp_addrs": [
+    "0x0770e6",
+    "0x077156"
+  ],
+  "expected_clamp_value": "0x07",
+  "restore": "post-materializer-runtime-bridge-clamp07-restore",
+  "restore_root": "/home/jonathan/boastermelt/references/firmware/extracted/helper-bypass-candidates"
+}

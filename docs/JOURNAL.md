@@ -4496,3 +4496,40 @@ patched" and "the slot patched, but the decoded-band read still failed."
 I also put this threshold variant into the readiness audit with a synthetic
 builder/verifier smoke test, so future offline checks cover both the historical
 `clamp-immediate 0x18` path and the newer `threshold-immediate 0x1c` path.
+
+Fresh drive day, 2026-05-07. The new drive enumerated cleanly on Linux as
+`/dev/sg0`, `PLDS DVD+-RW DS-8ABSH LD5M`, with only the Pico servo power-cycle
+attached; no GP28/front-panel wiring was needed. The first read-only
+bridge-clamp preflight captured stable `READ BUFFER id=01` windows and saw the
+stock clamp pattern in the `0x077000` page, so it was a valid test target.
+
+I then ran the guarded dynamic `0x07` bridge-clamp proof. The helper-bypass
+candidate staged, finalized, cold-booted, captured, restored, and cold-booted
+back to `LD5M`. Safety-wise, this was good: the fresh drive survived the full
+candidate/restore cycle. Technically, the proof did not land. The target
+`0x0f0000` window did not change, and the visible bridge-clamp sequence still
+contained stock `0x0e` immediates rather than patched `0x07` bytes. The first
+candidate had selected only the current baseline phase slots; after boot, the
+visible clamp copies shifted by `0x40`, so the selected slots missed the phase
+we were observing.
+
+To remove that specific excuse, I built a second DPTR-preserving dynamic
+candidate from the union of all observed phases in the same run. It targeted
+the four seen immediate addresses: `0x0770e6`, `0x077156`, `0x0770a6`, and
+`0x077196`. That candidate also verified cleanly, installed cleanly, restored
+cleanly, and left the drive visible as `LD5M`. It still did not produce patched
+`0x07` bytes in the visible bridge-clamp page, and `0x0f0000` remained
+unchanged. This narrows the interpretation: the post-materializer helper hook
+may be executing, but these gateway writes are not altering the public
+materialized page we can observe, or that page is a copied/tiled view rather
+than the writeable/executing copy.
+
+So the bridge-clamp oracle path is no longer the best next live step. The
+important positive result is that the helper-bypass update/restore flow still
+works on a fresh drive with only servo power cycling. The important negative
+result is that patching the observed bridge-clamp slots does not affect the
+visible normal work-window or high-offset read behavior. Do not proceed to the
+`0x18` or `threshold-immediate 0x1c` decoded-band oracle on this evidence.
+Future work should either find the real writeable copy of the materialized
+runtime page, use a different normal-mode hook target, or return to the
+non-mutating CDD/materialization oracle work.

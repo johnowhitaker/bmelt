@@ -3206,3 +3206,38 @@ Immediate useful directions:
     contain it at `+0x70d9` and `+0x7189` in one capture. Keep using the
     baseline-derived dynamic normal bridge-clamp builder for the first live
     proof.
+219. Fresh-drive bridge-clamp proof, 2026-05-07: the new drive enumerated as
+    `/dev/sg0`, `PLDS DVD+-RW DS-8ABSH LD5M`, with only the Pico servo
+    power-cycle attached. No GP28/front-panel wiring was needed. Read-only
+    preflight `freshdrive4-bridgeclamp-preflight-20260507` saw stable
+    `READ BUFFER id=01` windows and stock bridge-clamp hits in `0x077000`.
+220. The first guarded dynamic `0x07` bridge-clamp run is saved under
+    `references/evidence/live/freshdrive4-bridgeclamp-clamp07-proof-20260507`
+    with analysis in
+    `analysis/8051/freshdrive4-bridgeclamp-clamp07-proof-20260507.analysis.md`.
+    It installed the dynamic helper-bypass candidate, cold-cycled, captured,
+    installed the restore candidate, cold-cycled, and returned to normal
+    `LD5M`. The proof failed: `0x0f0000` did not change, and the visible
+    bridge-clamp sequence still had stock `0x0e` immediates, not patched
+    `0x07` bytes. The observed reason was phase drift: baseline selected
+    `0x0770e6`/`0x077156`, but the post-install visible copies shifted to
+    `0x0770a6`/`0x077196`.
+221. To remove that phase-miss explanation, a union-phase DPTR-preserving
+    dynamic candidate targeted all four observed slots:
+    `0x0770e6`, `0x077156`, `0x0770a6`, and `0x077196`. The live run is saved
+    under
+    `references/evidence/live/freshdrive4-bridgeclamp-unionphase-clamp07-proof-20260507`
+    with analysis in
+    `analysis/8051/freshdrive4-bridgeclamp-unionphase-clamp07-proof-20260507.analysis.md`.
+    It also installed, restored, and left the drive normal `LD5M`, but still
+    produced no patched `0x07` bytes in the visible `0x077000` bridge-clamp
+    page and no `0x0f0000` high-offset effect.
+222. Current bridge-clamp conclusion: do not proceed to `clamp-immediate 0x18`
+    or `threshold-immediate 0x1c` on the basis of the 2026-05-07 fresh-drive
+    proof. The helper-bypass update/restore path remains healthy, but the
+    attempted post-materializer gateway writes are not altering the public
+    materialized bridge-clamp page we can observe. The page may be a copied or
+    tiled view, or the writes may be hitting a non-executing/non-visible copy.
+    The next live hook attempt should first identify a writeable copy or choose
+    a different target; otherwise go back to non-mutating materialization/CDD
+    oracle work.

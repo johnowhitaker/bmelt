@@ -1,0 +1,219 @@
+{
+  "assessment": [
+    "NO HIGH-OFFSET EFFECT: 0x0f0000 did not show a patched-vs-baseline hash change.",
+    "CAUTION: ordinary 0x070000 also changed; this may be phase/noise or a broad behavioral effect.",
+    "BASELINE SLOT CHECK: 0x077000 contains 6 stock clamp-pattern hit(s)."
+  ],
+  "comparisons": {
+    "0x070000": {
+      "labels": {
+        "baseline": {
+          "clamp_pattern_hits_by_value": {
+            "0x07": 0,
+            "0x0e": 0,
+            "0x18": 0
+          },
+          "count": 3,
+          "patched_clamp18_pattern_hits": 0,
+          "patched_clamp_pattern_hits": 0,
+          "stable": true,
+          "stock_clamp_pattern_hits": 0,
+          "unique_hashes": [
+            "715a7880369c17812591a93f845a5ee1bf54b2c107a578050d8b08a1b438f516"
+          ]
+        },
+        "patched": {
+          "clamp_pattern_hits_by_value": {
+            "0x07": 0,
+            "0x0e": 0,
+            "0x18": 0
+          },
+          "count": 3,
+          "patched_clamp18_pattern_hits": 0,
+          "patched_clamp_pattern_hits": 0,
+          "stable": true,
+          "stock_clamp_pattern_hits": 0,
+          "unique_hashes": [
+            "6424d3698a926c99ba73147e9c47d66ba7cd006372107aed54d2ca61799ae388"
+          ]
+        },
+        "restored": {
+          "clamp_pattern_hits_by_value": {
+            "0x07": 0,
+            "0x0e": 0,
+            "0x18": 0
+          },
+          "count": 3,
+          "patched_clamp18_pattern_hits": 0,
+          "patched_clamp_pattern_hits": 0,
+          "stable": true,
+          "stock_clamp_pattern_hits": 0,
+          "unique_hashes": [
+            "123c961f61654f2da1fa2b30611c3a33e810a00921efcc6e7ceed5ecef334315"
+          ]
+        }
+      },
+      "patched_differs_from_baseline": true,
+      "restored_matches_baseline": false
+    },
+    "0x074000": {
+      "labels": {
+        "baseline": {
+          "clamp_pattern_hits_by_value": {
+            "0x07": 0,
+            "0x0e": 0,
+            "0x18": 0
+          },
+          "count": 3,
+          "patched_clamp18_pattern_hits": 0,
+          "patched_clamp_pattern_hits": 0,
+          "stable": true,
+          "stock_clamp_pattern_hits": 0,
+          "unique_hashes": [
+            "18469f79007353f523a076fec7b5e2a74cda534e6e90980567e5610e8da86681"
+          ]
+        },
+        "patched": {
+          "clamp_pattern_hits_by_value": {
+            "0x07": 0,
+            "0x0e": 0,
+            "0x18": 0
+          },
+          "count": 3,
+          "patched_clamp18_pattern_hits": 0,
+          "patched_clamp_pattern_hits": 0,
+          "stable": true,
+          "stock_clamp_pattern_hits": 0,
+          "unique_hashes": [
+            "18469f79007353f523a076fec7b5e2a74cda534e6e90980567e5610e8da86681"
+          ]
+        },
+        "restored": {
+          "clamp_pattern_hits_by_value": {
+            "0x07": 0,
+            "0x0e": 0,
+            "0x18": 0
+          },
+          "count": 3,
+          "patched_clamp18_pattern_hits": 0,
+          "patched_clamp_pattern_hits": 0,
+          "stable": true,
+          "stock_clamp_pattern_hits": 0,
+          "unique_hashes": [
+            "18469f79007353f523a076fec7b5e2a74cda534e6e90980567e5610e8da86681"
+          ]
+        }
+      },
+      "patched_differs_from_baseline": false,
+      "restored_matches_baseline": true
+    },
+    "0x077000": {
+      "labels": {
+        "baseline": {
+          "clamp_pattern_hits_by_value": {
+            "0x07": 0,
+            "0x0e": 6,
+            "0x18": 0
+          },
+          "count": 3,
+          "patched_clamp18_pattern_hits": 0,
+          "patched_clamp_pattern_hits": 0,
+          "stable": true,
+          "stock_clamp_pattern_hits": 6,
+          "unique_hashes": [
+            "4ad09694db12bbd36d054a25bd2d6e6d381c58b106305202aaf502cb9f1c86dc"
+          ]
+        },
+        "patched": {
+          "clamp_pattern_hits_by_value": {
+            "0x07": 0,
+            "0x0e": 6,
+            "0x18": 0
+          },
+          "count": 3,
+          "patched_clamp18_pattern_hits": 0,
+          "patched_clamp_pattern_hits": 0,
+          "stable": true,
+          "stock_clamp_pattern_hits": 6,
+          "unique_hashes": [
+            "1831e39315e08f2993f75b6ae48d6c6b4e14f2f99ab6ba86ea9079d36270f15b"
+          ]
+        },
+        "restored": {
+          "clamp_pattern_hits_by_value": {
+            "0x07": 0,
+            "0x0e": 6,
+            "0x18": 0
+          },
+          "count": 3,
+          "patched_clamp18_pattern_hits": 0,
+          "patched_clamp_pattern_hits": 0,
+          "stable": true,
+          "stock_clamp_pattern_hits": 6,
+          "unique_hashes": [
+            "1831e39315e08f2993f75b6ae48d6c6b4e14f2f99ab6ba86ea9079d36270f15b"
+          ]
+        }
+      },
+      "patched_differs_from_baseline": true,
+      "restored_matches_baseline": false
+    },
+    "0x0f0000": {
+      "labels": {
+        "baseline": {
+          "clamp_pattern_hits_by_value": {
+            "0x07": 0,
+            "0x0e": 0,
+            "0x18": 0
+          },
+          "count": 3,
+          "patched_clamp18_pattern_hits": 0,
+          "patched_clamp_pattern_hits": 0,
+          "stable": true,
+          "stock_clamp_pattern_hits": 0,
+          "unique_hashes": [
+            "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560"
+          ]
+        },
+        "patched": {
+          "clamp_pattern_hits_by_value": {
+            "0x07": 0,
+            "0x0e": 0,
+            "0x18": 0
+          },
+          "count": 3,
+          "patched_clamp18_pattern_hits": 0,
+          "patched_clamp_pattern_hits": 0,
+          "stable": true,
+          "stock_clamp_pattern_hits": 0,
+          "unique_hashes": [
+            "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560"
+          ]
+        },
+        "restored": {
+          "clamp_pattern_hits_by_value": {
+            "0x07": 0,
+            "0x0e": 0,
+            "0x18": 0
+          },
+          "count": 3,
+          "patched_clamp18_pattern_hits": 0,
+          "patched_clamp_pattern_hits": 0,
+          "stable": true,
+          "stock_clamp_pattern_hits": 0,
+          "unique_hashes": [
+            "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560"
+          ]
+        }
+      },
+      "patched_differs_from_baseline": false,
+      "restored_matches_baseline": true
+    }
+  },
+  "labels": [
+    "baseline",
+    "patched",
+    "restored"
+  ],
+  "run_dir": "references/evidence/live/freshdrive4-bridgeclamp-clamp07-proof-20260507"
+}
