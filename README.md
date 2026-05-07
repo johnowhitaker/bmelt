@@ -1,134 +1,15 @@
 # boastermelt
 
-Clean working repo for the LiteOn/PLDS `DS-8ABSH` firmware project.
+Attempts to RE the LiteOn/PLDS `DS-8ABSH` DVD drive.
 
-The old 10GB+ working tree was intentionally collapsed. Historical bulk logs,
-temporary Wine prefixes, packaged handoff zips, and the old git history were
-removed from the active repo; a small amount of retired source/notes is under
-`old/`, which is ignored. The user has external backups of the full pre-clean
-tree.
+Initially inspired by the epic [coastermelt](https://scanlime.org/tag/coastermelt/)
 
-## Current State
+For a blog post on this, see [here](https://johnowhitaker.dev/posts/dvd_hack.html)
 
-We can:
+For a minimal readme to start hacking on this project, see [here](https://github.com/johnowhitaker/bmelt/blob/codex/clean-slate/minimal/README.md) (in minimal/)
 
-- talk to a drive from Linux with `sg_raw`;
-- dump and decrypt `READ BUFFER id=F0`;
-- recover the known `0D5C` currentboot state back to `LD5M`;
-- build helper-bypass candidates that persist selected F0 byte changes;
-- execute patched 8051 helper-overlay code;
-- read small XDATA values back through a slow success/error bit channel;
-- use the currentboot response hook as a much faster byte oracle for selected
-  controller/source addresses.
-- recover the newer blank-currentboot failure class with a dynamic slot-5
-  profile-tail replay.
+This repo has the tricks we've worked out so far: dumping and decrypting the firmware, running the firmware update process, patching a helper to allow modified firmware by working around the integrity check, reading out memory from currentboot, recovering from a few scary-looking states. It also has a ton of mess from (so far unsuccessful) attempts to get past the next blocker: decoding the CDDs to gain full normal-mode control of the drive and its functions.
 
-Current live-drive caveat: the two older drives are both poor write targets.
-The original drive still enumerates as normal `LD5M`, but it is not byte-stock:
-it has the currentboot response-hook trampoline/cave plus the persistent
-record-59 CDD mutation at `F0[0x28519] = 0x60`. The spare is currently
-bridge/card-reader-only after the record-55 experiment. Treat live write work
-as paused until the fresh replacement drives arrive, unless the session
-explicitly decides to use the original as a sacrificial/mutated test subject.
+USE AT OWN RISK, I'VE BRICKED A FEW DRIVES ALREADY :)
 
-The current code-exec foothold is documented in
-`references/evidence/live/linux-drive1-codeexec-timing-poc.md` and
-`references/evidence/live/linux-drive1-helper-bit-channel.md`.
-
-The latest CDD static push is intentionally contained under `cdd_cracking/`.
-Its short version: the hard DS-8ABSH CDD decoder is still unsolved, but XD13
-contains a plaintext-style CDD 8051 code/data object that is useful as a
-semantic atlas for hardware-control work. Start with
-`cdd_cracking/cdd_hail_mary_summary_20260502.md`,
-`cdd_cracking/completion_audit.md`, and
-`cdd_cracking/cdd-xd13-structure.md`.
-
-## Read First
-
-- `docs/AI_FIELD_GUIDE.md`: compact technical handoff for future agents.
-- `docs/JOURNAL.md`: human-readable story of the project so far.
-- `docs/helper-bypass-write-method.md`: practical helper-bypass write method.
-- `handoff/NEXT_SESSION_HANDOFF.md`: latest operational handoff.
-
-## Useful Commands
-
-Check the repo:
-
-```sh
-make check
-```
-
-On the Linux host, discover the drive:
-
-```sh
-ssh root@jonathan-thinkpad-t480s 'cd /home/jonathan/boastermelt && python3 scripts/liteon_linux_status.py'
-```
-
-Power-cycle the Linux drive/bridge from the Mac via the Pico servo microswitch:
-
-```sh
-python3 pico/client.py --port /dev/cu.usbmodem2101 "TOGGLE SERVO"
-```
-
-This cuts the spliced USB `+5V` line for about one second. It has been verified
-to make the optical LUN disappear and reappear as `LD5M`.
-
-For a longer raw cut:
-
-```sh
-python3 pico/client.py --port /dev/cu.usbmodem2101 --timeout 35 "TOGGLE SERVO 30000"
-```
-
-Or use the wrapper that toggles the servo and waits for the Linux optical LUN:
-
-```sh
-python3 scripts/pico_power_cycle_linux_drive.py
-```
-
-Dump a full decrypted F0 image:
-
-```sh
-ssh root@jonathan-thinkpad-t480s 'cd /home/jonathan/boastermelt && mkdir -p runs/f0 && python3 scripts/dump_liteon_linux_f0_window.py --device /dev/sg1 --extrainq references/evidence/ld5m-extrainq-reference.log --start 0 --size 0x100000 --chunk 0x80 --out runs/f0/f0-decrypted.bin --raw-out runs/f0/f0-raw.bin'
-```
-
-Recover from known `0D5C` currentboot:
-
-```sh
-ssh root@jonathan-thinkpad-t480s 'cd /home/jonathan/boastermelt && python3 scripts/recover_liteon_currentboot_linux.py --device /dev/sg1'
-```
-
-Recover from the blank-revision currentboot dialect:
-
-```sh
-ssh root@jonathan-thinkpad-t480s 'cd /home/jonathan/boastermelt && python3 scripts/recover_liteon_blank_currentboot_linux.py --device /dev/sg0'
-```
-
-Read one XDATA byte through the safer GOOD/GOOD timing channel:
-
-```sh
-ssh root@jonathan-thinkpad-t480s 'cd /home/jonathan/boastermelt && python3 scripts/read_liteon_xdata_timing_channel.py --device /dev/sg1 --addr 0x4704 --calibrate --payload-offset 0x04f6 --between-delay 3'
-```
-
-Build a helper-bypass candidate:
-
-```sh
-python3 scripts/build_liteon_helper_bypass_candidate.py \
-  --name example-d8ff4 \
-  --patch 0xd8ff4:33 \
-  --include-pre-tail
-```
-
-Run a candidate on Linux:
-
-```sh
-ssh root@jonathan-thinkpad-t480s 'cd /home/jonathan/boastermelt && python3 scripts/run_liteon_linux_persistence_experiment.py --candidate references/firmware/extracted/helper-bypass-candidates/example-d8ff4/liteon-full-currentboot-ld5m-helper-bypass-example-d8ff4-candidate.json --device /dev/sg1 --skip-pre-f0 --end-index 544 --f0-size 0xe0000 --capture-finalizer-status-after-event 1 --capture-finalizer-status --recover-on-currentboot'
-```
-
-## Layout
-
-- `analysis/8051/`: current 8051 binary and Ghidra decompile.
-- `docs/`: curated docs only.
-- `handoff/`: short handoff for the next session.
-- `references/`: minimal known-good artifacts and current PoC evidence.
-- `scripts/`: minimal tooling for Linux access, candidate building, and recovery.
-- `old/`: ignored retired pre-clean misc files.
+LMK if you have any questions, I don't expect this to be useful to anyone but I will be pleasantly surprised if it does.
